@@ -1,0 +1,1418 @@
+[
+    {
+        "Name": "Adrenaline Fueled ",
+        "Properties":
+        [
+            "+100% stamina",
+            " -75% stamina regeneration",
+            " when you kill an enemy",
+            " gain 10 stamina instantly and an additional 10 stamina over 5 seconds"
+        ],
+        "Kind": "Reflex"
+    },
+    {
+        "Name": "Brazen ",
+        "Properties":
+        [
+            "+30% melee stamina efficiency",
+            " +30% melee attack speed",
+            " -5% damage resistance"
+        ],
+        "Kind": "Reflex"
+    },
+    {
+        "Name": "Breakout ",
+        "Properties":
+        [
+            "Allows you to free yourself from grabs",
+            " +50% breakout cooldown reduction"
+        ],
+        "Kind": "Reflex"
+    },
+    {
+        "Name": "Cocky ",
+        "Properties":
+        [
+            "+75% weapon swap speed",
+            " When you take damage your accuracy is reduced by 20% for 3 seconds"
+        ],
+        "Kind": "Reflex"
+    },
+    {
+        "Name": "Combat Medic ",
+        "Properties":
+        [
+            "Teammates healed by an additional 20 health when revived",
+            " +50 use speed"
+        ],
+        "Kind": " Reflex"
+    },
+    {
+        "Name": "Cross Trainers ",
+        "Properties":
+        [
+            "+20% stamina",
+            " +20% stamina regen",
+            " +3% move speed",
+            " 5 health"
+        ],
+        "Kind": "Reflex"
+    },
+    {
+        "Name": "Dash ",
+        "Properties":
+        [
+            "+5% move speed"
+        ],
+        "Kind": " Reflex"
+    },
+    {
+        "Name": "Energy Drink ",
+        "Properties":
+        [
+            "+40% stamina",
+            " -5% damage resistance "
+        ],
+        "Kind": "Reflex"
+    },
+    {
+        "Name": "Evasive Action ",
+        "Properties":
+        [
+            "Gain a 20% movement speed boost for three seconds when you take a hit of 10 or more"
+        ],
+        "Kind": "Reflex"
+    },
+    {
+        "Name": "Fire in the Hole! ",
+        "Properties":
+        [
+            "Gain 20 temporary health and 20% movement speed for five seconds after throwing an offensive item"
+        ],
+        "Kind": " Reflex"
+    },
+    {
+        "Name": "Fire in the Hole! ",
+        "Properties":
+        [
+            "When you throw an Offensive Accessory",
+            " gain 20 temporary health and 20% move speed for 5 seconds."
+        ],
+        "Kind": " Reflex"
+    },
+    {
+        "Name": "Fleet Of Foot ",
+        "Properties":
+        [
+            "+10% move speed",
+            " -5% damage resistance"
+        ],
+        "Kind": "Reflex"
+    },
+    {
+        "Name": "Glass Cannon ",
+        "Properties":
+        [
+            "+25% damage",
+            " -30% health"
+        ],
+        "Kind": "Reflex"
+    },
+    {
+        "Name": "Guns Out ",
+        "Properties":
+        [
+            "+50% weapon swap speed",
+            " -5% damage resistance"
+        ],
+        "Kind": "Reflex"
+    },
+    {
+        "Name": "Headband Magnifier ",
+        "Properties":
+        [
+            "+125% use speed",
+            " when you take damage",
+            " you have a chance to be binded for 1 second"
+        ],
+        "Kind": "Reflex"
+    },
+    {
+        "Name": "Hellfire ",
+        "Properties":
+        [
+            "+45% move speed while firing",
+            " +5% move speed while not firing"
+        ],
+        "Kind": "Reflex"
+    },
+    {
+        "Name": "Hi Vis Sights ",
+        "Properties":
+        [
+            "+30% aim speed"
+        ],
+        "Kind": "Reflex"
+    },
+    {
+        "Name": "Hyper-Focused ",
+        "Properties":
+        [
+            "+50% weakspot damage",
+            " -75% ADS Move Speed"
+        ],
+        "Kind": " Reflex"
+    },
+    {
+        "Name": "Killer’s Instinct ",
+        "Properties":
+        [
+            "+30% weakspot damage",
+            " disables aim down sights"
+        ],
+        "Kind": "Reflex"
+    },
+    {
+        "Name": "Mad Dash ",
+        "Properties":
+        [
+            "+20% sprint speed",
+            " -30% stamina efficiency"
+        ],
+        "Kind": " Reflex"
+    },
+    {
+        "Name": "Mag Carrier ",
+        "Properties":
+        [
+            "+30% pistol/SMG ammo capacity",
+            " +10% damage with pistols and SMGs"
+        ],
+        "Kind": "Reflex"
+    },
+    {
+        "Name": "Mag Coupler ",
+        "Properties":
+        [
+            "+50% reload speed",
+            " disables aim down sights"
+        ],
+        "Kind": " Reflex"
+    },
+    {
+        "Name": "Mandatory PT ",
+        "Properties":
+        [
+            "Team Effect: +15% team stamina"
+        ],
+        "Kind": " Reflex"
+    },
+    {
+        "Name": "Marathon Runner ",
+        "Properties":
+        [
+            "No movement penalty for strafe and backpedal",
+            " disables Sprint"
+        ],
+        "Kind": "Reflex"
+    },
+    {
+        "Name": "Medical Expert ",
+        "Properties":
+        [
+            "+15 healing efficiency",
+            " plus +15% movement speed for 15 seconds when you use a medical accessory"
+        ],
+        "Kind": " Reflex"
+    },
+    {
+        "Name": "Meth Head ",
+        "Properties":
+        [
+            "40% melee attack speed",
+            " +40% melee stamina efficiency",
+            " Your melee attacks no longer stick in tough enemies",
+            " disables aim down sights"
+        ],
+        "Kind": "Reflex"
+    },
+    {
+        "Name": "Miraculous Recovery ",
+        "Properties":
+        [
+            " A medical accessory has a 25% chance of having a 100% increased effect"
+        ],
+        "Kind": " Reflex"
+    },
+    {
+        "Name": "Multitool ",
+        "Properties":
+        [
+            "75% use speed",
+            " -5% damage resistance"
+        ],
+        "Kind": "Reflex"
+    },
+    {
+        "Name": "On Your Mark… ",
+        "Properties":
+        [
+            "When you exit a starting saferoom your team gains +15% move speed for 30 seconds"
+        ],
+        "Kind": "Reflex"
+    },
+    {
+        "Name": "Olympic Sprinter ",
+        "Properties":
+        [
+            "+30% sprint efficiency",
+            " -5% damage resistance"
+        ],
+        "Kind": "Reflex"
+    },
+    {
+        "Name": "Pep in your Step ",
+        "Properties":
+        [
+            "Precision Kills grant 10% movement speed for five seconds"
+        ],
+        "Kind": "Reflex"
+    },
+    {
+        "Name": "Pep Talk ",
+        "Properties":
+        [
+            "+150% revive speed",
+            " -5% damage resistance"
+        ],
+        "Kind": "Reflex"
+    },
+    {
+        "Name": "Power Swap ",
+        "Properties":
+        [
+            " Changing weapons within 0.75 seconds of hitting low ammo grants +20% damage for five seconds"
+        ],
+        "Kind": "Reflex"
+    },
+    {
+        "Name": "Reckless ",
+        "Properties":
+        [
+            "+40% sprint efficiency",
+            " When you take damage while sprinting",
+            " you lose all your stamina"
+        ],
+        "Kind": " Reflex"
+    },
+    {
+        "Name": "Reckless Strategy ",
+        "Properties":
+        [
+            "+30% weakspot damage",
+            " -5% damage resistance"
+        ],
+        "Kind": "Reflex"
+    },
+    {
+        "Name": "Reload Drills ",
+        "Properties":
+        [
+            " +30% reload speed"
+        ],
+        "Kind": "Reflex"
+    },
+    {
+        "Name": "Rhythmic Breathing ",
+        "Properties":
+        [
+            "+60% stamina",
+            " -20% slow resistance"
+        ],
+        "Kind": "Reflex"
+    },
+    {
+        "Name": "Ridden Slayer ",
+        "Properties":
+        [
+            " +20% weak spot damage"
+        ],
+        "Kind": "Reflex"
+    },
+    {
+        "Name": "Rolling Thunder ",
+        "Properties":
+        [
+            "+6% move speed while using an SMG",
+            " +35% reload speed while using an SMG"
+        ],
+        "Kind": " Reflex"
+    },
+    {
+        "Name": "Rousing Speech ",
+        "Properties":
+        [
+            "+225% revive speed",
+            " disables offensive accessories",
+            " Team Effect: +20% reduced incap trauma"
+        ],
+        "Kind": "Reflex"
+    },
+    {
+        "Name": "Run Like Hell ",
+        "Properties":
+        [
+            "+15% move speed",
+            " When you take damage your accuracy is reduced by 20% for 3 seconds"
+        ],
+        "Kind": "Reflex"
+    },
+    {
+        "Name": "Sadistic ",
+        "Properties":
+        [
+            "Gain 5% weakspot damage for each precision kill in the last 10 seconds"
+        ],
+        "Kind": " Reflex"
+    },
+    {
+        "Name": "Screwdriver ",
+        "Properties":
+        [
+            " +50% use speed",
+            " +10% stamina"
+        ],
+        "Kind": "Reflex"
+    },
+    {
+        "Name": "Shooting Gloves ",
+        "Properties":
+        [
+            " +25% weapon swap speed"
+        ],
+        "Kind": " Reflex"
+    },
+    {
+        "Name": "Shredder ",
+        "Properties":
+        [
+            "Each bullet hit causes the target to take 1% increased damage for 3 seconds (stacks up to 15%)"
+        ],
+        "Kind": " Reflex"
+    },
+    {
+        "Name": "Slugger ",
+        "Properties":
+        [
+            "+5 health",
+            " +10% melee stamina efficiency",
+            " +20% melee attack speed"
+        ],
+        "Kind": "Reflex"
+    },
+    {
+        "Name": "Smelling Salts ",
+        "Properties":
+        [
+            "+100% revive speed"
+        ],
+        "Kind": "Reflex"
+    },
+    {
+        "Name": "Speed Demon ",
+        "Properties":
+        [
+            "+6% move speed while using an SMG",
+            " +35% reload speed while using an SMG"
+        ],
+        "Kind": " Reflex"
+    },
+    {
+        "Name": "Stamina ",
+        "Properties":
+        [
+            "+10% Stamina"
+        ],
+        "Kind": "Reflex"
+    },
+    {
+        "Name": "Steady Aim ",
+        "Properties":
+        [
+            "+80% aim speed",
+            " -50% ADS move speed"
+        ],
+        "Kind": "Reflex"
+    },
+    {
+        "Name": "Stimulants ",
+        "Properties":
+        [
+            " Pain meds grant +10% movement speed",
+            " 10% reload speed",
+            " and 10% weapon swap speed for 30 seconds"
+        ],
+        "Kind": " Reflex"
+    },
+    {
+        "Name": "Stock Pouch ",
+        "Properties":
+        [
+            "+30% sniper ammo capacity",
+            " +10% damage with sniper rifles"
+        ],
+        "Kind": "Reflex"
+    },
+    {
+        "Name": "Superior Cardio ",
+        "Properties":
+        [
+            "+50% sprint efficiency",
+            " +5 health"
+        ],
+        "Kind": "Reflex"
+    },
+    {
+        "Name": "Tunnel Vision ",
+        "Properties":
+        [
+            "+50% aim speed",
+            " -5% damage resistance"
+        ],
+        "Kind": " Reflex"
+    },
+    {
+        "Name": "Utility Scavenger ",
+        "Properties":
+        [
+            "You can sense nearby quick accessories",
+            " more quick accessories spawn"
+        ],
+        "Kind": "Reflex"
+    },
+    {
+        "Name": "Widemouth Magwell ",
+        "Properties":
+        [
+            "+30% reload speed",
+            " -5% damage resistance"
+        ],
+        "Kind": "Reflex"
+    },
+    {
+        "Name": "Ammo",
+        "Properties":
+        [
+            " +10% ammo"
+        ],
+        "Kind": "Discipline"
+    },
+    {
+        "Name": "Ammo Belt",
+        "Properties":
+        [
+            "+50% ammo capacity",
+            " -20% stamina efficiency"
+        ],
+        "Kind": "Discipline"
+    },
+    {
+        "Name": "Ammo For All",
+        "Properties":
+        [
+            " Team Effect: +10% team ammo capacity"
+        ],
+        "Kind": " Discipline"
+    },
+    {
+        "Name": "Ammo Mule",
+        "Properties":
+        [
+            "75% ammo capacity",
+            " disables support accessories"
+        ],
+        "Kind": "Discipline"
+    },
+    {
+        "Name": "Ammo Pouch",
+        "Properties":
+        [
+            "+25% ammo capacity"
+        ],
+        "Kind": "Discipline"
+    },
+    {
+        "Name": "Ammo Scavenger",
+        "Properties":
+        [
+            "You can sense nearby ammo",
+            " more ammo spawns"
+        ],
+        "Kind": "Discipline"
+    },
+    {
+        "Name": "Amped Up",
+        "Properties":
+        [
+            " When you exit a starting saferoom your team gains 50 temporary health"
+        ],
+        "Kind": "Discipline"
+    },
+    {
+        "Name": "Antibiotic Ointment",
+        "Properties":
+        [
+            "+20% healing efficiency"
+        ],
+        "Kind": "Discipline"
+    },
+    {
+        "Name": "Avenge The Fallen",
+        "Properties":
+        [
+            "Team Effect: When you or a teammate becomes incapacitated",
+            " all teammates gain 30% damage",
+            " 20% reload speed and unlimited ammo for 10 seconds."
+        ],
+        "Kind": "Discipline"
+    },
+    {
+        "Name": "Charitable Soul",
+        "Properties":
+        [
+            "Heals granted to a teammate will also apply 50% of the effect to you"
+        ],
+        "Kind": " Discipline"
+    },
+    {
+        "Name": "Cold Brew Coffee",
+        "Properties":
+        [
+            " +40% stamina regeneration",
+            " -10% stamina efficiency"
+        ],
+        "Kind": "Discipline"
+    },
+    {
+        "Name": "Combat Knife",
+        "Properties":
+        [
+            " Turns your Bash into a Knife that counts as a Melee weapon."
+        ],
+        "Kind": "Discipline"
+    },
+    {
+        "Name": "Combat Training",
+        "Properties":
+        [
+            "+5% damage dealt",
+            " +50% bullet penetration"
+        ],
+        "Kind": " Discipline"
+    },
+    {
+        "Name": "Controlled Movement",
+        "Properties":
+        [
+            "+40% move speed while aiming down sights with sniper rifles"
+        ],
+        "Kind": "Discipline"
+    },
+    {
+        "Name": "Down In Front!",
+        "Properties":
+        [
+            "While crouching you neither take nor deal Friendly Fire damage",
+            " +10 health"
+        ],
+        "Kind": "Discipline"
+    },
+    {
+        "Name": "EMT Bag",
+        "Properties":
+        [
+            "+40% healing efficiency",
+            " -20% stamina efficiency"
+        ],
+        "Kind": " Discipline"
+    },
+    {
+        "Name": "Energy Bar",
+        "Properties":
+        [
+            "+20% stamina regeneration",
+            " 5 health"
+        ],
+        "Kind": "Discipline"
+    },
+    {
+        "Name": "Experienced EMT",
+        "Properties":
+        [
+            "Medical accessories will grant +20% maximum health until the end of the level"
+        ],
+        "Kind": " Discipline"
+    },
+    {
+        "Name": "Field Surgeon",
+        "Properties":
+        [
+            "+60% healing efficiency",
+            " -50% use speed"
+        ],
+        "Kind": "Discipline"
+    },
+    {
+        "Name": "Front Sight Focus",
+        "Properties":
+        [
+            "+20% accuracy"
+        ],
+        "Kind": "Discipline"
+    },
+    {
+        "Name": "Group Therapy",
+        "Properties":
+        [
+            "All teammates heal for 5 health when a medical accessory is used"
+        ],
+        "Kind": " Discipline"
+    },
+    {
+        "Name": "Hunker Down",
+        "Properties":
+        [
+            "+10% damage resistance and +40% accuracy when crouching"
+        ],
+        "Kind": "Discipline"
+    },
+    {
+        "Name": "In the Zone",
+        "Properties":
+        [
+            "+5% reload speed for five seconds (can be stacked ten times) when getting precision kills"
+        ],
+        "Kind": " Discipline"
+    },
+    {
+        "Name": "Inspiring Sacrifice",
+        "Properties":
+        [
+            "Team Effect: All teammates heal for 25 health over twenty seconds if someone is incapacitated"
+        ],
+        "Kind": " Discipline"
+    },
+    {
+        "Name": "Knowledge Is Power",
+        "Properties":
+        [
+            "+10% weakspot damage",
+            " allows players to see values for damage they deal and enemy health bars"
+        ],
+        "Kind": "Discipline"
+    },
+    {
+        "Name": "Large Caliber Rounds",
+        "Properties":
+        [
+            " +7.5% bullet damage",
+            " +100% bullet penetration",
+            " -20% stamina efficiency"
+        ],
+        "Kind": "Discipline"
+    },
+    {
+        "Name": "Marked for Death",
+        "Properties":
+        [
+            " +10% damage to pinged mutations and mutations are highlighted"
+        ],
+        "Kind": "Discipline"
+    },
+    {
+        "Name": "Meat Grinder",
+        "Properties":
+        [
+            " Gain 30% move speed and accuracy while crouched and using an LMG"
+        ],
+        "Kind": " Discipline"
+    },
+    {
+        "Name": "Medical Professional",
+        "Properties":
+        [
+            " First Aids and Defibrillators recover 15 trauma damage and one extra life"
+        ],
+        "Kind": " Discipline"
+    },
+    {
+        "Name": "Motorcycle Helmet",
+        "Properties":
+        [
+            "+15% damage resistance",
+            " +10 health",
+            " disables aim down sights"
+        ],
+        "Kind": " Discipline"
+    },
+    {
+        "Name": "Motorcycle Jacket",
+        "Properties":
+        [
+            "+5% damage resistance",
+            " +5 health"
+        ],
+        "Kind": " Discipline"
+    },
+    {
+        "Name": "Natural Sprinter",
+        "Properties":
+        [
+            " +100% stamina regeneration",
+            " -50% maximum stamina"
+        ],
+        "Kind": " Discipline"
+    },
+    {
+        "Name": "Needs Of The Many",
+        "Properties":
+        [
+            "-20% health",
+            " Team Effect: +1 team extra life"
+        ],
+        "Kind": " Discipline"
+    },
+    {
+        "Name": "Optics Enthusiast",
+        "Properties":
+        [
+            "+30% accuracy",
+            " -20% stamina efficiency"
+        ],
+        "Kind": "Discipline"
+    },
+    {
+        "Name": "Padded Suit",
+        "Properties":
+        [
+            "+10% damage resistance",
+            " +5 health",
+            " -20% stamina efficiency"
+        ],
+        "Kind": "Discipline"
+    },
+    {
+        "Name": "Patient Hunter",
+        "Properties":
+        [
+            "+10% damage for each second aimed down sights (can be stacked three times)"
+        ],
+        "Kind": "Discipline"
+    },
+    {
+        "Name": "Poultice",
+        "Properties":
+        [
+            " Teammate gains +20 health over 30 seconds when healed"
+        ],
+        "Kind": "Discipline"
+    },
+    {
+        "Name": "Power Reload",
+        "Properties":
+        [
+            " Reloading a gun within 0.75 seconds of hitting low ammo grants +30% mag capacity until the next reload"
+        ],
+        "Kind": "Discipline"
+    },
+    {
+        "Name": "Quick Kill",
+        "Properties":
+        [
+            "+50% accuracy",
+            " disables aim down sights"
+        ],
+        "Kind": "Discipline"
+    },
+    {
+        "Name": "Scattergun Skills",
+        "Properties":
+        [
+            "+40% reload speed with shotguns"
+        ],
+        "Kind": "Discipline"
+    },
+    {
+        "Name": "Silver Bullets",
+        "Properties":
+        [
+            "+10% bullet damage",
+            " +150% bullet penetration",
+            " when you kill a Mutation",
+            " you lose 5 copper"
+        ],
+        "Kind": "Discipline"
+    },
+    {
+        "Name": "Support Scavenger",
+        "Properties":
+        [
+            "You can sense nearby support accessories",
+            " more support accessories spawn"
+        ],
+        "Kind": " Discipline"
+    },
+    {
+        "Name": "Tactical Vest",
+        "Properties":
+        [
+            "+30% rifle ammo capacity",
+            " +10% damage with assault rifles and LMGs"
+        ],
+        "Kind": "Discipline"
+    },
+    {
+        "Name": "Trigger Control",
+        "Properties":
+        [
+            "+25% accuracy with assault rifles and sniper rifles."
+        ],
+        "Kind": " Discipline"
+    },
+    {
+        "Name": "Vanguard",
+        "Properties":
+        [
+            " Melee kills grant 1 temporary health to you and nearby teammates"
+        ],
+        "Kind": " Discipline"
+    },
+    {
+        "Name": "Weapon Scavenger",
+        "Properties":
+        [
+            " You can sense nearby weapons",
+            " more weapons spawn"
+        ],
+        "Kind": " Discipline"
+    },
+    {
+        "Name": "Batter Up",
+        "Properties":
+        [
+            "+50% melee damage",
+            " +5 health"
+        ],
+        "Kind": " Brawn"
+    },
+    {
+        "Name": "Battle Lust",
+        "Properties":
+        [
+            "Melee kills heal two health"
+        ],
+        "Kind": "Brawn"
+    },
+    {
+        "Name": "Berserker",
+        "Properties":
+        [
+            "Gain 10% melee damage",
+            " 10% melee speed",
+            " and 5% move speed for each melee kill in the last 4 seconds"
+        ],
+        "Kind": "Brawn"
+    },
+    {
+        "Name": "Body Armor",
+        "Properties":
+        [
+            "+25% trauma resistance",
+            " -15% ammo capacity"
+        ],
+        "Kind": "Brawn"
+    },
+    {
+        "Name": "Bomb Squad",
+        "Properties":
+        [
+            "+100% explosive damage",
+            " 35+ explosive resistance"
+        ],
+        "Kind": " Brawn"
+    },
+    {
+        "Name": "Broadside",
+        "Properties":
+        [
+            "Precision kills have a 20% chance to cause Ridden to explode",
+            " dealing 15 damage to other Ridden within 4 meters"
+        ],
+        "Kind": "Brawn"
+    },
+    {
+        "Name": "Buckshot Bruiser",
+        "Properties":
+        [
+            " When using Shotguns",
+            " gain temporary health for each pellet that hits."
+        ],
+        "Kind": "Brawn"
+    },
+    {
+        "Name": "Canned Goods",
+        "Properties":
+        [
+            " +40 health",
+            " -30% stamina"
+        ],
+        "Kind": " Brawn"
+    },
+    {
+        "Name": "Chemical Courage",
+        "Properties":
+        [
+            " Pain meds grant +25% damage for 60 seconds"
+        ],
+        "Kind": "Brawn"
+    },
+    {
+        "Name": "Confident Killer",
+        "Properties":
+        [
+            " +1% damage (up to 15%) every time you kill a mutation until the end of the level"
+        ],
+        "Kind": " Brawn"
+    },
+    {
+        "Name": "Demolitions Expert",
+        "Properties":
+        [
+            "+50% accessory damage",
+            " -15% ammo capacity"
+        ],
+        "Kind": "Brawn"
+    },
+    {
+        "Name": "Durable",
+        "Properties":
+        [
+            "+15% trauma resistance",
+            " +5 health"
+        ],
+        "Kind": " Brawn"
+    },
+    {
+        "Name": "Face Your Fears",
+        "Properties":
+        [
+            "+3 temporary health when you kill a Ridden within two metres"
+        ],
+        "Kind": " Brawn"
+    },
+    {
+        "Name": "Fresh Bandage",
+        "Properties":
+        [
+            "heal 10 trauma damage at the start of each level"
+        ],
+        "Kind": " Brawn"
+    },
+    {
+        "Name": "Grenade Training",
+        "Properties":
+        [
+            " +25% accessory damage"
+        ],
+        "Kind": "Brawn"
+    },
+    {
+        "Name": "Health",
+        "Properties":
+        [
+            "+5 health"
+        ],
+        "Kind": "Brawn"
+    },
+    {
+        "Name": "Heavy Attack",
+        "Properties":
+        [
+            " Hold R2 with Melee weapons to burst forward",
+            " charge attacks deal 100% increased damage"
+        ],
+        "Kind": "Brawn"
+    },
+    {
+        "Name": "Heavy Hitter",
+        "Properties":
+        [
+            " Melee hits against weakspots deal +20% additional atumble damage"
+        ],
+        "Kind": " Brawn"
+    },
+    {
+        "Name": "Hydration Pack",
+        "Properties":
+        [
+            "+25% health",
+            " -15% ammo capacity"
+        ],
+        "Kind": "Brawn"
+    },
+    {
+        "Name": "Ignore The Pain",
+        "Properties":
+        [
+            "+20% melee damage against Mutations",
+            " when you deal melee damage to a mutation gain 1 temporary health and recover 3 stamina"
+        ],
+        "Kind": "Brawn"
+    },
+    {
+        "Name": "Improvised Explosives",
+        "Properties":
+        [
+            "+75% accessory damage",
+            " -25% swap speed"
+        ],
+        "Kind": "Brawn"
+    },
+    {
+        "Name": "Line ‘Em Up",
+        "Properties":
+        [
+            "+100% bullet penetration with assault rifles"
+        ],
+        "Kind": " Brawn"
+    },
+    {
+        "Name": "Mean Drunk",
+        "Properties":
+        [
+            "+75% melee damage",
+            " your melee attacks cause cleave through enemies dealing damage in a large area",
+            " disables sprint"
+        ],
+        "Kind": "Brawn"
+    },
+    {
+        "Name": "Numb",
+        "Properties":
+        [
+            " +15% damage resistance while you have temporary health"
+        ],
+        "Kind": "Brawn"
+    },
+    {
+        "Name": "Offensive Scavenger",
+        "Properties":
+        [
+            "You can sense nearby offensive accessories",
+            " more offensive accessories spawn"
+        ],
+        "Kind": " Brawn"
+    },
+    {
+        "Name": "Overwatch",
+        "Properties":
+        [
+            "Kills at more than 15 metres grants five temporary health to nearby allies within 10 meters of the target"
+        ],
+        "Kind": "Brawn"
+    },
+    {
+        "Name": "Pyro",
+        "Properties":
+        [
+            " +100% fire damage",
+            " kills with fire grant you 3 temporary health",
+            " you can sense flammable objects nearby"
+        ],
+        "Kind": "Brawn"
+    },
+    {
+        "Name": "Scar Tissue",
+        "Properties":
+        [
+            "Reduces the damage taken by all Ridden by one"
+        ],
+        "Kind": " Brawn"
+    },
+    {
+        "Name": "Second Chance",
+        "Properties":
+        [
+            "+1 extra life",
+            " +5 health"
+        ],
+        "Kind": " Brawn"
+    },
+    {
+        "Name": "Spiky Bits",
+        "Properties":
+        [
+            "+25% melee damage",
+            " +10% damage resistance while using a melee weapon",
+            " -15% ammo capacity"
+        ],
+        "Kind": " Brawn"
+    },
+    {
+        "Name": "Sunder",
+        "Properties":
+        [
+            "Melee hits cause the target to take 20% increased damage for 5 seconds"
+        ],
+        "Kind": "Brawn"
+    },
+    {
+        "Name": "True Grit",
+        "Properties":
+        [
+            "+8 health over five seconds when hit for 15 or more damage"
+        ],
+        "Kind": "Brawn"
+    },
+    {
+        "Name": "Two is One and One is None",
+        "Properties":
+        [
+            "Grants the ability to equip a second primary",
+            " -25% weapon swap speed"
+        ],
+        "Kind": " Brawn"
+    },
+    {
+        "Name": "Vitamins",
+        "Properties":
+        [
+            " +15 health"
+        ],
+        "Kind": "Brawn"
+    },
+    {
+        "Name": "Well Fed",
+        "Properties":
+        [
+            " -20% stamina regen",
+            " Team Effect: team health +10"
+        ],
+        "Kind": "Brawn"
+    },
+    {
+        "Name": "Wooden Armor",
+        "Properties":
+        [
+            " +40% trauma resistance",
+            " -100%fire resistance",
+            " -100% acid resistance",
+            " -100% explosion resistance"
+        ],
+        "Kind": "Brawn"
+    },
+    {
+        "Name": "Card name",
+        "Properties":
+        [
+            "Description"
+        ],
+        "Kind": "Fortune"
+    },
+    {
+        "Name": "Admin Reload",
+        "Properties":
+        [
+            " When you stow your weapon",
+            " it reloads",
+            " -15% ammo capacity"
+        ],
+        "Kind": "Fortune"
+    },
+    {
+        "Name": "Ammo Stash",
+        "Properties":
+        [
+            "Secondary weapons have unlimited ammo",
+            " your secondary weapon reload is 20% slower"
+        ],
+        "Kind": "Fortune"
+    },
+    {
+        "Name": "Bounty Hunter",
+        "Properties":
+        [
+            "When you kill a Mutation",
+            " gain 10 copper (up to 300 per level)"
+        ],
+        "Kind": "Fortune"
+    },
+    {
+        "Name": "Box O’ Bags",
+        "Properties":
+        [
+            "-10% health",
+            " Team Effect: +1 team support inventory"
+        ],
+        "Kind": "Fortune"
+    },
+    {
+        "Name": "Compound Interest",
+        "Properties":
+        [
+            "Gain 10% of your total copper in each saferoom"
+        ],
+        "Kind": "Fortune"
+    },
+    {
+        "Name": "Copper Scavenger",
+        "Properties":
+        [
+            " You can sense nearby Copper",
+            " more Copper piles spawn"
+        ],
+        "Kind": " Fortune"
+    },
+    {
+        "Name": "Double Grenade Pouch",
+        "Properties":
+        [
+            " +2 offensive inventory",
+            " -10% damage dealt"
+        ],
+        "Kind": "Fortune"
+    },
+    {
+        "Name": "Fanny Pack",
+        "Properties":
+        [
+            "+1 support inventory"
+        ],
+        "Kind": " Fortune"
+    },
+    {
+        "Name": "Fortune",
+        "Properties":
+        [
+            "Gain 25 to 50 Copper at the start of each level"
+        ],
+        "Kind": "Fortune"
+    },
+    {
+        "Name": "Grenade Pouch",
+        "Properties":
+        [
+            "+1 offensive inventory"
+        ],
+        "Kind": "Fortune"
+    },
+    {
+        "Name": "Hazard Pay",
+        "Properties":
+        [
+            "Gain 250% bonus copper at the start of each level"
+        ],
+        "Kind": "Fortune"
+    },
+    {
+        "Name": "Highwayman",
+        "Properties":
+        [
+            "Pistol kills have a 2% chance to spawn ammo"
+        ],
+        "Kind": "Fortune"
+    },
+    {
+        "Name": "Life Insurance",
+        "Properties":
+        [
+            "+2 extra life",
+            " lose 50 copper at the start of each level"
+        ],
+        "Kind": " Fortune"
+    },
+    {
+        "Name": "Lucky Pennies",
+        "Properties":
+        [
+            "whenever you or your team loots copper you have a 35% chance to find 35% additional copper"
+        ],
+        "Kind": "Fortune"
+    },
+    {
+        "Name": "Money Grubbers",
+        "Properties":
+        [
+            "Each time your team loots copper you gain 5 additional copper",
+            " stacking up to 100 additional copper."
+        ],
+        "Kind": " Fortune"
+    },
+    {
+        "Name": "Mugger",
+        "Properties":
+        [
+            "Melee kills have a 2% chance to spawn ammo"
+        ],
+        "Kind": "Fortune"
+    },
+    {
+        "Name": "Run and Gun",
+        "Properties":
+        [
+            "You can shoot while sprinting"
+        ],
+        "Kind": " Fortune"
+    },
+    {
+        "Name": "Saferoom Recovery",
+        "Properties":
+        [
+            "Your team heals 5 trauma damage and refills 10% ammo at the start of each level"
+        ],
+        "Kind": "Fortune"
+    },
+    {
+        "Name": "Share The Wealth",
+        "Properties":
+        [
+            " Each teammate gains 100 bonus copper at the start of each level"
+        ],
+        "Kind": "Fortune"
+    },
+    {
+        "Name": "Shell Carrier",
+        "Properties":
+        [
+            "+30% shotgun ammo capacity",
+            " +10% damage with shotguns"
+        ],
+        "Kind": "Fortune"
+    },
+    {
+        "Name": "Shoulder Bag",
+        "Properties":
+        [
+            " +2 support inventory",
+            " -10% damage dealt"
+        ],
+        "Kind": "Fortune"
+    },
+    {
+        "Name": "Surplus Pouches",
+        "Properties":
+        [
+            "-10% health",
+            " Team Effect: +1 team offensive inventory "
+        ],
+        "Kind": "Fortune"
+    },
+    {
+        "Name": "Wounded Animal",
+        "Properties":
+        [
+            "Kills while at critical health recover 1 health"
+        ],
+        "Kind": "Fortune"
+    }
+]

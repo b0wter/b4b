@@ -1,0 +1,11 @@
+#pointer {
+    cursor: pointer;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.overflow-scroll {
+    overflow: scroll;
+}
