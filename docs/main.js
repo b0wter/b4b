@@ -6910,30 +6910,289 @@ var $elm$core$List$filter = F2(
 			_List_Nil,
 			list);
 	});
-var $author$project$List$Extra$find = F2(
-	function (predicate, items) {
+var $elm_community$list_extra$List$Extra$find = F2(
+	function (predicate, list) {
 		find:
 		while (true) {
-			if (!items.b) {
+			if (!list.b) {
 				return $elm$core$Maybe$Nothing;
 			} else {
-				var head = items.a;
-				var tail = items.b;
-				if (predicate(head)) {
-					return $elm$core$Maybe$Just(head);
+				var first = list.a;
+				var rest = list.b;
+				if (predicate(first)) {
+					return $elm$core$Maybe$Just(first);
 				} else {
 					var $temp$predicate = predicate,
-						$temp$items = tail;
+						$temp$list = rest;
 					predicate = $temp$predicate;
-					items = $temp$items;
+					list = $temp$list;
 					continue find;
 				}
 			}
 		}
 	});
+var $elm$core$Debug$log = _Debug_log;
+var $elm$core$Basics$negate = function (n) {
+	return -n;
+};
 var $elm$core$Basics$neq = _Utils_notEqual;
 var $elm$core$Platform$Cmd$batch = _Platform_batch;
 var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
+var $author$project$List$Extras$elemIndexBy = F2(
+	function (predicate, list) {
+		var run = F2(
+			function (index, remaining) {
+				run:
+				while (true) {
+					if (!remaining.b) {
+						return $elm$core$Maybe$Nothing;
+					} else {
+						var head = remaining.a;
+						var tail = remaining.b;
+						if (predicate(head)) {
+							return $elm$core$Maybe$Just(index);
+						} else {
+							var $temp$index = index + 1,
+								$temp$remaining = tail;
+							index = $temp$index;
+							remaining = $temp$remaining;
+							continue run;
+						}
+					}
+				}
+			});
+		return A2(run, 0, list);
+	});
+var $elm$core$List$append = F2(
+	function (xs, ys) {
+		if (!ys.b) {
+			return xs;
+		} else {
+			return A3($elm$core$List$foldr, $elm$core$List$cons, ys, xs);
+		}
+	});
+var $elm$core$List$concat = function (lists) {
+	return A3($elm$core$List$foldr, $elm$core$List$append, _List_Nil, lists);
+};
+var $elm$core$List$drop = F2(
+	function (n, list) {
+		drop:
+		while (true) {
+			if (n <= 0) {
+				return list;
+			} else {
+				if (!list.b) {
+					return list;
+				} else {
+					var x = list.a;
+					var xs = list.b;
+					var $temp$n = n - 1,
+						$temp$list = xs;
+					n = $temp$n;
+					list = $temp$list;
+					continue drop;
+				}
+			}
+		}
+	});
+var $elm$core$List$takeReverse = F3(
+	function (n, list, kept) {
+		takeReverse:
+		while (true) {
+			if (n <= 0) {
+				return kept;
+			} else {
+				if (!list.b) {
+					return kept;
+				} else {
+					var x = list.a;
+					var xs = list.b;
+					var $temp$n = n - 1,
+						$temp$list = xs,
+						$temp$kept = A2($elm$core$List$cons, x, kept);
+					n = $temp$n;
+					list = $temp$list;
+					kept = $temp$kept;
+					continue takeReverse;
+				}
+			}
+		}
+	});
+var $elm$core$List$takeTailRec = F2(
+	function (n, list) {
+		return $elm$core$List$reverse(
+			A3($elm$core$List$takeReverse, n, list, _List_Nil));
+	});
+var $elm$core$List$takeFast = F3(
+	function (ctr, n, list) {
+		if (n <= 0) {
+			return _List_Nil;
+		} else {
+			var _v0 = _Utils_Tuple2(n, list);
+			_v0$1:
+			while (true) {
+				_v0$5:
+				while (true) {
+					if (!_v0.b.b) {
+						return list;
+					} else {
+						if (_v0.b.b.b) {
+							switch (_v0.a) {
+								case 1:
+									break _v0$1;
+								case 2:
+									var _v2 = _v0.b;
+									var x = _v2.a;
+									var _v3 = _v2.b;
+									var y = _v3.a;
+									return _List_fromArray(
+										[x, y]);
+								case 3:
+									if (_v0.b.b.b.b) {
+										var _v4 = _v0.b;
+										var x = _v4.a;
+										var _v5 = _v4.b;
+										var y = _v5.a;
+										var _v6 = _v5.b;
+										var z = _v6.a;
+										return _List_fromArray(
+											[x, y, z]);
+									} else {
+										break _v0$5;
+									}
+								default:
+									if (_v0.b.b.b.b && _v0.b.b.b.b.b) {
+										var _v7 = _v0.b;
+										var x = _v7.a;
+										var _v8 = _v7.b;
+										var y = _v8.a;
+										var _v9 = _v8.b;
+										var z = _v9.a;
+										var _v10 = _v9.b;
+										var w = _v10.a;
+										var tl = _v10.b;
+										return (ctr > 1000) ? A2(
+											$elm$core$List$cons,
+											x,
+											A2(
+												$elm$core$List$cons,
+												y,
+												A2(
+													$elm$core$List$cons,
+													z,
+													A2(
+														$elm$core$List$cons,
+														w,
+														A2($elm$core$List$takeTailRec, n - 4, tl))))) : A2(
+											$elm$core$List$cons,
+											x,
+											A2(
+												$elm$core$List$cons,
+												y,
+												A2(
+													$elm$core$List$cons,
+													z,
+													A2(
+														$elm$core$List$cons,
+														w,
+														A3($elm$core$List$takeFast, ctr + 1, n - 4, tl)))));
+									} else {
+										break _v0$5;
+									}
+							}
+						} else {
+							if (_v0.a === 1) {
+								break _v0$1;
+							} else {
+								break _v0$5;
+							}
+						}
+					}
+				}
+				return list;
+			}
+			var _v1 = _v0.b;
+			var x = _v1.a;
+			return _List_fromArray(
+				[x]);
+		}
+	});
+var $elm$core$List$take = F2(
+	function (n, list) {
+		return A3($elm$core$List$takeFast, 0, n, list);
+	});
+var $elm_community$list_extra$List$Extra$splitAt = F2(
+	function (n, xs) {
+		return _Utils_Tuple2(
+			A2($elm$core$List$take, n, xs),
+			A2($elm$core$List$drop, n, xs));
+	});
+var $elm_community$list_extra$List$Extra$uncons = function (list) {
+	if (!list.b) {
+		return $elm$core$Maybe$Nothing;
+	} else {
+		var first = list.a;
+		var rest = list.b;
+		return $elm$core$Maybe$Just(
+			_Utils_Tuple2(first, rest));
+	}
+};
+var $elm_community$list_extra$List$Extra$swapAt = F3(
+	function (index1, index2, l) {
+		swapAt:
+		while (true) {
+			if (_Utils_eq(index1, index2) || (index1 < 0)) {
+				return l;
+			} else {
+				if (_Utils_cmp(index1, index2) > 0) {
+					var $temp$index1 = index2,
+						$temp$index2 = index1,
+						$temp$l = l;
+					index1 = $temp$index1;
+					index2 = $temp$index2;
+					l = $temp$l;
+					continue swapAt;
+				} else {
+					var _v0 = A2($elm_community$list_extra$List$Extra$splitAt, index1, l);
+					var part1 = _v0.a;
+					var tail1 = _v0.b;
+					var _v1 = A2($elm_community$list_extra$List$Extra$splitAt, index2 - index1, tail1);
+					var head2 = _v1.a;
+					var tail2 = _v1.b;
+					var _v2 = _Utils_Tuple2(
+						$elm_community$list_extra$List$Extra$uncons(head2),
+						$elm_community$list_extra$List$Extra$uncons(tail2));
+					if ((_v2.a.$ === 'Just') && (_v2.b.$ === 'Just')) {
+						var _v3 = _v2.a.a;
+						var value1 = _v3.a;
+						var part2 = _v3.b;
+						var _v4 = _v2.b.a;
+						var value2 = _v4.a;
+						var part3 = _v4.b;
+						return $elm$core$List$concat(
+							_List_fromArray(
+								[
+									part1,
+									A2($elm$core$List$cons, value2, part2),
+									A2($elm$core$List$cons, value1, part3)
+								]));
+					} else {
+						return l;
+					}
+				}
+			}
+		}
+	});
+var $author$project$Main$swapCardsBy = F3(
+	function (predicate, stepSize, cards) {
+		var index = A2($author$project$List$Extras$elemIndexBy, predicate, cards);
+		if (index.$ === 'Just') {
+			var i = index.a;
+			return A3($elm_community$list_extra$List$Extra$swapAt, i, i + stepSize, cards);
+		} else {
+			return A2($elm$core$Debug$log, 'Tried to swap cards for a card not found in the set.', cards);
+		}
+	});
 var $author$project$Main$update = F2(
 	function (msg, model) {
 		switch (msg.$) {
@@ -6947,7 +7206,7 @@ var $author$project$Main$update = F2(
 			case 'SelectCard':
 				var id = msg.a;
 				var card = A2(
-					$author$project$List$Extra$find,
+					$elm_community$list_extra$List$Extra$find,
 					function (c) {
 						return _Utils_eq(c.id, id);
 					},
@@ -6968,12 +7227,15 @@ var $author$project$Main$update = F2(
 							}),
 						$elm$core$Platform$Cmd$none);
 				} else {
-					return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
+					return A2(
+						$elm$core$Debug$log,
+						'A message was sent for a card that could not be found.',
+						_Utils_Tuple2(model, $elm$core$Platform$Cmd$none));
 				}
 			case 'DeselectCard':
 				var id = msg.a;
 				var card = A2(
-					$author$project$List$Extra$find,
+					$elm_community$list_extra$List$Extra$find,
 					function (c) {
 						return _Utils_eq(c.id, id);
 					},
@@ -6994,8 +7256,41 @@ var $author$project$Main$update = F2(
 							}),
 						$elm$core$Platform$Cmd$none);
 				} else {
-					return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
+					return A2(
+						$elm$core$Debug$log,
+						'A message was sent for a card that could not be found.',
+						_Utils_Tuple2(model, $elm$core$Platform$Cmd$none));
 				}
+			case 'MoveCardDown':
+				var id = msg.a;
+				return _Utils_Tuple2(
+					_Utils_update(
+						model,
+						{
+							selectedCards: A3(
+								$author$project$Main$swapCardsBy,
+								function (c) {
+									return _Utils_eq(c.id, id);
+								},
+								1,
+								model.selectedCards)
+						}),
+					$elm$core$Platform$Cmd$none);
+			case 'MoveCardUp':
+				var id = msg.a;
+				return _Utils_Tuple2(
+					_Utils_update(
+						model,
+						{
+							selectedCards: A3(
+								$author$project$Main$swapCardsBy,
+								function (c) {
+									return _Utils_eq(c.id, id);
+								},
+								-1,
+								model.selectedCards)
+						}),
+					$elm$core$Platform$Cmd$none);
 			default:
 				return _Utils_Tuple2(
 					_Utils_update(
@@ -9526,6 +9821,12 @@ var $author$project$Main$header = function (model) {
 var $author$project$Main$DeselectCard = function (a) {
 	return {$: 'DeselectCard', a: a};
 };
+var $author$project$Main$MoveCardDown = function (a) {
+	return {$: 'MoveCardDown', a: a};
+};
+var $author$project$Main$MoveCardUp = function (a) {
+	return {$: 'MoveCardUp', a: a};
+};
 var $rundis$elm_bootstrap$Bootstrap$Card$Internal$BlockAttrs = function (a) {
 	return {$: 'BlockAttrs', a: a};
 };
@@ -9649,16 +9950,49 @@ var $author$project$Main$summaryCardView = function (card) {
 												$elm$html$Html$text(card.title)
 											])),
 										A2(
-										$elm$html$Html$a,
+										$elm$html$Html$div,
+										_List_Nil,
 										_List_fromArray(
 											[
-												$elm$html$Html$Events$onClick(
-												$author$project$Main$DeselectCard(card.id)),
-												$author$project$Main$pointerClass
-											]),
-										_List_fromArray(
-											[
-												$elm$html$Html$text('✕')
+												A2(
+												$elm$html$Html$a,
+												_List_fromArray(
+													[
+														$elm$html$Html$Events$onClick(
+														$author$project$Main$MoveCardUp(card.id)),
+														$author$project$Main$pointerClass,
+														$elm$html$Html$Attributes$class('pl-2 pr-2')
+													]),
+												_List_fromArray(
+													[
+														$elm$html$Html$text('↑')
+													])),
+												A2(
+												$elm$html$Html$a,
+												_List_fromArray(
+													[
+														$elm$html$Html$Events$onClick(
+														$author$project$Main$MoveCardDown(card.id)),
+														$author$project$Main$pointerClass,
+														$elm$html$Html$Attributes$class('pl-2 pr-2 ml-2')
+													]),
+												_List_fromArray(
+													[
+														$elm$html$Html$text('↓')
+													])),
+												A2(
+												$elm$html$Html$a,
+												_List_fromArray(
+													[
+														$elm$html$Html$Events$onClick(
+														$author$project$Main$DeselectCard(card.id)),
+														$author$project$Main$pointerClass,
+														$elm$html$Html$Attributes$class('pl-2 pr-2 ml-2')
+													]),
+												_List_fromArray(
+													[
+														$elm$html$Html$text('✕')
+													]))
 											]))
 									]))
 							]),

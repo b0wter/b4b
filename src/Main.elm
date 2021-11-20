@@ -13,12 +13,13 @@ import Bootstrap.Utilities.Flex as Flex
 import Bootstrap.Utilities.Size as Size
 import Bootstrap.Utilities.Spacing as Spacing
 import Browser
-import Cards exposing (Card, Kind(..), cards)
+import Cards exposing (Card, CardId, Kind(..), cards)
 import Html exposing (Attribute, Html, div, img, text)
 import Html.Attributes exposing (..)
 import Html.Events exposing (onClick)
 import List.Extra as List
-import List.FlatMap as FlatMap
+import List.Extras as List
+import List.FlatMap as List
 
 
 main : Program Flags Model Msg
@@ -59,9 +60,11 @@ init flags =
 
 type Msg
     = NavbarMsg Navbar.State
-    | SelectCard Int
-    | DeselectCard Int
+    | SelectCard CardId
+    | DeselectCard CardId
     | ResetCards
+    | MoveCardUp CardId
+    | MoveCardDown CardId
 
 
 
@@ -71,6 +74,21 @@ type Msg
 subscriptions : Model -> Sub Msg
 subscriptions model =
     Navbar.subscriptions model.navbarState NavbarMsg
+
+
+swapCardsBy : (Card -> Bool) -> Int -> List Card -> List Card
+swapCardsBy predicate stepSize cards =
+    let
+        index =
+            cards |> List.elemIndexBy predicate
+    in
+    case index of
+        Just i ->
+            cards |> List.swapAt i (i + stepSize)
+
+        Nothing ->
+            Debug.log "Tried to swap cards for a card not found in the set."
+                cards
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -94,7 +112,8 @@ update msg model =
                     )
 
                 Nothing ->
-                    ( model, Cmd.none )
+                    Debug.log "A message was sent for a card that could not be found."
+                        ( model, Cmd.none )
 
         DeselectCard id ->
             let
@@ -111,7 +130,18 @@ update msg model =
                     )
 
                 Nothing ->
-                    ( model, Cmd.none )
+                    Debug.log "A message was sent for a card that could not be found."
+                        ( model, Cmd.none )
+
+        MoveCardDown id ->
+            ( { model | selectedCards = model.selectedCards |> swapCardsBy (\c -> c.id == id) 1 }
+            , Cmd.none
+            )
+
+        MoveCardUp id ->
+            ( { model | selectedCards = model.selectedCards |> swapCardsBy (\c -> c.id == id) -1 }
+            , Cmd.none
+            )
 
         ResetCards ->
             ( { model | selectedCards = [], cardPool = cards }, Cmd.none )
@@ -313,7 +343,11 @@ summaryCardView card =
             |> Card.block [ Block.attrs [ Spacing.pt1, Spacing.pb1 ] ]
                 [ Block.text [ Flex.block, Flex.justifyBetween ]
                     [ div [] [ text card.title ]
-                    , Html.a [ onClick (DeselectCard card.id), pointerClass ] [ text "✕" ]
+                    , div []
+                        [ Html.a [ onClick (MoveCardUp card.id), pointerClass, class "pl-2 pr-2" ] [ text "↑" ]
+                        , Html.a [ onClick (MoveCardDown card.id), pointerClass, class "pl-2 pr-2 ml-2" ] [ text "↓" ]
+                        , Html.a [ onClick (DeselectCard card.id), pointerClass, class "pl-2 pr-2 ml-2" ] [ text "✕" ]
+                        ]
                     ]
                 ]
             |> Card.footer [ Spacing.pt1, Spacing.pb1 ]

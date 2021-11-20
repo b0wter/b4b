@@ -12,9 +12,11 @@ type Kind
   | Fortune
   | Unknown
 
+type alias CardId = Int
+
 type alias Card =
   {
-    id: Int,
+    id: CardId,
     title: String,
     properties: List Property,
     kind: Kind
