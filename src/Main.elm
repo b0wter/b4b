@@ -7,6 +7,7 @@ import Bootstrap.Grid as Grid
 import Bootstrap.Grid.Col as Col
 import Bootstrap.Navbar as Navbar
 import Bootstrap.Table exposing (RowOption, rowLight)
+import Bootstrap.Text as Text
 import Bootstrap.Utilities.Border as Border
 import Bootstrap.Utilities.Display as Display
 import Bootstrap.Utilities.Flex as Flex
@@ -20,6 +21,7 @@ import Html.Events exposing (onClick)
 import List.Extra as List
 import List.Extras as List
 import List.FlatMap as List
+import Bootstrap.Text exposing (Color)
 
 
 main : Program Flags Model Msg
@@ -195,9 +197,19 @@ cardPoolView model =
 
 inventoryView : Model -> Grid.Column Msg
 inventoryView model =
+    let numberOfSelectedCards = model.selectedCards |> List.length
+        selectionCountString = "(" ++ (numberOfSelectedCards |> String.fromInt) ++ "/15)"
+        border = if numberOfSelectedCards <= 15 then Border.light else Border.warning
+        textColor = if numberOfSelectedCards <= 15 then class "" else class "text-warning"
+    in
     Grid.col [ Col.xs4, Col.attrs [ class "overflow-scroll content-column" ] ]
-        [ div []
-            [ Grid.row []
+        [ div [ class "bg-light m-2 shadow rounded border", border]
+            [ Grid.row [ ]
+                [ Grid.col [ Col.xs12, Col.attrs [ class "d-flex justify-content-between" ] ] 
+                    [ Html.h5 [ Spacing.m2, textColor ] [ text "Selection" ] 
+                    , div [ Spacing.m2, textColor ] [ text selectionCountString ]
+                    ] ]
+            , Grid.row []
                 (model.selectedCards |> List.map summaryCardView)
             ]
         ]

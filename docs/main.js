@@ -9818,6 +9818,7 @@ var $author$project$Main$header = function (model) {
 				$rundis$elm_bootstrap$Bootstrap$Navbar$withAnimation(
 					$rundis$elm_bootstrap$Bootstrap$Navbar$config($author$project$Main$NavbarMsg)))));
 };
+var $rundis$elm_bootstrap$Bootstrap$Utilities$Border$light = A2($rundis$elm_bootstrap$Bootstrap$Internal$Role$toClass, 'border', $rundis$elm_bootstrap$Bootstrap$Internal$Role$Light);
 var $author$project$Main$DeselectCard = function (a) {
 	return {$: 'DeselectCard', a: a};
 };
@@ -10006,9 +10007,14 @@ var $author$project$Main$summaryCardView = function (card) {
 								])))))
 			]));
 };
+var $rundis$elm_bootstrap$Bootstrap$Utilities$Border$warning = A2($rundis$elm_bootstrap$Bootstrap$Internal$Role$toClass, 'border', $rundis$elm_bootstrap$Bootstrap$Internal$Role$Warning);
 var $rundis$elm_bootstrap$Bootstrap$Grid$Internal$Col4 = {$: 'Col4'};
 var $rundis$elm_bootstrap$Bootstrap$Grid$Col$xs4 = A2($rundis$elm_bootstrap$Bootstrap$Grid$Internal$width, $rundis$elm_bootstrap$Bootstrap$General$Internal$XS, $rundis$elm_bootstrap$Bootstrap$Grid$Internal$Col4);
 var $author$project$Main$inventoryView = function (model) {
+	var numberOfSelectedCards = $elm$core$List$length(model.selectedCards);
+	var selectionCountString = '(' + ($elm$core$String$fromInt(numberOfSelectedCards) + '/15)');
+	var textColor = (numberOfSelectedCards <= 15) ? $elm$html$Html$Attributes$class('') : $elm$html$Html$Attributes$class('text-warning');
+	var border = (numberOfSelectedCards <= 15) ? $rundis$elm_bootstrap$Bootstrap$Utilities$Border$light : $rundis$elm_bootstrap$Bootstrap$Utilities$Border$warning;
 	return A2(
 		$rundis$elm_bootstrap$Bootstrap$Grid$col,
 		_List_fromArray(
@@ -10024,9 +10030,49 @@ var $author$project$Main$inventoryView = function (model) {
 			[
 				A2(
 				$elm$html$Html$div,
-				_List_Nil,
 				_List_fromArray(
 					[
+						$elm$html$Html$Attributes$class('bg-light m-2 shadow rounded border'),
+						border
+					]),
+				_List_fromArray(
+					[
+						A2(
+						$rundis$elm_bootstrap$Bootstrap$Grid$row,
+						_List_Nil,
+						_List_fromArray(
+							[
+								A2(
+								$rundis$elm_bootstrap$Bootstrap$Grid$col,
+								_List_fromArray(
+									[
+										$rundis$elm_bootstrap$Bootstrap$Grid$Col$xs12,
+										$rundis$elm_bootstrap$Bootstrap$Grid$Col$attrs(
+										_List_fromArray(
+											[
+												$elm$html$Html$Attributes$class('d-flex justify-content-between')
+											]))
+									]),
+								_List_fromArray(
+									[
+										A2(
+										$elm$html$Html$h5,
+										_List_fromArray(
+											[$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$m2, textColor]),
+										_List_fromArray(
+											[
+												$elm$html$Html$text('Selection')
+											])),
+										A2(
+										$elm$html$Html$div,
+										_List_fromArray(
+											[$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$m2, textColor]),
+										_List_fromArray(
+											[
+												$elm$html$Html$text(selectionCountString)
+											]))
+									]))
+							])),
 						A2(
 						$rundis$elm_bootstrap$Bootstrap$Grid$row,
 						_List_Nil,
