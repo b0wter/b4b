@@ -8628,8 +8628,7 @@ var $author$project$Main$cardPoolView = function (model) {
 				$rundis$elm_bootstrap$Bootstrap$Grid$Col$attrs(
 				_List_fromArray(
 					[
-						A2($elm$html$Html$Attributes$style, 'height', 'calc(100vh - 60px)'),
-						$elm$html$Html$Attributes$class('overflow-scroll')
+						$elm$html$Html$Attributes$class('overflow-scroll content-column')
 					]))
 			]),
 		_List_fromArray(
@@ -9684,8 +9683,7 @@ var $author$project$Main$inventoryView = function (model) {
 				$rundis$elm_bootstrap$Bootstrap$Grid$Col$attrs(
 				_List_fromArray(
 					[
-						A2($elm$html$Html$Attributes$style, 'height', 'calc(100vh - 60px)'),
-						$elm$html$Html$Attributes$class('overflow-scroll')
+						$elm$html$Html$Attributes$class('overflow-scroll content-column')
 					]))
 			]),
 		_List_fromArray(

@@ -126,11 +126,6 @@ pointerClass =
     Html.Attributes.class "pointer"
 
 
-pointerStyle : Attribute msg
-pointerStyle =
-    Html.Attributes.style "pointer" "cursor"
-
-
 view : Model -> Browser.Document Msg
 view model =
     { title = "Back 4 Blood Deck Builder"
@@ -162,7 +157,7 @@ mainContent model =
 
 cardPoolView : Model -> Grid.Column Msg
 cardPoolView model =
-    Grid.col [ Col.xs8, Col.attrs [ style "height" "calc(100vh - 60px)", class "overflow-scroll" ] ]
+    Grid.col [ Col.xs8, Col.attrs [ class "overflow-scroll content-column" ] ]
         [ Grid.row []
             (model.cardPool |> List.map fullCardView)
         ]
@@ -170,7 +165,7 @@ cardPoolView model =
 
 inventoryView : Model -> Grid.Column Msg
 inventoryView model =
-    Grid.col [ Col.xs4, Col.attrs [ style "height" "calc(100vh - 60px)", class "overflow-scroll" ] ]
+    Grid.col [ Col.xs4, Col.attrs [ class "overflow-scroll content-column" ] ]
         [ div []
             [ Grid.row []
                 (model.selectedCards |> List.map summaryCardView)

@@ -8,4 +8,9 @@
 
 .overflow-scroll {
     overflow: scroll;
+    -webkit-overflow-scrolling: touch;
+}
+
+.content-column {
+    height: calc(-60px + 100vh)
 }
