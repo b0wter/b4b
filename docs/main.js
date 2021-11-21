@@ -5155,12 +5155,1232 @@ var $author$project$Cards$Property = function (description) {
 };
 var $author$project$Cards$Reflex = {$: 'Reflex'};
 var $author$project$Cards$Unknown = {$: 'Unknown'};
+var $author$project$Tags$AbsoluteCurrent = function (a) {
+	return {$: 'AbsoluteCurrent', a: a};
+};
+var $author$project$Tags$DamageResistance = {$: 'DamageResistance'};
+var $author$project$Tags$KillEnemy = {$: 'KillEnemy'};
+var $author$project$Tags$MeleeAttackSpeed = {$: 'MeleeAttackSpeed'};
+var $author$project$Tags$MeleeStaminaEfficiency = {$: 'MeleeStaminaEfficiency'};
+var $author$project$Tags$Once = F2(
+	function (a, b) {
+		return {$: 'Once', a: a, b: b};
+	});
+var $author$project$Tags$OverTime = F2(
+	function (a, b) {
+		return {$: 'OverTime', a: a, b: b};
+	});
+var $author$project$Tags$Passive = F2(
+	function (a, b) {
+		return {$: 'Passive', a: a, b: b};
+	});
+var $author$project$Tags$RelativeMax = function (a) {
+	return {$: 'RelativeMax', a: a};
+};
+var $author$project$Tags$Special = function (a) {
+	return {$: 'Special', a: a};
+};
+var $author$project$Tags$Stamina = {$: 'Stamina'};
+var $author$project$Tags$StaminaRegeneration = {$: 'StaminaRegeneration'};
+var $author$project$Tags$Triggered = F2(
+	function (a, b) {
+		return {$: 'Triggered', a: a, b: b};
+	});
+var $author$project$Tags$Twin = F2(
+	function (a, b) {
+		return {$: 'Twin', a: a, b: b};
+	});
+var $elm$core$Basics$negate = function (n) {
+	return -n;
+};
+var $author$project$Cards$rawCards = _List_fromArray(
+	[
+		{
+		effects: _List_fromArray(
+			[
+				A2(
+				$author$project$Tags$Passive,
+				$author$project$Tags$Stamina,
+				$author$project$Tags$RelativeMax(100)),
+				A2(
+				$author$project$Tags$Passive,
+				$author$project$Tags$StaminaRegeneration,
+				$author$project$Tags$RelativeMax(75)),
+				A2(
+				$author$project$Tags$Triggered,
+				$author$project$Tags$KillEnemy,
+				A2(
+					$author$project$Tags$Twin,
+					A2(
+						$author$project$Tags$Once,
+						$author$project$Tags$Stamina,
+						$author$project$Tags$AbsoluteCurrent(10)),
+					A2(
+						$author$project$Tags$OverTime,
+						5,
+						A2(
+							$author$project$Tags$Once,
+							$author$project$Tags$Stamina,
+							$author$project$Tags$AbsoluteCurrent(10)))))
+			]),
+		kind: 'Reflex',
+		properties: _List_fromArray(
+			['+ 100% Stamina', '- 75% Stamina Regeneration', 'When you kill an enemy, gain 10 Stamina instantly and an additional 10 Stamina over 5 seconds.']),
+		title: 'Adrenaline Fueled '
+	},
+		{
+		effects: _List_fromArray(
+			[
+				A2(
+				$author$project$Tags$Passive,
+				$author$project$Tags$MeleeStaminaEfficiency,
+				$author$project$Tags$RelativeMax(40)),
+				A2(
+				$author$project$Tags$Passive,
+				$author$project$Tags$MeleeAttackSpeed,
+				$author$project$Tags$RelativeMax(30)),
+				A2(
+				$author$project$Tags$Passive,
+				$author$project$Tags$DamageResistance,
+				$author$project$Tags$RelativeMax(-5))
+			]),
+		kind: 'Reflex',
+		properties: _List_fromArray(
+			['+30% melee stamina efficiency', '+30% melee attack speed', '-5% damage resistance']),
+		title: 'Brazen '
+	},
+		{
+		effects: _List_fromArray(
+			[
+				$author$project$Tags$Special('Allows you to free yourself from grabs'),
+				$author$project$Tags$Special('+50% breakout cooldown reduction')
+			]),
+		kind: 'Reflex',
+		properties: _List_fromArray(
+			['Allows you to free yourself from grabs', '+50% breakout cooldown reduction']),
+		title: 'Breakout '
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Reflex',
+		properties: _List_fromArray(
+			['+75% weapon swap speed', 'When you take damage your accuracy is reduced by 20% for 3 seconds']),
+		title: 'Cocky '
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Reflex',
+		properties: _List_fromArray(
+			['Teammates healed by an additional 20 health when revived', '+50 use speed']),
+		title: 'Combat Medic '
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Reflex',
+		properties: _List_fromArray(
+			['+20% stamina', '+20% stamina regen', '+3% move speed', '5 health']),
+		title: 'Cross Trainers '
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Reflex',
+		properties: _List_fromArray(
+			['+5% move speed']),
+		title: 'Dash '
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Reflex',
+		properties: _List_fromArray(
+			['+40% stamina', '-5% damage resistance ']),
+		title: 'Energy Drink '
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Reflex',
+		properties: _List_fromArray(
+			['Gain a 20% movement speed boost for three seconds when you take a hit of 10 or more']),
+		title: 'Evasive Action '
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Reflex',
+		properties: _List_fromArray(
+			['Gain 20 temporary health and 20% movement speed for five seconds after throwing an offensive item']),
+		title: 'Fire in the Hole! '
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Reflex',
+		properties: _List_fromArray(
+			['When you throw an Offensive Accessory', 'gain 20 temporary health and 20% move speed for 5 seconds.']),
+		title: 'Fire in the Hole! '
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Reflex',
+		properties: _List_fromArray(
+			['+10% move speed', '-5% damage resistance']),
+		title: 'Fleet Of Foot '
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Reflex',
+		properties: _List_fromArray(
+			['+25% damage', '-30% health']),
+		title: 'Glass Cannon '
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Reflex',
+		properties: _List_fromArray(
+			['+50% weapon swap speed', '-5% damage resistance']),
+		title: 'Guns Out '
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Reflex',
+		properties: _List_fromArray(
+			['+125% use speed', 'when you take damage', 'you have a chance to be binded for 1 second']),
+		title: 'Headband Magnifier '
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Reflex',
+		properties: _List_fromArray(
+			['+45% move speed while firing', '+5% move speed while not firing']),
+		title: 'Hellfire '
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Reflex',
+		properties: _List_fromArray(
+			['+30% aim speed']),
+		title: 'Hi Vis Sights '
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Reflex',
+		properties: _List_fromArray(
+			['+50% weakspot damage', '-75% ADS Move Speed']),
+		title: 'Hyper-Focused '
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Reflex',
+		properties: _List_fromArray(
+			['+30% weakspot damage', 'disables aim down sights']),
+		title: 'Killer’s Instinct '
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Reflex',
+		properties: _List_fromArray(
+			['+20% sprint speed', '-30% stamina efficiency']),
+		title: 'Mad Dash '
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Reflex',
+		properties: _List_fromArray(
+			['+30% pistol/SMG ammo capacity', '+10% damage with pistols and SMGs']),
+		title: 'Mag Carrier '
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Reflex',
+		properties: _List_fromArray(
+			['+50% reload speed', 'disables aim down sights']),
+		title: 'Mag Coupler '
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Reflex',
+		properties: _List_fromArray(
+			['Team Effect: +15% team stamina']),
+		title: 'Mandatory PT '
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Reflex',
+		properties: _List_fromArray(
+			['No movement penalty for strafe and backpedal', 'disables Sprint']),
+		title: 'Marathon Runner '
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Reflex',
+		properties: _List_fromArray(
+			['+15 healing efficiency', 'plus +15% movement speed for 15 seconds when you use a medical accessory']),
+		title: 'Medical Expert '
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Reflex',
+		properties: _List_fromArray(
+			['40% melee attack speed', '+40% melee stamina efficiency', 'Your melee attacks no longer stick in tough enemies', 'disables aim down sights']),
+		title: 'Meth Head '
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Reflex',
+		properties: _List_fromArray(
+			['A medical accessory has a 25% chance of having a 100% increased effect']),
+		title: 'Miraculous Recovery '
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Reflex',
+		properties: _List_fromArray(
+			['75% use speed', '-5% damage resistance']),
+		title: 'Multitool '
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Reflex',
+		properties: _List_fromArray(
+			['When you exit a starting saferoom your team gains +15% move speed for 30 seconds']),
+		title: 'On Your Mark… '
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Reflex',
+		properties: _List_fromArray(
+			['+30% sprint efficiency', '-5% damage resistance']),
+		title: 'Olympic Sprinter '
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Reflex',
+		properties: _List_fromArray(
+			['Precision Kills grant 10% movement speed for five seconds']),
+		title: 'Pep in your Step '
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Reflex',
+		properties: _List_fromArray(
+			['+150% revive speed', '-5% damage resistance']),
+		title: 'Pep Talk '
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Reflex',
+		properties: _List_fromArray(
+			['Changing weapons within 0.75 seconds of hitting low ammo grants +20% damage for five seconds']),
+		title: 'Power Swap '
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Reflex',
+		properties: _List_fromArray(
+			['+40% sprint efficiency', 'When you take damage while sprinting', 'you lose all your stamina']),
+		title: 'Reckless '
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Reflex',
+		properties: _List_fromArray(
+			['+30% weakspot damage', '-5% damage resistance']),
+		title: 'Reckless Strategy '
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Reflex',
+		properties: _List_fromArray(
+			['+30% reload speed']),
+		title: 'Reload Drills '
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Reflex',
+		properties: _List_fromArray(
+			['+60% stamina', '-20% slow resistance']),
+		title: 'Rhythmic Breathing '
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Reflex',
+		properties: _List_fromArray(
+			['+20% weak spot damage']),
+		title: 'Ridden Slayer '
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Reflex',
+		properties: _List_fromArray(
+			['+6% move speed while using an SMG', '+35% reload speed while using an SMG']),
+		title: 'Rolling Thunder '
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Reflex',
+		properties: _List_fromArray(
+			['+225% revive speed', 'disables offensive accessories', 'Team Effect: +20% reduced incap trauma']),
+		title: 'Rousing Speech '
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Reflex',
+		properties: _List_fromArray(
+			['+15% move speed', 'When you take damage your accuracy is reduced by 20% for 3 seconds']),
+		title: 'Run Like Hell '
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Reflex',
+		properties: _List_fromArray(
+			['Gain 5% weakspot damage for each precision kill in the last 10 seconds']),
+		title: 'Sadistic '
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Reflex',
+		properties: _List_fromArray(
+			['+50% use speed', '+10% stamina']),
+		title: 'Screwdriver '
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Reflex',
+		properties: _List_fromArray(
+			['+25% weapon swap speed']),
+		title: 'Shooting Gloves '
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Reflex',
+		properties: _List_fromArray(
+			['Each bullet hit causes the target to take 1% increased damage for 3 seconds (stacks up to 15%)']),
+		title: 'Shredder '
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Reflex',
+		properties: _List_fromArray(
+			['+5 health', '+10% melee stamina efficiency', '+20% melee attack speed']),
+		title: 'Slugger '
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Reflex',
+		properties: _List_fromArray(
+			['+100% revive speed']),
+		title: 'Smelling Salts '
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Reflex',
+		properties: _List_fromArray(
+			['+6% move speed while using an SMG', '+35% reload speed while using an SMG']),
+		title: 'Speed Demon '
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Reflex',
+		properties: _List_fromArray(
+			['+10% Stamina']),
+		title: 'Stamina '
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Reflex',
+		properties: _List_fromArray(
+			['+80% aim speed', '-50% ADS move speed']),
+		title: 'Steady Aim '
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Reflex',
+		properties: _List_fromArray(
+			['Pain meds grant +10% movement speed', '10% reload speed', 'and 10% weapon swap speed for 30 seconds']),
+		title: 'Stimulants '
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Reflex',
+		properties: _List_fromArray(
+			['+30% sniper ammo capacity', '+10% damage with sniper rifles']),
+		title: 'Stock Pouch '
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Reflex',
+		properties: _List_fromArray(
+			['+50% sprint efficiency', '+5 health']),
+		title: 'Superior Cardio '
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Reflex',
+		properties: _List_fromArray(
+			['+50% aim speed', '-5% damage resistance']),
+		title: 'Tunnel Vision '
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Reflex',
+		properties: _List_fromArray(
+			['You can sense nearby quick accessories', 'more quick accessories spawn']),
+		title: 'Utility Scavenger '
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Reflex',
+		properties: _List_fromArray(
+			['+30% reload speed', '-5% damage resistance']),
+		title: 'Widemouth Magwell '
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Discipline',
+		properties: _List_fromArray(
+			['+10% ammo']),
+		title: 'Ammo'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Discipline',
+		properties: _List_fromArray(
+			['+50% ammo capacity', '-20% stamina efficiency']),
+		title: 'Ammo Belt'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Discipline',
+		properties: _List_fromArray(
+			['Team Effect: +10% team ammo capacity']),
+		title: 'Ammo For All'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Discipline',
+		properties: _List_fromArray(
+			['75% ammo capacity', 'disables support accessories']),
+		title: 'Ammo Mule'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Discipline',
+		properties: _List_fromArray(
+			['+25% ammo capacity']),
+		title: 'Ammo Pouch'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Discipline',
+		properties: _List_fromArray(
+			['You can sense nearby ammo', 'more ammo spawns']),
+		title: 'Ammo Scavenger'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Discipline',
+		properties: _List_fromArray(
+			['When you exit a starting saferoom your team gains 50 temporary health']),
+		title: 'Amped Up'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Discipline',
+		properties: _List_fromArray(
+			['+20% healing efficiency']),
+		title: 'Antibiotic Ointment'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Discipline',
+		properties: _List_fromArray(
+			['Team Effect: When you or a teammate becomes incapacitated', 'all teammates gain 30% damage', '20% reload speed and unlimited ammo for 10 seconds.']),
+		title: 'Avenge The Fallen'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Discipline',
+		properties: _List_fromArray(
+			['Heals granted to a teammate will also apply 50% of the effect to you']),
+		title: 'Charitable Soul'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Discipline',
+		properties: _List_fromArray(
+			['+40% stamina regeneration', '-10% stamina efficiency']),
+		title: 'Cold Brew Coffee'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Discipline',
+		properties: _List_fromArray(
+			['Turns your Bash into a Knife that counts as a Melee weapon.']),
+		title: 'Combat Knife'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Discipline',
+		properties: _List_fromArray(
+			['+5% damage dealt', '+50% bullet penetration']),
+		title: 'Combat Training'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Discipline',
+		properties: _List_fromArray(
+			['+40% move speed while aiming down sights with sniper rifles']),
+		title: 'Controlled Movement'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Discipline',
+		properties: _List_fromArray(
+			['While crouching you neither take nor deal Friendly Fire damage', '+10 health']),
+		title: 'Down In Front!'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Discipline',
+		properties: _List_fromArray(
+			['+40% healing efficiency', '-20% stamina efficiency']),
+		title: 'EMT Bag'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Discipline',
+		properties: _List_fromArray(
+			['+20% stamina regeneration', '5 health']),
+		title: 'Energy Bar'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Discipline',
+		properties: _List_fromArray(
+			['Medical accessories will grant +20% maximum health until the end of the level']),
+		title: 'Experienced EMT'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Discipline',
+		properties: _List_fromArray(
+			['+60% healing efficiency', '-50% use speed']),
+		title: 'Field Surgeon'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Discipline',
+		properties: _List_fromArray(
+			['+20% accuracy']),
+		title: 'Front Sight Focus'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Discipline',
+		properties: _List_fromArray(
+			['All teammates heal for 5 health when a medical accessory is used']),
+		title: 'Group Therapy'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Discipline',
+		properties: _List_fromArray(
+			['+10% damage resistance and +40% accuracy when crouching']),
+		title: 'Hunker Down'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Discipline',
+		properties: _List_fromArray(
+			['+5% reload speed for five seconds (can be stacked ten times) when getting precision kills']),
+		title: 'In the Zone'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Discipline',
+		properties: _List_fromArray(
+			['Team Effect: All teammates heal for 25 health over twenty seconds if someone is incapacitated']),
+		title: 'Inspiring Sacrifice'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Discipline',
+		properties: _List_fromArray(
+			['+10% weakspot damage', 'allows players to see values for damage they deal and enemy health bars']),
+		title: 'Knowledge Is Power'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Discipline',
+		properties: _List_fromArray(
+			['+7.5% bullet damage', '+100% bullet penetration', '-20% stamina efficiency']),
+		title: 'Large Caliber Rounds'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Discipline',
+		properties: _List_fromArray(
+			['+10% damage to pinged mutations and mutations are highlighted']),
+		title: 'Marked for Death'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Discipline',
+		properties: _List_fromArray(
+			['Gain 30% move speed and accuracy while crouched and using an LMG']),
+		title: 'Meat Grinder'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Discipline',
+		properties: _List_fromArray(
+			['First Aids and Defibrillators recover 15 trauma damage and one extra life']),
+		title: 'Medical Professional'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Discipline',
+		properties: _List_fromArray(
+			['+15% damage resistance', '+10 health', 'disables aim down sights']),
+		title: 'Motorcycle Helmet'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Discipline',
+		properties: _List_fromArray(
+			['+5% damage resistance', '+5 health']),
+		title: 'Motorcycle Jacket'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Discipline',
+		properties: _List_fromArray(
+			['+100% stamina regeneration', '-50% maximum stamina']),
+		title: 'Natural Sprinter'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Discipline',
+		properties: _List_fromArray(
+			['-20% health', 'Team Effect: +1 team extra life']),
+		title: 'Needs Of The Many'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Discipline',
+		properties: _List_fromArray(
+			['+30% accuracy', '-20% stamina efficiency']),
+		title: 'Optics Enthusiast'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Discipline',
+		properties: _List_fromArray(
+			['+10% damage resistance', '+5 health', '-20% stamina efficiency']),
+		title: 'Padded Suit'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Discipline',
+		properties: _List_fromArray(
+			['+10% damage for each second aimed down sights (can be stacked three times)']),
+		title: 'Patient Hunter'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Discipline',
+		properties: _List_fromArray(
+			['Teammate gains +20 health over 30 seconds when healed']),
+		title: 'Poultice'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Discipline',
+		properties: _List_fromArray(
+			['Reloading a gun within 0.75 seconds of hitting low ammo grants +30% mag capacity until the next reload']),
+		title: 'Power Reload'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Discipline',
+		properties: _List_fromArray(
+			['+50% accuracy', 'disables aim down sights']),
+		title: 'Quick Kill'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Discipline',
+		properties: _List_fromArray(
+			['+40% reload speed with shotguns']),
+		title: 'Scattergun Skills'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Discipline',
+		properties: _List_fromArray(
+			['+10% bullet damage', '+150% bullet penetration', 'when you kill a Mutation', 'you lose 5 copper']),
+		title: 'Silver Bullets'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Discipline',
+		properties: _List_fromArray(
+			['You can sense nearby support accessories', 'more support accessories spawn']),
+		title: 'Support Scavenger'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Discipline',
+		properties: _List_fromArray(
+			['+30% rifle ammo capacity', '+10% damage with assault rifles and LMGs']),
+		title: 'Tactical Vest'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Discipline',
+		properties: _List_fromArray(
+			['+25% accuracy with assault rifles and sniper rifles.']),
+		title: 'Trigger Control'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Discipline',
+		properties: _List_fromArray(
+			['Melee kills grant 1 temporary health to you and nearby teammates']),
+		title: 'Vanguard'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Discipline',
+		properties: _List_fromArray(
+			['You can sense nearby weapons', 'more weapons spawn']),
+		title: 'Weapon Scavenger'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Brawn',
+		properties: _List_fromArray(
+			['+50% melee damage', '+5 health']),
+		title: 'Batter Up'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Brawn',
+		properties: _List_fromArray(
+			['Melee kills heal two health']),
+		title: 'Battle Lust'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Brawn',
+		properties: _List_fromArray(
+			['Gain 10% melee damage', '10% melee speed', 'and 5% move speed for each melee kill in the last 4 seconds']),
+		title: 'Berserker'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Brawn',
+		properties: _List_fromArray(
+			['+25% trauma resistance', '-15% ammo capacity']),
+		title: 'Body Armor'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Brawn',
+		properties: _List_fromArray(
+			['+100% explosive damage', '35+ explosive resistance']),
+		title: 'Bomb Squad'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Brawn',
+		properties: _List_fromArray(
+			['Precision kills have a 20% chance to cause Ridden to explode', 'dealing 15 damage to other Ridden within 4 meters']),
+		title: 'Broadside'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Brawn',
+		properties: _List_fromArray(
+			['When using Shotguns', 'gain temporary health for each pellet that hits.']),
+		title: 'Buckshot Bruiser'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Brawn',
+		properties: _List_fromArray(
+			['+40 health', '-30% stamina']),
+		title: 'Canned Goods'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Brawn',
+		properties: _List_fromArray(
+			['Pain meds grant +25% damage for 60 seconds']),
+		title: 'Chemical Courage'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Brawn',
+		properties: _List_fromArray(
+			['+1% damage (up to 15%) every time you kill a mutation until the end of the level']),
+		title: 'Confident Killer'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Brawn',
+		properties: _List_fromArray(
+			['+50% accessory damage', '-15% ammo capacity']),
+		title: 'Demolitions Expert'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Brawn',
+		properties: _List_fromArray(
+			['+15% trauma resistance', '+5 health']),
+		title: 'Durable'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Brawn',
+		properties: _List_fromArray(
+			['+3 temporary health when you kill a Ridden within two metres']),
+		title: 'Face Your Fears'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Brawn',
+		properties: _List_fromArray(
+			['heal 10 trauma damage at the start of each level']),
+		title: 'Fresh Bandage'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Brawn',
+		properties: _List_fromArray(
+			['+25% accessory damage']),
+		title: 'Grenade Training'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Brawn',
+		properties: _List_fromArray(
+			['+5 health']),
+		title: 'Health'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Brawn',
+		properties: _List_fromArray(
+			['Hold R2 with Melee weapons to burst forward', 'charge attacks deal 100% increased damage']),
+		title: 'Heavy Attack'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Brawn',
+		properties: _List_fromArray(
+			['Melee hits against weakspots deal +20% additional atumble damage']),
+		title: 'Heavy Hitter'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Brawn',
+		properties: _List_fromArray(
+			['+25% health', '-15% ammo capacity']),
+		title: 'Hydration Pack'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Brawn',
+		properties: _List_fromArray(
+			['+20% melee damage against Mutations', 'when you deal melee damage to a mutation gain 1 temporary health and recover 3 stamina']),
+		title: 'Ignore The Pain'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Brawn',
+		properties: _List_fromArray(
+			['+75% accessory damage', '-25% swap speed']),
+		title: 'Improvised Explosives'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Brawn',
+		properties: _List_fromArray(
+			['+100% bullet penetration with assault rifles']),
+		title: 'Line ‘Em Up'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Brawn',
+		properties: _List_fromArray(
+			['+75% melee damage', 'your melee attacks cause cleave through enemies dealing damage in a large area', 'disables sprint']),
+		title: 'Mean Drunk'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Brawn',
+		properties: _List_fromArray(
+			['+15% damage resistance while you have temporary health']),
+		title: 'Numb'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Brawn',
+		properties: _List_fromArray(
+			['You can sense nearby offensive accessories', 'more offensive accessories spawn']),
+		title: 'Offensive Scavenger'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Brawn',
+		properties: _List_fromArray(
+			['Kills at more than 15 metres grants five temporary health to nearby allies within 10 meters of the target']),
+		title: 'Overwatch'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Brawn',
+		properties: _List_fromArray(
+			['+100% fire damage', 'kills with fire grant you 3 temporary health', 'you can sense flammable objects nearby']),
+		title: 'Pyro'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Brawn',
+		properties: _List_fromArray(
+			['Reduces the damage taken by all Ridden by one']),
+		title: 'Scar Tissue'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Brawn',
+		properties: _List_fromArray(
+			['+1 extra life', '+5 health']),
+		title: 'Second Chance'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Brawn',
+		properties: _List_fromArray(
+			['+25% melee damage', '+10% damage resistance while using a melee weapon', '-15% ammo capacity']),
+		title: 'Spiky Bits'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Brawn',
+		properties: _List_fromArray(
+			['Melee hits cause the target to take 20% increased damage for 5 seconds']),
+		title: 'Sunder'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Brawn',
+		properties: _List_fromArray(
+			['+8 health over five seconds when hit for 15 or more damage']),
+		title: 'True Grit'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Brawn',
+		properties: _List_fromArray(
+			['Grants the ability to equip a second primary', '-25% weapon swap speed']),
+		title: 'Two is One and One is None'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Brawn',
+		properties: _List_fromArray(
+			['+15 health']),
+		title: 'Vitamins'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Brawn',
+		properties: _List_fromArray(
+			['-20% stamina regen', 'Team Effect: team health +10']),
+		title: 'Well Fed'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Brawn',
+		properties: _List_fromArray(
+			['+40% trauma resistance', '-100%fire resistance', '-100% acid resistance', '-100% explosion resistance']),
+		title: 'Wooden Armor'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Fortune',
+		properties: _List_fromArray(
+			['Description']),
+		title: 'Card name'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Fortune',
+		properties: _List_fromArray(
+			['When you stow your weapon', 'it reloads', '-15% ammo capacity']),
+		title: 'Admin Reload'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Fortune',
+		properties: _List_fromArray(
+			['Secondary weapons have unlimited ammo', 'your secondary weapon reload is 20% slower']),
+		title: 'Ammo Stash'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Fortune',
+		properties: _List_fromArray(
+			['When you kill a Mutation', 'gain 10 copper (up to 300 per level)']),
+		title: 'Bounty Hunter'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Fortune',
+		properties: _List_fromArray(
+			['-10% health', 'Team Effect: +1 team support inventory']),
+		title: 'Box O’ Bags'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Fortune',
+		properties: _List_fromArray(
+			['Gain 10% of your total copper in each saferoom']),
+		title: 'Compound Interest'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Fortune',
+		properties: _List_fromArray(
+			['You can sense nearby Copper', 'more Copper piles spawn']),
+		title: 'Copper Scavenger'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Fortune',
+		properties: _List_fromArray(
+			['+2 offensive inventory', '-10% damage dealt']),
+		title: 'Double Grenade Pouch'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Fortune',
+		properties: _List_fromArray(
+			['+1 support inventory']),
+		title: 'Fanny Pack'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Fortune',
+		properties: _List_fromArray(
+			['Gain 25 to 50 Copper at the start of each level']),
+		title: 'Fortune'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Fortune',
+		properties: _List_fromArray(
+			['+1 offensive inventory']),
+		title: 'Grenade Pouch'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Fortune',
+		properties: _List_fromArray(
+			['Gain 250% bonus copper at the start of each level']),
+		title: 'Hazard Pay'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Fortune',
+		properties: _List_fromArray(
+			['Pistol kills have a 2% chance to spawn ammo']),
+		title: 'Highwayman'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Fortune',
+		properties: _List_fromArray(
+			['+2 extra life', 'lose 50 copper at the start of each level']),
+		title: 'Life Insurance'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Fortune',
+		properties: _List_fromArray(
+			['whenever you or your team loots copper you have a 35% chance to find 35% additional copper']),
+		title: 'Lucky Pennies'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Fortune',
+		properties: _List_fromArray(
+			['Each time your team loots copper you gain 5 additional copper', 'stacking up to 100 additional copper.']),
+		title: 'Money Grubbers'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Fortune',
+		properties: _List_fromArray(
+			['Melee kills have a 2% chance to spawn ammo']),
+		title: 'Mugger'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Fortune',
+		properties: _List_fromArray(
+			['You can shoot while sprinting']),
+		title: 'Run and Gun'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Fortune',
+		properties: _List_fromArray(
+			['Your team heals 5 trauma damage and refills 10% ammo at the start of each level']),
+		title: 'Saferoom Recovery'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Fortune',
+		properties: _List_fromArray(
+			['Each teammate gains 100 bonus copper at the start of each level']),
+		title: 'Share The Wealth'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Fortune',
+		properties: _List_fromArray(
+			['+30% shotgun ammo capacity', '+10% damage with shotguns']),
+		title: 'Shell Carrier'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Fortune',
+		properties: _List_fromArray(
+			['+2 support inventory', '-10% damage dealt']),
+		title: 'Shoulder Bag'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Fortune',
+		properties: _List_fromArray(
+			['-10% health', 'Team Effect: +1 team offensive inventory ']),
+		title: 'Surplus Pouches'
+	},
+		{
+		effects: _List_Nil,
+		kind: 'Fortune',
+		properties: _List_fromArray(
+			['Kills while at critical health recover 1 health']),
+		title: 'Wounded Animal'
+	}
+	]);
 var $elm$core$String$toLower = _String_toLower;
 var $author$project$Cards$cards = A2(
 	$elm$core$List$indexedMap,
 	F2(
 		function (index, raw) {
 			return {
+				effects: raw.effects,
 				id: index,
 				kind: function () {
 					var _v0 = $elm$core$String$toLower(raw.kind);
@@ -5181,981 +6401,7 @@ var $author$project$Cards$cards = A2(
 				title: raw.title
 			};
 		}),
-	_List_fromArray(
-		[
-			{
-			kind: 'Reflex',
-			properties: _List_fromArray(
-				['+ 100% Stamina', '- 75% Stamina Regeneration', 'When you kill an enemy, gain 10 Stamina instantly and an additional 10 Stamina over 5 seconds.']),
-			title: 'Adrenaline Fueled '
-		},
-			{
-			kind: 'Reflex',
-			properties: _List_fromArray(
-				['+30% melee stamina efficiency', '+30% melee attack speed', '-5% damage resistance']),
-			title: 'Brazen '
-		},
-			{
-			kind: 'Reflex',
-			properties: _List_fromArray(
-				['Allows you to free yourself from grabs', '+50% breakout cooldown reduction']),
-			title: 'Breakout '
-		},
-			{
-			kind: 'Reflex',
-			properties: _List_fromArray(
-				['+75% weapon swap speed', 'When you take damage your accuracy is reduced by 20% for 3 seconds']),
-			title: 'Cocky '
-		},
-			{
-			kind: 'Reflex',
-			properties: _List_fromArray(
-				['Teammates healed by an additional 20 health when revived', '+50 use speed']),
-			title: 'Combat Medic '
-		},
-			{
-			kind: 'Reflex',
-			properties: _List_fromArray(
-				['+20% stamina', '+20% stamina regen', '+3% move speed', '5 health']),
-			title: 'Cross Trainers '
-		},
-			{
-			kind: 'Reflex',
-			properties: _List_fromArray(
-				['+5% move speed']),
-			title: 'Dash '
-		},
-			{
-			kind: 'Reflex',
-			properties: _List_fromArray(
-				['+40% stamina', '-5% damage resistance ']),
-			title: 'Energy Drink '
-		},
-			{
-			kind: 'Reflex',
-			properties: _List_fromArray(
-				['Gain a 20% movement speed boost for three seconds when you take a hit of 10 or more']),
-			title: 'Evasive Action '
-		},
-			{
-			kind: 'Reflex',
-			properties: _List_fromArray(
-				['Gain 20 temporary health and 20% movement speed for five seconds after throwing an offensive item']),
-			title: 'Fire in the Hole! '
-		},
-			{
-			kind: 'Reflex',
-			properties: _List_fromArray(
-				['When you throw an Offensive Accessory', 'gain 20 temporary health and 20% move speed for 5 seconds.']),
-			title: 'Fire in the Hole! '
-		},
-			{
-			kind: 'Reflex',
-			properties: _List_fromArray(
-				['+10% move speed', '-5% damage resistance']),
-			title: 'Fleet Of Foot '
-		},
-			{
-			kind: 'Reflex',
-			properties: _List_fromArray(
-				['+25% damage', '-30% health']),
-			title: 'Glass Cannon '
-		},
-			{
-			kind: 'Reflex',
-			properties: _List_fromArray(
-				['+50% weapon swap speed', '-5% damage resistance']),
-			title: 'Guns Out '
-		},
-			{
-			kind: 'Reflex',
-			properties: _List_fromArray(
-				['+125% use speed', 'when you take damage', 'you have a chance to be binded for 1 second']),
-			title: 'Headband Magnifier '
-		},
-			{
-			kind: 'Reflex',
-			properties: _List_fromArray(
-				['+45% move speed while firing', '+5% move speed while not firing']),
-			title: 'Hellfire '
-		},
-			{
-			kind: 'Reflex',
-			properties: _List_fromArray(
-				['+30% aim speed']),
-			title: 'Hi Vis Sights '
-		},
-			{
-			kind: 'Reflex',
-			properties: _List_fromArray(
-				['+50% weakspot damage', '-75% ADS Move Speed']),
-			title: 'Hyper-Focused '
-		},
-			{
-			kind: 'Reflex',
-			properties: _List_fromArray(
-				['+30% weakspot damage', 'disables aim down sights']),
-			title: 'Killer’s Instinct '
-		},
-			{
-			kind: 'Reflex',
-			properties: _List_fromArray(
-				['+20% sprint speed', '-30% stamina efficiency']),
-			title: 'Mad Dash '
-		},
-			{
-			kind: 'Reflex',
-			properties: _List_fromArray(
-				['+30% pistol/SMG ammo capacity', '+10% damage with pistols and SMGs']),
-			title: 'Mag Carrier '
-		},
-			{
-			kind: 'Reflex',
-			properties: _List_fromArray(
-				['+50% reload speed', 'disables aim down sights']),
-			title: 'Mag Coupler '
-		},
-			{
-			kind: 'Reflex',
-			properties: _List_fromArray(
-				['Team Effect: +15% team stamina']),
-			title: 'Mandatory PT '
-		},
-			{
-			kind: 'Reflex',
-			properties: _List_fromArray(
-				['No movement penalty for strafe and backpedal', 'disables Sprint']),
-			title: 'Marathon Runner '
-		},
-			{
-			kind: 'Reflex',
-			properties: _List_fromArray(
-				['+15 healing efficiency', 'plus +15% movement speed for 15 seconds when you use a medical accessory']),
-			title: 'Medical Expert '
-		},
-			{
-			kind: 'Reflex',
-			properties: _List_fromArray(
-				['40% melee attack speed', '+40% melee stamina efficiency', 'Your melee attacks no longer stick in tough enemies', 'disables aim down sights']),
-			title: 'Meth Head '
-		},
-			{
-			kind: 'Reflex',
-			properties: _List_fromArray(
-				['A medical accessory has a 25% chance of having a 100% increased effect']),
-			title: 'Miraculous Recovery '
-		},
-			{
-			kind: 'Reflex',
-			properties: _List_fromArray(
-				['75% use speed', '-5% damage resistance']),
-			title: 'Multitool '
-		},
-			{
-			kind: 'Reflex',
-			properties: _List_fromArray(
-				['When you exit a starting saferoom your team gains +15% move speed for 30 seconds']),
-			title: 'On Your Mark… '
-		},
-			{
-			kind: 'Reflex',
-			properties: _List_fromArray(
-				['+30% sprint efficiency', '-5% damage resistance']),
-			title: 'Olympic Sprinter '
-		},
-			{
-			kind: 'Reflex',
-			properties: _List_fromArray(
-				['Precision Kills grant 10% movement speed for five seconds']),
-			title: 'Pep in your Step '
-		},
-			{
-			kind: 'Reflex',
-			properties: _List_fromArray(
-				['+150% revive speed', '-5% damage resistance']),
-			title: 'Pep Talk '
-		},
-			{
-			kind: 'Reflex',
-			properties: _List_fromArray(
-				['Changing weapons within 0.75 seconds of hitting low ammo grants +20% damage for five seconds']),
-			title: 'Power Swap '
-		},
-			{
-			kind: 'Reflex',
-			properties: _List_fromArray(
-				['+40% sprint efficiency', 'When you take damage while sprinting', 'you lose all your stamina']),
-			title: 'Reckless '
-		},
-			{
-			kind: 'Reflex',
-			properties: _List_fromArray(
-				['+30% weakspot damage', '-5% damage resistance']),
-			title: 'Reckless Strategy '
-		},
-			{
-			kind: 'Reflex',
-			properties: _List_fromArray(
-				['+30% reload speed']),
-			title: 'Reload Drills '
-		},
-			{
-			kind: 'Reflex',
-			properties: _List_fromArray(
-				['+60% stamina', '-20% slow resistance']),
-			title: 'Rhythmic Breathing '
-		},
-			{
-			kind: 'Reflex',
-			properties: _List_fromArray(
-				['+20% weak spot damage']),
-			title: 'Ridden Slayer '
-		},
-			{
-			kind: 'Reflex',
-			properties: _List_fromArray(
-				['+6% move speed while using an SMG', '+35% reload speed while using an SMG']),
-			title: 'Rolling Thunder '
-		},
-			{
-			kind: 'Reflex',
-			properties: _List_fromArray(
-				['+225% revive speed', 'disables offensive accessories', 'Team Effect: +20% reduced incap trauma']),
-			title: 'Rousing Speech '
-		},
-			{
-			kind: 'Reflex',
-			properties: _List_fromArray(
-				['+15% move speed', 'When you take damage your accuracy is reduced by 20% for 3 seconds']),
-			title: 'Run Like Hell '
-		},
-			{
-			kind: 'Reflex',
-			properties: _List_fromArray(
-				['Gain 5% weakspot damage for each precision kill in the last 10 seconds']),
-			title: 'Sadistic '
-		},
-			{
-			kind: 'Reflex',
-			properties: _List_fromArray(
-				['+50% use speed', '+10% stamina']),
-			title: 'Screwdriver '
-		},
-			{
-			kind: 'Reflex',
-			properties: _List_fromArray(
-				['+25% weapon swap speed']),
-			title: 'Shooting Gloves '
-		},
-			{
-			kind: 'Reflex',
-			properties: _List_fromArray(
-				['Each bullet hit causes the target to take 1% increased damage for 3 seconds (stacks up to 15%)']),
-			title: 'Shredder '
-		},
-			{
-			kind: 'Reflex',
-			properties: _List_fromArray(
-				['+5 health', '+10% melee stamina efficiency', '+20% melee attack speed']),
-			title: 'Slugger '
-		},
-			{
-			kind: 'Reflex',
-			properties: _List_fromArray(
-				['+100% revive speed']),
-			title: 'Smelling Salts '
-		},
-			{
-			kind: 'Reflex',
-			properties: _List_fromArray(
-				['+6% move speed while using an SMG', '+35% reload speed while using an SMG']),
-			title: 'Speed Demon '
-		},
-			{
-			kind: 'Reflex',
-			properties: _List_fromArray(
-				['+10% Stamina']),
-			title: 'Stamina '
-		},
-			{
-			kind: 'Reflex',
-			properties: _List_fromArray(
-				['+80% aim speed', '-50% ADS move speed']),
-			title: 'Steady Aim '
-		},
-			{
-			kind: 'Reflex',
-			properties: _List_fromArray(
-				['Pain meds grant +10% movement speed', '10% reload speed', 'and 10% weapon swap speed for 30 seconds']),
-			title: 'Stimulants '
-		},
-			{
-			kind: 'Reflex',
-			properties: _List_fromArray(
-				['+30% sniper ammo capacity', '+10% damage with sniper rifles']),
-			title: 'Stock Pouch '
-		},
-			{
-			kind: 'Reflex',
-			properties: _List_fromArray(
-				['+50% sprint efficiency', '+5 health']),
-			title: 'Superior Cardio '
-		},
-			{
-			kind: 'Reflex',
-			properties: _List_fromArray(
-				['+50% aim speed', '-5% damage resistance']),
-			title: 'Tunnel Vision '
-		},
-			{
-			kind: 'Reflex',
-			properties: _List_fromArray(
-				['You can sense nearby quick accessories', 'more quick accessories spawn']),
-			title: 'Utility Scavenger '
-		},
-			{
-			kind: 'Reflex',
-			properties: _List_fromArray(
-				['+30% reload speed', '-5% damage resistance']),
-			title: 'Widemouth Magwell '
-		},
-			{
-			kind: 'Discipline',
-			properties: _List_fromArray(
-				['+10% ammo']),
-			title: 'Ammo'
-		},
-			{
-			kind: 'Discipline',
-			properties: _List_fromArray(
-				['+50% ammo capacity', '-20% stamina efficiency']),
-			title: 'Ammo Belt'
-		},
-			{
-			kind: 'Discipline',
-			properties: _List_fromArray(
-				['Team Effect: +10% team ammo capacity']),
-			title: 'Ammo For All'
-		},
-			{
-			kind: 'Discipline',
-			properties: _List_fromArray(
-				['75% ammo capacity', 'disables support accessories']),
-			title: 'Ammo Mule'
-		},
-			{
-			kind: 'Discipline',
-			properties: _List_fromArray(
-				['+25% ammo capacity']),
-			title: 'Ammo Pouch'
-		},
-			{
-			kind: 'Discipline',
-			properties: _List_fromArray(
-				['You can sense nearby ammo', 'more ammo spawns']),
-			title: 'Ammo Scavenger'
-		},
-			{
-			kind: 'Discipline',
-			properties: _List_fromArray(
-				['When you exit a starting saferoom your team gains 50 temporary health']),
-			title: 'Amped Up'
-		},
-			{
-			kind: 'Discipline',
-			properties: _List_fromArray(
-				['+20% healing efficiency']),
-			title: 'Antibiotic Ointment'
-		},
-			{
-			kind: 'Discipline',
-			properties: _List_fromArray(
-				['Team Effect: When you or a teammate becomes incapacitated', 'all teammates gain 30% damage', '20% reload speed and unlimited ammo for 10 seconds.']),
-			title: 'Avenge The Fallen'
-		},
-			{
-			kind: 'Discipline',
-			properties: _List_fromArray(
-				['Heals granted to a teammate will also apply 50% of the effect to you']),
-			title: 'Charitable Soul'
-		},
-			{
-			kind: 'Discipline',
-			properties: _List_fromArray(
-				['+40% stamina regeneration', '-10% stamina efficiency']),
-			title: 'Cold Brew Coffee'
-		},
-			{
-			kind: 'Discipline',
-			properties: _List_fromArray(
-				['Turns your Bash into a Knife that counts as a Melee weapon.']),
-			title: 'Combat Knife'
-		},
-			{
-			kind: 'Discipline',
-			properties: _List_fromArray(
-				['+5% damage dealt', '+50% bullet penetration']),
-			title: 'Combat Training'
-		},
-			{
-			kind: 'Discipline',
-			properties: _List_fromArray(
-				['+40% move speed while aiming down sights with sniper rifles']),
-			title: 'Controlled Movement'
-		},
-			{
-			kind: 'Discipline',
-			properties: _List_fromArray(
-				['While crouching you neither take nor deal Friendly Fire damage', '+10 health']),
-			title: 'Down In Front!'
-		},
-			{
-			kind: 'Discipline',
-			properties: _List_fromArray(
-				['+40% healing efficiency', '-20% stamina efficiency']),
-			title: 'EMT Bag'
-		},
-			{
-			kind: 'Discipline',
-			properties: _List_fromArray(
-				['+20% stamina regeneration', '5 health']),
-			title: 'Energy Bar'
-		},
-			{
-			kind: 'Discipline',
-			properties: _List_fromArray(
-				['Medical accessories will grant +20% maximum health until the end of the level']),
-			title: 'Experienced EMT'
-		},
-			{
-			kind: 'Discipline',
-			properties: _List_fromArray(
-				['+60% healing efficiency', '-50% use speed']),
-			title: 'Field Surgeon'
-		},
-			{
-			kind: 'Discipline',
-			properties: _List_fromArray(
-				['+20% accuracy']),
-			title: 'Front Sight Focus'
-		},
-			{
-			kind: 'Discipline',
-			properties: _List_fromArray(
-				['All teammates heal for 5 health when a medical accessory is used']),
-			title: 'Group Therapy'
-		},
-			{
-			kind: 'Discipline',
-			properties: _List_fromArray(
-				['+10% damage resistance and +40% accuracy when crouching']),
-			title: 'Hunker Down'
-		},
-			{
-			kind: 'Discipline',
-			properties: _List_fromArray(
-				['+5% reload speed for five seconds (can be stacked ten times) when getting precision kills']),
-			title: 'In the Zone'
-		},
-			{
-			kind: 'Discipline',
-			properties: _List_fromArray(
-				['Team Effect: All teammates heal for 25 health over twenty seconds if someone is incapacitated']),
-			title: 'Inspiring Sacrifice'
-		},
-			{
-			kind: 'Discipline',
-			properties: _List_fromArray(
-				['+10% weakspot damage', 'allows players to see values for damage they deal and enemy health bars']),
-			title: 'Knowledge Is Power'
-		},
-			{
-			kind: 'Discipline',
-			properties: _List_fromArray(
-				['+7.5% bullet damage', '+100% bullet penetration', '-20% stamina efficiency']),
-			title: 'Large Caliber Rounds'
-		},
-			{
-			kind: 'Discipline',
-			properties: _List_fromArray(
-				['+10% damage to pinged mutations and mutations are highlighted']),
-			title: 'Marked for Death'
-		},
-			{
-			kind: 'Discipline',
-			properties: _List_fromArray(
-				['Gain 30% move speed and accuracy while crouched and using an LMG']),
-			title: 'Meat Grinder'
-		},
-			{
-			kind: 'Discipline',
-			properties: _List_fromArray(
-				['First Aids and Defibrillators recover 15 trauma damage and one extra life']),
-			title: 'Medical Professional'
-		},
-			{
-			kind: 'Discipline',
-			properties: _List_fromArray(
-				['+15% damage resistance', '+10 health', 'disables aim down sights']),
-			title: 'Motorcycle Helmet'
-		},
-			{
-			kind: 'Discipline',
-			properties: _List_fromArray(
-				['+5% damage resistance', '+5 health']),
-			title: 'Motorcycle Jacket'
-		},
-			{
-			kind: 'Discipline',
-			properties: _List_fromArray(
-				['+100% stamina regeneration', '-50% maximum stamina']),
-			title: 'Natural Sprinter'
-		},
-			{
-			kind: 'Discipline',
-			properties: _List_fromArray(
-				['-20% health', 'Team Effect: +1 team extra life']),
-			title: 'Needs Of The Many'
-		},
-			{
-			kind: 'Discipline',
-			properties: _List_fromArray(
-				['+30% accuracy', '-20% stamina efficiency']),
-			title: 'Optics Enthusiast'
-		},
-			{
-			kind: 'Discipline',
-			properties: _List_fromArray(
-				['+10% damage resistance', '+5 health', '-20% stamina efficiency']),
-			title: 'Padded Suit'
-		},
-			{
-			kind: 'Discipline',
-			properties: _List_fromArray(
-				['+10% damage for each second aimed down sights (can be stacked three times)']),
-			title: 'Patient Hunter'
-		},
-			{
-			kind: 'Discipline',
-			properties: _List_fromArray(
-				['Teammate gains +20 health over 30 seconds when healed']),
-			title: 'Poultice'
-		},
-			{
-			kind: 'Discipline',
-			properties: _List_fromArray(
-				['Reloading a gun within 0.75 seconds of hitting low ammo grants +30% mag capacity until the next reload']),
-			title: 'Power Reload'
-		},
-			{
-			kind: 'Discipline',
-			properties: _List_fromArray(
-				['+50% accuracy', 'disables aim down sights']),
-			title: 'Quick Kill'
-		},
-			{
-			kind: 'Discipline',
-			properties: _List_fromArray(
-				['+40% reload speed with shotguns']),
-			title: 'Scattergun Skills'
-		},
-			{
-			kind: 'Discipline',
-			properties: _List_fromArray(
-				['+10% bullet damage', '+150% bullet penetration', 'when you kill a Mutation', 'you lose 5 copper']),
-			title: 'Silver Bullets'
-		},
-			{
-			kind: 'Discipline',
-			properties: _List_fromArray(
-				['You can sense nearby support accessories', 'more support accessories spawn']),
-			title: 'Support Scavenger'
-		},
-			{
-			kind: 'Discipline',
-			properties: _List_fromArray(
-				['+30% rifle ammo capacity', '+10% damage with assault rifles and LMGs']),
-			title: 'Tactical Vest'
-		},
-			{
-			kind: 'Discipline',
-			properties: _List_fromArray(
-				['+25% accuracy with assault rifles and sniper rifles.']),
-			title: 'Trigger Control'
-		},
-			{
-			kind: 'Discipline',
-			properties: _List_fromArray(
-				['Melee kills grant 1 temporary health to you and nearby teammates']),
-			title: 'Vanguard'
-		},
-			{
-			kind: 'Discipline',
-			properties: _List_fromArray(
-				['You can sense nearby weapons', 'more weapons spawn']),
-			title: 'Weapon Scavenger'
-		},
-			{
-			kind: 'Brawn',
-			properties: _List_fromArray(
-				['+50% melee damage', '+5 health']),
-			title: 'Batter Up'
-		},
-			{
-			kind: 'Brawn',
-			properties: _List_fromArray(
-				['Melee kills heal two health']),
-			title: 'Battle Lust'
-		},
-			{
-			kind: 'Brawn',
-			properties: _List_fromArray(
-				['Gain 10% melee damage', '10% melee speed', 'and 5% move speed for each melee kill in the last 4 seconds']),
-			title: 'Berserker'
-		},
-			{
-			kind: 'Brawn',
-			properties: _List_fromArray(
-				['+25% trauma resistance', '-15% ammo capacity']),
-			title: 'Body Armor'
-		},
-			{
-			kind: 'Brawn',
-			properties: _List_fromArray(
-				['+100% explosive damage', '35+ explosive resistance']),
-			title: 'Bomb Squad'
-		},
-			{
-			kind: 'Brawn',
-			properties: _List_fromArray(
-				['Precision kills have a 20% chance to cause Ridden to explode', 'dealing 15 damage to other Ridden within 4 meters']),
-			title: 'Broadside'
-		},
-			{
-			kind: 'Brawn',
-			properties: _List_fromArray(
-				['When using Shotguns', 'gain temporary health for each pellet that hits.']),
-			title: 'Buckshot Bruiser'
-		},
-			{
-			kind: 'Brawn',
-			properties: _List_fromArray(
-				['+40 health', '-30% stamina']),
-			title: 'Canned Goods'
-		},
-			{
-			kind: 'Brawn',
-			properties: _List_fromArray(
-				['Pain meds grant +25% damage for 60 seconds']),
-			title: 'Chemical Courage'
-		},
-			{
-			kind: 'Brawn',
-			properties: _List_fromArray(
-				['+1% damage (up to 15%) every time you kill a mutation until the end of the level']),
-			title: 'Confident Killer'
-		},
-			{
-			kind: 'Brawn',
-			properties: _List_fromArray(
-				['+50% accessory damage', '-15% ammo capacity']),
-			title: 'Demolitions Expert'
-		},
-			{
-			kind: 'Brawn',
-			properties: _List_fromArray(
-				['+15% trauma resistance', '+5 health']),
-			title: 'Durable'
-		},
-			{
-			kind: 'Brawn',
-			properties: _List_fromArray(
-				['+3 temporary health when you kill a Ridden within two metres']),
-			title: 'Face Your Fears'
-		},
-			{
-			kind: 'Brawn',
-			properties: _List_fromArray(
-				['heal 10 trauma damage at the start of each level']),
-			title: 'Fresh Bandage'
-		},
-			{
-			kind: 'Brawn',
-			properties: _List_fromArray(
-				['+25% accessory damage']),
-			title: 'Grenade Training'
-		},
-			{
-			kind: 'Brawn',
-			properties: _List_fromArray(
-				['+5 health']),
-			title: 'Health'
-		},
-			{
-			kind: 'Brawn',
-			properties: _List_fromArray(
-				['Hold R2 with Melee weapons to burst forward', 'charge attacks deal 100% increased damage']),
-			title: 'Heavy Attack'
-		},
-			{
-			kind: 'Brawn',
-			properties: _List_fromArray(
-				['Melee hits against weakspots deal +20% additional atumble damage']),
-			title: 'Heavy Hitter'
-		},
-			{
-			kind: 'Brawn',
-			properties: _List_fromArray(
-				['+25% health', '-15% ammo capacity']),
-			title: 'Hydration Pack'
-		},
-			{
-			kind: 'Brawn',
-			properties: _List_fromArray(
-				['+20% melee damage against Mutations', 'when you deal melee damage to a mutation gain 1 temporary health and recover 3 stamina']),
-			title: 'Ignore The Pain'
-		},
-			{
-			kind: 'Brawn',
-			properties: _List_fromArray(
-				['+75% accessory damage', '-25% swap speed']),
-			title: 'Improvised Explosives'
-		},
-			{
-			kind: 'Brawn',
-			properties: _List_fromArray(
-				['+100% bullet penetration with assault rifles']),
-			title: 'Line ‘Em Up'
-		},
-			{
-			kind: 'Brawn',
-			properties: _List_fromArray(
-				['+75% melee damage', 'your melee attacks cause cleave through enemies dealing damage in a large area', 'disables sprint']),
-			title: 'Mean Drunk'
-		},
-			{
-			kind: 'Brawn',
-			properties: _List_fromArray(
-				['+15% damage resistance while you have temporary health']),
-			title: 'Numb'
-		},
-			{
-			kind: 'Brawn',
-			properties: _List_fromArray(
-				['You can sense nearby offensive accessories', 'more offensive accessories spawn']),
-			title: 'Offensive Scavenger'
-		},
-			{
-			kind: 'Brawn',
-			properties: _List_fromArray(
-				['Kills at more than 15 metres grants five temporary health to nearby allies within 10 meters of the target']),
-			title: 'Overwatch'
-		},
-			{
-			kind: 'Brawn',
-			properties: _List_fromArray(
-				['+100% fire damage', 'kills with fire grant you 3 temporary health', 'you can sense flammable objects nearby']),
-			title: 'Pyro'
-		},
-			{
-			kind: 'Brawn',
-			properties: _List_fromArray(
-				['Reduces the damage taken by all Ridden by one']),
-			title: 'Scar Tissue'
-		},
-			{
-			kind: 'Brawn',
-			properties: _List_fromArray(
-				['+1 extra life', '+5 health']),
-			title: 'Second Chance'
-		},
-			{
-			kind: 'Brawn',
-			properties: _List_fromArray(
-				['+25% melee damage', '+10% damage resistance while using a melee weapon', '-15% ammo capacity']),
-			title: 'Spiky Bits'
-		},
-			{
-			kind: 'Brawn',
-			properties: _List_fromArray(
-				['Melee hits cause the target to take 20% increased damage for 5 seconds']),
-			title: 'Sunder'
-		},
-			{
-			kind: 'Brawn',
-			properties: _List_fromArray(
-				['+8 health over five seconds when hit for 15 or more damage']),
-			title: 'True Grit'
-		},
-			{
-			kind: 'Brawn',
-			properties: _List_fromArray(
-				['Grants the ability to equip a second primary', '-25% weapon swap speed']),
-			title: 'Two is One and One is None'
-		},
-			{
-			kind: 'Brawn',
-			properties: _List_fromArray(
-				['+15 health']),
-			title: 'Vitamins'
-		},
-			{
-			kind: 'Brawn',
-			properties: _List_fromArray(
-				['-20% stamina regen', 'Team Effect: team health +10']),
-			title: 'Well Fed'
-		},
-			{
-			kind: 'Brawn',
-			properties: _List_fromArray(
-				['+40% trauma resistance', '-100%fire resistance', '-100% acid resistance', '-100% explosion resistance']),
-			title: 'Wooden Armor'
-		},
-			{
-			kind: 'Fortune',
-			properties: _List_fromArray(
-				['Description']),
-			title: 'Card name'
-		},
-			{
-			kind: 'Fortune',
-			properties: _List_fromArray(
-				['When you stow your weapon', 'it reloads', '-15% ammo capacity']),
-			title: 'Admin Reload'
-		},
-			{
-			kind: 'Fortune',
-			properties: _List_fromArray(
-				['Secondary weapons have unlimited ammo', 'your secondary weapon reload is 20% slower']),
-			title: 'Ammo Stash'
-		},
-			{
-			kind: 'Fortune',
-			properties: _List_fromArray(
-				['When you kill a Mutation', 'gain 10 copper (up to 300 per level)']),
-			title: 'Bounty Hunter'
-		},
-			{
-			kind: 'Fortune',
-			properties: _List_fromArray(
-				['-10% health', 'Team Effect: +1 team support inventory']),
-			title: 'Box O’ Bags'
-		},
-			{
-			kind: 'Fortune',
-			properties: _List_fromArray(
-				['Gain 10% of your total copper in each saferoom']),
-			title: 'Compound Interest'
-		},
-			{
-			kind: 'Fortune',
-			properties: _List_fromArray(
-				['You can sense nearby Copper', 'more Copper piles spawn']),
-			title: 'Copper Scavenger'
-		},
-			{
-			kind: 'Fortune',
-			properties: _List_fromArray(
-				['+2 offensive inventory', '-10% damage dealt']),
-			title: 'Double Grenade Pouch'
-		},
-			{
-			kind: 'Fortune',
-			properties: _List_fromArray(
-				['+1 support inventory']),
-			title: 'Fanny Pack'
-		},
-			{
-			kind: 'Fortune',
-			properties: _List_fromArray(
-				['Gain 25 to 50 Copper at the start of each level']),
-			title: 'Fortune'
-		},
-			{
-			kind: 'Fortune',
-			properties: _List_fromArray(
-				['+1 offensive inventory']),
-			title: 'Grenade Pouch'
-		},
-			{
-			kind: 'Fortune',
-			properties: _List_fromArray(
-				['Gain 250% bonus copper at the start of each level']),
-			title: 'Hazard Pay'
-		},
-			{
-			kind: 'Fortune',
-			properties: _List_fromArray(
-				['Pistol kills have a 2% chance to spawn ammo']),
-			title: 'Highwayman'
-		},
-			{
-			kind: 'Fortune',
-			properties: _List_fromArray(
-				['+2 extra life', 'lose 50 copper at the start of each level']),
-			title: 'Life Insurance'
-		},
-			{
-			kind: 'Fortune',
-			properties: _List_fromArray(
-				['whenever you or your team loots copper you have a 35% chance to find 35% additional copper']),
-			title: 'Lucky Pennies'
-		},
-			{
-			kind: 'Fortune',
-			properties: _List_fromArray(
-				['Each time your team loots copper you gain 5 additional copper', 'stacking up to 100 additional copper.']),
-			title: 'Money Grubbers'
-		},
-			{
-			kind: 'Fortune',
-			properties: _List_fromArray(
-				['Melee kills have a 2% chance to spawn ammo']),
-			title: 'Mugger'
-		},
-			{
-			kind: 'Fortune',
-			properties: _List_fromArray(
-				['You can shoot while sprinting']),
-			title: 'Run and Gun'
-		},
-			{
-			kind: 'Fortune',
-			properties: _List_fromArray(
-				['Your team heals 5 trauma damage and refills 10% ammo at the start of each level']),
-			title: 'Saferoom Recovery'
-		},
-			{
-			kind: 'Fortune',
-			properties: _List_fromArray(
-				['Each teammate gains 100 bonus copper at the start of each level']),
-			title: 'Share The Wealth'
-		},
-			{
-			kind: 'Fortune',
-			properties: _List_fromArray(
-				['+30% shotgun ammo capacity', '+10% damage with shotguns']),
-			title: 'Shell Carrier'
-		},
-			{
-			kind: 'Fortune',
-			properties: _List_fromArray(
-				['+2 support inventory', '-10% damage dealt']),
-			title: 'Shoulder Bag'
-		},
-			{
-			kind: 'Fortune',
-			properties: _List_fromArray(
-				['-10% health', 'Team Effect: +1 team offensive inventory ']),
-			title: 'Surplus Pouches'
-		},
-			{
-			kind: 'Fortune',
-			properties: _List_fromArray(
-				['Kills while at critical health recover 1 health']),
-			title: 'Wounded Animal'
-		}
-		]));
+	$author$project$Cards$rawCards);
 var $rundis$elm_bootstrap$Bootstrap$Navbar$Hidden = {$: 'Hidden'};
 var $rundis$elm_bootstrap$Bootstrap$Navbar$State = function (a) {
 	return {$: 'State', a: a};
@@ -6932,9 +7178,6 @@ var $elm_community$list_extra$List$Extra$find = F2(
 		}
 	});
 var $elm$core$Debug$log = _Debug_log;
-var $elm$core$Basics$negate = function (n) {
-	return -n;
-};
 var $elm$core$Basics$neq = _Utils_notEqual;
 var $elm$core$Platform$Cmd$batch = _Platform_batch;
 var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
