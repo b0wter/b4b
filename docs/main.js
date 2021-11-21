@@ -5226,7 +5226,7 @@ var $author$project$Cards$rawCards = _List_fromArray(
 		kind: 'Reflex',
 		properties: _List_fromArray(
 			['+ 100% Stamina', '- 75% Stamina Regeneration', 'When you kill an enemy, gain 10 Stamina instantly and an additional 10 Stamina over 5 seconds.']),
-		title: 'Adrenaline Fueled '
+		title: 'Adrenaline Fueled'
 	},
 		{
 		effects: _List_fromArray(
@@ -5247,7 +5247,7 @@ var $author$project$Cards$rawCards = _List_fromArray(
 		kind: 'Reflex',
 		properties: _List_fromArray(
 			['+30% melee stamina efficiency', '+30% melee attack speed', '-5% damage resistance']),
-		title: 'Brazen '
+		title: 'Brazen'
 	},
 		{
 		effects: _List_fromArray(
@@ -5258,378 +5258,378 @@ var $author$project$Cards$rawCards = _List_fromArray(
 		kind: 'Reflex',
 		properties: _List_fromArray(
 			['Allows you to free yourself from grabs', '+50% breakout cooldown reduction']),
-		title: 'Breakout '
+		title: 'Breakout'
 	},
 		{
 		effects: _List_Nil,
 		kind: 'Reflex',
 		properties: _List_fromArray(
 			['+75% weapon swap speed', 'When you take damage your accuracy is reduced by 20% for 3 seconds']),
-		title: 'Cocky '
+		title: 'Cocky'
 	},
 		{
 		effects: _List_Nil,
 		kind: 'Reflex',
 		properties: _List_fromArray(
 			['Teammates healed by an additional 20 health when revived', '+50 use speed']),
-		title: 'Combat Medic '
+		title: 'Combat Medic'
 	},
 		{
 		effects: _List_Nil,
 		kind: 'Reflex',
 		properties: _List_fromArray(
 			['+20% stamina', '+20% stamina regen', '+3% move speed', '5 health']),
-		title: 'Cross Trainers '
+		title: 'Cross Trainers'
 	},
 		{
 		effects: _List_Nil,
 		kind: 'Reflex',
 		properties: _List_fromArray(
 			['+5% move speed']),
-		title: 'Dash '
+		title: 'Dash'
 	},
 		{
 		effects: _List_Nil,
 		kind: 'Reflex',
 		properties: _List_fromArray(
-			['+40% stamina', '-5% damage resistance ']),
-		title: 'Energy Drink '
+			['+40% stamina', '-5% damage resistance']),
+		title: 'Energy Drink'
 	},
 		{
 		effects: _List_Nil,
 		kind: 'Reflex',
 		properties: _List_fromArray(
 			['Gain a 20% movement speed boost for three seconds when you take a hit of 10 or more']),
-		title: 'Evasive Action '
+		title: 'Evasive Action'
 	},
 		{
 		effects: _List_Nil,
 		kind: 'Reflex',
 		properties: _List_fromArray(
 			['Gain 20 temporary health and 20% movement speed for five seconds after throwing an offensive item']),
-		title: 'Fire in the Hole! '
+		title: 'Fire in the Hole!'
 	},
 		{
 		effects: _List_Nil,
 		kind: 'Reflex',
 		properties: _List_fromArray(
 			['When you throw an Offensive Accessory', 'gain 20 temporary health and 20% move speed for 5 seconds.']),
-		title: 'Fire in the Hole! '
+		title: 'Fire in the Hole!'
 	},
 		{
 		effects: _List_Nil,
 		kind: 'Reflex',
 		properties: _List_fromArray(
 			['+10% move speed', '-5% damage resistance']),
-		title: 'Fleet Of Foot '
+		title: 'Fleet Of Foot'
 	},
 		{
 		effects: _List_Nil,
 		kind: 'Reflex',
 		properties: _List_fromArray(
 			['+25% damage', '-30% health']),
-		title: 'Glass Cannon '
+		title: 'Glass Cannon'
 	},
 		{
 		effects: _List_Nil,
 		kind: 'Reflex',
 		properties: _List_fromArray(
 			['+50% weapon swap speed', '-5% damage resistance']),
-		title: 'Guns Out '
+		title: 'Guns Out'
 	},
 		{
 		effects: _List_Nil,
 		kind: 'Reflex',
 		properties: _List_fromArray(
 			['+125% use speed', 'when you take damage', 'you have a chance to be binded for 1 second']),
-		title: 'Headband Magnifier '
+		title: 'Headband Magnifier'
 	},
 		{
 		effects: _List_Nil,
 		kind: 'Reflex',
 		properties: _List_fromArray(
 			['+45% move speed while firing', '+5% move speed while not firing']),
-		title: 'Hellfire '
+		title: 'Hellfire'
 	},
 		{
 		effects: _List_Nil,
 		kind: 'Reflex',
 		properties: _List_fromArray(
 			['+30% aim speed']),
-		title: 'Hi Vis Sights '
+		title: 'Hi Vis Sights'
 	},
 		{
 		effects: _List_Nil,
 		kind: 'Reflex',
 		properties: _List_fromArray(
 			['+50% weakspot damage', '-75% ADS Move Speed']),
-		title: 'Hyper-Focused '
+		title: 'Hyper-Focused'
 	},
 		{
 		effects: _List_Nil,
 		kind: 'Reflex',
 		properties: _List_fromArray(
 			['+30% weakspot damage', 'disables aim down sights']),
-		title: 'Killer’s Instinct '
+		title: 'Killer’s Instinct'
 	},
 		{
 		effects: _List_Nil,
 		kind: 'Reflex',
 		properties: _List_fromArray(
 			['+20% sprint speed', '-30% stamina efficiency']),
-		title: 'Mad Dash '
+		title: 'Mad Dash'
 	},
 		{
 		effects: _List_Nil,
 		kind: 'Reflex',
 		properties: _List_fromArray(
 			['+30% pistol/SMG ammo capacity', '+10% damage with pistols and SMGs']),
-		title: 'Mag Carrier '
+		title: 'Mag Carrier'
 	},
 		{
 		effects: _List_Nil,
 		kind: 'Reflex',
 		properties: _List_fromArray(
 			['+50% reload speed', 'disables aim down sights']),
-		title: 'Mag Coupler '
+		title: 'Mag Coupler'
 	},
 		{
 		effects: _List_Nil,
 		kind: 'Reflex',
 		properties: _List_fromArray(
 			['Team Effect: +15% team stamina']),
-		title: 'Mandatory PT '
+		title: 'Mandatory PT'
 	},
 		{
 		effects: _List_Nil,
 		kind: 'Reflex',
 		properties: _List_fromArray(
 			['No movement penalty for strafe and backpedal', 'disables Sprint']),
-		title: 'Marathon Runner '
+		title: 'Marathon Runner'
 	},
 		{
 		effects: _List_Nil,
 		kind: 'Reflex',
 		properties: _List_fromArray(
 			['+15 healing efficiency', 'plus +15% movement speed for 15 seconds when you use a medical accessory']),
-		title: 'Medical Expert '
+		title: 'Medical Expert'
 	},
 		{
 		effects: _List_Nil,
 		kind: 'Reflex',
 		properties: _List_fromArray(
 			['40% melee attack speed', '+40% melee stamina efficiency', 'Your melee attacks no longer stick in tough enemies', 'disables aim down sights']),
-		title: 'Meth Head '
+		title: 'Meth Head'
 	},
 		{
 		effects: _List_Nil,
 		kind: 'Reflex',
 		properties: _List_fromArray(
 			['A medical accessory has a 25% chance of having a 100% increased effect']),
-		title: 'Miraculous Recovery '
+		title: 'Miraculous Recovery'
 	},
 		{
 		effects: _List_Nil,
 		kind: 'Reflex',
 		properties: _List_fromArray(
 			['75% use speed', '-5% damage resistance']),
-		title: 'Multitool '
+		title: 'Multitool'
 	},
 		{
 		effects: _List_Nil,
 		kind: 'Reflex',
 		properties: _List_fromArray(
 			['When you exit a starting saferoom your team gains +15% move speed for 30 seconds']),
-		title: 'On Your Mark… '
+		title: 'On Your Mark…'
 	},
 		{
 		effects: _List_Nil,
 		kind: 'Reflex',
 		properties: _List_fromArray(
 			['+30% sprint efficiency', '-5% damage resistance']),
-		title: 'Olympic Sprinter '
+		title: 'Olympic Sprinter'
 	},
 		{
 		effects: _List_Nil,
 		kind: 'Reflex',
 		properties: _List_fromArray(
 			['Precision Kills grant 10% movement speed for five seconds']),
-		title: 'Pep in your Step '
+		title: 'Pep in your Step'
 	},
 		{
 		effects: _List_Nil,
 		kind: 'Reflex',
 		properties: _List_fromArray(
 			['+150% revive speed', '-5% damage resistance']),
-		title: 'Pep Talk '
+		title: 'Pep Talk'
 	},
 		{
 		effects: _List_Nil,
 		kind: 'Reflex',
 		properties: _List_fromArray(
 			['Changing weapons within 0.75 seconds of hitting low ammo grants +20% damage for five seconds']),
-		title: 'Power Swap '
+		title: 'Power Swap'
 	},
 		{
 		effects: _List_Nil,
 		kind: 'Reflex',
 		properties: _List_fromArray(
 			['+40% sprint efficiency', 'When you take damage while sprinting', 'you lose all your stamina']),
-		title: 'Reckless '
+		title: 'Reckless'
 	},
 		{
 		effects: _List_Nil,
 		kind: 'Reflex',
 		properties: _List_fromArray(
 			['+30% weakspot damage', '-5% damage resistance']),
-		title: 'Reckless Strategy '
+		title: 'Reckless Strategy'
 	},
 		{
 		effects: _List_Nil,
 		kind: 'Reflex',
 		properties: _List_fromArray(
 			['+30% reload speed']),
-		title: 'Reload Drills '
+		title: 'Reload Drills'
 	},
 		{
 		effects: _List_Nil,
 		kind: 'Reflex',
 		properties: _List_fromArray(
 			['+60% stamina', '-20% slow resistance']),
-		title: 'Rhythmic Breathing '
+		title: 'Rhythmic Breathing'
 	},
 		{
 		effects: _List_Nil,
 		kind: 'Reflex',
 		properties: _List_fromArray(
 			['+20% weak spot damage']),
-		title: 'Ridden Slayer '
+		title: 'Ridden Slayer'
 	},
 		{
 		effects: _List_Nil,
 		kind: 'Reflex',
 		properties: _List_fromArray(
 			['+6% move speed while using an SMG', '+35% reload speed while using an SMG']),
-		title: 'Rolling Thunder '
+		title: 'Rolling Thunder'
 	},
 		{
 		effects: _List_Nil,
 		kind: 'Reflex',
 		properties: _List_fromArray(
 			['+225% revive speed', 'disables offensive accessories', 'Team Effect: +20% reduced incap trauma']),
-		title: 'Rousing Speech '
+		title: 'Rousing Speech'
 	},
 		{
 		effects: _List_Nil,
 		kind: 'Reflex',
 		properties: _List_fromArray(
 			['+15% move speed', 'When you take damage your accuracy is reduced by 20% for 3 seconds']),
-		title: 'Run Like Hell '
+		title: 'Run Like Hell'
 	},
 		{
 		effects: _List_Nil,
 		kind: 'Reflex',
 		properties: _List_fromArray(
 			['Gain 5% weakspot damage for each precision kill in the last 10 seconds']),
-		title: 'Sadistic '
+		title: 'Sadistic'
 	},
 		{
 		effects: _List_Nil,
 		kind: 'Reflex',
 		properties: _List_fromArray(
 			['+50% use speed', '+10% stamina']),
-		title: 'Screwdriver '
+		title: 'Screwdriver'
 	},
 		{
 		effects: _List_Nil,
 		kind: 'Reflex',
 		properties: _List_fromArray(
 			['+25% weapon swap speed']),
-		title: 'Shooting Gloves '
+		title: 'Shooting Gloves'
 	},
 		{
 		effects: _List_Nil,
 		kind: 'Reflex',
 		properties: _List_fromArray(
 			['Each bullet hit causes the target to take 1% increased damage for 3 seconds (stacks up to 15%)']),
-		title: 'Shredder '
+		title: 'Shredder'
 	},
 		{
 		effects: _List_Nil,
 		kind: 'Reflex',
 		properties: _List_fromArray(
 			['+5 health', '+10% melee stamina efficiency', '+20% melee attack speed']),
-		title: 'Slugger '
+		title: 'Slugger'
 	},
 		{
 		effects: _List_Nil,
 		kind: 'Reflex',
 		properties: _List_fromArray(
 			['+100% revive speed']),
-		title: 'Smelling Salts '
+		title: 'Smelling Salts'
 	},
 		{
 		effects: _List_Nil,
 		kind: 'Reflex',
 		properties: _List_fromArray(
 			['+6% move speed while using an SMG', '+35% reload speed while using an SMG']),
-		title: 'Speed Demon '
+		title: 'Speed Demon'
 	},
 		{
 		effects: _List_Nil,
 		kind: 'Reflex',
 		properties: _List_fromArray(
 			['+10% Stamina']),
-		title: 'Stamina '
+		title: 'Stamina'
 	},
 		{
 		effects: _List_Nil,
 		kind: 'Reflex',
 		properties: _List_fromArray(
 			['+80% aim speed', '-50% ADS move speed']),
-		title: 'Steady Aim '
+		title: 'Steady Aim'
 	},
 		{
 		effects: _List_Nil,
 		kind: 'Reflex',
 		properties: _List_fromArray(
 			['Pain meds grant +10% movement speed', '10% reload speed', 'and 10% weapon swap speed for 30 seconds']),
-		title: 'Stimulants '
+		title: 'Stimulants'
 	},
 		{
 		effects: _List_Nil,
 		kind: 'Reflex',
 		properties: _List_fromArray(
 			['+30% sniper ammo capacity', '+10% damage with sniper rifles']),
-		title: 'Stock Pouch '
+		title: 'Stock Pouch'
 	},
 		{
 		effects: _List_Nil,
 		kind: 'Reflex',
 		properties: _List_fromArray(
 			['+50% sprint efficiency', '+5 health']),
-		title: 'Superior Cardio '
+		title: 'Superior Cardio'
 	},
 		{
 		effects: _List_Nil,
 		kind: 'Reflex',
 		properties: _List_fromArray(
 			['+50% aim speed', '-5% damage resistance']),
-		title: 'Tunnel Vision '
+		title: 'Tunnel Vision'
 	},
 		{
 		effects: _List_Nil,
 		kind: 'Reflex',
 		properties: _List_fromArray(
 			['You can sense nearby quick accessories', 'more quick accessories spawn']),
-		title: 'Utility Scavenger '
+		title: 'Utility Scavenger'
 	},
 		{
 		effects: _List_Nil,
 		kind: 'Reflex',
 		properties: _List_fromArray(
 			['+30% reload speed', '-5% damage resistance']),
-		title: 'Widemouth Magwell '
+		title: 'Widemouth Magwell'
 	},
 		{
 		effects: _List_Nil,
@@ -6363,7 +6363,7 @@ var $author$project$Cards$rawCards = _List_fromArray(
 		effects: _List_Nil,
 		kind: 'Fortune',
 		properties: _List_fromArray(
-			['-10% health', 'Team Effect: +1 team offensive inventory ']),
+			['-10% health', 'Team Effect: +1 team offensive inventory']),
 		title: 'Surplus Pouches'
 	},
 		{

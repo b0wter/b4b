@@ -39,7 +39,7 @@ type alias Card =
 
 rawCards : List RawCard
 rawCards =
-    [ { title = "Adrenaline Fueled "
+    [ { title = "Adrenaline Fueled"
       , properties =
             [ "+ 100% Stamina"
             , "- 75% Stamina Regeneration"
@@ -56,7 +56,7 @@ rawCards =
                 )
             ]
       }
-    , { title = "Brazen "
+    , { title = "Brazen"
       , properties =
             [ "+30% melee stamina efficiency"
             , "+30% melee attack speed"
@@ -69,7 +69,7 @@ rawCards =
             , Passive DamageResistance (RelativeMax -5)
             ]
       }
-    , { title = "Breakout "
+    , { title = "Breakout"
       , properties =
             [ "Allows you to free yourself from grabs"
             , "+50% breakout cooldown reduction"
@@ -80,7 +80,7 @@ rawCards =
             , Special "+50% breakout cooldown reduction"
             ]
       }
-    , { title = "Cocky "
+    , { title = "Cocky"
       , properties =
             [ "+75% weapon swap speed"
             , "When you take damage your accuracy is reduced by 20% for 3 seconds"
@@ -88,7 +88,7 @@ rawCards =
       , kind = "Reflex"
       , effects = []
       }
-    , { title = "Combat Medic "
+    , { title = "Combat Medic"
       , properties =
             [ "Teammates healed by an additional 20 health when revived"
             , "+50 use speed"
@@ -96,7 +96,7 @@ rawCards =
       , kind = "Reflex"
       , effects = []
       }
-    , { title = "Cross Trainers "
+    , { title = "Cross Trainers"
       , properties =
             [ "+20% stamina"
             , "+20% stamina regen"
@@ -106,36 +106,36 @@ rawCards =
       , kind = "Reflex"
       , effects = []
       }
-    , { title = "Dash "
+    , { title = "Dash"
       , properties =
             [ "+5% move speed"
             ]
       , kind = "Reflex"
       , effects = []
       }
-    , { title = "Energy Drink "
+    , { title = "Energy Drink"
       , properties =
             [ "+40% stamina"
-            , "-5% damage resistance "
+            , "-5% damage resistance"
             ]
       , kind = "Reflex"
       , effects = []
       }
-    , { title = "Evasive Action "
+    , { title = "Evasive Action"
       , properties =
             [ "Gain a 20% movement speed boost for three seconds when you take a hit of 10 or more"
             ]
       , kind = "Reflex"
       , effects = []
       }
-    , { title = "Fire in the Hole! "
+    , { title = "Fire in the Hole!"
       , properties =
             [ "Gain 20 temporary health and 20% movement speed for five seconds after throwing an offensive item"
             ]
       , kind = "Reflex"
       , effects = []
       }
-    , { title = "Fire in the Hole! "
+    , { title = "Fire in the Hole!"
       , properties =
             [ "When you throw an Offensive Accessory"
             , "gain 20 temporary health and 20% move speed for 5 seconds."
@@ -143,7 +143,7 @@ rawCards =
       , kind = "Reflex"
       , effects = []
       }
-    , { title = "Fleet Of Foot "
+    , { title = "Fleet Of Foot"
       , properties =
             [ "+10% move speed"
             , "-5% damage resistance"
@@ -151,7 +151,7 @@ rawCards =
       , kind = "Reflex"
       , effects = []
       }
-    , { title = "Glass Cannon "
+    , { title = "Glass Cannon"
       , properties =
             [ "+25% damage"
             , "-30% health"
@@ -159,7 +159,7 @@ rawCards =
       , kind = "Reflex"
       , effects = []
       }
-    , { title = "Guns Out "
+    , { title = "Guns Out"
       , properties =
             [ "+50% weapon swap speed"
             , "-5% damage resistance"
@@ -167,7 +167,7 @@ rawCards =
       , kind = "Reflex"
       , effects = []
       }
-    , { title = "Headband Magnifier "
+    , { title = "Headband Magnifier"
       , properties =
             [ "+125% use speed"
             , "when you take damage"
@@ -176,7 +176,7 @@ rawCards =
       , kind = "Reflex"
       , effects = []
       }
-    , { title = "Hellfire "
+    , { title = "Hellfire"
       , properties =
             [ "+45% move speed while firing"
             , "+5% move speed while not firing"
@@ -184,14 +184,14 @@ rawCards =
       , kind = "Reflex"
       , effects = []
       }
-    , { title = "Hi Vis Sights "
+    , { title = "Hi Vis Sights"
       , properties =
             [ "+30% aim speed"
             ]
       , kind = "Reflex"
       , effects = []
       }
-    , { title = "Hyper-Focused "
+    , { title = "Hyper-Focused"
       , properties =
             [ "+50% weakspot damage"
             , "-75% ADS Move Speed"
@@ -199,7 +199,7 @@ rawCards =
       , kind = "Reflex"
       , effects = []
       }
-    , { title = "Killer’s Instinct "
+    , { title = "Killer’s Instinct"
       , properties =
             [ "+30% weakspot damage"
             , "disables aim down sights"
@@ -207,7 +207,7 @@ rawCards =
       , kind = "Reflex"
       , effects = []
       }
-    , { title = "Mad Dash "
+    , { title = "Mad Dash"
       , properties =
             [ "+20% sprint speed"
             , "-30% stamina efficiency"
@@ -215,7 +215,7 @@ rawCards =
       , kind = "Reflex"
       , effects = []
       }
-    , { title = "Mag Carrier "
+    , { title = "Mag Carrier"
       , properties =
             [ "+30% pistol/SMG ammo capacity"
             , "+10% damage with pistols and SMGs"
@@ -223,7 +223,7 @@ rawCards =
       , kind = "Reflex"
       , effects = []
       }
-    , { title = "Mag Coupler "
+    , { title = "Mag Coupler"
       , properties =
             [ "+50% reload speed"
             , "disables aim down sights"
@@ -231,14 +231,14 @@ rawCards =
       , kind = "Reflex"
       , effects = []
       }
-    , { title = "Mandatory PT "
+    , { title = "Mandatory PT"
       , properties =
             [ "Team Effect: +15% team stamina"
             ]
       , kind = "Reflex"
       , effects = []
       }
-    , { title = "Marathon Runner "
+    , { title = "Marathon Runner"
       , properties =
             [ "No movement penalty for strafe and backpedal"
             , "disables Sprint"
@@ -246,7 +246,7 @@ rawCards =
       , kind = "Reflex"
       , effects = []
       }
-    , { title = "Medical Expert "
+    , { title = "Medical Expert"
       , properties =
             [ "+15 healing efficiency"
             , "plus +15% movement speed for 15 seconds when you use a medical accessory"
@@ -254,7 +254,7 @@ rawCards =
       , kind = "Reflex"
       , effects = []
       }
-    , { title = "Meth Head "
+    , { title = "Meth Head"
       , properties =
             [ "40% melee attack speed"
             , "+40% melee stamina efficiency"
@@ -264,14 +264,14 @@ rawCards =
       , kind = "Reflex"
       , effects = []
       }
-    , { title = "Miraculous Recovery "
+    , { title = "Miraculous Recovery"
       , properties =
             [ "A medical accessory has a 25% chance of having a 100% increased effect"
             ]
       , kind = "Reflex"
       , effects = []
       }
-    , { title = "Multitool "
+    , { title = "Multitool"
       , properties =
             [ "75% use speed"
             , "-5% damage resistance"
@@ -279,14 +279,14 @@ rawCards =
       , kind = "Reflex"
       , effects = []
       }
-    , { title = "On Your Mark… "
+    , { title = "On Your Mark…"
       , properties =
             [ "When you exit a starting saferoom your team gains +15% move speed for 30 seconds"
             ]
       , kind = "Reflex"
       , effects = []
       }
-    , { title = "Olympic Sprinter "
+    , { title = "Olympic Sprinter"
       , properties =
             [ "+30% sprint efficiency"
             , "-5% damage resistance"
@@ -294,14 +294,14 @@ rawCards =
       , kind = "Reflex"
       , effects = []
       }
-    , { title = "Pep in your Step "
+    , { title = "Pep in your Step"
       , properties =
             [ "Precision Kills grant 10% movement speed for five seconds"
             ]
       , kind = "Reflex"
       , effects = []
       }
-    , { title = "Pep Talk "
+    , { title = "Pep Talk"
       , properties =
             [ "+150% revive speed"
             , "-5% damage resistance"
@@ -309,14 +309,14 @@ rawCards =
       , kind = "Reflex"
       , effects = []
       }
-    , { title = "Power Swap "
+    , { title = "Power Swap"
       , properties =
             [ "Changing weapons within 0.75 seconds of hitting low ammo grants +20% damage for five seconds"
             ]
       , kind = "Reflex"
       , effects = []
       }
-    , { title = "Reckless "
+    , { title = "Reckless"
       , properties =
             [ "+40% sprint efficiency"
             , "When you take damage while sprinting"
@@ -325,7 +325,7 @@ rawCards =
       , kind = "Reflex"
       , effects = []
       }
-    , { title = "Reckless Strategy "
+    , { title = "Reckless Strategy"
       , properties =
             [ "+30% weakspot damage"
             , "-5% damage resistance"
@@ -333,14 +333,14 @@ rawCards =
       , kind = "Reflex"
       , effects = []
       }
-    , { title = "Reload Drills "
+    , { title = "Reload Drills"
       , properties =
             [ "+30% reload speed"
             ]
       , kind = "Reflex"
       , effects = []
       }
-    , { title = "Rhythmic Breathing "
+    , { title = "Rhythmic Breathing"
       , properties =
             [ "+60% stamina"
             , "-20% slow resistance"
@@ -348,14 +348,14 @@ rawCards =
       , kind = "Reflex"
       , effects = []
       }
-    , { title = "Ridden Slayer "
+    , { title = "Ridden Slayer"
       , properties =
             [ "+20% weak spot damage"
             ]
       , kind = "Reflex"
       , effects = []
       }
-    , { title = "Rolling Thunder "
+    , { title = "Rolling Thunder"
       , properties =
             [ "+6% move speed while using an SMG"
             , "+35% reload speed while using an SMG"
@@ -363,7 +363,7 @@ rawCards =
       , kind = "Reflex"
       , effects = []
       }
-    , { title = "Rousing Speech "
+    , { title = "Rousing Speech"
       , properties =
             [ "+225% revive speed"
             , "disables offensive accessories"
@@ -372,7 +372,7 @@ rawCards =
       , kind = "Reflex"
       , effects = []
       }
-    , { title = "Run Like Hell "
+    , { title = "Run Like Hell"
       , properties =
             [ "+15% move speed"
             , "When you take damage your accuracy is reduced by 20% for 3 seconds"
@@ -380,14 +380,14 @@ rawCards =
       , kind = "Reflex"
       , effects = []
       }
-    , { title = "Sadistic "
+    , { title = "Sadistic"
       , properties =
             [ "Gain 5% weakspot damage for each precision kill in the last 10 seconds"
             ]
       , kind = "Reflex"
       , effects = []
       }
-    , { title = "Screwdriver "
+    , { title = "Screwdriver"
       , properties =
             [ "+50% use speed"
             , "+10% stamina"
@@ -395,21 +395,21 @@ rawCards =
       , kind = "Reflex"
       , effects = []
       }
-    , { title = "Shooting Gloves "
+    , { title = "Shooting Gloves"
       , properties =
             [ "+25% weapon swap speed"
             ]
       , kind = "Reflex"
       , effects = []
       }
-    , { title = "Shredder "
+    , { title = "Shredder"
       , properties =
             [ "Each bullet hit causes the target to take 1% increased damage for 3 seconds (stacks up to 15%)"
             ]
       , kind = "Reflex"
       , effects = []
       }
-    , { title = "Slugger "
+    , { title = "Slugger"
       , properties =
             [ "+5 health"
             , "+10% melee stamina efficiency"
@@ -418,14 +418,14 @@ rawCards =
       , kind = "Reflex"
       , effects = []
       }
-    , { title = "Smelling Salts "
+    , { title = "Smelling Salts"
       , properties =
             [ "+100% revive speed"
             ]
       , kind = "Reflex"
       , effects = []
       }
-    , { title = "Speed Demon "
+    , { title = "Speed Demon"
       , properties =
             [ "+6% move speed while using an SMG"
             , "+35% reload speed while using an SMG"
@@ -433,14 +433,14 @@ rawCards =
       , kind = "Reflex"
       , effects = []
       }
-    , { title = "Stamina "
+    , { title = "Stamina"
       , properties =
             [ "+10% Stamina"
             ]
       , kind = "Reflex"
       , effects = []
       }
-    , { title = "Steady Aim "
+    , { title = "Steady Aim"
       , properties =
             [ "+80% aim speed"
             , "-50% ADS move speed"
@@ -448,7 +448,7 @@ rawCards =
       , kind = "Reflex"
       , effects = []
       }
-    , { title = "Stimulants "
+    , { title = "Stimulants"
       , properties =
             [ "Pain meds grant +10% movement speed"
             , "10% reload speed"
@@ -457,7 +457,7 @@ rawCards =
       , kind = "Reflex"
       , effects = []
       }
-    , { title = "Stock Pouch "
+    , { title = "Stock Pouch"
       , properties =
             [ "+30% sniper ammo capacity"
             , "+10% damage with sniper rifles"
@@ -465,7 +465,7 @@ rawCards =
       , kind = "Reflex"
       , effects = []
       }
-    , { title = "Superior Cardio "
+    , { title = "Superior Cardio"
       , properties =
             [ "+50% sprint efficiency"
             , "+5 health"
@@ -473,7 +473,7 @@ rawCards =
       , kind = "Reflex"
       , effects = []
       }
-    , { title = "Tunnel Vision "
+    , { title = "Tunnel Vision"
       , properties =
             [ "+50% aim speed"
             , "-5% damage resistance"
@@ -481,7 +481,7 @@ rawCards =
       , kind = "Reflex"
       , effects = []
       }
-    , { title = "Utility Scavenger "
+    , { title = "Utility Scavenger"
       , properties =
             [ "You can sense nearby quick accessories"
             , "more quick accessories spawn"
@@ -489,7 +489,7 @@ rawCards =
       , kind = "Reflex"
       , effects = []
       }
-    , { title = "Widemouth Magwell "
+    , { title = "Widemouth Magwell"
       , properties =
             [ "+30% reload speed"
             , "-5% damage resistance"
@@ -1295,7 +1295,7 @@ rawCards =
     , { title = "Surplus Pouches"
       , properties =
             [ "-10% health"
-            , "Team Effect: +1 team offensive inventory "
+            , "Team Effect: +1 team offensive inventory"
             ]
       , kind = "Fortune"
       , effects = []
