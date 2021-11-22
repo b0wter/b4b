@@ -326,7 +326,7 @@ fullCardView card =
             card |> buttonBackgroundColor
     in
     Grid.col []
-        [ Card.config [ cardBackground, Card.attrs [ style "width" "20rem", style "height" "605px", Spacing.m2 ] ]
+        [ Card.config [ cardBackground, Card.attrs [ style "width" "16rem", style "height" "605px", Spacing.m2 ] ]
             |> Card.header [ class "text-center" ]
                 [ img [ src ("img/english/" ++ card.filename), style "max-width" "200px" ] []
                 ]

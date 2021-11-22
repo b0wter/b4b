@@ -5181,7 +5181,7 @@ var $author$project$Cards$rawCards = _List_fromArray(
 		id: 3,
 		kind: 'DEFENSE',
 		properties: _List_fromArray(
-			['73', 'When you exit a starting saferoom,', 'your team gains 50 Temporary', 'Health.']),
+			['When you exit a starting saferoom,', 'your team gains 50 Temporary', 'Health.']),
 		title: 'AMPED UP'
 	},
 		{
@@ -5226,7 +5226,7 @@ var $author$project$Cards$rawCards = _List_fromArray(
 		id: 8,
 		kind: 'UTILITY',
 		properties: _List_fromArray(
-			['730', '+ 10% Weakspoť Damage', 'Allows players to see values for', 'damage they deal and enemy', 'health bars.']),
+			['+ 10% Weakspoť Damage', 'Allows players to see values for', 'damage they deal and enemy', 'health bars.']),
 		title: 'KNOWLEDGE IS POWER'
 	},
 		{
@@ -5271,7 +5271,7 @@ var $author$project$Cards$rawCards = _List_fromArray(
 		id: 13,
 		kind: 'MOBILITY',
 		properties: _List_fromArray(
-			['Atteghe', '+ 60% Stamina', '20% Slow Resistance']),
+			['+ 60% Stamina', '20% Slow Resistance']),
 		title: 'RHYTHMIC BREATHING'
 	},
 		{
@@ -5280,7 +5280,7 @@ var $author$project$Cards$rawCards = _List_fromArray(
 		id: 14,
 		kind: 'OFFENSE',
 		properties: _List_fromArray(
-			['Fin', '+ 20% Reload Speed']),
+			['+ 20% Reload Speed']),
 		title: 'RELOAD DRILLS'
 	},
 		{
@@ -5379,7 +5379,7 @@ var $author$project$Cards$rawCards = _List_fromArray(
 		id: 25,
 		kind: 'OFFENSE',
 		properties: _List_fromArray(
-			['CK', '+ 25% Accessory Damage']),
+			['+ 25% Accessory Damage']),
 		title: 'GRENADE TRAINING'
 	},
 		{
@@ -5415,7 +5415,7 @@ var $author$project$Cards$rawCards = _List_fromArray(
 		id: 29,
 		kind: 'OFFENSE',
 		properties: _List_fromArray(
-			['+ 40% Melee Attack Speed', '+ 30% Melee Stamina Efficiency', 'Your Melee Attacks no longer stick', 'in tough enemies.', 'DISABLES: Aim Down Sights']),
+			['+ 40% Melee Attack Speed', '+ 30% Melee Stamina Efficiency', 'Your Melee Attacks no longer stick in tough enemies.', 'DISABLES: Aim Down Sights']),
 		title: 'МЕТН НЕAD'
 	},
 		{
@@ -5433,7 +5433,7 @@ var $author$project$Cards$rawCards = _List_fromArray(
 		id: 31,
 		kind: 'OFFENSE',
 		properties: _List_fromArray(
-			['00:05', '+ 75% Accessory Damage', '25% Swap Speed']),
+			['+ 75% Accessory Damage', '25% Swap Speed']),
 		title: 'IMPROVISED EXPLOSIVES'
 	},
 		{
@@ -5469,7 +5469,7 @@ var $author$project$Cards$rawCards = _List_fromArray(
 		id: 35,
 		kind: 'OFFENSE',
 		properties: _List_fromArray(
-			['Gain 10% Melee Damage, 10%', 'Melee Speed, and 5% Move Speed', 'for each Melee kill in the last', '4 seconds.', '09']),
+			['Gain 10% Melee Damage, 10%', 'Melee Speed, and 5% Move Speed', 'for each Melee kill in the last', '4 seconds.']),
 		title: 'BERSERKER'
 	},
 		{
@@ -5532,7 +5532,7 @@ var $author$project$Cards$rawCards = _List_fromArray(
 		id: 42,
 		kind: 'DEFENSE',
 		properties: _List_fromArray(
-			['HUN', 'Gain 2 Temporary Health', 'whenever you kill a Ridden within', '2 meters.']),
+			['Gain 2 Temporary Health', 'whenever you kill a Ridden within', '2 meters.']),
 		title: 'FACE YOUR FEARS'
 	},
 		{
@@ -5595,7 +5595,7 @@ var $author$project$Cards$rawCards = _List_fromArray(
 		id: 49,
 		kind: 'UTILITY',
 		properties: _List_fromArray(
-			['SATCUSIVE', 'You can sense nearby Offensive', 'Accessories.', 'More Offensive Accessories', 'spawn.']),
+			['You can sense nearby Offensive', 'Accessories.', 'More Offensive Accessories', 'spawn.']),
 		title: 'OFFENSIVE SCAVENGER'
 	},
 		{
@@ -5631,7 +5631,7 @@ var $author$project$Cards$rawCards = _List_fromArray(
 		id: 53,
 		kind: 'DEFENSE',
 		properties: _List_fromArray(
-			['MINERS', 'When using Shotguns, gain 0.25', 'Temporary Health for each pellet', 'that hits.']),
+			['When using Shotguns, gain 0.25', 'Temporary Health for each pellet', 'that hits.']),
 		title: 'BUCKSHOT BRUISER'
 	},
 		{
@@ -5694,7 +5694,7 @@ var $author$project$Cards$rawCards = _List_fromArray(
 		id: 60,
 		kind: 'DEFENSE',
 		properties: _List_fromArray(
-			['FRLE', '10% Health', 'TEAM EFFECTS', '+ 1 Team Support Inventory']),
+			['10% Health', 'TEAM EFFECTS', '+ 1 Team Support Inventory']),
 		title: 'ВОХ \' ВAGS'
 	},
 		{
@@ -5703,7 +5703,7 @@ var $author$project$Cards$rawCards = _List_fromArray(
 		id: 61,
 		kind: 'UTILITY',
 		properties: _List_fromArray(
-			['13', 'Melee kills have a 2% chance to', 'spawn ammo.']),
+			['Melee kills have a 2% chance to', 'spawn ammo.']),
 		title: 'MUGGER'
 	},
 		{
@@ -5739,7 +5739,7 @@ var $author$project$Cards$rawCards = _List_fromArray(
 		id: 65,
 		kind: 'OFFENSE',
 		properties: _List_fromArray(
-			['RANCEN', 'Your secondary weapons have', 'unlimited ammo.', 'Your secondary weapons reload', '20% slower.']),
+			['Your secondary weapons have', 'unlimited ammo.', 'Your secondary weapons reload', '20% slower.']),
 		title: 'AMMO STASH'
 	},
 		{
@@ -5838,7 +5838,7 @@ var $author$project$Cards$rawCards = _List_fromArray(
 		id: 76,
 		kind: 'DEFENSE',
 		properties: _List_fromArray(
-			['Your team heals 5 Trauma', 'Damage and refills 10% Ammo at', 'AID', 'the start of each level.']),
+			['Your team heals 5 Trauma', 'Damage and refills 10% Ammo at', 'the start of each level.']),
 		title: 'SAFEROOM RECOVERY'
 	},
 		{
@@ -5874,7 +5874,7 @@ var $author$project$Cards$rawCards = _List_fromArray(
 		id: 80,
 		kind: 'OFFENSE',
 		properties: _List_fromArray(
-			['RANK', '+ 50% Aim Speed', '5% Damage Resistance']),
+			['+ 50% Aim Speed', '5% Damage Resistance']),
 		title: 'TUNNEL VISION'
 	},
 		{
@@ -5964,7 +5964,7 @@ var $author$project$Cards$rawCards = _List_fromArray(
 		id: 90,
 		kind: 'MOBILITY',
 		properties: _List_fromArray(
-			['CK', '+ 15% Move Speed', 'When you take damage, your', 'Accuracy is reduced by 20% for 3', 'seconds.']),
+			['+ 15% Move Speed', 'When you take damage, your', 'Accuracy is reduced by 20% for 3', 'seconds.']),
 		title: 'RUN LIKE HELL'
 	},
 		{
@@ -5973,7 +5973,7 @@ var $author$project$Cards$rawCards = _List_fromArray(
 		id: 91,
 		kind: 'MOBILITY',
 		properties: _List_fromArray(
-			['Allegheny', 'NATIONAL FOREST', '+ 20% Stamina', '+ 20% Sprint Efficiency', '+ 5 Health']),
+			['+ 20% Stamina', '+ 20% Sprint Efficiency', '+ 5 Health']),
 		title: 'SUPERIOR CARDIO'
 	},
 		{
@@ -6045,7 +6045,7 @@ var $author$project$Cards$rawCards = _List_fromArray(
 		id: 99,
 		kind: 'MOBILITY',
 		properties: _List_fromArray(
-			['ENE', '+ 6% Move Speed while using an', 'SMG.', '+ 35% Reload Speed while using', 'an SMG.']),
+			['+ 6% Move Speed while using an', 'SMG.', '+ 35% Reload Speed while using', 'an SMG.']),
 		title: 'SPEED DEMON'
 	},
 		{
@@ -6171,7 +6171,7 @@ var $author$project$Cards$rawCards = _List_fromArray(
 		id: 113,
 		kind: 'UTILITY',
 		properties: _List_fromArray(
-			['SHOCH', 'You can sense nearby Quick', 'Accessories.', 'More Quick Accessories spawn.']),
+			['You can sense nearby Quick', 'Accessories.', 'More Quick Accessories spawn.']),
 		title: 'UTILITY SCAVENGER'
 	},
 		{
@@ -6261,7 +6261,7 @@ var $author$project$Cards$rawCards = _List_fromArray(
 		id: 123,
 		kind: 'OFFENSE',
 		properties: _List_fromArray(
-			['Funt', '+ 75% Ammo Capacity', 'DISABLES: Support Accessories']),
+			['+ 75% Ammo Capacity', 'DISABLES: Support Accessories']),
 		title: 'AMMO MULE'
 	},
 		{
@@ -6342,7 +6342,7 @@ var $author$project$Cards$rawCards = _List_fromArray(
 		id: 132,
 		kind: 'OFFENSE',
 		properties: _List_fromArray(
-			['CIN', '+ 10% Bullet Damage', '+ 150% Bullet Penetration', 'When you kill a Mutation, you lose', '5 Copper.']),
+			['+ 10% Bullet Damage', '+ 150% Bullet Penetration', 'When you kill a Mutation, you lose', '5 Copper.']),
 		title: 'SILVER BULLETS'
 	},
 		{
@@ -6351,7 +6351,7 @@ var $author$project$Cards$rawCards = _List_fromArray(
 		id: 133,
 		kind: 'DEFENSE',
 		properties: _List_fromArray(
-			['NET Y OZ 0', '+ 20% Healing Efficiency']),
+			['+ 20% Healing Efficiency']),
 		title: 'ANTIBIOTIC OINTMENT'
 	},
 		{
@@ -6378,7 +6378,7 @@ var $author$project$Cards$rawCards = _List_fromArray(
 		id: 136,
 		kind: 'MOBILITY',
 		properties: _List_fromArray(
-			['EN RG', '+ 20% Stamina Regeneration', '+ 5 Health']),
+			['+ 20% Stamina Regeneration', '+ 5 Health']),
 		title: 'ENERGY BAR'
 	},
 		{
@@ -6459,7 +6459,7 @@ var $author$project$Cards$rawCards = _List_fromArray(
 		id: 145,
 		kind: 'OFFENSE',
 		properties: _List_fromArray(
-			['Ki', '+ 25% Accuracy with Assault', 'Rifles and Sniper Rifles.']),
+			['+ 25% Accuracy with Assault', 'Rifles and Sniper Rifles.']),
 		title: 'TRIGGER CONTROL'
 	},
 		{
@@ -6468,7 +6468,7 @@ var $author$project$Cards$rawCards = _List_fromArray(
 		id: 146,
 		kind: 'DEFENSE',
 		properties: _List_fromArray(
-			['4 CLU', '20% Health', 'TEAM EFFECTS', '+ 1 Team Extra Life']),
+			['20% Health', 'TEAM EFFECTS', '+ 1 Team Extra Life']),
 		title: 'NEEDS OF THE MANY'
 	},
 		{
@@ -6484,7 +6484,7 @@ var $author$project$Cards$rawCards = _List_fromArray(
 		effects: _List_Nil,
 		filename: '9_0_1.jpg',
 		id: 148,
-		kind: 'OFFÉNSE',
+		kind: 'OFFENSE',
 		properties: _List_fromArray(
 			['Gain 30% Move Speed and', 'Accuracy while crouched and', 'using an LMG.']),
 		title: 'MEATGRINDER'
@@ -6558,7 +6558,7 @@ var $author$project$Cards$rawCards = _List_fromArray(
 		id: 156,
 		kind: 'UTILITY',
 		properties: _List_fromArray(
-			['CARTK', 'Belea', 'Bogla', '7.42MM X 5IMM', 'You can sense nearby Ammo.', 'More Ammo spawns.']),
+			['You can sense nearby Ammo.', 'More Ammo spawns.']),
 		title: 'AMMO SCAVENGER'
 	}
 	]);
@@ -8564,7 +8564,7 @@ var $author$project$Main$fullCardView = function (card) {
 										$rundis$elm_bootstrap$Bootstrap$Card$attrs(
 										_List_fromArray(
 											[
-												A2($elm$html$Html$Attributes$style, 'width', '20rem'),
+												A2($elm$html$Html$Attributes$style, 'width', '16rem'),
 												A2($elm$html$Html$Attributes$style, 'height', '605px'),
 												$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$m2
 											]))
