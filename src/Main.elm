@@ -221,16 +221,16 @@ cardBackgroundColor card =
         Unknown ->
             Card.dark
 
-        Reflex ->
+        Mobility ->
             Card.primary
 
-        Discipline ->
+        Utility ->
             Card.danger
 
-        Brawn ->
+        Defense ->
             Card.success
 
-        Fortune ->
+        Offense ->
             Card.warning
 
 
@@ -240,16 +240,16 @@ buttonBackgroundColor card =
         Unknown ->
             Button.dark
 
-        Reflex ->
+        Mobility ->
             Button.primary
 
-        Discipline ->
+        Utility ->
             Button.danger
 
-        Brawn ->
+        Defense ->
             Button.success
 
-        Fortune ->
+        Offense ->
             Button.warning
 
 
@@ -259,16 +259,16 @@ cardOutlineColor card =
         Unknown ->
             Card.outlineDark
 
-        Reflex ->
+        Mobility ->
             Card.outlinePrimary
 
-        Discipline ->
+        Utility ->
             Card.outlineDanger
 
-        Brawn ->
+        Defense ->
             Card.outlineSuccess
 
-        Fortune ->
+        Offense ->
             Card.outlineWarning
 
 
@@ -303,16 +303,16 @@ htmlBackgroundColor card =
         Unknown ->
             Html.Attributes.class "bg-dark"
 
-        Reflex ->
+        Mobility ->
             Html.Attributes.class "bg-primary"
 
-        Discipline ->
+        Utility ->
             Html.Attributes.class "bg-danger"
 
-        Brawn ->
+        Defense ->
             Html.Attributes.class "bg-success"
 
-        Fortune ->
+        Offense ->
             Html.Attributes.class "bg-warning"
 
 
@@ -328,7 +328,7 @@ fullCardView card =
     Grid.col []
         [ Card.config [ cardBackground, Card.attrs [ style "width" "20rem", style "height" "605px", Spacing.m2 ] ]
             |> Card.header [ class "text-center" ]
-                [ img [ src "img/sample_card.jpg", style "max-width" "200px" ] []
+                [ img [ src ("img/english/" ++ card.filename), style "max-width" "200px" ] []
                 ]
             |> Card.block []
                 [ Block.titleH5 [] [ text card.title ]

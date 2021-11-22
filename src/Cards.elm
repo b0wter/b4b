@@ -9,10 +9,10 @@ type alias Property =
 
 
 type Kind
-    = Reflex
-    | Discipline
-    | Brawn
-    | Fortune
+    = Utility
+    | Offense
+    | Defense
+    | Mobility
     | Unknown
 
 
@@ -21,10 +21,12 @@ type alias CardId =
 
 
 type alias RawCard =
-    { title : String
+    { id: Int 
+    , title : String
     , properties : List String
     , kind : String
     , effects : List Effect
+    , filename: String
     }
 
 
@@ -34,1306 +36,1733 @@ type alias Card =
     , properties : List Property
     , kind : Kind
     , effects : List Effect
+    , filename: String
     }
 
 
 rawCards : List RawCard
 rawCards =
-    [ { title = "Adrenaline Fueled"
+    [ { id = 1
+      , title = "SUPPORT SCAVENGER"
+      , kind = "UTILITY"
+      , filename = "10_0_0.jpg"
+      , properties =
+            [ "You can sense nearby Support"
+            , "Accessories."
+            , "More Support Accessories spawn."
+            ]
+      , effects = []
+      }   
+    , { id = 2
+      , title = "WEAPON SCAVENGER"
+      , kind = "UTILITY"
+      , filename = "10_0_1.jpg"
+      , properties =
+            [ "You can sense nearby weapons."
+            , "More weapons spawn."
+            ]
+      , effects = []
+      }   
+    , { id = 3
+      , title = "AMPED UP"
+      , kind = "DEFENSE"
+      , filename = "10_0_2.jpg"
+      , properties =
+            [ "73"
+            , "When you exit a starting saferoom,"
+            , "your team gains 50 Temporary"
+            , "Health."
+            ]
+      , effects = []
+      }   
+    , { id = 4
+      , title = "PATIENT HUNTER"
+      , kind = "OFFENSE"
+      , filename = "10_0_3.jpg"
+      , properties =
+            [ "Each second you Aim Down Sights"
+            , "increases your Damage by 10%"
+            , "(up to 3 stacks)."
+            ]
+      , effects = []
+      }   
+    , { id = 5
+      , title = "POWER RELOAD"
+      , kind = "OFFENSE"
+      , filename = "10_0_4.jpg"
+      , properties =
+            [ "Reloading a gun within 0.75"
+            , "seconds of reaching low ammo"
+            , "will increase its magazine size by"
+            , "30% until the next reload."
+            ]
+      , effects = []
+      }   
+    , { id = 6
+      , title = "CROSS TRAINERS"
+      , kind = "MOBILITY"
+      , filename = "1_0_0.jpg"
+      , properties =
+            [ "+ 20% Stamina"
+            , "+ 20% Stamina Regen"
+            , "+ 3% Move Speed"
+            , "+ 5 Health"
+            ]
+      , effects = []
+      }   
+    , { id = 7
+      , title = "MARKED FOR DEATH"
+      , kind = "UTILITY"
+      , filename = "10_1_0.jpg"
+      , properties =
+            [ "Mutations you ping are highlighted"
+            , "and your team deals 10%"
+            , "increased damage to highlighted"
+            , "enemies."
+            ]
+      , effects = []
+      }   
+    , { id = 8
+      , title = "KNOWLEDGE IS POWER"
+      , kind = "UTILITY"
+      , filename = "10_1_1.jpg"
+      , properties =
+            [ "730"
+            , "+ 10% Weakspoť Damage"
+            , "Allows players to see values for"
+            , "damage they deal and enemy"
+            , "health bars."
+            ]
+      , effects = []
+      }   
+    , { id = 9
+      , title = "TACTICAL VEST"
+      , kind = "OFFENSE"
+      , filename = "10_1_2.jpg"
+      , properties =
+            [ "+ 30% Rifle Ammo Capacity"
+            , "+ 10% Damage with Assault Rifles"
+            , "and LMGS"
+            ]
+      , effects = []
+      }   
+    , { id = 10
+      , title = "EXPERIENCED EMT"
+      , kind = "DEFENSE"
+      , filename = "10_1_3.jpg"
+      , properties =
+            [ "When you use a Medical"
+            , "Accessory, the target gains +20%"
+            , "Maximum Health until the end of"
+            , "the level."
+            ]
+      , effects = []
+      }   
+    , { id = 11
+      , title = "VITAMINS"
+      , kind = "DEFENSE"
+      , filename = "10_1_4.jpg"
+      , properties =
+            [ "+ 15 Health"
+            ]
+      , effects = []
+      }   
+    , { id = 12
+      , title = "ENERGY DRINK"
+      , kind = "MOBILITY"
+      , filename = "1_0_1.jpg"
+      , properties =
+            [ "+ 40% Stamina"
+            , "5% Damage Resistance"
+            ]
+      , effects = []
+      }   
+    , { id = 13
+      , title = "RHYTHMIC BREATHING"
+      , kind = "MOBILITY"
+      , filename = "1_0_2.jpg"
+      , properties =
+            [ "Atteghe"
+            , "+ 60% Stamina"
+            , "20% Slow Resistance"
+            ]
+      , effects = []
+      }   
+    , { id = 14
+      , title = "RELOAD DRILLS"
+      , kind = "OFFENSE"
+      , filename = "1_0_3.jpg"
+      , properties =
+            [ "Fin"
+            , "+ 20% Reload Speed"
+            ]
+      , effects = []
+      }   
+    , { id = 15
+      , title = "WIDEMOUTH MAGWELL"
+      , kind = "OFFENSE"
+      , filename = "1_0_4.jpg"
+      , properties =
+            [ "+ 30% Reload Speed"
+            , "5% Damage Resistance"
+            ]
+      , effects = []
+      }   
+    , { id = 16
+      , title = "HYDRATION PACK"
+      , kind = "DEFENSE"
+      , filename = "11_0_0.jpg"
+      , properties =
+            [ "+ 25 Health"
+            , "15% Ammo Capacity"
+            ]
+      , effects = []
+      }   
+    , { id = 17
+      , title = "CANNED GOODS"
+      , kind = "DEFENSE"
+      , filename = "11_0_1.jpg"
+      , properties =
+            [ "+ 40 Health"
+            , "30% Stamina"
+            ]
+      , effects = []
+      }   
+    , { id = 18
+      , title = "BATTER UP"
+      , kind = "OFFENSE"
+      , filename = "11_0_2.jpg"
+      , properties =
+            [ "+ 40% Melee Damage"
+            , "+ 5 Health"
+            ]
+      , effects = []
+      }   
+    , { id = 19
+      , title = "SPIKY BITS"
+      , kind = "OFFENSE"
+      , filename = "11_0_3.jpg"
+      , properties =
+            [ "+ 20% Melee Damage"
+            , "+ 10% Damage Resistance while"
+            , "using a Melee weapon"
+            , "15% Ammo Capacity"
+            ]
+      , effects = []
+      }   
+    , { id = 20
+      , title = "MEAN DRUNK"
+      , kind = "OFFENSE"
+      , filename = "11_0_4.jpg"
+      , properties =
+            [ "+ 60% Melee Damage"
+            , "Your Melee Attacks cause cleave"
+            , "through enemies dealing damage"
+            , "in a large area."
+            , "DISABLES: Sprint"
+            ]
+      , effects = []
+      }   
+    , { id = 21
+      , title = "MAG COUPLER"
+      , kind = "OFFENSE"
+      , filename = "1_1_0.jpg"
+      , properties =
+            [ "+ 50% Reload Speed"
+            , "DISABLES: Aim Down Sights"
+            ]
+      , effects = []
+      }   
+    , { id = 22
+      , title = "DURABLE"
+      , kind = "DEFENSE"
+      , filename = "11_1_0.jpg"
+      , properties =
+            [ "+ 15% Trauma Resistance"
+            , "+ 5 Health"
+            ]
+      , effects = []
+      }   
+    , { id = 23
+      , title = "BODY ARMOR"
+      , kind = "DEFENSE"
+      , filename = "11_1_1.jpg"
+      , properties =
+            [ "+ 25% Trauma Resistance"
+            , "15% Ammo Capacity"
+            ]
+      , effects = []
+      }   
+    , { id = 24
+      , title = "WOODEN ARMOR"
+      , kind = "DEFENSE"
+      , filename = "11_1_2.jpg"
+      , properties =
+            [ "+ 40% Trauma Resistance"
+            , "100% Fire Resistance"
+            , "100% Acid Resistance"
+            , "100% Explosion Resistance"
+            ]
+      , effects = []
+      }   
+    , { id = 25
+      , title = "GRENADE TRAINING"
+      , kind = "OFFENSE"
+      , filename = "11_1_3.jpg"
+      , properties =
+            [ "CK"
+            , "+ 25% Accessory Damage"
+            ]
+      , effects = []
+      }   
+    , { id = 26
+      , title = "DEMOLITIONS EXPERT"
+      , kind = "OFFENSE"
+      , filename = "11_1_4.jpg"
+      , properties =
+            [ "+ 50% Accessory Damage"
+            , "15% Ammo Capacity"
+            ]
+      , effects = []
+      }   
+    , { id = 27
+      , title = "SLUGGER"
+      , kind = "OFFENSE"
+      , filename = "1_1_1.jpg"
+      , properties =
+            [ "+ 5 Health"
+            , "+ 10% Melee Stamina Efficiency"
+            , "+ 20% Melee Attack Speed"
+            ]
+      , effects = []
+      }   
+    , { id = 28
+      , title = "BRAZEN"
+      , kind = "OFFENSE"
+      , filename = "1_1_2.jpg"
+      , properties =
+            [ "+ 20% Melee Stamina Efficiency"
+            , "+ 30% Melee Attack Speed"
+            , "5% Damage Resistance"
+            ]
+      , effects = []
+      }   
+    , { id = 29
+      , title = "МЕТН НЕAD"
+      , kind = "OFFENSE"
+      , filename = "1_1_3.jpg"
+      , properties =
+            [ "+ 40% Melee Attack Speed"
+            , "+ 30% Melee Stamina Efficiency"
+            , "Your Melee Attacks no longer stick"
+            , "in tough enemies."
+            , "DISABLES: Aim Down Sights"
+            ]
+      , effects = []
+      }   
+    , { id = 30
+      , title = "RIDDEN SLAYER"
+      , kind = "OFFENSE"
+      , filename = "1_1_4.jpg"
+      , properties =
+            [ "+ 20% Weakspot Damage"
+            ]
+      , effects = []
+      }   
+    , { id = 31
+      , title = "IMPROVISED EXPLOSIVES"
+      , kind = "OFFENSE"
+      , filename = "12_0_0.jpg"
+      , properties =
+            [ "00:05"
+            , "+ 75% Accessory Damage"
+            , "25% Swap Speed"
+            ]
+      , effects = []
+      }   
+    , { id = 32
+      , title = "CONFIDENT KILLER"
+      , kind = "OFFENSE"
+      , filename = "12_0_1.jpg"
+      , properties =
+            [ "When you or your team kills a"
+            , "Mutation gain 1% damage (up to"
+            , "15%) until the end of the level."
+            ]
+      , effects = []
+      }   
+    , { id = 33
+      , title = "HEAVY HITTER"
+      , kind = "OFFENSE"
+      , filename = "12_0_2.jpg"
+      , properties =
+            [ "Melee hits against Weakspots deal"
+            , "+ 20 additional Stumble Damage."
+            ]
+      , effects = []
+      }   
+    , { id = 34
+      , title = "IGNORE THE PAIN"
+      , kind = "DEFENSE"
+      , filename = "12_0_3.jpg"
+      , properties =
+            [ "+ 20% Melee Damage against"
+            , "Mutations"
+            , "When you deal Melee damage to a"
+            , "Mutation heal 1 Health and"
+            , "recover 3 Stamina."
+            ]
+      , effects = []
+      }   
+    , { id = 35
+      , title = "BERSERKER"
+      , kind = "OFFENSE"
+      , filename = "12_0_4.jpg"
+      , properties =
+            [ "Gain 10% Melee Damage, 10%"
+            , "Melee Speed, and 5% Move Speed"
+            , "for each Melee kill in the last"
+            , "4 seconds."
+            , "09"
+            ]
+      , effects = []
+      }   
+    , { id = 36
+      , title = "TRUE GRIT"
+      , kind = "DEFENSE"
+      , filename = "12_1_0.jpg"
+      , properties =
+            [ "When you take a single hit for 15"
+            , "or more damage, heal 10 health"
+            , "over 5 seconds."
+            ]
+      , effects = []
+      }   
+    , { id = 37
+      , title = "PYRO"
+      , kind = "OFFENSE"
+      , filename = "12_1_1.jpg"
+      , properties =
+            [ "+ 100% Fire damage."
+            , "Kills with fire grant you"
+            , "Temporary Health."
+            , "You can sense flammable objects"
+            , "nearby."
+            ]
+      , effects = []
+      }   
+    , { id = 38
+      , title = "BOMB SQUAD"
+      , kind = "OFFENSE"
+      , filename = "12_1_2.jpg"
+      , properties =
+            [ "+ 100% Explosive Damage"
+            , "+ 35% Explosive Resistance"
+            ]
+      , effects = []
+      }   
+    , { id = 39
+      , title = "SCAR TISSUE"
+      , kind = "DEFENSE"
+      , filename = "12_1_3.jpg"
+      , properties =
+            [ "Take 1 less damage from all"
+            , "Ridden."
+            ]
+      , effects = []
+      }   
+    , { id = 40
+      , title = "BATTLE LUST"
+      , kind = "DEFENSE"
+      , filename = "12_1_4.jpg"
+      , properties =
+            [ "Melee kills heal 2 Health."
+            ]
+      , effects = []
+      }   
+    , { id = 41
+      , title = "LINE 'EM UP"
+      , kind = "OFFENSE"
+      , filename = "13_0_0.jpg"
+      , properties =
+            [ "+ 100% Bullet Penetration with"
+            , "Assault Rifles."
+            ]
+      , effects = []
+      }   
+    , { id = 42
+      , title = "FACE YOUR FEARS"
+      , kind = "DEFENSE"
+      , filename = "13_0_1.jpg"
+      , properties =
+            [ "HUN"
+            , "Gain 2 Temporary Health"
+            , "whenever you kill a Ridden within"
+            , "2 meters."
+            ]
+      , effects = []
+      }   
+    , { id = 43
+      , title = "WELL FED"
+      , kind = "DEFENSE"
+      , filename = "13_0_2.jpg"
+      , properties =
+            [ "20% Stamina Regen"
+            , "-"
+            , "TEAM EFFECTS"
+            , "+ 10 Team Health"
+            ]
+      , effects = []
+      }   
+    , { id = 44
+      , title = "HEAVY ATTACK"
+      , kind = "OFFENSE"
+      , filename = "13_0_3.jpg"
+      , properties =
+            [ "Charge: Hold"
+            , "with Melee"
+            , "weapons to burst forward."
+            , "Charge attacks deal 100%"
+            , "increased damage."
+            ]
+      , effects = []
+      }   
+    , { id = 45
+      , title = "SUNDER"
+      , kind = "OFFENSE"
+      , filename = "13_0_4.jpg"
+      , properties =
+            [ "Melee hits cause the target to take"
+            , "20% increased damage for"
+            , "5 seconds."
+            ]
+      , effects = []
+      }   
+    , { id = 46
+      , title = "OVERWATCH"
+      , kind = "DEFENSE"
+      , filename = "13_1_0.jpg"
+      , properties =
+            [ "Kills from greater than 15 meters"
+            , "grant 5 Temporary Health to"
+            , "teammates within 10 meters of"
+            , "the target."
+            ]
+      , effects = []
+      }   
+    , { id = 47
+      , title = "FRESH BANDAGE"
+      , kind = "DEFENSE"
+      , filename = "13_1_1.jpg"
+      , properties =
+            [ "Heal 10 Trauma Damage at the"
+            , "start of each level."
+            ]
+      , effects = []
+      }   
+    , { id = 48
+      , title = "TWO IS ONE AND ONE IS NONE"
+      , kind = "OFFENSE"
+      , filename = "13_1_2.jpg"
+      , properties =
+            [ "You can equip a Primary weapon in"
+            , "your Secondary slot."
+            , "25% Swap Speed"
+            ]
+      , effects = []
+      }   
+    , { id = 49
+      , title = "OFFENSIVE SCAVENGER"
+      , kind = "UTILITY"
+      , filename = "13_1_3.jpg"
+      , properties =
+            [ "SATCUSIVE"
+            , "You can sense nearby Offensive"
+            , "Accessories."
+            , "More Offensive Accessories"
+            , "spawn."
+            ]
+      , effects = []
+      }   
+    , { id = 50
+      , title = "CHEMICAL COURAGE"
+      , kind = "OFFENSE"
+      , filename = "13_1_4.jpg"
+      , properties =
+            [ "Pain Meds you apply also grant"
+            , "+ 25% Damage for 60 seconds."
+            ]
+      , effects = []
+      }   
+    , { id = 51
+      , title = "NUMB"
+      , kind = "DEFENSE"
+      , filename = "14_0_0.jpg"
+      , properties =
+            [ "Gain + 15% Damage Resistance"
+            , "while you have Temporary Health."
+            ]
+      , effects = []
+      }   
+    , { id = 52
+      , title = "BROADSIDE"
+      , kind = "OFFENSE"
+      , filename = "14_0_1.jpg"
+      , properties =
+            [ "Precision Kills have a 20% chance"
+            , "to cause Ridden to explode, dealing"
+            , "15 damage to other Ridden within"
+            , "4 meters."
+            ]
+      , effects = []
+      }   
+    , { id = 53
+      , title = "BUCKSHOT BRUISER"
+      , kind = "DEFENSE"
+      , filename = "14_0_2.jpg"
+      , properties =
+            [ "MINERS"
+            , "When using Shotguns, gain 0.25"
+            , "Temporary Health for each pellet"
+            , "that hits."
+            ]
+      , effects = []
+      }   
+    , { id = 54
+      , title = "SECOND CHANCE"
+      , kind = "DEFENSE"
+      , filename = "14_0_3.jpg"
+      , properties =
+            [ "+ 1 Extra Life"
+            , "+ 5 Health"
+            ]
+      , effects = []
+      }   
+    , { id = 55
+      , title = "GRENADE POUCH"
+      , kind = "OFFENSE"
+      , filename = "14_0_4.jpg"
+      , properties =
+            [ "+ 1 Offensive Inventory"
+            ]
+      , effects = []
+      }   
+    , { id = 56
+      , title = "DOUBLE GRENADE POUCH"
+      , kind = "OFFENSE"
+      , filename = "14_1_0.jpg"
+      , properties =
+            [ "+ 2 Offensive Inventory"
+            , "10% Damage Dealt"
+            ]
+      , effects = []
+      }   
+    , { id = 57
+      , title = "SURPLUS POUCHES"
+      , kind = "OFFENSE"
+      , filename = "14_1_1.jpg"
+      , properties =
+            [ "10% Health"
+            , "TEAM EFFECTS"
+            , "+ 1 Team Offensive Inventory"
+            ]
+      , effects = []
+      }   
+    , { id = 58
+      , title = "FANNY PACK"
+      , kind = "DEFENSE"
+      , filename = "14_1_2.jpg"
+      , properties =
+            [ "+ 1 Support Inventory"
+            ]
+      , effects = []
+      }   
+    , { id = 59
+      , title = "SHOULDER BAG"
+      , kind = "DEFENSE"
+      , filename = "14_1_3.jpg"
+      , properties =
+            [ "+ 2 Support Inventory"
+            , "10% Damage Dealt"
+            ]
+      , effects = []
+      }   
+    , { id = 60
+      , title = "ВОХ ' ВAGS"
+      , kind = "DEFENSE"
+      , filename = "14_1_4.jpg"
+      , properties =
+            [ "FRLE"
+            , "10% Health"
+            , "TEAM EFFECTS"
+            , "+ 1 Team Support Inventory"
+            ]
+      , effects = []
+      }   
+    , { id = 61
+      , title = "MUGGER"
+      , kind = "UTILITY"
+      , filename = "15_0_0.jpg"
+      , properties =
+            [ "13"
+            , "Melee kills have a 2% chance to"
+            , "spawn ammo."
+            ]
+      , effects = []
+      }   
+    , { id = 62
+      , title = "HIGHWAYMAN"
+      , kind = "UTILITY"
+      , filename = "15_0_1.jpg"
+      , properties =
+            [ "Pistol kills have a 2% chance to"
+            , "spawn ammo."
+            ]
+      , effects = []
+      }   
+    , { id = 63
+      , title = "ADMIN RELOAD"
+      , kind = "OFFENSE"
+      , filename = "15_0_2.jpg"
+      , properties =
+            [ "When you stow your weapon, it"
+            , "reloads."
+            , "15% Ammo Capacity"
+            ]
+      , effects = []
+      }   
+    , { id = 64
+      , title = "BOUNTY HUNTER"
+      , kind = "UTILITY"
+      , filename = "15_0_3.jpg"
+      , properties =
+            [ "When you kill a Mutation, gain 10"
+            , "Copper (up to 300 per level)."
+            ]
+      , effects = []
+      }   
+    , { id = 65
+      , title = "AMMO STASH"
+      , kind = "OFFENSE"
+      , filename = "15_0_4.jpg"
+      , properties =
+            [ "RANCEN"
+            , "Your secondary weapons have"
+            , "unlimited ammo."
+            , "Your secondary weapons reload"
+            , "20% slower."
+            ]
+      , effects = []
+      }   
+    , { id = 66
+      , title = "LIFE INSURANCE"
+      , kind = "DEFENSE"
+      , filename = "15_1_0.jpg"
+      , properties =
+            [ "+ 2 Extra Life"
+            , "Lose 50 Copper at the start of"
+            , "each level."
+            ]
+      , effects = []
+      }   
+    , { id = 67
+      , title = "WOUNDED ANIMAL"
+      , kind = "DEFENSE"
+      , filename = "15_1_1.jpg"
+      , properties =
+            [ "Kills while at Critical Health"
+            , "recover 1 Health."
+            ]
+      , effects = []
+      }   
+    , { id = 68
+      , title = "COMPOUND INTEREST"
+      , kind = "UTILITY"
+      , filename = "15_1_2.jpg"
+      , properties =
+            [ "Gain 10% of your total Copper in"
+            , "each Saferoom."
+            ]
+      , effects = []
+      }   
+    , { id = 69
+      , title = "LUCKY PENNIES"
+      , kind = "UTILITY"
+      , filename = "15_1_3.jpg"
+      , properties =
+            [ "Whenever you or your team loots"
+            , "Copper, you have a 35% chance to"
+            , "find 35% additional Copper."
+            ]
+      , effects = []
+      }   
+    , { id = 70
+      , title = "MONEY GRUBBERS"
+      , kind = "UTILITY"
+      , filename = "15_1_4.jpg"
+      , properties =
+            [ "Each time your team loots Copper,"
+            , "you gain 3 additional Copper,"
+            , "stacking up to 75 additional"
+            , "Сopper."
+            ]
+      , effects = []
+      }   
+    , { id = 71
+      , title = "RUN AND GUN"
+      , kind = "MOBILITY"
+      , filename = "16_0_0.jpg"
+      , properties =
+            [ "You can shoot while sprinting."
+            ]
+      , effects = []
+      }   
+    , { id = 72
+      , title = "COPPER SCAVENGER"
+      , kind = "UTILITY"
+      , filename = "16_0_1.jpg"
+      , properties =
+            [ "You can sense nearby Copper."
+            , "More Copper Piles spawn."
+            ]
+      , effects = []
+      }   
+    , { id = 73
+      , title = "SHARE THE WEALTH"
+      , kind = "UTILITY"
+      , filename = "16_0_2.jpg"
+      , properties =
+            [ "Each teammate gains 100 bonus"
+            , "Copper at the start of each level."
+            ]
+      , effects = []
+      }   
+    , { id = 74
+      , title = "SHELL CARRIER"
+      , kind = "OFFENSE"
+      , filename = "16_0_3.jpg"
+      , properties =
+            [ "+ 30% Shotgun Ammo Capacity"
+            , "+ 10% Damage with Shotguns"
+            ]
+      , effects = []
+      }   
+    , { id = 75
+      , title = "HAZARD PAY"
+      , kind = "UTILITY"
+      , filename = "16_0_4.jpg"
+      , properties =
+            [ "Gain 250 bonus Copper at the"
+            , "start of each level."
+            ]
+      , effects = []
+      }   
+    , { id = 76
+      , title = "SAFEROOM RECOVERY"
+      , kind = "DEFENSE"
+      , filename = "16_1_0.jpg"
+      , properties =
+            [ "Your team heals 5 Trauma"
+            , "Damage and refills 10% Ammo at"
+            , "AID"
+            , "the start of each level."
+            ]
+      , effects = []
+      }   
+    , { id = 77
+      , title = "RECKLESS STRATEGY"
+      , kind = "OFFENSE"
+      , filename = "2_0_0.jpg"
+      , properties =
+            [ "+ 30% Weakspot Damage"
+            , "5% Damage Resistance"
+            ]
+      , effects = []
+      }   
+    , { id = 78
+      , title = "HYPER-FOCUSED"
+      , kind = "OFFENSE"
+      , filename = "2_0_1.jpg"
+      , properties =
+            [ "+ 50% Weakspot Damage"
+            , "75% ADS Move Speed."
+            ]
+      , effects = []
+      }   
+    , { id = 79
+      , title = "HI VIS SIGHTS"
+      , kind = "OFFENSE"
+      , filename = "2_0_2.jpg"
+      , properties =
+            [ "+ 30% Aim Speed"
+            ]
+      , effects = []
+      }   
+    , { id = 80
+      , title = "TUNNEL VISION"
+      , kind = "OFFENSE"
+      , filename = "2_0_3.jpg"
+      , properties =
+            [ "RANK"
+            , "+ 50% Aim Speed"
+            , "5% Damage Resistance"
+            ]
+      , effects = []
+      }   
+    , { id = 81
+      , title = "STEADY AIM"
+      , kind = "OFFENSE"
+      , filename = "2_0_4.jpg"
+      , properties =
+            [ "+ 80% Aim Speed"
+            , "50% ADS Move Speed"
+            ]
+      , effects = []
+      }   
+    , { id = 82
+      , title = "SHOOTING GLOVES"
+      , kind = "UTILITY"
+      , filename = "2_1_0.jpg"
+      , properties =
+            [ "+ 25% Weapon Swap Speed"
+            ]
+      , effects = []
+      }   
+    , { id = 83
+      , title = "GUNS OUT"
+      , kind = "UTILITY"
+      , filename = "2_1_1.jpg"
+      , properties =
+            [ "+ 50% Weapon Swap Speed"
+            , "5% Damage Resistance"
+            ]
+      , effects = []
+      }   
+    , { id = 84
+      , title = "СОСKY"
+      , kind = "UTILITY"
+      , filename = "2_1_2.jpg"
+      , properties =
+            [ "+ 75% Weapon Swap Speed"
+            , "When you take damage, your"
+            , "Accuracy is reduced by 20% for 3"
+            , "seconds."
+            ]
+      , effects = []
+      }   
+    , { id = 85
+      , title = "SMELLING SALTS"
+      , kind = "UTILITY"
+      , filename = "2_1_3.jpg"
+      , properties =
+            [ "+ 100% Revive Speed"
+            ]
+      , effects = []
+      }   
+    , { id = 86
+      , title = "ΡEP TALK"
+      , kind = "UTILITY"
+      , filename = "2_1_4.jpg"
+      , properties =
+            [ "+ 150% Revive Speed"
+            , "5% Damage Resistance"
+            ]
+      , effects = []
+      }   
+    , { id = 87
+      , title = "ROUSING SPEECH"
+      , kind = "UTILITY"
+      , filename = "3_0_0.jpg"
+      , properties =
+            [ "+ 225% Revive Speed"
+            , "DISABLES: Offensive Accessories"
+            , "TEAM EFFECTS"
+            , "+ 20% Reduced Incap Trauma"
+            ]
+      , effects = []
+      }   
+    , { id = 88
+      , title = "DASH"
+      , kind = "MOBILITY"
+      , filename = "3_0_1.jpg"
+      , properties =
+            [ "+ 5% Move Speed"
+            ]
+      , effects = []
+      }   
+    , { id = 89
+      , title = "FLEET OF FOOT"
+      , kind = "MOBILITY"
+      , filename = "3_0_2.jpg"
+      , properties =
+            [ "+ 10% Move Speed"
+            , "5% Damage Resistance"
+            ]
+      , effects = []
+      }   
+    , { id = 90
+      , title = "RUN LIKE HELL"
+      , kind = "MOBILITY"
+      , filename = "3_0_3.jpg"
+      , properties =
+            [ "CK"
+            , "+ 15% Move Speed"
+            , "When you take damage, your"
+            , "Accuracy is reduced by 20% for 3"
+            , "seconds."
+            ]
+      , effects = []
+      }   
+    , { id = 91
+      , title = "SUPERIOR CARDIO"
+      , kind = "MOBILITY"
+      , filename = "3_0_4.jpg"
+      , properties =
+            [ "Allegheny"
+            , "NATIONAL FOREST"
+            , "+ 20% Stamina"
+            , "+ 20% Sprint Efficiency"
+            , "+ 5 Health"
+            ]
+      , effects = []
+      }   
+    , { id = 92
+      , title = "OLYMPIC SPRINTER"
+      , kind = "MOBILITY"
+      , filename = "3_1_0.jpg"
+      , properties =
+            [ "+ 30% Sprint Efficiency"
+            , "5% Damage Resistance"
+            ]
+      , effects = []
+      }   
+    , { id = 93
+      , title = "RECKLESS"
+      , kind = "MOBILITY"
+      , filename = "3_1_1.jpg"
+      , properties =
+            [ "+ 40% Sprint Efficiency"
+            , "When you take damage while"
+            , "Sprinting, you lose all Stamina."
+            ]
+      , effects = []
+      }   
+    , { id = 94
+      , title = "BREAKOUT"
+      , kind = "UTILITY"
+      , filename = "3_1_2.jpg"
+      , properties =
+            [ "Breakout: Hold"
+            , "E"
+            , "to free"
+            , "yourself from Grabs."
+            , "+ 50% Breakout Cooldown"
+            , "Reduction. (Base 60 seconds)."
+            ]
+      , effects = []
+      }   
+    , { id = 95
+      , title = "СOMBAT MEDIC"
+      , kind = "DEFENSE"
+      , filename = "3_1_3.jpg"
+      , properties =
+            [ "+ 50% Use Speed"
+            , "Heals teammates for an additional"
+            , "20 Health when you revive them."
+            ]
+      , effects = []
+      }   
+    , { id = 96
+      , title = "FIRE IN THE HOLE!"
+      , kind = "MOBILITY"
+      , filename = "3_1_4.jpg"
+      , properties =
+            [ "When you throw an Offensive"
+            , "Accessory, gain 20 Temporary"
+            , "Health and 20% Move Speed for"
+            , "5 seconds."
+            ]
+      , effects = []
+      }   
+    , { id = 97
+      , title = "MEDICAL EXPERT"
+      , kind = "DEFENSE"
+      , filename = "4_0_0.jpg"
+      , properties =
+            [ "+ 15% Healing Efficiency"
+            , "When you use a Medical"
+            , "Accessory, you gain 15% Move"
+            , "Speed for 15 seconds."
+            ]
+      , effects = []
+      }   
+    , { id = 98
+      , title = "ROLLING THUNDER"
+      , kind = "MOBILITY"
+      , filename = "4_0_1.jpg"
+      , properties =
+            [ "+ 35% Move Speed while firing"
+            , "with Shotguns."
+            , "+ 10% Damage with Shotguns."
+            ]
+      , effects = []
+      }   
+    , { id = 99
+      , title = "SPEED DEMON"
+      , kind = "MOBILITY"
+      , filename = "4_0_2.jpg"
+      , properties =
+            [ "ENE"
+            , "+ 6% Move Speed while using an"
+            , "SMG."
+            , "+ 35% Reload Speed while using"
+            , "an SMG."
+            ]
+      , effects = []
+      }   
+    , { id = 100
+      , title = "HELLFIRE"
+      , kind = "MOBILITY"
+      , filename = "4_0_3.jpg"
+      , properties =
+            [ "+ 45% Move Speed while firing."
+            , "+ 5% Move Speed while not firing."
+            ]
+      , effects = []
+      }   
+    , { id = 101
+      , title = "MARATHON RUNNER"
+      , kind = "MOBILITY"
+      , filename = "4_0_4.jpg"
+      , properties =
+            [ "No Movement Penalty for strafe"
+            , "and backpedal."
+            , "DISABLES: Sprint"
+            ]
+      , effects = []
+      }   
+    , { id = 102
+      , title = "MANDATORY PT"
+      , kind = "MOBILITY"
+      , filename = "4_1_0.jpg"
+      , properties =
+            [ "TEAM EFFECTS"
+            , "+ 15% Team Stamina"
+            ]
+      , effects = []
+      }   
+    , { id = 103
+      , title = "PEP IN YOUR STEP"
+      , kind = "MOBILITY"
+      , filename = "4_1_1.jpg"
+      , properties =
+            [ "Precision Kills grant you 10%"
+            , "Move Speed for 5 seconds."
+            ]
+      , effects = []
+      }   
+    , { id = 104
+      , title = "SHREDDER"
+      , kind = "OFFENSE"
+      , filename = "4_1_2.jpg"
+      , properties =
+            [ "Each bullet hit causes the target to"
+            , "take 1% increased damage for 3"
+            , "seconds (stacks up to 15% )."
+            ]
+      , effects = []
+      }   
+    , { id = 105
+      , title = "GLASS CANNON"
+      , kind = "OFFENSE"
+      , filename = "4_1_3.jpg"
+      , properties =
+            [ "+ 25% Damage"
+            , "30% Health"
+            ]
+      , effects = []
+      }   
+    , { id = 106
+      , title = "SADISTIC"
+      , kind = "OFFENSE"
+      , filename = "4_1_4.jpg"
+      , properties =
+            [ "Gain 5% Weakspot Damage for"
+            , "each Precision Kill in the last 10"
+            , "seconds."
+            ]
+      , effects = []
+      }   
+    , { id = 107
+      , title = "EVASIVE ACTION"
+      , kind = "MOBILITY"
+      , filename = "5_0_0.jpg"
+      , properties =
+            [ "When you take a hit for 10 or more"
+            , "damage, gain 20% Move Speed for"
+            , "3 seconds."
+            ]
+      , effects = []
+      }   
+    , { id = 108
+      , title = "ADRENALINE FUELED"
+      , kind = "OFFENSE"
+      , filename = "5_0_1.jpg"
       , properties =
             [ "+ 100% Stamina"
-            , "- 75% Stamina Regeneration"
-            , "When you kill an enemy, gain 10 Stamina instantly and an additional 10 Stamina over 5 seconds."
+            , "75% Stamina Regeneration"
+            , "When you kill an enemy, gain 10"
+            , "Stamina instantly and an additional"
+            , "10 Stamina over 5 seconds."
             ]
-      , kind = "Reflex"
-      , effects =
-            [ Passive Stamina (RelativeMax 100)
-            , Passive StaminaRegeneration (RelativeMax 75)
-            , Triggered KillEnemy
-                (Twin
-                    (Once Stamina (AbsoluteCurrent 10))
-                    (OverTime 5 (Once Stamina (AbsoluteCurrent 10)))
-                )
-            ]
-      }
-    , { title = "Brazen"
-      , properties =
-            [ "+30% melee stamina efficiency"
-            , "+30% melee attack speed"
-            , "-5% damage resistance"
-            ]
-      , kind = "Reflex"
-      , effects =
-            [ Passive MeleeStaminaEfficiency (RelativeMax 40)
-            , Passive MeleeAttackSpeed (RelativeMax 30)
-            , Passive DamageResistance (RelativeMax -5)
-            ]
-      }
-    , { title = "Breakout"
-      , properties =
-            [ "Allows you to free yourself from grabs"
-            , "+50% breakout cooldown reduction"
-            ]
-      , kind = "Reflex"
-      , effects =
-            [ Special "Allows you to free yourself from grabs"
-            , Special "+50% breakout cooldown reduction"
-            ]
-      }
-    , { title = "Cocky"
-      , properties =
-            [ "+75% weapon swap speed"
-            , "When you take damage your accuracy is reduced by 20% for 3 seconds"
-            ]
-      , kind = "Reflex"
-      , effects = []
-      }
-    , { title = "Combat Medic"
-      , properties =
-            [ "Teammates healed by an additional 20 health when revived"
-            , "+50 use speed"
-            ]
-      , kind = "Reflex"
-      , effects = []
-      }
-    , { title = "Cross Trainers"
-      , properties =
-            [ "+20% stamina"
-            , "+20% stamina regen"
-            , "+3% move speed"
-            , "5 health"
-            ]
-      , kind = "Reflex"
-      , effects = []
-      }
-    , { title = "Dash"
-      , properties =
-            [ "+5% move speed"
-            ]
-      , kind = "Reflex"
-      , effects = []
-      }
-    , { title = "Energy Drink"
-      , properties =
-            [ "+40% stamina"
-            , "-5% damage resistance"
-            ]
-      , kind = "Reflex"
-      , effects = []
-      }
-    , { title = "Evasive Action"
-      , properties =
-            [ "Gain a 20% movement speed boost for three seconds when you take a hit of 10 or more"
-            ]
-      , kind = "Reflex"
-      , effects = []
-      }
-    , { title = "Fire in the Hole!"
-      , properties =
-            [ "Gain 20 temporary health and 20% movement speed for five seconds after throwing an offensive item"
-            ]
-      , kind = "Reflex"
-      , effects = []
-      }
-    , { title = "Fire in the Hole!"
-      , properties =
-            [ "When you throw an Offensive Accessory"
-            , "gain 20 temporary health and 20% move speed for 5 seconds."
-            ]
-      , kind = "Reflex"
-      , effects = []
-      }
-    , { title = "Fleet Of Foot"
-      , properties =
-            [ "+10% move speed"
-            , "-5% damage resistance"
-            ]
-      , kind = "Reflex"
-      , effects = []
-      }
-    , { title = "Glass Cannon"
-      , properties =
-            [ "+25% damage"
-            , "-30% health"
-            ]
-      , kind = "Reflex"
-      , effects = []
-      }
-    , { title = "Guns Out"
-      , properties =
-            [ "+50% weapon swap speed"
-            , "-5% damage resistance"
-            ]
-      , kind = "Reflex"
-      , effects = []
-      }
-    , { title = "Headband Magnifier"
-      , properties =
-            [ "+125% use speed"
-            , "when you take damage"
-            , "you have a chance to be binded for 1 second"
-            ]
-      , kind = "Reflex"
-      , effects = []
-      }
-    , { title = "Hellfire"
-      , properties =
-            [ "+45% move speed while firing"
-            , "+5% move speed while not firing"
-            ]
-      , kind = "Reflex"
-      , effects = []
-      }
-    , { title = "Hi Vis Sights"
-      , properties =
-            [ "+30% aim speed"
-            ]
-      , kind = "Reflex"
-      , effects = []
-      }
-    , { title = "Hyper-Focused"
-      , properties =
-            [ "+50% weakspot damage"
-            , "-75% ADS Move Speed"
-            ]
-      , kind = "Reflex"
-      , effects = []
-      }
-    , { title = "Killer’s Instinct"
-      , properties =
-            [ "+30% weakspot damage"
-            , "disables aim down sights"
-            ]
-      , kind = "Reflex"
-      , effects = []
-      }
-    , { title = "Mad Dash"
-      , properties =
-            [ "+20% sprint speed"
-            , "-30% stamina efficiency"
-            ]
-      , kind = "Reflex"
-      , effects = []
-      }
-    , { title = "Mag Carrier"
-      , properties =
-            [ "+30% pistol/SMG ammo capacity"
-            , "+10% damage with pistols and SMGs"
-            ]
-      , kind = "Reflex"
-      , effects = []
-      }
-    , { title = "Mag Coupler"
-      , properties =
-            [ "+50% reload speed"
-            , "disables aim down sights"
-            ]
-      , kind = "Reflex"
-      , effects = []
-      }
-    , { title = "Mandatory PT"
-      , properties =
-            [ "Team Effect: +15% team stamina"
-            ]
-      , kind = "Reflex"
-      , effects = []
-      }
-    , { title = "Marathon Runner"
-      , properties =
-            [ "No movement penalty for strafe and backpedal"
-            , "disables Sprint"
-            ]
-      , kind = "Reflex"
-      , effects = []
-      }
-    , { title = "Medical Expert"
-      , properties =
-            [ "+15 healing efficiency"
-            , "plus +15% movement speed for 15 seconds when you use a medical accessory"
-            ]
-      , kind = "Reflex"
-      , effects = []
-      }
-    , { title = "Meth Head"
-      , properties =
-            [ "40% melee attack speed"
-            , "+40% melee stamina efficiency"
-            , "Your melee attacks no longer stick in tough enemies"
-            , "disables aim down sights"
-            ]
-      , kind = "Reflex"
-      , effects = []
-      }
-    , { title = "Miraculous Recovery"
-      , properties =
-            [ "A medical accessory has a 25% chance of having a 100% increased effect"
-            ]
-      , kind = "Reflex"
-      , effects = []
-      }
-    , { title = "Multitool"
-      , properties =
-            [ "75% use speed"
-            , "-5% damage resistance"
-            ]
-      , kind = "Reflex"
-      , effects = []
-      }
-    , { title = "On Your Mark…"
-      , properties =
-            [ "When you exit a starting saferoom your team gains +15% move speed for 30 seconds"
-            ]
-      , kind = "Reflex"
-      , effects = []
-      }
-    , { title = "Olympic Sprinter"
-      , properties =
-            [ "+30% sprint efficiency"
-            , "-5% damage resistance"
-            ]
-      , kind = "Reflex"
-      , effects = []
-      }
-    , { title = "Pep in your Step"
-      , properties =
-            [ "Precision Kills grant 10% movement speed for five seconds"
-            ]
-      , kind = "Reflex"
-      , effects = []
-      }
-    , { title = "Pep Talk"
-      , properties =
-            [ "+150% revive speed"
-            , "-5% damage resistance"
-            ]
-      , kind = "Reflex"
-      , effects = []
-      }
-    , { title = "Power Swap"
-      , properties =
-            [ "Changing weapons within 0.75 seconds of hitting low ammo grants +20% damage for five seconds"
-            ]
-      , kind = "Reflex"
-      , effects = []
-      }
-    , { title = "Reckless"
-      , properties =
-            [ "+40% sprint efficiency"
-            , "When you take damage while sprinting"
-            , "you lose all your stamina"
-            ]
-      , kind = "Reflex"
-      , effects = []
-      }
-    , { title = "Reckless Strategy"
-      , properties =
-            [ "+30% weakspot damage"
-            , "-5% damage resistance"
-            ]
-      , kind = "Reflex"
-      , effects = []
-      }
-    , { title = "Reload Drills"
-      , properties =
-            [ "+30% reload speed"
-            ]
-      , kind = "Reflex"
-      , effects = []
-      }
-    , { title = "Rhythmic Breathing"
-      , properties =
-            [ "+60% stamina"
-            , "-20% slow resistance"
-            ]
-      , kind = "Reflex"
-      , effects = []
-      }
-    , { title = "Ridden Slayer"
-      , properties =
-            [ "+20% weak spot damage"
-            ]
-      , kind = "Reflex"
-      , effects = []
-      }
-    , { title = "Rolling Thunder"
-      , properties =
-            [ "+6% move speed while using an SMG"
-            , "+35% reload speed while using an SMG"
-            ]
-      , kind = "Reflex"
-      , effects = []
-      }
-    , { title = "Rousing Speech"
-      , properties =
-            [ "+225% revive speed"
-            , "disables offensive accessories"
-            , "Team Effect: +20% reduced incap trauma"
-            ]
-      , kind = "Reflex"
-      , effects = []
-      }
-    , { title = "Run Like Hell"
-      , properties =
-            [ "+15% move speed"
-            , "When you take damage your accuracy is reduced by 20% for 3 seconds"
-            ]
-      , kind = "Reflex"
-      , effects = []
-      }
-    , { title = "Sadistic"
-      , properties =
-            [ "Gain 5% weakspot damage for each precision kill in the last 10 seconds"
-            ]
-      , kind = "Reflex"
-      , effects = []
-      }
-    , { title = "Screwdriver"
-      , properties =
-            [ "+50% use speed"
-            , "+10% stamina"
-            ]
-      , kind = "Reflex"
-      , effects = []
-      }
-    , { title = "Shooting Gloves"
-      , properties =
-            [ "+25% weapon swap speed"
-            ]
-      , kind = "Reflex"
-      , effects = []
-      }
-    , { title = "Shredder"
-      , properties =
-            [ "Each bullet hit causes the target to take 1% increased damage for 3 seconds (stacks up to 15%)"
-            ]
-      , kind = "Reflex"
-      , effects = []
-      }
-    , { title = "Slugger"
-      , properties =
-            [ "+5 health"
-            , "+10% melee stamina efficiency"
-            , "+20% melee attack speed"
-            ]
-      , kind = "Reflex"
-      , effects = []
-      }
-    , { title = "Smelling Salts"
-      , properties =
-            [ "+100% revive speed"
-            ]
-      , kind = "Reflex"
-      , effects = []
-      }
-    , { title = "Speed Demon"
-      , properties =
-            [ "+6% move speed while using an SMG"
-            , "+35% reload speed while using an SMG"
-            ]
-      , kind = "Reflex"
-      , effects = []
-      }
-    , { title = "Stamina"
-      , properties =
-            [ "+10% Stamina"
-            ]
-      , kind = "Reflex"
-      , effects = []
-      }
-    , { title = "Steady Aim"
-      , properties =
-            [ "+80% aim speed"
-            , "-50% ADS move speed"
-            ]
-      , kind = "Reflex"
-      , effects = []
-      }
-    , { title = "Stimulants"
-      , properties =
-            [ "Pain meds grant +10% movement speed"
-            , "10% reload speed"
-            , "and 10% weapon swap speed for 30 seconds"
-            ]
-      , kind = "Reflex"
-      , effects = []
-      }
-    , { title = "Stock Pouch"
-      , properties =
-            [ "+30% sniper ammo capacity"
-            , "+10% damage with sniper rifles"
-            ]
-      , kind = "Reflex"
-      , effects = []
-      }
-    , { title = "Superior Cardio"
-      , properties =
-            [ "+50% sprint efficiency"
-            , "+5 health"
-            ]
-      , kind = "Reflex"
-      , effects = []
-      }
-    , { title = "Tunnel Vision"
-      , properties =
-            [ "+50% aim speed"
-            , "-5% damage resistance"
-            ]
-      , kind = "Reflex"
-      , effects = []
-      }
-    , { title = "Utility Scavenger"
-      , properties =
-            [ "You can sense nearby quick accessories"
-            , "more quick accessories spawn"
-            ]
-      , kind = "Reflex"
-      , effects = []
-      }
-    , { title = "Widemouth Magwell"
-      , properties =
-            [ "+30% reload speed"
-            , "-5% damage resistance"
-            ]
-      , kind = "Reflex"
-      , effects = []
-      }
-    , { title = "Ammo"
-      , properties =
-            [ "+10% ammo"
-            ]
-      , kind = "Discipline"
-      , effects = []
-      }
-    , { title = "Ammo Belt"
-      , properties =
-            [ "+50% ammo capacity"
-            , "-20% stamina efficiency"
-            ]
-      , kind = "Discipline"
-      , effects = []
-      }
-    , { title = "Ammo For All"
-      , properties =
-            [ "Team Effect: +10% team ammo capacity"
-            ]
-      , kind = "Discipline"
-      , effects = []
-      }
-    , { title = "Ammo Mule"
-      , properties =
-            [ "75% ammo capacity"
-            , "disables support accessories"
-            ]
-      , kind = "Discipline"
-      , effects = []
-      }
-    , { title = "Ammo Pouch"
-      , properties =
-            [ "+25% ammo capacity"
-            ]
-      , kind = "Discipline"
-      , effects = []
-      }
-    , { title = "Ammo Scavenger"
-      , properties =
-            [ "You can sense nearby ammo"
-            , "more ammo spawns"
-            ]
-      , kind = "Discipline"
-      , effects = []
-      }
-    , { title = "Amped Up"
-      , properties =
-            [ "When you exit a starting saferoom your team gains 50 temporary health"
-            ]
-      , kind = "Discipline"
-      , effects = []
-      }
-    , { title = "Antibiotic Ointment"
-      , properties =
-            [ "+20% healing efficiency"
-            ]
-      , kind = "Discipline"
-      , effects = []
-      }
-    , { title = "Avenge The Fallen"
-      , properties =
-            [ "Team Effect: When you or a teammate becomes incapacitated"
-            , "all teammates gain 30% damage"
-            , "20% reload speed and unlimited ammo for 10 seconds."
-            ]
-      , kind = "Discipline"
-      , effects = []
-      }
-    , { title = "Charitable Soul"
-      , properties =
-            [ "Heals granted to a teammate will also apply 50% of the effect to you"
-            ]
-      , kind = "Discipline"
-      , effects = []
-      }
-    , { title = "Cold Brew Coffee"
-      , properties =
-            [ "+40% stamina regeneration"
-            , "-10% stamina efficiency"
-            ]
-      , kind = "Discipline"
-      , effects = []
-      }
-    , { title = "Combat Knife"
-      , properties =
-            [ "Turns your Bash into a Knife that counts as a Melee weapon."
-            ]
-      , kind = "Discipline"
-      , effects = []
-      }
-    , { title = "Combat Training"
-      , properties =
-            [ "+5% damage dealt"
-            , "+50% bullet penetration"
-            ]
-      , kind = "Discipline"
-      , effects = []
-      }
-    , { title = "Controlled Movement"
-      , properties =
-            [ "+40% move speed while aiming down sights with sniper rifles"
-            ]
-      , kind = "Discipline"
-      , effects = []
-      }
-    , { title = "Down In Front!"
-      , properties =
-            [ "While crouching you neither take nor deal Friendly Fire damage"
-            , "+10 health"
-            ]
-      , kind = "Discipline"
-      , effects = []
-      }
-    , { title = "EMT Bag"
-      , properties =
-            [ "+40% healing efficiency"
-            , "-20% stamina efficiency"
-            ]
-      , kind = "Discipline"
-      , effects = []
-      }
-    , { title = "Energy Bar"
-      , properties =
-            [ "+20% stamina regeneration"
-            , "5 health"
-            ]
-      , kind = "Discipline"
-      , effects = []
-      }
-    , { title = "Experienced EMT"
-      , properties =
-            [ "Medical accessories will grant +20% maximum health until the end of the level"
-            ]
-      , kind = "Discipline"
-      , effects = []
-      }
-    , { title = "Field Surgeon"
-      , properties =
-            [ "+60% healing efficiency"
-            , "-50% use speed"
-            ]
-      , kind = "Discipline"
-      , effects = []
-      }
-    , { title = "Front Sight Focus"
-      , properties =
-            [ "+20% accuracy"
-            ]
-      , kind = "Discipline"
-      , effects = []
-      }
-    , { title = "Group Therapy"
-      , properties =
-            [ "All teammates heal for 5 health when a medical accessory is used"
-            ]
-      , kind = "Discipline"
-      , effects = []
-      }
-    , { title = "Hunker Down"
-      , properties =
-            [ "+10% damage resistance and +40% accuracy when crouching"
-            ]
-      , kind = "Discipline"
-      , effects = []
-      }
-    , { title = "In the Zone"
-      , properties =
-            [ "+5% reload speed for five seconds (can be stacked ten times) when getting precision kills"
-            ]
-      , kind = "Discipline"
-      , effects = []
-      }
-    , { title = "Inspiring Sacrifice"
-      , properties =
-            [ "Team Effect: All teammates heal for 25 health over twenty seconds if someone is incapacitated"
-            ]
-      , kind = "Discipline"
-      , effects = []
-      }
-    , { title = "Knowledge Is Power"
-      , properties =
-            [ "+10% weakspot damage"
-            , "allows players to see values for damage they deal and enemy health bars"
-            ]
-      , kind = "Discipline"
-      , effects = []
-      }
-    , { title = "Large Caliber Rounds"
-      , properties =
-            [ "+7.5% bullet damage"
-            , "+100% bullet penetration"
-            , "-20% stamina efficiency"
-            ]
-      , kind = "Discipline"
-      , effects = []
-      }
-    , { title = "Marked for Death"
-      , properties =
-            [ "+10% damage to pinged mutations and mutations are highlighted"
-            ]
-      , kind = "Discipline"
-      , effects = []
-      }
-    , { title = "Meat Grinder"
-      , properties =
-            [ "Gain 30% move speed and accuracy while crouched and using an LMG"
-            ]
-      , kind = "Discipline"
-      , effects = []
-      }
-    , { title = "Medical Professional"
-      , properties =
-            [ "First Aids and Defibrillators recover 15 trauma damage and one extra life"
-            ]
-      , kind = "Discipline"
-      , effects = []
-      }
-    , { title = "Motorcycle Helmet"
-      , properties =
-            [ "+15% damage resistance"
-            , "+10 health"
-            , "disables aim down sights"
-            ]
-      , kind = "Discipline"
-      , effects = []
-      }
-    , { title = "Motorcycle Jacket"
-      , properties =
-            [ "+5% damage resistance"
-            , "+5 health"
-            ]
-      , kind = "Discipline"
-      , effects = []
-      }
-    , { title = "Natural Sprinter"
-      , properties =
-            [ "+100% stamina regeneration"
-            , "-50% maximum stamina"
-            ]
-      , kind = "Discipline"
-      , effects = []
-      }
-    , { title = "Needs Of The Many"
-      , properties =
-            [ "-20% health"
-            , "Team Effect: +1 team extra life"
-            ]
-      , kind = "Discipline"
-      , effects = []
-      }
-    , { title = "Optics Enthusiast"
-      , properties =
-            [ "+30% accuracy"
-            , "-20% stamina efficiency"
-            ]
-      , kind = "Discipline"
-      , effects = []
-      }
-    , { title = "Padded Suit"
-      , properties =
-            [ "+10% damage resistance"
-            , "+5 health"
-            , "-20% stamina efficiency"
-            ]
-      , kind = "Discipline"
-      , effects = []
-      }
-    , { title = "Patient Hunter"
-      , properties =
-            [ "+10% damage for each second aimed down sights (can be stacked three times)"
-            ]
-      , kind = "Discipline"
-      , effects = []
-      }
-    , { title = "Poultice"
-      , properties =
-            [ "Teammate gains +20 health over 30 seconds when healed"
-            ]
-      , kind = "Discipline"
-      , effects = []
-      }
-    , { title = "Power Reload"
-      , properties =
-            [ "Reloading a gun within 0.75 seconds of hitting low ammo grants +30% mag capacity until the next reload"
-            ]
-      , kind = "Discipline"
-      , effects = []
-      }
-    , { title = "Quick Kill"
-      , properties =
-            [ "+50% accuracy"
-            , "disables aim down sights"
-            ]
-      , kind = "Discipline"
-      , effects = []
-      }
-    , { title = "Scattergun Skills"
-      , properties =
-            [ "+40% reload speed with shotguns"
-            ]
-      , kind = "Discipline"
-      , effects = []
-      }
-    , { title = "Silver Bullets"
-      , properties =
-            [ "+10% bullet damage"
-            , "+150% bullet penetration"
-            , "when you kill a Mutation"
-            , "you lose 5 copper"
-            ]
-      , kind = "Discipline"
-      , effects = []
-      }
-    , { title = "Support Scavenger"
-      , properties =
-            [ "You can sense nearby support accessories"
-            , "more support accessories spawn"
-            ]
-      , kind = "Discipline"
-      , effects = []
-      }
-    , { title = "Tactical Vest"
-      , properties =
-            [ "+30% rifle ammo capacity"
-            , "+10% damage with assault rifles and LMGs"
-            ]
-      , kind = "Discipline"
-      , effects = []
-      }
-    , { title = "Trigger Control"
-      , properties =
-            [ "+25% accuracy with assault rifles and sniper rifles."
-            ]
-      , kind = "Discipline"
-      , effects = []
-      }
-    , { title = "Vanguard"
-      , properties =
-            [ "Melee kills grant 1 temporary health to you and nearby teammates"
-            ]
-      , kind = "Discipline"
-      , effects = []
-      }
-    , { title = "Weapon Scavenger"
-      , properties =
-            [ "You can sense nearby weapons"
-            , "more weapons spawn"
-            ]
-      , kind = "Discipline"
-      , effects = []
-      }
-    , { title = "Batter Up"
-      , properties =
-            [ "+50% melee damage"
-            , "+5 health"
-            ]
-      , kind = "Brawn"
-      , effects = []
-      }
-    , { title = "Battle Lust"
-      , properties =
-            [ "Melee kills heal two health"
-            ]
-      , kind = "Brawn"
-      , effects = []
-      }
-    , { title = "Berserker"
-      , properties =
-            [ "Gain 10% melee damage"
-            , "10% melee speed"
-            , "and 5% move speed for each melee kill in the last 4 seconds"
-            ]
-      , kind = "Brawn"
-      , effects = []
-      }
-    , { title = "Body Armor"
-      , properties =
-            [ "+25% trauma resistance"
-            , "-15% ammo capacity"
-            ]
-      , kind = "Brawn"
-      , effects = []
-      }
-    , { title = "Bomb Squad"
-      , properties =
-            [ "+100% explosive damage"
-            , "35+ explosive resistance"
-            ]
-      , kind = "Brawn"
-      , effects = []
-      }
-    , { title = "Broadside"
-      , properties =
-            [ "Precision kills have a 20% chance to cause Ridden to explode"
-            , "dealing 15 damage to other Ridden within 4 meters"
-            ]
-      , kind = "Brawn"
-      , effects = []
-      }
-    , { title = "Buckshot Bruiser"
-      , properties =
-            [ "When using Shotguns"
-            , "gain temporary health for each pellet that hits."
-            ]
-      , kind = "Brawn"
-      , effects = []
-      }
-    , { title = "Canned Goods"
-      , properties =
-            [ "+40 health"
-            , "-30% stamina"
-            ]
-      , kind = "Brawn"
-      , effects = []
-      }
-    , { title = "Chemical Courage"
-      , properties =
-            [ "Pain meds grant +25% damage for 60 seconds"
-            ]
-      , kind = "Brawn"
-      , effects = []
-      }
-    , { title = "Confident Killer"
-      , properties =
-            [ "+1% damage (up to 15%) every time you kill a mutation until the end of the level"
-            ]
-      , kind = "Brawn"
-      , effects = []
-      }
-    , { title = "Demolitions Expert"
-      , properties =
-            [ "+50% accessory damage"
-            , "-15% ammo capacity"
-            ]
-      , kind = "Brawn"
-      , effects = []
-      }
-    , { title = "Durable"
-      , properties =
-            [ "+15% trauma resistance"
-            , "+5 health"
-            ]
-      , kind = "Brawn"
       , effects = []
-      }
-    , { title = "Face Your Fears"
+      }   
+    , { id = 109
+      , title = "MIRACULOUS RECOVERY"
+      , kind = "DEFENSE"
+      , filename = "5_0_2.jpg"
       , properties =
-            [ "+3 temporary health when you kill a Ridden within two metres"
+            [ "When you use a Medical"
+            , "Accessory, it has a 25% chance to"
+            , "have 100% increased effect."
             ]
-      , kind = "Brawn"
       , effects = []
-      }
-    , { title = "Fresh Bandage"
+      }   
+    , { id = 110
+      , title = "SCREWDRIVER"
+      , kind = "UTILITY"
+      , filename = "5_0_3.jpg"
       , properties =
-            [ "heal 10 trauma damage at the start of each level"
+            [ "+ 50% Use Speed"
+            , "+ 10% Stamina"
             ]
-      , kind = "Brawn"
       , effects = []
-      }
-    , { title = "Grenade Training"
+      }   
+    , { id = 111
+      , title = "MULTITOOL"
+      , kind = "UTILITY"
+      , filename = "5_0_4.jpg"
       , properties =
-            [ "+25% accessory damage"
+            [ "+ 75% Use Speed"
+            , "5% Damage Resistance"
             ]
-      , kind = "Brawn"
       , effects = []
-      }
-    , { title = "Health"
+      }   
+    , { id = 112
+      , title = "HEADBAND MAGNIFIER"
+      , kind = "UTILITY"
+      , filename = "5_1_0.jpg"
       , properties =
-            [ "+5 health"
+            [ "+ 125% Use Speed"
+            , "When you take damage, you have a"
+            , "chance to be blinded for"
+            , "1 second."
             ]
-      , kind = "Brawn"
       , effects = []
-      }
-    , { title = "Heavy Attack"
+      }   
+    , { id = 113
+      , title = "UTILITY SCAVENGER"
+      , kind = "UTILITY"
+      , filename = "5_1_1.jpg"
       , properties =
-            [ "Hold R2 with Melee weapons to burst forward"
-            , "charge attacks deal 100% increased damage"
+            [ "SHOCH"
+            , "You can sense nearby Quick"
+            , "Accessories."
+            , "More Quick Accessories spawn."
             ]
-      , kind = "Brawn"
       , effects = []
-      }
-    , { title = "Heavy Hitter"
+      }   
+    , { id = 114
+      , title = "STIMULANTS"
+      , kind = "MOBILITY"
+      , filename = "5_1_2.jpg"
       , properties =
-            [ "Melee hits against weakspots deal +20% additional atumble damage"
+            [ "Pain Meds you apply also grant"
+            , "+ 10% Move Speed, + 10% Reload"
+            , "Speed, and + 10% Weapon Swap"
+            , "Speed for 30 seconds."
             ]
-      , kind = "Brawn"
       , effects = []
-      }
-    , { title = "Hydration Pack"
+      }   
+    , { id = 115
+      , title = "ON YOUR MARK.."
+      , kind = "MOBILITY"
+      , filename = "5_1_3.jpg"
       , properties =
-            [ "+25% health"
-            , "-15% ammo capacity"
+            [ "When you exit a starting saferoom"
+            , "your team gains + 15% Move"
+            , "Speed for 30 seconds."
             ]
-      , kind = "Brawn"
       , effects = []
-      }
-    , { title = "Ignore The Pain"
+      }   
+    , { id = 116
+      , title = "KILLER'S INSTINCT"
+      , kind = "OFFENSE"
+      , filename = "5_1_4.jpg"
       , properties =
-            [ "+20% melee damage against Mutations"
-            , "when you deal melee damage to a mutation gain 1 temporary health and recover 3 stamina"
+            [ "+ 30% Weakspot Damage"
+            , "DISABLES: Aim Down Sights"
             ]
-      , kind = "Brawn"
       , effects = []
-      }
-    , { title = "Improvised Explosives"
+      }   
+    , { id = 117
+      , title = "POWER SWAP"
+      , kind = "OFFENSE"
+      , filename = "6_0_0.jpg"
       , properties =
-            [ "+75% accessory damage"
-            , "-25% swap speed"
+            [ "Changing weapons within 0.75"
+            , "seconds of reaching low ammo"
+            , "grants + 20% Damage for"
+            , "5 seconds."
             ]
-      , kind = "Brawn"
       , effects = []
-      }
-    , { title = "Line ‘Em Up"
+      }   
+    , { id = 118
+      , title = "STOCK POUCH"
+      , kind = "OFFENSE"
+      , filename = "6_0_1.jpg"
       , properties =
-            [ "+100% bullet penetration with assault rifles"
+            [ "+ 30% Sniper Ammo Capacity"
+            , "+ 10% Damage with Sniper Rifles"
             ]
-      , kind = "Brawn"
       , effects = []
-      }
-    , { title = "Mean Drunk"
+      }   
+    , { id = 119
+      , title = "MAG CARRIER"
+      , kind = "OFFENSE"
+      , filename = "6_0_2.jpg"
       , properties =
-            [ "+75% melee damage"
-            , "your melee attacks cause cleave through enemies dealing damage in a large area"
-            , "disables sprint"
+            [ "+ 30% Pistol/SMG Ammo Capacity"
+            , "+ 10% Damage with Pistols and"
+            , "SMGS"
             ]
-      , kind = "Brawn"
       , effects = []
-      }
-    , { title = "Numb"
+      }   
+    , { id = 120
+      , title = "MAD DASH"
+      , kind = "MOBILITY"
+      , filename = "6_0_3.jpg"
       , properties =
-            [ "+15% damage resistance while you have temporary health"
+            [ "+ 20% Sprint Speed"
+            , "30% Sprint Stamina Efficiency"
             ]
-      , kind = "Brawn"
       , effects = []
-      }
-    , { title = "Offensive Scavenger"
+      }   
+    , { id = 121
+      , title = "АММО РOUСH"
+      , kind = "OFFENSE"
+      , filename = "6_0_4.jpg"
       , properties =
-            [ "You can sense nearby offensive accessories"
-            , "more offensive accessories spawn"
+            [ "+ 25% Ammo Сарacity"
             ]
-      , kind = "Brawn"
       , effects = []
-      }
-    , { title = "Overwatch"
+      }   
+    , { id = 122
+      , title = "AMMO BELT"
+      , kind = "OFFENSE"
+      , filename = "6_1_0.jpg"
       , properties =
-            [ "Kills at more than 15 metres grants five temporary health to nearby allies within 10 meters of the target"
+            [ "+ 50% Ammo Capacity"
+            , "20% Stamina Efficiency"
             ]
-      , kind = "Brawn"
       , effects = []
-      }
-    , { title = "Pyro"
+      }   
+    , { id = 123
+      , title = "AMMO MULE"
+      , kind = "OFFENSE"
+      , filename = "6_1_1.jpg"
       , properties =
-            [ "+100% fire damage"
-            , "kills with fire grant you 3 temporary health"
-            , "you can sense flammable objects nearby"
+            [ "Funt"
+            , "+ 75% Ammo Capacity"
+            , "DISABLES: Support Accessories"
             ]
-      , kind = "Brawn"
       , effects = []
-      }
-    , { title = "Scar Tissue"
+      }   
+    , { id = 124
+      , title = "FRONT SIGHT FOCUS"
+      , kind = "OFFENSE"
+      , filename = "6_1_2.jpg"
       , properties =
-            [ "Reduces the damage taken by all Ridden by one"
+            [ "+ 20% Accuracy"
             ]
-      , kind = "Brawn"
       , effects = []
-      }
-    , { title = "Second Chance"
+      }   
+    , { id = 125
+      , title = "OPTICS ENTHUSIAST"
+      , kind = "OFFENSE"
+      , filename = "6_1_3.jpg"
       , properties =
-            [ "+1 extra life"
-            , "+5 health"
+            [ "+ 30% Accuracy"
+            , "20% Stamina Efficiency"
             ]
-      , kind = "Brawn"
       , effects = []
-      }
-    , { title = "Spiky Bits"
+      }   
+    , { id = 126
+      , title = "QUICK KILL"
+      , kind = "OFFENSE"
+      , filename = "6_1_4.jpg"
       , properties =
-            [ "+25% melee damage"
-            , "+10% damage resistance while using a melee weapon"
-            , "-15% ammo capacity"
+            [ "+ 50% Accuracy"
+            , "DISABLES: Aim Down Sights"
             ]
-      , kind = "Brawn"
       , effects = []
-      }
-    , { title = "Sunder"
+      }   
+    , { id = 127
+      , title = "MOTORCYCLE JACKET"
+      , kind = "DEFENSE"
+      , filename = "7_0_0.jpg"
       , properties =
-            [ "Melee hits cause the target to take 20% increased damage for 5 seconds"
+            [ "+ 5% Damage Resistance"
+            , "+ 5 Health"
             ]
-      , kind = "Brawn"
       , effects = []
-      }
-    , { title = "True Grit"
+      }   
+    , { id = 128
+      , title = "PADDED SUIT"
+      , kind = "DEFENSE"
+      , filename = "7_0_1.jpg"
       , properties =
-            [ "+8 health over five seconds when hit for 15 or more damage"
+            [ "+ 10% Damage Resistance"
+            , "+ 5 Health"
+            , "20% Stamina Efficiency"
             ]
-      , kind = "Brawn"
       , effects = []
-      }
-    , { title = "Two is One and One is None"
+      }   
+    , { id = 129
+      , title = "MOTORCYCLE HELMET"
+      , kind = "DEFENSE"
+      , filename = "7_0_2.jpg"
       , properties =
-            [ "Grants the ability to equip a second primary"
-            , "-25% weapon swap speed"
+            [ "+ 15% Damage Resistance"
+            , "+ 10 Health"
+            , "DISABLES: Aim Down Sights"
             ]
-      , kind = "Brawn"
       , effects = []
-      }
-    , { title = "Vitamins"
+      }   
+    , { id = 130
+      , title = "COMBAT TRAINING"
+      , kind = "OFFENSE"
+      , filename = "7_0_3.jpg"
       , properties =
-            [ "+15 health"
+            [ "+ 5% Bullet Damage"
+            , "+ 50% Bullet Penetration"
             ]
-      , kind = "Brawn"
       , effects = []
-      }
-    , { title = "Well Fed"
+      }   
+    , { id = 131
+      , title = "LARGE CALIBER ROUNDS"
+      , kind = "OFFENSE"
+      , filename = "7_0_4.jpg"
       , properties =
-            [ "-20% stamina regen"
-            , "Team Effect: team health +10"
+            [ "+ 7.5% Bullet Damage"
+            , "+ 100% Bullet Penetration"
+            , "20% Stamina Efficiency"
             ]
-      , kind = "Brawn"
       , effects = []
-      }
-    , { title = "Wooden Armor"
+      }   
+    , { id = 132
+      , title = "SILVER BULLETS"
+      , kind = "OFFENSE"
+      , filename = "7_1_0.jpg"
       , properties =
-            [ "+40% trauma resistance"
-            , "-100%fire resistance"
-            , "-100% acid resistance"
-            , "-100% explosion resistance"
+            [ "CIN"
+            , "+ 10% Bullet Damage"
+            , "+ 150% Bullet Penetration"
+            , "When you kill a Mutation, you lose"
+            , "5 Copper."
             ]
-      , kind = "Brawn"
       , effects = []
-      }
-    , { title = "Card name"
+      }   
+    , { id = 133
+      , title = "ANTIBIOTIC OINTMENT"
+      , kind = "DEFENSE"
+      , filename = "7_1_1.jpg"
       , properties =
-            [ "Description"
+            [ "NET Y OZ 0"
+            , "+ 20% Healing Efficiency"
             ]
-      , kind = "Fortune"
       , effects = []
-      }
-    , { title = "Admin Reload"
+      }   
+    , { id = 134
+      , title = "EMT BAG"
+      , kind = "DEFENSE"
+      , filename = "7_1_2.jpg"
       , properties =
-            [ "When you stow your weapon"
-            , "it reloads"
-            , "-15% ammo capacity"
+            [ "+ 40% Healing Efficiency"
+            , "20% Stamina Efficiency"
             ]
-      , kind = "Fortune"
       , effects = []
-      }
-    , { title = "Ammo Stash"
+      }   
+    , { id = 135
+      , title = "FIELD SURGEON"
+      , kind = "DEFENSE"
+      , filename = "7_1_3.jpg"
       , properties =
-            [ "Secondary weapons have unlimited ammo"
-            , "your secondary weapon reload is 20% slower"
+            [ "+ 60% Healing Efficiency"
+            , "50% Use Speed"
             ]
-      , kind = "Fortune"
       , effects = []
-      }
-    , { title = "Bounty Hunter"
+      }   
+    , { id = 136
+      , title = "ENERGY BAR"
+      , kind = "MOBILITY"
+      , filename = "7_1_4.jpg"
       , properties =
-            [ "When you kill a Mutation"
-            , "gain 10 copper (up to 300 per level)"
+            [ "EN RG"
+            , "+ 20% Stamina Regeneration"
+            , "+ 5 Health"
             ]
-      , kind = "Fortune"
       , effects = []
-      }
-    , { title = "Box O’ Bags"
+      }   
+    , { id = 137
+      , title = "COLD BREW COFFEE"
+      , kind = "MOBILITY"
+      , filename = "8_0_0.jpg"
       , properties =
-            [ "-10% health"
-            , "Team Effect: +1 team support inventory"
+            [ "+ 40% Stamina Regeneration"
+            , "10% Stamina Efficiency"
             ]
-      , kind = "Fortune"
       , effects = []
-      }
-    , { title = "Compound Interest"
+      }   
+    , { id = 138
+      , title = "NATURAL SPRINTER"
+      , kind = "MOBILITY"
+      , filename = "8_0_1.jpg"
       , properties =
-            [ "Gain 10% of your total copper in each saferoom"
+            [ "+ 100% Stamina Regeneration"
+            , "50% Maximum Stamina"
             ]
-      , kind = "Fortune"
       , effects = []
-      }
-    , { title = "Copper Scavenger"
+      }   
+    , { id = 139
+      , title = "INSPIRING SACRIFICE"
+      , kind = "DEFENSE"
+      , filename = "8_0_2.jpg"
       , properties =
-            [ "You can sense nearby Copper"
-            , "more Copper piles spawn"
+            [ "TEAM EFFECTS"
+            , "When you or a teammate becomes"
+            , "incapacitated, all teammates heal"
+            , "for 20 health over 15 seconds."
             ]
-      , kind = "Fortune"
       , effects = []
-      }
-    , { title = "Double Grenade Pouch"
+      }   
+    , { id = 140
+      , title = "CHARITABLE SOUL"
+      , kind = "DEFENSE"
+      , filename = "8_0_3.jpg"
       , properties =
-            [ "+2 offensive inventory"
-            , "-10% damage dealt"
+            [ "Healing a teammate also applies"
+            , "50% of the effect to you."
             ]
-      , kind = "Fortune"
       , effects = []
-      }
-    , { title = "Fanny Pack"
+      }   
+    , { id = 141
+      , title = "HUNKER DOWN"
+      , kind = "DEFENSE"
+      , filename = "8_0_4.jpg"
       , properties =
-            [ "+1 support inventory"
+            [ "While crouching, gain 10%"
+            , "Damage Resistance and 40%"
+            , "Асcuracy."
             ]
-      , kind = "Fortune"
       , effects = []
-      }
-    , { title = "Fortune"
+      }   
+    , { id = 142
+      , title = "AVENGE THE FALLEN"
+      , kind = "OFFENSE"
+      , filename = "8_1_0.jpg"
       , properties =
-            [ "Gain 25 to 50 Copper at the start of each level"
+            [ "TEAM EFFECTS"
+            , "When you or a teammate becomes"
+            , "incapacitated, all teammates gain"
+            , "30% Damage, 20% Reload Speed,"
+            , "and Unlimited Ammo for"
+            , "10 seconds."
             ]
-      , kind = "Fortune"
       , effects = []
-      }
-    , { title = "Grenade Pouch"
+      }   
+    , { id = 143
+      , title = "VANGUARD"
+      , kind = "DEFENSE"
+      , filename = "8_1_1.jpg"
       , properties =
-            [ "+1 offensive inventory"
+            [ "Melee kills grant 1 Temporary"
+            , "Health to you and nearby"
+            , "teammates."
             ]
-      , kind = "Fortune"
       , effects = []
-      }
-    , { title = "Hazard Pay"
+      }   
+    , { id = 144
+      , title = "IN THE ZONE"
+      , kind = "OFFENSE"
+      , filename = "8_1_2.jpg"
       , properties =
-            [ "Gain 250% bonus copper at the start of each level"
+            [ "Precision Kills grant 5% Reload"
+            , "Speed for 5 seconds (stacking up"
+            , "to 10 times)."
             ]
-      , kind = "Fortune"
       , effects = []
-      }
-    , { title = "Highwayman"
+      }   
+    , { id = 145
+      , title = "TRIGGER CONTROL"
+      , kind = "OFFENSE"
+      , filename = "8_1_3.jpg"
       , properties =
-            [ "Pistol kills have a 2% chance to spawn ammo"
+            [ "Ki"
+            , "+ 25% Accuracy with Assault"
+            , "Rifles and Sniper Rifles."
             ]
-      , kind = "Fortune"
       , effects = []
-      }
-    , { title = "Life Insurance"
+      }   
+    , { id = 146
+      , title = "NEEDS OF THE MANY"
+      , kind = "DEFENSE"
+      , filename = "8_1_4.jpg"
       , properties =
-            [ "+2 extra life"
-            , "lose 50 copper at the start of each level"
+            [ "4 CLU"
+            , "20% Health"
+            , "TEAM EFFECTS"
+            , "+ 1 Team Extra Life"
             ]
-      , kind = "Fortune"
       , effects = []
-      }
-    , { title = "Lucky Pennies"
+      }   
+    , { id = 147
+      , title = "COMBAT KNIFE"
+      , kind = "OFFENSE"
+      , filename = "9_0_0.jpg"
       , properties =
-            [ "whenever you or your team loots copper you have a 35% chance to find 35% additional copper"
+            [ "Turns your Bash into a Knife that"
+            , "counts as a Melee weapon."
             ]
-      , kind = "Fortune"
       , effects = []
-      }
-    , { title = "Money Grubbers"
+      }   
+    , { id = 148
+      , title = "MEATGRINDER"
+      , kind = "OFFÉNSE"
+      , filename = "9_0_1.jpg"
       , properties =
-            [ "Each time your team loots copper you gain 5 additional copper"
-            , "stacking up to 100 additional copper."
+            [ "Gain 30% Move Speed and"
+            , "Accuracy while crouched and"
+            , "using an LMG."
             ]
-      , kind = "Fortune"
       , effects = []
-      }
-    , { title = "Mugger"
+      }   
+    , { id = 149
+      , title = "SCATTERGUN SKILLS"
+      , kind = "OFFENSE"
+      , filename = "9_0_2.jpg"
       , properties =
-            [ "Melee kills have a 2% chance to spawn ammo"
+            [ "+ 40% Reload Speed with"
+            , "Shotguns."
             ]
-      , kind = "Fortune"
       , effects = []
-      }
-    , { title = "Run and Gun"
+      }   
+    , { id = 150
+      , title = "CONTROLLED MOVEMENT"
+      , kind = "MOBILITY"
+      , filename = "9_0_3.jpg"
       , properties =
-            [ "You can shoot while sprinting"
+            [ "+ 40% Move Speed while aiming"
+            , "down sights with Sniper Rifles."
             ]
-      , kind = "Fortune"
       , effects = []
-      }
-    , { title = "Saferoom Recovery"
+      }   
+    , { id = 151
+      , title = "AMMO FOR ALL"
+      , kind = "OFFENSE"
+      , filename = "9_0_4.jpg"
       , properties =
-            [ "Your team heals 5 trauma damage and refills 10% ammo at the start of each level"
+            [ "TEAM EFFECTS"
+            , "+ 10% Team Ammo Capacity"
             ]
-      , kind = "Fortune"
       , effects = []
-      }
-    , { title = "Share The Wealth"
+      }   
+    , { id = 152
+      , title = "DOWN IN FRONT!"
+      , kind = "DEFENSE"
+      , filename = "9_1_0.jpg"
       , properties =
-            [ "Each teammate gains 100 bonus copper at the start of each level"
+            [ "While crouching you neither take"
+            , "nor deal Friendly Fire damage."
+            , "+ 10 Health"
             ]
-      , kind = "Fortune"
       , effects = []
-      }
-    , { title = "Shell Carrier"
+      }   
+    , { id = 153
+      , title = "POULTICE"
+      , kind = "DEFENSE"
+      , filename = "9_1_1.jpg"
       , properties =
-            [ "+30% shotgun ammo capacity"
-            , "+10% damage with shotguns"
+            [ "When you use a Medical"
+            , "Accessory, the target heals for an"
+            , "additional 20 Health over"
+            , "30 seconds."
             ]
-      , kind = "Fortune"
       , effects = []
-      }
-    , { title = "Shoulder Bag"
+      }   
+    , { id = 154
+      , title = "GROUP THERAPY"
+      , kind = "DEFENSE"
+      , filename = "9_1_2.jpg"
       , properties =
-            [ "+2 support inventory"
-            , "-10% damage dealt"
+            [ "When you use a Medical"
+            , "Accessory, all teammates heal for"
+            , "5 Health."
             ]
-      , kind = "Fortune"
       , effects = []
-      }
-    , { title = "Surplus Pouches"
+      }   
+    , { id = 155
+      , title = "MEDICAL PROFESSIONAL"
+      , kind = "DEFENSE"
+      , filename = "9_1_3.jpg"
       , properties =
-            [ "-10% health"
-            , "Team Effect: +1 team offensive inventory"
+            [ "First Aids and Defibrillators also"
+            , "recover 15 Trauma Damage and"
+            , "1 Extra Life."
             ]
-      , kind = "Fortune"
       , effects = []
-      }
-    , { title = "Wounded Animal"
+      }   
+    , { id = 156
+      , title = "AMMO SCAVENGER"
+      , kind = "UTILITY"
+      , filename = "9_1_4.jpg"
       , properties =
-            [ "Kills while at critical health recover 1 health"
+            [ "CARTK"
+            , "Belea"
+            , "Bogla"
+            , "7.42MM X 5IMM"
+            , "You can sense nearby Ammo."
+            , "More Ammo spawns."
             ]
-      , kind = "Fortune"
       , effects = []
-      }
+      }   
     ]
-
 
 cards : List Card
 cards =
     rawCards
-        |> List.indexedMap
-            (\index raw ->
-                { id = index
+        |> List.map
+            (\raw ->
+                { id = raw.id 
                 , title = raw.title
                 , properties = raw.properties |> List.map Property
                 , kind =
                     case raw.kind |> String.toLower of
-                        "reflex" ->
-                            Reflex
+                        "utility" ->
+                            Utility
 
-                        "discipline" ->
-                            Discipline
+                        "offense" ->
+                            Offense
 
-                        "brawn" ->
-                            Brawn
+                        "defense" ->
+                            Defense
 
-                        "fortune" ->
-                            Fortune
+                        "mobility" ->
+                            Mobility
 
                         _ ->
                             Unknown
                 , effects = raw.effects
+                , filename = raw.filename
                 }
             )

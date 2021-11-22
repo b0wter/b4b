@@ -1,5 +1,8 @@
 {
   "devDependencies": {
     "elm": "^0.19.1-5"
+  },
+  "dependencies": {
+    "@google-cloud/vision": "^2.4.0"
   }
 }
