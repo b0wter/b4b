@@ -173,6 +173,7 @@ header model =
     Navbar.config NavbarMsg
         |> Navbar.withAnimation
         |> Navbar.brand [ href "#" ] [ text "Deck Builder" ]
+        |> Navbar.dark
         |> Navbar.items
             [ Navbar.itemLink [ href "#", onClick ResetCards ] [ text "Reset" ]
             , Navbar.itemLink [ href "#" ] [ text "Share" ]
