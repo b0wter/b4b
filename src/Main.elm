@@ -348,7 +348,7 @@ summaryCardView : Card -> Grid.Column Msg
 summaryCardView card =
     let
         background =
-            card |> cardBackgroundColor
+            card |> cardOutlineColor
     in
     Grid.col [ Col.xs12 ]
         [ Card.config [ background, Card.attrs [ Spacing.m2 ] ]
