@@ -6634,7 +6634,7 @@ var $author$project$Main$init = function (flags) {
 	var navbarState = _v0.a;
 	var navbarCmd = _v0.b;
 	return _Utils_Tuple2(
-		{cardPool: $author$project$Cards$cards, navbarState: navbarState, selectedCards: _List_Nil},
+		{cardPool: $author$project$Cards$cards, navbarState: navbarState, selectedCards: _List_Nil, viewCardImages: true, viewCardText: true},
 		navbarCmd);
 };
 var $rundis$elm_bootstrap$Bootstrap$Navbar$AnimatingDown = {$: 'AnimatingDown'};
@@ -9431,6 +9431,35 @@ var $rundis$elm_bootstrap$Bootstrap$Navbar$config = function (toMsg) {
 			withAnimation: false
 		});
 };
+var $rundis$elm_bootstrap$Bootstrap$Navbar$Dark = {$: 'Dark'};
+var $rundis$elm_bootstrap$Bootstrap$Navbar$updateOptions = F2(
+	function (mapper, _v0) {
+		var conf = _v0.a;
+		return $rundis$elm_bootstrap$Bootstrap$Navbar$Config(
+			_Utils_update(
+				conf,
+				{
+					options: mapper(conf.options)
+				}));
+	});
+var $rundis$elm_bootstrap$Bootstrap$Navbar$scheme = F3(
+	function (modifier, bgColor, conf) {
+		return A2(
+			$rundis$elm_bootstrap$Bootstrap$Navbar$updateOptions,
+			function (opt) {
+				return _Utils_update(
+					opt,
+					{
+						scheme: $elm$core$Maybe$Just(
+							{bgColor: bgColor, modifier: modifier})
+					});
+			},
+			conf);
+	});
+var $rundis$elm_bootstrap$Bootstrap$Navbar$dark = A2(
+	$rundis$elm_bootstrap$Bootstrap$Navbar$scheme,
+	$rundis$elm_bootstrap$Bootstrap$Navbar$Dark,
+	$rundis$elm_bootstrap$Bootstrap$Navbar$Roled($rundis$elm_bootstrap$Bootstrap$Internal$Role$Dark));
 var $elm$html$Html$Attributes$href = function (url) {
 	return A2(
 		$elm$html$Html$Attributes$stringProperty,
@@ -10239,18 +10268,19 @@ var $author$project$Main$header = function (model) {
 							$elm$html$Html$text('Share')
 						]))
 				]),
-			A3(
-				$rundis$elm_bootstrap$Bootstrap$Navbar$brand,
-				_List_fromArray(
-					[
-						$elm$html$Html$Attributes$href('#')
-					]),
-				_List_fromArray(
-					[
-						$elm$html$Html$text('Deck Builder')
-					]),
-				$rundis$elm_bootstrap$Bootstrap$Navbar$withAnimation(
-					$rundis$elm_bootstrap$Bootstrap$Navbar$config($author$project$Main$NavbarMsg)))));
+			$rundis$elm_bootstrap$Bootstrap$Navbar$dark(
+				A3(
+					$rundis$elm_bootstrap$Bootstrap$Navbar$brand,
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$href('#')
+						]),
+					_List_fromArray(
+						[
+							$elm$html$Html$text('Deck Builder')
+						]),
+					$rundis$elm_bootstrap$Bootstrap$Navbar$withAnimation(
+						$rundis$elm_bootstrap$Bootstrap$Navbar$config($author$project$Main$NavbarMsg))))));
 };
 var $rundis$elm_bootstrap$Bootstrap$Utilities$Border$light = A2($rundis$elm_bootstrap$Bootstrap$Internal$Role$toClass, 'border', $rundis$elm_bootstrap$Bootstrap$Internal$Role$Light);
 var $author$project$Main$DeselectCard = function (a) {
@@ -10269,34 +10299,6 @@ var $rundis$elm_bootstrap$Bootstrap$Card$Block$attrs = function (attrs_) {
 	return $rundis$elm_bootstrap$Bootstrap$Card$Internal$BlockAttrs(attrs_);
 };
 var $rundis$elm_bootstrap$Bootstrap$Utilities$Flex$block = $elm$html$Html$Attributes$class('d-flex');
-var $rundis$elm_bootstrap$Bootstrap$Card$Internal$Roled = function (a) {
-	return {$: 'Roled', a: a};
-};
-var $rundis$elm_bootstrap$Bootstrap$Card$danger = $rundis$elm_bootstrap$Bootstrap$Card$Internal$Coloring(
-	$rundis$elm_bootstrap$Bootstrap$Card$Internal$Roled($rundis$elm_bootstrap$Bootstrap$Internal$Role$Danger));
-var $rundis$elm_bootstrap$Bootstrap$Card$dark = $rundis$elm_bootstrap$Bootstrap$Card$Internal$Coloring(
-	$rundis$elm_bootstrap$Bootstrap$Card$Internal$Roled($rundis$elm_bootstrap$Bootstrap$Internal$Role$Dark));
-var $rundis$elm_bootstrap$Bootstrap$Card$primary = $rundis$elm_bootstrap$Bootstrap$Card$Internal$Coloring(
-	$rundis$elm_bootstrap$Bootstrap$Card$Internal$Roled($rundis$elm_bootstrap$Bootstrap$Internal$Role$Primary));
-var $rundis$elm_bootstrap$Bootstrap$Card$success = $rundis$elm_bootstrap$Bootstrap$Card$Internal$Coloring(
-	$rundis$elm_bootstrap$Bootstrap$Card$Internal$Roled($rundis$elm_bootstrap$Bootstrap$Internal$Role$Success));
-var $rundis$elm_bootstrap$Bootstrap$Card$warning = $rundis$elm_bootstrap$Bootstrap$Card$Internal$Coloring(
-	$rundis$elm_bootstrap$Bootstrap$Card$Internal$Roled($rundis$elm_bootstrap$Bootstrap$Internal$Role$Warning));
-var $author$project$Main$cardBackgroundColor = function (card) {
-	var _v0 = card.kind;
-	switch (_v0.$) {
-		case 'Unknown':
-			return $rundis$elm_bootstrap$Bootstrap$Card$dark;
-		case 'Mobility':
-			return $rundis$elm_bootstrap$Bootstrap$Card$primary;
-		case 'Utility':
-			return $rundis$elm_bootstrap$Bootstrap$Card$danger;
-		case 'Defense':
-			return $rundis$elm_bootstrap$Bootstrap$Card$success;
-		default:
-			return $rundis$elm_bootstrap$Bootstrap$Card$warning;
-	}
-};
 var $rundis$elm_bootstrap$Bootstrap$Utilities$Flex$justifyBetween = $elm$html$Html$Attributes$class('justify-content-between');
 var $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$pb1 = $elm$html$Html$Attributes$class('pb-1');
 var $author$project$Main$pointerClass = $elm$html$Html$Attributes$class('pointer');
@@ -10318,7 +10320,7 @@ var $rundis$elm_bootstrap$Bootstrap$Card$Block$text = F2(
 var $rundis$elm_bootstrap$Bootstrap$Grid$Internal$Col12 = {$: 'Col12'};
 var $rundis$elm_bootstrap$Bootstrap$Grid$Col$xs12 = A2($rundis$elm_bootstrap$Bootstrap$Grid$Internal$width, $rundis$elm_bootstrap$Bootstrap$General$Internal$XS, $rundis$elm_bootstrap$Bootstrap$Grid$Internal$Col12);
 var $author$project$Main$summaryCardView = function (card) {
-	var background = $author$project$Main$cardBackgroundColor(card);
+	var background = $author$project$Main$cardOutlineColor(card);
 	return A2(
 		$rundis$elm_bootstrap$Bootstrap$Grid$col,
 		_List_fromArray(

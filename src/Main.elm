@@ -44,7 +44,8 @@ type alias Flags =
 
 type alias Model =
     { navbarState : Navbar.State
-
+    , viewCardImages: Bool
+    , viewCardText: Bool
     --------------
     , cardPool : List Card
     , selectedCards : List Card
@@ -57,7 +58,12 @@ init flags =
         ( navbarState, navbarCmd ) =
             Navbar.initialState NavbarMsg
     in
-    ( { cardPool = cards, selectedCards = [], navbarState = navbarState }, navbarCmd )
+    ( { cardPool = cards
+      , viewCardImages = True
+      , viewCardText = True
+      , selectedCards = []
+      , navbarState = navbarState }
+    , navbarCmd )
 
 
 type Msg

@@ -40,6 +40,14 @@ type alias Card =
     }
 
 
+containsWord: String -> Card -> Bool
+containsWord word card =
+    card.properties 
+    |> List.map (\p -> p.description) 
+    |> String.join " "
+    |> String.contains word
+
+
 rawCards : List RawCard
 rawCards =
     [ { id = 1
