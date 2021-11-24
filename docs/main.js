@@ -6634,7 +6634,7 @@ var $author$project$Main$init = function (flags) {
 	var navbarState = _v0.a;
 	var navbarCmd = _v0.b;
 	return _Utils_Tuple2(
-		{cardPool: $author$project$Cards$cards, navbarState: navbarState, selectedCards: _List_Nil, viewCardImages: true, viewCardText: true},
+		{cardPool: $author$project$Cards$cards, filter: $elm$core$Maybe$Nothing, navbarState: navbarState, selectedCards: _List_Nil, viewCardImages: true, viewCardText: true},
 		navbarCmd);
 };
 var $rundis$elm_bootstrap$Bootstrap$Navbar$AnimatingDown = {$: 'AnimatingDown'};
@@ -7725,11 +7725,24 @@ var $author$project$Main$update = F2(
 								model.selectedCards)
 						}),
 					$elm$core$Platform$Cmd$none);
-			default:
+			case 'ResetCards':
 				return _Utils_Tuple2(
 					_Utils_update(
 						model,
 						{cardPool: $author$project$Cards$cards, selectedCards: _List_Nil}),
+					$elm$core$Platform$Cmd$none);
+			default:
+				var value = msg.a;
+				return $elm$core$String$isEmpty(value) ? _Utils_Tuple2(
+					_Utils_update(
+						model,
+						{filter: $elm$core$Maybe$Nothing}),
+					$elm$core$Platform$Cmd$none) : _Utils_Tuple2(
+					_Utils_update(
+						model,
+						{
+							filter: $elm$core$Maybe$Just(value)
+						}),
 					$elm$core$Platform$Cmd$none);
 		}
 	});
@@ -7755,6 +7768,15 @@ var $rundis$elm_bootstrap$Bootstrap$Grid$containerFluid = F2(
 				attributes),
 			children);
 	});
+var $author$project$Main$FilterChanged = function (a) {
+	return {$: 'FilterChanged', a: a};
+};
+var $rundis$elm_bootstrap$Bootstrap$Form$Input$Attrs = function (a) {
+	return {$: 'Attrs', a: a};
+};
+var $rundis$elm_bootstrap$Bootstrap$Form$Input$attrs = function (attrs_) {
+	return $rundis$elm_bootstrap$Bootstrap$Form$Input$Attrs(attrs_);
+};
 var $rundis$elm_bootstrap$Bootstrap$Grid$Internal$ColAttrs = function (a) {
 	return {$: 'ColAttrs', a: a};
 };
@@ -7769,6 +7791,52 @@ var $rundis$elm_bootstrap$Bootstrap$Grid$col = F2(
 		return $rundis$elm_bootstrap$Bootstrap$Grid$Column(
 			{children: children, options: options});
 	});
+var $elm$core$Basics$not = _Basics_not;
+var $elm$core$List$all = F2(
+	function (isOkay, list) {
+		return !A2(
+			$elm$core$List$any,
+			A2($elm$core$Basics$composeL, $elm$core$Basics$not, isOkay),
+			list);
+	});
+var $author$project$Cards$containsWord = F2(
+	function (word, card) {
+		var descriptions = A2(
+			$elm$core$List$map,
+			function (p) {
+				return $elm$core$String$toLower(p.description);
+			},
+			card.properties);
+		var textAndProperties = A2(
+			$elm$core$List$cons,
+			$elm$core$String$toLower(card.title),
+			descriptions);
+		return A2(
+			$elm$core$String$contains,
+			word,
+			A2($elm$core$String$join, ' ', textAndProperties));
+	});
+var $author$project$Cards$containsWords = F2(
+	function (words, card) {
+		var contains = function (w) {
+			return A2($author$project$Cards$containsWord, w, card);
+		};
+		return A2($elm$core$List$all, contains, words);
+	});
+var $author$project$Main$filteredCards = function (model) {
+	var _v0 = model.filter;
+	if (_v0.$ === 'Just') {
+		var f = _v0.a;
+		var filter = $elm$core$String$toLower(f);
+		var parts = A2($elm$core$String$split, ' ', filter);
+		return A2(
+			$elm$core$List$filter,
+			$author$project$Cards$containsWords(parts),
+			model.cardPool);
+	} else {
+		return model.cardPool;
+	}
+};
 var $author$project$Main$SelectCard = function (a) {
 	return {$: 'SelectCard', a: a};
 };
@@ -8571,6 +8639,41 @@ var $author$project$Main$fullCardView = function (card) {
 									]))))))
 			]));
 };
+var $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$mt2 = $elm$html$Html$Attributes$class('mt-2');
+var $elm$html$Html$Events$alwaysStop = function (x) {
+	return _Utils_Tuple2(x, true);
+};
+var $elm$virtual_dom$VirtualDom$MayStopPropagation = function (a) {
+	return {$: 'MayStopPropagation', a: a};
+};
+var $elm$html$Html$Events$stopPropagationOn = F2(
+	function (event, decoder) {
+		return A2(
+			$elm$virtual_dom$VirtualDom$on,
+			event,
+			$elm$virtual_dom$VirtualDom$MayStopPropagation(decoder));
+	});
+var $elm$json$Json$Decode$at = F2(
+	function (fields, decoder) {
+		return A3($elm$core$List$foldr, $elm$json$Json$Decode$field, decoder, fields);
+	});
+var $elm$json$Json$Decode$string = _Json_decodeString;
+var $elm$html$Html$Events$targetValue = A2(
+	$elm$json$Json$Decode$at,
+	_List_fromArray(
+		['target', 'value']),
+	$elm$json$Json$Decode$string);
+var $elm$html$Html$Events$onInput = function (tagger) {
+	return A2(
+		$elm$html$Html$Events$stopPropagationOn,
+		'input',
+		A2(
+			$elm$json$Json$Decode$map,
+			$elm$html$Html$Events$alwaysStop,
+			A2($elm$json$Json$Decode$map, tagger, $elm$html$Html$Events$targetValue)));
+};
+var $elm$html$Html$Attributes$placeholder = $elm$html$Html$Attributes$stringProperty('placeholder');
+var $rundis$elm_bootstrap$Bootstrap$Utilities$Border$rounded = $elm$html$Html$Attributes$class('rounded');
 var $rundis$elm_bootstrap$Bootstrap$Grid$Internal$Col = {$: 'Col'};
 var $rundis$elm_bootstrap$Bootstrap$Grid$Internal$Width = F2(
 	function (screenSize, columnCount) {
@@ -9338,7 +9441,195 @@ var $rundis$elm_bootstrap$Bootstrap$Grid$row = F2(
 			$rundis$elm_bootstrap$Bootstrap$Grid$Internal$rowAttributes(options),
 			A2($elm$core$List$map, $rundis$elm_bootstrap$Bootstrap$Grid$renderCol, cols));
 	});
-var $rundis$elm_bootstrap$Bootstrap$Grid$Internal$Col8 = {$: 'Col8'};
+var $rundis$elm_bootstrap$Bootstrap$Form$Input$Text = {$: 'Text'};
+var $rundis$elm_bootstrap$Bootstrap$Form$Input$Input = function (a) {
+	return {$: 'Input', a: a};
+};
+var $rundis$elm_bootstrap$Bootstrap$Form$Input$Type = function (a) {
+	return {$: 'Type', a: a};
+};
+var $rundis$elm_bootstrap$Bootstrap$Form$Input$create = F2(
+	function (tipe, options) {
+		return $rundis$elm_bootstrap$Bootstrap$Form$Input$Input(
+			{
+				options: A2(
+					$elm$core$List$cons,
+					$rundis$elm_bootstrap$Bootstrap$Form$Input$Type(tipe),
+					options)
+			});
+	});
+var $elm$html$Html$input = _VirtualDom_node('input');
+var $rundis$elm_bootstrap$Bootstrap$Form$Input$applyModifier = F2(
+	function (modifier, options) {
+		switch (modifier.$) {
+			case 'Size':
+				var size_ = modifier.a;
+				return _Utils_update(
+					options,
+					{
+						size: $elm$core$Maybe$Just(size_)
+					});
+			case 'Id':
+				var id_ = modifier.a;
+				return _Utils_update(
+					options,
+					{
+						id: $elm$core$Maybe$Just(id_)
+					});
+			case 'Type':
+				var tipe = modifier.a;
+				return _Utils_update(
+					options,
+					{tipe: tipe});
+			case 'Disabled':
+				var val = modifier.a;
+				return _Utils_update(
+					options,
+					{disabled: val});
+			case 'Value':
+				var value_ = modifier.a;
+				return _Utils_update(
+					options,
+					{
+						value: $elm$core$Maybe$Just(value_)
+					});
+			case 'Placeholder':
+				var value_ = modifier.a;
+				return _Utils_update(
+					options,
+					{
+						placeholder: $elm$core$Maybe$Just(value_)
+					});
+			case 'OnInput':
+				var onInput_ = modifier.a;
+				return _Utils_update(
+					options,
+					{
+						onInput: $elm$core$Maybe$Just(onInput_)
+					});
+			case 'Validation':
+				var validation_ = modifier.a;
+				return _Utils_update(
+					options,
+					{
+						validation: $elm$core$Maybe$Just(validation_)
+					});
+			case 'Readonly':
+				var val = modifier.a;
+				return _Utils_update(
+					options,
+					{readonly: val});
+			case 'PlainText':
+				var val = modifier.a;
+				return _Utils_update(
+					options,
+					{plainText: val});
+			default:
+				var attrs_ = modifier.a;
+				return _Utils_update(
+					options,
+					{
+						attributes: _Utils_ap(options.attributes, attrs_)
+					});
+		}
+	});
+var $rundis$elm_bootstrap$Bootstrap$Form$Input$defaultOptions = {attributes: _List_Nil, disabled: false, id: $elm$core$Maybe$Nothing, onInput: $elm$core$Maybe$Nothing, placeholder: $elm$core$Maybe$Nothing, plainText: false, readonly: false, size: $elm$core$Maybe$Nothing, tipe: $rundis$elm_bootstrap$Bootstrap$Form$Input$Text, validation: $elm$core$Maybe$Nothing, value: $elm$core$Maybe$Nothing};
+var $elm$html$Html$Attributes$id = $elm$html$Html$Attributes$stringProperty('id');
+var $elm$html$Html$Attributes$readonly = $elm$html$Html$Attributes$boolProperty('readOnly');
+var $rundis$elm_bootstrap$Bootstrap$Form$Input$sizeAttribute = function (size) {
+	return A2(
+		$elm$core$Maybe$map,
+		function (s) {
+			return $elm$html$Html$Attributes$class('form-control-' + s);
+		},
+		$rundis$elm_bootstrap$Bootstrap$General$Internal$screenSizeOption(size));
+};
+var $elm$html$Html$Attributes$type_ = $elm$html$Html$Attributes$stringProperty('type');
+var $rundis$elm_bootstrap$Bootstrap$Form$Input$typeAttribute = function (inputType) {
+	return $elm$html$Html$Attributes$type_(
+		function () {
+			switch (inputType.$) {
+				case 'Text':
+					return 'text';
+				case 'Password':
+					return 'password';
+				case 'DatetimeLocal':
+					return 'datetime-local';
+				case 'Date':
+					return 'date';
+				case 'Month':
+					return 'month';
+				case 'Time':
+					return 'time';
+				case 'Week':
+					return 'week';
+				case 'Number':
+					return 'number';
+				case 'Email':
+					return 'email';
+				case 'Url':
+					return 'url';
+				case 'Search':
+					return 'search';
+				case 'Tel':
+					return 'tel';
+				default:
+					return 'color';
+			}
+		}());
+};
+var $rundis$elm_bootstrap$Bootstrap$Form$FormInternal$validationToString = function (validation) {
+	if (validation.$ === 'Success') {
+		return 'is-valid';
+	} else {
+		return 'is-invalid';
+	}
+};
+var $rundis$elm_bootstrap$Bootstrap$Form$Input$validationAttribute = function (validation) {
+	return $elm$html$Html$Attributes$class(
+		$rundis$elm_bootstrap$Bootstrap$Form$FormInternal$validationToString(validation));
+};
+var $elm$html$Html$Attributes$value = $elm$html$Html$Attributes$stringProperty('value');
+var $rundis$elm_bootstrap$Bootstrap$Form$Input$toAttributes = function (modifiers) {
+	var options = A3($elm$core$List$foldl, $rundis$elm_bootstrap$Bootstrap$Form$Input$applyModifier, $rundis$elm_bootstrap$Bootstrap$Form$Input$defaultOptions, modifiers);
+	return _Utils_ap(
+		_List_fromArray(
+			[
+				$elm$html$Html$Attributes$class(
+				options.plainText ? 'form-control-plaintext' : 'form-control'),
+				$elm$html$Html$Attributes$disabled(options.disabled),
+				$elm$html$Html$Attributes$readonly(options.readonly || options.plainText),
+				$rundis$elm_bootstrap$Bootstrap$Form$Input$typeAttribute(options.tipe)
+			]),
+		_Utils_ap(
+			A2(
+				$elm$core$List$filterMap,
+				$elm$core$Basics$identity,
+				_List_fromArray(
+					[
+						A2($elm$core$Maybe$map, $elm$html$Html$Attributes$id, options.id),
+						A2($elm$core$Maybe$andThen, $rundis$elm_bootstrap$Bootstrap$Form$Input$sizeAttribute, options.size),
+						A2($elm$core$Maybe$map, $elm$html$Html$Attributes$value, options.value),
+						A2($elm$core$Maybe$map, $elm$html$Html$Attributes$placeholder, options.placeholder),
+						A2($elm$core$Maybe$map, $elm$html$Html$Events$onInput, options.onInput),
+						A2($elm$core$Maybe$map, $rundis$elm_bootstrap$Bootstrap$Form$Input$validationAttribute, options.validation)
+					])),
+			options.attributes));
+};
+var $rundis$elm_bootstrap$Bootstrap$Form$Input$view = function (_v0) {
+	var options = _v0.a.options;
+	return A2(
+		$elm$html$Html$input,
+		$rundis$elm_bootstrap$Bootstrap$Form$Input$toAttributes(options),
+		_List_Nil);
+};
+var $rundis$elm_bootstrap$Bootstrap$Form$Input$input = F2(
+	function (tipe, options) {
+		return $rundis$elm_bootstrap$Bootstrap$Form$Input$view(
+			A2($rundis$elm_bootstrap$Bootstrap$Form$Input$create, tipe, options));
+	});
+var $rundis$elm_bootstrap$Bootstrap$Form$Input$text = $rundis$elm_bootstrap$Bootstrap$Form$Input$input($rundis$elm_bootstrap$Bootstrap$Form$Input$Text);
+var $rundis$elm_bootstrap$Bootstrap$Grid$Internal$Col12 = {$: 'Col12'};
 var $rundis$elm_bootstrap$Bootstrap$Grid$Internal$ColWidth = function (a) {
 	return {$: 'ColWidth', a: a};
 };
@@ -9347,6 +9638,8 @@ var $rundis$elm_bootstrap$Bootstrap$Grid$Internal$width = F2(
 		return $rundis$elm_bootstrap$Bootstrap$Grid$Internal$ColWidth(
 			A2($rundis$elm_bootstrap$Bootstrap$Grid$Internal$Width, size, count));
 	});
+var $rundis$elm_bootstrap$Bootstrap$Grid$Col$xs12 = A2($rundis$elm_bootstrap$Bootstrap$Grid$Internal$width, $rundis$elm_bootstrap$Bootstrap$General$Internal$XS, $rundis$elm_bootstrap$Bootstrap$Grid$Internal$Col12);
+var $rundis$elm_bootstrap$Bootstrap$Grid$Internal$Col8 = {$: 'Col8'};
 var $rundis$elm_bootstrap$Bootstrap$Grid$Col$xs8 = A2($rundis$elm_bootstrap$Bootstrap$Grid$Internal$width, $rundis$elm_bootstrap$Bootstrap$General$Internal$XS, $rundis$elm_bootstrap$Bootstrap$Grid$Internal$Col8);
 var $author$project$Main$cardPoolView = function (model) {
 	return A2(
@@ -9365,7 +9658,52 @@ var $author$project$Main$cardPoolView = function (model) {
 				A2(
 				$rundis$elm_bootstrap$Bootstrap$Grid$row,
 				_List_Nil,
-				A2($elm$core$List$map, $author$project$Main$fullCardView, model.cardPool))
+				_List_fromArray(
+					[
+						A2(
+						$rundis$elm_bootstrap$Bootstrap$Grid$col,
+						_List_fromArray(
+							[$rundis$elm_bootstrap$Bootstrap$Grid$Col$xs12]),
+						_List_fromArray(
+							[
+								A2(
+								$elm$html$Html$div,
+								_List_fromArray(
+									[
+										$rundis$elm_bootstrap$Bootstrap$Utilities$Border$rounded,
+										$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$mt2,
+										$elm$html$Html$Attributes$class('d-flex pr-1 pt-1 pb-1 bg-dark shadow ')
+									]),
+								_List_fromArray(
+									[
+										A2(
+										$elm$html$Html$h5,
+										_List_fromArray(
+											[$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$m2]),
+										_List_fromArray(
+											[
+												$elm$html$Html$text('Filter')
+											])),
+										$rundis$elm_bootstrap$Bootstrap$Form$Input$text(
+										_List_fromArray(
+											[
+												$rundis$elm_bootstrap$Bootstrap$Form$Input$attrs(
+												_List_fromArray(
+													[
+														$elm$html$Html$Attributes$placeholder('type here'),
+														$elm$html$Html$Events$onInput($author$project$Main$FilterChanged)
+													]))
+											]))
+									]))
+							]))
+					])),
+				A2(
+				$rundis$elm_bootstrap$Bootstrap$Grid$row,
+				_List_Nil,
+				A2(
+					$elm$core$List$map,
+					$author$project$Main$fullCardView,
+					$author$project$Main$filteredCards(model)))
 			]));
 };
 var $author$project$Main$ResetCards = {$: 'ResetCards'};
@@ -9494,7 +9832,6 @@ var $rundis$elm_bootstrap$Bootstrap$Navbar$maybeBrand = function (brand_) {
 		return _List_Nil;
 	}
 };
-var $elm$core$Basics$not = _Basics_not;
 var $rundis$elm_bootstrap$Bootstrap$Navbar$sizeToComparable = function (size) {
 	switch (size.$) {
 		case 'XS':
@@ -10071,10 +10408,6 @@ var $rundis$elm_bootstrap$Bootstrap$Navbar$renderNav = F3(
 	});
 var $elm$html$Html$span = _VirtualDom_node('span');
 var $elm$json$Json$Decode$andThen = _Json_andThen;
-var $elm$json$Json$Decode$at = F2(
-	function (fields, decoder) {
-		return A3($elm$core$List$foldr, $elm$json$Json$Decode$field, decoder, fields);
-	});
 var $elm$json$Json$Decode$decodeValue = _Json_run;
 var $elm$json$Json$Decode$fail = _Json_fail;
 var $elm$json$Json$Decode$float = _Json_decodeFloat;
@@ -10082,7 +10415,6 @@ var $elm$json$Json$Decode$oneOf = _Json_oneOf;
 var $rundis$elm_bootstrap$Bootstrap$Utilities$DomHelper$parentElement = function (decoder) {
 	return A2($elm$json$Json$Decode$field, 'parentElement', decoder);
 };
-var $elm$json$Json$Decode$string = _Json_decodeString;
 var $rundis$elm_bootstrap$Bootstrap$Utilities$DomHelper$target = function (decoder) {
 	return A2($elm$json$Json$Decode$field, 'target', decoder);
 };
@@ -10169,7 +10501,6 @@ var $rundis$elm_bootstrap$Bootstrap$Navbar$toggleHandler = F2(
 				},
 				$rundis$elm_bootstrap$Bootstrap$Navbar$heightDecoder));
 	});
-var $elm$html$Html$Attributes$type_ = $elm$html$Html$Attributes$stringProperty('type');
 var $rundis$elm_bootstrap$Bootstrap$Navbar$view = F2(
 	function (state, conf) {
 		var configRec = conf.a;
@@ -10282,6 +10613,12 @@ var $author$project$Main$header = function (model) {
 					$rundis$elm_bootstrap$Bootstrap$Navbar$withAnimation(
 						$rundis$elm_bootstrap$Bootstrap$Navbar$config($author$project$Main$NavbarMsg))))));
 };
+var $rundis$elm_bootstrap$Bootstrap$Grid$Internal$RowAttrs = function (a) {
+	return {$: 'RowAttrs', a: a};
+};
+var $rundis$elm_bootstrap$Bootstrap$Grid$Row$attrs = function (attrs_) {
+	return $rundis$elm_bootstrap$Bootstrap$Grid$Internal$RowAttrs(attrs_);
+};
 var $rundis$elm_bootstrap$Bootstrap$Utilities$Border$dark = A2($rundis$elm_bootstrap$Bootstrap$Internal$Role$toClass, 'border', $rundis$elm_bootstrap$Bootstrap$Internal$Role$Dark);
 var $author$project$Main$DeselectCard = function (a) {
 	return {$: 'DeselectCard', a: a};
@@ -10317,8 +10654,6 @@ var $rundis$elm_bootstrap$Bootstrap$Card$Block$text = F2(
 					attributes),
 				children));
 	});
-var $rundis$elm_bootstrap$Bootstrap$Grid$Internal$Col12 = {$: 'Col12'};
-var $rundis$elm_bootstrap$Bootstrap$Grid$Col$xs12 = A2($rundis$elm_bootstrap$Bootstrap$Grid$Internal$width, $rundis$elm_bootstrap$Bootstrap$General$Internal$XS, $rundis$elm_bootstrap$Bootstrap$Grid$Internal$Col12);
 var $author$project$Main$summaryCardView = function (card) {
 	var background = $author$project$Main$cardOutlineColor(card);
 	return A2(
@@ -10424,7 +10759,7 @@ var $author$project$Main$summaryCardView = function (card) {
 														$elm$html$Html$Events$onClick(
 														$author$project$Main$DeselectCard(card.id)),
 														$author$project$Main$pointerClass,
-														$elm$html$Html$Attributes$class('pl-2 pr-2 ml-2')
+														$elm$html$Html$Attributes$class('pl-2 pr-0 ml-2 mr-0')
 													]),
 												_List_fromArray(
 													[
@@ -10475,7 +10810,14 @@ var $author$project$Main$inventoryView = function (model) {
 					[
 						A2(
 						$rundis$elm_bootstrap$Bootstrap$Grid$row,
-						_List_Nil,
+						_List_fromArray(
+							[
+								$rundis$elm_bootstrap$Bootstrap$Grid$Row$attrs(
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$class('pr-1 pt-1 pb-1')
+									]))
+							]),
 						_List_fromArray(
 							[
 								A2(

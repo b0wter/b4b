@@ -10,6 +10,7 @@ import Bootstrap.Table exposing (RowOption, rowLight)
 import Bootstrap.Text as Text
 import Bootstrap.Utilities.Border as Border
 import Bootstrap.Utilities.Display as Display
+import Bootstrap.Form.Input as Input
 import Bootstrap.Utilities.Flex as Flex
 import Bootstrap.Utilities.Size as Size
 import Bootstrap.Utilities.Spacing as Spacing
@@ -17,11 +18,12 @@ import Browser
 import Cards exposing (Card, CardId, Kind(..), cards)
 import Html exposing (Attribute, Html, div, img, text)
 import Html.Attributes exposing (..)
-import Html.Events exposing (onClick)
+import Html.Events exposing (onClick, onInput)
 import List.Extra as List
 import List.Extras as List
 import List.FlatMap as List
 import Bootstrap.Text exposing (Color)
+import Bootstrap.Grid.Row
 
 
 main : Program Flags Model Msg
@@ -49,8 +51,20 @@ type alias Model =
     --------------
     , cardPool : List Card
     , selectedCards : List Card
+    , filter : Maybe String
     }
 
+filteredCards: Model -> List Card
+filteredCards model =
+    case model.filter of
+        Just f ->
+            let 
+                filter = f |> String.toLower
+                parts = filter |> String.split " "
+            in
+            model.cardPool |> List.filter (Cards.containsWords parts)
+        Nothing ->
+            model.cardPool
 
 init : Flags -> ( Model, Cmd Msg )
 init flags =
@@ -62,6 +76,7 @@ init flags =
       , viewCardImages = True
       , viewCardText = True
       , selectedCards = []
+      , filter = Nothing
       , navbarState = navbarState }
     , navbarCmd )
 
@@ -73,6 +88,7 @@ type Msg
     | ResetCards
     | MoveCardUp CardId
     | MoveCardDown CardId
+    | FilterChanged String
 
 
 
@@ -154,6 +170,12 @@ update msg model =
         ResetCards ->
             ( { model | selectedCards = [], cardPool = cards }, Cmd.none )
 
+        FilterChanged value ->
+            if value |> String.isEmpty then
+                ( { model | filter = Nothing }, Cmd.none)
+            else
+                ( { model | filter = Just value }, Cmd.none)
+
 
 
 -- View -------------------------------------------------------------------------------------
@@ -198,7 +220,15 @@ cardPoolView : Model -> Grid.Column Msg
 cardPoolView model =
     Grid.col [ Col.xs8, Col.attrs [ class "overflow-scroll content-column" ] ]
         [ Grid.row []
-            (model.cardPool |> List.map fullCardView)
+            [ Grid.col [ Col.xs12 ] 
+                [ div [ Border.rounded, Spacing.mt2, class "d-flex pr-1 pt-1 pb-1 bg-dark shadow "]
+                    [ Html.h5 [ Spacing.m2 ] [ text "Filter" ]
+                      , Input.text [ Input.attrs [ placeholder "type here", onInput FilterChanged ] ]
+                    ]
+                ]
+            ]
+        , Grid.row []
+            (model |> filteredCards |> List.map fullCardView)
         ]
 
 
@@ -211,7 +241,7 @@ inventoryView model =
     in
     Grid.col [ Col.xs4, Col.attrs [ class "overflow-scroll content-column" ] ]
         [ div [ class "bg-dark m-2 shadow rounded border", border]
-            [ Grid.row [ ]
+            [ Grid.row [ Bootstrap.Grid.Row.attrs [ class "pr-1 pt-1 pb-1" ] ]
                 [ Grid.col [ Col.xs12, Col.attrs [ class "d-flex justify-content-between" ] ] 
                     [ Html.h5 [ Spacing.m2, textColor ] [ text "Selection" ] 
                     , div [ Spacing.m2, textColor ] [ text selectionCountString ]
@@ -365,7 +395,7 @@ summaryCardView card =
                     , div []
                         [ Html.a [ onClick (MoveCardUp card.id), pointerClass, class "pl-2 pr-2" ] [ text "↑" ]
                         , Html.a [ onClick (MoveCardDown card.id), pointerClass, class "pl-2 pr-2 ml-2" ] [ text "↓" ]
-                        , Html.a [ onClick (DeselectCard card.id), pointerClass, class "pl-2 pr-2 ml-2" ] [ text "✕" ]
+                        , Html.a [ onClick (DeselectCard card.id), pointerClass, class "pl-2 pr-0 ml-2 mr-0" ] [ text "✕" ]
                         ]
                     ]
                 ]
