@@ -24,15 +24,20 @@ import List.Extras as List
 import List.FlatMap as List
 import Bootstrap.Text exposing (Color)
 import Bootstrap.Grid.Row
+import Browser.Navigation exposing (Key)
+import Url exposing (Url)
+import Browser exposing (UrlRequest)
 
 
 main : Program Flags Model Msg
 main =
-    Browser.document
+    Browser.application
         { init = init
         , update = update
         , view = view
         , subscriptions = subscriptions
+        , onUrlChange = UrlChanged
+        , onUrlRequest = LinkClicked
         }
 
 
@@ -66,8 +71,8 @@ filteredCards model =
         Nothing ->
             model.cardPool
 
-init : Flags -> ( Model, Cmd Msg )
-init flags =
+init : Flags -> Url -> Key -> ( Model, Cmd Msg )
+init flags url _ =
     let
         ( navbarState, navbarCmd ) =
             Navbar.initialState NavbarMsg
@@ -83,6 +88,9 @@ init flags =
 
 type Msg
     = NavbarMsg Navbar.State
+    | UrlChanged Url
+    | LinkClicked UrlRequest
+    ---------------------------
     | SelectCard CardId
     | DeselectCard CardId
     | ResetCards
@@ -93,7 +101,6 @@ type Msg
 
 
 -- Update -------------------------------------------------------------------------------------
-
 
 subscriptions : Model -> Sub Msg
 subscriptions model =
@@ -120,6 +127,12 @@ update msg model =
     case msg of
         NavbarMsg state ->
             ( { model | navbarState = state }, Cmd.none )
+
+        UrlChanged _ ->
+            ( model, Cmd.none)
+        
+        LinkClicked _ ->
+            ( model, Cmd.none)
 
         SelectCard id ->
             let

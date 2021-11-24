@@ -4355,6 +4355,12 @@ function _Browser_load(url)
 		}
 	}));
 }
+var $author$project$Main$LinkClicked = function (a) {
+	return {$: 'LinkClicked', a: a};
+};
+var $author$project$Main$UrlChanged = function (a) {
+	return {$: 'UrlChanged', a: a};
+};
 var $elm$core$Basics$EQ = {$: 'EQ'};
 var $elm$core$Basics$GT = {$: 'GT'};
 var $elm$core$Basics$LT = {$: 'LT'};
@@ -5143,7 +5149,7 @@ var $elm$core$Task$perform = F2(
 			$elm$core$Task$Perform(
 				A2($elm$core$Task$map, toMessage, task)));
 	});
-var $elm$browser$Browser$document = _Browser_document;
+var $elm$browser$Browser$application = _Browser_application;
 var $author$project$Main$NavbarMsg = function (a) {
 	return {$: 'NavbarMsg', a: a};
 };
@@ -6629,14 +6635,15 @@ var $rundis$elm_bootstrap$Bootstrap$Navbar$initialState = function (toMsg) {
 		state,
 		A2($rundis$elm_bootstrap$Bootstrap$Navbar$initWindowSize, toMsg, state));
 };
-var $author$project$Main$init = function (flags) {
-	var _v0 = $rundis$elm_bootstrap$Bootstrap$Navbar$initialState($author$project$Main$NavbarMsg);
-	var navbarState = _v0.a;
-	var navbarCmd = _v0.b;
-	return _Utils_Tuple2(
-		{cardPool: $author$project$Cards$cards, filter: $elm$core$Maybe$Nothing, navbarState: navbarState, selectedCards: _List_Nil, viewCardImages: true, viewCardText: true},
-		navbarCmd);
-};
+var $author$project$Main$init = F3(
+	function (flags, url, _v0) {
+		var _v1 = $rundis$elm_bootstrap$Bootstrap$Navbar$initialState($author$project$Main$NavbarMsg);
+		var navbarState = _v1.a;
+		var navbarCmd = _v1.b;
+		return _Utils_Tuple2(
+			{cardPool: $author$project$Cards$cards, filter: $elm$core$Maybe$Nothing, navbarState: navbarState, selectedCards: _List_Nil, viewCardImages: true, viewCardText: true},
+			navbarCmd);
+	});
 var $rundis$elm_bootstrap$Bootstrap$Navbar$AnimatingDown = {$: 'AnimatingDown'};
 var $rundis$elm_bootstrap$Bootstrap$Navbar$AnimatingUp = {$: 'AnimatingUp'};
 var $elm$core$Platform$Sub$batch = _Platform_batch;
@@ -7637,6 +7644,10 @@ var $author$project$Main$update = F2(
 						model,
 						{navbarState: state}),
 					$elm$core$Platform$Cmd$none);
+			case 'UrlChanged':
+				return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
+			case 'LinkClicked':
+				return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
 			case 'SelectCard':
 				var id = msg.a;
 				var card = A2(
@@ -10884,8 +10895,8 @@ var $author$project$Main$view = function (model) {
 		title: 'Back 4 Blood Deck Builder'
 	};
 };
-var $author$project$Main$main = $elm$browser$Browser$document(
-	{init: $author$project$Main$init, subscriptions: $author$project$Main$subscriptions, update: $author$project$Main$update, view: $author$project$Main$view});
+var $author$project$Main$main = $elm$browser$Browser$application(
+	{init: $author$project$Main$init, onUrlChange: $author$project$Main$UrlChanged, onUrlRequest: $author$project$Main$LinkClicked, subscriptions: $author$project$Main$subscriptions, update: $author$project$Main$update, view: $author$project$Main$view});
 _Platform_export({'Main':{'init':$author$project$Main$main(
 	$elm$json$Json$Decode$succeed(
 		{}))(0)}});}(this));
