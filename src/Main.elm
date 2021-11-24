@@ -206,11 +206,11 @@ inventoryView : Model -> Grid.Column Msg
 inventoryView model =
     let numberOfSelectedCards = model.selectedCards |> List.length
         selectionCountString = "(" ++ (numberOfSelectedCards |> String.fromInt) ++ "/15)"
-        border = if numberOfSelectedCards <= 15 then Border.light else Border.warning
+        border = if numberOfSelectedCards <= 15 then Border.dark else Border.warning
         textColor = if numberOfSelectedCards <= 15 then class "" else class "text-warning"
     in
     Grid.col [ Col.xs4, Col.attrs [ class "overflow-scroll content-column" ] ]
-        [ div [ class "bg-light m-2 shadow rounded border", border]
+        [ div [ class "bg-dark m-2 shadow rounded border", border]
             [ Grid.row [ ]
                 [ Grid.col [ Col.xs12, Col.attrs [ class "d-flex justify-content-between" ] ] 
                     [ Html.h5 [ Spacing.m2, textColor ] [ text "Selection" ] 

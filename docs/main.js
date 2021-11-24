@@ -10282,7 +10282,7 @@ var $author$project$Main$header = function (model) {
 					$rundis$elm_bootstrap$Bootstrap$Navbar$withAnimation(
 						$rundis$elm_bootstrap$Bootstrap$Navbar$config($author$project$Main$NavbarMsg))))));
 };
-var $rundis$elm_bootstrap$Bootstrap$Utilities$Border$light = A2($rundis$elm_bootstrap$Bootstrap$Internal$Role$toClass, 'border', $rundis$elm_bootstrap$Bootstrap$Internal$Role$Light);
+var $rundis$elm_bootstrap$Bootstrap$Utilities$Border$dark = A2($rundis$elm_bootstrap$Bootstrap$Internal$Role$toClass, 'border', $rundis$elm_bootstrap$Bootstrap$Internal$Role$Dark);
 var $author$project$Main$DeselectCard = function (a) {
 	return {$: 'DeselectCard', a: a};
 };
@@ -10450,7 +10450,7 @@ var $author$project$Main$inventoryView = function (model) {
 	var numberOfSelectedCards = $elm$core$List$length(model.selectedCards);
 	var selectionCountString = '(' + ($elm$core$String$fromInt(numberOfSelectedCards) + '/15)');
 	var textColor = (numberOfSelectedCards <= 15) ? $elm$html$Html$Attributes$class('') : $elm$html$Html$Attributes$class('text-warning');
-	var border = (numberOfSelectedCards <= 15) ? $rundis$elm_bootstrap$Bootstrap$Utilities$Border$light : $rundis$elm_bootstrap$Bootstrap$Utilities$Border$warning;
+	var border = (numberOfSelectedCards <= 15) ? $rundis$elm_bootstrap$Bootstrap$Utilities$Border$dark : $rundis$elm_bootstrap$Bootstrap$Utilities$Border$warning;
 	return A2(
 		$rundis$elm_bootstrap$Bootstrap$Grid$col,
 		_List_fromArray(
@@ -10468,7 +10468,7 @@ var $author$project$Main$inventoryView = function (model) {
 				$elm$html$Html$div,
 				_List_fromArray(
 					[
-						$elm$html$Html$Attributes$class('bg-light m-2 shadow rounded border'),
+						$elm$html$Html$Attributes$class('bg-dark m-2 shadow rounded border'),
 						border
 					]),
 				_List_fromArray(
