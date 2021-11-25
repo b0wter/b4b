@@ -14,7 +14,8 @@
             "elm-community/list-extra": "8.2.3",
             "elm-community/maybe-extra": "5.2.1",
             "elm-community/string-extra": "4.0.1",
-            "rundis/elm-bootstrap": "5.2.0"
+            "rundis/elm-bootstrap": "5.2.0",
+            "sporto/qs": "2.0.0"
         },
         "indirect": {
             "avh4/elm-color": "1.0.0",

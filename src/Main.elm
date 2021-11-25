@@ -18,6 +18,7 @@ import Bootstrap.Form.InputGroup as InputGroup
 import Browser
 import Cards exposing (Card, CardId, Kind(..))
 import CardData exposing (cards)
+import Dict
 import Html exposing (Attribute, Html, div, img, text)
 import Html.Attributes exposing (..)
 import Html.Events exposing (onClick, onInput)
@@ -28,6 +29,7 @@ import Bootstrap.Text exposing (Color)
 import Bootstrap.Grid.Row
 import Browser.Navigation as Nav exposing (Key)
 import Maybe.Extra as Maybe
+import QS as QS
 import Url exposing (Url)
 import Browser exposing (UrlRequest)
 import Url.Parser.Query as Query
@@ -105,29 +107,17 @@ filteredCards filter cards =
 tryDeckQueryArgument : Url -> Maybe String
 tryDeckQueryArgument url =
     let
-        _ = Debug.log "tryDeckQueryArgument - url" url
-        parsed = Url.Parser.parse (Url.Parser.query (Query.string "deck")) url
-        _ = Debug.log "tryDeckQueryArgument - parsed" parsed
+        dict = url.query |> Maybe.map (QS.parse (QS.config))
+        val = dict |> Maybe.andThen (Dict.get "deck")
     in
-    case parsed of
-        Just v -> 
-            let _ = Debug.log "tryDeckQueryArgument - url - Just v" url
-            in
-            case v of
-                Just vv ->
-                    let
-                        lengthMismatchMessage =
-                            "The given value for the \"deck\" query parameter is invalid. Needs to be multiple of "
-                    in
-                    if vv |> String.isEmpty then Nothing
-                    else if (vv |> String.length |> modBy cardIdLength) /= 0 then
-                        let _ = Debug.log lengthMismatchMessage (cardIdLength |> String.fromInt)
-                        in
-                        Nothing
-                    else Just vv
-                Nothing ->
-                    Nothing
-        Nothing -> 
+    case val of
+        Just (QS.One o) ->
+            Just o
+        Just (QS.Many (head :: _)) ->
+            Just head
+        Just (QS.Many []) ->
+            Nothing
+        Nothing ->
             Nothing
 
 
