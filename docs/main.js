@@ -4355,6 +4355,60 @@ function _Browser_load(url)
 		}
 	}));
 }
+
+
+function _Url_percentEncode(string)
+{
+	return encodeURIComponent(string);
+}
+
+function _Url_percentDecode(string)
+{
+	try
+	{
+		return $elm$core$Maybe$Just(decodeURIComponent(string));
+	}
+	catch (e)
+	{
+		return $elm$core$Maybe$Nothing;
+	}
+}
+
+
+var _Bitwise_and = F2(function(a, b)
+{
+	return a & b;
+});
+
+var _Bitwise_or = F2(function(a, b)
+{
+	return a | b;
+});
+
+var _Bitwise_xor = F2(function(a, b)
+{
+	return a ^ b;
+});
+
+function _Bitwise_complement(a)
+{
+	return ~a;
+};
+
+var _Bitwise_shiftLeftBy = F2(function(offset, a)
+{
+	return a << offset;
+});
+
+var _Bitwise_shiftRightBy = F2(function(offset, a)
+{
+	return a >> offset;
+});
+
+var _Bitwise_shiftRightZfBy = F2(function(offset, a)
+{
+	return a >>> offset;
+});
 var $author$project$Main$LinkClicked = function (a) {
 	return {$: 'LinkClicked', a: a};
 };
@@ -5153,6 +5207,36 @@ var $elm$browser$Browser$application = _Browser_application;
 var $author$project$Main$NavbarMsg = function (a) {
 	return {$: 'NavbarMsg', a: a};
 };
+var $elm$core$Maybe$andThen = F2(
+	function (callback, maybeValue) {
+		if (maybeValue.$ === 'Just') {
+			var value = maybeValue.a;
+			return callback(value);
+		} else {
+			return $elm$core$Maybe$Nothing;
+		}
+	});
+var $elm$core$List$any = F2(
+	function (isOkay, list) {
+		any:
+		while (true) {
+			if (!list.b) {
+				return false;
+			} else {
+				var x = list.a;
+				var xs = list.b;
+				if (isOkay(x)) {
+					return true;
+				} else {
+					var $temp$isOkay = isOkay,
+						$temp$list = xs;
+					isOkay = $temp$isOkay;
+					list = $temp$list;
+					continue any;
+				}
+			}
+		}
+	});
 var $author$project$Cards$Defense = {$: 'Defense'};
 var $author$project$Cards$Mobility = {$: 'Mobility'};
 var $author$project$Cards$Offense = {$: 'Offense'};
@@ -5161,7 +5245,7 @@ var $author$project$Cards$Property = function (description) {
 };
 var $author$project$Cards$Unknown = {$: 'Unknown'};
 var $author$project$Cards$Utility = {$: 'Utility'};
-var $author$project$Cards$rawCards = _List_fromArray(
+var $author$project$CardData$rawCards = _List_fromArray(
 	[
 		{
 		effects: _List_Nil,
@@ -6569,7 +6653,7 @@ var $author$project$Cards$rawCards = _List_fromArray(
 	}
 	]);
 var $elm$core$String$toLower = _String_toLower;
-var $author$project$Cards$cards = A2(
+var $author$project$CardData$cards = A2(
 	$elm$core$List$map,
 	function (raw) {
 		return {
@@ -6595,7 +6679,9 @@ var $author$project$Cards$cards = A2(
 			title: raw.title
 		};
 	},
-	$author$project$Cards$rawCards);
+	$author$project$CardData$rawCards);
+var $rundis$elm_bootstrap$Bootstrap$Modal$Hide = {$: 'Hide'};
+var $rundis$elm_bootstrap$Bootstrap$Modal$hidden = $rundis$elm_bootstrap$Bootstrap$Modal$Hide;
 var $rundis$elm_bootstrap$Bootstrap$Navbar$Hidden = {$: 'Hidden'};
 var $rundis$elm_bootstrap$Bootstrap$Navbar$State = function (a) {
 	return {$: 'State', a: a};
@@ -6635,13 +6721,927 @@ var $rundis$elm_bootstrap$Bootstrap$Navbar$initialState = function (toMsg) {
 		state,
 		A2($rundis$elm_bootstrap$Bootstrap$Navbar$initWindowSize, toMsg, state));
 };
+var $elm$core$Debug$log = _Debug_log;
+var $elm$core$Maybe$map = F2(
+	function (f, maybe) {
+		if (maybe.$ === 'Just') {
+			var value = maybe.a;
+			return $elm$core$Maybe$Just(
+				f(value));
+		} else {
+			return $elm$core$Maybe$Nothing;
+		}
+	});
+var $author$project$Main$cardIdLength = 3;
+var $author$project$String$Extras$chunks = F2(
+	function (size, string) {
+		var run = F2(
+			function (accumulator, remaining) {
+				run:
+				while (true) {
+					if (remaining === '') {
+						return accumulator;
+					} else {
+						var text = remaining;
+						var $temp$accumulator = A2(
+							$elm$core$List$cons,
+							A3($elm$core$String$slice, 0, size, text),
+							accumulator),
+							$temp$remaining = A2($elm$core$String$dropLeft, size, text);
+						accumulator = $temp$accumulator;
+						remaining = $temp$remaining;
+						continue run;
+					}
+				}
+			});
+		return $elm$core$List$reverse(
+			A2(run, _List_Nil, string));
+	});
+var $elm$core$Maybe$map2 = F3(
+	function (func, ma, mb) {
+		if (ma.$ === 'Nothing') {
+			return $elm$core$Maybe$Nothing;
+		} else {
+			var a = ma.a;
+			if (mb.$ === 'Nothing') {
+				return $elm$core$Maybe$Nothing;
+			} else {
+				var b = mb.a;
+				return $elm$core$Maybe$Just(
+					A2(func, a, b));
+			}
+		}
+	});
+var $elm_community$maybe_extra$Maybe$Extra$combine = A2(
+	$elm$core$List$foldr,
+	$elm$core$Maybe$map2($elm$core$List$cons),
+	$elm$core$Maybe$Just(_List_Nil));
+var $author$project$Main$parseCardIds = function (query) {
+	return $elm_community$maybe_extra$Maybe$Extra$combine(
+		A2(
+			$elm$core$List$map,
+			$elm$core$String$toInt,
+			A2($author$project$String$Extras$chunks, $author$project$Main$cardIdLength, query)));
+};
+var $author$project$List$Extras$splitBy = F2(
+	function (predicate, items) {
+		var run = F3(
+			function (nonMatches, matches, remaining) {
+				run:
+				while (true) {
+					if (!remaining.b) {
+						return _Utils_Tuple2(
+							$elm$core$List$reverse(nonMatches),
+							$elm$core$List$reverse(matches));
+					} else {
+						var head = remaining.a;
+						var tail = remaining.b;
+						if (predicate(head)) {
+							var $temp$nonMatches = nonMatches,
+								$temp$matches = A2($elm$core$List$cons, head, matches),
+								$temp$remaining = tail;
+							nonMatches = $temp$nonMatches;
+							matches = $temp$matches;
+							remaining = $temp$remaining;
+							continue run;
+						} else {
+							var $temp$nonMatches = A2($elm$core$List$cons, head, nonMatches),
+								$temp$matches = matches,
+								$temp$remaining = tail;
+							nonMatches = $temp$nonMatches;
+							matches = $temp$matches;
+							remaining = $temp$remaining;
+							continue run;
+						}
+					}
+				}
+			});
+		return A3(run, _List_Nil, _List_Nil, items);
+	});
+var $elm$core$Basics$modBy = _Basics_modBy;
+var $elm$core$Basics$neq = _Utils_notEqual;
+var $elm$url$Url$Parser$State = F5(
+	function (visited, unvisited, params, frag, value) {
+		return {frag: frag, params: params, unvisited: unvisited, value: value, visited: visited};
+	});
+var $elm$url$Url$Parser$getFirstMatch = function (states) {
+	getFirstMatch:
+	while (true) {
+		if (!states.b) {
+			return $elm$core$Maybe$Nothing;
+		} else {
+			var state = states.a;
+			var rest = states.b;
+			var _v1 = state.unvisited;
+			if (!_v1.b) {
+				return $elm$core$Maybe$Just(state.value);
+			} else {
+				if ((_v1.a === '') && (!_v1.b.b)) {
+					return $elm$core$Maybe$Just(state.value);
+				} else {
+					var $temp$states = rest;
+					states = $temp$states;
+					continue getFirstMatch;
+				}
+			}
+		}
+	}
+};
+var $elm$url$Url$Parser$removeFinalEmpty = function (segments) {
+	if (!segments.b) {
+		return _List_Nil;
+	} else {
+		if ((segments.a === '') && (!segments.b.b)) {
+			return _List_Nil;
+		} else {
+			var segment = segments.a;
+			var rest = segments.b;
+			return A2(
+				$elm$core$List$cons,
+				segment,
+				$elm$url$Url$Parser$removeFinalEmpty(rest));
+		}
+	}
+};
+var $elm$url$Url$Parser$preparePath = function (path) {
+	var _v0 = A2($elm$core$String$split, '/', path);
+	if (_v0.b && (_v0.a === '')) {
+		var segments = _v0.b;
+		return $elm$url$Url$Parser$removeFinalEmpty(segments);
+	} else {
+		var segments = _v0;
+		return $elm$url$Url$Parser$removeFinalEmpty(segments);
+	}
+};
+var $elm$url$Url$Parser$addToParametersHelp = F2(
+	function (value, maybeList) {
+		if (maybeList.$ === 'Nothing') {
+			return $elm$core$Maybe$Just(
+				_List_fromArray(
+					[value]));
+		} else {
+			var list = maybeList.a;
+			return $elm$core$Maybe$Just(
+				A2($elm$core$List$cons, value, list));
+		}
+	});
+var $elm$url$Url$percentDecode = _Url_percentDecode;
+var $elm$core$Basics$compare = _Utils_compare;
+var $elm$core$Dict$get = F2(
+	function (targetKey, dict) {
+		get:
+		while (true) {
+			if (dict.$ === 'RBEmpty_elm_builtin') {
+				return $elm$core$Maybe$Nothing;
+			} else {
+				var key = dict.b;
+				var value = dict.c;
+				var left = dict.d;
+				var right = dict.e;
+				var _v1 = A2($elm$core$Basics$compare, targetKey, key);
+				switch (_v1.$) {
+					case 'LT':
+						var $temp$targetKey = targetKey,
+							$temp$dict = left;
+						targetKey = $temp$targetKey;
+						dict = $temp$dict;
+						continue get;
+					case 'EQ':
+						return $elm$core$Maybe$Just(value);
+					default:
+						var $temp$targetKey = targetKey,
+							$temp$dict = right;
+						targetKey = $temp$targetKey;
+						dict = $temp$dict;
+						continue get;
+				}
+			}
+		}
+	});
+var $elm$core$Dict$Black = {$: 'Black'};
+var $elm$core$Dict$RBNode_elm_builtin = F5(
+	function (a, b, c, d, e) {
+		return {$: 'RBNode_elm_builtin', a: a, b: b, c: c, d: d, e: e};
+	});
+var $elm$core$Dict$Red = {$: 'Red'};
+var $elm$core$Dict$balance = F5(
+	function (color, key, value, left, right) {
+		if ((right.$ === 'RBNode_elm_builtin') && (right.a.$ === 'Red')) {
+			var _v1 = right.a;
+			var rK = right.b;
+			var rV = right.c;
+			var rLeft = right.d;
+			var rRight = right.e;
+			if ((left.$ === 'RBNode_elm_builtin') && (left.a.$ === 'Red')) {
+				var _v3 = left.a;
+				var lK = left.b;
+				var lV = left.c;
+				var lLeft = left.d;
+				var lRight = left.e;
+				return A5(
+					$elm$core$Dict$RBNode_elm_builtin,
+					$elm$core$Dict$Red,
+					key,
+					value,
+					A5($elm$core$Dict$RBNode_elm_builtin, $elm$core$Dict$Black, lK, lV, lLeft, lRight),
+					A5($elm$core$Dict$RBNode_elm_builtin, $elm$core$Dict$Black, rK, rV, rLeft, rRight));
+			} else {
+				return A5(
+					$elm$core$Dict$RBNode_elm_builtin,
+					color,
+					rK,
+					rV,
+					A5($elm$core$Dict$RBNode_elm_builtin, $elm$core$Dict$Red, key, value, left, rLeft),
+					rRight);
+			}
+		} else {
+			if ((((left.$ === 'RBNode_elm_builtin') && (left.a.$ === 'Red')) && (left.d.$ === 'RBNode_elm_builtin')) && (left.d.a.$ === 'Red')) {
+				var _v5 = left.a;
+				var lK = left.b;
+				var lV = left.c;
+				var _v6 = left.d;
+				var _v7 = _v6.a;
+				var llK = _v6.b;
+				var llV = _v6.c;
+				var llLeft = _v6.d;
+				var llRight = _v6.e;
+				var lRight = left.e;
+				return A5(
+					$elm$core$Dict$RBNode_elm_builtin,
+					$elm$core$Dict$Red,
+					lK,
+					lV,
+					A5($elm$core$Dict$RBNode_elm_builtin, $elm$core$Dict$Black, llK, llV, llLeft, llRight),
+					A5($elm$core$Dict$RBNode_elm_builtin, $elm$core$Dict$Black, key, value, lRight, right));
+			} else {
+				return A5($elm$core$Dict$RBNode_elm_builtin, color, key, value, left, right);
+			}
+		}
+	});
+var $elm$core$Dict$insertHelp = F3(
+	function (key, value, dict) {
+		if (dict.$ === 'RBEmpty_elm_builtin') {
+			return A5($elm$core$Dict$RBNode_elm_builtin, $elm$core$Dict$Red, key, value, $elm$core$Dict$RBEmpty_elm_builtin, $elm$core$Dict$RBEmpty_elm_builtin);
+		} else {
+			var nColor = dict.a;
+			var nKey = dict.b;
+			var nValue = dict.c;
+			var nLeft = dict.d;
+			var nRight = dict.e;
+			var _v1 = A2($elm$core$Basics$compare, key, nKey);
+			switch (_v1.$) {
+				case 'LT':
+					return A5(
+						$elm$core$Dict$balance,
+						nColor,
+						nKey,
+						nValue,
+						A3($elm$core$Dict$insertHelp, key, value, nLeft),
+						nRight);
+				case 'EQ':
+					return A5($elm$core$Dict$RBNode_elm_builtin, nColor, nKey, value, nLeft, nRight);
+				default:
+					return A5(
+						$elm$core$Dict$balance,
+						nColor,
+						nKey,
+						nValue,
+						nLeft,
+						A3($elm$core$Dict$insertHelp, key, value, nRight));
+			}
+		}
+	});
+var $elm$core$Dict$insert = F3(
+	function (key, value, dict) {
+		var _v0 = A3($elm$core$Dict$insertHelp, key, value, dict);
+		if ((_v0.$ === 'RBNode_elm_builtin') && (_v0.a.$ === 'Red')) {
+			var _v1 = _v0.a;
+			var k = _v0.b;
+			var v = _v0.c;
+			var l = _v0.d;
+			var r = _v0.e;
+			return A5($elm$core$Dict$RBNode_elm_builtin, $elm$core$Dict$Black, k, v, l, r);
+		} else {
+			var x = _v0;
+			return x;
+		}
+	});
+var $elm$core$Dict$getMin = function (dict) {
+	getMin:
+	while (true) {
+		if ((dict.$ === 'RBNode_elm_builtin') && (dict.d.$ === 'RBNode_elm_builtin')) {
+			var left = dict.d;
+			var $temp$dict = left;
+			dict = $temp$dict;
+			continue getMin;
+		} else {
+			return dict;
+		}
+	}
+};
+var $elm$core$Dict$moveRedLeft = function (dict) {
+	if (((dict.$ === 'RBNode_elm_builtin') && (dict.d.$ === 'RBNode_elm_builtin')) && (dict.e.$ === 'RBNode_elm_builtin')) {
+		if ((dict.e.d.$ === 'RBNode_elm_builtin') && (dict.e.d.a.$ === 'Red')) {
+			var clr = dict.a;
+			var k = dict.b;
+			var v = dict.c;
+			var _v1 = dict.d;
+			var lClr = _v1.a;
+			var lK = _v1.b;
+			var lV = _v1.c;
+			var lLeft = _v1.d;
+			var lRight = _v1.e;
+			var _v2 = dict.e;
+			var rClr = _v2.a;
+			var rK = _v2.b;
+			var rV = _v2.c;
+			var rLeft = _v2.d;
+			var _v3 = rLeft.a;
+			var rlK = rLeft.b;
+			var rlV = rLeft.c;
+			var rlL = rLeft.d;
+			var rlR = rLeft.e;
+			var rRight = _v2.e;
+			return A5(
+				$elm$core$Dict$RBNode_elm_builtin,
+				$elm$core$Dict$Red,
+				rlK,
+				rlV,
+				A5(
+					$elm$core$Dict$RBNode_elm_builtin,
+					$elm$core$Dict$Black,
+					k,
+					v,
+					A5($elm$core$Dict$RBNode_elm_builtin, $elm$core$Dict$Red, lK, lV, lLeft, lRight),
+					rlL),
+				A5($elm$core$Dict$RBNode_elm_builtin, $elm$core$Dict$Black, rK, rV, rlR, rRight));
+		} else {
+			var clr = dict.a;
+			var k = dict.b;
+			var v = dict.c;
+			var _v4 = dict.d;
+			var lClr = _v4.a;
+			var lK = _v4.b;
+			var lV = _v4.c;
+			var lLeft = _v4.d;
+			var lRight = _v4.e;
+			var _v5 = dict.e;
+			var rClr = _v5.a;
+			var rK = _v5.b;
+			var rV = _v5.c;
+			var rLeft = _v5.d;
+			var rRight = _v5.e;
+			if (clr.$ === 'Black') {
+				return A5(
+					$elm$core$Dict$RBNode_elm_builtin,
+					$elm$core$Dict$Black,
+					k,
+					v,
+					A5($elm$core$Dict$RBNode_elm_builtin, $elm$core$Dict$Red, lK, lV, lLeft, lRight),
+					A5($elm$core$Dict$RBNode_elm_builtin, $elm$core$Dict$Red, rK, rV, rLeft, rRight));
+			} else {
+				return A5(
+					$elm$core$Dict$RBNode_elm_builtin,
+					$elm$core$Dict$Black,
+					k,
+					v,
+					A5($elm$core$Dict$RBNode_elm_builtin, $elm$core$Dict$Red, lK, lV, lLeft, lRight),
+					A5($elm$core$Dict$RBNode_elm_builtin, $elm$core$Dict$Red, rK, rV, rLeft, rRight));
+			}
+		}
+	} else {
+		return dict;
+	}
+};
+var $elm$core$Dict$moveRedRight = function (dict) {
+	if (((dict.$ === 'RBNode_elm_builtin') && (dict.d.$ === 'RBNode_elm_builtin')) && (dict.e.$ === 'RBNode_elm_builtin')) {
+		if ((dict.d.d.$ === 'RBNode_elm_builtin') && (dict.d.d.a.$ === 'Red')) {
+			var clr = dict.a;
+			var k = dict.b;
+			var v = dict.c;
+			var _v1 = dict.d;
+			var lClr = _v1.a;
+			var lK = _v1.b;
+			var lV = _v1.c;
+			var _v2 = _v1.d;
+			var _v3 = _v2.a;
+			var llK = _v2.b;
+			var llV = _v2.c;
+			var llLeft = _v2.d;
+			var llRight = _v2.e;
+			var lRight = _v1.e;
+			var _v4 = dict.e;
+			var rClr = _v4.a;
+			var rK = _v4.b;
+			var rV = _v4.c;
+			var rLeft = _v4.d;
+			var rRight = _v4.e;
+			return A5(
+				$elm$core$Dict$RBNode_elm_builtin,
+				$elm$core$Dict$Red,
+				lK,
+				lV,
+				A5($elm$core$Dict$RBNode_elm_builtin, $elm$core$Dict$Black, llK, llV, llLeft, llRight),
+				A5(
+					$elm$core$Dict$RBNode_elm_builtin,
+					$elm$core$Dict$Black,
+					k,
+					v,
+					lRight,
+					A5($elm$core$Dict$RBNode_elm_builtin, $elm$core$Dict$Red, rK, rV, rLeft, rRight)));
+		} else {
+			var clr = dict.a;
+			var k = dict.b;
+			var v = dict.c;
+			var _v5 = dict.d;
+			var lClr = _v5.a;
+			var lK = _v5.b;
+			var lV = _v5.c;
+			var lLeft = _v5.d;
+			var lRight = _v5.e;
+			var _v6 = dict.e;
+			var rClr = _v6.a;
+			var rK = _v6.b;
+			var rV = _v6.c;
+			var rLeft = _v6.d;
+			var rRight = _v6.e;
+			if (clr.$ === 'Black') {
+				return A5(
+					$elm$core$Dict$RBNode_elm_builtin,
+					$elm$core$Dict$Black,
+					k,
+					v,
+					A5($elm$core$Dict$RBNode_elm_builtin, $elm$core$Dict$Red, lK, lV, lLeft, lRight),
+					A5($elm$core$Dict$RBNode_elm_builtin, $elm$core$Dict$Red, rK, rV, rLeft, rRight));
+			} else {
+				return A5(
+					$elm$core$Dict$RBNode_elm_builtin,
+					$elm$core$Dict$Black,
+					k,
+					v,
+					A5($elm$core$Dict$RBNode_elm_builtin, $elm$core$Dict$Red, lK, lV, lLeft, lRight),
+					A5($elm$core$Dict$RBNode_elm_builtin, $elm$core$Dict$Red, rK, rV, rLeft, rRight));
+			}
+		}
+	} else {
+		return dict;
+	}
+};
+var $elm$core$Dict$removeHelpPrepEQGT = F7(
+	function (targetKey, dict, color, key, value, left, right) {
+		if ((left.$ === 'RBNode_elm_builtin') && (left.a.$ === 'Red')) {
+			var _v1 = left.a;
+			var lK = left.b;
+			var lV = left.c;
+			var lLeft = left.d;
+			var lRight = left.e;
+			return A5(
+				$elm$core$Dict$RBNode_elm_builtin,
+				color,
+				lK,
+				lV,
+				lLeft,
+				A5($elm$core$Dict$RBNode_elm_builtin, $elm$core$Dict$Red, key, value, lRight, right));
+		} else {
+			_v2$2:
+			while (true) {
+				if ((right.$ === 'RBNode_elm_builtin') && (right.a.$ === 'Black')) {
+					if (right.d.$ === 'RBNode_elm_builtin') {
+						if (right.d.a.$ === 'Black') {
+							var _v3 = right.a;
+							var _v4 = right.d;
+							var _v5 = _v4.a;
+							return $elm$core$Dict$moveRedRight(dict);
+						} else {
+							break _v2$2;
+						}
+					} else {
+						var _v6 = right.a;
+						var _v7 = right.d;
+						return $elm$core$Dict$moveRedRight(dict);
+					}
+				} else {
+					break _v2$2;
+				}
+			}
+			return dict;
+		}
+	});
+var $elm$core$Dict$removeMin = function (dict) {
+	if ((dict.$ === 'RBNode_elm_builtin') && (dict.d.$ === 'RBNode_elm_builtin')) {
+		var color = dict.a;
+		var key = dict.b;
+		var value = dict.c;
+		var left = dict.d;
+		var lColor = left.a;
+		var lLeft = left.d;
+		var right = dict.e;
+		if (lColor.$ === 'Black') {
+			if ((lLeft.$ === 'RBNode_elm_builtin') && (lLeft.a.$ === 'Red')) {
+				var _v3 = lLeft.a;
+				return A5(
+					$elm$core$Dict$RBNode_elm_builtin,
+					color,
+					key,
+					value,
+					$elm$core$Dict$removeMin(left),
+					right);
+			} else {
+				var _v4 = $elm$core$Dict$moveRedLeft(dict);
+				if (_v4.$ === 'RBNode_elm_builtin') {
+					var nColor = _v4.a;
+					var nKey = _v4.b;
+					var nValue = _v4.c;
+					var nLeft = _v4.d;
+					var nRight = _v4.e;
+					return A5(
+						$elm$core$Dict$balance,
+						nColor,
+						nKey,
+						nValue,
+						$elm$core$Dict$removeMin(nLeft),
+						nRight);
+				} else {
+					return $elm$core$Dict$RBEmpty_elm_builtin;
+				}
+			}
+		} else {
+			return A5(
+				$elm$core$Dict$RBNode_elm_builtin,
+				color,
+				key,
+				value,
+				$elm$core$Dict$removeMin(left),
+				right);
+		}
+	} else {
+		return $elm$core$Dict$RBEmpty_elm_builtin;
+	}
+};
+var $elm$core$Dict$removeHelp = F2(
+	function (targetKey, dict) {
+		if (dict.$ === 'RBEmpty_elm_builtin') {
+			return $elm$core$Dict$RBEmpty_elm_builtin;
+		} else {
+			var color = dict.a;
+			var key = dict.b;
+			var value = dict.c;
+			var left = dict.d;
+			var right = dict.e;
+			if (_Utils_cmp(targetKey, key) < 0) {
+				if ((left.$ === 'RBNode_elm_builtin') && (left.a.$ === 'Black')) {
+					var _v4 = left.a;
+					var lLeft = left.d;
+					if ((lLeft.$ === 'RBNode_elm_builtin') && (lLeft.a.$ === 'Red')) {
+						var _v6 = lLeft.a;
+						return A5(
+							$elm$core$Dict$RBNode_elm_builtin,
+							color,
+							key,
+							value,
+							A2($elm$core$Dict$removeHelp, targetKey, left),
+							right);
+					} else {
+						var _v7 = $elm$core$Dict$moveRedLeft(dict);
+						if (_v7.$ === 'RBNode_elm_builtin') {
+							var nColor = _v7.a;
+							var nKey = _v7.b;
+							var nValue = _v7.c;
+							var nLeft = _v7.d;
+							var nRight = _v7.e;
+							return A5(
+								$elm$core$Dict$balance,
+								nColor,
+								nKey,
+								nValue,
+								A2($elm$core$Dict$removeHelp, targetKey, nLeft),
+								nRight);
+						} else {
+							return $elm$core$Dict$RBEmpty_elm_builtin;
+						}
+					}
+				} else {
+					return A5(
+						$elm$core$Dict$RBNode_elm_builtin,
+						color,
+						key,
+						value,
+						A2($elm$core$Dict$removeHelp, targetKey, left),
+						right);
+				}
+			} else {
+				return A2(
+					$elm$core$Dict$removeHelpEQGT,
+					targetKey,
+					A7($elm$core$Dict$removeHelpPrepEQGT, targetKey, dict, color, key, value, left, right));
+			}
+		}
+	});
+var $elm$core$Dict$removeHelpEQGT = F2(
+	function (targetKey, dict) {
+		if (dict.$ === 'RBNode_elm_builtin') {
+			var color = dict.a;
+			var key = dict.b;
+			var value = dict.c;
+			var left = dict.d;
+			var right = dict.e;
+			if (_Utils_eq(targetKey, key)) {
+				var _v1 = $elm$core$Dict$getMin(right);
+				if (_v1.$ === 'RBNode_elm_builtin') {
+					var minKey = _v1.b;
+					var minValue = _v1.c;
+					return A5(
+						$elm$core$Dict$balance,
+						color,
+						minKey,
+						minValue,
+						left,
+						$elm$core$Dict$removeMin(right));
+				} else {
+					return $elm$core$Dict$RBEmpty_elm_builtin;
+				}
+			} else {
+				return A5(
+					$elm$core$Dict$balance,
+					color,
+					key,
+					value,
+					left,
+					A2($elm$core$Dict$removeHelp, targetKey, right));
+			}
+		} else {
+			return $elm$core$Dict$RBEmpty_elm_builtin;
+		}
+	});
+var $elm$core$Dict$remove = F2(
+	function (key, dict) {
+		var _v0 = A2($elm$core$Dict$removeHelp, key, dict);
+		if ((_v0.$ === 'RBNode_elm_builtin') && (_v0.a.$ === 'Red')) {
+			var _v1 = _v0.a;
+			var k = _v0.b;
+			var v = _v0.c;
+			var l = _v0.d;
+			var r = _v0.e;
+			return A5($elm$core$Dict$RBNode_elm_builtin, $elm$core$Dict$Black, k, v, l, r);
+		} else {
+			var x = _v0;
+			return x;
+		}
+	});
+var $elm$core$Dict$update = F3(
+	function (targetKey, alter, dictionary) {
+		var _v0 = alter(
+			A2($elm$core$Dict$get, targetKey, dictionary));
+		if (_v0.$ === 'Just') {
+			var value = _v0.a;
+			return A3($elm$core$Dict$insert, targetKey, value, dictionary);
+		} else {
+			return A2($elm$core$Dict$remove, targetKey, dictionary);
+		}
+	});
+var $elm$url$Url$Parser$addParam = F2(
+	function (segment, dict) {
+		var _v0 = A2($elm$core$String$split, '=', segment);
+		if ((_v0.b && _v0.b.b) && (!_v0.b.b.b)) {
+			var rawKey = _v0.a;
+			var _v1 = _v0.b;
+			var rawValue = _v1.a;
+			var _v2 = $elm$url$Url$percentDecode(rawKey);
+			if (_v2.$ === 'Nothing') {
+				return dict;
+			} else {
+				var key = _v2.a;
+				var _v3 = $elm$url$Url$percentDecode(rawValue);
+				if (_v3.$ === 'Nothing') {
+					return dict;
+				} else {
+					var value = _v3.a;
+					return A3(
+						$elm$core$Dict$update,
+						key,
+						$elm$url$Url$Parser$addToParametersHelp(value),
+						dict);
+				}
+			}
+		} else {
+			return dict;
+		}
+	});
+var $elm$url$Url$Parser$prepareQuery = function (maybeQuery) {
+	if (maybeQuery.$ === 'Nothing') {
+		return $elm$core$Dict$empty;
+	} else {
+		var qry = maybeQuery.a;
+		return A3(
+			$elm$core$List$foldr,
+			$elm$url$Url$Parser$addParam,
+			$elm$core$Dict$empty,
+			A2($elm$core$String$split, '&', qry));
+	}
+};
+var $elm$url$Url$Parser$parse = F2(
+	function (_v0, url) {
+		var parser = _v0.a;
+		return $elm$url$Url$Parser$getFirstMatch(
+			parser(
+				A5(
+					$elm$url$Url$Parser$State,
+					_List_Nil,
+					$elm$url$Url$Parser$preparePath(url.path),
+					$elm$url$Url$Parser$prepareQuery(url.query),
+					url.fragment,
+					$elm$core$Basics$identity)));
+	});
+var $elm$url$Url$Parser$Parser = function (a) {
+	return {$: 'Parser', a: a};
+};
+var $elm$url$Url$Parser$query = function (_v0) {
+	var queryParser = _v0.a;
+	return $elm$url$Url$Parser$Parser(
+		function (_v1) {
+			var visited = _v1.visited;
+			var unvisited = _v1.unvisited;
+			var params = _v1.params;
+			var frag = _v1.frag;
+			var value = _v1.value;
+			return _List_fromArray(
+				[
+					A5(
+					$elm$url$Url$Parser$State,
+					visited,
+					unvisited,
+					params,
+					frag,
+					value(
+						queryParser(params)))
+				]);
+		});
+};
+var $elm$url$Url$Parser$Internal$Parser = function (a) {
+	return {$: 'Parser', a: a};
+};
+var $elm$core$Maybe$withDefault = F2(
+	function (_default, maybe) {
+		if (maybe.$ === 'Just') {
+			var value = maybe.a;
+			return value;
+		} else {
+			return _default;
+		}
+	});
+var $elm$url$Url$Parser$Query$custom = F2(
+	function (key, func) {
+		return $elm$url$Url$Parser$Internal$Parser(
+			function (dict) {
+				return func(
+					A2(
+						$elm$core$Maybe$withDefault,
+						_List_Nil,
+						A2($elm$core$Dict$get, key, dict)));
+			});
+	});
+var $elm$url$Url$Parser$Query$string = function (key) {
+	return A2(
+		$elm$url$Url$Parser$Query$custom,
+		key,
+		function (stringList) {
+			if (stringList.b && (!stringList.b.b)) {
+				var str = stringList.a;
+				return $elm$core$Maybe$Just(str);
+			} else {
+				return $elm$core$Maybe$Nothing;
+			}
+		});
+};
+var $author$project$Main$tryDeckQueryArgument = function (url) {
+	var _v0 = A2(
+		$elm$url$Url$Parser$parse,
+		$elm$url$Url$Parser$query(
+			$elm$url$Url$Parser$Query$string('deck')),
+		url);
+	if (_v0.$ === 'Just') {
+		var v = _v0.a;
+		if (v.$ === 'Just') {
+			var vv = v.a;
+			var lengthMismatchMessage = 'The given value for the \"deck\" query parameter is invalid. Needs to be multiple of ';
+			if ($elm$core$String$isEmpty(vv)) {
+				return $elm$core$Maybe$Nothing;
+			} else {
+				if (!(!A2(
+					$elm$core$Basics$modBy,
+					$author$project$Main$cardIdLength,
+					$elm$core$String$length(vv)))) {
+					var _v2 = A2(
+						$elm$core$Debug$log,
+						lengthMismatchMessage,
+						$elm$core$String$fromInt($author$project$Main$cardIdLength));
+					return $elm$core$Maybe$Nothing;
+				} else {
+					return $elm$core$Maybe$Just(vv);
+				}
+			}
+		} else {
+			return $elm$core$Maybe$Nothing;
+		}
+	} else {
+		return $elm$core$Maybe$Nothing;
+	}
+};
+var $elm$core$Set$Set_elm_builtin = function (a) {
+	return {$: 'Set_elm_builtin', a: a};
+};
+var $elm$core$Set$empty = $elm$core$Set$Set_elm_builtin($elm$core$Dict$empty);
+var $elm$core$Set$insert = F2(
+	function (key, _v0) {
+		var dict = _v0.a;
+		return $elm$core$Set$Set_elm_builtin(
+			A3($elm$core$Dict$insert, key, _Utils_Tuple0, dict));
+	});
+var $elm$core$Dict$member = F2(
+	function (key, dict) {
+		var _v0 = A2($elm$core$Dict$get, key, dict);
+		if (_v0.$ === 'Just') {
+			return true;
+		} else {
+			return false;
+		}
+	});
+var $elm$core$Set$member = F2(
+	function (key, _v0) {
+		var dict = _v0.a;
+		return A2($elm$core$Dict$member, key, dict);
+	});
+var $elm_community$list_extra$List$Extra$uniqueHelp = F4(
+	function (f, existing, remaining, accumulator) {
+		uniqueHelp:
+		while (true) {
+			if (!remaining.b) {
+				return $elm$core$List$reverse(accumulator);
+			} else {
+				var first = remaining.a;
+				var rest = remaining.b;
+				var computedFirst = f(first);
+				if (A2($elm$core$Set$member, computedFirst, existing)) {
+					var $temp$f = f,
+						$temp$existing = existing,
+						$temp$remaining = rest,
+						$temp$accumulator = accumulator;
+					f = $temp$f;
+					existing = $temp$existing;
+					remaining = $temp$remaining;
+					accumulator = $temp$accumulator;
+					continue uniqueHelp;
+				} else {
+					var $temp$f = f,
+						$temp$existing = A2($elm$core$Set$insert, computedFirst, existing),
+						$temp$remaining = rest,
+						$temp$accumulator = A2($elm$core$List$cons, first, accumulator);
+					f = $temp$f;
+					existing = $temp$existing;
+					remaining = $temp$remaining;
+					accumulator = $temp$accumulator;
+					continue uniqueHelp;
+				}
+			}
+		}
+	});
+var $elm_community$list_extra$List$Extra$unique = function (list) {
+	return A4($elm_community$list_extra$List$Extra$uniqueHelp, $elm$core$Basics$identity, $elm$core$Set$empty, list, _List_Nil);
+};
 var $author$project$Main$init = F3(
-	function (flags, url, _v0) {
-		var _v1 = $rundis$elm_bootstrap$Bootstrap$Navbar$initialState($author$project$Main$NavbarMsg);
-		var navbarState = _v1.a;
-		var navbarCmd = _v1.b;
+	function (_v0, url, key) {
+		var hostUrl = _Utils_update(
+			url,
+			{fragment: $elm$core$Maybe$Nothing, query: $elm$core$Maybe$Nothing});
+		var cardIdsFromQuery = A2(
+			$elm$core$Maybe$withDefault,
+			_List_Nil,
+			A2(
+				$elm$core$Maybe$map,
+				$elm_community$list_extra$List$Extra$unique,
+				A2(
+					$elm$core$Maybe$andThen,
+					$author$project$Main$parseCardIds,
+					$author$project$Main$tryDeckQueryArgument(url))));
+		var _v1 = A2(
+			$author$project$List$Extras$splitBy,
+			function (c) {
+				return A2(
+					$elm$core$List$any,
+					function (cardId) {
+						return _Utils_eq(c.id, cardId);
+					},
+					cardIdsFromQuery);
+			},
+			$author$project$CardData$cards);
+		var notSelected = _v1.a;
+		var selected = _v1.b;
+		var _v2 = $rundis$elm_bootstrap$Bootstrap$Navbar$initialState($author$project$Main$NavbarMsg);
+		var navbarState = _v2.a;
+		var navbarCmd = _v2.b;
+		var _v3 = A2($elm$core$Debug$log, 'url', url);
 		return _Utils_Tuple2(
-			{cardPool: $author$project$Cards$cards, filter: $elm$core$Maybe$Nothing, navbarState: navbarState, selectedCards: _List_Nil, viewCardImages: true, viewCardText: true},
+			{cardPool: $author$project$CardData$cards, filter: $elm$core$Maybe$Nothing, hostUrl: hostUrl, navKey: key, navbarState: navbarState, notSelectedCards: notSelected, selectedCards: selected, shareModalVisibility: $rundis$elm_bootstrap$Bootstrap$Modal$hidden, viewCardImages: true, viewCardText: true},
 			navbarCmd);
 	});
 var $rundis$elm_bootstrap$Bootstrap$Navbar$AnimatingDown = {$: 'AnimatingDown'};
@@ -6650,31 +7650,6 @@ var $elm$core$Platform$Sub$batch = _Platform_batch;
 var $rundis$elm_bootstrap$Bootstrap$Navbar$Closed = {$: 'Closed'};
 var $rundis$elm_bootstrap$Bootstrap$Navbar$ListenClicks = {$: 'ListenClicks'};
 var $rundis$elm_bootstrap$Bootstrap$Navbar$Open = {$: 'Open'};
-var $elm$core$List$any = F2(
-	function (isOkay, list) {
-		any:
-		while (true) {
-			if (!list.b) {
-				return false;
-			} else {
-				var x = list.a;
-				var xs = list.b;
-				if (isOkay(x)) {
-					return true;
-				} else {
-					var $temp$isOkay = isOkay,
-						$temp$list = xs;
-					isOkay = $temp$isOkay;
-					list = $temp$list;
-					continue any;
-				}
-			}
-		}
-	});
-var $elm$core$Dict$RBNode_elm_builtin = F5(
-	function (a, b, c, d, e) {
-		return {$: 'RBNode_elm_builtin', a: a, b: b, c: c, d: d, e: e};
-	});
 var $elm$core$Dict$map = F2(
 	function (func, dict) {
 		if (dict.$ === 'RBEmpty_elm_builtin') {
@@ -6856,111 +7831,6 @@ var $elm$browser$Browser$Events$addKey = function (sub) {
 			name),
 		sub);
 };
-var $elm$core$Dict$Black = {$: 'Black'};
-var $elm$core$Dict$Red = {$: 'Red'};
-var $elm$core$Dict$balance = F5(
-	function (color, key, value, left, right) {
-		if ((right.$ === 'RBNode_elm_builtin') && (right.a.$ === 'Red')) {
-			var _v1 = right.a;
-			var rK = right.b;
-			var rV = right.c;
-			var rLeft = right.d;
-			var rRight = right.e;
-			if ((left.$ === 'RBNode_elm_builtin') && (left.a.$ === 'Red')) {
-				var _v3 = left.a;
-				var lK = left.b;
-				var lV = left.c;
-				var lLeft = left.d;
-				var lRight = left.e;
-				return A5(
-					$elm$core$Dict$RBNode_elm_builtin,
-					$elm$core$Dict$Red,
-					key,
-					value,
-					A5($elm$core$Dict$RBNode_elm_builtin, $elm$core$Dict$Black, lK, lV, lLeft, lRight),
-					A5($elm$core$Dict$RBNode_elm_builtin, $elm$core$Dict$Black, rK, rV, rLeft, rRight));
-			} else {
-				return A5(
-					$elm$core$Dict$RBNode_elm_builtin,
-					color,
-					rK,
-					rV,
-					A5($elm$core$Dict$RBNode_elm_builtin, $elm$core$Dict$Red, key, value, left, rLeft),
-					rRight);
-			}
-		} else {
-			if ((((left.$ === 'RBNode_elm_builtin') && (left.a.$ === 'Red')) && (left.d.$ === 'RBNode_elm_builtin')) && (left.d.a.$ === 'Red')) {
-				var _v5 = left.a;
-				var lK = left.b;
-				var lV = left.c;
-				var _v6 = left.d;
-				var _v7 = _v6.a;
-				var llK = _v6.b;
-				var llV = _v6.c;
-				var llLeft = _v6.d;
-				var llRight = _v6.e;
-				var lRight = left.e;
-				return A5(
-					$elm$core$Dict$RBNode_elm_builtin,
-					$elm$core$Dict$Red,
-					lK,
-					lV,
-					A5($elm$core$Dict$RBNode_elm_builtin, $elm$core$Dict$Black, llK, llV, llLeft, llRight),
-					A5($elm$core$Dict$RBNode_elm_builtin, $elm$core$Dict$Black, key, value, lRight, right));
-			} else {
-				return A5($elm$core$Dict$RBNode_elm_builtin, color, key, value, left, right);
-			}
-		}
-	});
-var $elm$core$Basics$compare = _Utils_compare;
-var $elm$core$Dict$insertHelp = F3(
-	function (key, value, dict) {
-		if (dict.$ === 'RBEmpty_elm_builtin') {
-			return A5($elm$core$Dict$RBNode_elm_builtin, $elm$core$Dict$Red, key, value, $elm$core$Dict$RBEmpty_elm_builtin, $elm$core$Dict$RBEmpty_elm_builtin);
-		} else {
-			var nColor = dict.a;
-			var nKey = dict.b;
-			var nValue = dict.c;
-			var nLeft = dict.d;
-			var nRight = dict.e;
-			var _v1 = A2($elm$core$Basics$compare, key, nKey);
-			switch (_v1.$) {
-				case 'LT':
-					return A5(
-						$elm$core$Dict$balance,
-						nColor,
-						nKey,
-						nValue,
-						A3($elm$core$Dict$insertHelp, key, value, nLeft),
-						nRight);
-				case 'EQ':
-					return A5($elm$core$Dict$RBNode_elm_builtin, nColor, nKey, value, nLeft, nRight);
-				default:
-					return A5(
-						$elm$core$Dict$balance,
-						nColor,
-						nKey,
-						nValue,
-						nLeft,
-						A3($elm$core$Dict$insertHelp, key, value, nRight));
-			}
-		}
-	});
-var $elm$core$Dict$insert = F3(
-	function (key, value, dict) {
-		var _v0 = A3($elm$core$Dict$insertHelp, key, value, dict);
-		if ((_v0.$ === 'RBNode_elm_builtin') && (_v0.a.$ === 'Red')) {
-			var _v1 = _v0.a;
-			var k = _v0.b;
-			var v = _v0.c;
-			var l = _v0.d;
-			var r = _v0.e;
-			return A5($elm$core$Dict$RBNode_elm_builtin, $elm$core$Dict$Black, k, v, l, r);
-		} else {
-			var x = _v0;
-			return x;
-		}
-	});
 var $elm$core$Dict$fromList = function (assocs) {
 	return A3(
 		$elm$core$List$foldl,
@@ -7372,13 +8242,76 @@ var $elm_community$list_extra$List$Extra$find = F2(
 			}
 		}
 	});
-var $elm$core$Debug$log = _Debug_log;
 var $elm$core$Basics$negate = function (n) {
 	return -n;
 };
-var $elm$core$Basics$neq = _Utils_notEqual;
 var $elm$core$Platform$Cmd$batch = _Platform_batch;
 var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
+var $elm$browser$Browser$Navigation$pushUrl = _Browser_pushUrl;
+var $elm_community$list_extra$List$Extra$remove = F2(
+	function (x, xs) {
+		if (!xs.b) {
+			return _List_Nil;
+		} else {
+			var y = xs.a;
+			var ys = xs.b;
+			return _Utils_eq(x, y) ? ys : A2(
+				$elm$core$List$cons,
+				y,
+				A2($elm_community$list_extra$List$Extra$remove, x, ys));
+		}
+	});
+var $elm$core$String$cons = _String_cons;
+var $elm$core$String$fromChar = function (_char) {
+	return A2($elm$core$String$cons, _char, '');
+};
+var $elm$core$Bitwise$and = _Bitwise_and;
+var $elm$core$Bitwise$shiftRightBy = _Bitwise_shiftRightBy;
+var $elm$core$String$repeatHelp = F3(
+	function (n, chunk, result) {
+		return (n <= 0) ? result : A3(
+			$elm$core$String$repeatHelp,
+			n >> 1,
+			_Utils_ap(chunk, chunk),
+			(!(n & 1)) ? result : _Utils_ap(result, chunk));
+	});
+var $elm$core$String$repeat = F2(
+	function (n, chunk) {
+		return A3($elm$core$String$repeatHelp, n, chunk, '');
+	});
+var $elm$core$String$padLeft = F3(
+	function (n, _char, string) {
+		return _Utils_ap(
+			A2(
+				$elm$core$String$repeat,
+				n - $elm$core$String$length(string),
+				$elm$core$String$fromChar(_char)),
+			string);
+	});
+var $author$project$Main$shareUrl = function (model) {
+	var query = A2(
+		$elm$core$String$join,
+		'',
+		A2(
+			$elm$core$List$map,
+			function (c) {
+				return A3(
+					$elm$core$String$padLeft,
+					3,
+					_Utils_chr('0'),
+					$elm$core$String$fromInt(c.id));
+			},
+			model.selectedCards));
+	var hostUrl = model.hostUrl;
+	var _v0 = A2($elm$core$Debug$log, 'shareUrl - query', query);
+	return _Utils_update(
+		hostUrl,
+		{
+			query: $elm$core$Maybe$Just('deck=' + query)
+		});
+};
+var $rundis$elm_bootstrap$Bootstrap$Modal$Show = {$: 'Show'};
+var $rundis$elm_bootstrap$Bootstrap$Modal$shown = $rundis$elm_bootstrap$Bootstrap$Modal$Show;
 var $author$project$List$Extras$elemIndexBy = F2(
 	function (predicate, list) {
 		var run = F2(
@@ -7634,6 +8567,50 @@ var $author$project$Main$swapCardsBy = F3(
 			return A2($elm$core$Debug$log, 'Tried to swap cards for a card not found in the set.', cards);
 		}
 	});
+var $elm$url$Url$addPort = F2(
+	function (maybePort, starter) {
+		if (maybePort.$ === 'Nothing') {
+			return starter;
+		} else {
+			var port_ = maybePort.a;
+			return starter + (':' + $elm$core$String$fromInt(port_));
+		}
+	});
+var $elm$url$Url$addPrefixed = F3(
+	function (prefix, maybeSegment, starter) {
+		if (maybeSegment.$ === 'Nothing') {
+			return starter;
+		} else {
+			var segment = maybeSegment.a;
+			return _Utils_ap(
+				starter,
+				_Utils_ap(prefix, segment));
+		}
+	});
+var $elm$url$Url$toString = function (url) {
+	var http = function () {
+		var _v0 = url.protocol;
+		if (_v0.$ === 'Http') {
+			return 'http://';
+		} else {
+			return 'https://';
+		}
+	}();
+	return A3(
+		$elm$url$Url$addPrefixed,
+		'#',
+		url.fragment,
+		A3(
+			$elm$url$Url$addPrefixed,
+			'?',
+			url.query,
+			_Utils_ap(
+				A2(
+					$elm$url$Url$addPort,
+					url.port_,
+					_Utils_ap(http, url.host)),
+				url.path)));
+};
 var $author$project$Main$update = F2(
 	function (msg, model) {
 		switch (msg.$) {
@@ -7648,6 +8625,18 @@ var $author$project$Main$update = F2(
 				return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
 			case 'LinkClicked':
 				return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
+			case 'ShowShareModal':
+				return _Utils_Tuple2(
+					_Utils_update(
+						model,
+						{shareModalVisibility: $rundis$elm_bootstrap$Bootstrap$Modal$shown}),
+					$elm$core$Platform$Cmd$none);
+			case 'HideShareModal':
+				return _Utils_Tuple2(
+					_Utils_update(
+						model,
+						{shareModalVisibility: $rundis$elm_bootstrap$Bootstrap$Modal$hidden}),
+					$elm$core$Platform$Cmd$none);
 			case 'SelectCard':
 				var id = msg.a;
 				var card = A2(
@@ -7658,19 +8647,17 @@ var $author$project$Main$update = F2(
 					model.cardPool);
 				if (card.$ === 'Just') {
 					var c = card.a;
+					var updatedModel = _Utils_update(
+						model,
+						{
+							notSelectedCards: A2($elm_community$list_extra$List$Extra$remove, c, model.notSelectedCards),
+							selectedCards: A2($elm$core$List$cons, c, model.selectedCards)
+						});
+					var navUrl = $elm$url$Url$toString(
+						$author$project$Main$shareUrl(updatedModel));
 					return _Utils_Tuple2(
-						_Utils_update(
-							model,
-							{
-								cardPool: A2(
-									$elm$core$List$filter,
-									function (cc) {
-										return !_Utils_eq(cc.id, id);
-									},
-									model.cardPool),
-								selectedCards: A2($elm$core$List$cons, c, model.selectedCards)
-							}),
-						$elm$core$Platform$Cmd$none);
+						updatedModel,
+						A2($elm$browser$Browser$Navigation$pushUrl, model.navKey, navUrl));
 				} else {
 					return A2(
 						$elm$core$Debug$log,
@@ -7687,19 +8674,22 @@ var $author$project$Main$update = F2(
 					model.selectedCards);
 				if (card.$ === 'Just') {
 					var c = card.a;
+					var updatedModel = _Utils_update(
+						model,
+						{
+							notSelectedCards: A2($elm$core$List$cons, c, model.notSelectedCards),
+							selectedCards: A2(
+								$elm$core$List$filter,
+								function (cc) {
+									return !_Utils_eq(cc.id, id);
+								},
+								model.selectedCards)
+						});
+					var navUrl = $elm$url$Url$toString(
+						$author$project$Main$shareUrl(updatedModel));
 					return _Utils_Tuple2(
-						_Utils_update(
-							model,
-							{
-								cardPool: A2($elm$core$List$cons, c, model.cardPool),
-								selectedCards: A2(
-									$elm$core$List$filter,
-									function (cc) {
-										return !_Utils_eq(cc.id, id);
-									},
-									model.selectedCards)
-							}),
-						$elm$core$Platform$Cmd$none);
+						updatedModel,
+						A2($elm$browser$Browser$Navigation$pushUrl, model.navKey, navUrl));
 				} else {
 					return A2(
 						$elm$core$Debug$log,
@@ -7737,11 +8727,14 @@ var $author$project$Main$update = F2(
 						}),
 					$elm$core$Platform$Cmd$none);
 			case 'ResetCards':
+				var updatedModel = _Utils_update(
+					model,
+					{notSelectedCards: $author$project$CardData$cards, selectedCards: _List_Nil});
+				var url = $elm$url$Url$toString(
+					$author$project$Main$shareUrl(updatedModel));
 				return _Utils_Tuple2(
-					_Utils_update(
-						model,
-						{cardPool: $author$project$Cards$cards, selectedCards: _List_Nil}),
-					$elm$core$Platform$Cmd$none);
+					updatedModel,
+					A2($elm$browser$Browser$Navigation$pushUrl, model.navKey, url));
 			default:
 				var value = msg.a;
 				return $elm$core$String$isEmpty(value) ? _Utils_Tuple2(
@@ -7834,20 +8827,20 @@ var $author$project$Cards$containsWords = F2(
 		};
 		return A2($elm$core$List$all, contains, words);
 	});
-var $author$project$Main$filteredCards = function (model) {
-	var _v0 = model.filter;
-	if (_v0.$ === 'Just') {
-		var f = _v0.a;
-		var filter = $elm$core$String$toLower(f);
-		var parts = A2($elm$core$String$split, ' ', filter);
-		return A2(
-			$elm$core$List$filter,
-			$author$project$Cards$containsWords(parts),
-			model.cardPool);
-	} else {
-		return model.cardPool;
-	}
-};
+var $author$project$Main$filteredCards = F2(
+	function (filter, cards) {
+		if (filter.$ === 'Just') {
+			var f = filter.a;
+			var lowerCaseFilter = $elm$core$String$toLower(f);
+			var parts = A2($elm$core$String$split, ' ', lowerCaseFilter);
+			return A2(
+				$elm$core$List$filter,
+				$author$project$Cards$containsWords(parts),
+				cards);
+		} else {
+			return cards;
+		}
+	});
 var $author$project$Main$SelectCard = function (a) {
 	return {$: 'SelectCard', a: a};
 };
@@ -7903,16 +8896,6 @@ var $rundis$elm_bootstrap$Bootstrap$Card$Internal$applyBlockModifier = F2(
 		}
 	});
 var $rundis$elm_bootstrap$Bootstrap$Card$Internal$defaultBlockOptions = {aligned: $elm$core$Maybe$Nothing, attributes: _List_Nil, coloring: $elm$core$Maybe$Nothing, textColoring: $elm$core$Maybe$Nothing};
-var $elm$core$Maybe$map = F2(
-	function (f, maybe) {
-		if (maybe.$ === 'Just') {
-			var value = maybe.a;
-			return $elm$core$Maybe$Just(
-				f(value));
-		} else {
-			return $elm$core$Maybe$Nothing;
-		}
-	});
 var $rundis$elm_bootstrap$Bootstrap$General$Internal$screenSizeOption = function (size) {
 	switch (size.$) {
 		case 'XS':
@@ -7937,15 +8920,6 @@ var $rundis$elm_bootstrap$Bootstrap$Internal$Text$textAlignDirOption = function 
 			return 'right';
 	}
 };
-var $elm$core$Maybe$withDefault = F2(
-	function (_default, maybe) {
-		if (maybe.$ === 'Just') {
-			var value = maybe.a;
-			return value;
-		} else {
-			return _default;
-		}
-	});
 var $rundis$elm_bootstrap$Bootstrap$Internal$Text$textAlignClass = function (_v0) {
 	var dir = _v0.dir;
 	var size = _v0.size;
@@ -8070,15 +9044,6 @@ var $rundis$elm_bootstrap$Bootstrap$Card$block = F3(
 				}));
 	});
 var $elm$html$Html$button = _VirtualDom_node('button');
-var $elm$core$Maybe$andThen = F2(
-	function (callback, maybeValue) {
-		if (maybeValue.$ === 'Just') {
-			var value = maybeValue.a;
-			return callback(value);
-		} else {
-			return $elm$core$Maybe$Nothing;
-		}
-	});
 var $rundis$elm_bootstrap$Bootstrap$Internal$Button$applyModifier = F2(
 	function (modifier, options) {
 		switch (modifier.$) {
@@ -9714,10 +10679,11 @@ var $author$project$Main$cardPoolView = function (model) {
 				A2(
 					$elm$core$List$map,
 					$author$project$Main$fullCardView,
-					$author$project$Main$filteredCards(model)))
+					A2($author$project$Main$filteredCards, model.filter, model.notSelectedCards)))
 			]));
 };
 var $author$project$Main$ResetCards = {$: 'ResetCards'};
+var $author$project$Main$ShowShareModal = {$: 'ShowShareModal'};
 var $rundis$elm_bootstrap$Bootstrap$Navbar$Brand = function (a) {
 	return {$: 'Brand', a: a};
 };
@@ -10220,37 +11186,6 @@ var $rundis$elm_bootstrap$Bootstrap$Navbar$renderCustom = function (items_) {
 		},
 		items_);
 };
-var $elm$core$Dict$get = F2(
-	function (targetKey, dict) {
-		get:
-		while (true) {
-			if (dict.$ === 'RBEmpty_elm_builtin') {
-				return $elm$core$Maybe$Nothing;
-			} else {
-				var key = dict.b;
-				var value = dict.c;
-				var left = dict.d;
-				var right = dict.e;
-				var _v1 = A2($elm$core$Basics$compare, targetKey, key);
-				switch (_v1.$) {
-					case 'LT':
-						var $temp$targetKey = targetKey,
-							$temp$dict = left;
-						targetKey = $temp$targetKey;
-						dict = $temp$dict;
-						continue get;
-					case 'EQ':
-						return $elm$core$Maybe$Just(value);
-					default:
-						var $temp$targetKey = targetKey,
-							$temp$dict = right;
-						targetKey = $temp$targetKey;
-						dict = $temp$dict;
-						continue get;
-				}
-			}
-		}
-	});
 var $rundis$elm_bootstrap$Bootstrap$Navbar$getOrInitDropdownStatus = F2(
 	function (id, _v0) {
 		var dropdowns = _v0.a.dropdowns;
@@ -10603,7 +11538,8 @@ var $author$project$Main$header = function (model) {
 					$rundis$elm_bootstrap$Bootstrap$Navbar$itemLink,
 					_List_fromArray(
 						[
-							$elm$html$Html$Attributes$href('#')
+							$elm$html$Html$Attributes$href('#'),
+							$elm$html$Html$Events$onClick($author$project$Main$ShowShareModal)
 						]),
 					_List_fromArray(
 						[
@@ -10631,6 +11567,7 @@ var $rundis$elm_bootstrap$Bootstrap$Grid$Row$attrs = function (attrs_) {
 	return $rundis$elm_bootstrap$Bootstrap$Grid$Internal$RowAttrs(attrs_);
 };
 var $rundis$elm_bootstrap$Bootstrap$Utilities$Border$dark = A2($rundis$elm_bootstrap$Bootstrap$Internal$Role$toClass, 'border', $rundis$elm_bootstrap$Bootstrap$Internal$Role$Dark);
+var $author$project$Main$maxDeckSize = 15;
 var $author$project$Main$DeselectCard = function (a) {
 	return {$: 'DeselectCard', a: a};
 };
@@ -10794,9 +11731,9 @@ var $rundis$elm_bootstrap$Bootstrap$Grid$Internal$Col4 = {$: 'Col4'};
 var $rundis$elm_bootstrap$Bootstrap$Grid$Col$xs4 = A2($rundis$elm_bootstrap$Bootstrap$Grid$Internal$width, $rundis$elm_bootstrap$Bootstrap$General$Internal$XS, $rundis$elm_bootstrap$Bootstrap$Grid$Internal$Col4);
 var $author$project$Main$inventoryView = function (model) {
 	var numberOfSelectedCards = $elm$core$List$length(model.selectedCards);
-	var selectionCountString = '(' + ($elm$core$String$fromInt(numberOfSelectedCards) + '/15)');
-	var textColor = (numberOfSelectedCards <= 15) ? $elm$html$Html$Attributes$class('') : $elm$html$Html$Attributes$class('text-warning');
-	var border = (numberOfSelectedCards <= 15) ? $rundis$elm_bootstrap$Bootstrap$Utilities$Border$dark : $rundis$elm_bootstrap$Bootstrap$Utilities$Border$warning;
+	var selectionCountString = '(' + ($elm$core$String$fromInt(numberOfSelectedCards) + ('/' + ($elm$core$String$fromInt($author$project$Main$maxDeckSize) + ')')));
+	var textColor = (_Utils_cmp(numberOfSelectedCards, $author$project$Main$maxDeckSize) < 1) ? $elm$html$Html$Attributes$class('') : $elm$html$Html$Attributes$class('text-warning');
+	var border = (_Utils_cmp(numberOfSelectedCards, $author$project$Main$maxDeckSize) < 1) ? $rundis$elm_bootstrap$Bootstrap$Utilities$Border$dark : $rundis$elm_bootstrap$Bootstrap$Utilities$Border$warning;
 	return A2(
 		$rundis$elm_bootstrap$Bootstrap$Grid$col,
 		_List_fromArray(
@@ -10869,9 +11806,512 @@ var $author$project$Main$inventoryView = function (model) {
 					]))
 			]));
 };
+var $author$project$Main$HideShareModal = {$: 'HideShareModal'};
+var $rundis$elm_bootstrap$Bootstrap$Modal$Body = function (a) {
+	return {$: 'Body', a: a};
+};
+var $rundis$elm_bootstrap$Bootstrap$Modal$Config = function (a) {
+	return {$: 'Config', a: a};
+};
+var $rundis$elm_bootstrap$Bootstrap$Modal$body = F3(
+	function (attributes, children, _v0) {
+		var conf = _v0.a;
+		return $rundis$elm_bootstrap$Bootstrap$Modal$Config(
+			_Utils_update(
+				conf,
+				{
+					body: $elm$core$Maybe$Just(
+						$rundis$elm_bootstrap$Bootstrap$Modal$Body(
+							{attributes: attributes, children: children}))
+				}));
+	});
+var $rundis$elm_bootstrap$Bootstrap$Modal$config = function (closeMsg) {
+	return $rundis$elm_bootstrap$Bootstrap$Modal$Config(
+		{
+			body: $elm$core$Maybe$Nothing,
+			closeMsg: closeMsg,
+			footer: $elm$core$Maybe$Nothing,
+			header: $elm$core$Maybe$Nothing,
+			options: {attrs: _List_Nil, centered: true, hideOnBackdropClick: true, modalSize: $elm$core$Maybe$Nothing, scrollableBody: false},
+			withAnimation: $elm$core$Maybe$Nothing
+		});
+};
+var $rundis$elm_bootstrap$Bootstrap$Modal$Footer = function (a) {
+	return {$: 'Footer', a: a};
+};
+var $rundis$elm_bootstrap$Bootstrap$Modal$footer = F3(
+	function (attributes, children, _v0) {
+		var conf = _v0.a;
+		return $rundis$elm_bootstrap$Bootstrap$Modal$Config(
+			_Utils_update(
+				conf,
+				{
+					footer: $elm$core$Maybe$Just(
+						$rundis$elm_bootstrap$Bootstrap$Modal$Footer(
+							{attributes: attributes, children: children}))
+				}));
+	});
+var $elm$html$Html$h3 = _VirtualDom_node('h3');
+var $rundis$elm_bootstrap$Bootstrap$Modal$Header = function (a) {
+	return {$: 'Header', a: a};
+};
+var $rundis$elm_bootstrap$Bootstrap$Modal$header = F3(
+	function (attributes, children, _v0) {
+		var conf = _v0.a;
+		return $rundis$elm_bootstrap$Bootstrap$Modal$Config(
+			_Utils_update(
+				conf,
+				{
+					header: $elm$core$Maybe$Just(
+						$rundis$elm_bootstrap$Bootstrap$Modal$Header(
+							{attributes: attributes, children: children}))
+				}));
+	});
+var $rundis$elm_bootstrap$Bootstrap$Modal$titledHeader = F3(
+	function (itemFn, attributes, children) {
+		return A2(
+			$rundis$elm_bootstrap$Bootstrap$Modal$header,
+			_List_Nil,
+			_List_fromArray(
+				[
+					A2(
+					itemFn,
+					A2(
+						$elm$core$List$cons,
+						$elm$html$Html$Attributes$class('modal-title'),
+						attributes),
+					children)
+				]));
+	});
+var $rundis$elm_bootstrap$Bootstrap$Modal$h3 = $rundis$elm_bootstrap$Bootstrap$Modal$titledHeader($elm$html$Html$h3);
+var $rundis$elm_bootstrap$Bootstrap$Modal$hideOnBackdropClick = F2(
+	function (hide, _v0) {
+		var conf = _v0.a;
+		var options = conf.options;
+		return $rundis$elm_bootstrap$Bootstrap$Modal$Config(
+			_Utils_update(
+				conf,
+				{
+					options: _Utils_update(
+						options,
+						{hideOnBackdropClick: hide})
+				}));
+	});
+var $rundis$elm_bootstrap$Bootstrap$Internal$Button$Outlined = function (a) {
+	return {$: 'Outlined', a: a};
+};
+var $rundis$elm_bootstrap$Bootstrap$Button$outlinePrimary = $rundis$elm_bootstrap$Bootstrap$Internal$Button$Coloring(
+	$rundis$elm_bootstrap$Bootstrap$Internal$Button$Outlined($rundis$elm_bootstrap$Bootstrap$Internal$Button$Primary));
+var $rundis$elm_bootstrap$Bootstrap$Modal$small = function (_v0) {
+	var conf = _v0.a;
+	var options = conf.options;
+	return $rundis$elm_bootstrap$Bootstrap$Modal$Config(
+		_Utils_update(
+			conf,
+			{
+				options: _Utils_update(
+					options,
+					{
+						modalSize: $elm$core$Maybe$Just($rundis$elm_bootstrap$Bootstrap$General$Internal$SM)
+					})
+			}));
+};
+var $elm$virtual_dom$VirtualDom$attribute = F2(
+	function (key, value) {
+		return A2(
+			_VirtualDom_attribute,
+			_VirtualDom_noOnOrFormAction(key),
+			_VirtualDom_noJavaScriptOrHtmlUri(value));
+	});
+var $elm$html$Html$Attributes$attribute = $elm$virtual_dom$VirtualDom$attribute;
+var $rundis$elm_bootstrap$Bootstrap$Modal$StartClose = {$: 'StartClose'};
+var $rundis$elm_bootstrap$Bootstrap$Modal$getCloseMsg = function (config_) {
+	var _v0 = config_.withAnimation;
+	if (_v0.$ === 'Just') {
+		var animationMsg = _v0.a;
+		return animationMsg($rundis$elm_bootstrap$Bootstrap$Modal$StartClose);
+	} else {
+		return config_.closeMsg;
+	}
+};
+var $rundis$elm_bootstrap$Bootstrap$Modal$isFade = function (conf) {
+	return A2(
+		$elm$core$Maybe$withDefault,
+		false,
+		A2(
+			$elm$core$Maybe$map,
+			function (_v0) {
+				return true;
+			},
+			conf.withAnimation));
+};
+var $rundis$elm_bootstrap$Bootstrap$Modal$backdrop = F2(
+	function (visibility, conf) {
+		var attributes = function () {
+			switch (visibility.$) {
+				case 'Show':
+					return _Utils_ap(
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$classList(
+								_List_fromArray(
+									[
+										_Utils_Tuple2('modal-backdrop', true),
+										_Utils_Tuple2(
+										'fade',
+										$rundis$elm_bootstrap$Bootstrap$Modal$isFade(conf)),
+										_Utils_Tuple2('show', true)
+									]))
+							]),
+						conf.options.hideOnBackdropClick ? _List_fromArray(
+							[
+								$elm$html$Html$Events$onClick(
+								$rundis$elm_bootstrap$Bootstrap$Modal$getCloseMsg(conf))
+							]) : _List_Nil);
+				case 'StartClose':
+					return _List_fromArray(
+						[
+							$elm$html$Html$Attributes$classList(
+							_List_fromArray(
+								[
+									_Utils_Tuple2('modal-backdrop', true),
+									_Utils_Tuple2('fade', true),
+									_Utils_Tuple2('show', true)
+								]))
+						]);
+				case 'FadeClose':
+					return _List_fromArray(
+						[
+							$elm$html$Html$Attributes$classList(
+							_List_fromArray(
+								[
+									_Utils_Tuple2('modal-backdrop', true),
+									_Utils_Tuple2('fade', true),
+									_Utils_Tuple2('show', false)
+								]))
+						]);
+				default:
+					return _List_fromArray(
+						[
+							$elm$html$Html$Attributes$classList(
+							_List_fromArray(
+								[
+									_Utils_Tuple2('modal-backdrop', false),
+									_Utils_Tuple2(
+									'fade',
+									$rundis$elm_bootstrap$Bootstrap$Modal$isFade(conf)),
+									_Utils_Tuple2('show', false)
+								]))
+						]);
+			}
+		}();
+		return _List_fromArray(
+			[
+				A2($elm$html$Html$div, attributes, _List_Nil)
+			]);
+	});
+var $rundis$elm_bootstrap$Bootstrap$Utilities$DomHelper$className = A2(
+	$elm$json$Json$Decode$at,
+	_List_fromArray(
+		['className']),
+	$elm$json$Json$Decode$string);
+var $rundis$elm_bootstrap$Bootstrap$Modal$containerClickDecoder = function (closeMsg) {
+	return A2(
+		$elm$json$Json$Decode$andThen,
+		function (c) {
+			return A2($elm$core$String$contains, 'elm-bootstrap-modal', c) ? $elm$json$Json$Decode$succeed(closeMsg) : $elm$json$Json$Decode$fail('ignoring');
+		},
+		$rundis$elm_bootstrap$Bootstrap$Utilities$DomHelper$target($rundis$elm_bootstrap$Bootstrap$Utilities$DomHelper$className));
+};
+var $rundis$elm_bootstrap$Bootstrap$Modal$display = F2(
+	function (visibility, conf) {
+		switch (visibility.$) {
+			case 'Show':
+				return _List_fromArray(
+					[
+						A2($elm$html$Html$Attributes$style, 'pointer-events', 'none'),
+						A2($elm$html$Html$Attributes$style, 'display', 'block'),
+						$elm$html$Html$Attributes$classList(
+						_List_fromArray(
+							[
+								_Utils_Tuple2('modal', true),
+								_Utils_Tuple2(
+								'fade',
+								$rundis$elm_bootstrap$Bootstrap$Modal$isFade(conf)),
+								_Utils_Tuple2('show', true)
+							]))
+					]);
+			case 'StartClose':
+				return _List_fromArray(
+					[
+						A2($elm$html$Html$Attributes$style, 'pointer-events', 'none'),
+						A2($elm$html$Html$Attributes$style, 'display', 'block'),
+						$elm$html$Html$Attributes$classList(
+						_List_fromArray(
+							[
+								_Utils_Tuple2('modal', true),
+								_Utils_Tuple2('fade', true),
+								_Utils_Tuple2('show', true)
+							]))
+					]);
+			case 'FadeClose':
+				return _List_fromArray(
+					[
+						A2($elm$html$Html$Attributes$style, 'pointer-events', 'none'),
+						A2($elm$html$Html$Attributes$style, 'display', 'block'),
+						$elm$html$Html$Attributes$classList(
+						_List_fromArray(
+							[
+								_Utils_Tuple2('modal', true),
+								_Utils_Tuple2('fade', true),
+								_Utils_Tuple2('show', false)
+							])),
+						A2(
+						$elm$html$Html$Events$on,
+						'transitionend',
+						$elm$json$Json$Decode$succeed(conf.closeMsg))
+					]);
+			default:
+				return _List_fromArray(
+					[
+						A2($elm$html$Html$Attributes$style, 'height', '0px'),
+						A2($elm$html$Html$Attributes$style, 'display', 'block'),
+						$elm$html$Html$Attributes$classList(
+						_List_fromArray(
+							[
+								_Utils_Tuple2('modal', true),
+								_Utils_Tuple2(
+								'fade',
+								$rundis$elm_bootstrap$Bootstrap$Modal$isFade(conf)),
+								_Utils_Tuple2('show', false)
+							]))
+					]);
+		}
+	});
+var $rundis$elm_bootstrap$Bootstrap$Modal$modalClass = function (size) {
+	var _v0 = $rundis$elm_bootstrap$Bootstrap$General$Internal$screenSizeOption(size);
+	if (_v0.$ === 'Just') {
+		var s = _v0.a;
+		return _List_fromArray(
+			[
+				$elm$html$Html$Attributes$class('modal-' + s)
+			]);
+	} else {
+		return _List_Nil;
+	}
+};
+var $rundis$elm_bootstrap$Bootstrap$Modal$modalAttributes = function (options) {
+	return _Utils_ap(
+		options.attrs,
+		_Utils_ap(
+			_List_fromArray(
+				[
+					$elm$html$Html$Attributes$classList(
+					_List_fromArray(
+						[
+							_Utils_Tuple2('modal-dialog', true),
+							_Utils_Tuple2('modal-dialog-centered', options.centered),
+							_Utils_Tuple2('modal-dialog-scrollable', options.scrollableBody)
+						])),
+					A2($elm$html$Html$Attributes$style, 'pointer-events', 'auto')
+				]),
+			A2(
+				$elm$core$Maybe$withDefault,
+				_List_Nil,
+				A2($elm$core$Maybe$map, $rundis$elm_bootstrap$Bootstrap$Modal$modalClass, options.modalSize))));
+};
+var $rundis$elm_bootstrap$Bootstrap$Modal$renderBody = function (maybeBody) {
+	if (maybeBody.$ === 'Just') {
+		var cfg = maybeBody.a.a;
+		return $elm$core$Maybe$Just(
+			A2(
+				$elm$html$Html$div,
+				A2(
+					$elm$core$List$cons,
+					$elm$html$Html$Attributes$class('modal-body'),
+					cfg.attributes),
+				cfg.children));
+	} else {
+		return $elm$core$Maybe$Nothing;
+	}
+};
+var $rundis$elm_bootstrap$Bootstrap$Modal$renderFooter = function (maybeFooter) {
+	if (maybeFooter.$ === 'Just') {
+		var cfg = maybeFooter.a.a;
+		return $elm$core$Maybe$Just(
+			A2(
+				$elm$html$Html$div,
+				A2(
+					$elm$core$List$cons,
+					$elm$html$Html$Attributes$class('modal-footer'),
+					cfg.attributes),
+				cfg.children));
+	} else {
+		return $elm$core$Maybe$Nothing;
+	}
+};
+var $rundis$elm_bootstrap$Bootstrap$Modal$closeButton = function (closeMsg) {
+	return A2(
+		$elm$html$Html$button,
+		_List_fromArray(
+			[
+				$elm$html$Html$Attributes$class('close'),
+				$elm$html$Html$Events$onClick(closeMsg)
+			]),
+		_List_fromArray(
+			[
+				$elm$html$Html$text('×')
+			]));
+};
+var $rundis$elm_bootstrap$Bootstrap$Modal$renderHeader = function (conf_) {
+	var _v0 = conf_.header;
+	if (_v0.$ === 'Just') {
+		var cfg = _v0.a.a;
+		return $elm$core$Maybe$Just(
+			A2(
+				$elm$html$Html$div,
+				A2(
+					$elm$core$List$cons,
+					$elm$html$Html$Attributes$class('modal-header'),
+					cfg.attributes),
+				_Utils_ap(
+					cfg.children,
+					_List_fromArray(
+						[
+							$rundis$elm_bootstrap$Bootstrap$Modal$closeButton(
+							$rundis$elm_bootstrap$Bootstrap$Modal$getCloseMsg(conf_))
+						]))));
+	} else {
+		return $elm$core$Maybe$Nothing;
+	}
+};
+var $elm$html$Html$Attributes$tabindex = function (n) {
+	return A2(
+		_VirtualDom_attribute,
+		'tabIndex',
+		$elm$core$String$fromInt(n));
+};
+var $rundis$elm_bootstrap$Bootstrap$Modal$view = F2(
+	function (visibility, _v0) {
+		var conf = _v0.a;
+		return A2(
+			$elm$html$Html$div,
+			_List_Nil,
+			_Utils_ap(
+				_List_fromArray(
+					[
+						A2(
+						$elm$html$Html$div,
+						_Utils_ap(
+							_List_fromArray(
+								[
+									$elm$html$Html$Attributes$tabindex(-1)
+								]),
+							A2($rundis$elm_bootstrap$Bootstrap$Modal$display, visibility, conf)),
+						_List_fromArray(
+							[
+								A2(
+								$elm$html$Html$div,
+								_Utils_ap(
+									_List_fromArray(
+										[
+											A2($elm$html$Html$Attributes$attribute, 'role', 'document'),
+											$elm$html$Html$Attributes$class('elm-bootstrap-modal')
+										]),
+									_Utils_ap(
+										$rundis$elm_bootstrap$Bootstrap$Modal$modalAttributes(conf.options),
+										conf.options.hideOnBackdropClick ? _List_fromArray(
+											[
+												A2(
+												$elm$html$Html$Events$on,
+												'click',
+												$rundis$elm_bootstrap$Bootstrap$Modal$containerClickDecoder(conf.closeMsg))
+											]) : _List_Nil)),
+								_List_fromArray(
+									[
+										A2(
+										$elm$html$Html$div,
+										_List_fromArray(
+											[
+												$elm$html$Html$Attributes$class('modal-content')
+											]),
+										A2(
+											$elm$core$List$filterMap,
+											$elm$core$Basics$identity,
+											_List_fromArray(
+												[
+													$rundis$elm_bootstrap$Bootstrap$Modal$renderHeader(conf),
+													$rundis$elm_bootstrap$Bootstrap$Modal$renderBody(conf.body),
+													$rundis$elm_bootstrap$Bootstrap$Modal$renderFooter(conf.footer)
+												])))
+									]))
+							]))
+					]),
+				A2($rundis$elm_bootstrap$Bootstrap$Modal$backdrop, visibility, conf)));
+	});
+var $author$project$Main$shareModal = function (model) {
+	var modalShareUrl = $elm$url$Url$toString(
+		$author$project$Main$shareUrl(model));
+	return A2(
+		$rundis$elm_bootstrap$Bootstrap$Modal$view,
+		model.shareModalVisibility,
+		A3(
+			$rundis$elm_bootstrap$Bootstrap$Modal$footer,
+			_List_Nil,
+			_List_fromArray(
+				[
+					A2(
+					$rundis$elm_bootstrap$Bootstrap$Button$button,
+					_List_fromArray(
+						[
+							$rundis$elm_bootstrap$Bootstrap$Button$outlinePrimary,
+							$rundis$elm_bootstrap$Bootstrap$Button$attrs(
+							_List_fromArray(
+								[
+									$elm$html$Html$Events$onClick($author$project$Main$HideShareModal)
+								]))
+						]),
+					_List_fromArray(
+						[
+							$elm$html$Html$text('Close')
+						]))
+				]),
+			A3(
+				$rundis$elm_bootstrap$Bootstrap$Modal$body,
+				_List_Nil,
+				_List_fromArray(
+					[
+						A2(
+						$elm$html$Html$p,
+						_List_Nil,
+						_List_fromArray(
+							[
+								A2(
+								$elm$html$Html$a,
+								_List_Nil,
+								_List_fromArray(
+									[
+										$elm$html$Html$text(modalShareUrl)
+									]))
+							]))
+					]),
+				A3(
+					$rundis$elm_bootstrap$Bootstrap$Modal$h3,
+					_List_Nil,
+					_List_fromArray(
+						[
+							$elm$html$Html$text('Share build')
+						]),
+					A2(
+						$rundis$elm_bootstrap$Bootstrap$Modal$hideOnBackdropClick,
+						true,
+						$rundis$elm_bootstrap$Bootstrap$Modal$small(
+							$rundis$elm_bootstrap$Bootstrap$Modal$config($author$project$Main$HideShareModal)))))));
+};
 var $author$project$Main$mainContent = function (model) {
 	return _List_fromArray(
 		[
+			$author$project$Main$shareModal(model),
 			$author$project$Main$header(model),
 			A2(
 			$rundis$elm_bootstrap$Bootstrap$Grid$row,

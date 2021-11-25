@@ -1,4 +1,6 @@
-module List.Extras exposing (addAndDrop, elemIndexBy, limit, removeIndex, replaceBy)
+module List.Extras exposing (..)
+
+import List.Extra exposing (..)
 
 
 limit : Int -> List a -> List a
@@ -65,3 +67,26 @@ replaceBy predicate new items =
             )
             []
         |> List.reverse
+
+
+{-| Takes a predicate and a list of items.
+Splits the list into two parts:
+ left: items that don't match the predicate
+ right: items that match the predicate
+
+    splitBy ((>) 3) [ 1, 9, 2, 8 ] = ([1, 2], [9, 8])
+-}
+splitBy : (a -> Bool) -> List a -> (List a, List a)
+splitBy predicate items =
+    let
+        run nonMatches matches remaining =
+            case remaining of
+                [] ->
+                    (nonMatches |> List.reverse, matches |> List.reverse)
+                head :: tail ->
+                    if head |> predicate then
+                        run nonMatches (head :: matches) tail
+                    else
+                        run (head :: nonMatches) matches tail
+    in
+    run [] [] items

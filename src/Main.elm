@@ -5,8 +5,8 @@ import Bootstrap.Card as Card
 import Bootstrap.Card.Block as Block
 import Bootstrap.Grid as Grid
 import Bootstrap.Grid.Col as Col
+import Bootstrap.Modal as Modal
 import Bootstrap.Navbar as Navbar
-import Bootstrap.Table exposing (RowOption, rowLight)
 import Bootstrap.Text as Text
 import Bootstrap.Utilities.Border as Border
 import Bootstrap.Utilities.Display as Display
@@ -15,7 +15,8 @@ import Bootstrap.Utilities.Flex as Flex
 import Bootstrap.Utilities.Size as Size
 import Bootstrap.Utilities.Spacing as Spacing
 import Browser
-import Cards exposing (Card, CardId, Kind(..), cards)
+import Cards exposing (Card, CardId, Kind(..))
+import CardData exposing (cards)
 import Html exposing (Attribute, Html, div, img, text)
 import Html.Attributes exposing (..)
 import Html.Events exposing (onClick, onInput)
@@ -24,10 +25,22 @@ import List.Extras as List
 import List.FlatMap as List
 import Bootstrap.Text exposing (Color)
 import Bootstrap.Grid.Row
-import Browser.Navigation exposing (Key)
+import Browser.Navigation as Nav exposing (Key)
+import Maybe.Extra as Maybe
 import Url exposing (Url)
 import Browser exposing (UrlRequest)
+import Url.Parser.Query as Query
+import String.Extra as String
+import String.Extras as String
+import Url.Parser exposing (Parser)
+import Platform exposing (Router)
 
+
+maxDeckSize : Int
+maxDeckSize = 15
+
+cardIdLength : Int
+cardIdLength = 3
 
 main : Program Flags Model Msg
 main =
@@ -41,7 +54,6 @@ main =
         }
 
 
-
 -- Model -------------------------------------------------------------------------------------
 
 
@@ -53,35 +65,95 @@ type alias Model =
     { navbarState : Navbar.State
     , viewCardImages: Bool
     , viewCardText: Bool
+    , shareModalVisibility: Modal.Visibility
+    , hostUrl: Url
+    , navKey: Key
     --------------
-    , cardPool : List Card
-    , selectedCards : List Card
+    , cardPool : List Card -- All known cards, should never be modified
+    , selectedCards : List Card -- All currently selected cards
+    , notSelectedCards : List Card -- All currently not selected cards
     , filter : Maybe String
     }
 
-filteredCards: Model -> List Card
-filteredCards model =
-    case model.filter of
+{-| Takes a string and splits it into chunks of size `cardIdSize` and parses them as Ints.
+    Returns `Nothing` if any of the chunks cannot be parsed.
+    Expects the string length to be a multiple of `cardIdSize`.
+
+        parseCardIds "001002003004" == Just [ 1, 2, 4, 5 ]
+-}
+parseCardIds : String -> Maybe (List Int)
+parseCardIds query =
+    query
+    |> String.chunks cardIdLength
+    |> List.map String.toInt |> Maybe.combine
+
+
+filteredCards: Maybe String -> List Card -> List Card
+filteredCards filter cards =
+    case filter of
         Just f ->
             let 
-                filter = f |> String.toLower
-                parts = filter |> String.split " "
+                lowerCaseFilter = f |> String.toLower
+                parts = lowerCaseFilter |> String.split " "
             in
-            model.cardPool |> List.filter (Cards.containsWords parts)
+            cards |> List.filter (Cards.containsWords parts)
         Nothing ->
-            model.cardPool
+            cards
+
+
+tryDeckQueryArgument : Url -> Maybe String
+tryDeckQueryArgument url =
+    case (Url.Parser.parse (Url.Parser.query (Query.string "deck")) url) of
+        Just v -> 
+            case v of
+                Just vv ->
+                    let
+                        lengthMismatchMessage =
+                            "The given value for the \"deck\" query parameter is invalid. Needs to be multiple of "
+                    in
+                    if vv |> String.isEmpty then Nothing
+                    else if (vv |> String.length |> modBy cardIdLength) /= 0 then
+                        let _ = Debug.log lengthMismatchMessage (cardIdLength |> String.fromInt)
+                        in
+                        Nothing
+                    else Just vv
+                Nothing ->
+                    Nothing
+        Nothing -> 
+            Nothing
+
 
 init : Flags -> Url -> Key -> ( Model, Cmd Msg )
-init flags url _ =
+init _ url key =
     let
         ( navbarState, navbarCmd ) =
             Navbar.initialState NavbarMsg
+
+        cardIdsFromQuery =
+            url
+            |> tryDeckQueryArgument
+            |> Maybe.andThen parseCardIds
+            |> Maybe.map List.unique
+            |> Maybe.withDefault []
+
+        (notSelected, selected) =
+            List.splitBy (\c ->  cardIdsFromQuery |> List.any (\cardId -> c.id == cardId)) cards
+
+        hostUrl =
+            { url | query = Nothing, fragment = Nothing }
+
+        _ =
+            Debug.log "url" url
     in
     ( { cardPool = cards
       , viewCardImages = True
       , viewCardText = True
-      , selectedCards = []
+      , selectedCards = selected
+      , notSelectedCards = notSelected
       , filter = Nothing
+      , shareModalVisibility = Modal.hidden
+      , hostUrl = hostUrl
+      , navKey = key
       , navbarState = navbarState }
     , navbarCmd )
 
@@ -90,6 +162,8 @@ type Msg
     = NavbarMsg Navbar.State
     | UrlChanged Url
     | LinkClicked UrlRequest
+    | ShowShareModal
+    | HideShareModal
     ---------------------------
     | SelectCard CardId
     | DeselectCard CardId
@@ -97,7 +171,6 @@ type Msg
     | MoveCardUp CardId
     | MoveCardDown CardId
     | FilterChanged String
-
 
 
 -- Update -------------------------------------------------------------------------------------
@@ -134,6 +207,12 @@ update msg model =
         LinkClicked _ ->
             ( model, Cmd.none)
 
+        ShowShareModal ->
+            ( { model | shareModalVisibility = Modal.shown }, Cmd.none )
+
+        HideShareModal ->
+            ( { model | shareModalVisibility = Modal.hidden }, Cmd.none )
+
         SelectCard id ->
             let
                 card =
@@ -141,12 +220,16 @@ update msg model =
             in
             case card of
                 Just c ->
-                    ( { model
-                        | selectedCards = c :: model.selectedCards
-                        , cardPool = model.cardPool |> List.filter (\cc -> cc.id /= id)
-                      }
-                    , Cmd.none
-                    )
+                    let
+                        updatedModel =
+                            { model
+                            | selectedCards = c :: model.selectedCards
+                            , notSelectedCards = model.notSelectedCards |> List.remove c
+                            }
+
+                        navUrl = updatedModel |> shareUrl |> Url.toString
+                    in
+                    (updatedModel, Nav.pushUrl model.navKey navUrl)
 
                 Nothing ->
                     Debug.log "A message was sent for a card that could not be found."
@@ -159,12 +242,16 @@ update msg model =
             in
             case card of
                 Just c ->
-                    ( { model
-                        | selectedCards = model.selectedCards |> List.filter (\cc -> cc.id /= id)
-                        , cardPool = c :: model.cardPool
-                      }
-                    , Cmd.none
-                    )
+                    let
+                        updatedModel =
+                            { model
+                            | selectedCards = model.selectedCards |> List.filter (\cc -> cc.id /= id)
+                            , notSelectedCards = c :: model.notSelectedCards
+                            }
+
+                        navUrl = updatedModel |> shareUrl |> Url.toString
+                    in
+                    ( updatedModel, Nav.pushUrl model.navKey navUrl)
 
                 Nothing ->
                     Debug.log "A message was sent for a card that could not be found."
@@ -181,7 +268,11 @@ update msg model =
             )
 
         ResetCards ->
-            ( { model | selectedCards = [], cardPool = cards }, Cmd.none )
+            let
+                updatedModel = { model | selectedCards = [], notSelectedCards = cards }
+                url = shareUrl updatedModel |> Url.toString
+            in
+            ( updatedModel, Nav.pushUrl model.navKey url )
 
         FilterChanged value ->
             if value |> String.isEmpty then
@@ -192,6 +283,18 @@ update msg model =
 
 
 -- View -------------------------------------------------------------------------------------
+
+
+shareUrl : Model -> Url
+shareUrl model =
+    let
+        hostUrl = model.hostUrl
+        query = model.selectedCards
+                |> List.map (\c -> c.id |> String.fromInt |> (String.padLeft 3 '0'))
+                |> String.join ""
+        _ = Debug.log "shareUrl - query" query
+    in
+    { hostUrl | query = Just ("deck=" ++ query) }
 
 
 pointerClass : Attribute msg
@@ -217,14 +320,34 @@ header model =
         |> Navbar.dark
         |> Navbar.items
             [ Navbar.itemLink [ href "#", onClick ResetCards ] [ text "Reset" ]
-            , Navbar.itemLink [ href "#" ] [ text "Share" ]
+            , Navbar.itemLink [ href "#", onClick ShowShareModal ] [ text "Share" ]
             ]
         |> Navbar.view model.navbarState
 
 
+shareModal : Model -> Html Msg
+shareModal model =
+    let
+        modalShareUrl = model |> shareUrl |> Url.toString
+    in
+    Modal.config HideShareModal
+    |> Modal.small
+    |> Modal.hideOnBackdropClick True
+    |> Modal.h3 [] [ text "Share build" ]
+    |> Modal.body [] [ Html.p [] [ Html.a [] [ text modalShareUrl ] ] ]
+    |> Modal.footer []
+        [ Button.button
+            [ Button.outlinePrimary
+            , Button.attrs [ onClick HideShareModal ]
+            ]
+            [ text "Close" ]
+        ]
+    |> Modal.view model.shareModalVisibility
+
 mainContent : Model -> List (Html Msg)
 mainContent model =
-    [ header model
+    [ shareModal model
+    , header model
     , Grid.row [] [ cardPoolView model, inventoryView model ]
     ]
 
@@ -241,16 +364,16 @@ cardPoolView model =
                 ]
             ]
         , Grid.row []
-            (model |> filteredCards |> List.map fullCardView)
+            (model.notSelectedCards |> (filteredCards model.filter) |> List.map fullCardView)
         ]
 
 
 inventoryView : Model -> Grid.Column Msg
 inventoryView model =
     let numberOfSelectedCards = model.selectedCards |> List.length
-        selectionCountString = "(" ++ (numberOfSelectedCards |> String.fromInt) ++ "/15)"
-        border = if numberOfSelectedCards <= 15 then Border.dark else Border.warning
-        textColor = if numberOfSelectedCards <= 15 then class "" else class "text-warning"
+        selectionCountString = "(" ++ (numberOfSelectedCards |> String.fromInt) ++ "/" ++ (maxDeckSize |> String.fromInt) ++ ")"
+        border = if numberOfSelectedCards <= maxDeckSize then Border.dark else Border.warning
+        textColor = if numberOfSelectedCards <= maxDeckSize then class "" else class "text-warning"
     in
     Grid.col [ Col.xs4, Col.attrs [ class "overflow-scroll content-column" ] ]
         [ div [ class "bg-dark m-2 shadow rounded border", border]
