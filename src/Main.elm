@@ -14,6 +14,7 @@ import Bootstrap.Form.Input as Input
 import Bootstrap.Utilities.Flex as Flex
 import Bootstrap.Utilities.Size as Size
 import Bootstrap.Utilities.Spacing as Spacing
+import Bootstrap.Form.InputGroup as InputGroup
 import Browser
 import Cards exposing (Card, CardId, Kind(..))
 import CardData exposing (cards)
@@ -141,9 +142,6 @@ init _ url key =
 
         hostUrl =
             { url | query = Nothing, fragment = Nothing }
-
-        _ =
-            Debug.log "url" url
     in
     ( { cardPool = cards
       , viewCardImages = True
@@ -171,6 +169,7 @@ type Msg
     | MoveCardUp CardId
     | MoveCardDown CardId
     | FilterChanged String
+    | ClearFilter
 
 
 -- Update -------------------------------------------------------------------------------------
@@ -276,9 +275,12 @@ update msg model =
 
         FilterChanged value ->
             if value |> String.isEmpty then
-                ( { model | filter = Nothing }, Cmd.none)
+                ( { model | filter = Nothing }, Cmd.none )
             else
-                ( { model | filter = Just value }, Cmd.none)
+                ( { model | filter = Just value }, Cmd.none )
+
+        ClearFilter ->
+            ( { model | filter = Nothing }, Cmd.none )
 
 
 
@@ -292,7 +294,6 @@ shareUrl model =
         query = model.selectedCards
                 |> List.map (\c -> c.id |> String.fromInt |> (String.padLeft 3 '0'))
                 |> String.join ""
-        _ = Debug.log "shareUrl - query" query
     in
     { hostUrl | query = Just ("deck=" ++ query) }
 
@@ -352,14 +353,22 @@ mainContent model =
     ]
 
 
+filterWithClearButton : String -> Html Msg
+filterWithClearButton currentFilter =
+    InputGroup.config
+        ( InputGroup.text [ Input.attrs [ placeholder "Filter", onInput FilterChanged, value currentFilter ] ] )
+        |> InputGroup.successors
+            [ InputGroup.button [ Button.secondary, Button.attrs [ onClick ClearFilter ] ] [ text "Clear" ] ]
+        |> InputGroup.view
+
+
 cardPoolView : Model -> Grid.Column Msg
 cardPoolView model =
     Grid.col [ Col.xs8, Col.attrs [ class "overflow-scroll content-column" ] ]
         [ Grid.row []
             [ Grid.col [ Col.xs12 ] 
-                [ div [ Border.rounded, Spacing.mt2, class "d-flex pr-1 pt-1 pb-1 bg-dark shadow "]
-                    [ Html.h5 [ Spacing.m2 ] [ text "Filter" ]
-                      , Input.text [ Input.attrs [ placeholder "type here", onInput FilterChanged ] ]
+                [ div [ Border.rounded, Spacing.mt2, class "d-flex pr-1 pl-1 pt-1 pb-1 bg-dark shadow "]
+                    [ filterWithClearButton (model.filter |> Maybe.withDefault "")
                     ]
                 ]
             ]
@@ -528,7 +537,7 @@ summaryCardView card =
             |> Card.block [ Block.attrs [ Spacing.pt1, Spacing.pb1 ] ]
                 [ Block.text [ Flex.block, Flex.justifyBetween ]
                     [ div [] [ text card.title ]
-                    , div []
+                    , div [ class "unselectable" ]
                         [ Html.a [ onClick (MoveCardUp card.id), pointerClass, class "pl-2 pr-2" ] [ text "↑" ]
                         , Html.a [ onClick (MoveCardDown card.id), pointerClass, class "pl-2 pr-2 ml-2" ] [ text "↓" ]
                         , Html.a [ onClick (DeselectCard card.id), pointerClass, class "pl-2 pr-0 ml-2 mr-0" ] [ text "✕" ]
