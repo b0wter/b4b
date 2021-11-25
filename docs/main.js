@@ -7514,15 +7514,16 @@ var $elm$url$Url$Parser$Query$string = function (key) {
 		});
 };
 var $author$project$Main$tryDeckQueryArgument = function (url) {
-	var _v0 = A2($elm$core$Debug$log, 'tryDeckQueryArgument - url', url);
-	var _v1 = A2(
+	var parsed = A2(
 		$elm$url$Url$Parser$parse,
 		$elm$url$Url$Parser$query(
 			$elm$url$Url$Parser$Query$string('deck')),
 		url);
-	if (_v1.$ === 'Just') {
-		var v = _v1.a;
-		var _v2 = A2($elm$core$Debug$log, 'tryDeckQueryArgument - url - Just v', url);
+	var _v0 = A2($elm$core$Debug$log, 'tryDeckQueryArgument - url', url);
+	var _v1 = A2($elm$core$Debug$log, 'tryDeckQueryArgument - parsed', parsed);
+	if (parsed.$ === 'Just') {
+		var v = parsed.a;
+		var _v3 = A2($elm$core$Debug$log, 'tryDeckQueryArgument - url - Just v', url);
 		if (v.$ === 'Just') {
 			var vv = v.a;
 			var lengthMismatchMessage = 'The given value for the \"deck\" query parameter is invalid. Needs to be multiple of ';
@@ -7533,7 +7534,7 @@ var $author$project$Main$tryDeckQueryArgument = function (url) {
 					$elm$core$Basics$modBy,
 					$author$project$Main$cardIdLength,
 					$elm$core$String$length(vv)))) {
-					var _v4 = A2(
+					var _v5 = A2(
 						$elm$core$Debug$log,
 						lengthMismatchMessage,
 						$elm$core$String$fromInt($author$project$Main$cardIdLength));

@@ -104,9 +104,12 @@ filteredCards filter cards =
 
 tryDeckQueryArgument : Url -> Maybe String
 tryDeckQueryArgument url =
-    let _ = Debug.log "tryDeckQueryArgument - url" url
+    let
+        _ = Debug.log "tryDeckQueryArgument - url" url
+        parsed = Url.Parser.parse (Url.Parser.query (Query.string "deck")) url
+        _ = Debug.log "tryDeckQueryArgument - parsed" parsed
     in
-    case (Url.Parser.parse (Url.Parser.query (Query.string "deck")) url) of
+    case parsed of
         Just v -> 
             let _ = Debug.log "tryDeckQueryArgument - url - Just v" url
             in
