@@ -6090,7 +6090,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		id: 94,
 		kind: 'UTILITY',
 		properties: _List_fromArray(
-			['Breakout: Hold', 'E', 'to free', 'yourself from Grabs.', '+ 50% Breakout Cooldown', 'Reduction. (Base 60 seconds).']),
+			['Breakout: Hold E to free yourself from Grabs.', '+ 50% Breakout Cooldown Reduction. (Base 60 seconds).']),
 		title: 'BREAKOUT'
 	},
 		{
@@ -6117,7 +6117,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		id: 97,
 		kind: 'DEFENSE',
 		properties: _List_fromArray(
-			['+ 15% Healing Efficiency', 'When you use a Medical Accessory, you gain 15% Move', 'Speed for 15 seconds.']),
+			['+ 15% Healing Efficiency', 'When you use a Medical Accessory, you gain 15% Move Speed for 15 seconds.']),
 		title: 'MEDICAL EXPERT'
 	},
 		{
@@ -6171,7 +6171,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		id: 103,
 		kind: 'MOBILITY',
 		properties: _List_fromArray(
-			['Precision Kills grant you 10%', 'Move Speed for 5 seconds.']),
+			['Precision Kills grant you 10% Move Speed for 5 seconds.']),
 		title: 'PEP IN YOUR STEP'
 	},
 		{
@@ -6270,7 +6270,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		id: 114,
 		kind: 'MOBILITY',
 		properties: _List_fromArray(
-			['Pain Meds you apply also grant', '+ 10% Move Speed, + 10% Reload', 'Speed, and + 10% Weapon Swap', 'Speed for 30 seconds.']),
+			['Pain Meds you apply also grant + 10% Move Speed, + 10% Reload Speed, and + 10% Weapon Swap Speed for 30 seconds.']),
 		title: 'STIMULANTS'
 	},
 		{

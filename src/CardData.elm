@@ -911,12 +911,8 @@ rawCards =
       , kind = "UTILITY"
       , filename = "3_1_2.jpg"
       , properties =
-            [ "Breakout: Hold"
-            , "E"
-            , "to free"
-            , "yourself from Grabs."
-            , "+ 50% Breakout Cooldown"
-            , "Reduction. (Base 60 seconds)."
+            [ "Breakout: Hold E to free yourself from Grabs."
+            , "+ 50% Breakout Cooldown Reduction. (Base 60 seconds)."
             ]
       , effects = []
       }
@@ -945,8 +941,7 @@ rawCards =
       , filename = "4_0_0.jpg"
       , properties =
             [ "+ 15% Healing Efficiency"
-            , "When you use a Medical Accessory, you gain 15% Move"
-            , "Speed for 15 seconds."
+            , "When you use a Medical Accessory, you gain 15% Move Speed for 15 seconds."
             ]
       , effects = []
       }
@@ -1004,8 +999,7 @@ rawCards =
       , kind = "MOBILITY"
       , filename = "4_1_1.jpg"
       , properties =
-            [ "Precision Kills grant you 10%"
-            , "Move Speed for 5 seconds."
+            [ "Precision Kills grant you 10% Move Speed for 5 seconds."
             ]
       , effects = []
       }
@@ -1111,10 +1105,7 @@ rawCards =
       , kind = "MOBILITY"
       , filename = "5_1_2.jpg"
       , properties =
-            [ "Pain Meds you apply also grant"
-            , "+ 10% Move Speed, + 10% Reload"
-            , "Speed, and + 10% Weapon Swap"
-            , "Speed for 30 seconds."
+            [ "Pain Meds you apply also grant + 10% Move Speed, + 10% Reload Speed, and + 10% Weapon Swap Speed for 30 seconds."
             ]
       , effects = []
       }
