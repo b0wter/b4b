@@ -13,12 +13,16 @@
   <link rel="stylesheet" href="/b4b/css/custom.css">
   <link rel="stylesheet" href="/css/bootstrap-dark.min.css" />
   <link rel="stylesheet" href="/b4b/css/bootstrap-dark.min.css" />
+  <script src="/js/custom.js"></script>
+  <script src="/b4b/js/custom.js"></script>
   <script src="main.js"></script>
 </head>
 
 <body>
   <div id="elm-node"></div>
   <script>
+    window.onload = initJavascript;
+    window.onresize = onResize;
     const node = document.getElementById('elm-node');
     var app = Elm.Main.init({
       node: node

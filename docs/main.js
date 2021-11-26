@@ -8209,6 +8209,8 @@ var $author$project$Main$update = F2(
 				return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
 			case 'LinkClicked':
 				return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
+			case 'ToggleInventory':
+				return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
 			case 'ShowShareModal':
 				return _Utils_Tuple2(
 					_Utils_update(
@@ -9558,13 +9560,26 @@ var $author$project$Main$fullCardView = function (card) {
 									]))))))
 			]));
 };
-var $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$mt2 = $elm$html$Html$Attributes$class('mt-2');
-var $rundis$elm_bootstrap$Bootstrap$Utilities$Border$rounded = $elm$html$Html$Attributes$class('rounded');
-var $rundis$elm_bootstrap$Bootstrap$Grid$Internal$Col = {$: 'Col'};
+var $rundis$elm_bootstrap$Bootstrap$Grid$Internal$Col4 = {$: 'Col4'};
+var $rundis$elm_bootstrap$Bootstrap$General$Internal$MD = {$: 'MD'};
+var $rundis$elm_bootstrap$Bootstrap$Grid$Internal$ColWidth = function (a) {
+	return {$: 'ColWidth', a: a};
+};
 var $rundis$elm_bootstrap$Bootstrap$Grid$Internal$Width = F2(
 	function (screenSize, columnCount) {
 		return {columnCount: columnCount, screenSize: screenSize};
 	});
+var $rundis$elm_bootstrap$Bootstrap$Grid$Internal$width = F2(
+	function (size, count) {
+		return $rundis$elm_bootstrap$Bootstrap$Grid$Internal$ColWidth(
+			A2($rundis$elm_bootstrap$Bootstrap$Grid$Internal$Width, size, count));
+	});
+var $rundis$elm_bootstrap$Bootstrap$Grid$Col$md4 = A2($rundis$elm_bootstrap$Bootstrap$Grid$Internal$width, $rundis$elm_bootstrap$Bootstrap$General$Internal$MD, $rundis$elm_bootstrap$Bootstrap$Grid$Internal$Col4);
+var $rundis$elm_bootstrap$Bootstrap$Grid$Internal$Col8 = {$: 'Col8'};
+var $rundis$elm_bootstrap$Bootstrap$Grid$Col$md8 = A2($rundis$elm_bootstrap$Bootstrap$Grid$Internal$width, $rundis$elm_bootstrap$Bootstrap$General$Internal$MD, $rundis$elm_bootstrap$Bootstrap$Grid$Internal$Col8);
+var $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$mt2 = $elm$html$Html$Attributes$class('mt-2');
+var $rundis$elm_bootstrap$Bootstrap$Utilities$Border$rounded = $elm$html$Html$Attributes$class('rounded');
+var $rundis$elm_bootstrap$Bootstrap$Grid$Internal$Col = {$: 'Col'};
 var $rundis$elm_bootstrap$Bootstrap$General$Internal$XS = {$: 'XS'};
 var $rundis$elm_bootstrap$Bootstrap$Grid$Internal$applyColAlign = F2(
 	function (align_, options) {
@@ -10328,26 +10343,18 @@ var $rundis$elm_bootstrap$Bootstrap$Grid$row = F2(
 			A2($elm$core$List$map, $rundis$elm_bootstrap$Bootstrap$Grid$renderCol, cols));
 	});
 var $rundis$elm_bootstrap$Bootstrap$Grid$Internal$Col12 = {$: 'Col12'};
-var $rundis$elm_bootstrap$Bootstrap$Grid$Internal$ColWidth = function (a) {
-	return {$: 'ColWidth', a: a};
-};
-var $rundis$elm_bootstrap$Bootstrap$Grid$Internal$width = F2(
-	function (size, count) {
-		return $rundis$elm_bootstrap$Bootstrap$Grid$Internal$ColWidth(
-			A2($rundis$elm_bootstrap$Bootstrap$Grid$Internal$Width, size, count));
-	});
 var $rundis$elm_bootstrap$Bootstrap$Grid$Col$xs12 = A2($rundis$elm_bootstrap$Bootstrap$Grid$Internal$width, $rundis$elm_bootstrap$Bootstrap$General$Internal$XS, $rundis$elm_bootstrap$Bootstrap$Grid$Internal$Col12);
-var $rundis$elm_bootstrap$Bootstrap$Grid$Internal$Col8 = {$: 'Col8'};
-var $rundis$elm_bootstrap$Bootstrap$Grid$Col$xs8 = A2($rundis$elm_bootstrap$Bootstrap$Grid$Internal$width, $rundis$elm_bootstrap$Bootstrap$General$Internal$XS, $rundis$elm_bootstrap$Bootstrap$Grid$Internal$Col8);
 var $author$project$Main$cardPoolView = function (model) {
 	return A2(
 		$rundis$elm_bootstrap$Bootstrap$Grid$col,
 		_List_fromArray(
 			[
-				$rundis$elm_bootstrap$Bootstrap$Grid$Col$xs8,
+				$rundis$elm_bootstrap$Bootstrap$Grid$Col$xs12,
+				$rundis$elm_bootstrap$Bootstrap$Grid$Col$md8,
 				$rundis$elm_bootstrap$Bootstrap$Grid$Col$attrs(
 				_List_fromArray(
 					[
+						$elm$html$Html$Attributes$id('left-column'),
 						$elm$html$Html$Attributes$class('overflow-scroll content-column')
 					]))
 			]),
@@ -10361,7 +10368,7 @@ var $author$project$Main$cardPoolView = function (model) {
 						A2(
 						$rundis$elm_bootstrap$Bootstrap$Grid$col,
 						_List_fromArray(
-							[$rundis$elm_bootstrap$Bootstrap$Grid$Col$xs12]),
+							[$rundis$elm_bootstrap$Bootstrap$Grid$Col$md4]),
 						_List_fromArray(
 							[
 								A2(
@@ -10530,7 +10537,6 @@ var $rundis$elm_bootstrap$Bootstrap$Navbar$sizeToComparable = function (size) {
 	}
 };
 var $rundis$elm_bootstrap$Bootstrap$General$Internal$LG = {$: 'LG'};
-var $rundis$elm_bootstrap$Bootstrap$General$Internal$MD = {$: 'MD'};
 var $rundis$elm_bootstrap$Bootstrap$General$Internal$SM = {$: 'SM'};
 var $rundis$elm_bootstrap$Bootstrap$General$Internal$XL = {$: 'XL'};
 var $rundis$elm_bootstrap$Bootstrap$Navbar$toScreenSize = function (windowWidth) {
@@ -11266,6 +11272,27 @@ var $author$project$Main$header = function (model) {
 					$rundis$elm_bootstrap$Bootstrap$Navbar$withAnimation(
 						$rundis$elm_bootstrap$Bootstrap$Navbar$config($author$project$Main$NavbarMsg))))));
 };
+var $elm$html$Html$h2 = _VirtualDom_node('h2');
+var $author$project$Main$inventoryToggleButton = A2(
+	$elm$html$Html$a,
+	_List_fromArray(
+		[
+			$elm$html$Html$Attributes$id('inventory-toggle-button'),
+			$elm$html$Html$Attributes$class('action-button btn btn-light d-flex d-md-none pointer')
+		]),
+	_List_fromArray(
+		[
+			A2(
+			$elm$html$Html$h2,
+			_List_fromArray(
+				[
+					$elm$html$Html$Attributes$class('m-auto grey no-decoration')
+				]),
+			_List_fromArray(
+				[
+					$elm$html$Html$text('🎒')
+				]))
+		]));
 var $rundis$elm_bootstrap$Bootstrap$Grid$Internal$RowAttrs = function (a) {
 	return {$: 'RowAttrs', a: a};
 };
@@ -11436,8 +11463,6 @@ var $author$project$Main$summaryCardView = function (card) {
 			]));
 };
 var $rundis$elm_bootstrap$Bootstrap$Utilities$Border$warning = A2($rundis$elm_bootstrap$Bootstrap$Internal$Role$toClass, 'border', $rundis$elm_bootstrap$Bootstrap$Internal$Role$Warning);
-var $rundis$elm_bootstrap$Bootstrap$Grid$Internal$Col4 = {$: 'Col4'};
-var $rundis$elm_bootstrap$Bootstrap$Grid$Col$xs4 = A2($rundis$elm_bootstrap$Bootstrap$Grid$Internal$width, $rundis$elm_bootstrap$Bootstrap$General$Internal$XS, $rundis$elm_bootstrap$Bootstrap$Grid$Internal$Col4);
 var $author$project$Main$inventoryView = function (model) {
 	var numberOfSelectedCards = $elm$core$List$length(model.selectedCards);
 	var selectionCountString = '(' + ($elm$core$String$fromInt(numberOfSelectedCards) + ('/' + ($elm$core$String$fromInt($author$project$Main$maxDeckSize) + ')')));
@@ -11447,10 +11472,12 @@ var $author$project$Main$inventoryView = function (model) {
 		$rundis$elm_bootstrap$Bootstrap$Grid$col,
 		_List_fromArray(
 			[
-				$rundis$elm_bootstrap$Bootstrap$Grid$Col$xs4,
+				$rundis$elm_bootstrap$Bootstrap$Grid$Col$xs12,
+				$rundis$elm_bootstrap$Bootstrap$Grid$Col$md4,
 				$rundis$elm_bootstrap$Bootstrap$Grid$Col$attrs(
 				_List_fromArray(
 					[
+						$elm$html$Html$Attributes$id('right-column'),
 						$elm$html$Html$Attributes$class('overflow-scroll content-column')
 					]))
 			]),
@@ -11606,12 +11633,7 @@ var $rundis$elm_bootstrap$Bootstrap$Modal$hideOnBackdropClick = F2(
 						{hideOnBackdropClick: hide})
 				}));
 	});
-var $rundis$elm_bootstrap$Bootstrap$Internal$Button$Outlined = function (a) {
-	return {$: 'Outlined', a: a};
-};
-var $rundis$elm_bootstrap$Bootstrap$Button$outlinePrimary = $rundis$elm_bootstrap$Bootstrap$Internal$Button$Coloring(
-	$rundis$elm_bootstrap$Bootstrap$Internal$Button$Outlined($rundis$elm_bootstrap$Bootstrap$Internal$Button$Primary));
-var $rundis$elm_bootstrap$Bootstrap$Modal$small = function (_v0) {
+var $rundis$elm_bootstrap$Bootstrap$Modal$large = function (_v0) {
 	var conf = _v0.a;
 	var options = conf.options;
 	return $rundis$elm_bootstrap$Bootstrap$Modal$Config(
@@ -11621,10 +11643,19 @@ var $rundis$elm_bootstrap$Bootstrap$Modal$small = function (_v0) {
 				options: _Utils_update(
 					options,
 					{
-						modalSize: $elm$core$Maybe$Just($rundis$elm_bootstrap$Bootstrap$General$Internal$SM)
+						modalSize: $elm$core$Maybe$Just($rundis$elm_bootstrap$Bootstrap$General$Internal$LG)
 					})
 			}));
 };
+var $rundis$elm_bootstrap$Bootstrap$Internal$Button$Outlined = function (a) {
+	return {$: 'Outlined', a: a};
+};
+var $rundis$elm_bootstrap$Bootstrap$Button$outlinePrimary = $rundis$elm_bootstrap$Bootstrap$Internal$Button$Coloring(
+	$rundis$elm_bootstrap$Bootstrap$Internal$Button$Outlined($rundis$elm_bootstrap$Bootstrap$Internal$Button$Primary));
+var $rundis$elm_bootstrap$Bootstrap$Internal$Button$Size = function (a) {
+	return {$: 'Size', a: a};
+};
+var $rundis$elm_bootstrap$Bootstrap$Button$small = $rundis$elm_bootstrap$Bootstrap$Internal$Button$Size($rundis$elm_bootstrap$Bootstrap$General$Internal$SM);
 var $elm$virtual_dom$VirtualDom$attribute = F2(
 	function (key, value) {
 		return A2(
@@ -11995,13 +12026,31 @@ var $author$project$Main$shareModal = function (model) {
 						_List_Nil,
 						_List_fromArray(
 							[
+								$rundis$elm_bootstrap$Bootstrap$Form$InputGroup$view(
 								A2(
-								$elm$html$Html$a,
-								_List_Nil,
-								_List_fromArray(
-									[
-										$elm$html$Html$text(modalShareUrl)
-									]))
+									$rundis$elm_bootstrap$Bootstrap$Form$InputGroup$successors,
+									_List_fromArray(
+										[
+											A2(
+											$rundis$elm_bootstrap$Bootstrap$Form$InputGroup$button,
+											_List_fromArray(
+												[$rundis$elm_bootstrap$Bootstrap$Button$secondary, $rundis$elm_bootstrap$Bootstrap$Button$small]),
+											_List_fromArray(
+												[
+													$elm$html$Html$text('📋')
+												]))
+										]),
+									$rundis$elm_bootstrap$Bootstrap$Form$InputGroup$config(
+										$rundis$elm_bootstrap$Bootstrap$Form$InputGroup$text(
+											_List_fromArray(
+												[
+													$rundis$elm_bootstrap$Bootstrap$Form$Input$attrs(
+													_List_fromArray(
+														[
+															$elm$html$Html$Attributes$readonly(true),
+															$elm$html$Html$Attributes$value(modalShareUrl)
+														]))
+												])))))
 							]))
 					]),
 				A3(
@@ -12014,7 +12063,7 @@ var $author$project$Main$shareModal = function (model) {
 					A2(
 						$rundis$elm_bootstrap$Bootstrap$Modal$hideOnBackdropClick,
 						true,
-						$rundis$elm_bootstrap$Bootstrap$Modal$small(
+						$rundis$elm_bootstrap$Bootstrap$Modal$large(
 							$rundis$elm_bootstrap$Bootstrap$Modal$config($author$project$Main$HideShareModal)))))));
 };
 var $author$project$Main$mainContent = function (model) {
@@ -12029,7 +12078,8 @@ var $author$project$Main$mainContent = function (model) {
 				[
 					$author$project$Main$cardPoolView(model),
 					$author$project$Main$inventoryView(model)
-				]))
+				])),
+			$author$project$Main$inventoryToggleButton
 		]);
 };
 var $author$project$Main$view = function (model) {

@@ -22,3 +22,17 @@
     -o-user-select: none;
     user-select: none;
 }
+
+.action-button {
+    position: fixed;
+    bottom: 1em;
+    right: 1em;
+    width: 4em;
+    height: 4em;
+    border-radius: 50% !important;
+}
+
+.grey {
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+}

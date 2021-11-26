@@ -26,7 +26,7 @@ import List.Extra as List
 import List.Extras as List
 import List.FlatMap as List
 import Bootstrap.Text exposing (Color)
-import Bootstrap.Grid.Row
+import Bootstrap.Grid.Row as Row
 import Browser.Navigation as Nav exposing (Key)
 import Maybe.Extra as Maybe
 import QS as QS
@@ -159,6 +159,8 @@ type Msg
     | LinkClicked UrlRequest
     | ShowShareModal
     | HideShareModal
+    | ToggleInventory
+    | CopyShareUrl String
     ---------------------------
     | SelectCard CardId
     | DeselectCard CardId
@@ -203,11 +205,17 @@ update msg model =
         LinkClicked _ ->
             ( model, Cmd.none)
 
+        ToggleInventory ->
+            ( model, Cmd.none)
+
         ShowShareModal ->
             ( { model | shareModalVisibility = Modal.shown }, Cmd.none )
 
         HideShareModal ->
             ( { model | shareModalVisibility = Modal.hidden }, Cmd.none )
+
+        CopyShareUrl url ->
+            
 
         SelectCard id ->
             let
@@ -310,6 +318,14 @@ view model =
     }
 
 
+inventoryToggleButton : Html Msg
+inventoryToggleButton =
+    Html.a [ id "inventory-toggle-button", class "action-button btn btn-light d-flex d-md-none pointer" ]
+    [
+        Html.h2 [ class "m-auto grey no-decoration" ] [ text "🎒" ]
+    ]
+
+
 header : Model -> Html Msg
 header model =
     Navbar.config NavbarMsg
@@ -329,10 +345,18 @@ shareModal model =
         modalShareUrl = model |> shareUrl |> Url.toString
     in
     Modal.config HideShareModal
-    |> Modal.small
+    |> Modal.large
     |> Modal.hideOnBackdropClick True
     |> Modal.h3 [] [ text "Share build" ]
-    |> Modal.body [] [ Html.p [] [ Html.a [] [ text modalShareUrl ] ] ]
+    |> Modal.body []
+        [ Html.p []
+            [ InputGroup.config
+                ( InputGroup.text [ Input.attrs [ Html.Attributes.readonly True, value modalShareUrl ] ])
+                |> InputGroup.successors
+                    [ InputGroup.button [ Button.secondary, Button.small ] [ text "📋" ] ]
+                |> InputGroup.view
+            ]
+        ]
     |> Modal.footer []
         [ Button.button
             [ Button.outlinePrimary
@@ -346,7 +370,8 @@ mainContent : Model -> List (Html Msg)
 mainContent model =
     [ shareModal model
     , header model
-    , Grid.row [] [ cardPoolView model, inventoryView model ]
+    , Grid.row [ ] [ cardPoolView model, inventoryView model ]
+    , inventoryToggleButton
     ]
 
 
@@ -361,9 +386,9 @@ filterWithClearButton currentFilter =
 
 cardPoolView : Model -> Grid.Column Msg
 cardPoolView model =
-    Grid.col [ Col.xs8, Col.attrs [ class "overflow-scroll content-column" ] ]
+    Grid.col [ Col.xs12, Col.md8, Col.attrs [ id "left-column", class "overflow-scroll content-column" ] ]
         [ Grid.row []
-            [ Grid.col [ Col.xs12 ] 
+            [ Grid.col [ Col.md4 ]
                 [ div [ Border.rounded, Spacing.mt2, class "d-flex pr-1 pl-1 pt-1 pb-1 bg-dark shadow "]
                     [ filterWithClearButton (model.filter |> Maybe.withDefault "")
                     ]
@@ -381,9 +406,9 @@ inventoryView model =
         border = if numberOfSelectedCards <= maxDeckSize then Border.dark else Border.warning
         textColor = if numberOfSelectedCards <= maxDeckSize then class "" else class "text-warning"
     in
-    Grid.col [ Col.xs4, Col.attrs [ class "overflow-scroll content-column" ] ]
+    Grid.col [ Col.xs12, Col.md4, Col.attrs [ id "right-column", class "overflow-scroll content-column" ] ]
         [ div [ class "bg-dark m-2 shadow rounded border", border]
-            [ Grid.row [ Bootstrap.Grid.Row.attrs [ class "pr-1 pt-1 pb-1" ] ]
+            [ Grid.row [ Row.attrs [ class "pr-1 pt-1 pb-1" ] ]
                 [ Grid.col [ Col.xs12, Col.attrs [ class "d-flex justify-content-between" ] ] 
                     [ Html.h5 [ Spacing.m2, textColor ] [ text "Selection" ] 
                     , div [ Spacing.m2, textColor ] [ text selectionCountString ]
