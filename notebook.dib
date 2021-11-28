@@ -1,0 +1,57 @@
+#!fsharp
+
+let text = System.IO.File.ReadAllLines("/tmp/cards.txt") |> List.ofArray
+
+#!fsharp
+
+let titles = text 
+             |> List.where (fun line -> line.Contains("{ title = "))
+             |> List.map (fun line -> 
+                    line
+                        .Split('"', StringSplitOptions.RemoveEmptyEntries).[1]
+                        .Replace("'", "")
+                        .Replace("’", "")
+                        .Replace("!", "")
+                        .Replace("-", "")
+                        .Replace("…", "")
+                        .Replace("‘", "")
+                        .Replace(" ", "_")
+                )
+let ids = text
+          |> List.where (fun line -> line.Contains(", id = "))
+          |> List.map (fun line -> line.Split('=').[1])
+
+let idAndTitle = List.zip ids titles
+
+let basePath = "/home/b0wter/work/b4b/docs/img/english/named/"
+let filenames = System.IO.Directory.GetFiles(basePath) 
+                |> List.ofArray
+                |> List.filter (fun file -> file.EndsWith(".jpg"))
+                |> List.map (fun file -> System.IO.Path.GetFileName(file))
+
+
+
+//titles |> List.iter (printfn "%s")
+//filenames
+idAndTitle
+
+#!fsharp
+
+let rec run (accumulator: string list) (remaining: string list) (counter: int) =
+    match remaining with
+    | [] -> 
+        accumulator
+    | head :: tail ->
+        let (newAccumulator, newCounter) = 
+            if head.Contains(", id =") then
+                ($"      , id = %i{counter}" :: accumulator), counter + 1
+            else
+                head :: accumulator, counter
+        run newAccumulator tail newCounter
+
+let modified = run [] text 1 |> List.rev
+modified
+
+#!fsharp
+
+System.IO.File.WriteAllLines("/tmp/cards.out", modified)
