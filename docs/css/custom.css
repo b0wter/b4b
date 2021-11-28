@@ -36,3 +36,9 @@
     -webkit-filter: grayscale(100%);
     filter: grayscale(100%);
 }
+
+.card-text-header {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

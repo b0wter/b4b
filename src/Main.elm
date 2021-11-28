@@ -64,10 +64,14 @@ type alias Flags =
     {}
 
 
+type CardDisplay
+    = TextAndImage
+    | Text
+    | Image
+
 type alias Model =
     { navbarState : Navbar.State
-    , viewCardImages: Bool
-    , viewCardText: Bool
+    , cardDisplay : CardDisplay
     , shareModalVisibility: Modal.Visibility
     , hostUrl: Url
     , navKey: Key
@@ -141,8 +145,7 @@ init _ url key =
             { url | query = Nothing, fragment = Nothing }
     in
     ( { cardPool = cards
-      , viewCardImages = True
-      , viewCardText = True
+      , cardDisplay = Image
       , selectedCards = selected
       , notSelectedCards = notSelected
       , filter = Nothing
@@ -215,7 +218,7 @@ update msg model =
             ( { model | shareModalVisibility = Modal.hidden }, Cmd.none )
 
         CopyShareUrl url ->
-            
+            ( model, Cmd.none)
 
         SelectCard id ->
             let
@@ -388,14 +391,14 @@ cardPoolView : Model -> Grid.Column Msg
 cardPoolView model =
     Grid.col [ Col.xs12, Col.md8, Col.attrs [ id "left-column", class "overflow-scroll content-column" ] ]
         [ Grid.row []
-            [ Grid.col [ Col.md4 ]
+            [ Grid.col [ Col.xs12 ]
                 [ div [ Border.rounded, Spacing.mt2, class "d-flex pr-1 pl-1 pt-1 pb-1 bg-dark shadow "]
                     [ filterWithClearButton (model.filter |> Maybe.withDefault "")
                     ]
                 ]
             ]
         , Grid.row []
-            (model.notSelectedCards |> (filteredCards model.filter) |> List.map fullCardView)
+            (model.notSelectedCards |> (filteredCards model.filter) |> List.map (fullCardView model.cardDisplay))
         ]
 
 
@@ -520,14 +523,25 @@ htmlBackgroundColor card =
             Html.Attributes.class "bg-warning"
 
 
-fullCardView : Card -> Grid.Column Msg
-fullCardView card =
+fullCardView :  CardDisplay -> Card ->Grid.Column Msg
+fullCardView cardDisplay card =
+    case cardDisplay of
+        TextAndImage ->
+            fullCardViewWithTextAndImage card
+        Image ->
+            fullCardViewWithImage card
+        Text ->
+            fullCardViewWithText card
+
+
+fullCardViewWithTextAndImage : Card -> Grid.Column Msg
+fullCardViewWithTextAndImage card =
     let
         cardBackground =
             card |> cardOutlineColor
 
         buttonBackground =
-            card |> buttonBackgroundColor
+            Button.secondary
     in
     Grid.col []
         [ Card.config [ cardBackground, Card.attrs [ style "width" "16rem", style "height" "605px", Spacing.m2 ] ]
@@ -546,6 +560,56 @@ fullCardView card =
                 ]
             |> Card.view
         ]
+
+
+fullCardViewWithImage : Card -> Grid.Column Msg
+fullCardViewWithImage card =
+    let
+        cardBackground =
+            card |> cardOutlineColor
+
+        buttonBackground =
+            Button.secondary
+    in
+    Grid.col []
+        [ Card.config [ cardBackground , Card.attrs [  Spacing.m2 ] ] --style "width" "16rem",
+            |> Card.block []
+                [ Block.custom
+                    (img [ src ("img/english/" ++ card.filename), style "max-width" "200px" ] [])
+                ]
+            |> Card.footer []
+                [ Button.button [ buttonBackground, Button.attrs [ Size.w100, onClick (SelectCard card.id) ] ] [ text "Select" ]
+                ]
+            |> Card.view
+        ]
+
+
+fullCardViewWithText : Card -> Grid.Column Msg
+fullCardViewWithText card =
+    let
+        cardBackground =
+            card |> cardOutlineColor
+
+        buttonBackground =
+            Button.secondary
+    in
+    Grid.col []
+        [ Card.config [ cardBackground, Card.attrs [ Spacing.m2, style "width" "15em" ] ] --[ style "width" "16rem", style "height" "605px", Spacing.m2 ] ]
+            |> Card.header [ class "text-center" ]
+                [ Html.h6 [ class "card-text-header mb-0"] [ text card.title ]
+                ]
+            |> Card.block [ Block.attrs [ style "height" "12em" ] ]
+                [ Block.custom
+                    (Html.ul [ Spacing.pl3, Spacing.pr0 ]
+                        (card.properties |> List.map (\property -> div [] [ Html.li [] [ Html.small [] [ text property.description ] ] ]))
+                    )
+                ]
+            |> Card.footer []
+                [ Button.button [ buttonBackground, Button.attrs [ Size.w100, onClick (SelectCard card.id) ] ] [ text "Select" ]
+                ]
+            |> Card.view
+        ]
+
 
 
 summaryCardView : Card -> Grid.Column Msg

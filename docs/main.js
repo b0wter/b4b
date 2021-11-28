@@ -5204,6 +5204,7 @@ var $elm$core$Task$perform = F2(
 				A2($elm$core$Task$map, toMessage, task)));
 	});
 var $elm$browser$Browser$application = _Browser_application;
+var $author$project$Main$Image = {$: 'Image'};
 var $author$project$Main$NavbarMsg = function (a) {
 	return {$: 'NavbarMsg', a: a};
 };
@@ -7256,7 +7257,7 @@ var $author$project$Main$init = F3(
 		var navbarState = _v2.a;
 		var navbarCmd = _v2.b;
 		return _Utils_Tuple2(
-			{cardPool: $author$project$CardData$cards, filter: $elm$core$Maybe$Nothing, hostUrl: hostUrl, navKey: key, navbarState: navbarState, notSelectedCards: notSelected, selectedCards: selected, shareModalVisibility: $rundis$elm_bootstrap$Bootstrap$Modal$hidden, viewCardImages: true, viewCardText: true},
+			{cardDisplay: $author$project$Main$Image, cardPool: $author$project$CardData$cards, filter: $elm$core$Maybe$Nothing, hostUrl: hostUrl, navKey: key, navbarState: navbarState, notSelectedCards: notSelected, selectedCards: selected, shareModalVisibility: $rundis$elm_bootstrap$Bootstrap$Modal$hidden},
 			navbarCmd);
 	});
 var $rundis$elm_bootstrap$Bootstrap$Navbar$AnimatingDown = {$: 'AnimatingDown'};
@@ -8223,6 +8224,9 @@ var $author$project$Main$update = F2(
 						model,
 						{shareModalVisibility: $rundis$elm_bootstrap$Bootstrap$Modal$hidden}),
 					$elm$core$Platform$Cmd$none);
+			case 'CopyShareUrl':
+				var url = msg.a;
+				return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
 			case 'SelectCard':
 				var id = msg.a;
 				var card = A2(
@@ -9154,36 +9158,6 @@ var $rundis$elm_bootstrap$Bootstrap$Card$block = F3(
 							]))
 				}));
 	});
-var $rundis$elm_bootstrap$Bootstrap$Internal$Button$Danger = {$: 'Danger'};
-var $rundis$elm_bootstrap$Bootstrap$Button$danger = $rundis$elm_bootstrap$Bootstrap$Internal$Button$Coloring(
-	$rundis$elm_bootstrap$Bootstrap$Internal$Button$Roled($rundis$elm_bootstrap$Bootstrap$Internal$Button$Danger));
-var $rundis$elm_bootstrap$Bootstrap$Internal$Button$Dark = {$: 'Dark'};
-var $rundis$elm_bootstrap$Bootstrap$Button$dark = $rundis$elm_bootstrap$Bootstrap$Internal$Button$Coloring(
-	$rundis$elm_bootstrap$Bootstrap$Internal$Button$Roled($rundis$elm_bootstrap$Bootstrap$Internal$Button$Dark));
-var $rundis$elm_bootstrap$Bootstrap$Internal$Button$Primary = {$: 'Primary'};
-var $rundis$elm_bootstrap$Bootstrap$Button$primary = $rundis$elm_bootstrap$Bootstrap$Internal$Button$Coloring(
-	$rundis$elm_bootstrap$Bootstrap$Internal$Button$Roled($rundis$elm_bootstrap$Bootstrap$Internal$Button$Primary));
-var $rundis$elm_bootstrap$Bootstrap$Internal$Button$Success = {$: 'Success'};
-var $rundis$elm_bootstrap$Bootstrap$Button$success = $rundis$elm_bootstrap$Bootstrap$Internal$Button$Coloring(
-	$rundis$elm_bootstrap$Bootstrap$Internal$Button$Roled($rundis$elm_bootstrap$Bootstrap$Internal$Button$Success));
-var $rundis$elm_bootstrap$Bootstrap$Internal$Button$Warning = {$: 'Warning'};
-var $rundis$elm_bootstrap$Bootstrap$Button$warning = $rundis$elm_bootstrap$Bootstrap$Internal$Button$Coloring(
-	$rundis$elm_bootstrap$Bootstrap$Internal$Button$Roled($rundis$elm_bootstrap$Bootstrap$Internal$Button$Warning));
-var $author$project$Main$buttonBackgroundColor = function (card) {
-	var _v0 = card.kind;
-	switch (_v0.$) {
-		case 'Unknown':
-			return $rundis$elm_bootstrap$Bootstrap$Button$dark;
-		case 'Mobility':
-			return $rundis$elm_bootstrap$Bootstrap$Button$primary;
-		case 'Utility':
-			return $rundis$elm_bootstrap$Bootstrap$Button$danger;
-		case 'Defense':
-			return $rundis$elm_bootstrap$Bootstrap$Button$success;
-		default:
-			return $rundis$elm_bootstrap$Bootstrap$Button$warning;
-	}
-};
 var $rundis$elm_bootstrap$Bootstrap$Card$Internal$Coloring = function (a) {
 	return {$: 'Coloring', a: a};
 };
@@ -9251,34 +9225,8 @@ var $rundis$elm_bootstrap$Bootstrap$Card$footer = F3(
 								children)))
 				}));
 	});
-var $rundis$elm_bootstrap$Bootstrap$Card$Header = function (a) {
-	return {$: 'Header', a: a};
-};
-var $rundis$elm_bootstrap$Bootstrap$Card$headerPrivate = F4(
-	function (elemFn, attributes, children, _v0) {
-		var conf = _v0.a;
-		return $rundis$elm_bootstrap$Bootstrap$Card$Config(
-			_Utils_update(
-				conf,
-				{
-					header: $elm$core$Maybe$Just(
-						$rundis$elm_bootstrap$Bootstrap$Card$Header(
-							A2(
-								elemFn,
-								A2(
-									$elm$core$List$cons,
-									$elm$html$Html$Attributes$class('card-header'),
-									attributes),
-								children)))
-				}));
-	});
-var $rundis$elm_bootstrap$Bootstrap$Card$header = $rundis$elm_bootstrap$Bootstrap$Card$headerPrivate($elm$html$Html$div);
 var $elm$html$Html$img = _VirtualDom_node('img');
-var $elm$html$Html$li = _VirtualDom_node('li');
 var $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$m2 = $elm$html$Html$Attributes$class('m-2');
-var $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$pl3 = $elm$html$Html$Attributes$class('pl-3');
-var $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$pr0 = $elm$html$Html$Attributes$class('pr-0');
-var $elm$html$Html$small = _VirtualDom_node('small');
 var $elm$html$Html$Attributes$src = function (url) {
 	return A2(
 		$elm$html$Html$Attributes$stringProperty,
@@ -9287,20 +9235,6 @@ var $elm$html$Html$Attributes$src = function (url) {
 };
 var $elm$virtual_dom$VirtualDom$style = _VirtualDom_style;
 var $elm$html$Html$Attributes$style = $elm$virtual_dom$VirtualDom$style;
-var $elm$html$Html$h5 = _VirtualDom_node('h5');
-var $rundis$elm_bootstrap$Bootstrap$Card$Block$title = F3(
-	function (elemFn, attributes, children) {
-		return $rundis$elm_bootstrap$Bootstrap$Card$Internal$BlockItem(
-			A2(
-				elemFn,
-				A2(
-					$elm$core$List$cons,
-					$elm$html$Html$Attributes$class('card-title'),
-					attributes),
-				children));
-	});
-var $rundis$elm_bootstrap$Bootstrap$Card$Block$titleH5 = $rundis$elm_bootstrap$Bootstrap$Card$Block$title($elm$html$Html$h5);
-var $elm$html$Html$ul = _VirtualDom_node('ul');
 var $rundis$elm_bootstrap$Bootstrap$Card$Internal$applyModifier = F2(
 	function (option, options) {
 		switch (option.$) {
@@ -9455,9 +9389,219 @@ var $rundis$elm_bootstrap$Bootstrap$Card$view = function (_v0) {
 						])))));
 };
 var $rundis$elm_bootstrap$Bootstrap$Utilities$Size$w100 = $elm$html$Html$Attributes$class('w-100');
-var $author$project$Main$fullCardView = function (card) {
+var $author$project$Main$fullCardViewWithImage = function (card) {
 	var cardBackground = $author$project$Main$cardOutlineColor(card);
-	var buttonBackground = $author$project$Main$buttonBackgroundColor(card);
+	var buttonBackground = $rundis$elm_bootstrap$Bootstrap$Button$secondary;
+	return A2(
+		$rundis$elm_bootstrap$Bootstrap$Grid$col,
+		_List_Nil,
+		_List_fromArray(
+			[
+				$rundis$elm_bootstrap$Bootstrap$Card$view(
+				A3(
+					$rundis$elm_bootstrap$Bootstrap$Card$footer,
+					_List_Nil,
+					_List_fromArray(
+						[
+							A2(
+							$rundis$elm_bootstrap$Bootstrap$Button$button,
+							_List_fromArray(
+								[
+									buttonBackground,
+									$rundis$elm_bootstrap$Bootstrap$Button$attrs(
+									_List_fromArray(
+										[
+											$rundis$elm_bootstrap$Bootstrap$Utilities$Size$w100,
+											$elm$html$Html$Events$onClick(
+											$author$project$Main$SelectCard(card.id))
+										]))
+								]),
+							_List_fromArray(
+								[
+									$elm$html$Html$text('Select')
+								]))
+						]),
+					A3(
+						$rundis$elm_bootstrap$Bootstrap$Card$block,
+						_List_Nil,
+						_List_fromArray(
+							[
+								$rundis$elm_bootstrap$Bootstrap$Card$Block$custom(
+								A2(
+									$elm$html$Html$img,
+									_List_fromArray(
+										[
+											$elm$html$Html$Attributes$src('img/english/' + card.filename),
+											A2($elm$html$Html$Attributes$style, 'max-width', '200px')
+										]),
+									_List_Nil))
+							]),
+						$rundis$elm_bootstrap$Bootstrap$Card$config(
+							_List_fromArray(
+								[
+									cardBackground,
+									$rundis$elm_bootstrap$Bootstrap$Card$attrs(
+									_List_fromArray(
+										[$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$m2]))
+								])))))
+			]));
+};
+var $rundis$elm_bootstrap$Bootstrap$Card$Internal$BlockAttrs = function (a) {
+	return {$: 'BlockAttrs', a: a};
+};
+var $rundis$elm_bootstrap$Bootstrap$Card$Block$attrs = function (attrs_) {
+	return $rundis$elm_bootstrap$Bootstrap$Card$Internal$BlockAttrs(attrs_);
+};
+var $elm$html$Html$h6 = _VirtualDom_node('h6');
+var $rundis$elm_bootstrap$Bootstrap$Card$Header = function (a) {
+	return {$: 'Header', a: a};
+};
+var $rundis$elm_bootstrap$Bootstrap$Card$headerPrivate = F4(
+	function (elemFn, attributes, children, _v0) {
+		var conf = _v0.a;
+		return $rundis$elm_bootstrap$Bootstrap$Card$Config(
+			_Utils_update(
+				conf,
+				{
+					header: $elm$core$Maybe$Just(
+						$rundis$elm_bootstrap$Bootstrap$Card$Header(
+							A2(
+								elemFn,
+								A2(
+									$elm$core$List$cons,
+									$elm$html$Html$Attributes$class('card-header'),
+									attributes),
+								children)))
+				}));
+	});
+var $rundis$elm_bootstrap$Bootstrap$Card$header = $rundis$elm_bootstrap$Bootstrap$Card$headerPrivate($elm$html$Html$div);
+var $elm$html$Html$li = _VirtualDom_node('li');
+var $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$pl3 = $elm$html$Html$Attributes$class('pl-3');
+var $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$pr0 = $elm$html$Html$Attributes$class('pr-0');
+var $elm$html$Html$small = _VirtualDom_node('small');
+var $elm$html$Html$ul = _VirtualDom_node('ul');
+var $author$project$Main$fullCardViewWithText = function (card) {
+	var cardBackground = $author$project$Main$cardOutlineColor(card);
+	var buttonBackground = $rundis$elm_bootstrap$Bootstrap$Button$secondary;
+	return A2(
+		$rundis$elm_bootstrap$Bootstrap$Grid$col,
+		_List_Nil,
+		_List_fromArray(
+			[
+				$rundis$elm_bootstrap$Bootstrap$Card$view(
+				A3(
+					$rundis$elm_bootstrap$Bootstrap$Card$footer,
+					_List_Nil,
+					_List_fromArray(
+						[
+							A2(
+							$rundis$elm_bootstrap$Bootstrap$Button$button,
+							_List_fromArray(
+								[
+									buttonBackground,
+									$rundis$elm_bootstrap$Bootstrap$Button$attrs(
+									_List_fromArray(
+										[
+											$rundis$elm_bootstrap$Bootstrap$Utilities$Size$w100,
+											$elm$html$Html$Events$onClick(
+											$author$project$Main$SelectCard(card.id))
+										]))
+								]),
+							_List_fromArray(
+								[
+									$elm$html$Html$text('Select')
+								]))
+						]),
+					A3(
+						$rundis$elm_bootstrap$Bootstrap$Card$block,
+						_List_fromArray(
+							[
+								$rundis$elm_bootstrap$Bootstrap$Card$Block$attrs(
+								_List_fromArray(
+									[
+										A2($elm$html$Html$Attributes$style, 'height', '12em')
+									]))
+							]),
+						_List_fromArray(
+							[
+								$rundis$elm_bootstrap$Bootstrap$Card$Block$custom(
+								A2(
+									$elm$html$Html$ul,
+									_List_fromArray(
+										[$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$pl3, $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$pr0]),
+									A2(
+										$elm$core$List$map,
+										function (property) {
+											return A2(
+												$elm$html$Html$div,
+												_List_Nil,
+												_List_fromArray(
+													[
+														A2(
+														$elm$html$Html$li,
+														_List_Nil,
+														_List_fromArray(
+															[
+																A2(
+																$elm$html$Html$small,
+																_List_Nil,
+																_List_fromArray(
+																	[
+																		$elm$html$Html$text(property.description)
+																	]))
+															]))
+													]));
+										},
+										card.properties)))
+							]),
+						A3(
+							$rundis$elm_bootstrap$Bootstrap$Card$header,
+							_List_fromArray(
+								[
+									$elm$html$Html$Attributes$class('text-center')
+								]),
+							_List_fromArray(
+								[
+									A2(
+									$elm$html$Html$h6,
+									_List_fromArray(
+										[
+											$elm$html$Html$Attributes$class('card-text-header mb-0')
+										]),
+									_List_fromArray(
+										[
+											$elm$html$Html$text(card.title)
+										]))
+								]),
+							$rundis$elm_bootstrap$Bootstrap$Card$config(
+								_List_fromArray(
+									[
+										cardBackground,
+										$rundis$elm_bootstrap$Bootstrap$Card$attrs(
+										_List_fromArray(
+											[
+												$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$m2,
+												A2($elm$html$Html$Attributes$style, 'width', '15em')
+											]))
+									]))))))
+			]));
+};
+var $elm$html$Html$h5 = _VirtualDom_node('h5');
+var $rundis$elm_bootstrap$Bootstrap$Card$Block$title = F3(
+	function (elemFn, attributes, children) {
+		return $rundis$elm_bootstrap$Bootstrap$Card$Internal$BlockItem(
+			A2(
+				elemFn,
+				A2(
+					$elm$core$List$cons,
+					$elm$html$Html$Attributes$class('card-title'),
+					attributes),
+				children));
+	});
+var $rundis$elm_bootstrap$Bootstrap$Card$Block$titleH5 = $rundis$elm_bootstrap$Bootstrap$Card$Block$title($elm$html$Html$h5);
+var $author$project$Main$fullCardViewWithTextAndImage = function (card) {
+	var cardBackground = $author$project$Main$cardOutlineColor(card);
+	var buttonBackground = $rundis$elm_bootstrap$Bootstrap$Button$secondary;
 	return A2(
 		$rundis$elm_bootstrap$Bootstrap$Grid$col,
 		_List_Nil,
@@ -9560,7 +9704,18 @@ var $author$project$Main$fullCardView = function (card) {
 									]))))))
 			]));
 };
-var $rundis$elm_bootstrap$Bootstrap$Grid$Internal$Col4 = {$: 'Col4'};
+var $author$project$Main$fullCardView = F2(
+	function (cardDisplay, card) {
+		switch (cardDisplay.$) {
+			case 'TextAndImage':
+				return $author$project$Main$fullCardViewWithTextAndImage(card);
+			case 'Image':
+				return $author$project$Main$fullCardViewWithImage(card);
+			default:
+				return $author$project$Main$fullCardViewWithText(card);
+		}
+	});
+var $rundis$elm_bootstrap$Bootstrap$Grid$Internal$Col8 = {$: 'Col8'};
 var $rundis$elm_bootstrap$Bootstrap$General$Internal$MD = {$: 'MD'};
 var $rundis$elm_bootstrap$Bootstrap$Grid$Internal$ColWidth = function (a) {
 	return {$: 'ColWidth', a: a};
@@ -9574,8 +9729,6 @@ var $rundis$elm_bootstrap$Bootstrap$Grid$Internal$width = F2(
 		return $rundis$elm_bootstrap$Bootstrap$Grid$Internal$ColWidth(
 			A2($rundis$elm_bootstrap$Bootstrap$Grid$Internal$Width, size, count));
 	});
-var $rundis$elm_bootstrap$Bootstrap$Grid$Col$md4 = A2($rundis$elm_bootstrap$Bootstrap$Grid$Internal$width, $rundis$elm_bootstrap$Bootstrap$General$Internal$MD, $rundis$elm_bootstrap$Bootstrap$Grid$Internal$Col4);
-var $rundis$elm_bootstrap$Bootstrap$Grid$Internal$Col8 = {$: 'Col8'};
 var $rundis$elm_bootstrap$Bootstrap$Grid$Col$md8 = A2($rundis$elm_bootstrap$Bootstrap$Grid$Internal$width, $rundis$elm_bootstrap$Bootstrap$General$Internal$MD, $rundis$elm_bootstrap$Bootstrap$Grid$Internal$Col8);
 var $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$mt2 = $elm$html$Html$Attributes$class('mt-2');
 var $rundis$elm_bootstrap$Bootstrap$Utilities$Border$rounded = $elm$html$Html$Attributes$class('rounded');
@@ -10368,7 +10521,7 @@ var $author$project$Main$cardPoolView = function (model) {
 						A2(
 						$rundis$elm_bootstrap$Bootstrap$Grid$col,
 						_List_fromArray(
-							[$rundis$elm_bootstrap$Bootstrap$Grid$Col$md4]),
+							[$rundis$elm_bootstrap$Bootstrap$Grid$Col$xs12]),
 						_List_fromArray(
 							[
 								A2(
@@ -10391,7 +10544,7 @@ var $author$project$Main$cardPoolView = function (model) {
 				_List_Nil,
 				A2(
 					$elm$core$List$map,
-					$author$project$Main$fullCardView,
+					$author$project$Main$fullCardView(model.cardDisplay),
 					A2($author$project$Main$filteredCards, model.filter, model.notSelectedCards)))
 			]));
 };
@@ -11301,6 +11454,8 @@ var $rundis$elm_bootstrap$Bootstrap$Grid$Row$attrs = function (attrs_) {
 };
 var $rundis$elm_bootstrap$Bootstrap$Utilities$Border$dark = A2($rundis$elm_bootstrap$Bootstrap$Internal$Role$toClass, 'border', $rundis$elm_bootstrap$Bootstrap$Internal$Role$Dark);
 var $author$project$Main$maxDeckSize = 15;
+var $rundis$elm_bootstrap$Bootstrap$Grid$Internal$Col4 = {$: 'Col4'};
+var $rundis$elm_bootstrap$Bootstrap$Grid$Col$md4 = A2($rundis$elm_bootstrap$Bootstrap$Grid$Internal$width, $rundis$elm_bootstrap$Bootstrap$General$Internal$MD, $rundis$elm_bootstrap$Bootstrap$Grid$Internal$Col4);
 var $author$project$Main$DeselectCard = function (a) {
 	return {$: 'DeselectCard', a: a};
 };
@@ -11309,12 +11464,6 @@ var $author$project$Main$MoveCardDown = function (a) {
 };
 var $author$project$Main$MoveCardUp = function (a) {
 	return {$: 'MoveCardUp', a: a};
-};
-var $rundis$elm_bootstrap$Bootstrap$Card$Internal$BlockAttrs = function (a) {
-	return {$: 'BlockAttrs', a: a};
-};
-var $rundis$elm_bootstrap$Bootstrap$Card$Block$attrs = function (attrs_) {
-	return $rundis$elm_bootstrap$Bootstrap$Card$Internal$BlockAttrs(attrs_);
 };
 var $rundis$elm_bootstrap$Bootstrap$Utilities$Flex$block = $elm$html$Html$Attributes$class('d-flex');
 var $rundis$elm_bootstrap$Bootstrap$Utilities$Flex$justifyBetween = $elm$html$Html$Attributes$class('justify-content-between');
@@ -11650,6 +11799,7 @@ var $rundis$elm_bootstrap$Bootstrap$Modal$large = function (_v0) {
 var $rundis$elm_bootstrap$Bootstrap$Internal$Button$Outlined = function (a) {
 	return {$: 'Outlined', a: a};
 };
+var $rundis$elm_bootstrap$Bootstrap$Internal$Button$Primary = {$: 'Primary'};
 var $rundis$elm_bootstrap$Bootstrap$Button$outlinePrimary = $rundis$elm_bootstrap$Bootstrap$Internal$Button$Coloring(
 	$rundis$elm_bootstrap$Bootstrap$Internal$Button$Outlined($rundis$elm_bootstrap$Bootstrap$Internal$Button$Primary));
 var $rundis$elm_bootstrap$Bootstrap$Internal$Button$Size = function (a) {
