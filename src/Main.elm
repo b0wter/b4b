@@ -386,7 +386,7 @@ mainContent model =
 
 cardDisplayToggle : CardDisplay -> Html Msg
 cardDisplayToggle cardDisplay =
-    ButtonGroup.radioButtonGroup [ ButtonGroup.small, ButtonGroup.attrs [ class "d-flex align-items-center" ] ]
+    ButtonGroup.radioButtonGroup [ ButtonGroup.small, ButtonGroup.attrs [ class "d-flex align-items-center", Spacing.ml3 ] ]
         [ ButtonGroup.radioButton
             (cardDisplay == Text)
             [ Button.secondary, Button.onClick <| (ChangeCardDisplayType Text) ]
@@ -435,13 +435,17 @@ inventoryView model =
         selectionCountString = "(" ++ (numberOfSelectedCards |> String.fromInt) ++ "/" ++ (maxDeckSize |> String.fromInt) ++ ")"
         border = if numberOfSelectedCards <= maxDeckSize then Border.dark else Border.warning
         textColor = if numberOfSelectedCards <= maxDeckSize then class "" else class "text-warning"
+        buttons = div []
+                    [ Button.button [ Button.secondary, Button.onClick ShowShareModal ] [FontAwesome.Solid.share |> FontAwesome.Icon.viewIcon]
+                    , Button.button [ Button.warning, Button.onClick ResetCards, Button.attrs [ Spacing.ml3 ] ] [FontAwesome.Solid.times |> FontAwesome.Icon.viewIcon]
+                    ]
     in
     Grid.col [ Col.xs12, Col.md4, Col.attrs [ id "right-column", class "overflow-scroll content-column" ] ]
         [ div [ class "bg-dark m-2 shadow rounded border", border]
             [ Grid.row [ Row.attrs [ class "pr-1 pt-1 pb-1" ] ]
                 [ Grid.col [ Col.xs12, Col.attrs [ class "d-flex justify-content-between" ] ] 
-                    [ Html.h5 [ Spacing.m2, textColor ] [ text "Selection" ] 
-                    , div [ Spacing.m2, textColor ] [ text selectionCountString ]
+                    [ Html.h5 [ Spacing.m2, textColor ] [ text ("Selection " ++ selectionCountString) ]
+                    , div [ Spacing.m2, textColor ] [ buttons ]
                     ] ]
             , Grid.row []
                 (model.selectedCards |> List.map summaryCardView)

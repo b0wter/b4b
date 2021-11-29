@@ -8420,6 +8420,7 @@ var $lattyware$elm_fontawesome$FontAwesome$Solid$image = A5(
 	512,
 	_List_fromArray(
 		['M464 448H48c-26.51 0-48-21.49-48-48V112c0-26.51 21.49-48 48-48h416c26.51 0 48 21.49 48 48v288c0 26.51-21.49 48-48 48zM112 120c-30.928 0-56 25.072-56 56s25.072 56 56 56 56-25.072 56-56-25.072-56-56-56zM64 384h384V272l-87.515-87.515c-4.686-4.686-12.284-4.686-16.971 0L208 320l-55.515-55.515c-4.686-4.686-12.284-4.686-16.971 0L64 336v48z']));
+var $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$ml3 = $elm$html$Html$Attributes$class('ml-3');
 var $rundis$elm_bootstrap$Bootstrap$Internal$Button$Attrs = function (a) {
 	return {$: 'Attrs', a: a};
 };
@@ -9152,7 +9153,8 @@ var $author$project$Main$cardDisplayToggle = function (cardDisplay) {
 				$rundis$elm_bootstrap$Bootstrap$ButtonGroup$attrs(
 				_List_fromArray(
 					[
-						$elm$html$Html$Attributes$class('d-flex align-items-center')
+						$elm$html$Html$Attributes$class('d-flex align-items-center'),
+						$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$ml3
 					]))
 			]),
 		_List_fromArray(
@@ -11253,6 +11255,8 @@ var $author$project$Main$inventoryToggleButton = A2(
 					$elm$html$Html$text('🎒')
 				]))
 		]));
+var $author$project$Main$ResetCards = {$: 'ResetCards'};
+var $author$project$Main$ShowShareModal = {$: 'ShowShareModal'};
 var $rundis$elm_bootstrap$Bootstrap$Grid$Internal$RowAttrs = function (a) {
 	return {$: 'RowAttrs', a: a};
 };
@@ -11263,6 +11267,14 @@ var $rundis$elm_bootstrap$Bootstrap$Utilities$Border$dark = A2($rundis$elm_boots
 var $author$project$Main$maxDeckSize = 15;
 var $rundis$elm_bootstrap$Bootstrap$Grid$Internal$Col4 = {$: 'Col4'};
 var $rundis$elm_bootstrap$Bootstrap$Grid$Col$md4 = A2($rundis$elm_bootstrap$Bootstrap$Grid$Internal$width, $rundis$elm_bootstrap$Bootstrap$General$Internal$MD, $rundis$elm_bootstrap$Bootstrap$Grid$Internal$Col4);
+var $lattyware$elm_fontawesome$FontAwesome$Solid$share = A5(
+	$lattyware$elm_fontawesome$FontAwesome$Icon$Icon,
+	'fas',
+	'share',
+	512,
+	512,
+	_List_fromArray(
+		['M503.691 189.836L327.687 37.851C312.281 24.546 288 35.347 288 56.015v80.053C127.371 137.907 0 170.1 0 322.326c0 61.441 39.581 122.309 83.333 154.132 13.653 9.931 33.111-2.533 28.077-18.631C66.066 312.814 132.917 274.316 288 272.085V360c0 20.7 24.3 31.453 39.687 18.164l176.004-152c11.071-9.562 11.086-26.753 0-36.328z']));
 var $author$project$Main$DeselectCard = function (a) {
 	return {$: 'DeselectCard', a: a};
 };
@@ -11418,11 +11430,45 @@ var $author$project$Main$summaryCardView = function (card) {
 								])))))
 			]));
 };
+var $rundis$elm_bootstrap$Bootstrap$Internal$Button$Warning = {$: 'Warning'};
+var $rundis$elm_bootstrap$Bootstrap$Button$warning = $rundis$elm_bootstrap$Bootstrap$Internal$Button$Coloring(
+	$rundis$elm_bootstrap$Bootstrap$Internal$Button$Roled($rundis$elm_bootstrap$Bootstrap$Internal$Button$Warning));
 var $rundis$elm_bootstrap$Bootstrap$Utilities$Border$warning = A2($rundis$elm_bootstrap$Bootstrap$Internal$Role$toClass, 'border', $rundis$elm_bootstrap$Bootstrap$Internal$Role$Warning);
 var $author$project$Main$inventoryView = function (model) {
 	var numberOfSelectedCards = $elm$core$List$length(model.selectedCards);
 	var selectionCountString = '(' + ($elm$core$String$fromInt(numberOfSelectedCards) + ('/' + ($elm$core$String$fromInt($author$project$Main$maxDeckSize) + ')')));
 	var textColor = (_Utils_cmp(numberOfSelectedCards, $author$project$Main$maxDeckSize) < 1) ? $elm$html$Html$Attributes$class('') : $elm$html$Html$Attributes$class('text-warning');
+	var buttons = A2(
+		$elm$html$Html$div,
+		_List_Nil,
+		_List_fromArray(
+			[
+				A2(
+				$rundis$elm_bootstrap$Bootstrap$Button$button,
+				_List_fromArray(
+					[
+						$rundis$elm_bootstrap$Bootstrap$Button$secondary,
+						$rundis$elm_bootstrap$Bootstrap$Button$onClick($author$project$Main$ShowShareModal)
+					]),
+				_List_fromArray(
+					[
+						$lattyware$elm_fontawesome$FontAwesome$Icon$viewIcon($lattyware$elm_fontawesome$FontAwesome$Solid$share)
+					])),
+				A2(
+				$rundis$elm_bootstrap$Bootstrap$Button$button,
+				_List_fromArray(
+					[
+						$rundis$elm_bootstrap$Bootstrap$Button$warning,
+						$rundis$elm_bootstrap$Bootstrap$Button$onClick($author$project$Main$ResetCards),
+						$rundis$elm_bootstrap$Bootstrap$Button$attrs(
+						_List_fromArray(
+							[$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$ml3]))
+					]),
+				_List_fromArray(
+					[
+						$lattyware$elm_fontawesome$FontAwesome$Icon$viewIcon($lattyware$elm_fontawesome$FontAwesome$Solid$times)
+					]))
+			]));
 	var border = (_Utils_cmp(numberOfSelectedCards, $author$project$Main$maxDeckSize) < 1) ? $rundis$elm_bootstrap$Bootstrap$Utilities$Border$dark : $rundis$elm_bootstrap$Bootstrap$Utilities$Border$warning;
 	return A2(
 		$rundis$elm_bootstrap$Bootstrap$Grid$col,
@@ -11479,16 +11525,14 @@ var $author$project$Main$inventoryView = function (model) {
 											[$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$m2, textColor]),
 										_List_fromArray(
 											[
-												$elm$html$Html$text('Selection')
+												$elm$html$Html$text('Selection ' + selectionCountString)
 											])),
 										A2(
 										$elm$html$Html$div,
 										_List_fromArray(
 											[$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$m2, textColor]),
 										_List_fromArray(
-											[
-												$elm$html$Html$text(selectionCountString)
-											]))
+											[buttons]))
 									]))
 							])),
 						A2(
