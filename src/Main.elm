@@ -1,4 +1,4 @@
-module Main exposing (..)
+port module Main exposing (..)
 
 import Bootstrap.Button as Button exposing (Option)
 import Bootstrap.ButtonGroup as ButtonGroup
@@ -59,6 +59,9 @@ main =
         , onUrlRequest = LinkClicked
         }
 
+
+port copy : String -> Cmd msg
+port receiveCopyResult : (Bool -> msg) -> Sub msg
 
 -- Model -------------------------------------------------------------------------------------
 
@@ -167,6 +170,7 @@ type Msg
     | HideShareModal
     | ToggleInventory
     | CopyShareUrl String
+    | CopyShareUrlResult Bool
     | ChangeCardDisplayType CardDisplay
     ---------------------------
     | SelectCard CardId
@@ -182,7 +186,10 @@ type Msg
 
 subscriptions : Model -> Sub Msg
 subscriptions model =
-    Navbar.subscriptions model.navbarState NavbarMsg
+    Sub.batch
+    [ Navbar.subscriptions model.navbarState NavbarMsg
+    , receiveCopyResult CopyShareUrlResult
+    ]
 
 
 swapCardsBy : (Card -> Bool) -> Int -> List Card -> List Card
@@ -222,7 +229,12 @@ update msg model =
             ( { model | shareModalVisibility = Modal.hidden }, Cmd.none )
 
         CopyShareUrl url ->
-            ( model, Cmd.none)
+            ( model, copy url)
+
+        CopyShareUrlResult result ->
+            if result then
+                ( { model | shareModalVisibility = Modal.hidden }, Cmd.none)
+            else (model, Cmd.none)
 
         ChangeCardDisplayType display ->
             ( { model | cardDisplay = display }, Cmd.none)
@@ -363,7 +375,7 @@ shareModal model =
             [ InputGroup.config
                 ( InputGroup.text [ Input.attrs [ Html.Attributes.readonly True, value modalShareUrl ] ])
                 |> InputGroup.successors
-                    [ InputGroup.button [ Button.secondary, Button.small ] [ text "📋" ] ]
+                    [ InputGroup.button [ Button.secondary, Button.small, Button.onClick (CopyShareUrl modalShareUrl) ] [ text "📋" ] ]
                 |> InputGroup.view
             ]
         ]

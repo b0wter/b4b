@@ -7260,9 +7260,14 @@ var $author$project$Main$init = F3(
 			{cardDisplay: $author$project$Main$Image, cardPool: $author$project$CardData$cards, filter: $elm$core$Maybe$Nothing, hostUrl: hostUrl, navKey: key, navbarState: navbarState, notSelectedCards: notSelected, selectedCards: selected, shareModalVisibility: $rundis$elm_bootstrap$Bootstrap$Modal$hidden},
 			navbarCmd);
 	});
+var $author$project$Main$CopyShareUrlResult = function (a) {
+	return {$: 'CopyShareUrlResult', a: a};
+};
+var $elm$core$Platform$Sub$batch = _Platform_batch;
+var $elm$json$Json$Decode$bool = _Json_decodeBool;
+var $author$project$Main$receiveCopyResult = _Platform_incomingPort('receiveCopyResult', $elm$json$Json$Decode$bool);
 var $rundis$elm_bootstrap$Bootstrap$Navbar$AnimatingDown = {$: 'AnimatingDown'};
 var $rundis$elm_bootstrap$Bootstrap$Navbar$AnimatingUp = {$: 'AnimatingUp'};
-var $elm$core$Platform$Sub$batch = _Platform_batch;
 var $rundis$elm_bootstrap$Bootstrap$Navbar$Closed = {$: 'Closed'};
 var $rundis$elm_bootstrap$Bootstrap$Navbar$ListenClicks = {$: 'ListenClicks'};
 var $rundis$elm_bootstrap$Bootstrap$Navbar$Open = {$: 'Open'};
@@ -7824,8 +7829,15 @@ var $rundis$elm_bootstrap$Bootstrap$Navbar$subscriptions = F2(
 				]));
 	});
 var $author$project$Main$subscriptions = function (model) {
-	return A2($rundis$elm_bootstrap$Bootstrap$Navbar$subscriptions, model.navbarState, $author$project$Main$NavbarMsg);
+	return $elm$core$Platform$Sub$batch(
+		_List_fromArray(
+			[
+				A2($rundis$elm_bootstrap$Bootstrap$Navbar$subscriptions, model.navbarState, $author$project$Main$NavbarMsg),
+				$author$project$Main$receiveCopyResult($author$project$Main$CopyShareUrlResult)
+			]));
 };
+var $elm$json$Json$Encode$string = _Json_wrap;
+var $author$project$Main$copy = _Platform_outgoingPort('copy', $elm$json$Json$Encode$string);
 var $elm$core$List$filter = F2(
 	function (isGood, list) {
 		return A3(
@@ -8226,7 +8238,16 @@ var $author$project$Main$update = F2(
 					$elm$core$Platform$Cmd$none);
 			case 'CopyShareUrl':
 				var url = msg.a;
-				return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
+				return _Utils_Tuple2(
+					model,
+					$author$project$Main$copy(url));
+			case 'CopyShareUrlResult':
+				var result = msg.a;
+				return result ? _Utils_Tuple2(
+					_Utils_update(
+						model,
+						{shareModalVisibility: $rundis$elm_bootstrap$Bootstrap$Modal$hidden}),
+					$elm$core$Platform$Cmd$none) : _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
 			case 'ChangeCardDisplayType':
 				var display = msg.a;
 				return _Utils_Tuple2(
@@ -8353,7 +8374,6 @@ var $author$project$Main$update = F2(
 					$elm$core$Platform$Cmd$none);
 		}
 	});
-var $elm$json$Json$Encode$string = _Json_wrap;
 var $elm$html$Html$Attributes$stringProperty = F2(
 	function (key, string) {
 		return A2(
@@ -11542,6 +11562,9 @@ var $author$project$Main$inventoryView = function (model) {
 					]))
 			]));
 };
+var $author$project$Main$CopyShareUrl = function (a) {
+	return {$: 'CopyShareUrl', a: a};
+};
 var $author$project$Main$HideShareModal = {$: 'HideShareModal'};
 var $rundis$elm_bootstrap$Bootstrap$Modal$Body = function (a) {
 	return {$: 'Body', a: a};
@@ -12033,7 +12056,12 @@ var $author$project$Main$shareModal = function (model) {
 											A2(
 											$rundis$elm_bootstrap$Bootstrap$Form$InputGroup$button,
 											_List_fromArray(
-												[$rundis$elm_bootstrap$Bootstrap$Button$secondary, $rundis$elm_bootstrap$Bootstrap$Button$small]),
+												[
+													$rundis$elm_bootstrap$Bootstrap$Button$secondary,
+													$rundis$elm_bootstrap$Bootstrap$Button$small,
+													$rundis$elm_bootstrap$Bootstrap$Button$onClick(
+													$author$project$Main$CopyShareUrl(modalShareUrl))
+												]),
 											_List_fromArray(
 												[
 													$elm$html$Html$text('📋')

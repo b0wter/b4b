@@ -12,7 +12,7 @@
 }
 
 .content-column {
-    height: calc(-60px + 100vh)
+    height: calc(100vh)
 }
 
 .unselectable {
