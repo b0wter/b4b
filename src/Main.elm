@@ -1,6 +1,7 @@
 module Main exposing (..)
 
 import Bootstrap.Button as Button exposing (Option)
+import Bootstrap.ButtonGroup as ButtonGroup
 import Bootstrap.Card as Card
 import Bootstrap.Card.Block as Block
 import Bootstrap.Grid as Grid
@@ -19,6 +20,9 @@ import Browser
 import Cards exposing (Card, CardId, Kind(..))
 import CardData exposing (cards)
 import Dict
+import FontAwesome.Icon
+import FontAwesome.Solid
+import FontAwesome.Transforms
 import Html exposing (Attribute, Html, div, img, text)
 import Html.Attributes exposing (..)
 import Html.Events exposing (onClick, onInput)
@@ -37,7 +41,6 @@ import String.Extra as String
 import String.Extras as String
 import Url.Parser exposing (Parser)
 import Platform exposing (Router)
-
 
 maxDeckSize : Int
 maxDeckSize = 15
@@ -164,6 +167,7 @@ type Msg
     | HideShareModal
     | ToggleInventory
     | CopyShareUrl String
+    | ChangeCardDisplayType CardDisplay
     ---------------------------
     | SelectCard CardId
     | DeselectCard CardId
@@ -219,6 +223,9 @@ update msg model =
 
         CopyShareUrl url ->
             ( model, Cmd.none)
+
+        ChangeCardDisplayType display ->
+            ( { model | cardDisplay = display }, Cmd.none)
 
         SelectCard id ->
             let
@@ -372,19 +379,38 @@ shareModal model =
 mainContent : Model -> List (Html Msg)
 mainContent model =
     [ shareModal model
-    , header model
     , Grid.row [ ] [ cardPoolView model, inventoryView model ]
     , inventoryToggleButton
     ]
 
 
+cardDisplayToggle : CardDisplay -> Html Msg
+cardDisplayToggle cardDisplay =
+    ButtonGroup.radioButtonGroup [ ButtonGroup.small, ButtonGroup.attrs [ class "d-flex align-items-center" ] ]
+        [ ButtonGroup.radioButton
+            (cardDisplay == Text)
+            [ Button.secondary, Button.onClick <| (ChangeCardDisplayType Text) ]
+            [ FontAwesome.Solid.alignLeft |> FontAwesome.Icon.viewIcon ]
+        , ButtonGroup.radioButton
+            (cardDisplay == TextAndImage)
+            [ Button.secondary, Button.onClick <| (ChangeCardDisplayType TextAndImage) ]
+            [ text "Text & Image" ]
+        , ButtonGroup.radioButton
+            (cardDisplay == Image)
+            [ Button.secondary, Button.onClick <| (ChangeCardDisplayType Image) ]
+            [ text "Image" ]
+        ]
+
+
 filterWithClearButton : String -> Html Msg
 filterWithClearButton currentFilter =
-    InputGroup.config
+    div []
+    [ InputGroup.config
         ( InputGroup.text [ Input.attrs [ placeholder "Filter", onInput FilterChanged, value currentFilter ] ] )
         |> InputGroup.successors
             [ InputGroup.button [ Button.secondary, Button.attrs [ onClick ClearFilter ] ] [ text "Clear" ] ]
         |> InputGroup.view
+    ]
 
 
 cardPoolView : Model -> Grid.Column Msg
@@ -392,8 +418,9 @@ cardPoolView model =
     Grid.col [ Col.xs12, Col.md8, Col.attrs [ id "left-column", class "overflow-scroll content-column" ] ]
         [ Grid.row []
             [ Grid.col [ Col.xs12 ]
-                [ div [ Border.rounded, Spacing.mt2, class "d-flex pr-1 pl-1 pt-1 pb-1 bg-dark shadow "]
+                [ div [ Border.rounded, Spacing.mt2, class "d-flex justify-content-between pr-1 pl-1 pt-1 pb-1 bg-dark shadow "]
                     [ filterWithClearButton (model.filter |> Maybe.withDefault "")
+                    , cardDisplayToggle model.cardDisplay
                     ]
                 ]
             ]
@@ -572,8 +599,8 @@ fullCardViewWithImage card =
             Button.secondary
     in
     Grid.col []
-        [ Card.config [ cardBackground , Card.attrs [  Spacing.m2 ] ] --style "width" "16rem",
-            |> Card.block []
+        [ Card.config [ cardBackground , Card.attrs [  Spacing.m2, style "max-width" "240px" ] ]
+            |> Card.block [ Block.attrs [ class "d-flex justify-content-center" ] ]
                 [ Block.custom
                     (img [ src ("img/english/" ++ card.filename), style "max-width" "200px" ] [])
                 ]
@@ -594,7 +621,7 @@ fullCardViewWithText card =
             Button.secondary
     in
     Grid.col []
-        [ Card.config [ cardBackground, Card.attrs [ Spacing.m2, style "width" "15em" ] ] --[ style "width" "16rem", style "height" "605px", Spacing.m2 ] ]
+        [ Card.config [ cardBackground, Card.attrs [ Spacing.m2, style "width" "15em" ] ]
             |> Card.header [ class "text-center" ]
                 [ Html.h6 [ class "card-text-header mb-0"] [ text card.title ]
                 ]
