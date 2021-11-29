@@ -408,7 +408,7 @@ filterWithClearButton currentFilter =
     [ InputGroup.config
         ( InputGroup.text [ Input.attrs [ placeholder "Filter", onInput FilterChanged, value currentFilter ] ] )
         |> InputGroup.successors
-            [ InputGroup.button [ Button.secondary, Button.attrs [ onClick ClearFilter ] ] [ text "Clear" ] ]
+            [ InputGroup.button [ Button.secondary, Button.attrs [ onClick ClearFilter ] ] [ FontAwesome.Solid.times |> FontAwesome.Icon.viewIcon] ]
         |> InputGroup.view
     ]
 

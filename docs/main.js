@@ -9491,7 +9491,14 @@ var $rundis$elm_bootstrap$Bootstrap$Form$Input$input = F2(
 	});
 var $rundis$elm_bootstrap$Bootstrap$Form$Input$text = $rundis$elm_bootstrap$Bootstrap$Form$Input$input($rundis$elm_bootstrap$Bootstrap$Form$Input$Text);
 var $rundis$elm_bootstrap$Bootstrap$Form$InputGroup$text = $rundis$elm_bootstrap$Bootstrap$Form$InputGroup$input($rundis$elm_bootstrap$Bootstrap$Form$Input$text);
-var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
+var $lattyware$elm_fontawesome$FontAwesome$Solid$times = A5(
+	$lattyware$elm_fontawesome$FontAwesome$Icon$Icon,
+	'fas',
+	'times',
+	352,
+	512,
+	_List_fromArray(
+		['M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z']));
 var $rundis$elm_bootstrap$Bootstrap$Form$InputGroup$sizeAttribute = function (size) {
 	return A2(
 		$elm$core$Maybe$map,
@@ -9577,7 +9584,7 @@ var $author$project$Main$filterWithClearButton = function (currentFilter) {
 								]),
 							_List_fromArray(
 								[
-									$elm$html$Html$text('Clear')
+									$lattyware$elm_fontawesome$FontAwesome$Icon$viewIcon($lattyware$elm_fontawesome$FontAwesome$Solid$times)
 								]))
 						]),
 					$rundis$elm_bootstrap$Bootstrap$Form$InputGroup$config(
@@ -9905,6 +9912,7 @@ var $elm$html$Html$Attributes$src = function (url) {
 };
 var $elm$virtual_dom$VirtualDom$style = _VirtualDom_style;
 var $elm$html$Html$Attributes$style = $elm$virtual_dom$VirtualDom$style;
+var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
 var $rundis$elm_bootstrap$Bootstrap$Card$Internal$applyModifier = F2(
 	function (option, options) {
 		switch (option.$) {
