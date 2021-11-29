@@ -394,11 +394,11 @@ cardDisplayToggle cardDisplay =
         , ButtonGroup.radioButton
             (cardDisplay == TextAndImage)
             [ Button.secondary, Button.onClick <| (ChangeCardDisplayType TextAndImage) ]
-            [ text "Text & Image" ]
+            [ FontAwesome.Solid.idCard |> FontAwesome.Icon.viewIcon ]
         , ButtonGroup.radioButton
             (cardDisplay == Image)
             [ Button.secondary, Button.onClick <| (ChangeCardDisplayType Image) ]
-            [ text "Image" ]
+            [ FontAwesome.Solid.image |> FontAwesome.Icon.viewIcon ]
         ]
 
 
