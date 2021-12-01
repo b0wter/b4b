@@ -7257,7 +7257,7 @@ var $author$project$Main$init = F3(
 		var navbarState = _v2.a;
 		var navbarCmd = _v2.b;
 		return _Utils_Tuple2(
-			{cardDisplay: $author$project$Main$Image, cardPool: $author$project$CardData$cards, filter: $elm$core$Maybe$Nothing, hostUrl: hostUrl, navKey: key, navbarState: navbarState, notSelectedCards: notSelected, selectedCards: selected, shareModalVisibility: $rundis$elm_bootstrap$Bootstrap$Modal$hidden},
+			{cardDisplay: $author$project$Main$Image, cardPool: $author$project$CardData$cards, filter: $elm$core$Maybe$Nothing, hostUrl: hostUrl, navKey: key, navbarState: navbarState, notSelectedCards: notSelected, selectedCards: selected, shareModalVisibility: $rundis$elm_bootstrap$Bootstrap$Modal$hidden, yesNoModalContent: $elm$core$Maybe$Nothing, yesNoModalVisibility: $rundis$elm_bootstrap$Bootstrap$Modal$hidden},
 			navbarCmd);
 	});
 var $author$project$Main$CopyShareUrlResult = function (a) {
@@ -8235,6 +8235,31 @@ var $author$project$Main$update = F2(
 					_Utils_update(
 						model,
 						{shareModalVisibility: $rundis$elm_bootstrap$Bootstrap$Modal$hidden}),
+					$elm$core$Platform$Cmd$none);
+			case 'ShowYesNoModal':
+				var content = msg.a;
+				return _Utils_Tuple2(
+					_Utils_update(
+						model,
+						{
+							yesNoModalContent: $elm$core$Maybe$Just(content),
+							yesNoModalVisibility: $rundis$elm_bootstrap$Bootstrap$Modal$shown
+						}),
+					$elm$core$Platform$Cmd$none);
+			case 'ConfirmResetModal':
+				var updatedModel = _Utils_update(
+					model,
+					{notSelectedCards: $author$project$CardData$cards, selectedCards: _List_Nil, yesNoModalContent: $elm$core$Maybe$Nothing, yesNoModalVisibility: $rundis$elm_bootstrap$Bootstrap$Modal$hidden});
+				var url = $elm$url$Url$toString(
+					$author$project$Main$shareUrl(updatedModel));
+				return _Utils_Tuple2(
+					updatedModel,
+					A2($elm$browser$Browser$Navigation$pushUrl, model.navKey, url));
+			case 'RejectResetModal':
+				return _Utils_Tuple2(
+					_Utils_update(
+						model,
+						{yesNoModalContent: $elm$core$Maybe$Nothing, yesNoModalVisibility: $rundis$elm_bootstrap$Bootstrap$Modal$hidden}),
 					$elm$core$Platform$Cmd$none);
 			case 'CopyShareUrl':
 				var url = msg.a;
@@ -9585,7 +9610,10 @@ var $rundis$elm_bootstrap$Bootstrap$Form$InputGroup$view = function (_v0) {
 var $author$project$Main$filterWithClearButton = function (currentFilter) {
 	return A2(
 		$elm$html$Html$div,
-		_List_Nil,
+		_List_fromArray(
+			[
+				$elm$html$Html$Attributes$class('w-100')
+			]),
 		_List_fromArray(
 			[
 				$rundis$elm_bootstrap$Bootstrap$Form$InputGroup$view(
@@ -11275,8 +11303,12 @@ var $author$project$Main$inventoryToggleButton = A2(
 					$elm$html$Html$text('🎒')
 				]))
 		]));
-var $author$project$Main$ResetCards = {$: 'ResetCards'};
+var $author$project$Main$ConfirmResetModal = {$: 'ConfirmResetModal'};
+var $author$project$Main$RejectResetModal = {$: 'RejectResetModal'};
 var $author$project$Main$ShowShareModal = {$: 'ShowShareModal'};
+var $author$project$Main$ShowYesNoModal = function (a) {
+	return {$: 'ShowYesNoModal', a: a};
+};
 var $rundis$elm_bootstrap$Bootstrap$Grid$Internal$RowAttrs = function (a) {
 	return {$: 'RowAttrs', a: a};
 };
@@ -11455,6 +11487,7 @@ var $rundis$elm_bootstrap$Bootstrap$Button$warning = $rundis$elm_bootstrap$Boots
 	$rundis$elm_bootstrap$Bootstrap$Internal$Button$Roled($rundis$elm_bootstrap$Bootstrap$Internal$Button$Warning));
 var $rundis$elm_bootstrap$Bootstrap$Utilities$Border$warning = A2($rundis$elm_bootstrap$Bootstrap$Internal$Role$toClass, 'border', $rundis$elm_bootstrap$Bootstrap$Internal$Role$Warning);
 var $author$project$Main$inventoryView = function (model) {
+	var yesNoContent = {header: 'Reset', noMsg: $author$project$Main$RejectResetModal, text: 'Clear the currently selected cards?', yesMsg: $author$project$Main$ConfirmResetModal};
 	var numberOfSelectedCards = $elm$core$List$length(model.selectedCards);
 	var selectionCountString = '(' + ($elm$core$String$fromInt(numberOfSelectedCards) + ('/' + ($elm$core$String$fromInt($author$project$Main$maxDeckSize) + ')')));
 	var textColor = (_Utils_cmp(numberOfSelectedCards, $author$project$Main$maxDeckSize) < 1) ? $elm$html$Html$Attributes$class('') : $elm$html$Html$Attributes$class('text-warning');
@@ -11479,7 +11512,8 @@ var $author$project$Main$inventoryView = function (model) {
 				_List_fromArray(
 					[
 						$rundis$elm_bootstrap$Bootstrap$Button$warning,
-						$rundis$elm_bootstrap$Bootstrap$Button$onClick($author$project$Main$ResetCards),
+						$rundis$elm_bootstrap$Bootstrap$Button$onClick(
+						$author$project$Main$ShowYesNoModal(yesNoContent)),
 						$rundis$elm_bootstrap$Bootstrap$Button$attrs(
 						_List_fromArray(
 							[$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$ml3]))
@@ -12093,10 +12127,107 @@ var $author$project$Main$shareModal = function (model) {
 						$rundis$elm_bootstrap$Bootstrap$Modal$large(
 							$rundis$elm_bootstrap$Bootstrap$Modal$config($author$project$Main$HideShareModal)))))));
 };
+var $rundis$elm_bootstrap$Bootstrap$Internal$Button$Danger = {$: 'Danger'};
+var $rundis$elm_bootstrap$Bootstrap$Button$outlineDanger = $rundis$elm_bootstrap$Bootstrap$Internal$Button$Coloring(
+	$rundis$elm_bootstrap$Bootstrap$Internal$Button$Outlined($rundis$elm_bootstrap$Bootstrap$Internal$Button$Danger));
+var $rundis$elm_bootstrap$Bootstrap$Internal$Button$Success = {$: 'Success'};
+var $rundis$elm_bootstrap$Bootstrap$Button$outlineSuccess = $rundis$elm_bootstrap$Bootstrap$Internal$Button$Coloring(
+	$rundis$elm_bootstrap$Bootstrap$Internal$Button$Outlined($rundis$elm_bootstrap$Bootstrap$Internal$Button$Success));
+var $rundis$elm_bootstrap$Bootstrap$Modal$small = function (_v0) {
+	var conf = _v0.a;
+	var options = conf.options;
+	return $rundis$elm_bootstrap$Bootstrap$Modal$Config(
+		_Utils_update(
+			conf,
+			{
+				options: _Utils_update(
+					options,
+					{
+						modalSize: $elm$core$Maybe$Just($rundis$elm_bootstrap$Bootstrap$General$Internal$SM)
+					})
+			}));
+};
+var $author$project$Main$yesNoModal = F2(
+	function (visibility, content) {
+		return A2(
+			$rundis$elm_bootstrap$Bootstrap$Modal$view,
+			visibility,
+			A3(
+				$rundis$elm_bootstrap$Bootstrap$Modal$footer,
+				_List_Nil,
+				_List_fromArray(
+					[
+						A2(
+						$rundis$elm_bootstrap$Bootstrap$Button$button,
+						_List_fromArray(
+							[
+								$rundis$elm_bootstrap$Bootstrap$Button$outlineSuccess,
+								$rundis$elm_bootstrap$Bootstrap$Button$attrs(
+								_List_fromArray(
+									[
+										$elm$html$Html$Events$onClick(content.yesMsg)
+									]))
+							]),
+						_List_fromArray(
+							[
+								$elm$html$Html$text('Yes')
+							])),
+						A2(
+						$rundis$elm_bootstrap$Bootstrap$Button$button,
+						_List_fromArray(
+							[
+								$rundis$elm_bootstrap$Bootstrap$Button$outlineDanger,
+								$rundis$elm_bootstrap$Bootstrap$Button$attrs(
+								_List_fromArray(
+									[
+										$elm$html$Html$Events$onClick(content.noMsg)
+									]))
+							]),
+						_List_fromArray(
+							[
+								$elm$html$Html$text('No')
+							]))
+					]),
+				A3(
+					$rundis$elm_bootstrap$Bootstrap$Modal$body,
+					_List_Nil,
+					_List_fromArray(
+						[
+							A2(
+							$elm$html$Html$p,
+							_List_Nil,
+							_List_fromArray(
+								[
+									$elm$html$Html$text(content.text)
+								]))
+						]),
+					A3(
+						$rundis$elm_bootstrap$Bootstrap$Modal$h3,
+						_List_Nil,
+						_List_fromArray(
+							[
+								$elm$html$Html$text(content.header)
+							]),
+						A2(
+							$rundis$elm_bootstrap$Bootstrap$Modal$hideOnBackdropClick,
+							false,
+							$rundis$elm_bootstrap$Bootstrap$Modal$small(
+								$rundis$elm_bootstrap$Bootstrap$Modal$config(content.noMsg)))))));
+	});
 var $author$project$Main$mainContent = function (model) {
+	var resetModal = A2(
+		$elm$core$Maybe$withDefault,
+		A2($elm$html$Html$div, _List_Nil, _List_Nil),
+		A2(
+			$elm$core$Maybe$map,
+			function (c) {
+				return A2($author$project$Main$yesNoModal, model.yesNoModalVisibility, c);
+			},
+			model.yesNoModalContent));
 	return _List_fromArray(
 		[
 			$author$project$Main$shareModal(model),
+			resetModal,
 			A2(
 			$rundis$elm_bootstrap$Bootstrap$Grid$row,
 			_List_Nil,

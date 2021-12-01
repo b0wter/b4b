@@ -34,6 +34,7 @@ import Bootstrap.Grid.Row as Row
 import Browser.Navigation as Nav exposing (Key)
 import Maybe.Extra as Maybe
 import QS as QS
+import Task
 import Url exposing (Url)
 import Browser exposing (UrlRequest)
 import Url.Parser.Query as Query
@@ -79,6 +80,8 @@ type alias Model =
     { navbarState : Navbar.State
     , cardDisplay : CardDisplay
     , shareModalVisibility: Modal.Visibility
+    , yesNoModalVisibility: Modal.Visibility
+    , yesNoModalContent: Maybe YesNoModalContent
     , hostUrl: Url
     , navKey: Key
     --------------
@@ -156,10 +159,20 @@ init _ url key =
       , notSelectedCards = notSelected
       , filter = Nothing
       , shareModalVisibility = Modal.hidden
+      , yesNoModalVisibility = Modal.hidden
+      , yesNoModalContent = Nothing
       , hostUrl = hostUrl
       , navKey = key
       , navbarState = navbarState }
     , navbarCmd )
+
+
+type alias YesNoModalContent =
+    { header: String
+    , text: String
+    , yesMsg: Msg
+    , noMsg: Msg
+    }
 
 
 type Msg
@@ -172,6 +185,9 @@ type Msg
     | CopyShareUrl String
     | CopyShareUrlResult Bool
     | ChangeCardDisplayType CardDisplay
+    | ShowYesNoModal YesNoModalContent
+    | ConfirmResetModal
+    | RejectResetModal
     ---------------------------
     | SelectCard CardId
     | DeselectCard CardId
@@ -227,6 +243,22 @@ update msg model =
 
         HideShareModal ->
             ( { model | shareModalVisibility = Modal.hidden }, Cmd.none )
+
+
+        ShowYesNoModal content ->
+            ( { model | yesNoModalContent = Just content, yesNoModalVisibility = Modal.shown }, Cmd.none )
+
+
+        ConfirmResetModal ->
+            let
+                updatedModel = { model | selectedCards = [], notSelectedCards = cards, yesNoModalContent = Nothing, yesNoModalVisibility = Modal.hidden }
+                url = shareUrl updatedModel |> Url.toString
+            in
+            ( updatedModel, Nav.pushUrl model.navKey url )
+
+
+        RejectResetModal ->
+            ( { model | yesNoModalContent = Nothing, yesNoModalVisibility = Modal.hidden }, Cmd.none)
 
         CopyShareUrl url ->
             ( model, copy url)
@@ -311,6 +343,8 @@ update msg model =
 
 
 
+
+
 -- View -------------------------------------------------------------------------------------
 
 
@@ -388,9 +422,42 @@ shareModal model =
         ]
     |> Modal.view model.shareModalVisibility
 
+
+yesNoModal : Modal.Visibility -> YesNoModalContent -> Html Msg
+yesNoModal visibility content =
+    Modal.config content.noMsg
+    |> Modal.small
+    |> Modal.hideOnBackdropClick False
+    |> Modal.h3 [] [ text content.header ]
+    |> Modal.body []
+        [ Html.p []
+            [ text content.text
+            ]
+        ]
+    |> Modal.footer []
+        [ Button.button
+            [ Button.outlineSuccess
+            , Button.attrs [ onClick content.yesMsg ]
+            ]
+            [ text "Yes" ]
+        , Button.button
+            [ Button.outlineDanger
+            , Button.attrs [ onClick content.noMsg ]
+            ]
+            [ text "No" ]
+        ]
+    |> Modal.view visibility
+
+
 mainContent : Model -> List (Html Msg)
 mainContent model =
+    let
+        resetModal = model.yesNoModalContent
+                     |> Maybe.map (\c -> yesNoModal model.yesNoModalVisibility c)
+                     |> Maybe.withDefault (div [] [])
+    in
     [ shareModal model
+    , resetModal
     , Grid.row [ ] [ cardPoolView model, inventoryView model ]
     , inventoryToggleButton
     ]
@@ -416,7 +483,7 @@ cardDisplayToggle cardDisplay =
 
 filterWithClearButton : String -> Html Msg
 filterWithClearButton currentFilter =
-    div []
+    div [ class "w-100" ]
     [ InputGroup.config
         ( InputGroup.text [ Input.attrs [ placeholder "Filter", onInput FilterChanged, value currentFilter ] ] )
         |> InputGroup.successors
@@ -447,9 +514,10 @@ inventoryView model =
         selectionCountString = "(" ++ (numberOfSelectedCards |> String.fromInt) ++ "/" ++ (maxDeckSize |> String.fromInt) ++ ")"
         border = if numberOfSelectedCards <= maxDeckSize then Border.dark else Border.warning
         textColor = if numberOfSelectedCards <= maxDeckSize then class "" else class "text-warning"
+        yesNoContent = { header = "Reset", text = "Clear the currently selected cards?", yesMsg = ConfirmResetModal, noMsg = RejectResetModal }
         buttons = div []
                     [ Button.button [ Button.secondary, Button.onClick ShowShareModal ] [FontAwesome.Solid.share |> FontAwesome.Icon.viewIcon]
-                    , Button.button [ Button.warning, Button.onClick ResetCards, Button.attrs [ Spacing.ml3 ] ] [FontAwesome.Solid.times |> FontAwesome.Icon.viewIcon]
+                    , Button.button [ Button.warning, Button.onClick (ShowYesNoModal yesNoContent), Button.attrs [ Spacing.ml3 ] ] [FontAwesome.Solid.times |> FontAwesome.Icon.viewIcon]
                     ]
     in
     Grid.col [ Col.xs12, Col.md4, Col.attrs [ id "right-column", class "overflow-scroll content-column" ] ]
