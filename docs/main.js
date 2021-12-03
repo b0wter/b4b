@@ -6575,7 +6575,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		effects: _List_Nil,
 		filename: '9_0_1.jpg',
 		id: 148,
-		kind: 'OFFÉNSE',
+		kind: 'OFFENSE',
 		properties: _List_fromArray(
 			['Gain 30% Move Speed and Accuracy while crouched and using an LMG.']),
 		title: 'MEATGRINDER'
@@ -8288,6 +8288,7 @@ var $author$project$Main$update = F2(
 						return _Utils_eq(c.id, id);
 					},
 					model.cardPool);
+				var _v1 = A2($elm$core$Debug$log, 'cards', $author$project$CardData$cards);
 				if (card.$ === 'Just') {
 					var c = card.a;
 					var updatedModel = _Utils_update(

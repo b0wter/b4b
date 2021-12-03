@@ -1432,7 +1432,7 @@ rawCards =
       }
     , { id = 148
       , title = "MEATGRINDER"
-      , kind = "OFFÉNSE"
+      , kind = "OFFENSE"
       , filename = "9_0_1.jpg"
       , properties =
             [ "Gain 30% Move Speed and Accuracy while crouched and using an LMG."

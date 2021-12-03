@@ -275,6 +275,7 @@ update msg model =
             let
                 card =
                     model.cardPool |> List.find (\c -> c.id == id)
+                _ = Debug.log "cards" cards
             in
             case card of
                 Just c ->
@@ -380,19 +381,6 @@ inventoryToggleButton =
     [
         Html.h2 [ class "m-auto grey no-decoration" ] [ text "🎒" ]
     ]
-
-
-header : Model -> Html Msg
-header model =
-    Navbar.config NavbarMsg
-        |> Navbar.withAnimation
-        |> Navbar.brand [ href "#" ] [ text "Deck Builder" ]
-        |> Navbar.dark
-        |> Navbar.items
-            [ Navbar.itemLink [ href "#", onClick ResetCards ] [ text "Reset" ]
-            , Navbar.itemLink [ href "#", onClick ShowShareModal ] [ text "Share" ]
-            ]
-        |> Navbar.view model.navbarState
 
 
 shareModal : Model -> Html Msg
