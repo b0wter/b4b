@@ -5238,1449 +5238,2032 @@ var $elm$core$List$any = F2(
 			}
 		}
 	});
+var $author$project$Cards$Brawn = {$: 'Brawn'};
+var $author$project$Cards$Discipline = {$: 'Discipline'};
+var $author$project$Cards$Fortune = {$: 'Fortune'};
+var $author$project$Cards$Reflex = {$: 'Reflex'};
+var $author$project$Cards$UnknownAffinity = {$: 'UnknownAffinity'};
+var $elm$core$String$toLower = _String_toLower;
+var $author$project$Cards$parseAffinity = function (str) {
+	var _v0 = $elm$core$String$toLower(str);
+	switch (_v0) {
+		case 'discipline':
+			return $author$project$Cards$Discipline;
+		case 'reflex':
+			return $author$project$Cards$Reflex;
+		case 'brawn':
+			return $author$project$Cards$Brawn;
+		case 'fortune':
+			return $author$project$Cards$Fortune;
+		default:
+			return $author$project$Cards$UnknownAffinity;
+	}
+};
 var $author$project$Cards$Defense = {$: 'Defense'};
 var $author$project$Cards$Mobility = {$: 'Mobility'};
 var $author$project$Cards$Offense = {$: 'Offense'};
-var $author$project$Cards$Property = function (description) {
-	return {description: description};
-};
-var $author$project$Cards$Unknown = {$: 'Unknown'};
+var $author$project$Cards$UnknownKind = {$: 'UnknownKind'};
 var $author$project$Cards$Utility = {$: 'Utility'};
+var $author$project$Cards$parseKind = function (str) {
+	var _v0 = $elm$core$String$toLower(str);
+	switch (_v0) {
+		case 'utility':
+			return $author$project$Cards$Utility;
+		case 'offense':
+			return $author$project$Cards$Offense;
+		case 'defense':
+			return $author$project$Cards$Defense;
+		case 'mobility':
+			return $author$project$Cards$Mobility;
+		default:
+			return $author$project$Cards$UnknownKind;
+	}
+};
+var $author$project$Cards$Alley = function (a) {
+	return {$: 'Alley', a: a};
+};
+var $author$project$Cards$BridgeTown = {$: 'BridgeTown'};
+var $author$project$Cards$Clinic = function (a) {
+	return {$: 'Clinic', a: a};
+};
+var $author$project$Cards$FortHope = {$: 'FortHope'};
+var $author$project$Cards$GrantsBrewHouse = {$: 'GrantsBrewHouse'};
+var $author$project$Cards$KnuckleHouse = {$: 'KnuckleHouse'};
+var $author$project$Cards$Nest = function (a) {
+	return {$: 'Nest', a: a};
+};
+var $author$project$Cards$PaulsAlley = {$: 'PaulsAlley'};
+var $author$project$Cards$Starter = function (a) {
+	return {$: 'Starter', a: a};
+};
+var $author$project$Cards$StarterDeck = {$: 'StarterDeck'};
+var $author$project$Cards$Strip = function (a) {
+	return {$: 'Strip', a: a};
+};
+var $author$project$Cards$TheClinic = {$: 'TheClinic'};
+var $author$project$Cards$TheCrowsNest = {$: 'TheCrowsNest'};
+var $author$project$Cards$TheFurnace = {$: 'TheFurnace'};
+var $author$project$Cards$TheStilts = {$: 'TheStilts'};
+var $author$project$Cards$TheStrip = {$: 'TheStrip'};
+var $author$project$Cards$UnknownTrack = F2(
+	function (a, b) {
+		return {$: 'UnknownTrack', a: a, b: b};
+	});
+var $author$project$Cards$parseSupplyTrack = F2(
+	function (track, name) {
+		switch (track) {
+			case 'Alley':
+				switch (name) {
+					case 'Paul\'s Alley':
+						return $author$project$Cards$Alley($author$project$Cards$PaulsAlley);
+					case 'The Stilts':
+						return $author$project$Cards$Alley($author$project$Cards$TheStilts);
+					case 'Fort Hope':
+						return $author$project$Cards$Alley($author$project$Cards$FortHope);
+					default:
+						return A2($author$project$Cards$UnknownTrack, track, name);
+				}
+			case 'Clinic':
+				switch (name) {
+					case 'The Clinic':
+						return $author$project$Cards$Clinic($author$project$Cards$TheClinic);
+					case 'The Furnace':
+						return $author$project$Cards$Clinic($author$project$Cards$TheFurnace);
+					case 'Grant\'s Brew House':
+						return $author$project$Cards$Clinic($author$project$Cards$GrantsBrewHouse);
+					default:
+						return A2($author$project$Cards$UnknownTrack, track, name);
+				}
+			case 'Nest':
+				switch (name) {
+					case 'The Crow\'s Nest':
+						return $author$project$Cards$Nest($author$project$Cards$TheCrowsNest);
+					case 'Bridge Town':
+						return $author$project$Cards$Nest($author$project$Cards$BridgeTown);
+					case 'Knuckle House':
+						return $author$project$Cards$Nest($author$project$Cards$KnuckleHouse);
+					default:
+						return A2($author$project$Cards$UnknownTrack, track, name);
+				}
+			case 'Starter':
+				if (name === 'Starter Deck') {
+					return $author$project$Cards$Starter($author$project$Cards$StarterDeck);
+				} else {
+					return A2($author$project$Cards$UnknownTrack, track, name);
+				}
+			case 'Strip':
+				if (name === 'The Strip') {
+					return $author$project$Cards$Strip($author$project$Cards$TheStrip);
+				} else {
+					return A2($author$project$Cards$UnknownTrack, track, name);
+				}
+			default:
+				return A2($author$project$Cards$UnknownTrack, track, name);
+		}
+	});
+var $author$project$Cards$parseSupplyLine = function (raw) {
+	var track = A2($author$project$Cards$parseSupplyTrack, raw.track, raw.name);
+	return {index: raw.index, name: track, tier: raw.tier};
+};
+var $author$project$Cards$parseRawCard = function (raw) {
+	var line = $author$project$Cards$parseSupplyLine(raw.supplyLine);
+	return {
+		affinity: $author$project$Cards$parseAffinity(raw.affinity),
+		cost: raw.cost,
+		effects: _List_Nil,
+		filename: raw.filename,
+		id: raw.id,
+		kind: $author$project$Cards$parseKind(raw.kind),
+		properties: A2(
+			$elm$core$List$map,
+			function (p) {
+				return {description: p};
+			},
+			raw.properties),
+		supplyLine: line,
+		title: raw.name,
+		totalCost: raw.totalCost
+	};
+};
+var $elm$core$Basics$negate = function (n) {
+	return -n;
+};
 var $author$project$CardData$rawCards = _List_fromArray(
 	[
 		{
-		effects: _List_Nil,
-		filename: '10_0_0.jpg',
+		affinity: 'Discipline',
+		cost: 30,
+		filename: '7_0_3.jpg',
 		id: 1,
-		kind: 'UTILITY',
+		kind: 'Offense',
+		name: 'Combat Training',
 		properties: _List_fromArray(
-			['You can sense nearby Support Accessories.', 'More Support Accessories spawn.']),
-		title: 'SUPPORT SCAVENGER'
+			['+5% Bullet Damage', '+50% Bullet Penetration']),
+		supplyLine: {index: 1, name: 'Paul\'s Alley', tier: 1, track: 'Alley'},
+		totalCost: 0
 	},
 		{
-		effects: _List_Nil,
-		filename: '10_0_1.jpg',
+		affinity: 'Discipline',
+		cost: 45,
+		filename: '6_1_0.jpg',
 		id: 2,
-		kind: 'UTILITY',
+		kind: 'Offense',
+		name: 'Ammo Belt',
 		properties: _List_fromArray(
-			['You can sense nearby weapons.', 'More weapons spawn.']),
-		title: 'WEAPON SCAVENGER'
+			['+50% Ammo Capacity', '-20% Stamina Efficiency']),
+		supplyLine: {index: 2, name: 'Paul\'s Alley', tier: 1, track: 'Alley'},
+		totalCost: 0
 	},
 		{
-		effects: _List_Nil,
-		filename: '10_0_2.jpg',
+		affinity: 'Reflex',
+		cost: 30,
+		filename: '2_0_2.jpg',
 		id: 3,
-		kind: 'DEFENSE',
+		kind: 'Offense',
+		name: 'HI Vis Sights',
 		properties: _List_fromArray(
-			['When you exit a starting saferoom, your team gains 50 Temporary Health.']),
-		title: 'AMPED UP'
+			['+30% Aim Speed']),
+		supplyLine: {index: 3, name: 'Paul\'s Alley', tier: 1, track: 'Alley'},
+		totalCost: 0
 	},
 		{
-		effects: _List_Nil,
-		filename: '10_0_3.jpg',
+		affinity: 'Discipline',
+		cost: 30,
+		filename: '6_1_2.jpg',
 		id: 4,
-		kind: 'OFFENSE',
+		kind: 'Offense',
+		name: 'Front Sight Focus',
 		properties: _List_fromArray(
-			['Each second you Aim Down Sights increases your Damage by 10% (up to 3 stacks).']),
-		title: 'PATIENT HUNTER'
+			['+20% Accuracy']),
+		supplyLine: {index: 4, name: 'Paul\'s Alley', tier: 1, track: 'Alley'},
+		totalCost: 0
 	},
 		{
-		effects: _List_Nil,
-		filename: '10_0_4.jpg',
+		affinity: 'Fortune',
+		cost: 30,
+		filename: '14_0_4.jpg',
 		id: 5,
-		kind: 'OFFENSE',
+		kind: 'Offense',
+		name: 'Grenade Pouch',
 		properties: _List_fromArray(
-			['Reloading a gun within 0.75 seconds of reaching low ammo will increase its magazine size by - 30% until the next reload.']),
-		title: 'POWER RELOAD'
+			['+1 Offensive Inventory']),
+		supplyLine: {index: 5, name: 'Paul\'s Alley', tier: 1, track: 'Alley'},
+		totalCost: 0
 	},
 		{
-		effects: _List_Nil,
-		filename: '1_0_0.jpg',
+		affinity: 'Discipline',
+		cost: 100,
+		filename: '9_0_4.jpg',
 		id: 6,
-		kind: 'MOBILITY',
+		kind: 'Offense',
+		name: 'Ammo for All',
 		properties: _List_fromArray(
-			['+ 20% Stamina', '+ 20% Stamina Regen', '+ 3% Move Speed', '+ 5 Health']),
-		title: 'CROSS TRAINERS'
+			['TEAM EFFECTS +10% Team Ammo Capacity']),
+		supplyLine: {index: 6, name: 'Paul\'s Alley', tier: 1, track: 'Alley'},
+		totalCost: 0
 	},
 		{
-		effects: _List_Nil,
-		filename: '10_1_0.jpg',
+		affinity: 'Discipline',
+		cost: 45,
+		filename: '7_0_4.jpg',
 		id: 7,
-		kind: 'UTILITY',
+		kind: 'Offense',
+		name: 'Large Caliber Rounds',
 		properties: _List_fromArray(
-			['Mutations you ping are highlighted and your team deals 10% increased damage to highlighted enemies.']),
-		title: 'MARKED FOR DEATH'
+			['+7.5% Bullet Damage', '+100% Bullet Penetration', '-20% Stamina Efficiency']),
+		supplyLine: {index: 7, name: 'The Stilts', tier: 1, track: 'Alley'},
+		totalCost: 0
 	},
 		{
-		effects: _List_Nil,
-		filename: '10_1_1.jpg',
-		id: 8,
-		kind: 'UTILITY',
-		properties: _List_fromArray(
-			['+ 10% Weakspoť Damage', 'Allows players to see values for damage they deal and enemy health bars.']),
-		title: 'KNOWLEDGE IS POWER'
-	},
-		{
-		effects: _List_Nil,
-		filename: '10_1_2.jpg',
-		id: 9,
-		kind: 'OFFENSE',
-		properties: _List_fromArray(
-			['+ 30% Rifle Ammo Capacity', '+ 10% Damage with Assault Rifles and LMGS']),
-		title: 'TACTICAL VEST'
-	},
-		{
-		effects: _List_Nil,
-		filename: '10_1_3.jpg',
-		id: 10,
-		kind: 'DEFENSE',
-		properties: _List_fromArray(
-			['When you use a Medical Accessory, the target gains +20% Maximum Health until the end of the level.']),
-		title: 'EXPERIENCED EMT'
-	},
-		{
-		effects: _List_Nil,
-		filename: '10_1_4.jpg',
-		id: 11,
-		kind: 'DEFENSE',
-		properties: _List_fromArray(
-			['+ 15 Health']),
-		title: 'VITAMINS'
-	},
-		{
-		effects: _List_Nil,
-		filename: '1_0_1.jpg',
-		id: 12,
-		kind: 'MOBILITY',
-		properties: _List_fromArray(
-			['+ 40% Stamina', '- 5% Damage Resistance']),
-		title: 'ENERGY DRINK'
-	},
-		{
-		effects: _List_Nil,
-		filename: '1_0_2.jpg',
-		id: 13,
-		kind: 'MOBILITY',
-		properties: _List_fromArray(
-			['+ 60% Stamina', '- 20% Slow Resistance']),
-		title: 'RHYTHMIC BREATHING'
-	},
-		{
-		effects: _List_Nil,
-		filename: '1_0_3.jpg',
-		id: 14,
-		kind: 'OFFENSE',
-		properties: _List_fromArray(
-			['+ 20% Reload Speed']),
-		title: 'RELOAD DRILLS'
-	},
-		{
-		effects: _List_Nil,
+		affinity: 'Reflex',
+		cost: 45,
 		filename: '1_0_4.jpg',
-		id: 15,
-		kind: 'OFFENSE',
+		id: 8,
+		kind: 'Offense',
+		name: 'Widemouth Magwell',
 		properties: _List_fromArray(
-			['+ 30% Reload Speed', '- 5% Damage Resistance']),
-		title: 'WIDEMOUTH MAGWELL'
+			['+30% Reload Speed', '-5% Damage Resistance']),
+		supplyLine: {index: 8, name: 'The Stilts', tier: 1, track: 'Alley'},
+		totalCost: 0
 	},
 		{
-		effects: _List_Nil,
-		filename: '11_0_0.jpg',
-		id: 16,
-		kind: 'DEFENSE',
-		properties: _List_fromArray(
-			['+ 25 Health', '- 15% Ammo Capacity']),
-		title: 'HYDRATION PACK'
-	},
-		{
-		effects: _List_Nil,
-		filename: '11_0_1.jpg',
-		id: 17,
-		kind: 'DEFENSE',
-		properties: _List_fromArray(
-			['+ 40 Health', '- 30% Stamina']),
-		title: 'CANNED GOODS'
-	},
-		{
-		effects: _List_Nil,
-		filename: '11_0_2.jpg',
-		id: 18,
-		kind: 'OFFENSE',
-		properties: _List_fromArray(
-			['+ 40% Melee Damage', '+ 5 Health']),
-		title: 'BATTER UP'
-	},
-		{
-		effects: _List_Nil,
-		filename: '11_0_3.jpg',
-		id: 19,
-		kind: 'OFFENSE',
-		properties: _List_fromArray(
-			['+ 20% Melee Damage', '+ 10% Damage Resistance while using a Melee weapon', '- 15% Ammo Capacity']),
-		title: 'SPIKY BITS'
-	},
-		{
-		effects: _List_Nil,
-		filename: '11_0_4.jpg',
-		id: 20,
-		kind: 'OFFENSE',
-		properties: _List_fromArray(
-			['+ 60% Melee Damage', 'Your Melee Attacks cause cleave through enemies dealing damage in a large area.', 'DISABLES: Sprint']),
-		title: 'MEAN DRUNK'
-	},
-		{
-		effects: _List_Nil,
-		filename: '1_1_0.jpg',
-		id: 21,
-		kind: 'OFFENSE',
-		properties: _List_fromArray(
-			['+ 50% Reload Speed', 'DISABLES: Aim Down Sights']),
-		title: 'MAG COUPLER'
-	},
-		{
-		effects: _List_Nil,
-		filename: '11_1_0.jpg',
-		id: 22,
-		kind: 'DEFENSE',
-		properties: _List_fromArray(
-			['+ 15% Trauma Resistance', '+ 5 Health']),
-		title: 'DURABLE'
-	},
-		{
-		effects: _List_Nil,
-		filename: '11_1_1.jpg',
-		id: 23,
-		kind: 'DEFENSE',
-		properties: _List_fromArray(
-			['+ 25% Trauma Resistance', '- 15% Ammo Capacity']),
-		title: 'BODY ARMOR'
-	},
-		{
-		effects: _List_Nil,
-		filename: '11_1_2.jpg',
-		id: 24,
-		kind: 'DEFENSE',
-		properties: _List_fromArray(
-			['+ 40% Trauma Resistance', '- 100% Fire Resistance', '- 100% Acid Resistance', '- 100% Explosion Resistance']),
-		title: 'WOODEN ARMOR'
-	},
-		{
-		effects: _List_Nil,
-		filename: '11_1_3.jpg',
-		id: 25,
-		kind: 'OFFENSE',
-		properties: _List_fromArray(
-			['+ 25% Accessory Damage']),
-		title: 'GRENADE TRAINING'
-	},
-		{
-		effects: _List_Nil,
-		filename: '11_1_4.jpg',
-		id: 26,
-		kind: 'OFFENSE',
-		properties: _List_fromArray(
-			['+ 50% Accessory Damage', '- 15% Ammo Capacity']),
-		title: 'DEMOLITIONS EXPERT'
-	},
-		{
-		effects: _List_Nil,
-		filename: '1_1_1.jpg',
-		id: 27,
-		kind: 'OFFENSE',
-		properties: _List_fromArray(
-			['+ 5 Health', '+ 10% Melee Stamina Efficiency', '+ 20% Melee Attack Speed']),
-		title: 'SLUGGER'
-	},
-		{
-		effects: _List_Nil,
-		filename: '1_1_2.jpg',
-		id: 28,
-		kind: 'OFFENSE',
-		properties: _List_fromArray(
-			['+ 20% Melee Stamina Efficiency', '+ 30% Melee Attack Speed', '- 5% Damage Resistance']),
-		title: 'BRAZEN'
-	},
-		{
-		effects: _List_Nil,
-		filename: '1_1_3.jpg',
-		id: 29,
-		kind: 'OFFENSE',
-		properties: _List_fromArray(
-			['+ 40% Melee Attack Speed', '+ 30% Melee Stamina Efficiency', 'Your Melee Attacks no longer stick in tough enemies.', 'DISABLES: Aim Down Sights']),
-		title: 'МЕТН НЕAD'
-	},
-		{
-		effects: _List_Nil,
-		filename: '1_1_4.jpg',
-		id: 30,
-		kind: 'OFFENSE',
-		properties: _List_fromArray(
-			['+ 20% Weakspot Damage']),
-		title: 'RIDDEN SLAYER'
-	},
-		{
-		effects: _List_Nil,
-		filename: '12_0_0.jpg',
-		id: 31,
-		kind: 'OFFENSE',
-		properties: _List_fromArray(
-			['+ 75% Accessory Damage', '- 25% Swap Speed']),
-		title: 'IMPROVISED EXPLOSIVES'
-	},
-		{
-		effects: _List_Nil,
-		filename: '12_0_1.jpg',
-		id: 32,
-		kind: 'OFFENSE',
-		properties: _List_fromArray(
-			['When you or your team kills a Mutation gain 1% damage (up to - 15%) until the end of the level.']),
-		title: 'CONFIDENT KILLER'
-	},
-		{
-		effects: _List_Nil,
-		filename: '12_0_2.jpg',
-		id: 33,
-		kind: 'OFFENSE',
-		properties: _List_fromArray(
-			['Melee hits against Weakspots deal + 20 additional Stumble Damage.']),
-		title: 'HEAVY HITTER'
-	},
-		{
-		effects: _List_Nil,
-		filename: '12_0_3.jpg',
-		id: 34,
-		kind: 'DEFENSE',
-		properties: _List_fromArray(
-			['+ 20% Melee Damage against Mutations', 'When you deal Melee damage to a Mutation heal 1 Health and recover 3 Stamina.']),
-		title: 'IGNORE THE PAIN'
-	},
-		{
-		effects: _List_Nil,
-		filename: '12_0_4.jpg',
-		id: 35,
-		kind: 'OFFENSE',
-		properties: _List_fromArray(
-			['Gain 10% Melee Damage, 10% Melee Speed, and 5% Move Speed for each Melee kill in the last 4 seconds.']),
-		title: 'BERSERKER'
-	},
-		{
-		effects: _List_Nil,
-		filename: '12_1_0.jpg',
-		id: 36,
-		kind: 'DEFENSE',
-		properties: _List_fromArray(
-			['When you take a single hit for 15 or more damage, heal 10 health over 5 seconds.']),
-		title: 'TRUE GRIT'
-	},
-		{
-		effects: _List_Nil,
-		filename: '12_1_1.jpg',
-		id: 37,
-		kind: 'OFFENSE',
-		properties: _List_fromArray(
-			['+ 100% Fire damage.', 'Kills with fire grant you Temporary Health.', 'You can sense flammable objects nearby.']),
-		title: 'PYRO'
-	},
-		{
-		effects: _List_Nil,
-		filename: '12_1_2.jpg',
-		id: 38,
-		kind: 'OFFENSE',
-		properties: _List_fromArray(
-			['+ 100% Explosive Damage', '+ 35% Explosive Resistance']),
-		title: 'BOMB SQUAD'
-	},
-		{
-		effects: _List_Nil,
-		filename: '12_1_3.jpg',
-		id: 39,
-		kind: 'DEFENSE',
-		properties: _List_fromArray(
-			['Take 1 less damage from all Ridden.']),
-		title: 'SCAR TISSUE'
-	},
-		{
-		effects: _List_Nil,
-		filename: '12_1_4.jpg',
-		id: 40,
-		kind: 'DEFENSE',
-		properties: _List_fromArray(
-			['Melee kills heal 2 Health.']),
-		title: 'BATTLE LUST'
-	},
-		{
-		effects: _List_Nil,
-		filename: '13_0_0.jpg',
-		id: 41,
-		kind: 'OFFENSE',
-		properties: _List_fromArray(
-			['+ 100% Bullet Penetration with Assault Rifles.']),
-		title: 'LINE \'EM UP'
-	},
-		{
-		effects: _List_Nil,
-		filename: '13_0_1.jpg',
-		id: 42,
-		kind: 'DEFENSE',
-		properties: _List_fromArray(
-			['Gain 2 Temporary Health whenever you kill a Ridden within 2 meters.']),
-		title: 'FACE YOUR FEARS'
-	},
-		{
-		effects: _List_Nil,
-		filename: '13_0_2.jpg',
-		id: 43,
-		kind: 'DEFENSE',
-		properties: _List_fromArray(
-			['- 20% Stamina Regen', 'TEAM EFFECTS + 10 Team Health']),
-		title: 'WELL FED'
-	},
-		{
-		effects: _List_Nil,
-		filename: '13_0_3.jpg',
-		id: 44,
-		kind: 'OFFENSE',
-		properties: _List_fromArray(
-			['Charge: Hold with Melee weapons to burst forward. Charge attacks deal 100% increased damage.']),
-		title: 'HEAVY ATTACK'
-	},
-		{
-		effects: _List_Nil,
-		filename: '13_0_4.jpg',
-		id: 45,
-		kind: 'OFFENSE',
-		properties: _List_fromArray(
-			['Melee hits cause the target to take 20% increased damage for 5 seconds.']),
-		title: 'SUNDER'
-	},
-		{
-		effects: _List_Nil,
-		filename: '13_1_0.jpg',
-		id: 46,
-		kind: 'DEFENSE',
-		properties: _List_fromArray(
-			['Kills from greater than 15 meters grant 5 Temporary Health to teammates within 10 meters of the target.']),
-		title: 'OVERWATCH'
-	},
-		{
-		effects: _List_Nil,
-		filename: '13_1_1.jpg',
-		id: 47,
-		kind: 'DEFENSE',
-		properties: _List_fromArray(
-			['Heal 10 Trauma Damage at the start of each level.']),
-		title: 'FRESH BANDAGE'
-	},
-		{
-		effects: _List_Nil,
-		filename: '13_1_2.jpg',
-		id: 48,
-		kind: 'OFFENSE',
-		properties: _List_fromArray(
-			['You can equip a Primary weapon in your Secondary slot.', '- 25% Swap Speed']),
-		title: 'TWO IS ONE AND ONE IS NONE'
-	},
-		{
-		effects: _List_Nil,
+		affinity: 'Brawn',
+		cost: 100,
 		filename: '13_1_3.jpg',
-		id: 49,
-		kind: 'UTILITY',
+		id: 9,
+		kind: 'Utility',
+		name: 'Offensive Scavenger',
 		properties: _List_fromArray(
 			['You can sense nearby Offensive Accessories.', 'More Offensive Accessories spawn.']),
-		title: 'OFFENSIVE SCAVENGER'
+		supplyLine: {index: 9, name: 'The Stilts', tier: 1, track: 'Alley'},
+		totalCost: 0
 	},
 		{
-		effects: _List_Nil,
-		filename: '13_1_4.jpg',
-		id: 50,
-		kind: 'OFFENSE',
+		affinity: 'Discipline',
+		cost: 70,
+		filename: '6_1_1.jpg',
+		id: 10,
+		kind: 'Offense',
+		name: 'Ammo Mule',
 		properties: _List_fromArray(
-			['Pain Meds you apply also grant + 25% Damage for 60 seconds.']),
-		title: 'CHEMICAL COURAGE'
+			['+75% Ammo Capacity', 'DISABLES: Support Accessories']),
+		supplyLine: {index: 10, name: 'The Stilts', tier: 1, track: 'Alley'},
+		totalCost: 0
 	},
 		{
-		effects: _List_Nil,
-		filename: '14_0_0.jpg',
-		id: 51,
-		kind: 'DEFENSE',
+		affinity: 'Brawn',
+		cost: 30,
+		filename: '11_1_3.jpg',
+		id: 11,
+		kind: 'Offense',
+		name: 'Grenade Training',
 		properties: _List_fromArray(
-			['Gain + 15% Damage Resistance while you have Temporary Health.']),
-		title: 'NUMB'
+			['+25% Accessory Damage']),
+		supplyLine: {index: 11, name: 'Fort Hope', tier: 1, track: 'Alley'},
+		totalCost: 0
 	},
 		{
-		effects: _List_Nil,
-		filename: '14_0_1.jpg',
-		id: 52,
-		kind: 'OFFENSE',
+		affinity: 'Discipline',
+		cost: 45,
+		filename: '6_1_3.jpg',
+		id: 12,
+		kind: 'Offense',
+		name: 'Optics Enthusiast',
 		properties: _List_fromArray(
-			['Precision Kills have a 20% chance to cause Ridden to explode, dealing 15 damage to other Ridden within 4 meters.']),
-		title: 'BROADSIDE'
+			['+30% Accuracy', '-20% Stamina Efficiency']),
+		supplyLine: {index: 12, name: 'Fort Hope', tier: 1, track: 'Alley'},
+		totalCost: 0
 	},
 		{
-		effects: _List_Nil,
-		filename: '14_0_2.jpg',
-		id: 53,
-		kind: 'DEFENSE',
+		affinity: 'Brawn',
+		cost: 30,
+		filename: '11_0_2.jpg',
+		id: 13,
+		kind: 'Offense',
+		name: 'Batter Up',
 		properties: _List_fromArray(
-			['When using Shotguns, gain 0.25 Temporary Health for each pellet that hits.']),
-		title: 'BUCKSHOT BRUISER'
+			['+40% Melee Damage', '+5 Health']),
+		supplyLine: {index: 13, name: 'Fort Hope', tier: 1, track: 'Alley'},
+		totalCost: 0
 	},
 		{
-		effects: _List_Nil,
-		filename: '14_0_3.jpg',
-		id: 54,
-		kind: 'DEFENSE',
+		affinity: 'Discipline',
+		cost: 100,
+		filename: '8_1_0.jpg',
+		id: 14,
+		kind: 'Offense',
+		name: 'Avenge The Fallen',
 		properties: _List_fromArray(
-			['+ 1 Extra Life', '+ 5 Health']),
-		title: 'SECOND CHANCE'
+			['TEAM EFFECTS When you or a teammate becomes incapacitated, all teammates gain 30% Damage,20% Reload Speed, and Unlimited Ammo for 10 seconds.']),
+		supplyLine: {index: 14, name: 'Fort Hope', tier: 1, track: 'Alley'},
+		totalCost: 0
 	},
 		{
-		effects: _List_Nil,
-		filename: '14_0_4.jpg',
-		id: 55,
-		kind: 'OFFENSE',
+		affinity: 'Discipline',
+		cost: 70,
+		filename: '10_0_3.jpg',
+		id: 15,
+		kind: 'Offense',
+		name: 'Patient Hunter',
 		properties: _List_fromArray(
-			['+ 1 Offensive Inventory']),
-		title: 'GRENADE POUCH'
+			['Each second you Aim Down Sights increases your Damage by 10% (up to 3 stacks).']),
+		supplyLine: {index: 15, name: 'Fort Hope', tier: 1, track: 'Alley'},
+		totalCost: 0
 	},
 		{
-		effects: _List_Nil,
+		affinity: 'Fortune',
+		cost: 45,
 		filename: '14_1_0.jpg',
-		id: 56,
-		kind: 'OFFENSE',
+		id: 16,
+		kind: 'Offense',
+		name: 'Double Grenade Pouch',
 		properties: _List_fromArray(
-			['+ 2 Offensive Inventory', '- 10% Damage Dealt']),
-		title: 'DOUBLE GRENADE POUCH'
+			['+2 Offensive Inventory', '-10% Damage Dealt']),
+		supplyLine: {index: 16, name: 'Paul\'s Alley', tier: 2, track: 'Alley'},
+		totalCost: 0
 	},
 		{
-		effects: _List_Nil,
-		filename: '14_1_1.jpg',
-		id: 57,
-		kind: 'OFFENSE',
+		affinity: 'Discipline',
+		cost: 100,
+		filename: '9_1_0.jpg',
+		id: 17,
+		kind: 'Defense',
+		name: 'Down in Front!',
 		properties: _List_fromArray(
-			['- 10% Health', 'TEAM EFFECTS + 1 Team Offensive Inventory']),
-		title: 'SURPLUS POUCHES'
+			['While crouching you neither take nor deal Friendly Fire damage.', '+10 Health']),
+		supplyLine: {index: 17, name: 'Paul\'s Alley', tier: 2, track: 'Alley'},
+		totalCost: 0
 	},
 		{
-		effects: _List_Nil,
-		filename: '14_1_2.jpg',
-		id: 58,
-		kind: 'DEFENSE',
+		affinity: 'Brawn',
+		cost: 45,
+		filename: '11_1_4.jpg',
+		id: 18,
+		kind: 'Offense',
+		name: 'Demolitions Expert',
 		properties: _List_fromArray(
-			['+ 1 Support Inventory']),
-		title: 'FANNY PACK'
+			['+50% Accessory Damage', '-15% Ammo Capacity']),
+		supplyLine: {index: 18, name: 'Paul\'s Alley', tier: 2, track: 'Alley'},
+		totalCost: 0
 	},
 		{
-		effects: _List_Nil,
-		filename: '14_1_3.jpg',
-		id: 59,
-		kind: 'DEFENSE',
+		affinity: 'Reflex',
+		cost: 70,
+		filename: '1_1_0.jpg',
+		id: 19,
+		kind: 'Offense',
+		name: 'Mag Coupler',
 		properties: _List_fromArray(
-			['+ 2 Support Inventory', '- 10% Damage Dealt']),
-		title: 'SHOULDER BAG'
+			['+50% Reload Speed', 'DISABLES: Aim Down Sights']),
+		supplyLine: {index: 19, name: 'Paul\'s Alley', tier: 2, track: 'Alley'},
+		totalCost: 0
 	},
 		{
-		effects: _List_Nil,
-		filename: '14_1_4.jpg',
-		id: 60,
-		kind: 'DEFENSE',
+		affinity: 'Brawn',
+		cost: 100,
+		filename: '13_1_2.jpg',
+		id: 20,
+		kind: 'Offense',
+		name: 'Two is One and One is None',
 		properties: _List_fromArray(
-			['- 10% Health', 'TEAM EFFECTS + 1 Team Support Inventory']),
-		title: 'ВОХ \' ВAGS'
+			['You can equip a Primary weapon in your Secondary slot.', '-25% Swap Speed']),
+		supplyLine: {index: 20, name: 'Paul\'s Alley', tier: 2, track: 'Alley'},
+		totalCost: 0
 	},
 		{
-		effects: _List_Nil,
-		filename: '15_0_0.jpg',
-		id: 61,
-		kind: 'UTILITY',
+		affinity: 'Brawn',
+		cost: 45,
+		filename: '11_0_3.jpg',
+		id: 21,
+		kind: 'Offense',
+		name: 'Spiky Bits',
 		properties: _List_fromArray(
-			['Melee kills have a 2% chance to spawn ammo.']),
-		title: 'MUGGER'
+			['+20% Melee Damage', '+10% Damage Resistance while using a Melee weapon', '-15% Ammo Capacity']),
+		supplyLine: {index: 21, name: 'The Stilts', tier: 2, track: 'Alley'},
+		totalCost: 0
 	},
 		{
-		effects: _List_Nil,
-		filename: '15_0_1.jpg',
-		id: 62,
-		kind: 'UTILITY',
+		affinity: 'Discipline',
+		cost: 70,
+		filename: '7_1_0.jpg',
+		id: 22,
+		kind: 'Offense',
+		name: 'Silver Bullets',
 		properties: _List_fromArray(
-			['Pistol kills have a 2% chance to spawn ammo.']),
-		title: 'HIGHWAYMAN'
+			['+10% Bullet Damage', '+150% Bullet Penetration', 'When you kill a Mutation, you lose 5 Copper.']),
+		supplyLine: {index: 22, name: 'The Stilts', tier: 2, track: 'Alley'},
+		totalCost: 0
 	},
 		{
-		effects: _List_Nil,
+		affinity: 'Reflex',
+		cost: 70,
+		filename: '2_0_4.jpg',
+		id: 23,
+		kind: 'Offense',
+		name: 'Steady Aim',
+		properties: _List_fromArray(
+			['+80% Aim Speed', '-50% ADS Move Speed']),
+		supplyLine: {index: 23, name: 'The Stilts', tier: 2, track: 'Alley'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Fortune',
+		cost: 100,
 		filename: '15_0_2.jpg',
-		id: 63,
-		kind: 'OFFENSE',
+		id: 24,
+		kind: 'Offense',
+		name: 'Admin Reload',
 		properties: _List_fromArray(
-			['When you stow your weapon, it reloads.', '- 15% Ammo Capacity']),
-		title: 'ADMIN RELOAD'
+			['When you stow your weapon, it reloads.', '-15% Ammo Capacity']),
+		supplyLine: {index: 24, name: 'The Stilts', tier: 2, track: 'Alley'},
+		totalCost: 0
 	},
 		{
-		effects: _List_Nil,
-		filename: '15_0_3.jpg',
-		id: 64,
-		kind: 'UTILITY',
-		properties: _List_fromArray(
-			['When you kill a Mutation, gain 10 Copper (up to 300 per level).']),
-		title: 'BOUNTY HUNTER'
-	},
-		{
-		effects: _List_Nil,
-		filename: '15_0_4.jpg',
-		id: 65,
-		kind: 'OFFENSE',
-		properties: _List_fromArray(
-			['Your secondary weapons have unlimited ammo.', 'Your secondary weapons reload - 20% slower.']),
-		title: 'AMMO STASH'
-	},
-		{
-		effects: _List_Nil,
-		filename: '15_1_0.jpg',
-		id: 66,
-		kind: 'DEFENSE',
-		properties: _List_fromArray(
-			['+ 2 Extra Life', 'Lose 50 Copper at the start of each level.']),
-		title: 'LIFE INSURANCE'
-	},
-		{
-		effects: _List_Nil,
-		filename: '15_1_1.jpg',
-		id: 67,
-		kind: 'DEFENSE',
-		properties: _List_fromArray(
-			['Kills while at Critical Health recover 1 Health.']),
-		title: 'WOUNDED ANIMAL'
-	},
-		{
-		effects: _List_Nil,
-		filename: '15_1_2.jpg',
-		id: 68,
-		kind: 'UTILITY',
-		properties: _List_fromArray(
-			['Gain 10% of your total Copper in each Saferoom.']),
-		title: 'COMPOUND INTEREST'
-	},
-		{
-		effects: _List_Nil,
-		filename: '15_1_3.jpg',
-		id: 69,
-		kind: 'UTILITY',
-		properties: _List_fromArray(
-			['Whenever you or your team loots Copper, you have a 35% chance to find 35% additional Copper.']),
-		title: 'LUCKY PENNIES'
-	},
-		{
-		effects: _List_Nil,
+		affinity: 'Fortune',
+		cost: 70,
 		filename: '15_1_4.jpg',
-		id: 70,
-		kind: 'UTILITY',
+		id: 25,
+		kind: 'Utility',
+		name: 'Money Grubbers',
 		properties: _List_fromArray(
 			['Each time your team loots Copper, you gain 3 additional Copper, stacking up to 75 additional Сopper.']),
-		title: 'MONEY GRUBBERS'
+		supplyLine: {index: 25, name: 'The Stilts', tier: 2, track: 'Alley'},
+		totalCost: 0
 	},
 		{
-		effects: _List_Nil,
-		filename: '16_0_0.jpg',
-		id: 71,
-		kind: 'MOBILITY',
+		affinity: 'Fortune',
+		cost: 70,
+		filename: '14_1_1.jpg',
+		id: 26,
+		kind: 'Offense',
+		name: 'Surplus Pouches',
 		properties: _List_fromArray(
-			['You can shoot while sprinting.']),
-		title: 'RUN AND GUN'
+			['-10% Health', 'TEAM EFFECTS +1 Team Offensive Inventory']),
+		supplyLine: {index: 26, name: 'Fort Hope', tier: 2, track: 'Alley'},
+		totalCost: 0
 	},
 		{
-		effects: _List_Nil,
-		filename: '16_0_1.jpg',
-		id: 72,
-		kind: 'UTILITY',
+		affinity: 'Discipline',
+		cost: 70,
+		filename: '10_0_1.jpg',
+		id: 27,
+		kind: 'Utility',
+		name: 'Weapon Scavenger',
 		properties: _List_fromArray(
-			['You can sense nearby Copper.', 'More Copper Piles spawn.']),
-		title: 'COPPER SCAVENGER'
+			['You can sense nearby weapons.', 'More weapons spawn.']),
+		supplyLine: {index: 27, name: 'Fort Hope', tier: 2, track: 'Alley'},
+		totalCost: 0
 	},
 		{
-		effects: _List_Nil,
-		filename: '16_0_2.jpg',
-		id: 73,
-		kind: 'UTILITY',
-		properties: _List_fromArray(
-			['Each teammate gains 100 bonus Copper at the start of each level.']),
-		title: 'SHARE THE WEALTH'
-	},
-		{
-		effects: _List_Nil,
-		filename: '16_0_3.jpg',
-		id: 74,
-		kind: 'OFFENSE',
-		properties: _List_fromArray(
-			['+ 30% Shotgun Ammo Capacity', '+ 10% Damage with Shotguns']),
-		title: 'SHELL CARRIER'
-	},
-		{
-		effects: _List_Nil,
-		filename: '16_0_4.jpg',
-		id: 75,
-		kind: 'UTILITY',
-		properties: _List_fromArray(
-			['Gain 250 bonus Copper at the', 'start of each level.']),
-		title: 'HAZARD PAY'
-	},
-		{
-		effects: _List_Nil,
-		filename: '16_1_0.jpg',
-		id: 76,
-		kind: 'DEFENSE',
-		properties: _List_fromArray(
-			['Your team heals 5 Trauma Damage and refills 10% Ammo at the start of each level.']),
-		title: 'SAFEROOM RECOVERY'
-	},
-		{
-		effects: _List_Nil,
-		filename: '2_0_0.jpg',
-		id: 77,
-		kind: 'OFFENSE',
-		properties: _List_fromArray(
-			['+ 30% Weakspot Damage', '- 5% Damage Resistance']),
-		title: 'RECKLESS STRATEGY'
-	},
-		{
-		effects: _List_Nil,
-		filename: '2_0_1.jpg',
-		id: 78,
-		kind: 'OFFENSE',
-		properties: _List_fromArray(
-			['+ 50% Weakspot Damage', '- 75% ADS Move Speed.']),
-		title: 'HYPER-FOCUSED'
-	},
-		{
-		effects: _List_Nil,
-		filename: '2_0_2.jpg',
-		id: 79,
-		kind: 'OFFENSE',
-		properties: _List_fromArray(
-			['+ 30% Aim Speed']),
-		title: 'HI VIS SIGHTS'
-	},
-		{
-		effects: _List_Nil,
-		filename: '2_0_3.jpg',
-		id: 80,
-		kind: 'OFFENSE',
-		properties: _List_fromArray(
-			['+ 50% Aim Speed', '- 5% Damage Resistance']),
-		title: 'TUNNEL VISION'
-	},
-		{
-		effects: _List_Nil,
-		filename: '2_0_4.jpg',
-		id: 81,
-		kind: 'OFFENSE',
-		properties: _List_fromArray(
-			['+ 80% Aim Speed', '- 50% ADS Move Speed']),
-		title: 'STEADY AIM'
-	},
-		{
-		effects: _List_Nil,
-		filename: '2_1_0.jpg',
-		id: 82,
-		kind: 'UTILITY',
-		properties: _List_fromArray(
-			['+ 25% Weapon Swap Speed']),
-		title: 'SHOOTING GLOVES'
-	},
-		{
-		effects: _List_Nil,
-		filename: '2_1_1.jpg',
-		id: 83,
-		kind: 'UTILITY',
-		properties: _List_fromArray(
-			['+ 50% Weapon Swap Speed', '- 5% Damage Resistance']),
-		title: 'GUNS OUT'
-	},
-		{
-		effects: _List_Nil,
-		filename: '2_1_2.jpg',
-		id: 84,
-		kind: 'UTILITY',
-		properties: _List_fromArray(
-			['+ 75% Weapon Swap Speed', 'When you take damage, your Accuracy is reduced by 20% for 3 seconds.']),
-		title: 'СОСKY'
-	},
-		{
-		effects: _List_Nil,
-		filename: '2_1_3.jpg',
-		id: 85,
-		kind: 'UTILITY',
-		properties: _List_fromArray(
-			['+ 100% Revive Speed']),
-		title: 'SMELLING SALTS'
-	},
-		{
-		effects: _List_Nil,
-		filename: '2_1_4.jpg',
-		id: 86,
-		kind: 'UTILITY',
-		properties: _List_fromArray(
-			['+ 150% Revive Speed', '- 5% Damage Resistance']),
-		title: 'ΡEP TALK'
-	},
-		{
-		effects: _List_Nil,
-		filename: '3_0_0.jpg',
-		id: 87,
-		kind: 'UTILITY',
-		properties: _List_fromArray(
-			['+ 225% Revive Speed', 'DISABLES: Offensive Accessories', 'TEAM EFFECTS + 20% Reduced Incap Trauma']),
-		title: 'ROUSING SPEECH'
-	},
-		{
-		effects: _List_Nil,
-		filename: '3_0_1.jpg',
-		id: 88,
-		kind: 'MOBILITY',
-		properties: _List_fromArray(
-			['+ 5% Move Speed']),
-		title: 'DASH'
-	},
-		{
-		effects: _List_Nil,
-		filename: '3_0_2.jpg',
-		id: 89,
-		kind: 'MOBILITY',
-		properties: _List_fromArray(
-			['+ 10% Move Speed', '- 5% Damage Resistance']),
-		title: 'FLEET OF FOOT'
-	},
-		{
-		effects: _List_Nil,
-		filename: '3_0_3.jpg',
-		id: 90,
-		kind: 'MOBILITY',
-		properties: _List_fromArray(
-			['+ 15% Move Speed', 'When you take damage, your Accuracy is reduced by 20% for 3 seconds.']),
-		title: 'RUN LIKE HELL'
-	},
-		{
-		effects: _List_Nil,
-		filename: '3_0_4.jpg',
-		id: 91,
-		kind: 'MOBILITY',
-		properties: _List_fromArray(
-			['+ 20% Stamina', '+ 20% Sprint Efficiency', '+ 5 Health']),
-		title: 'SUPERIOR CARDIO'
-	},
-		{
-		effects: _List_Nil,
-		filename: '3_1_0.jpg',
-		id: 92,
-		kind: 'MOBILITY',
-		properties: _List_fromArray(
-			['+ 30% Sprint Efficiency', '- 5% Damage Resistance']),
-		title: 'OLYMPIC SPRINTER'
-	},
-		{
-		effects: _List_Nil,
-		filename: '3_1_1.jpg',
-		id: 93,
-		kind: 'MOBILITY',
-		properties: _List_fromArray(
-			['+ 40% Sprint Efficiency', 'When you take damage while Sprinting, you lose all Stamina.']),
-		title: 'RECKLESS'
-	},
-		{
-		effects: _List_Nil,
-		filename: '3_1_2.jpg',
-		id: 94,
-		kind: 'UTILITY',
-		properties: _List_fromArray(
-			['Breakout: Hold E to free yourself from Grabs.', '+ 50% Breakout Cooldown Reduction. (Base 60 seconds).']),
-		title: 'BREAKOUT'
-	},
-		{
-		effects: _List_Nil,
-		filename: '3_1_3.jpg',
-		id: 95,
-		kind: 'DEFENSE',
-		properties: _List_fromArray(
-			['+ 50% Use Speed', 'Heals teammates for an additional 20 Health when you revive them.']),
-		title: 'СOMBAT MEDIC'
-	},
-		{
-		effects: _List_Nil,
-		filename: '3_1_4.jpg',
-		id: 96,
-		kind: 'MOBILITY',
-		properties: _List_fromArray(
-			['When you throw an Offensive Accessory, gain 20 Temporary Health and 20% Move Speed for 5 seconds.']),
-		title: 'FIRE IN THE HOLE!'
-	},
-		{
-		effects: _List_Nil,
-		filename: '4_0_0.jpg',
-		id: 97,
-		kind: 'DEFENSE',
-		properties: _List_fromArray(
-			['+ 15% Healing Efficiency', 'When you use a Medical Accessory, you gain 15% Move Speed for 15 seconds.']),
-		title: 'MEDICAL EXPERT'
-	},
-		{
-		effects: _List_Nil,
-		filename: '4_0_1.jpg',
-		id: 98,
-		kind: 'MOBILITY',
-		properties: _List_fromArray(
-			['+ 35% Move Speed while firing with Shotguns.', '+ 10% Damage with Shotguns.']),
-		title: 'ROLLING THUNDER'
-	},
-		{
-		effects: _List_Nil,
-		filename: '4_0_2.jpg',
-		id: 99,
-		kind: 'MOBILITY',
-		properties: _List_fromArray(
-			['+ 6% Move Speed while using an SMG.', '+ 35% Reload Speed while using an SMG.']),
-		title: 'SPEED DEMON'
-	},
-		{
-		effects: _List_Nil,
-		filename: '4_0_3.jpg',
-		id: 100,
-		kind: 'MOBILITY',
-		properties: _List_fromArray(
-			['+ 45% Move Speed while firing.', '+ 5% Move Speed while not firing.']),
-		title: 'HELLFIRE'
-	},
-		{
-		effects: _List_Nil,
-		filename: '4_0_4.jpg',
-		id: 101,
-		kind: 'MOBILITY',
-		properties: _List_fromArray(
-			['No Movement Penalty for strafe and backpedal.', 'DISABLES: Sprint']),
-		title: 'MARATHON RUNNER'
-	},
-		{
-		effects: _List_Nil,
-		filename: '4_1_0.jpg',
-		id: 102,
-		kind: 'MOBILITY',
-		properties: _List_fromArray(
-			['TEAM EFFECTS + 15% Team Stamina']),
-		title: 'MANDATORY PT'
-	},
-		{
-		effects: _List_Nil,
-		filename: '4_1_1.jpg',
-		id: 103,
-		kind: 'MOBILITY',
-		properties: _List_fromArray(
-			['Precision Kills grant you 10% Move Speed for 5 seconds.']),
-		title: 'PEP IN YOUR STEP'
-	},
-		{
-		effects: _List_Nil,
-		filename: '4_1_2.jpg',
-		id: 104,
-		kind: 'OFFENSE',
-		properties: _List_fromArray(
-			['Each bullet hit causes the target to take 1% increased damage for 3 seconds (stacks up to 15% ).']),
-		title: 'SHREDDER'
-	},
-		{
-		effects: _List_Nil,
-		filename: '4_1_3.jpg',
-		id: 105,
-		kind: 'OFFENSE',
-		properties: _List_fromArray(
-			['+ 25% Damage', '- 30% Health']),
-		title: 'GLASS CANNON'
-	},
-		{
-		effects: _List_Nil,
-		filename: '4_1_4.jpg',
-		id: 106,
-		kind: 'OFFENSE',
-		properties: _List_fromArray(
-			['Gain 5% Weakspot Damage for each Precision Kill in the last 10 seconds.']),
-		title: 'SADISTIC'
-	},
-		{
-		effects: _List_Nil,
-		filename: '5_0_0.jpg',
-		id: 107,
-		kind: 'MOBILITY',
-		properties: _List_fromArray(
-			['When you take a hit for 10 or more damage, gain 20% Move Speed for 3 seconds.']),
-		title: 'EVASIVE ACTION'
-	},
-		{
-		effects: _List_Nil,
-		filename: '5_0_1.jpg',
-		id: 108,
-		kind: 'OFFENSE',
-		properties: _List_fromArray(
-			['+ 100% Stamina', '- 75% Stamina Regeneration', 'When you kill an enemy, gain 10 Stamina instantly and an additional 10 Stamina over 5 seconds.']),
-		title: 'ADRENALINE FUELED'
-	},
-		{
-		effects: _List_Nil,
-		filename: '5_0_2.jpg',
-		id: 109,
-		kind: 'DEFENSE',
-		properties: _List_fromArray(
-			['When you use a Medical Accessory, it has a 25% chance to have 100% increased effect.']),
-		title: 'MIRACULOUS RECOVERY'
-	},
-		{
-		effects: _List_Nil,
-		filename: '5_0_3.jpg',
-		id: 110,
-		kind: 'UTILITY',
-		properties: _List_fromArray(
-			['+ 50% Use Speed', '+ 10% Stamina']),
-		title: 'SCREWDRIVER'
-	},
-		{
-		effects: _List_Nil,
-		filename: '5_0_4.jpg',
-		id: 111,
-		kind: 'UTILITY',
-		properties: _List_fromArray(
-			['+ 75% Use Speed', '- 5% Damage Resistance']),
-		title: 'MULTITOOL'
-	},
-		{
-		effects: _List_Nil,
-		filename: '5_1_0.jpg',
-		id: 112,
-		kind: 'UTILITY',
-		properties: _List_fromArray(
-			['+ 125% Use Speed', 'When you take damage, you have a chance to be blinded for 1 second.']),
-		title: 'HEADBAND MAGNIFIER'
-	},
-		{
-		effects: _List_Nil,
-		filename: '5_1_1.jpg',
-		id: 113,
-		kind: 'UTILITY',
-		properties: _List_fromArray(
-			['You can sense nearby Quick', 'Accessories. More Quick Accessories spawn.']),
-		title: 'UTILITY SCAVENGER'
-	},
-		{
-		effects: _List_Nil,
-		filename: '5_1_2.jpg',
-		id: 114,
-		kind: 'MOBILITY',
-		properties: _List_fromArray(
-			['Pain Meds you apply also grant + 10% Move Speed, + 10% Reload Speed, and + 10% Weapon Swap Speed for 30 seconds.']),
-		title: 'STIMULANTS'
-	},
-		{
-		effects: _List_Nil,
-		filename: '5_1_3.jpg',
-		id: 115,
-		kind: 'MOBILITY',
-		properties: _List_fromArray(
-			['When you exit a starting saferoom your team gains + 15% Move Speed for 30 seconds.']),
-		title: 'ON YOUR MARK..'
-	},
-		{
-		effects: _List_Nil,
-		filename: '5_1_4.jpg',
-		id: 116,
-		kind: 'OFFENSE',
-		properties: _List_fromArray(
-			['+ 30% Weakspot Damage', 'DISABLES: Aim Down Sights']),
-		title: 'KILLER\'S INSTINCT'
-	},
-		{
-		effects: _List_Nil,
-		filename: '6_0_0.jpg',
-		id: 117,
-		kind: 'OFFENSE',
-		properties: _List_fromArray(
-			['Changing weapons within 0.75 seconds of reaching low ammo grants + 20% Damage for 5 seconds.']),
-		title: 'POWER SWAP'
-	},
-		{
-		effects: _List_Nil,
-		filename: '6_0_1.jpg',
-		id: 118,
-		kind: 'OFFENSE',
-		properties: _List_fromArray(
-			['+ 30% Sniper Ammo Capacity', '+ 10% Damage with Sniper Rifles']),
-		title: 'STOCK POUCH'
-	},
-		{
-		effects: _List_Nil,
-		filename: '6_0_2.jpg',
-		id: 119,
-		kind: 'OFFENSE',
-		properties: _List_fromArray(
-			['+ 30% Pistol/SMG Ammo Capacity', '+ 10% Damage with Pistols and SMGS']),
-		title: 'MAG CARRIER'
-	},
-		{
-		effects: _List_Nil,
-		filename: '6_0_3.jpg',
-		id: 120,
-		kind: 'MOBILITY',
-		properties: _List_fromArray(
-			['+ 20% Sprint Speed', '- 30% Sprint Stamina Efficiency']),
-		title: 'MAD DASH'
-	},
-		{
-		effects: _List_Nil,
-		filename: '6_0_4.jpg',
-		id: 121,
-		kind: 'OFFENSE',
-		properties: _List_fromArray(
-			['+ 25% Ammo Сарacity']),
-		title: 'АММО РOUСH'
-	},
-		{
-		effects: _List_Nil,
-		filename: '6_1_0.jpg',
-		id: 122,
-		kind: 'OFFENSE',
-		properties: _List_fromArray(
-			['+ 50% Ammo Capacity', '- 20% Stamina Efficiency']),
-		title: 'AMMO BELT'
-	},
-		{
-		effects: _List_Nil,
-		filename: '6_1_1.jpg',
-		id: 123,
-		kind: 'OFFENSE',
-		properties: _List_fromArray(
-			['+ 75% Ammo Capacity', 'DISABLES: Support Accessories']),
-		title: 'AMMO MULE'
-	},
-		{
-		effects: _List_Nil,
-		filename: '6_1_2.jpg',
-		id: 124,
-		kind: 'OFFENSE',
-		properties: _List_fromArray(
-			['+ 20% Accuracy']),
-		title: 'FRONT SIGHT FOCUS'
-	},
-		{
-		effects: _List_Nil,
-		filename: '6_1_3.jpg',
-		id: 125,
-		kind: 'OFFENSE',
-		properties: _List_fromArray(
-			['+ 30% Accuracy', '- 20% Stamina Efficiency']),
-		title: 'OPTICS ENTHUSIAST'
-	},
-		{
-		effects: _List_Nil,
-		filename: '6_1_4.jpg',
-		id: 126,
-		kind: 'OFFENSE',
-		properties: _List_fromArray(
-			['+ 50% Accuracy', 'DISABLES: Aim Down Sights']),
-		title: 'QUICK KILL'
-	},
-		{
-		effects: _List_Nil,
-		filename: '7_0_0.jpg',
-		id: 127,
-		kind: 'DEFENSE',
-		properties: _List_fromArray(
-			['+ 5% Damage Resistance', '+ 5 Health']),
-		title: 'MOTORCYCLE JACKET'
-	},
-		{
-		effects: _List_Nil,
-		filename: '7_0_1.jpg',
-		id: 128,
-		kind: 'DEFENSE',
-		properties: _List_fromArray(
-			['+ 10% Damage Resistance', '+ 5 Health', '- 20% Stamina Efficiency']),
-		title: 'PADDED SUIT'
-	},
-		{
-		effects: _List_Nil,
-		filename: '7_0_2.jpg',
-		id: 129,
-		kind: 'DEFENSE',
-		properties: _List_fromArray(
-			['+ 15% Damage Resistance', '+ 10 Health', 'DISABLES: Aim Down Sights']),
-		title: 'MOTORCYCLE HELMET'
-	},
-		{
-		effects: _List_Nil,
-		filename: '7_0_3.jpg',
-		id: 130,
-		kind: 'OFFENSE',
-		properties: _List_fromArray(
-			['+ 5% Bullet Damage', '+ 50% Bullet Penetration']),
-		title: 'COMBAT TRAINING'
-	},
-		{
-		effects: _List_Nil,
-		filename: '7_0_4.jpg',
-		id: 131,
-		kind: 'OFFENSE',
-		properties: _List_fromArray(
-			['+ 7.5% Bullet Damage', '+ 100% Bullet Penetration', '- 20% Stamina Efficiency']),
-		title: 'LARGE CALIBER ROUNDS'
-	},
-		{
-		effects: _List_Nil,
-		filename: '7_1_0.jpg',
-		id: 132,
-		kind: 'OFFENSE',
-		properties: _List_fromArray(
-			['+ 10% Bullet Damage', '+ 150% Bullet Penetration', 'When you kill a Mutation, you lose 5 Copper.']),
-		title: 'SILVER BULLETS'
-	},
-		{
-		effects: _List_Nil,
-		filename: '7_1_1.jpg',
-		id: 133,
-		kind: 'DEFENSE',
-		properties: _List_fromArray(
-			['+ 20% Healing Efficiency']),
-		title: 'ANTIBIOTIC OINTMENT'
-	},
-		{
-		effects: _List_Nil,
-		filename: '7_1_2.jpg',
-		id: 134,
-		kind: 'DEFENSE',
-		properties: _List_fromArray(
-			['+ 40% Healing Efficiency', '- 20% Stamina Efficiency']),
-		title: 'EMT BAG'
-	},
-		{
-		effects: _List_Nil,
-		filename: '7_1_3.jpg',
-		id: 135,
-		kind: 'DEFENSE',
-		properties: _List_fromArray(
-			['+ 60% Healing Efficiency', '- 50% Use Speed']),
-		title: 'FIELD SURGEON'
-	},
-		{
-		effects: _List_Nil,
-		filename: '7_1_4.jpg',
-		id: 136,
-		kind: 'MOBILITY',
-		properties: _List_fromArray(
-			['+ 20% Stamina Regeneration', '+ 5 Health']),
-		title: 'ENERGY BAR'
-	},
-		{
-		effects: _List_Nil,
-		filename: '8_0_0.jpg',
-		id: 137,
-		kind: 'MOBILITY',
-		properties: _List_fromArray(
-			['+ 40% Stamina Regeneration', '- 10% Stamina Efficiency']),
-		title: 'COLD BREW COFFEE'
-	},
-		{
-		effects: _List_Nil,
-		filename: '8_0_1.jpg',
-		id: 138,
-		kind: 'MOBILITY',
-		properties: _List_fromArray(
-			['+ 100% Stamina Regeneration', '- 50% Maximum Stamina']),
-		title: 'NATURAL SPRINTER'
-	},
-		{
-		effects: _List_Nil,
-		filename: '8_0_2.jpg',
-		id: 139,
-		kind: 'DEFENSE',
-		properties: _List_fromArray(
-			['TEAM EFFECTS When you or a teammate becomes incapacitated, all teammates heal for 20 health over 15 seconds.']),
-		title: 'INSPIRING SACRIFICE'
-	},
-		{
-		effects: _List_Nil,
-		filename: '8_0_3.jpg',
-		id: 140,
-		kind: 'DEFENSE',
-		properties: _List_fromArray(
-			['Healing a teammate also applies 50% of the effect to you.']),
-		title: 'CHARITABLE SOUL'
-	},
-		{
-		effects: _List_Nil,
-		filename: '8_0_4.jpg',
-		id: 141,
-		kind: 'DEFENSE',
-		properties: _List_fromArray(
-			['While crouching, gain 10% Damage Resistance and 40% Асcuracy.']),
-		title: 'HUNKER DOWN'
-	},
-		{
-		effects: _List_Nil,
-		filename: '8_1_0.jpg',
-		id: 142,
-		kind: 'OFFENSE',
-		properties: _List_fromArray(
-			['TEAM EFFECTS When you or a teammate becomes incapacitated, all teammates gain 30% Damage, 20% Reload Speed, and Unlimited Ammo for 10 seconds.']),
-		title: 'AVENGE THE FALLEN'
-	},
-		{
-		effects: _List_Nil,
+		affinity: 'Discipline',
+		cost: 100,
 		filename: '8_1_1.jpg',
-		id: 143,
-		kind: 'DEFENSE',
+		id: 28,
+		kind: 'Defense',
+		name: 'Vanguard',
 		properties: _List_fromArray(
 			['Melee kills grant 1 Temporary Health to you and nearby teammates.']),
-		title: 'VANGUARD'
+		supplyLine: {index: 28, name: 'Fort Hope', tier: 2, track: 'Alley'},
+		totalCost: 0
 	},
 		{
-		effects: _List_Nil,
+		affinity: 'Discipline',
+		cost: 70,
+		filename: '6_1_4.jpg',
+		id: 29,
+		kind: 'Offense',
+		name: 'Quick Kill',
+		properties: _List_fromArray(
+			['+50% Accuracy', 'DISABLES: Aim Down Sights']),
+		supplyLine: {index: 29, name: 'Fort Hope', tier: 2, track: 'Alley'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Brawn',
+		cost: 70,
+		filename: '13_1_4.jpg',
+		id: 30,
+		kind: 'Offense',
+		name: 'Chemical courage',
+		properties: _List_fromArray(
+			['Pain Meds you apply also grant +25% Damage for 60 seconds.']),
+		supplyLine: {index: 30, name: 'Paul\'s Alley', tier: 3, track: 'Alley'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Discipline',
+		cost: 150,
+		filename: '10_0_4.jpg',
+		id: 31,
+		kind: 'Offense',
+		name: 'Power reload',
+		properties: _List_fromArray(
+			['Reloading a gun within 0.75 seconds of reaching low ammo will increase its magazine size by -30% until the next reload.']),
+		supplyLine: {index: 31, name: 'Paul\'s Alley', tier: 3, track: 'Alley'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Discipline',
+		cost: 100,
+		filename: '8_0_4.jpg',
+		id: 32,
+		kind: 'Defense',
+		name: 'Hunker down',
+		properties: _List_fromArray(
+			['While crouching, gain 10% Damage Resistance and 40% Асcuracy.']),
+		supplyLine: {index: 32, name: 'Paul\'s Alley', tier: 3, track: 'Alley'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Reflex',
+		cost: 150,
+		filename: '4_1_3.jpg',
+		id: 33,
+		kind: 'Offense',
+		name: 'Glass Cannon',
+		properties: _List_fromArray(
+			['+25% Damage', '-30% Health']),
+		supplyLine: {index: 33, name: 'Paul\'s Alley', tier: 3, track: 'Alley'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Discipline',
+		cost: 150,
+		filename: '10_1_0.jpg',
+		id: 34,
+		kind: 'Utility',
+		name: 'Marked for Death',
+		properties: _List_fromArray(
+			['Mutations you ping are highlighted and your team deals 10% increased damage to highlighted enemies.']),
+		supplyLine: {index: 34, name: 'Paul\'s Alley', tier: 3, track: 'Alley'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Fortune',
+		cost: 100,
+		filename: '15_0_1.jpg',
+		id: 35,
+		kind: 'Utility',
+		name: 'Highwayman',
+		properties: _List_fromArray(
+			['Pistol kills have a 2% chance to spawn ammo.']),
+		supplyLine: {index: 35, name: 'The Stilts', tier: 3, track: 'Alley'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Brawn',
+		cost: 100,
+		filename: '12_0_3.jpg',
+		id: 36,
+		kind: 'Defense',
+		name: 'Ignore the Pain',
+		properties: _List_fromArray(
+			['+20% Melee Damage against Mutations', 'When you deal Melee damage to a Mutation heal 1 Health and recover 3 Stamina.']),
+		supplyLine: {index: 36, name: 'The Stilts', tier: 3, track: 'Alley'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Brawn',
+		cost: 100,
+		filename: '12_1_2.jpg',
+		id: 37,
+		kind: 'Offense',
+		name: 'Bomb Squad',
+		properties: _List_fromArray(
+			['+100% Explosive Damage', '+35% Explosive Resistance']),
+		supplyLine: {index: 37, name: 'The Stilts', tier: 3, track: 'Alley'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Brawn',
+		cost: 100,
+		filename: '13_0_1.jpg',
+		id: 38,
+		kind: 'Defense',
+		name: 'Face your Fears',
+		properties: _List_fromArray(
+			['Gain 2 Temporary Health whenever you kill a Ridden within 2 meters.']),
+		supplyLine: {index: 38, name: 'The Stilts', tier: 3, track: 'Alley'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Discipline',
+		cost: 100,
+		filename: '8_1_4.jpg',
+		id: 39,
+		kind: 'Defense',
+		name: 'Needs of the Many',
+		properties: _List_fromArray(
+			['-20% Health', 'TEAM EFFECTS +1 Team Extra Life']),
+		supplyLine: {index: 39, name: 'The Stilts', tier: 3, track: 'Alley'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Discipline',
+		cost: 100,
+		filename: '8_1_3.jpg',
+		id: 40,
+		kind: 'Offense',
+		name: 'Trigger Control',
+		properties: _List_fromArray(
+			['+25% Accuracy with Assault Rifles and Sniper Rifles.']),
+		supplyLine: {index: 40, name: 'Fort Hope', tier: 3, track: 'Alley'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Brawn',
+		cost: 70,
+		filename: '12_0_0.jpg',
+		id: 41,
+		kind: 'Offense',
+		name: 'Improvised Explosives',
+		properties: _List_fromArray(
+			['+75% Accessory Damage', '-25% Swap Speed']),
+		supplyLine: {index: 41, name: 'Fort Hope', tier: 3, track: 'Alley'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Reflex',
+		cost: 70,
+		filename: '5_1_4.jpg',
+		id: 42,
+		kind: 'Offense',
+		name: 'Killer\'s Instinct',
+		properties: _List_fromArray(
+			['+30% Weakspot Damage', 'DISABLES: Aim Down Sights']),
+		supplyLine: {index: 42, name: 'Fort Hope', tier: 3, track: 'Alley'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Discipline',
+		cost: 100,
 		filename: '8_1_2.jpg',
-		id: 144,
-		kind: 'OFFENSE',
+		id: 43,
+		kind: 'Offense',
+		name: 'In the Zone',
 		properties: _List_fromArray(
 			['Precision Kills grant 5% Reload Speed for 5 seconds (stacking up to 10 times).']),
-		title: 'IN THE ZONE'
+		supplyLine: {index: 43, name: 'Paul\'s Alley', tier: 4, track: 'Alley'},
+		totalCost: 0
 	},
 		{
-		effects: _List_Nil,
-		filename: '8_1_3.jpg',
-		id: 145,
-		kind: 'OFFENSE',
-		properties: _List_fromArray(
-			['+ 25% Accuracy with Assault Rifles and Sniper Rifles.']),
-		title: 'TRIGGER CONTROL'
-	},
-		{
-		effects: _List_Nil,
-		filename: '8_1_4.jpg',
-		id: 146,
-		kind: 'DEFENSE',
-		properties: _List_fromArray(
-			['- 20% Health', 'TEAM EFFECTS + 1 Team Extra Life']),
-		title: 'NEEDS OF THE MANY'
-	},
-		{
-		effects: _List_Nil,
-		filename: '9_0_0.jpg',
-		id: 147,
-		kind: 'OFFENSE',
-		properties: _List_fromArray(
-			['Turns your Bash into a Knife that counts as a Melee weapon.']),
-		title: 'COMBAT KNIFE'
-	},
-		{
-		effects: _List_Nil,
-		filename: '9_0_1.jpg',
-		id: 148,
-		kind: 'OFFENSE',
-		properties: _List_fromArray(
-			['Gain 30% Move Speed and Accuracy while crouched and using an LMG.']),
-		title: 'MEATGRINDER'
-	},
-		{
-		effects: _List_Nil,
-		filename: '9_0_2.jpg',
-		id: 149,
-		kind: 'OFFENSE',
-		properties: _List_fromArray(
-			['+ 40% Reload Speed with Shotguns.']),
-		title: 'SCATTERGUN SKILLS'
-	},
-		{
-		effects: _List_Nil,
+		affinity: 'Discipline',
+		cost: 100,
 		filename: '9_0_3.jpg',
-		id: 150,
-		kind: 'MOBILITY',
+		id: 44,
+		kind: 'Mobility',
+		name: 'Controlled Movement',
 		properties: _List_fromArray(
-			['+ 40% Move Speed while aiming down sights with Sniper Rifles.']),
-		title: 'CONTROLLED MOVEMENT'
+			['+40% Move Speed while aiming down sights with Sniper Rifles.']),
+		supplyLine: {index: 44, name: 'Paul\'s Alley', tier: 4, track: 'Alley'},
+		totalCost: 0
 	},
 		{
-		effects: _List_Nil,
-		filename: '9_0_4.jpg',
-		id: 151,
-		kind: 'OFFENSE',
+		affinity: 'Discipline',
+		cost: 100,
+		filename: '9_0_2.jpg',
+		id: 45,
+		kind: 'Offense',
+		name: 'Scattergun Skills',
 		properties: _List_fromArray(
-			['TEAM EFFECTS + 10% Team Ammo Capacity']),
-		title: 'AMMO FOR ALL'
+			['+40% Reload Speed with Shotguns.']),
+		supplyLine: {index: 45, name: 'Paul\'s Alley', tier: 4, track: 'Alley'},
+		totalCost: 0
 	},
 		{
-		effects: _List_Nil,
-		filename: '9_1_0.jpg',
-		id: 152,
-		kind: 'DEFENSE',
+		affinity: 'Fortune',
+		cost: 100,
+		filename: '16_0_2.jpg',
+		id: 46,
+		kind: 'Utility',
+		name: 'Share the Wealth',
 		properties: _List_fromArray(
-			['While crouching you neither take nor deal Friendly Fire damage.', '+ 10 Health']),
-		title: 'DOWN IN FRONT!'
+			['Each teammate gains 100 bonus Copper at the start of each level.']),
+		supplyLine: {index: 46, name: 'The Stilts', tier: 4, track: 'Alley'},
+		totalCost: 0
 	},
 		{
-		effects: _List_Nil,
+		affinity: 'Discipline',
+		cost: 30,
+		filename: '7_0_0.jpg',
+		id: 47,
+		kind: 'Defense',
+		name: 'Motorcycle Jacket',
+		properties: _List_fromArray(
+			['+5% Damage Resistance', '+5 Health']),
+		supplyLine: {index: 1, name: 'The Clinic', tier: 1, track: 'Clinic'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Brawn',
+		cost: 30,
+		filename: '11_1_0.jpg',
+		id: 48,
+		kind: 'Defense',
+		name: 'Durable',
+		properties: _List_fromArray(
+			['+15% Trauma Resistance', '+5 Health']),
+		supplyLine: {index: 2, name: 'The Clinic', tier: 1, track: 'Clinic'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Discipline',
+		cost: 70,
 		filename: '9_1_1.jpg',
-		id: 153,
-		kind: 'DEFENSE',
+		id: 49,
+		kind: 'Defense',
+		name: 'Poultice',
 		properties: _List_fromArray(
 			['When you use a Medical Accessory, the target heals for an additional 20 Health over 30 seconds.']),
-		title: 'POULTICE'
+		supplyLine: {index: 3, name: 'The Clinic', tier: 1, track: 'Clinic'},
+		totalCost: 0
 	},
 		{
-		effects: _List_Nil,
+		affinity: 'Discipline',
+		cost: 45,
+		filename: '7_1_2.jpg',
+		id: 50,
+		kind: 'Defense',
+		name: 'EMT Bag',
+		properties: _List_fromArray(
+			['+40% Healing Efficiency', '-20% Stamina Efficiency']),
+		supplyLine: {index: 4, name: 'The Clinic', tier: 1, track: 'Clinic'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Discipline',
+		cost: 100,
+		filename: '8_0_2.jpg',
+		id: 51,
+		kind: 'Defense',
+		name: 'Inspiring Sacrifice',
+		properties: _List_fromArray(
+			['TEAM EFFECTS When you or a teammate becomes incapacitated, all teammates heal for 20 health over 15 seconds.']),
+		supplyLine: {index: 5, name: 'The Clinic', tier: 1, track: 'Clinic'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Discipline',
+		cost: 45,
+		filename: '7_0_1.jpg',
+		id: 52,
+		kind: 'Defense',
+		name: 'Padded Suit',
+		properties: _List_fromArray(
+			['+10% Damage Resistance', '+5 Health', '-20% Stamina Efficiency']),
+		supplyLine: {index: 6, name: 'The Furnace', tier: 1, track: 'Clinic'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Brawn',
+		cost: 45,
+		filename: '11_0_0.jpg',
+		id: 53,
+		kind: 'Defense',
+		name: 'Hydration Pack',
+		properties: _List_fromArray(
+			['+25 Health', '-15% Ammo Capacity']),
+		supplyLine: {index: 7, name: 'The Furnace', tier: 1, track: 'Clinic'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Brawn',
+		cost: 75,
+		filename: '14_0_2.jpg',
+		id: 54,
+		kind: 'Defense',
+		name: 'Buckshot Bruiser',
+		properties: _List_fromArray(
+			['When using Shotguns, gain 0.25 Temporary Health for each pellet that hits.']),
+		supplyLine: {index: 12, name: 'The Furnace', tier: 1, track: 'Clinic'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Discipline',
+		cost: 100,
+		filename: '10_0_0.jpg',
+		id: 55,
+		kind: 'Utility',
+		name: 'Support Scavenger',
+		properties: _List_fromArray(
+			['You can sense nearby Support Accessories.', 'More Support Accessories spawn.']),
+		supplyLine: {index: 13, name: 'The Furnace', tier: 1, track: 'Clinic'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Fortune',
+		cost: 30,
+		filename: '14_1_2.jpg',
+		id: 56,
+		kind: 'Defense',
+		name: 'Fanny Pack',
+		properties: _List_fromArray(
+			['+1 Support Inventory']),
+		supplyLine: {index: 14, name: 'The Furnace', tier: 1, track: 'Clinic'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Reflex',
+		cost: 30,
+		filename: '1_1_1.jpg',
+		id: 57,
+		kind: 'Offense',
+		name: 'Slugger',
+		properties: _List_fromArray(
+			['+5 Health', '+10% Melee Stamina Efficiency', '+20% Melee Attack Speed']),
+		supplyLine: {index: 15, name: 'Grant\'s Brew House', tier: 1, track: 'Clinic'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Reflex',
+		cost: 30,
+		filename: '2_1_3.jpg',
+		id: 58,
+		kind: 'Utility',
+		name: 'Smelling Salts',
+		properties: _List_fromArray(
+			['+100% Revive Speed']),
+		supplyLine: {index: 16, name: 'Grant\'s Brew House', tier: 1, track: 'Clinic'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Brawn',
+		cost: 45,
+		filename: '11_1_1.jpg',
+		id: 59,
+		kind: 'Defense',
+		name: 'Body Armor',
+		properties: _List_fromArray(
+			['+25% Trauma Resistance', '-15% Ammo Capacity']),
+		supplyLine: {index: 17, name: 'Grant\'s Brew House', tier: 1, track: 'Clinic'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Brawn',
+		cost: 100,
+		filename: '12_1_3.jpg',
+		id: 60,
+		kind: 'Defense',
+		name: 'Scar Tissue',
+		properties: _List_fromArray(
+			['Take 1 less damage from all Ridden.']),
+		supplyLine: {index: 18, name: 'Grant\'s Brew House', tier: 1, track: 'Clinic'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Brawn',
+		cost: 70,
+		filename: '13_1_1.jpg',
+		id: 61,
+		kind: 'Defense',
+		name: 'Fresh Bandage',
+		properties: _List_fromArray(
+			['Heal 10 Trauma Damage at the start of each level.']),
+		supplyLine: {index: 19, name: 'Grant\'s Brew House', tier: 1, track: 'Clinic'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Fortune',
+		cost: 45,
+		filename: '14_1_3.jpg',
+		id: 62,
+		kind: 'Defense',
+		name: 'Shoulder Bag',
+		properties: _List_fromArray(
+			['+2 Support Inventory', '-10% Damage Dealt']),
+		supplyLine: {index: 20, name: 'The Clinic', tier: 2, track: 'Clinic'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Reflex',
+		cost: 45,
+		filename: '2_1_4.jpg',
+		id: 63,
+		kind: 'Utility',
+		name: 'Pep Talk',
+		properties: _List_fromArray(
+			['+150% Revive Speed', '-5% Damage Resistance']),
+		supplyLine: {index: 21, name: 'The Clinic', tier: 2, track: 'Clinic'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Brawn',
+		cost: 100,
+		filename: '13_0_2.jpg',
+		id: 64,
+		kind: 'Defense',
+		name: 'Well Fed',
+		properties: _List_fromArray(
+			['-20% Stamina Regen', 'TEAM EFFECTS +10 Team Health']),
+		supplyLine: {index: 22, name: 'The Clinic', tier: 2, track: 'Clinic'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Discipline',
+		cost: 100,
+		filename: '8_0_3.jpg',
+		id: 65,
+		kind: 'Defense',
+		name: 'Charitable Soul',
+		properties: _List_fromArray(
+			['Healing a teammate also applies 50% of the effect to you.']),
+		supplyLine: {index: 23, name: 'The Clinic', tier: 2, track: 'Clinic'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Discipline',
+		cost: 45,
+		filename: '10_0_2.jpg',
+		id: 66,
+		kind: 'Defense',
+		name: 'Amped Up',
+		properties: _List_fromArray(
+			['When you exit a starting saferoom, your team gains 50 Temporary Health.']),
+		supplyLine: {index: 24, name: 'The Furnace', tier: 2, track: 'Clinic'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Discipline',
+		cost: 70,
+		filename: '7_0_2.jpg',
+		id: 67,
+		kind: 'Defense',
+		name: 'Motorcycle Helmet',
+		properties: _List_fromArray(
+			['+15% Damage Resistance', '+10 Health', 'DISABLES: Aim Down Sights']),
+		supplyLine: {index: 25, name: 'The Furnace', tier: 2, track: 'Clinic'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Brawn',
+		cost: 100,
+		filename: '14_0_1.jpg',
+		id: 68,
+		kind: 'Offense',
+		name: 'Broadside',
+		properties: _List_fromArray(
+			['Precision Kills have a 20% chance to cause Ridden to explode, dealing 15 damage to other Ridden within 4 meters.']),
+		supplyLine: {index: 26, name: 'The Furnace', tier: 2, track: 'Clinic'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Reflex',
+		cost: 100,
+		filename: '3_1_3.jpg',
+		id: 69,
+		kind: 'Defense',
+		name: 'Combat Medic',
+		properties: _List_fromArray(
+			['+50% Use Speed', 'Heals teammates for an additional 20 Health when you revive them.']),
+		supplyLine: {index: 27, name: 'The Furnace', tier: 2, track: 'Clinic'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Fortune',
+		cost: 70,
+		filename: '14_1_4.jpg',
+		id: 70,
+		kind: 'Defense',
+		name: 'Box O` Bags',
+		properties: _List_fromArray(
+			['-10% Health', 'TEAM EFFECTS +1 Team Support Inventory']),
+		supplyLine: {index: 28, name: 'Grant\'s Brew House', tier: 2, track: 'Clinic'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Brawn',
+		cost: 70,
+		filename: '11_0_1.jpg',
+		id: 71,
+		kind: 'Defense',
+		name: 'Canned Goods',
+		properties: _List_fromArray(
+			['+40 Health', '-30% Stamina']),
+		supplyLine: {index: 29, name: 'Grant\'s Brew House', tier: 2, track: 'Clinic'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Brawn',
+		cost: 70,
+		filename: '11_1_2.jpg',
+		id: 72,
+		kind: 'Defense',
+		name: 'Wooden Armor',
+		properties: _List_fromArray(
+			['+40% Trauma Resistance', '-100% Fire Resistance', '-100% Acid Resistance', '-100% Explosion Resistance']),
+		supplyLine: {index: 30, name: 'Grant\'s Brew House', tier: 2, track: 'Clinic'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Discipline',
+		cost: 70,
 		filename: '9_1_2.jpg',
-		id: 154,
-		kind: 'DEFENSE',
+		id: 73,
+		kind: 'Defense',
+		name: 'Group Therapy',
 		properties: _List_fromArray(
 			['When you use a Medical Accessory, all teammates heal for 5 Health.']),
-		title: 'GROUP THERAPY'
+		supplyLine: {index: 31, name: 'The Clinic', tier: 3, track: 'Clinic'},
+		totalCost: 0
 	},
 		{
-		effects: _List_Nil,
+		affinity: 'Brawn',
+		cost: 150,
+		filename: '13_0_4.jpg',
+		id: 74,
+		kind: 'Offense',
+		name: 'Sunder',
+		properties: _List_fromArray(
+			['Melee hits cause the target to take 20% increased damage for 5 seconds.']),
+		supplyLine: {index: 32, name: 'The Clinic', tier: 3, track: 'Clinic'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Brawn',
+		cost: 45,
+		filename: '14_0_0.jpg',
+		id: 75,
+		kind: 'Defense',
+		name: 'Numb',
+		properties: _List_fromArray(
+			['Gain +15% Damage Resistance while you have Temporary Health.']),
+		supplyLine: {index: 33, name: 'The Clinic', tier: 3, track: 'Clinic'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Fortune',
+		cost: 100,
+		filename: '15_1_0.jpg',
+		id: 76,
+		kind: 'Defense',
+		name: 'Life Insurance',
+		properties: _List_fromArray(
+			['+2 Extra Life', 'Lose 50 Copper at the start of each level.']),
+		supplyLine: {index: 34, name: 'The Clinic', tier: 3, track: 'Clinic'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Brawn',
+		cost: 100,
+		filename: '13_1_0.jpg',
+		id: 77,
+		kind: 'Defense',
+		name: 'Overwatch',
+		properties: _List_fromArray(
+			['Kills from greater than 15 meters grant 5 Temporary Health to teammates within 10 meters of the target.']),
+		supplyLine: {index: 35, name: 'The Furnace', tier: 3, track: 'Clinic'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Brawn',
+		cost: 100,
+		filename: '12_1_0.jpg',
+		id: 78,
+		kind: 'Defense',
+		name: 'True Grit',
+		properties: _List_fromArray(
+			['When you take a single hit for 15 or more damage, heal 10 health over 5 seconds.']),
+		supplyLine: {index: 36, name: 'The Furnace', tier: 3, track: 'Clinic'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Brawn',
+		cost: 100,
+		filename: '12_1_1.jpg',
+		id: 79,
+		kind: 'Offense',
+		name: 'Pyro',
+		properties: _List_fromArray(
+			['+100% Fire damage.', 'Kills with fire grant you Temporary Health.', 'You can sense flammable objects nearby.']),
+		supplyLine: {index: 37, name: 'The Furnace', tier: 3, track: 'Clinic'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Brawn',
+		cost: 100,
+		filename: '12_0_2.jpg',
+		id: 80,
+		kind: 'Offense',
+		name: 'Heavy Hitter',
+		properties: _List_fromArray(
+			['Melee hits against Weakspots deal +20 additional Stumble Damage.']),
+		supplyLine: {index: 38, name: 'The Furnace', tier: 3, track: 'Clinic'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Brawn',
+		cost: 100,
+		filename: '13_0_0.jpg',
+		id: 81,
+		kind: 'Offense',
+		name: 'Line \'em Up',
+		properties: _List_fromArray(
+			['+100% Bullet Penetration with Assault Rifles.']),
+		supplyLine: {index: 39, name: 'Grant\'s Brew House', tier: 3, track: 'Clinic'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Reflex',
+		cost: 70,
+		filename: '3_0_0.jpg',
+		id: 82,
+		kind: 'Utility',
+		name: 'Rousing Speech',
+		properties: _List_fromArray(
+			['+225% Revive Speed', 'DISABLES: Offensive Accessories', 'TEAM EFFECTS +20% Reduced Incap Trauma']),
+		supplyLine: {index: 40, name: 'Grant\'s Brew House', tier: 3, track: 'Clinic'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Reflex',
+		cost: 100,
+		filename: '4_0_0.jpg',
+		id: 83,
+		kind: 'Defense',
+		name: 'Medical Expert',
+		properties: _List_fromArray(
+			['+15% Healing Efficiency', 'When you use a Medical Accessory, you gain 15% Move Speed for 15 seconds.']),
+		supplyLine: {index: 41, name: 'The Clinic', tier: 4, track: 'Clinic'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Discipline',
+		cost: 75,
+		filename: '10_1_3.jpg',
+		id: 84,
+		kind: 'Defense',
+		name: 'Experienced EMT',
+		properties: _List_fromArray(
+			['When you use a Medical Accessory, the target gains +20% Maximum Health until the end of the level.']),
+		supplyLine: {index: 42, name: 'The Clinic', tier: 4, track: 'Clinic'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Fortune',
+		cost: 75,
+		filename: '16_1_0.jpg',
+		id: 85,
+		kind: 'Defense',
+		name: 'Saferoom Recovery',
+		properties: _List_fromArray(
+			['Your team heals 5 Trauma Damage and refills 10% Ammo at the start of each level.']),
+		supplyLine: {index: 43, name: 'The Clinic', tier: 4, track: 'Clinic'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Discipline',
+		cost: 100,
 		filename: '9_1_3.jpg',
-		id: 155,
-		kind: 'DEFENSE',
+		id: 86,
+		kind: 'Defense',
+		name: 'Medical Professional',
 		properties: _List_fromArray(
 			['First Aids and Defibrillators also recover 15 Trauma Damage and 1 Extra Life.']),
-		title: 'MEDICAL PROFESSIONAL'
+		supplyLine: {index: 44, name: 'The Clinic', tier: 4, track: 'Clinic'},
+		totalCost: 0
 	},
 		{
-		effects: _List_Nil,
+		affinity: 'Reflex',
+		cost: 150,
+		filename: '5_0_2.jpg',
+		id: 87,
+		kind: 'Defense',
+		name: 'Miraculous Recovery',
+		properties: _List_fromArray(
+			['When you use a Medical Accessory, it has a 25% chance to have 100% increased effect.']),
+		supplyLine: {index: 45, name: 'The Clinic', tier: 4, track: 'Clinic'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Reflex',
+		cost: 10,
+		filename: '1_0_0.jpg',
+		id: 88,
+		kind: 'Mobility',
+		name: 'Cross Trainers',
+		properties: _List_fromArray(
+			['+20% Stamina', '+20% Stamina Regen', '+3% Move Speed', '+5 Health']),
+		supplyLine: {index: 1, name: 'The Crow\'s Nest', tier: 1, track: 'Nest'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Reflex',
+		cost: 30,
+		filename: '1_1_4.jpg',
+		id: 89,
+		kind: 'Offense',
+		name: 'Ridden Slayer',
+		properties: _List_fromArray(
+			['+20% Weakspot Damage']),
+		supplyLine: {index: 2, name: 'The Crow\'s Nest', tier: 1, track: 'Nest'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Reflex',
+		cost: 30,
+		filename: '2_1_0.jpg',
+		id: 90,
+		kind: 'Utility',
+		name: 'Shooting Gloves',
+		properties: _List_fromArray(
+			['+25% Weapon Swap Speed']),
+		supplyLine: {index: 3, name: 'The Crow\'s Nest', tier: 1, track: 'Nest'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Reflex',
+		cost: 30,
+		filename: '3_0_4.jpg',
+		id: 91,
+		kind: 'Mobility',
+		name: 'Superior Cardio',
+		properties: _List_fromArray(
+			['+20% Stamina', '+20% Sprint Efficiency', '+5 Health']),
+		supplyLine: {index: 4, name: 'The Crow\'s Nest', tier: 1, track: 'Nest'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Reflex',
+		cost: 70,
+		filename: '5_0_0.jpg',
+		id: 92,
+		kind: 'Mobility',
+		name: 'Evasive Action',
+		properties: _List_fromArray(
+			['When you take a hit for 10 or more damage, gain 20% Move Speed for 3 seconds.']),
+		supplyLine: {index: 5, name: 'The Crow\'s Nest', tier: 1, track: 'Nest'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Fortune',
+		cost: 150,
+		filename: '16_0_0.jpg',
+		id: 93,
+		kind: 'Mobility',
+		name: 'Run and Gun',
+		properties: _List_fromArray(
+			['You can shoot while sprinting.']),
+		supplyLine: {index: 6, name: 'The Crow\'s Nest', tier: 1, track: 'Nest'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Reflex',
+		cost: 30,
+		filename: '5_0_3.jpg',
+		id: 94,
+		kind: 'Utility',
+		name: 'Screwdriver',
+		properties: _List_fromArray(
+			['+50% Use Speed', '+10% Stamina']),
+		supplyLine: {index: 7, name: 'Bridge Town', tier: 1, track: 'Nest'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Discipline',
+		cost: 30,
+		filename: '7_1_4.jpg',
+		id: 95,
+		kind: 'Mobility',
+		name: 'Energy Bar',
+		properties: _List_fromArray(
+			['+20% Stamina Regeneration', '+5 Health']),
+		supplyLine: {index: 8, name: 'Bridge Town', tier: 1, track: 'Nest'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Reflex',
+		cost: 100,
+		filename: '5_1_1.jpg',
+		id: 96,
+		kind: 'Utility',
+		name: 'Utility Scavenger',
+		properties: _List_fromArray(
+			['You can sense nearby Quick', 'Accessories. More Quick Accessories spawn.']),
+		supplyLine: {index: 9, name: 'Bridge Town', tier: 1, track: 'Nest'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Reflex',
+		cost: 30,
+		filename: '3_0_1.jpg',
+		id: 97,
+		kind: 'Mobility',
+		name: 'Dash',
+		properties: _List_fromArray(
+			['+5% Move Speed']),
+		supplyLine: {index: 10, name: 'Bridge Town', tier: 1, track: 'Nest'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Reflex',
+		cost: 100,
+		filename: '4_0_1.jpg',
+		id: 98,
+		kind: 'Mobility',
+		name: 'Rolling Thunder',
+		properties: _List_fromArray(
+			['+35% Move Speed while firing with Shotguns.', '+10% Damage with Shotguns.']),
+		supplyLine: {index: 11, name: 'Knuckle House', tier: 1, track: 'Nest'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Reflex',
+		cost: 45,
+		filename: '2_0_0.jpg',
+		id: 99,
+		kind: 'Offense',
+		name: 'Reckless Strategy',
+		properties: _List_fromArray(
+			['+30% Weakspot Damage', '-5% Damage Resistance']),
+		supplyLine: {index: 12, name: 'Knuckle House', tier: 1, track: 'Nest'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Reflex',
+		cost: 100,
+		filename: '3_1_2.jpg',
+		id: 100,
+		kind: 'Mobility',
+		name: 'Breakout',
+		properties: _List_fromArray(
+			['Breakout: Hold E to free yourself from Grabs.', '+50% Breakout Cooldown Reduction. (Base 60 seconds).']),
+		supplyLine: {index: 13, name: 'Knuckle House', tier: 1, track: 'Nest'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Reflex',
+		cost: 45,
+		filename: '3_0_2.jpg',
+		id: 101,
+		kind: 'Mobility',
+		name: 'Fleet of Foot',
+		properties: _List_fromArray(
+			['+10% Move Speed', '-5% Damage Resistance']),
+		supplyLine: {index: 14, name: 'Knuckle House', tier: 1, track: 'Nest'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Reflex',
+		cost: 70,
+		filename: '4_1_1.jpg',
+		id: 102,
+		kind: 'Mobility',
+		name: 'Pep In Your Step',
+		properties: _List_fromArray(
+			['Precision Kills grant you 10% Move Speed for 5 seconds.']),
+		supplyLine: {index: 15, name: 'Knuckle House', tier: 1, track: 'Nest'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Reflex',
+		cost: 45,
+		filename: '2_1_1.jpg',
+		id: 103,
+		kind: 'Utility',
+		name: 'Guns Out',
+		properties: _List_fromArray(
+			['+50% Weapon Swap Speed', '-5% Damage Resistance']),
+		supplyLine: {index: 16, name: 'The Crow\'s Nest', tier: 2, track: 'Nest'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Reflex',
+		cost: 45,
+		filename: '2_0_3.jpg',
+		id: 104,
+		kind: 'Offense',
+		name: 'Tunnel Vision',
+		properties: _List_fromArray(
+			['+50% Aim Speed', '-5% Damage Resistance']),
+		supplyLine: {index: 17, name: 'The Crow\'s Nest', tier: 2, track: 'Nest'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Reflex',
+		cost: 45,
+		filename: '1_0_1.jpg',
+		id: 105,
+		kind: 'Mobility',
+		name: 'Energy Drink',
+		properties: _List_fromArray(
+			['+40% Stamina', '-5% Damage Resistance']),
+		supplyLine: {index: 18, name: 'The Crow\'s Nest', tier: 2, track: 'Nest'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Reflex',
+		cost: 100,
+		filename: '4_0_4.jpg',
+		id: 106,
+		kind: 'Mobility',
+		name: 'Marathon Runner',
+		properties: _List_fromArray(
+			['No Movement Penalty for strafe and backpedal.', 'DISABLES: Sprint']),
+		supplyLine: {index: 19, name: 'The Crow\'s Nest', tier: 2, track: 'Nest'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Reflex',
+		cost: 45,
+		filename: '1_1_2.jpg',
+		id: 107,
+		kind: 'Offense',
+		name: 'Brazen',
+		properties: _List_fromArray(
+			['+20% Melee Stamina Efficiency', '+30% Melee Attack Speed', '-5% Damage Resistance']),
+		supplyLine: {index: 20, name: 'Bridge Town', tier: 2, track: 'Nest'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Reflex',
+		cost: 100,
+		filename: '4_1_4.jpg',
+		id: 108,
+		kind: 'Offense',
+		name: 'Sadistic',
+		properties: _List_fromArray(
+			['Gain 5% Weakspot Damage for each Precision Kill in the last 10 seconds.']),
+		supplyLine: {index: 21, name: 'Bridge Town', tier: 2, track: 'Nest'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Reflex',
+		cost: 45,
+		filename: '3_1_0.jpg',
+		id: 109,
+		kind: 'Mobility',
+		name: 'Olympic Sprinter',
+		properties: _List_fromArray(
+			['+30% Sprint Efficiency', '-5% Damage Resistance']),
+		supplyLine: {index: 22, name: 'Bridge Town', tier: 2, track: 'Nest'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Fortune',
+		cost: 100,
+		filename: '15_0_4.jpg',
+		id: 110,
+		kind: 'Offense',
+		name: 'Ammo Stash',
+		properties: _List_fromArray(
+			['Your secondary weapons have unlimited ammo.', 'Your secondary weapons reload -20% slower.']),
+		supplyLine: {index: 23, name: 'Bridge Town', tier: 2, track: 'Nest'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Fortune',
+		cost: 100,
+		filename: '15_1_2.jpg',
+		id: 111,
+		kind: 'Utility',
+		name: 'Compound Interest',
+		properties: _List_fromArray(
+			['Gain 10% of your total Copper in each Saferoom.']),
+		supplyLine: {index: 24, name: 'Bridge Town', tier: 2, track: 'Nest'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Reflex',
+		cost: 70,
+		filename: '2_1_2.jpg',
+		id: 112,
+		kind: 'Utility',
+		name: 'Cocky',
+		properties: _List_fromArray(
+			['+75% Weapon Swap Speed', 'When you take damage, your Accuracy is reduced by 20% for 3 seconds.']),
+		supplyLine: {index: 25, name: 'Knuckle House', tier: 2, track: 'Nest'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Reflex',
+		cost: 100,
+		filename: '4_1_0.jpg',
+		id: 113,
+		kind: 'Mobility',
+		name: 'Mandatory PT',
+		properties: _List_fromArray(
+			['TEAM EFFECTS +15% Team Stamina']),
+		supplyLine: {index: 26, name: 'Knuckle House', tier: 2, track: 'Nest'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Fortune',
+		cost: 100,
+		filename: '15_0_0.jpg',
+		id: 114,
+		kind: 'Utility',
+		name: 'Mugger',
+		properties: _List_fromArray(
+			['Melee kills have a 2% chance to spawn ammo.']),
+		supplyLine: {index: 27, name: 'Knuckle House', tier: 2, track: 'Nest'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Brawn',
+		cost: 70,
+		filename: '11_0_4.jpg',
+		id: 115,
+		kind: 'Offense',
+		name: 'Mean Drunk',
+		properties: _List_fromArray(
+			['+60% Melee Damage', 'Your Melee Attacks cause cleave through enemies dealing damage in a large area.', 'DISABLES: Sprint']),
+		supplyLine: {index: 28, name: 'Knuckle House', tier: 2, track: 'Nest'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Reflex',
+		cost: 45,
+		filename: '5_0_4.jpg',
+		id: 116,
+		kind: 'Utility',
+		name: 'Multitool',
+		properties: _List_fromArray(
+			['+75% Use Speed', '-5% Damage Resistance']),
+		supplyLine: {index: 29, name: 'Knuckle House', tier: 2, track: 'Nest'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Reflex',
+		cost: 45,
+		filename: '5_1_2.jpg',
+		id: 117,
+		kind: 'Mobility',
+		name: 'Stimulants',
+		properties: _List_fromArray(
+			['Pain Meds you apply also grant +10% Move Speed, + 10% Reload Speed, and + 10% Weapon Swap Speed for 30 seconds.']),
+		supplyLine: {index: 30, name: 'The Crow\'s Nest', tier: 3, track: 'Nest'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Reflex',
+		cost: 70,
+		filename: '1_1_3.jpg',
+		id: 118,
+		kind: 'Offense',
+		name: 'Meth Head',
+		properties: _List_fromArray(
+			['+40% Melee Attack Speed', '+30% Melee Stamina Efficiency', 'Your Melee Attacks no longer stick in tough enemies.', 'DISABLES: Aim Down Sights']),
+		supplyLine: {index: 31, name: 'The Crow\'s Nest', tier: 3, track: 'Nest'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Reflex',
+		cost: 150,
+		filename: '4_1_2.jpg',
+		id: 119,
+		kind: 'Offense',
+		name: 'Shredder',
+		properties: _List_fromArray(
+			['Each bullet hit causes the target to take 1% increased damage for 3 seconds (stacks up to 15% ).']),
+		supplyLine: {index: 32, name: 'The Crow\'s Nest', tier: 3, track: 'Nest'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Reflex',
+		cost: 70,
+		filename: '3_1_1.jpg',
+		id: 120,
+		kind: 'Mobility',
+		name: 'Reckless',
+		properties: _List_fromArray(
+			['+40% Sprint Efficiency', 'When you take damage while Sprinting, you lose all Stamina.']),
+		supplyLine: {index: 33, name: 'Bridge Town', tier: 3, track: 'Nest'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Reflex',
+		cost: 70,
+		filename: '3_0_3.jpg',
+		id: 121,
+		kind: 'Mobility',
+		name: 'Run Like Hell',
+		properties: _List_fromArray(
+			['+15% Move Speed', 'When you take damage, your Accuracy is reduced by 20% for 3 seconds.']),
+		supplyLine: {index: 34, name: 'Bridge Town', tier: 3, track: 'Nest'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Reflex',
+		cost: 150,
+		filename: '6_0_0.jpg',
+		id: 122,
+		kind: 'Offense',
+		name: 'Power Swap',
+		properties: _List_fromArray(
+			['Changing weapons within 0.75 seconds of reaching low ammo grants +20% Damage for 5 seconds.']),
+		supplyLine: {index: 35, name: 'Bridge Town', tier: 3, track: 'Nest'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Reflex',
+		cost: 70,
+		filename: '1_0_2.jpg',
+		id: 123,
+		kind: 'Mobility',
+		name: 'Rhythmic Breathing',
+		properties: _List_fromArray(
+			['+60% Stamina', '-20% Slow Resistance']),
+		supplyLine: {index: 36, name: 'Bridge Town', tier: 3, track: 'Nest'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Reflex',
+		cost: 45,
+		filename: '5_1_3.jpg',
+		id: 124,
+		kind: 'Mobility',
+		name: 'On your Mark...',
+		properties: _List_fromArray(
+			['When you exit a starting saferoom your team gains +15% Move Speed for 30 seconds.']),
+		supplyLine: {index: 37, name: 'Bridge Town', tier: 3, track: 'Nest'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Reflex',
+		cost: 100,
+		filename: '3_1_4.jpg',
+		id: 125,
+		kind: 'Mobility',
+		name: 'Fire in the Hole!',
+		properties: _List_fromArray(
+			['When you throw an Offensive Accessory, gain 20 Temporary Health and 20% Move Speed for 5 seconds.']),
+		supplyLine: {index: 38, name: 'Bridge Town', tier: 3, track: 'Nest'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Reflex',
+		cost: 70,
+		filename: '5_1_0.jpg',
+		id: 126,
+		kind: 'Utility',
+		name: 'Headband Magnifier',
+		properties: _List_fromArray(
+			['+125% Use Speed', 'When you take damage, you have a chance to be blinded for 1 second.']),
+		supplyLine: {index: 39, name: 'Bridge Town', tier: 3, track: 'Nest'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Discipline',
+		cost: 70,
+		filename: '8_0_0.jpg',
+		id: 127,
+		kind: 'Mobility',
+		name: 'Cold Brew Coffee',
+		properties: _List_fromArray(
+			['+40% Stamina Regeneration', '-10% Stamina Efficiency']),
+		supplyLine: {index: 40, name: 'Knuckle House', tier: 3, track: 'Nest'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Reflex',
+		cost: 70,
+		filename: '2_0_1.jpg',
+		id: 128,
+		kind: 'Offense',
+		name: 'Hyper-Focused',
+		properties: _List_fromArray(
+			['+50% Weakspot Damage', '-75% ADS Move Speed.']),
+		supplyLine: {index: 41, name: 'Knuckle House', tier: 3, track: 'Nest'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Discipline',
+		cost: 100,
+		filename: '10_1_1.jpg',
+		id: 129,
+		kind: 'Utility',
+		name: 'Knowledge is Power',
+		properties: _List_fromArray(
+			['+10% Weakspoť Damage', 'Allows players to see values for damage they deal and enemy health bars.']),
+		supplyLine: {index: 42, name: 'Knuckle House', tier: 3, track: 'Nest'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Fortune',
+		cost: 100,
+		filename: '15_0_3.jpg',
+		id: 130,
+		kind: 'Utility',
+		name: 'Bounty Hunter',
+		properties: _List_fromArray(
+			['When you kill a Mutation, gain 10 Copper (up to 300 per level).']),
+		supplyLine: {index: 43, name: 'Crow\'s Nest', tier: 4, track: 'Nest'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Reflex',
+		cost: 100,
+		filename: '4_0_2.jpg',
+		id: 131,
+		kind: 'Mobility',
+		name: 'Speed Demon',
+		properties: _List_fromArray(
+			['+6% Move Speed while using an SMG.', '+35% Reload Speed while using an SMG.']),
+		supplyLine: {index: 44, name: 'Crow\'s Nest', tier: 4, track: 'Nest'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Discipline',
+		cost: 70,
+		filename: '8_0_1.jpg',
+		id: 132,
+		kind: 'Mobility',
+		name: 'Natural Sprinter',
+		properties: _List_fromArray(
+			['+100% Stamina Regeneration', '-50% Maximum Stamina']),
+		supplyLine: {index: 45, name: 'Crow\'s Nest', tier: 4, track: 'Nest'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Reflex',
+		cost: 100,
+		filename: '4_0_3.jpg',
+		id: 133,
+		kind: 'Mobility',
+		name: 'Hellfire',
+		properties: _List_fromArray(
+			['+45% Move Speed while firing.', '+5% Move Speed while not firing.']),
+		supplyLine: {index: 46, name: 'Bridge Town', tier: 4, track: 'Nest'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Reflex',
+		cost: 75,
+		filename: '6_0_3.jpg',
+		id: 134,
+		kind: 'Mobility',
+		name: 'Mad Dash',
+		properties: _List_fromArray(
+			['+20% Sprint Speed', '-30% Sprint Stamina Efficiency']),
+		supplyLine: {index: 47, name: 'The Crow\'s Nest', tier: 5, track: 'Nest'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Fortune',
+		cost: 75,
+		filename: '16_0_4.jpg',
+		id: 135,
+		kind: 'Utility',
+		name: 'Hazard Pay',
+		properties: _List_fromArray(
+			['Gain 250 bonus Copper at the', 'start of each level.']),
+		supplyLine: {index: 48, name: 'Bridge Town', tier: 5, track: 'Nest'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Discipline',
+		cost: 0,
+		filename: '7_1_1.jpg',
+		id: 136,
+		kind: 'Defense',
+		name: 'Antibiotic Ointment',
+		properties: _List_fromArray(
+			['+20% Healing Efficiency']),
+		supplyLine: {index: -1, name: 'Starter Deck', tier: 1, track: 'Starter'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Brawn',
+		cost: 0,
+		filename: '12_1_4.jpg',
+		id: 137,
+		kind: 'Defense',
+		name: 'Battle Lust',
+		properties: _List_fromArray(
+			['Melee kills heal 2 Health.']),
+		supplyLine: {index: -1, name: 'Starter Deck', tier: 1, track: 'Starter'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Discipline',
+		cost: 0,
+		filename: '9_0_0.jpg',
+		id: 138,
+		kind: 'Offense',
+		name: 'Combat Knife',
+		properties: _List_fromArray(
+			['Turns your Bash into a Knife that counts as a Melee weapon.']),
+		supplyLine: {index: -1, name: 'Starter Deck', tier: 1, track: 'Starter'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Fortune',
+		cost: 0,
+		filename: '16_0_1.jpg',
+		id: 139,
+		kind: 'Utility',
+		name: 'Copper Scavenger',
+		properties: _List_fromArray(
+			['You can sense nearby Copper.', 'More Copper Piles spawn.']),
+		supplyLine: {index: -1, name: 'Starter Deck', tier: 1, track: 'Starter'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Reflex',
+		cost: 0,
+		filename: '1_0_3.jpg',
+		id: 140,
+		kind: 'Offense',
+		name: 'Reload Drills',
+		properties: _List_fromArray(
+			['+20% Reload Speed']),
+		supplyLine: {index: -1, name: 'Starter Deck', tier: 1, track: 'Starter'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Brawn',
+		cost: 0,
+		filename: '14_0_3.jpg',
+		id: 141,
+		kind: 'Defense',
+		name: 'Second Chance',
+		properties: _List_fromArray(
+			['+1 Extra Life', '+5 Health']),
+		supplyLine: {index: -1, name: 'Starter Deck', tier: 1, track: 'Starter'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Fortune',
+		cost: 0,
+		filename: '15_1_1.jpg',
+		id: 142,
+		kind: 'Defense',
+		name: 'Wounded Animal',
+		properties: _List_fromArray(
+			['Kills while at Critical Health recover 1 Health.']),
+		supplyLine: {index: -1, name: 'Starter Deck', tier: 1, track: 'Starter'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Brawn',
+		cost: 5,
+		filename: '10_1_4.jpg',
+		id: 143,
+		kind: 'Defense',
+		name: 'Vitamins',
+		properties: _List_fromArray(
+			['+15 Health']),
+		supplyLine: {index: 1, name: 'The Strip', tier: 1, track: 'Strip'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Discipline',
+		cost: 10,
+		filename: '6_0_4.jpg',
+		id: 144,
+		kind: 'Offense',
+		name: 'Ammo Pouch',
+		properties: _List_fromArray(
+			['+25% Ammo Сарacity']),
+		supplyLine: {index: 2, name: 'The Strip', tier: 1, track: 'Strip'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Brawn',
+		cost: 100,
+		filename: '13_0_3.jpg',
+		id: 145,
+		kind: 'Offense',
+		name: 'Heavy Attack',
+		properties: _List_fromArray(
+			['Charge: Hold with Melee weapons to burst forward. Charge attacks deal 100% increased damage.']),
+		supplyLine: {index: 5, name: 'The Strip', tier: 1, track: 'Strip'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Reflex',
+		cost: 0,
+		filename: '5_0_1.jpg',
+		id: 146,
+		kind: 'Offense',
+		name: 'Adrenaline Fueled',
+		properties: _List_fromArray(
+			['+100% Stamina', '-75% Stamina Regeneration', 'When you kill an enemy, gain 10 Stamina instantly and an additional 10 Stamina over 5 seconds.']),
+		supplyLine: {index: -1, name: 'Achievement', tier: 1, track: 'Accomplishment'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Discipline',
+		cost: 0,
 		filename: '9_1_4.jpg',
-		id: 156,
-		kind: 'UTILITY',
+		id: 147,
+		kind: 'Utility',
+		name: 'Ammo Scavenger',
 		properties: _List_fromArray(
 			['You can sense nearby Ammo. More Ammo spawns.']),
-		title: 'AMMO SCAVENGER'
+		supplyLine: {index: -1, name: 'Achievement', tier: 1, track: 'Accomplishment'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Brawn',
+		cost: 0,
+		filename: '12_0_4.jpg',
+		id: 148,
+		kind: 'Offense',
+		name: 'Berserker',
+		properties: _List_fromArray(
+			['Gain 10% Melee Damage,10% Melee Speed, and 5% Move Speed for each Melee kill in the last 4 seconds.']),
+		supplyLine: {index: -1, name: 'Achievement', tier: 1, track: 'Accomplishment'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Brawn',
+		cost: 0,
+		filename: '12_0_1.jpg',
+		id: 149,
+		kind: 'Offense',
+		name: 'Confident Killer',
+		properties: _List_fromArray(
+			['When you or your team kills a Mutation gain 1% damage (up to -15%) until the end of the level.']),
+		supplyLine: {index: -1, name: 'Achievement', tier: 1, track: 'Accomplishment'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Discipline',
+		cost: 0,
+		filename: '7_1_3.jpg',
+		id: 150,
+		kind: 'Defense',
+		name: 'Field Surgeon',
+		properties: _List_fromArray(
+			['+60% Healing Efficiency', '-50% Use Speed']),
+		supplyLine: {index: -1, name: 'Achievement', tier: 1, track: 'Accomplishment'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Fortune',
+		cost: 0,
+		filename: '15_1_3.jpg',
+		id: 151,
+		kind: 'Utility',
+		name: 'Lucky Pennies',
+		properties: _List_fromArray(
+			['Whenever you or your team loots Copper, you have a 35% chance to find 35% additional Copper.']),
+		supplyLine: {index: -1, name: 'Achievement', tier: 1, track: 'Accomplishment'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Reflex',
+		cost: 0,
+		filename: '6_0_2.jpg',
+		id: 152,
+		kind: 'Offense',
+		name: 'Mag Carrier',
+		properties: _List_fromArray(
+			['+30% Pistol/SMG Ammo Capacity', '+10% Damage with Pistols and SMGS']),
+		supplyLine: {index: -1, name: 'Achievement', tier: 1, track: 'Accomplishment'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Discipline',
+		cost: 0,
+		filename: '9_0_1.jpg',
+		id: 153,
+		kind: 'Offense',
+		name: 'Meatgrinder',
+		properties: _List_fromArray(
+			['Gain 30% Move Speed and Accuracy while crouched and using an LMG.']),
+		supplyLine: {index: -1, name: 'Achievement', tier: 1, track: 'Accomplishment'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Fortune',
+		cost: 0,
+		filename: '16_0_3.jpg',
+		id: 154,
+		kind: 'Offense',
+		name: 'Shell Carrier',
+		properties: _List_fromArray(
+			['+30% Shotgun Ammo Capacity', '+10% Damage with Shotguns']),
+		supplyLine: {index: -1, name: 'Achievement', tier: 1, track: 'Accomplishment'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Reflex',
+		cost: 0,
+		filename: '6_0_1.jpg',
+		id: 155,
+		kind: 'Offense',
+		name: 'Stock Pouch',
+		properties: _List_fromArray(
+			['+30% Sniper Ammo Capacity', '+10% Damage with Sniper Rifles']),
+		supplyLine: {index: -1, name: 'Achievement', tier: 1, track: 'Accomplishment'},
+		totalCost: 0
+	},
+		{
+		affinity: 'Discipline',
+		cost: 0,
+		filename: '10_1_2.jpg',
+		id: 156,
+		kind: 'Offense',
+		name: 'Tactical Vest',
+		properties: _List_fromArray(
+			['+30% Rifle Ammo Capacity', '+10% Damage with Assault Rifles and LMGS']),
+		supplyLine: {index: -1, name: 'Achievement', tier: 1, track: 'Accomplishment'},
+		totalCost: 0
 	}
 	]);
-var $elm$core$String$toLower = _String_toLower;
-var $author$project$CardData$cards = A2(
-	$elm$core$List$map,
-	function (raw) {
-		return {
-			effects: raw.effects,
-			filename: raw.filename,
-			id: raw.id,
-			kind: function () {
-				var _v0 = $elm$core$String$toLower(raw.kind);
-				switch (_v0) {
-					case 'utility':
-						return $author$project$Cards$Utility;
-					case 'offense':
-						return $author$project$Cards$Offense;
-					case 'defense':
-						return $author$project$Cards$Defense;
-					case 'mobility':
-						return $author$project$Cards$Mobility;
-					default:
-						return $author$project$Cards$Unknown;
-				}
-			}(),
-			properties: A2($elm$core$List$map, $author$project$Cards$Property, raw.properties),
-			title: raw.title
-		};
-	},
-	$author$project$CardData$rawCards);
+var $author$project$CardData$cards = A2($elm$core$List$map, $author$project$Cards$parseRawCard, $author$project$CardData$rawCards);
 var $rundis$elm_bootstrap$Bootstrap$Modal$Hide = {$: 'Hide'};
 var $rundis$elm_bootstrap$Bootstrap$Modal$hidden = $rundis$elm_bootstrap$Bootstrap$Modal$Hide;
 var $rundis$elm_bootstrap$Bootstrap$Navbar$Hidden = {$: 'Hidden'};
@@ -7043,9 +7626,6 @@ var $sporto$qs$QS$addUniqueValToQuery = F4(
 				query);
 		}
 	});
-var $elm$core$Basics$negate = function (n) {
-	return -n;
-};
 var $elm$core$String$dropRight = F2(
 	function (n, string) {
 		return (n < 1) ? string : A3($elm$core$String$slice, 0, -n, string);
@@ -8288,7 +8868,6 @@ var $author$project$Main$update = F2(
 						return _Utils_eq(c.id, id);
 					},
 					model.cardPool);
-				var _v1 = A2($elm$core$Debug$log, 'cards', $author$project$CardData$cards);
 				if (card.$ === 'Just') {
 					var c = card.a;
 					var updatedModel = _Utils_update(
@@ -9910,7 +10489,7 @@ var $rundis$elm_bootstrap$Bootstrap$Card$outlineWarning = $rundis$elm_bootstrap$
 var $author$project$Main$cardOutlineColor = function (card) {
 	var _v0 = card.kind;
 	switch (_v0.$) {
-		case 'Unknown':
+		case 'UnknownKind':
 			return $rundis$elm_bootstrap$Bootstrap$Card$outlineDark;
 		case 'Mobility':
 			return $rundis$elm_bootstrap$Bootstrap$Card$outlinePrimary;

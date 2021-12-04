@@ -101,7 +101,8 @@ parseCardIds : String -> Maybe (List Int)
 parseCardIds query =
     query
     |> String.chunks cardIdLength
-    |> List.map String.toInt |> Maybe.combine
+    |> List.map String.toInt
+    |> Maybe.combine
 
 
 filteredCards: Maybe String -> List Card -> List Card
@@ -275,7 +276,6 @@ update msg model =
             let
                 card =
                     model.cardPool |> List.find (\c -> c.id == id)
-                _ = Debug.log "cards" cards
             in
             case card of
                 Just c ->
@@ -524,7 +524,7 @@ inventoryView model =
 cardBackgroundColor : Card -> Card.Option msg
 cardBackgroundColor card =
     case card.kind of
-        Unknown ->
+        UnknownKind ->
             Card.dark
 
         Mobility ->
@@ -543,7 +543,7 @@ cardBackgroundColor card =
 buttonBackgroundColor : Card -> Option msg
 buttonBackgroundColor card =
     case card.kind of
-        Unknown ->
+        UnknownKind ->
             Button.dark
 
         Mobility ->
@@ -562,7 +562,7 @@ buttonBackgroundColor card =
 cardOutlineColor : Card -> Card.Option msg
 cardOutlineColor card =
     case card.kind of
-        Unknown ->
+        UnknownKind ->
             Card.outlineDark
 
         Mobility ->
@@ -606,7 +606,7 @@ bgWarning =
 htmlBackgroundColor : Card -> Attribute msg
 htmlBackgroundColor card =
     case card.kind of
-        Unknown ->
+        UnknownKind ->
             Html.Attributes.class "bg-dark"
 
         Mobility ->

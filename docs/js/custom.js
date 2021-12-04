@@ -23,8 +23,6 @@ function addToggleInventoryButtonEvent() {
 }
 
 function initJavascript() {
-    console.log('Initializing javascript.');
-    console.log('You can safely ignore any error messages for missing js/css files. To make the web app run on github.io and locally all js/css files are added twice (with different paths).');
     leftColumn = document.getElementById('left-column');
     rightColumn = document.getElementById('right-column');
     addToggleInventoryButtonEvent();
