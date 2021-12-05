@@ -7264,6 +7264,38 @@ var $author$project$CardData$rawCards = _List_fromArray(
 	}
 	]);
 var $author$project$CardData$cards = A2($elm$core$List$map, $author$project$Cards$parseRawCard, $author$project$CardData$rawCards);
+var $elm$core$List$filter = F2(
+	function (isGood, list) {
+		return A3(
+			$elm$core$List$foldr,
+			F2(
+				function (x, xs) {
+					return isGood(x) ? A2($elm$core$List$cons, x, xs) : xs;
+				}),
+			_List_Nil,
+			list);
+	});
+var $elm_community$list_extra$List$Extra$find = F2(
+	function (predicate, list) {
+		find:
+		while (true) {
+			if (!list.b) {
+				return $elm$core$Maybe$Nothing;
+			} else {
+				var first = list.a;
+				var rest = list.b;
+				if (predicate(first)) {
+					return $elm$core$Maybe$Just(first);
+				} else {
+					var $temp$predicate = predicate,
+						$temp$list = rest;
+					predicate = $temp$predicate;
+					list = $temp$list;
+					continue find;
+				}
+			}
+		}
+	});
 var $rundis$elm_bootstrap$Bootstrap$Modal$Hide = {$: 'Hide'};
 var $rundis$elm_bootstrap$Bootstrap$Modal$hidden = $rundis$elm_bootstrap$Bootstrap$Modal$Hide;
 var $rundis$elm_bootstrap$Bootstrap$Navbar$Hidden = {$: 'Hidden'};
@@ -7315,6 +7347,7 @@ var $elm$core$Maybe$map = F2(
 			return $elm$core$Maybe$Nothing;
 		}
 	});
+var $elm$core$Basics$neq = _Utils_notEqual;
 var $author$project$Main$cardIdLength = 3;
 var $author$project$String$Extras$chunks = F2(
 	function (size, string) {
@@ -7366,41 +7399,6 @@ var $author$project$Main$parseCardIds = function (query) {
 			$elm$core$String$toInt,
 			A2($author$project$String$Extras$chunks, $author$project$Main$cardIdLength, query)));
 };
-var $author$project$List$Extras$splitBy = F2(
-	function (predicate, items) {
-		var run = F3(
-			function (nonMatches, matches, remaining) {
-				run:
-				while (true) {
-					if (!remaining.b) {
-						return _Utils_Tuple2(
-							$elm$core$List$reverse(nonMatches),
-							$elm$core$List$reverse(matches));
-					} else {
-						var head = remaining.a;
-						var tail = remaining.b;
-						if (predicate(head)) {
-							var $temp$nonMatches = nonMatches,
-								$temp$matches = A2($elm$core$List$cons, head, matches),
-								$temp$remaining = tail;
-							nonMatches = $temp$nonMatches;
-							matches = $temp$matches;
-							remaining = $temp$remaining;
-							continue run;
-						} else {
-							var $temp$nonMatches = A2($elm$core$List$cons, head, nonMatches),
-								$temp$matches = matches,
-								$temp$remaining = tail;
-							nonMatches = $temp$nonMatches;
-							matches = $temp$matches;
-							remaining = $temp$remaining;
-							continue run;
-						}
-					}
-				}
-			});
-		return A3(run, _List_Nil, _List_Nil, items);
-	});
 var $sporto$qs$QS$Config = function (a) {
 	return {$: 'Config', a: a};
 };
@@ -7805,6 +7803,16 @@ var $elm_community$list_extra$List$Extra$uniqueHelp = F4(
 var $elm_community$list_extra$List$Extra$unique = function (list) {
 	return A4($elm_community$list_extra$List$Extra$uniqueHelp, $elm$core$Basics$identity, $elm$core$Set$empty, list, _List_Nil);
 };
+var $elm_community$maybe_extra$Maybe$Extra$cons = F2(
+	function (item, list) {
+		if (item.$ === 'Just') {
+			var v = item.a;
+			return A2($elm$core$List$cons, v, list);
+		} else {
+			return list;
+		}
+	});
+var $elm_community$maybe_extra$Maybe$Extra$values = A2($elm$core$List$foldr, $elm_community$maybe_extra$Maybe$Extra$cons, _List_Nil);
 var $author$project$Main$init = F3(
 	function (_v0, url, key) {
 		var hostUrl = _Utils_update(
@@ -7820,22 +7828,32 @@ var $author$project$Main$init = F3(
 					$elm$core$Maybe$andThen,
 					$author$project$Main$parseCardIds,
 					$author$project$Main$tryDeckQueryArgument(url))));
-		var _v1 = A2(
-			$author$project$List$Extras$splitBy,
+		var notSelected = A2(
+			$elm$core$List$filter,
 			function (c) {
 				return A2(
 					$elm$core$List$any,
-					function (cardId) {
-						return _Utils_eq(c.id, cardId);
+					function (id) {
+						return !_Utils_eq(c.id, id);
 					},
 					cardIdsFromQuery);
 			},
 			$author$project$CardData$cards);
-		var notSelected = _v1.a;
-		var selected = _v1.b;
-		var _v2 = $rundis$elm_bootstrap$Bootstrap$Navbar$initialState($author$project$Main$NavbarMsg);
-		var navbarState = _v2.a;
-		var navbarCmd = _v2.b;
+		var selected = $elm_community$maybe_extra$Maybe$Extra$values(
+			A2(
+				$elm$core$List$map,
+				function (c) {
+					return A2(
+						$elm_community$list_extra$List$Extra$find,
+						function (cc) {
+							return _Utils_eq(cc.id, c);
+						},
+						$author$project$CardData$cards);
+				},
+				cardIdsFromQuery));
+		var _v1 = $rundis$elm_bootstrap$Bootstrap$Navbar$initialState($author$project$Main$NavbarMsg);
+		var navbarState = _v1.a;
+		var navbarCmd = _v1.b;
 		return _Utils_Tuple2(
 			{cardDisplay: $author$project$Main$Image, cardPool: $author$project$CardData$cards, filter: $elm$core$Maybe$Nothing, hostUrl: hostUrl, navKey: key, navbarState: navbarState, notSelectedCards: notSelected, selectedCards: selected, shareModalVisibility: $rundis$elm_bootstrap$Bootstrap$Modal$hidden, yesNoModalContent: $elm$core$Maybe$Nothing, yesNoModalVisibility: $rundis$elm_bootstrap$Bootstrap$Modal$hidden},
 			navbarCmd);
@@ -8418,40 +8436,7 @@ var $author$project$Main$subscriptions = function (model) {
 };
 var $elm$json$Json$Encode$string = _Json_wrap;
 var $author$project$Main$copy = _Platform_outgoingPort('copy', $elm$json$Json$Encode$string);
-var $elm$core$List$filter = F2(
-	function (isGood, list) {
-		return A3(
-			$elm$core$List$foldr,
-			F2(
-				function (x, xs) {
-					return isGood(x) ? A2($elm$core$List$cons, x, xs) : xs;
-				}),
-			_List_Nil,
-			list);
-	});
-var $elm_community$list_extra$List$Extra$find = F2(
-	function (predicate, list) {
-		find:
-		while (true) {
-			if (!list.b) {
-				return $elm$core$Maybe$Nothing;
-			} else {
-				var first = list.a;
-				var rest = list.b;
-				if (predicate(first)) {
-					return $elm$core$Maybe$Just(first);
-				} else {
-					var $temp$predicate = predicate,
-						$temp$list = rest;
-					predicate = $temp$predicate;
-					list = $temp$list;
-					continue find;
-				}
-			}
-		}
-	});
 var $elm$core$Debug$log = _Debug_log;
-var $elm$core$Basics$neq = _Utils_notEqual;
 var $elm$core$Platform$Cmd$batch = _Platform_batch;
 var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
 var $elm$browser$Browser$Navigation$pushUrl = _Browser_pushUrl;

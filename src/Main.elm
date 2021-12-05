@@ -148,8 +148,18 @@ init _ url key =
             |> Maybe.map List.unique
             |> Maybe.withDefault []
 
-        (notSelected, selected) =
-            List.splitBy (\c ->  cardIdsFromQuery |> List.any (\cardId -> c.id == cardId)) cards
+        {- This way of mapping cards is inferior to checking all cards once if their id
+           was previously selected but this step is only done once and it makes sure to
+           keep the order of the deck intact. Filtering `cards` would automaticaly sort them
+           by id.
+        -}
+        selected =
+            cardIdsFromQuery
+            |> List.map (\c -> cards |> List.find (\cc -> cc.id == c))
+            |> Maybe.values
+
+        notSelected =
+            cards |> List.filter (\c -> cardIdsFromQuery |> List.any (\id -> c.id /= id))
 
         hostUrl =
             { url | query = Nothing, fragment = Nothing }
