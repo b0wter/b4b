@@ -11869,18 +11869,6 @@ var $author$project$Main$inventoryToggleButton = A2(
 					$elm$html$Html$text('🎒')
 				]))
 		]));
-var $author$project$Main$ConfirmResetModal = {$: 'ConfirmResetModal'};
-var $author$project$Main$RejectResetModal = {$: 'RejectResetModal'};
-var $author$project$Main$ShowShareModal = {$: 'ShowShareModal'};
-var $author$project$Main$ShowYesNoModal = function (a) {
-	return {$: 'ShowYesNoModal', a: a};
-};
-var $rundis$elm_bootstrap$Bootstrap$Grid$Internal$RowAttrs = function (a) {
-	return {$: 'RowAttrs', a: a};
-};
-var $rundis$elm_bootstrap$Bootstrap$Grid$Row$attrs = function (attrs_) {
-	return $rundis$elm_bootstrap$Bootstrap$Grid$Internal$RowAttrs(attrs_);
-};
 var $rundis$elm_bootstrap$Bootstrap$Utilities$Border$dark = A2($rundis$elm_bootstrap$Bootstrap$Internal$Role$toClass, 'border', $rundis$elm_bootstrap$Bootstrap$Internal$Role$Dark);
 var $author$project$Main$inventorySummaryView = function (cards) {
 	var properties = $elm$core$List$concat(
@@ -12099,9 +12087,19 @@ var $author$project$Main$inventoryContentView = function (model) {
 				]);
 	}
 };
+var $author$project$Main$ConfirmResetModal = {$: 'ConfirmResetModal'};
+var $author$project$Main$RejectResetModal = {$: 'RejectResetModal'};
+var $author$project$Main$ShowShareModal = {$: 'ShowShareModal'};
+var $author$project$Main$ShowYesNoModal = function (a) {
+	return {$: 'ShowYesNoModal', a: a};
+};
+var $rundis$elm_bootstrap$Bootstrap$Grid$Internal$RowAttrs = function (a) {
+	return {$: 'RowAttrs', a: a};
+};
+var $rundis$elm_bootstrap$Bootstrap$Grid$Row$attrs = function (attrs_) {
+	return $rundis$elm_bootstrap$Bootstrap$Grid$Internal$RowAttrs(attrs_);
+};
 var $author$project$Main$maxDeckSize = 15;
-var $rundis$elm_bootstrap$Bootstrap$Grid$Internal$Col4 = {$: 'Col4'};
-var $rundis$elm_bootstrap$Bootstrap$Grid$Col$md4 = A2($rundis$elm_bootstrap$Bootstrap$Grid$Internal$width, $rundis$elm_bootstrap$Bootstrap$General$Internal$MD, $rundis$elm_bootstrap$Bootstrap$Grid$Internal$Col4);
 var $lattyware$elm_fontawesome$FontAwesome$Solid$share = A5(
 	$lattyware$elm_fontawesome$FontAwesome$Icon$Icon,
 	'fas',
@@ -12113,12 +12111,10 @@ var $lattyware$elm_fontawesome$FontAwesome$Solid$share = A5(
 var $rundis$elm_bootstrap$Bootstrap$Internal$Button$Warning = {$: 'Warning'};
 var $rundis$elm_bootstrap$Bootstrap$Button$warning = $rundis$elm_bootstrap$Bootstrap$Internal$Button$Coloring(
 	$rundis$elm_bootstrap$Bootstrap$Internal$Button$Roled($rundis$elm_bootstrap$Bootstrap$Internal$Button$Warning));
-var $rundis$elm_bootstrap$Bootstrap$Utilities$Border$warning = A2($rundis$elm_bootstrap$Bootstrap$Internal$Role$toClass, 'border', $rundis$elm_bootstrap$Bootstrap$Internal$Role$Warning);
-var $author$project$Main$inventoryView = function (model) {
+var $author$project$Main$inventoryHeaderView = function (numberOfSelectedCards) {
 	var yesNoContent = {header: 'Reset', noMsg: $author$project$Main$RejectResetModal, text: 'Clear the currently selected cards?', yesMsg: $author$project$Main$ConfirmResetModal};
-	var numberOfSelectedCards = $elm$core$List$length(model.selectedCards);
-	var selectionCountString = '(' + ($elm$core$String$fromInt(numberOfSelectedCards) + ('/' + ($elm$core$String$fromInt($author$project$Main$maxDeckSize) + ')')));
 	var textColor = (_Utils_cmp(numberOfSelectedCards, $author$project$Main$maxDeckSize) < 1) ? $elm$html$Html$Attributes$class('') : $elm$html$Html$Attributes$class('text-warning');
+	var selectionCountString = '(' + ($elm$core$String$fromInt(numberOfSelectedCards) + ('/' + ($elm$core$String$fromInt($author$project$Main$maxDeckSize) + ')')));
 	var buttons = A2(
 		$elm$html$Html$div,
 		_List_Nil,
@@ -12151,6 +12147,53 @@ var $author$project$Main$inventoryView = function (model) {
 						$lattyware$elm_fontawesome$FontAwesome$Icon$viewIcon($lattyware$elm_fontawesome$FontAwesome$Solid$times)
 					]))
 			]));
+	return A2(
+		$rundis$elm_bootstrap$Bootstrap$Grid$row,
+		_List_fromArray(
+			[
+				$rundis$elm_bootstrap$Bootstrap$Grid$Row$attrs(
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('pr-1 pt-1 pb-1')
+					]))
+			]),
+		_List_fromArray(
+			[
+				A2(
+				$rundis$elm_bootstrap$Bootstrap$Grid$col,
+				_List_fromArray(
+					[
+						$rundis$elm_bootstrap$Bootstrap$Grid$Col$xs12,
+						$rundis$elm_bootstrap$Bootstrap$Grid$Col$attrs(
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('d-flex justify-content-between')
+							]))
+					]),
+				_List_fromArray(
+					[
+						A2(
+						$elm$html$Html$h5,
+						_List_fromArray(
+							[$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$m2, textColor]),
+						_List_fromArray(
+							[
+								$elm$html$Html$text('Selection ' + selectionCountString)
+							])),
+						A2(
+						$elm$html$Html$div,
+						_List_fromArray(
+							[$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$m2, textColor]),
+						_List_fromArray(
+							[buttons]))
+					]))
+			]));
+};
+var $rundis$elm_bootstrap$Bootstrap$Grid$Internal$Col4 = {$: 'Col4'};
+var $rundis$elm_bootstrap$Bootstrap$Grid$Col$md4 = A2($rundis$elm_bootstrap$Bootstrap$Grid$Internal$width, $rundis$elm_bootstrap$Bootstrap$General$Internal$MD, $rundis$elm_bootstrap$Bootstrap$Grid$Internal$Col4);
+var $rundis$elm_bootstrap$Bootstrap$Utilities$Border$warning = A2($rundis$elm_bootstrap$Bootstrap$Internal$Role$toClass, 'border', $rundis$elm_bootstrap$Bootstrap$Internal$Role$Warning);
+var $author$project$Main$inventoryView = function (model) {
+	var numberOfSelectedCards = $elm$core$List$length(model.selectedCards);
 	var border = (_Utils_cmp(numberOfSelectedCards, $author$project$Main$maxDeckSize) < 1) ? $rundis$elm_bootstrap$Bootstrap$Utilities$Border$dark : $rundis$elm_bootstrap$Bootstrap$Utilities$Border$warning;
 	return A2(
 		$rundis$elm_bootstrap$Bootstrap$Grid$col,
@@ -12176,47 +12219,7 @@ var $author$project$Main$inventoryView = function (model) {
 					]),
 				_List_fromArray(
 					[
-						A2(
-						$rundis$elm_bootstrap$Bootstrap$Grid$row,
-						_List_fromArray(
-							[
-								$rundis$elm_bootstrap$Bootstrap$Grid$Row$attrs(
-								_List_fromArray(
-									[
-										$elm$html$Html$Attributes$class('pr-1 pt-1 pb-1')
-									]))
-							]),
-						_List_fromArray(
-							[
-								A2(
-								$rundis$elm_bootstrap$Bootstrap$Grid$col,
-								_List_fromArray(
-									[
-										$rundis$elm_bootstrap$Bootstrap$Grid$Col$xs12,
-										$rundis$elm_bootstrap$Bootstrap$Grid$Col$attrs(
-										_List_fromArray(
-											[
-												$elm$html$Html$Attributes$class('d-flex justify-content-between')
-											]))
-									]),
-								_List_fromArray(
-									[
-										A2(
-										$elm$html$Html$h5,
-										_List_fromArray(
-											[$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$m2, textColor]),
-										_List_fromArray(
-											[
-												$elm$html$Html$text('Selection ' + selectionCountString)
-											])),
-										A2(
-										$elm$html$Html$div,
-										_List_fromArray(
-											[$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$m2, textColor]),
-										_List_fromArray(
-											[buttons]))
-									]))
-							])),
+						$author$project$Main$inventoryHeaderView(numberOfSelectedCards),
 						A2(
 						$rundis$elm_bootstrap$Bootstrap$Grid$row,
 						_List_Nil,
