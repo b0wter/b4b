@@ -5205,6 +5205,7 @@ var $elm$core$Task$perform = F2(
 	});
 var $elm$browser$Browser$application = _Browser_application;
 var $author$project$Main$Image = {$: 'Image'};
+var $author$project$Main$InventoryAsCards = {$: 'InventoryAsCards'};
 var $author$project$Main$NavbarMsg = function (a) {
 	return {$: 'NavbarMsg', a: a};
 };
@@ -7855,7 +7856,7 @@ var $author$project$Main$init = F3(
 		var navbarState = _v1.a;
 		var navbarCmd = _v1.b;
 		return _Utils_Tuple2(
-			{cardDisplay: $author$project$Main$Image, cardPool: $author$project$CardData$cards, filter: $elm$core$Maybe$Nothing, hostUrl: hostUrl, navKey: key, navbarState: navbarState, notSelectedCards: notSelected, selectedCards: selected, shareModalVisibility: $rundis$elm_bootstrap$Bootstrap$Modal$hidden, yesNoModalContent: $elm$core$Maybe$Nothing, yesNoModalVisibility: $rundis$elm_bootstrap$Bootstrap$Modal$hidden},
+			{cardDisplay: $author$project$Main$Image, cardPool: $author$project$CardData$cards, filter: $elm$core$Maybe$Nothing, hostUrl: hostUrl, inventoryDisplay: $author$project$Main$InventoryAsCards, navKey: key, navbarState: navbarState, notSelectedCards: notSelected, selectedCards: selected, shareModalVisibility: $rundis$elm_bootstrap$Bootstrap$Modal$hidden, yesNoModalContent: $elm$core$Maybe$Nothing, yesNoModalVisibility: $rundis$elm_bootstrap$Bootstrap$Modal$hidden},
 			navbarCmd);
 	});
 var $author$project$Main$CopyShareUrlResult = function (a) {
@@ -11881,17 +11882,45 @@ var $rundis$elm_bootstrap$Bootstrap$Grid$Row$attrs = function (attrs_) {
 	return $rundis$elm_bootstrap$Bootstrap$Grid$Internal$RowAttrs(attrs_);
 };
 var $rundis$elm_bootstrap$Bootstrap$Utilities$Border$dark = A2($rundis$elm_bootstrap$Bootstrap$Internal$Role$toClass, 'border', $rundis$elm_bootstrap$Bootstrap$Internal$Role$Dark);
-var $author$project$Main$maxDeckSize = 15;
-var $rundis$elm_bootstrap$Bootstrap$Grid$Internal$Col4 = {$: 'Col4'};
-var $rundis$elm_bootstrap$Bootstrap$Grid$Col$md4 = A2($rundis$elm_bootstrap$Bootstrap$Grid$Internal$width, $rundis$elm_bootstrap$Bootstrap$General$Internal$MD, $rundis$elm_bootstrap$Bootstrap$Grid$Internal$Col4);
-var $lattyware$elm_fontawesome$FontAwesome$Solid$share = A5(
-	$lattyware$elm_fontawesome$FontAwesome$Icon$Icon,
-	'fas',
-	'share',
-	512,
-	512,
-	_List_fromArray(
-		['M503.691 189.836L327.687 37.851C312.281 24.546 288 35.347 288 56.015v80.053C127.371 137.907 0 170.1 0 322.326c0 61.441 39.581 122.309 83.333 154.132 13.653 9.931 33.111-2.533 28.077-18.631C66.066 312.814 132.917 274.316 288 272.085V360c0 20.7 24.3 31.453 39.687 18.164l176.004-152c11.071-9.562 11.086-26.753 0-36.328z']));
+var $author$project$Main$inventorySummaryView = function (cards) {
+	var properties = $elm$core$List$concat(
+		A2(
+			$elm$core$List$map,
+			function (c) {
+				return A2(
+					$elm$core$List$map,
+					function (p) {
+						return p.description;
+					},
+					c.properties);
+			},
+			cards));
+	return _List_fromArray(
+		[
+			A2(
+			$rundis$elm_bootstrap$Bootstrap$Grid$col,
+			_List_fromArray(
+				[$rundis$elm_bootstrap$Bootstrap$Grid$Col$xs12]),
+			_List_fromArray(
+				[
+					A2(
+					$elm$html$Html$ul,
+					_List_Nil,
+					A2(
+						$elm$core$List$map,
+						function (p) {
+							return A2(
+								$elm$html$Html$li,
+								_List_Nil,
+								_List_fromArray(
+									[
+										$elm$html$Html$text(p)
+									]));
+						},
+						properties))
+				]))
+		]);
+};
 var $author$project$Main$DeselectCard = function (a) {
 	return {$: 'DeselectCard', a: a};
 };
@@ -12047,6 +12076,40 @@ var $author$project$Main$summaryCardView = function (card) {
 								])))))
 			]));
 };
+var $author$project$Main$inventoryContentView = function (model) {
+	var _v0 = model.inventoryDisplay;
+	switch (_v0.$) {
+		case 'InventoryAsCards':
+			return A2($elm$core$List$map, $author$project$Main$summaryCardView, model.selectedCards);
+		case 'InventoryAsSummary':
+			return $author$project$Main$inventorySummaryView(model.selectedCards);
+		default:
+			return _List_fromArray(
+				[
+					A2(
+					$rundis$elm_bootstrap$Bootstrap$Grid$col,
+					_List_fromArray(
+						[$rundis$elm_bootstrap$Bootstrap$Grid$Col$xs12]),
+					_List_Nil),
+					A2(
+					$rundis$elm_bootstrap$Bootstrap$Grid$col,
+					_List_fromArray(
+						[$rundis$elm_bootstrap$Bootstrap$Grid$Col$xs12]),
+					_List_Nil)
+				]);
+	}
+};
+var $author$project$Main$maxDeckSize = 15;
+var $rundis$elm_bootstrap$Bootstrap$Grid$Internal$Col4 = {$: 'Col4'};
+var $rundis$elm_bootstrap$Bootstrap$Grid$Col$md4 = A2($rundis$elm_bootstrap$Bootstrap$Grid$Internal$width, $rundis$elm_bootstrap$Bootstrap$General$Internal$MD, $rundis$elm_bootstrap$Bootstrap$Grid$Internal$Col4);
+var $lattyware$elm_fontawesome$FontAwesome$Solid$share = A5(
+	$lattyware$elm_fontawesome$FontAwesome$Icon$Icon,
+	'fas',
+	'share',
+	512,
+	512,
+	_List_fromArray(
+		['M503.691 189.836L327.687 37.851C312.281 24.546 288 35.347 288 56.015v80.053C127.371 137.907 0 170.1 0 322.326c0 61.441 39.581 122.309 83.333 154.132 13.653 9.931 33.111-2.533 28.077-18.631C66.066 312.814 132.917 274.316 288 272.085V360c0 20.7 24.3 31.453 39.687 18.164l176.004-152c11.071-9.562 11.086-26.753 0-36.328z']));
 var $rundis$elm_bootstrap$Bootstrap$Internal$Button$Warning = {$: 'Warning'};
 var $rundis$elm_bootstrap$Bootstrap$Button$warning = $rundis$elm_bootstrap$Bootstrap$Internal$Button$Coloring(
 	$rundis$elm_bootstrap$Bootstrap$Internal$Button$Roled($rundis$elm_bootstrap$Bootstrap$Internal$Button$Warning));
@@ -12157,7 +12220,7 @@ var $author$project$Main$inventoryView = function (model) {
 						A2(
 						$rundis$elm_bootstrap$Bootstrap$Grid$row,
 						_List_Nil,
-						A2($elm$core$List$map, $author$project$Main$summaryCardView, model.selectedCards))
+						$author$project$Main$inventoryContentView(model))
 					]))
 			]));
 };

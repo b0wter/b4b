@@ -76,9 +76,17 @@ type CardDisplay
     | Text
     | Image
 
+
+type InventoryDisplay
+    = InventoryAsCards
+    | InventoryAsSummary
+    | InventoryAsProgressBars
+
+
 type alias Model =
     { navbarState : Navbar.State
     , cardDisplay : CardDisplay
+    , inventoryDisplay : InventoryDisplay
     , shareModalVisibility: Modal.Visibility
     , yesNoModalVisibility: Modal.Visibility
     , yesNoModalContent: Maybe YesNoModalContent
@@ -166,6 +174,7 @@ init _ url key =
     in
     ( { cardPool = cards
       , cardDisplay = Image
+      , inventoryDisplay = InventoryAsCards
       , selectedCards = selected
       , notSelectedCards = notSelected
       , filter = Nothing
@@ -526,10 +535,23 @@ inventoryView model =
                     , div [ Spacing.m2, textColor ] [ buttons ]
                     ] ]
             , Grid.row []
-                (model.selectedCards |> List.map summaryCardView)
+                (inventoryContentView model)
+                --(model.selectedCards |> List.map summaryCardView)
             ]
         ]
 
+
+inventoryContentView : Model -> List (Grid.Column Msg)
+inventoryContentView model =
+    case model.inventoryDisplay of
+        InventoryAsCards ->
+            (model.selectedCards |> List.map summaryCardView)
+        InventoryAsSummary ->
+            inventorySummaryView model.selectedCards
+        _ ->
+            [ Grid.col [Col.xs12] []
+            , Grid.col [Col.xs12] []
+            ]
 
 cardBackgroundColor : Card -> Card.Option msg
 cardBackgroundColor card =
@@ -720,7 +742,21 @@ fullCardViewWithText card =
         ]
 
 
+inventorySummaryView : List Card -> List (Grid.Column Msg)
+inventorySummaryView cards =
+    let
+        properties =
+            cards
+            |> List.map (\c -> c.properties |> List.map (\p -> p.description))
+            |> List.concat
+    in
+    [ Grid.col [ Col.xs12 ]
+        [ Html.ul [] (properties |> List.map (\p -> Html.li [] [ text p ])) ]
+    ]
 
+
+{-| Creates a simple card view with a summary of all properties.
+-}
 summaryCardView : Card -> Grid.Column Msg
 summaryCardView card =
     let
