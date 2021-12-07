@@ -11019,7 +11019,7 @@ var $author$project$Main$fullCardView = F2(
 		}
 	});
 var $rundis$elm_bootstrap$Bootstrap$Grid$Internal$Col8 = {$: 'Col8'};
-var $rundis$elm_bootstrap$Bootstrap$General$Internal$MD = {$: 'MD'};
+var $rundis$elm_bootstrap$Bootstrap$General$Internal$LG = {$: 'LG'};
 var $rundis$elm_bootstrap$Bootstrap$Grid$Internal$ColWidth = function (a) {
 	return {$: 'ColWidth', a: a};
 };
@@ -11032,7 +11032,10 @@ var $rundis$elm_bootstrap$Bootstrap$Grid$Internal$width = F2(
 		return $rundis$elm_bootstrap$Bootstrap$Grid$Internal$ColWidth(
 			A2($rundis$elm_bootstrap$Bootstrap$Grid$Internal$Width, size, count));
 	});
-var $rundis$elm_bootstrap$Bootstrap$Grid$Col$md8 = A2($rundis$elm_bootstrap$Bootstrap$Grid$Internal$width, $rundis$elm_bootstrap$Bootstrap$General$Internal$MD, $rundis$elm_bootstrap$Bootstrap$Grid$Internal$Col8);
+var $rundis$elm_bootstrap$Bootstrap$Grid$Col$lg8 = A2($rundis$elm_bootstrap$Bootstrap$Grid$Internal$width, $rundis$elm_bootstrap$Bootstrap$General$Internal$LG, $rundis$elm_bootstrap$Bootstrap$Grid$Internal$Col8);
+var $rundis$elm_bootstrap$Bootstrap$Grid$Internal$Col6 = {$: 'Col6'};
+var $rundis$elm_bootstrap$Bootstrap$General$Internal$MD = {$: 'MD'};
+var $rundis$elm_bootstrap$Bootstrap$Grid$Col$md6 = A2($rundis$elm_bootstrap$Bootstrap$Grid$Internal$width, $rundis$elm_bootstrap$Bootstrap$General$Internal$MD, $rundis$elm_bootstrap$Bootstrap$Grid$Internal$Col6);
 var $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$mt2 = $elm$html$Html$Attributes$class('mt-2');
 var $rundis$elm_bootstrap$Bootstrap$Utilities$Border$rounded = $elm$html$Html$Attributes$class('rounded');
 var $rundis$elm_bootstrap$Bootstrap$Grid$Internal$Col = {$: 'Col'};
@@ -11806,7 +11809,8 @@ var $author$project$Main$cardPoolView = function (model) {
 		_List_fromArray(
 			[
 				$rundis$elm_bootstrap$Bootstrap$Grid$Col$xs12,
-				$rundis$elm_bootstrap$Bootstrap$Grid$Col$md8,
+				$rundis$elm_bootstrap$Bootstrap$Grid$Col$md6,
+				$rundis$elm_bootstrap$Bootstrap$Grid$Col$lg8,
 				$rundis$elm_bootstrap$Bootstrap$Grid$Col$attrs(
 				_List_fromArray(
 					[
@@ -12112,8 +12116,6 @@ var $rundis$elm_bootstrap$Bootstrap$Grid$Internal$RowAttrs = function (a) {
 var $rundis$elm_bootstrap$Bootstrap$Grid$Row$attrs = function (attrs_) {
 	return $rundis$elm_bootstrap$Bootstrap$Grid$Internal$RowAttrs(attrs_);
 };
-var $rundis$elm_bootstrap$Bootstrap$Utilities$Display$block = $elm$html$Html$Attributes$class('d-block');
-var $rundis$elm_bootstrap$Bootstrap$Utilities$Display$blockMd = $elm$html$Html$Attributes$class('d-md-block');
 var $author$project$Main$ChangeInventoryDisplayType = function (a) {
 	return {$: 'ChangeInventoryDisplayType', a: a};
 };
@@ -12201,8 +12203,6 @@ var $author$project$Main$inventoryStyleToggle = F2(
 				]));
 	});
 var $author$project$Main$maxDeckSize = 15;
-var $rundis$elm_bootstrap$Bootstrap$Utilities$Display$none = $elm$html$Html$Attributes$class('d-none');
-var $rundis$elm_bootstrap$Bootstrap$Utilities$Display$noneMd = $elm$html$Html$Attributes$class('d-md-none');
 var $lattyware$elm_fontawesome$FontAwesome$Solid$share = A5(
 	$lattyware$elm_fontawesome$FontAwesome$Icon$Icon,
 	'fas',
@@ -12290,15 +12290,7 @@ var $author$project$Main$inventoryHeaderView = F2(
 							A2(
 							$elm$html$Html$h5,
 							_List_fromArray(
-								[$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$m2, $rundis$elm_bootstrap$Bootstrap$Utilities$Display$none, $rundis$elm_bootstrap$Bootstrap$Utilities$Display$blockMd, textColor]),
-							_List_fromArray(
-								[
-									$elm$html$Html$text('Selection ' + selectionCountString)
-								])),
-							A2(
-							$elm$html$Html$h5,
-							_List_fromArray(
-								[$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$m2, $rundis$elm_bootstrap$Bootstrap$Utilities$Display$block, $rundis$elm_bootstrap$Bootstrap$Utilities$Display$noneMd, textColor]),
+								[$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$m2, textColor]),
 							_List_fromArray(
 								[
 									$elm$html$Html$text(selectionCountString)
@@ -12313,7 +12305,7 @@ var $author$project$Main$inventoryHeaderView = F2(
 				]));
 	});
 var $rundis$elm_bootstrap$Bootstrap$Grid$Internal$Col4 = {$: 'Col4'};
-var $rundis$elm_bootstrap$Bootstrap$Grid$Col$md4 = A2($rundis$elm_bootstrap$Bootstrap$Grid$Internal$width, $rundis$elm_bootstrap$Bootstrap$General$Internal$MD, $rundis$elm_bootstrap$Bootstrap$Grid$Internal$Col4);
+var $rundis$elm_bootstrap$Bootstrap$Grid$Col$lg4 = A2($rundis$elm_bootstrap$Bootstrap$Grid$Internal$width, $rundis$elm_bootstrap$Bootstrap$General$Internal$LG, $rundis$elm_bootstrap$Bootstrap$Grid$Internal$Col4);
 var $rundis$elm_bootstrap$Bootstrap$Utilities$Border$warning = A2($rundis$elm_bootstrap$Bootstrap$Internal$Role$toClass, 'border', $rundis$elm_bootstrap$Bootstrap$Internal$Role$Warning);
 var $author$project$Main$inventoryView = function (model) {
 	var numberOfSelectedCards = $elm$core$List$length(model.selectedCards);
@@ -12323,7 +12315,8 @@ var $author$project$Main$inventoryView = function (model) {
 		_List_fromArray(
 			[
 				$rundis$elm_bootstrap$Bootstrap$Grid$Col$xs12,
-				$rundis$elm_bootstrap$Bootstrap$Grid$Col$md4,
+				$rundis$elm_bootstrap$Bootstrap$Grid$Col$md6,
+				$rundis$elm_bootstrap$Bootstrap$Grid$Col$lg4,
 				$rundis$elm_bootstrap$Bootstrap$Grid$Col$attrs(
 				_List_fromArray(
 					[
@@ -12444,7 +12437,6 @@ var $rundis$elm_bootstrap$Bootstrap$Modal$hideOnBackdropClick = F2(
 						{hideOnBackdropClick: hide})
 				}));
 	});
-var $rundis$elm_bootstrap$Bootstrap$General$Internal$LG = {$: 'LG'};
 var $rundis$elm_bootstrap$Bootstrap$Modal$large = function (_v0) {
 	var conf = _v0.a;
 	var options = conf.options;

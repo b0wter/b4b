@@ -531,7 +531,7 @@ filterWithClearButton currentFilter =
 
 cardPoolView : Model -> Grid.Column Msg
 cardPoolView model =
-    Grid.col [ Col.xs12, Col.md8, Col.attrs [ id "left-column", class "overflow-scroll content-column" ] ]
+    Grid.col [ Col.xs12, Col.md6, Col.lg8, Col.attrs [ id "left-column", class "overflow-scroll content-column" ] ]
         [ Grid.row []
             [ Grid.col [ Col.xs12 ]
                 [ div [ Border.rounded, Spacing.mt2, class "d-flex justify-content-between pr-1 pl-1 pt-1 pb-1 bg-dark shadow "]
@@ -550,7 +550,7 @@ inventoryView model =
     let numberOfSelectedCards = model.selectedCards |> List.length
         border = if numberOfSelectedCards <= maxDeckSize then Border.dark else Border.warning
     in
-    Grid.col [ Col.xs12, Col.md4, Col.attrs [ id "right-column", class "overflow-scroll content-column" ] ]
+    Grid.col [ Col.xs12, Col.md6, Col.lg4, Col.attrs [ id "right-column", class "overflow-scroll content-column" ] ]
         [ div [ class "bg-dark m-2 shadow rounded border", border]
             [ inventoryHeaderView numberOfSelectedCards model.inventoryDisplay
             -- TODO: Make the content return List Grid.Row (if that's possible)
@@ -575,8 +575,7 @@ inventoryHeaderView numberOfSelectedCards display =
     in
     Grid.row [ Row.attrs [ class "pr-1 pt-1 pb-1" ] ]
         [ Grid.col [ Col.xs12, Col.attrs [ class "d-flex justify-content-between align-items-center" ] ]
-            [ Html.h5 [ Spacing.m2, Display.none, Display.blockMd, textColor ] [ text ("Selection " ++ selectionCountString) ]
-            , Html.h5 [ Spacing.m2, Display.block, Display.noneMd, textColor ] [ text selectionCountString ]
+            [ Html.h5 [ Spacing.m2, textColor ] [ text (selectionCountString) ]
             , div [ Spacing.m2, textColor ] [ buttons ]
         ] ]
 
