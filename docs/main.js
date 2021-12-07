@@ -8873,7 +8873,11 @@ var $author$project$Main$update = F2(
 						model,
 						{
 							notSelectedCards: A2($elm_community$list_extra$List$Extra$remove, c, model.notSelectedCards),
-							selectedCards: A2($elm$core$List$cons, c, model.selectedCards)
+							selectedCards: $elm$core$List$reverse(
+								A2(
+									$elm$core$List$cons,
+									c,
+									$elm$core$List$reverse(model.selectedCards)))
 						});
 					var navUrl = $elm$url$Url$toString(
 						$author$project$Main$shareUrl(updatedModel));
@@ -11954,138 +11958,157 @@ var $rundis$elm_bootstrap$Bootstrap$Card$Block$text = F2(
 					attributes),
 				children));
 	});
-var $author$project$Main$summaryCardView = function (card) {
-	var background = $author$project$Main$cardOutlineColor(card);
-	return A2(
-		$rundis$elm_bootstrap$Bootstrap$Grid$col,
-		_List_fromArray(
-			[$rundis$elm_bootstrap$Bootstrap$Grid$Col$xs12]),
-		_List_fromArray(
-			[
-				$rundis$elm_bootstrap$Bootstrap$Card$view(
-				A3(
-					$rundis$elm_bootstrap$Bootstrap$Card$footer,
-					_List_fromArray(
-						[$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$pt1, $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$pb1]),
-					_List_fromArray(
-						[
-							A2(
-							$elm$html$Html$ul,
-							_List_fromArray(
-								[$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$pl3, $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$pr0]),
-							A2(
-								$elm$core$List$map,
-								function (property) {
-									return A2(
-										$elm$html$Html$div,
-										_List_Nil,
-										_List_fromArray(
-											[
-												A2(
-												$elm$html$Html$li,
-												_List_Nil,
-												_List_fromArray(
-													[
-														A2(
-														$elm$html$Html$small,
-														_List_Nil,
-														_List_fromArray(
-															[
-																$elm$html$Html$text(property.description)
-															]))
-													]))
-											]));
-								},
-								card.properties))
-						]),
+var $author$project$Main$summaryCardView = F2(
+	function (optionalIndex, card) {
+		var index = function () {
+			if (optionalIndex.$ === 'Just') {
+				var i = optionalIndex.a;
+				return $elm$core$String$fromInt(i) + '. ';
+			} else {
+				return '';
+			}
+		}();
+		var background = $author$project$Main$cardOutlineColor(card);
+		return A2(
+			$rundis$elm_bootstrap$Bootstrap$Grid$col,
+			_List_fromArray(
+				[$rundis$elm_bootstrap$Bootstrap$Grid$Col$xs12]),
+			_List_fromArray(
+				[
+					$rundis$elm_bootstrap$Bootstrap$Card$view(
 					A3(
-						$rundis$elm_bootstrap$Bootstrap$Card$block,
+						$rundis$elm_bootstrap$Bootstrap$Card$footer,
 						_List_fromArray(
-							[
-								$rundis$elm_bootstrap$Bootstrap$Card$Block$attrs(
-								_List_fromArray(
-									[$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$pt1, $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$pb1]))
-							]),
+							[$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$pt1, $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$pb1]),
 						_List_fromArray(
 							[
 								A2(
-								$rundis$elm_bootstrap$Bootstrap$Card$Block$text,
+								$elm$html$Html$ul,
 								_List_fromArray(
-									[$rundis$elm_bootstrap$Bootstrap$Utilities$Flex$block, $rundis$elm_bootstrap$Bootstrap$Utilities$Flex$justifyBetween]),
-								_List_fromArray(
-									[
-										A2(
-										$elm$html$Html$div,
-										_List_Nil,
-										_List_fromArray(
-											[
-												$elm$html$Html$text(card.title)
-											])),
-										A2(
-										$elm$html$Html$div,
-										_List_fromArray(
-											[
-												$elm$html$Html$Attributes$class('unselectable')
-											]),
-										_List_fromArray(
-											[
-												A2(
-												$elm$html$Html$a,
-												_List_fromArray(
-													[
-														$elm$html$Html$Events$onClick(
-														$author$project$Main$MoveCardUp(card.id)),
-														$author$project$Main$pointerClass,
-														$elm$html$Html$Attributes$class('pl-2 pr-2')
-													]),
-												_List_fromArray(
-													[
-														$elm$html$Html$text('↑')
-													])),
-												A2(
-												$elm$html$Html$a,
-												_List_fromArray(
-													[
-														$elm$html$Html$Events$onClick(
-														$author$project$Main$MoveCardDown(card.id)),
-														$author$project$Main$pointerClass,
-														$elm$html$Html$Attributes$class('pl-2 pr-2 ml-2')
-													]),
-												_List_fromArray(
-													[
-														$elm$html$Html$text('↓')
-													])),
-												A2(
-												$elm$html$Html$a,
-												_List_fromArray(
-													[
-														$elm$html$Html$Events$onClick(
-														$author$project$Main$DeselectCard(card.id)),
-														$author$project$Main$pointerClass,
-														$elm$html$Html$Attributes$class('pl-2 pr-0 ml-2 mr-0')
-													]),
-												_List_fromArray(
-													[
-														$elm$html$Html$text('✕')
-													]))
-											]))
-									]))
+									[$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$pl3, $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$pr0]),
+								A2(
+									$elm$core$List$map,
+									function (property) {
+										return A2(
+											$elm$html$Html$div,
+											_List_Nil,
+											_List_fromArray(
+												[
+													A2(
+													$elm$html$Html$li,
+													_List_Nil,
+													_List_fromArray(
+														[
+															A2(
+															$elm$html$Html$small,
+															_List_Nil,
+															_List_fromArray(
+																[
+																	$elm$html$Html$text(property.description)
+																]))
+														]))
+												]));
+									},
+									card.properties))
 							]),
-						$rundis$elm_bootstrap$Bootstrap$Card$config(
+						A3(
+							$rundis$elm_bootstrap$Bootstrap$Card$block,
 							_List_fromArray(
 								[
-									background,
-									$rundis$elm_bootstrap$Bootstrap$Card$attrs(
+									$rundis$elm_bootstrap$Bootstrap$Card$Block$attrs(
 									_List_fromArray(
-										[$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$m2]))
-								])))))
-			]));
-};
+										[$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$pt1, $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$pb1]))
+								]),
+							_List_fromArray(
+								[
+									A2(
+									$rundis$elm_bootstrap$Bootstrap$Card$Block$text,
+									_List_fromArray(
+										[$rundis$elm_bootstrap$Bootstrap$Utilities$Flex$block, $rundis$elm_bootstrap$Bootstrap$Utilities$Flex$justifyBetween]),
+									_List_fromArray(
+										[
+											A2(
+											$elm$html$Html$div,
+											_List_Nil,
+											_List_fromArray(
+												[
+													$elm$html$Html$text(
+													_Utils_ap(index, card.title))
+												])),
+											A2(
+											$elm$html$Html$div,
+											_List_fromArray(
+												[
+													$elm$html$Html$Attributes$class('unselectable')
+												]),
+											_List_fromArray(
+												[
+													A2(
+													$elm$html$Html$a,
+													_List_fromArray(
+														[
+															$elm$html$Html$Events$onClick(
+															$author$project$Main$MoveCardUp(card.id)),
+															$author$project$Main$pointerClass,
+															$elm$html$Html$Attributes$class('pl-2 pr-2')
+														]),
+													_List_fromArray(
+														[
+															$elm$html$Html$text('↑')
+														])),
+													A2(
+													$elm$html$Html$a,
+													_List_fromArray(
+														[
+															$elm$html$Html$Events$onClick(
+															$author$project$Main$MoveCardDown(card.id)),
+															$author$project$Main$pointerClass,
+															$elm$html$Html$Attributes$class('pl-2 pr-2 ml-2')
+														]),
+													_List_fromArray(
+														[
+															$elm$html$Html$text('↓')
+														])),
+													A2(
+													$elm$html$Html$a,
+													_List_fromArray(
+														[
+															$elm$html$Html$Events$onClick(
+															$author$project$Main$DeselectCard(card.id)),
+															$author$project$Main$pointerClass,
+															$elm$html$Html$Attributes$class('pl-2 pr-0 ml-2 mr-0')
+														]),
+													_List_fromArray(
+														[
+															$elm$html$Html$text('✕')
+														]))
+												]))
+										]))
+								]),
+							$rundis$elm_bootstrap$Bootstrap$Card$config(
+								_List_fromArray(
+									[
+										background,
+										$rundis$elm_bootstrap$Bootstrap$Card$attrs(
+										_List_fromArray(
+											[$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$m2]))
+									])))))
+				]));
+	});
 var $author$project$Main$inventoryContentView = function (model) {
 	var _v0 = model.inventoryDisplay;
 	switch (_v0.$) {
 		case 'InventoryAsCards':
-			return A2($elm$core$List$map, $author$project$Main$summaryCardView, model.selectedCards);
+			return A2(
+				$elm$core$List$indexedMap,
+				F2(
+					function (i, c) {
+						return A2(
+							$author$project$Main$summaryCardView,
+							$elm$core$Maybe$Just(i + 1),
+							c);
+					}),
+				model.selectedCards);
 		case 'InventoryAsSummary':
 			return $author$project$Main$inventorySummaryView(model.selectedCards);
 		default:

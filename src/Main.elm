@@ -305,7 +305,7 @@ update msg model =
                     let
                         updatedModel =
                             { model
-                            | selectedCards = c :: model.selectedCards
+                            | selectedCards = c :: (model.selectedCards |> List.reverse) |> List.reverse
                             , notSelectedCards = model.notSelectedCards |> List.remove c
                             }
 
@@ -584,7 +584,7 @@ inventoryContentView : Model -> List (Grid.Column Msg)
 inventoryContentView model =
     case model.inventoryDisplay of
         InventoryAsCards ->
-            (model.selectedCards |> List.map summaryCardView)
+            (model.selectedCards |> List.indexedMap (\i c -> summaryCardView (Just (i + 1)) c))
         InventoryAsSummary ->
             inventorySummaryView model.selectedCards
         _ ->
@@ -796,17 +796,21 @@ inventorySummaryView cards =
 
 {-| Creates a simple card view with a summary of all properties.
 -}
-summaryCardView : Card -> Grid.Column Msg
-summaryCardView card =
+summaryCardView : Maybe Int -> Card -> Grid.Column Msg
+summaryCardView optionalIndex card =
     let
         background =
             card |> cardOutlineColor
+        index =
+            case optionalIndex of
+                Just i -> (i |> String.fromInt) ++ ". "
+                Nothing -> ""
     in
     Grid.col [ Col.xs12 ]
         [ Card.config [ background, Card.attrs [ Spacing.m2 ] ]
             |> Card.block [ Block.attrs [ Spacing.pt1, Spacing.pb1 ] ]
                 [ Block.text [ Flex.block, Flex.justifyBetween ]
-                    [ div [] [ text card.title ]
+                    [ div [] [ text (index ++ card.title) ]
                     , div [ class "unselectable" ]
                         [ Html.a [ onClick (MoveCardUp card.id), pointerClass, class "pl-2 pr-2" ] [ text "↑" ]
                         , Html.a [ onClick (MoveCardDown card.id), pointerClass, class "pl-2 pr-2 ml-2" ] [ text "↓" ]
