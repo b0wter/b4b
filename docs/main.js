@@ -5209,15 +5209,6 @@ var $author$project$Main$InventoryAsCards = {$: 'InventoryAsCards'};
 var $author$project$Main$NavbarMsg = function (a) {
 	return {$: 'NavbarMsg', a: a};
 };
-var $elm$core$Maybe$andThen = F2(
-	function (callback, maybeValue) {
-		if (maybeValue.$ === 'Just') {
-			var value = maybeValue.a;
-			return callback(value);
-		} else {
-			return $elm$core$Maybe$Nothing;
-		}
-	});
 var $elm$core$List$any = F2(
 	function (isOkay, list) {
 		any:
@@ -5237,6 +5228,28 @@ var $elm$core$List$any = F2(
 					continue any;
 				}
 			}
+		}
+	});
+var $elm$core$Basics$composeL = F3(
+	function (g, f, x) {
+		return g(
+			f(x));
+	});
+var $elm$core$Basics$not = _Basics_not;
+var $elm$core$List$all = F2(
+	function (isOkay, list) {
+		return !A2(
+			$elm$core$List$any,
+			A2($elm$core$Basics$composeL, $elm$core$Basics$not, isOkay),
+			list);
+	});
+var $elm$core$Maybe$andThen = F2(
+	function (callback, maybeValue) {
+		if (maybeValue.$ === 'Just') {
+			var value = maybeValue.a;
+			return callback(value);
+		} else {
+			return $elm$core$Maybe$Nothing;
 		}
 	});
 var $author$project$Cards$Brawn = {$: 'Brawn'};
@@ -7829,17 +7842,6 @@ var $author$project$Main$init = F3(
 					$elm$core$Maybe$andThen,
 					$author$project$Main$parseCardIds,
 					$author$project$Main$tryDeckQueryArgument(url))));
-		var notSelected = A2(
-			$elm$core$List$filter,
-			function (c) {
-				return A2(
-					$elm$core$List$any,
-					function (id) {
-						return !_Utils_eq(c.id, id);
-					},
-					cardIdsFromQuery);
-			},
-			$author$project$CardData$cards);
 		var selected = $elm_community$maybe_extra$Maybe$Extra$values(
 			A2(
 				$elm$core$List$map,
@@ -7852,6 +7854,15 @@ var $author$project$Main$init = F3(
 						$author$project$CardData$cards);
 				},
 				cardIdsFromQuery));
+		var notSelected = A2(
+			$elm$core$List$filter,
+			function (c) {
+				return A2(
+					$elm$core$List$all,
+					$elm$core$Basics$neq(c),
+					selected);
+			},
+			$author$project$CardData$cards);
 		var _v1 = $rundis$elm_bootstrap$Bootstrap$Navbar$initialState($author$project$Main$NavbarMsg);
 		var navbarState = _v1.a;
 		var navbarCmd = _v1.b;
@@ -8000,11 +8011,6 @@ var $elm$browser$Browser$AnimationManager$onSelfMsg = F3(
 var $elm$browser$Browser$AnimationManager$Delta = function (a) {
 	return {$: 'Delta', a: a};
 };
-var $elm$core$Basics$composeL = F3(
-	function (g, f, x) {
-		return g(
-			f(x));
-	});
 var $elm$browser$Browser$AnimationManager$subMap = F2(
 	function (func, sub) {
 		if (sub.$ === 'Time') {
@@ -10224,14 +10230,6 @@ var $author$project$Main$filterWithClearButton = function (currentFilter) {
 								])))))
 			]));
 };
-var $elm$core$Basics$not = _Basics_not;
-var $elm$core$List$all = F2(
-	function (isOkay, list) {
-		return !A2(
-			$elm$core$List$any,
-			A2($elm$core$Basics$composeL, $elm$core$Basics$not, isOkay),
-			list);
-	});
 var $author$project$Cards$containsWord = F2(
 	function (word, card) {
 		var descriptions = A2(

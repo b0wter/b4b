@@ -167,7 +167,7 @@ init _ url key =
             |> Maybe.values
 
         notSelected =
-            cards |> List.filter (\c -> cardIdsFromQuery |> List.any (\id -> c.id /= id))
+            cards |> List.filter (\c -> selected |> List.all  ((/=) c)) --(\s -> s /= c ))
 
         hostUrl =
             { url | query = Nothing, fragment = Nothing }
