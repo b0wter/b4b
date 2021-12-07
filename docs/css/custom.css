@@ -23,10 +23,19 @@
     user-select: none;
 }
 
-.action-button {
+.action-button-right {
     position: fixed;
     bottom: 1em;
     right: 1em;
+    width: 4em;
+    height: 4em;
+    border-radius: 50% !important;
+}
+
+.action-button-left {
+    position: fixed;
+    bottom: 1em;
+    left: 1em;
     width: 4em;
     height: 4em;
     border-radius: 50% !important;

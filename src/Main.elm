@@ -205,6 +205,7 @@ type Msg
     | CopyShareUrl String
     | CopyShareUrlResult Bool
     | ChangeCardDisplayType CardDisplay
+    | ChangeInventoryDisplayType InventoryDisplay
     | ShowYesNoModal YesNoModalContent
     | ConfirmResetModal
     | RejectResetModal
@@ -278,18 +279,21 @@ update msg model =
 
 
         RejectResetModal ->
-            ( { model | yesNoModalContent = Nothing, yesNoModalVisibility = Modal.hidden }, Cmd.none)
+            ( { model | yesNoModalContent = Nothing, yesNoModalVisibility = Modal.hidden }, Cmd.none )
 
         CopyShareUrl url ->
             ( model, copy url)
 
         CopyShareUrlResult result ->
             if result then
-                ( { model | shareModalVisibility = Modal.hidden }, Cmd.none)
+                ( { model | shareModalVisibility = Modal.hidden }, Cmd.none )
             else (model, Cmd.none)
 
         ChangeCardDisplayType display ->
-            ( { model | cardDisplay = display }, Cmd.none)
+            ( { model | cardDisplay = display }, Cmd.none )
+
+        ChangeInventoryDisplayType display ->
+            ( { model | inventoryDisplay = display }, Cmd.none )
 
         SelectCard id ->
             let
@@ -396,9 +400,17 @@ view model =
 
 inventoryToggleButton : Html Msg
 inventoryToggleButton =
-    Html.a [ id "inventory-toggle-button", class "action-button btn btn-light d-flex d-md-none pointer" ]
+    Html.a [ id "inventory-toggle-button", class "action-button-right btn btn-light d-flex d-md-none pointer" ]
     [
-        Html.h2 [ class "m-auto grey no-decoration" ] [ text "🎒" ]
+        Html.h2 [ class "m-auto grey no-decoration" ] [ FontAwesome.Solid.suitcase |> FontAwesome.Icon.viewIcon ]
+    ]
+
+
+scrollUpActionButton : Html Msg
+scrollUpActionButton =
+    Html.a [ id "inventory-toggle-button", class "action-button-left btn btn-light d-flex d-md-none pointer" ]
+    [
+        Html.h2 [ class "m-auto grey no-decoration" ] [ FontAwesome.Solid.chevronUp |> FontAwesome.Icon.viewIcon ]
     ]
 
 
@@ -488,6 +500,24 @@ cardDisplayToggle cardDisplay =
         ]
 
 
+inventoryStyleToggle : InventoryDisplay -> String -> Html Msg
+inventoryStyleToggle inventoryDisplay extraClasses =
+    ButtonGroup.radioButtonGroup [ ButtonGroup.small, ButtonGroup.attrs [ class ("d-flex align-items-center " ++ extraClasses), Spacing.ml3 ] ]
+        [ ButtonGroup.radioButton
+            (inventoryDisplay == InventoryAsCards)
+            [ Button.secondary, Button.onClick <| (ChangeInventoryDisplayType InventoryAsCards) ]
+            [ FontAwesome.Solid.layerGroup |> FontAwesome.Icon.viewIcon ]
+        , ButtonGroup.radioButton
+            (inventoryDisplay == InventoryAsSummary)
+            [ Button.secondary, Button.onClick <| (ChangeInventoryDisplayType InventoryAsSummary) ]
+            [ FontAwesome.Solid.list |> FontAwesome.Icon.viewIcon ]
+        , ButtonGroup.radioButton
+            (inventoryDisplay == InventoryAsProgressBars)
+            [ Button.secondary, Button.onClick <| (ChangeInventoryDisplayType InventoryAsProgressBars) ]
+            [ FontAwesome.Solid.tasks |> FontAwesome.Icon.viewIcon ]
+        ]
+
+
 filterWithClearButton : String -> Html Msg
 filterWithClearButton currentFilter =
     div [ class "w-100" ]
@@ -522,7 +552,7 @@ inventoryView model =
     in
     Grid.col [ Col.xs12, Col.md4, Col.attrs [ id "right-column", class "overflow-scroll content-column" ] ]
         [ div [ class "bg-dark m-2 shadow rounded border", border]
-            [ inventoryHeaderView numberOfSelectedCards
+            [ inventoryHeaderView numberOfSelectedCards model.inventoryDisplay
             -- TODO: Make the content return List Grid.Row (if that's possible)
             , Grid.row []
                 (inventoryContentView model)
@@ -530,20 +560,23 @@ inventoryView model =
         ]
 
 
-inventoryHeaderView : Int -> Html Msg
-inventoryHeaderView numberOfSelectedCards =
+inventoryHeaderView : Int -> InventoryDisplay -> Html Msg
+inventoryHeaderView numberOfSelectedCards display =
     let
         selectionCountString = "(" ++ (numberOfSelectedCards |> String.fromInt) ++ "/" ++ (maxDeckSize |> String.fromInt) ++ ")"
         textColor = if numberOfSelectedCards <= maxDeckSize then class "" else class "text-warning"
         yesNoContent = { header = "Reset", text = "Clear the currently selected cards?", yesMsg = ConfirmResetModal, noMsg = RejectResetModal }
-        buttons = div []
-                    [ Button.button [ Button.secondary, Button.onClick ShowShareModal ] [FontAwesome.Solid.share |> FontAwesome.Icon.viewIcon]
-                    , Button.button [ Button.warning, Button.onClick (ShowYesNoModal yesNoContent), Button.attrs [ Spacing.ml3 ] ] [FontAwesome.Solid.times |> FontAwesome.Icon.viewIcon]
+        styleSelector = inventoryStyleToggle display
+        buttons = div [ class "d-flex"]
+                    [ styleSelector "mr-3"
+                    , Button.button [ Button.secondary, Button.small, Button.onClick ShowShareModal ] [FontAwesome.Solid.share |> FontAwesome.Icon.viewIcon]
+                    , Button.button [ Button.warning, Button.small, Button.onClick (ShowYesNoModal yesNoContent), Button.attrs [ Spacing.ml3 ] ] [FontAwesome.Solid.times |> FontAwesome.Icon.viewIcon]
                     ]
     in
     Grid.row [ Row.attrs [ class "pr-1 pt-1 pb-1" ] ]
-        [ Grid.col [ Col.xs12, Col.attrs [ class "d-flex justify-content-between" ] ]
-            [ Html.h5 [ Spacing.m2, textColor ] [ text ("Selection " ++ selectionCountString) ]
+        [ Grid.col [ Col.xs12, Col.attrs [ class "d-flex justify-content-between align-items-center" ] ]
+            [ Html.h5 [ Spacing.m2, Display.none, Display.blockMd, textColor ] [ text ("Selection " ++ selectionCountString) ]
+            , Html.h5 [ Spacing.m2, Display.block, Display.noneMd, textColor ] [ text selectionCountString ]
             , div [ Spacing.m2, textColor ] [ buttons ]
         ] ]
 
@@ -710,7 +743,7 @@ fullCardViewWithImage card =
             Button.secondary
     in
     Grid.col []
-        [ Card.config [ cardBackground , Card.attrs [  Spacing.m2, style "max-width" "240px" ] ]
+        [ Card.config [ cardBackground , Card.attrs [  Spacing.m2, style "max-width" "2400px" ] ]
             |> Card.block [ Block.attrs [ class "d-flex justify-content-center" ] ]
                 [ Block.custom
                     (img [ src ("img/english/" ++ card.filename), style "max-width" "200px" ] [])

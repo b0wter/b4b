@@ -8846,6 +8846,13 @@ var $author$project$Main$update = F2(
 						model,
 						{cardDisplay: display}),
 					$elm$core$Platform$Cmd$none);
+			case 'ChangeInventoryDisplayType':
+				var display = msg.a;
+				return _Utils_Tuple2(
+					_Utils_update(
+						model,
+						{inventoryDisplay: display}),
+					$elm$core$Platform$Cmd$none);
 			case 'SelectCard':
 				var id = msg.a;
 				var card = A2(
@@ -10745,7 +10752,7 @@ var $author$project$Main$fullCardViewWithImage = function (card) {
 									_List_fromArray(
 										[
 											$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$m2,
-											A2($elm$html$Html$Attributes$style, 'max-width', '240px')
+											A2($elm$html$Html$Attributes$style, 'max-width', '2400px')
 										]))
 								])))))
 			]));
@@ -11849,12 +11856,20 @@ var $author$project$Main$cardPoolView = function (model) {
 };
 var $elm$html$Html$a = _VirtualDom_node('a');
 var $elm$html$Html$h2 = _VirtualDom_node('h2');
+var $lattyware$elm_fontawesome$FontAwesome$Solid$suitcase = A5(
+	$lattyware$elm_fontawesome$FontAwesome$Icon$Icon,
+	'fas',
+	'suitcase',
+	512,
+	512,
+	_List_fromArray(
+		['M128 480h256V80c0-26.5-21.5-48-48-48H176c-26.5 0-48 21.5-48 48v400zm64-384h128v32H192V96zm320 80v256c0 26.5-21.5 48-48 48h-48V128h48c26.5 0 48 21.5 48 48zM96 480H48c-26.5 0-48-21.5-48-48V176c0-26.5 21.5-48 48-48h48v352z']));
 var $author$project$Main$inventoryToggleButton = A2(
 	$elm$html$Html$a,
 	_List_fromArray(
 		[
 			$elm$html$Html$Attributes$id('inventory-toggle-button'),
-			$elm$html$Html$Attributes$class('action-button btn btn-light d-flex d-md-none pointer')
+			$elm$html$Html$Attributes$class('action-button-right btn btn-light d-flex d-md-none pointer')
 		]),
 	_List_fromArray(
 		[
@@ -11866,7 +11881,7 @@ var $author$project$Main$inventoryToggleButton = A2(
 				]),
 			_List_fromArray(
 				[
-					$elm$html$Html$text('🎒')
+					$lattyware$elm_fontawesome$FontAwesome$Icon$viewIcon($lattyware$elm_fontawesome$FontAwesome$Solid$suitcase)
 				]))
 		]));
 var $rundis$elm_bootstrap$Bootstrap$Utilities$Border$dark = A2($rundis$elm_bootstrap$Bootstrap$Internal$Role$toClass, 'border', $rundis$elm_bootstrap$Bootstrap$Internal$Role$Dark);
@@ -12099,7 +12114,97 @@ var $rundis$elm_bootstrap$Bootstrap$Grid$Internal$RowAttrs = function (a) {
 var $rundis$elm_bootstrap$Bootstrap$Grid$Row$attrs = function (attrs_) {
 	return $rundis$elm_bootstrap$Bootstrap$Grid$Internal$RowAttrs(attrs_);
 };
+var $rundis$elm_bootstrap$Bootstrap$Utilities$Display$block = $elm$html$Html$Attributes$class('d-block');
+var $rundis$elm_bootstrap$Bootstrap$Utilities$Display$blockMd = $elm$html$Html$Attributes$class('d-md-block');
+var $author$project$Main$ChangeInventoryDisplayType = function (a) {
+	return {$: 'ChangeInventoryDisplayType', a: a};
+};
+var $author$project$Main$InventoryAsProgressBars = {$: 'InventoryAsProgressBars'};
+var $author$project$Main$InventoryAsSummary = {$: 'InventoryAsSummary'};
+var $lattyware$elm_fontawesome$FontAwesome$Solid$layerGroup = A5(
+	$lattyware$elm_fontawesome$FontAwesome$Icon$Icon,
+	'fas',
+	'layer-group',
+	512,
+	512,
+	_List_fromArray(
+		['M12.41 148.02l232.94 105.67c6.8 3.09 14.49 3.09 21.29 0l232.94-105.67c16.55-7.51 16.55-32.52 0-40.03L266.65 2.31a25.607 25.607 0 0 0-21.29 0L12.41 107.98c-16.55 7.51-16.55 32.53 0 40.04zm487.18 88.28l-58.09-26.33-161.64 73.27c-7.56 3.43-15.59 5.17-23.86 5.17s-16.29-1.74-23.86-5.17L70.51 209.97l-58.1 26.33c-16.55 7.5-16.55 32.5 0 40l232.94 105.59c6.8 3.08 14.49 3.08 21.29 0L499.59 276.3c16.55-7.5 16.55-32.5 0-40zm0 127.8l-57.87-26.23-161.86 73.37c-7.56 3.43-15.59 5.17-23.86 5.17s-16.29-1.74-23.86-5.17L70.29 337.87 12.41 364.1c-16.55 7.5-16.55 32.5 0 40l232.94 105.59c6.8 3.08 14.49 3.08 21.29 0L499.59 404.1c16.55-7.5 16.55-32.5 0-40z']));
+var $lattyware$elm_fontawesome$FontAwesome$Solid$list = A5(
+	$lattyware$elm_fontawesome$FontAwesome$Icon$Icon,
+	'fas',
+	'list',
+	512,
+	512,
+	_List_fromArray(
+		['M80 368H16a16 16 0 0 0-16 16v64a16 16 0 0 0 16 16h64a16 16 0 0 0 16-16v-64a16 16 0 0 0-16-16zm0-320H16A16 16 0 0 0 0 64v64a16 16 0 0 0 16 16h64a16 16 0 0 0 16-16V64a16 16 0 0 0-16-16zm0 160H16a16 16 0 0 0-16 16v64a16 16 0 0 0 16 16h64a16 16 0 0 0 16-16v-64a16 16 0 0 0-16-16zm416 176H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16zm0-320H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16V80a16 16 0 0 0-16-16zm0 160H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16z']));
+var $lattyware$elm_fontawesome$FontAwesome$Solid$tasks = A5(
+	$lattyware$elm_fontawesome$FontAwesome$Icon$Icon,
+	'fas',
+	'tasks',
+	512,
+	512,
+	_List_fromArray(
+		['M139.61 35.5a12 12 0 0 0-17 0L58.93 98.81l-22.7-22.12a12 12 0 0 0-17 0L3.53 92.41a12 12 0 0 0 0 17l47.59 47.4a12.78 12.78 0 0 0 17.61 0l15.59-15.62L156.52 69a12.09 12.09 0 0 0 .09-17zm0 159.19a12 12 0 0 0-17 0l-63.68 63.72-22.7-22.1a12 12 0 0 0-17 0L3.53 252a12 12 0 0 0 0 17L51 316.5a12.77 12.77 0 0 0 17.6 0l15.7-15.69 72.2-72.22a12 12 0 0 0 .09-16.9zM64 368c-26.49 0-48.59 21.5-48.59 48S37.53 464 64 464a48 48 0 0 0 0-96zm432 16H208a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h288a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16zm0-320H208a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h288a16 16 0 0 0 16-16V80a16 16 0 0 0-16-16zm0 160H208a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h288a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16z']));
+var $author$project$Main$inventoryStyleToggle = F2(
+	function (inventoryDisplay, extraClasses) {
+		return A2(
+			$rundis$elm_bootstrap$Bootstrap$ButtonGroup$radioButtonGroup,
+			_List_fromArray(
+				[
+					$rundis$elm_bootstrap$Bootstrap$ButtonGroup$small,
+					$rundis$elm_bootstrap$Bootstrap$ButtonGroup$attrs(
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$class('d-flex align-items-center ' + extraClasses),
+							$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$ml3
+						]))
+				]),
+			_List_fromArray(
+				[
+					A3(
+					$rundis$elm_bootstrap$Bootstrap$ButtonGroup$radioButton,
+					_Utils_eq(inventoryDisplay, $author$project$Main$InventoryAsCards),
+					_List_fromArray(
+						[
+							$rundis$elm_bootstrap$Bootstrap$Button$secondary,
+							$rundis$elm_bootstrap$Bootstrap$Button$onClick(
+							$author$project$Main$ChangeInventoryDisplayType($author$project$Main$InventoryAsCards))
+						]),
+					_List_fromArray(
+						[
+							$lattyware$elm_fontawesome$FontAwesome$Icon$viewIcon($lattyware$elm_fontawesome$FontAwesome$Solid$layerGroup)
+						])),
+					A3(
+					$rundis$elm_bootstrap$Bootstrap$ButtonGroup$radioButton,
+					_Utils_eq(inventoryDisplay, $author$project$Main$InventoryAsSummary),
+					_List_fromArray(
+						[
+							$rundis$elm_bootstrap$Bootstrap$Button$secondary,
+							$rundis$elm_bootstrap$Bootstrap$Button$onClick(
+							$author$project$Main$ChangeInventoryDisplayType($author$project$Main$InventoryAsSummary))
+						]),
+					_List_fromArray(
+						[
+							$lattyware$elm_fontawesome$FontAwesome$Icon$viewIcon($lattyware$elm_fontawesome$FontAwesome$Solid$list)
+						])),
+					A3(
+					$rundis$elm_bootstrap$Bootstrap$ButtonGroup$radioButton,
+					_Utils_eq(inventoryDisplay, $author$project$Main$InventoryAsProgressBars),
+					_List_fromArray(
+						[
+							$rundis$elm_bootstrap$Bootstrap$Button$secondary,
+							$rundis$elm_bootstrap$Bootstrap$Button$onClick(
+							$author$project$Main$ChangeInventoryDisplayType($author$project$Main$InventoryAsProgressBars))
+						]),
+					_List_fromArray(
+						[
+							$lattyware$elm_fontawesome$FontAwesome$Icon$viewIcon($lattyware$elm_fontawesome$FontAwesome$Solid$tasks)
+						]))
+				]));
+	});
 var $author$project$Main$maxDeckSize = 15;
+var $rundis$elm_bootstrap$Bootstrap$Utilities$Display$none = $elm$html$Html$Attributes$class('d-none');
+var $rundis$elm_bootstrap$Bootstrap$Utilities$Display$noneMd = $elm$html$Html$Attributes$class('d-md-none');
 var $lattyware$elm_fontawesome$FontAwesome$Solid$share = A5(
 	$lattyware$elm_fontawesome$FontAwesome$Icon$Icon,
 	'fas',
@@ -12108,87 +12213,107 @@ var $lattyware$elm_fontawesome$FontAwesome$Solid$share = A5(
 	512,
 	_List_fromArray(
 		['M503.691 189.836L327.687 37.851C312.281 24.546 288 35.347 288 56.015v80.053C127.371 137.907 0 170.1 0 322.326c0 61.441 39.581 122.309 83.333 154.132 13.653 9.931 33.111-2.533 28.077-18.631C66.066 312.814 132.917 274.316 288 272.085V360c0 20.7 24.3 31.453 39.687 18.164l176.004-152c11.071-9.562 11.086-26.753 0-36.328z']));
+var $rundis$elm_bootstrap$Bootstrap$Internal$Button$Size = function (a) {
+	return {$: 'Size', a: a};
+};
+var $rundis$elm_bootstrap$Bootstrap$Button$small = $rundis$elm_bootstrap$Bootstrap$Internal$Button$Size($rundis$elm_bootstrap$Bootstrap$General$Internal$SM);
 var $rundis$elm_bootstrap$Bootstrap$Internal$Button$Warning = {$: 'Warning'};
 var $rundis$elm_bootstrap$Bootstrap$Button$warning = $rundis$elm_bootstrap$Bootstrap$Internal$Button$Coloring(
 	$rundis$elm_bootstrap$Bootstrap$Internal$Button$Roled($rundis$elm_bootstrap$Bootstrap$Internal$Button$Warning));
-var $author$project$Main$inventoryHeaderView = function (numberOfSelectedCards) {
-	var yesNoContent = {header: 'Reset', noMsg: $author$project$Main$RejectResetModal, text: 'Clear the currently selected cards?', yesMsg: $author$project$Main$ConfirmResetModal};
-	var textColor = (_Utils_cmp(numberOfSelectedCards, $author$project$Main$maxDeckSize) < 1) ? $elm$html$Html$Attributes$class('') : $elm$html$Html$Attributes$class('text-warning');
-	var selectionCountString = '(' + ($elm$core$String$fromInt(numberOfSelectedCards) + ('/' + ($elm$core$String$fromInt($author$project$Main$maxDeckSize) + ')')));
-	var buttons = A2(
-		$elm$html$Html$div,
-		_List_Nil,
-		_List_fromArray(
-			[
-				A2(
-				$rundis$elm_bootstrap$Bootstrap$Button$button,
-				_List_fromArray(
-					[
-						$rundis$elm_bootstrap$Bootstrap$Button$secondary,
-						$rundis$elm_bootstrap$Bootstrap$Button$onClick($author$project$Main$ShowShareModal)
-					]),
-				_List_fromArray(
-					[
-						$lattyware$elm_fontawesome$FontAwesome$Icon$viewIcon($lattyware$elm_fontawesome$FontAwesome$Solid$share)
-					])),
-				A2(
-				$rundis$elm_bootstrap$Bootstrap$Button$button,
-				_List_fromArray(
-					[
-						$rundis$elm_bootstrap$Bootstrap$Button$warning,
-						$rundis$elm_bootstrap$Bootstrap$Button$onClick(
-						$author$project$Main$ShowYesNoModal(yesNoContent)),
-						$rundis$elm_bootstrap$Bootstrap$Button$attrs(
-						_List_fromArray(
-							[$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$ml3]))
-					]),
-				_List_fromArray(
-					[
-						$lattyware$elm_fontawesome$FontAwesome$Icon$viewIcon($lattyware$elm_fontawesome$FontAwesome$Solid$times)
-					]))
-			]));
-	return A2(
-		$rundis$elm_bootstrap$Bootstrap$Grid$row,
-		_List_fromArray(
-			[
-				$rundis$elm_bootstrap$Bootstrap$Grid$Row$attrs(
-				_List_fromArray(
-					[
-						$elm$html$Html$Attributes$class('pr-1 pt-1 pb-1')
-					]))
-			]),
-		_List_fromArray(
-			[
-				A2(
-				$rundis$elm_bootstrap$Bootstrap$Grid$col,
-				_List_fromArray(
-					[
-						$rundis$elm_bootstrap$Bootstrap$Grid$Col$xs12,
-						$rundis$elm_bootstrap$Bootstrap$Grid$Col$attrs(
-						_List_fromArray(
-							[
-								$elm$html$Html$Attributes$class('d-flex justify-content-between')
-							]))
-					]),
-				_List_fromArray(
-					[
-						A2(
-						$elm$html$Html$h5,
-						_List_fromArray(
-							[$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$m2, textColor]),
-						_List_fromArray(
-							[
-								$elm$html$Html$text('Selection ' + selectionCountString)
-							])),
-						A2(
-						$elm$html$Html$div,
-						_List_fromArray(
-							[$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$m2, textColor]),
-						_List_fromArray(
-							[buttons]))
-					]))
-			]));
-};
+var $author$project$Main$inventoryHeaderView = F2(
+	function (numberOfSelectedCards, display) {
+		var yesNoContent = {header: 'Reset', noMsg: $author$project$Main$RejectResetModal, text: 'Clear the currently selected cards?', yesMsg: $author$project$Main$ConfirmResetModal};
+		var textColor = (_Utils_cmp(numberOfSelectedCards, $author$project$Main$maxDeckSize) < 1) ? $elm$html$Html$Attributes$class('') : $elm$html$Html$Attributes$class('text-warning');
+		var styleSelector = $author$project$Main$inventoryStyleToggle(display);
+		var selectionCountString = '(' + ($elm$core$String$fromInt(numberOfSelectedCards) + ('/' + ($elm$core$String$fromInt($author$project$Main$maxDeckSize) + ')')));
+		var buttons = A2(
+			$elm$html$Html$div,
+			_List_fromArray(
+				[
+					$elm$html$Html$Attributes$class('d-flex')
+				]),
+			_List_fromArray(
+				[
+					styleSelector('mr-3'),
+					A2(
+					$rundis$elm_bootstrap$Bootstrap$Button$button,
+					_List_fromArray(
+						[
+							$rundis$elm_bootstrap$Bootstrap$Button$secondary,
+							$rundis$elm_bootstrap$Bootstrap$Button$small,
+							$rundis$elm_bootstrap$Bootstrap$Button$onClick($author$project$Main$ShowShareModal)
+						]),
+					_List_fromArray(
+						[
+							$lattyware$elm_fontawesome$FontAwesome$Icon$viewIcon($lattyware$elm_fontawesome$FontAwesome$Solid$share)
+						])),
+					A2(
+					$rundis$elm_bootstrap$Bootstrap$Button$button,
+					_List_fromArray(
+						[
+							$rundis$elm_bootstrap$Bootstrap$Button$warning,
+							$rundis$elm_bootstrap$Bootstrap$Button$small,
+							$rundis$elm_bootstrap$Bootstrap$Button$onClick(
+							$author$project$Main$ShowYesNoModal(yesNoContent)),
+							$rundis$elm_bootstrap$Bootstrap$Button$attrs(
+							_List_fromArray(
+								[$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$ml3]))
+						]),
+					_List_fromArray(
+						[
+							$lattyware$elm_fontawesome$FontAwesome$Icon$viewIcon($lattyware$elm_fontawesome$FontAwesome$Solid$times)
+						]))
+				]));
+		return A2(
+			$rundis$elm_bootstrap$Bootstrap$Grid$row,
+			_List_fromArray(
+				[
+					$rundis$elm_bootstrap$Bootstrap$Grid$Row$attrs(
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$class('pr-1 pt-1 pb-1')
+						]))
+				]),
+			_List_fromArray(
+				[
+					A2(
+					$rundis$elm_bootstrap$Bootstrap$Grid$col,
+					_List_fromArray(
+						[
+							$rundis$elm_bootstrap$Bootstrap$Grid$Col$xs12,
+							$rundis$elm_bootstrap$Bootstrap$Grid$Col$attrs(
+							_List_fromArray(
+								[
+									$elm$html$Html$Attributes$class('d-flex justify-content-between align-items-center')
+								]))
+						]),
+					_List_fromArray(
+						[
+							A2(
+							$elm$html$Html$h5,
+							_List_fromArray(
+								[$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$m2, $rundis$elm_bootstrap$Bootstrap$Utilities$Display$none, $rundis$elm_bootstrap$Bootstrap$Utilities$Display$blockMd, textColor]),
+							_List_fromArray(
+								[
+									$elm$html$Html$text('Selection ' + selectionCountString)
+								])),
+							A2(
+							$elm$html$Html$h5,
+							_List_fromArray(
+								[$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$m2, $rundis$elm_bootstrap$Bootstrap$Utilities$Display$block, $rundis$elm_bootstrap$Bootstrap$Utilities$Display$noneMd, textColor]),
+							_List_fromArray(
+								[
+									$elm$html$Html$text(selectionCountString)
+								])),
+							A2(
+							$elm$html$Html$div,
+							_List_fromArray(
+								[$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$m2, textColor]),
+							_List_fromArray(
+								[buttons]))
+						]))
+				]));
+	});
 var $rundis$elm_bootstrap$Bootstrap$Grid$Internal$Col4 = {$: 'Col4'};
 var $rundis$elm_bootstrap$Bootstrap$Grid$Col$md4 = A2($rundis$elm_bootstrap$Bootstrap$Grid$Internal$width, $rundis$elm_bootstrap$Bootstrap$General$Internal$MD, $rundis$elm_bootstrap$Bootstrap$Grid$Internal$Col4);
 var $rundis$elm_bootstrap$Bootstrap$Utilities$Border$warning = A2($rundis$elm_bootstrap$Bootstrap$Internal$Role$toClass, 'border', $rundis$elm_bootstrap$Bootstrap$Internal$Role$Warning);
@@ -12219,7 +12344,7 @@ var $author$project$Main$inventoryView = function (model) {
 					]),
 				_List_fromArray(
 					[
-						$author$project$Main$inventoryHeaderView(numberOfSelectedCards),
+						A2($author$project$Main$inventoryHeaderView, numberOfSelectedCards, model.inventoryDisplay),
 						A2(
 						$rundis$elm_bootstrap$Bootstrap$Grid$row,
 						_List_Nil,
@@ -12342,10 +12467,6 @@ var $rundis$elm_bootstrap$Bootstrap$Internal$Button$Outlined = function (a) {
 var $rundis$elm_bootstrap$Bootstrap$Internal$Button$Primary = {$: 'Primary'};
 var $rundis$elm_bootstrap$Bootstrap$Button$outlinePrimary = $rundis$elm_bootstrap$Bootstrap$Internal$Button$Coloring(
 	$rundis$elm_bootstrap$Bootstrap$Internal$Button$Outlined($rundis$elm_bootstrap$Bootstrap$Internal$Button$Primary));
-var $rundis$elm_bootstrap$Bootstrap$Internal$Button$Size = function (a) {
-	return {$: 'Size', a: a};
-};
-var $rundis$elm_bootstrap$Bootstrap$Button$small = $rundis$elm_bootstrap$Bootstrap$Internal$Button$Size($rundis$elm_bootstrap$Bootstrap$General$Internal$SM);
 var $rundis$elm_bootstrap$Bootstrap$Modal$StartClose = {$: 'StartClose'};
 var $rundis$elm_bootstrap$Bootstrap$Modal$getCloseMsg = function (config_) {
 	var _v0 = config_.withAnimation;
