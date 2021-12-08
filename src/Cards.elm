@@ -98,6 +98,7 @@ type alias RawCard =
     , supplyLine : RawSupplyLine
     , kind : String
     , affinity : String
+    , effects : List Effect
     }
 
 

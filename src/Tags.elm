@@ -1,28 +1,6 @@
 module Tags exposing (..)
 
 
-type alias Boost =
-    { trigger : Trigger
-    , effects : List Effect
-    }
-
-
-
-{-
-   type alias Effect =
-       { change : Change
-       , duration : Duration
-       , stat : Stat
-       }
--}
-
-
-type alias TriggerEffects =
-    { trigger : Trigger
-    , effects : List Effect
-    }
-
-
 -- Passive is basically the minimal
 type Effect
     = Once Stat Change
@@ -31,8 +9,12 @@ type Effect
     | Delayed Int Effect
     | OverTime Int Effect
     | Triggered Trigger Effect
+    | While PlayerState Effect
     | Twin Effect Effect
     | Special String -- Used for cases that cannot be expressed otherwise
+    | Team Effect
+    | Disables DisableAbleStats
+    | Many (List Effect)
 
 
 type Stat
@@ -49,13 +31,33 @@ type Stat
     | Healing
     | Movement
     | Sprinting
+    | Damage
     | DamageResistance
+    | BulletDamage
+    | BulletPenetration
+    | AmmoCapacity
+    | AimSpeed
+    | OffensiveAccessoryCount
+    | DefensiveAccessoryCount
+    | MedicalAccessoryCount
+    | SupportAccessoryCount
+    | AccessoryDamage
+    | ReloadSpeed
+    | SwapSpeed
 
+
+type DisableAbleStats
+    = AimingDownSights
+    | Sprinting
+    | SupportAccessory
+    | OffensiveAccessory
+    | DealingFriendlyFire
+    | TakingFriendlyFire
 
 type Change
     = AbsoluteMax Int       -- increases the stat's max value by a fixed amount
     | AbsoluteCurrent Int   -- increases the stat's current value by a fixed amount
-    | RelativeMax Int       -- increases the stat's max value by a relative amount
+    | RelativeMax Float       -- increases the stat's max value by a relative amount
     | RelativeCurrent Int   -- increases the stat's current value by a fixed amount
     | Disable
 
@@ -68,9 +70,14 @@ type Duration
 
 type Trigger
     = Always -- This is always active.
-    | KillEnemy
+    | OnEnemyKilled
+    | OnTeammateIncapacitated
+    | OnSelfIncapacitated
+    | OnTeammateOrSelfIncapacitated
 
-
+type PlayerState
+    = PlayerAimingDownSights
+    | PlayerCrouching
 
 {-
    type Tag
