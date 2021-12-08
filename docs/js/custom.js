@@ -4,7 +4,6 @@ var rightColumn;
 var inventoryVisible = true;
 
 function toggleInventory() {
-    console.log('toggle all the things!');
     if (inventoryVisible) {
         leftColumn.classList.add("d-none");
         rightColumn.classList.remove("d-none")
