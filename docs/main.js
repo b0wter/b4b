@@ -5402,6 +5402,68 @@ var $author$project$Cards$parseRawCard = function (raw) {
 		totalCost: raw.totalCost
 	};
 };
+var $author$project$Tags$AbsoluteMax = function (a) {
+	return {$: 'AbsoluteMax', a: a};
+};
+var $author$project$Tags$AccessoryDamage = {$: 'AccessoryDamage'};
+var $author$project$Tags$Accuracy = {$: 'Accuracy'};
+var $author$project$Tags$AimSpeed = {$: 'AimSpeed'};
+var $author$project$Tags$AimingDownSights = {$: 'AimingDownSights'};
+var $author$project$Tags$AmmoCapacity = {$: 'AmmoCapacity'};
+var $author$project$Tags$BulletDamage = {$: 'BulletDamage'};
+var $author$project$Tags$BulletPenetration = {$: 'BulletPenetration'};
+var $author$project$Tags$Damage = {$: 'Damage'};
+var $author$project$Tags$DamageResistance = {$: 'DamageResistance'};
+var $author$project$Tags$DealingFriendlyFire = {$: 'DealingFriendlyFire'};
+var $author$project$Tags$Disables = function (a) {
+	return {$: 'Disables', a: a};
+};
+var $author$project$Tags$ForSeconds = function (a) {
+	return {$: 'ForSeconds', a: a};
+};
+var $author$project$Tags$Health = {$: 'Health'};
+var $author$project$Tags$Many = function (a) {
+	return {$: 'Many', a: a};
+};
+var $author$project$Tags$MeleeDamage = {$: 'MeleeDamage'};
+var $author$project$Tags$OffensiveAccessoryCount = {$: 'OffensiveAccessoryCount'};
+var $author$project$Tags$OnTeammateOrSelfIncapacitated = {$: 'OnTeammateOrSelfIncapacitated'};
+var $author$project$Tags$Once = F2(
+	function (a, b) {
+		return {$: 'Once', a: a, b: b};
+	});
+var $author$project$Tags$Passive = F2(
+	function (a, b) {
+		return {$: 'Passive', a: a, b: b};
+	});
+var $author$project$Tags$PlayerAimingDownSights = {$: 'PlayerAimingDownSights'};
+var $author$project$Tags$PlayerCrouching = {$: 'PlayerCrouching'};
+var $author$project$Tags$RelativeMax = function (a) {
+	return {$: 'RelativeMax', a: a};
+};
+var $author$project$Tags$ReloadSpeed = {$: 'ReloadSpeed'};
+var $author$project$Tags$Special = function (a) {
+	return {$: 'Special', a: a};
+};
+var $author$project$Tags$StaminaEfficiency = {$: 'StaminaEfficiency'};
+var $author$project$Tags$SupportAccessory = {$: 'SupportAccessory'};
+var $author$project$Tags$SwapSpeed = {$: 'SwapSpeed'};
+var $author$project$Tags$TakingFriendlyFire = {$: 'TakingFriendlyFire'};
+var $author$project$Tags$Team = function (a) {
+	return {$: 'Team', a: a};
+};
+var $author$project$Tags$Timed = F2(
+	function (a, b) {
+		return {$: 'Timed', a: a, b: b};
+	});
+var $author$project$Tags$Triggered = F2(
+	function (a, b) {
+		return {$: 'Triggered', a: a, b: b};
+	});
+var $author$project$Tags$While = F2(
+	function (a, b) {
+		return {$: 'While', a: a, b: b};
+	});
 var $elm$core$Basics$negate = function (n) {
 	return -n;
 };
@@ -5410,6 +5472,17 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Discipline',
 		cost: 30,
+		effects: _List_fromArray(
+			[
+				A2(
+				$author$project$Tags$Passive,
+				$author$project$Tags$BulletDamage,
+				$author$project$Tags$RelativeMax(5)),
+				A2(
+				$author$project$Tags$Passive,
+				$author$project$Tags$BulletPenetration,
+				$author$project$Tags$RelativeMax(50))
+			]),
 		filename: '7_0_3.jpg',
 		id: 1,
 		kind: 'Offense',
@@ -5422,6 +5495,17 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Discipline',
 		cost: 45,
+		effects: _List_fromArray(
+			[
+				A2(
+				$author$project$Tags$Passive,
+				$author$project$Tags$AmmoCapacity,
+				$author$project$Tags$RelativeMax(50)),
+				A2(
+				$author$project$Tags$Passive,
+				$author$project$Tags$StaminaEfficiency,
+				$author$project$Tags$RelativeMax(-20))
+			]),
 		filename: '6_1_0.jpg',
 		id: 2,
 		kind: 'Offense',
@@ -5434,6 +5518,13 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Reflex',
 		cost: 30,
+		effects: _List_fromArray(
+			[
+				A2(
+				$author$project$Tags$Passive,
+				$author$project$Tags$AimSpeed,
+				$author$project$Tags$RelativeMax(30))
+			]),
 		filename: '2_0_2.jpg',
 		id: 3,
 		kind: 'Offense',
@@ -5446,6 +5537,13 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Discipline',
 		cost: 30,
+		effects: _List_fromArray(
+			[
+				A2(
+				$author$project$Tags$Passive,
+				$author$project$Tags$Accuracy,
+				$author$project$Tags$RelativeMax(30))
+			]),
 		filename: '6_1_2.jpg',
 		id: 4,
 		kind: 'Offense',
@@ -5458,6 +5556,13 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Fortune',
 		cost: 30,
+		effects: _List_fromArray(
+			[
+				A2(
+				$author$project$Tags$Passive,
+				$author$project$Tags$OffensiveAccessoryCount,
+				$author$project$Tags$AbsoluteMax(1))
+			]),
 		filename: '14_0_4.jpg',
 		id: 5,
 		kind: 'Offense',
@@ -5470,6 +5575,14 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Discipline',
 		cost: 100,
+		effects: _List_fromArray(
+			[
+				$author$project$Tags$Team(
+				A2(
+					$author$project$Tags$Passive,
+					$author$project$Tags$AmmoCapacity,
+					$author$project$Tags$RelativeMax(10)))
+			]),
 		filename: '9_0_4.jpg',
 		id: 6,
 		kind: 'Offense',
@@ -5482,6 +5595,21 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Discipline',
 		cost: 45,
+		effects: _List_fromArray(
+			[
+				A2(
+				$author$project$Tags$Passive,
+				$author$project$Tags$BulletDamage,
+				$author$project$Tags$RelativeMax(7.5)),
+				A2(
+				$author$project$Tags$Passive,
+				$author$project$Tags$BulletPenetration,
+				$author$project$Tags$RelativeMax(100)),
+				A2(
+				$author$project$Tags$Passive,
+				$author$project$Tags$StaminaEfficiency,
+				$author$project$Tags$RelativeMax(-20))
+			]),
 		filename: '7_0_4.jpg',
 		id: 7,
 		kind: 'Offense',
@@ -5494,6 +5622,17 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Reflex',
 		cost: 45,
+		effects: _List_fromArray(
+			[
+				A2(
+				$author$project$Tags$Passive,
+				$author$project$Tags$ReloadSpeed,
+				$author$project$Tags$RelativeMax(30)),
+				A2(
+				$author$project$Tags$Passive,
+				$author$project$Tags$DamageResistance,
+				$author$project$Tags$RelativeMax(-5))
+			]),
 		filename: '1_0_4.jpg',
 		id: 8,
 		kind: 'Offense',
@@ -5506,6 +5645,11 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Brawn',
 		cost: 100,
+		effects: _List_fromArray(
+			[
+				$author$project$Tags$Special('You can sense nearby Offensive Accessories.'),
+				$author$project$Tags$Special('More Offensive Accessories spawn.')
+			]),
 		filename: '13_1_3.jpg',
 		id: 9,
 		kind: 'Utility',
@@ -5518,6 +5662,14 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Discipline',
 		cost: 70,
+		effects: _List_fromArray(
+			[
+				A2(
+				$author$project$Tags$Passive,
+				$author$project$Tags$AmmoCapacity,
+				$author$project$Tags$RelativeMax(75)),
+				$author$project$Tags$Disables($author$project$Tags$SupportAccessory)
+			]),
 		filename: '6_1_1.jpg',
 		id: 10,
 		kind: 'Offense',
@@ -5530,6 +5682,14 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Brawn',
 		cost: 30,
+		effects: _List_fromArray(
+			[
+				A2(
+				$author$project$Tags$Passive,
+				$author$project$Tags$AmmoCapacity,
+				$author$project$Tags$RelativeMax(75)),
+				$author$project$Tags$Disables($author$project$Tags$SupportAccessory)
+			]),
 		filename: '11_1_3.jpg',
 		id: 11,
 		kind: 'Offense',
@@ -5542,6 +5702,17 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Discipline',
 		cost: 45,
+		effects: _List_fromArray(
+			[
+				A2(
+				$author$project$Tags$Passive,
+				$author$project$Tags$Accuracy,
+				$author$project$Tags$RelativeMax(30)),
+				A2(
+				$author$project$Tags$Passive,
+				$author$project$Tags$StaminaEfficiency,
+				$author$project$Tags$RelativeMax(-20))
+			]),
 		filename: '6_1_3.jpg',
 		id: 12,
 		kind: 'Offense',
@@ -5554,6 +5725,17 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Brawn',
 		cost: 30,
+		effects: _List_fromArray(
+			[
+				A2(
+				$author$project$Tags$Passive,
+				$author$project$Tags$MeleeDamage,
+				$author$project$Tags$RelativeMax(40)),
+				A2(
+				$author$project$Tags$Passive,
+				$author$project$Tags$Health,
+				$author$project$Tags$AbsoluteMax(5))
+			]),
 		filename: '11_0_2.jpg',
 		id: 13,
 		kind: 'Offense',
@@ -5566,6 +5748,37 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Discipline',
 		cost: 100,
+		effects: _List_fromArray(
+			[
+				A2(
+				$author$project$Tags$Triggered,
+				$author$project$Tags$OnTeammateOrSelfIncapacitated,
+				$author$project$Tags$Many(
+					_List_fromArray(
+						[
+							$author$project$Tags$Team(
+							A2(
+								$author$project$Tags$Timed,
+								$author$project$Tags$ForSeconds(10),
+								A2(
+									$author$project$Tags$Once,
+									$author$project$Tags$Damage,
+									$author$project$Tags$RelativeMax(30)))),
+							$author$project$Tags$Team(
+							A2(
+								$author$project$Tags$Timed,
+								$author$project$Tags$ForSeconds(10),
+								A2(
+									$author$project$Tags$Once,
+									$author$project$Tags$ReloadSpeed,
+									$author$project$Tags$RelativeMax(20)))),
+							$author$project$Tags$Team(
+							A2(
+								$author$project$Tags$Timed,
+								$author$project$Tags$ForSeconds(10),
+								$author$project$Tags$Special('Unlimited ammo')))
+						])))
+			]),
 		filename: '8_1_0.jpg',
 		id: 14,
 		kind: 'Offense',
@@ -5578,6 +5791,13 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Discipline',
 		cost: 70,
+		effects: _List_fromArray(
+			[
+				A2(
+				$author$project$Tags$While,
+				$author$project$Tags$PlayerAimingDownSights,
+				$author$project$Tags$Special('Each second you Aim Down Sights increases your Damage by 10% (up to 3 stacks).'))
+			]),
 		filename: '10_0_3.jpg',
 		id: 15,
 		kind: 'Offense',
@@ -5590,6 +5810,17 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Fortune',
 		cost: 45,
+		effects: _List_fromArray(
+			[
+				A2(
+				$author$project$Tags$Passive,
+				$author$project$Tags$OffensiveAccessoryCount,
+				$author$project$Tags$AbsoluteMax(2)),
+				A2(
+				$author$project$Tags$Passive,
+				$author$project$Tags$Damage,
+				$author$project$Tags$RelativeMax(-10))
+			]),
 		filename: '14_1_0.jpg',
 		id: 16,
 		kind: 'Offense',
@@ -5602,6 +5833,17 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Discipline',
 		cost: 100,
+		effects: _List_fromArray(
+			[
+				A2(
+				$author$project$Tags$While,
+				$author$project$Tags$PlayerCrouching,
+				$author$project$Tags$Disables($author$project$Tags$TakingFriendlyFire)),
+				A2(
+				$author$project$Tags$While,
+				$author$project$Tags$PlayerCrouching,
+				$author$project$Tags$Disables($author$project$Tags$DealingFriendlyFire))
+			]),
 		filename: '9_1_0.jpg',
 		id: 17,
 		kind: 'Defense',
@@ -5614,6 +5856,17 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Brawn',
 		cost: 45,
+		effects: _List_fromArray(
+			[
+				A2(
+				$author$project$Tags$Passive,
+				$author$project$Tags$AccessoryDamage,
+				$author$project$Tags$RelativeMax(50)),
+				A2(
+				$author$project$Tags$Passive,
+				$author$project$Tags$AmmoCapacity,
+				$author$project$Tags$RelativeMax(-15))
+			]),
 		filename: '11_1_4.jpg',
 		id: 18,
 		kind: 'Offense',
@@ -5626,6 +5879,14 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Reflex',
 		cost: 70,
+		effects: _List_fromArray(
+			[
+				A2(
+				$author$project$Tags$Passive,
+				$author$project$Tags$ReloadSpeed,
+				$author$project$Tags$RelativeMax(50)),
+				$author$project$Tags$Disables($author$project$Tags$AimingDownSights)
+			]),
 		filename: '1_1_0.jpg',
 		id: 19,
 		kind: 'Offense',
@@ -5638,6 +5899,14 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Brawn',
 		cost: 100,
+		effects: _List_fromArray(
+			[
+				$author$project$Tags$Special('You can equip a Primary weapon in your Secondary slot.'),
+				A2(
+				$author$project$Tags$Passive,
+				$author$project$Tags$SwapSpeed,
+				$author$project$Tags$RelativeMax(25))
+			]),
 		filename: '13_1_2.jpg',
 		id: 20,
 		kind: 'Offense',
@@ -5650,6 +5919,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Brawn',
 		cost: 45,
+		effects: _List_Nil,
 		filename: '11_0_3.jpg',
 		id: 21,
 		kind: 'Offense',
@@ -5662,6 +5932,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Discipline',
 		cost: 70,
+		effects: _List_Nil,
 		filename: '7_1_0.jpg',
 		id: 22,
 		kind: 'Offense',
@@ -5674,6 +5945,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Reflex',
 		cost: 70,
+		effects: _List_Nil,
 		filename: '2_0_4.jpg',
 		id: 23,
 		kind: 'Offense',
@@ -5686,6 +5958,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Fortune',
 		cost: 100,
+		effects: _List_Nil,
 		filename: '15_0_2.jpg',
 		id: 24,
 		kind: 'Offense',
@@ -5698,6 +5971,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Fortune',
 		cost: 70,
+		effects: _List_Nil,
 		filename: '15_1_4.jpg',
 		id: 25,
 		kind: 'Utility',
@@ -5710,6 +5984,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Fortune',
 		cost: 70,
+		effects: _List_Nil,
 		filename: '14_1_1.jpg',
 		id: 26,
 		kind: 'Offense',
@@ -5722,6 +5997,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Discipline',
 		cost: 70,
+		effects: _List_Nil,
 		filename: '10_0_1.jpg',
 		id: 27,
 		kind: 'Utility',
@@ -5734,6 +6010,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Discipline',
 		cost: 100,
+		effects: _List_Nil,
 		filename: '8_1_1.jpg',
 		id: 28,
 		kind: 'Defense',
@@ -5746,6 +6023,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Discipline',
 		cost: 70,
+		effects: _List_Nil,
 		filename: '6_1_4.jpg',
 		id: 29,
 		kind: 'Offense',
@@ -5758,6 +6036,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Brawn',
 		cost: 70,
+		effects: _List_Nil,
 		filename: '13_1_4.jpg',
 		id: 30,
 		kind: 'Offense',
@@ -5770,6 +6049,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Discipline',
 		cost: 150,
+		effects: _List_Nil,
 		filename: '10_0_4.jpg',
 		id: 31,
 		kind: 'Offense',
@@ -5782,6 +6062,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Discipline',
 		cost: 100,
+		effects: _List_Nil,
 		filename: '8_0_4.jpg',
 		id: 32,
 		kind: 'Defense',
@@ -5794,6 +6075,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Reflex',
 		cost: 150,
+		effects: _List_Nil,
 		filename: '4_1_3.jpg',
 		id: 33,
 		kind: 'Offense',
@@ -5806,6 +6088,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Discipline',
 		cost: 150,
+		effects: _List_Nil,
 		filename: '10_1_0.jpg',
 		id: 34,
 		kind: 'Utility',
@@ -5818,6 +6101,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Fortune',
 		cost: 100,
+		effects: _List_Nil,
 		filename: '15_0_1.jpg',
 		id: 35,
 		kind: 'Utility',
@@ -5830,6 +6114,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Brawn',
 		cost: 100,
+		effects: _List_Nil,
 		filename: '12_0_3.jpg',
 		id: 36,
 		kind: 'Defense',
@@ -5842,6 +6127,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Brawn',
 		cost: 100,
+		effects: _List_Nil,
 		filename: '12_1_2.jpg',
 		id: 37,
 		kind: 'Offense',
@@ -5854,6 +6140,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Brawn',
 		cost: 100,
+		effects: _List_Nil,
 		filename: '13_0_1.jpg',
 		id: 38,
 		kind: 'Defense',
@@ -5866,6 +6153,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Discipline',
 		cost: 100,
+		effects: _List_Nil,
 		filename: '8_1_4.jpg',
 		id: 39,
 		kind: 'Defense',
@@ -5878,6 +6166,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Discipline',
 		cost: 100,
+		effects: _List_Nil,
 		filename: '8_1_3.jpg',
 		id: 40,
 		kind: 'Offense',
@@ -5890,6 +6179,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Brawn',
 		cost: 70,
+		effects: _List_Nil,
 		filename: '12_0_0.jpg',
 		id: 41,
 		kind: 'Offense',
@@ -5902,6 +6192,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Reflex',
 		cost: 70,
+		effects: _List_Nil,
 		filename: '5_1_4.jpg',
 		id: 42,
 		kind: 'Offense',
@@ -5914,6 +6205,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Discipline',
 		cost: 100,
+		effects: _List_Nil,
 		filename: '8_1_2.jpg',
 		id: 43,
 		kind: 'Offense',
@@ -5926,6 +6218,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Discipline',
 		cost: 100,
+		effects: _List_Nil,
 		filename: '9_0_3.jpg',
 		id: 44,
 		kind: 'Mobility',
@@ -5938,6 +6231,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Discipline',
 		cost: 100,
+		effects: _List_Nil,
 		filename: '9_0_2.jpg',
 		id: 45,
 		kind: 'Offense',
@@ -5950,6 +6244,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Fortune',
 		cost: 100,
+		effects: _List_Nil,
 		filename: '16_0_2.jpg',
 		id: 46,
 		kind: 'Utility',
@@ -5962,6 +6257,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Discipline',
 		cost: 30,
+		effects: _List_Nil,
 		filename: '7_0_0.jpg',
 		id: 47,
 		kind: 'Defense',
@@ -5974,6 +6270,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Brawn',
 		cost: 30,
+		effects: _List_Nil,
 		filename: '11_1_0.jpg',
 		id: 48,
 		kind: 'Defense',
@@ -5986,6 +6283,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Discipline',
 		cost: 70,
+		effects: _List_Nil,
 		filename: '9_1_1.jpg',
 		id: 49,
 		kind: 'Defense',
@@ -5998,6 +6296,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Discipline',
 		cost: 45,
+		effects: _List_Nil,
 		filename: '7_1_2.jpg',
 		id: 50,
 		kind: 'Defense',
@@ -6010,6 +6309,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Discipline',
 		cost: 100,
+		effects: _List_Nil,
 		filename: '8_0_2.jpg',
 		id: 51,
 		kind: 'Defense',
@@ -6022,6 +6322,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Discipline',
 		cost: 45,
+		effects: _List_Nil,
 		filename: '7_0_1.jpg',
 		id: 52,
 		kind: 'Defense',
@@ -6034,6 +6335,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Brawn',
 		cost: 45,
+		effects: _List_Nil,
 		filename: '11_0_0.jpg',
 		id: 53,
 		kind: 'Defense',
@@ -6046,6 +6348,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Brawn',
 		cost: 75,
+		effects: _List_Nil,
 		filename: '14_0_2.jpg',
 		id: 54,
 		kind: 'Defense',
@@ -6058,6 +6361,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Discipline',
 		cost: 100,
+		effects: _List_Nil,
 		filename: '10_0_0.jpg',
 		id: 55,
 		kind: 'Utility',
@@ -6070,6 +6374,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Fortune',
 		cost: 30,
+		effects: _List_Nil,
 		filename: '14_1_2.jpg',
 		id: 56,
 		kind: 'Defense',
@@ -6082,6 +6387,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Reflex',
 		cost: 30,
+		effects: _List_Nil,
 		filename: '1_1_1.jpg',
 		id: 57,
 		kind: 'Offense',
@@ -6094,6 +6400,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Reflex',
 		cost: 30,
+		effects: _List_Nil,
 		filename: '2_1_3.jpg',
 		id: 58,
 		kind: 'Utility',
@@ -6106,6 +6413,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Brawn',
 		cost: 45,
+		effects: _List_Nil,
 		filename: '11_1_1.jpg',
 		id: 59,
 		kind: 'Defense',
@@ -6118,6 +6426,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Brawn',
 		cost: 100,
+		effects: _List_Nil,
 		filename: '12_1_3.jpg',
 		id: 60,
 		kind: 'Defense',
@@ -6130,6 +6439,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Brawn',
 		cost: 70,
+		effects: _List_Nil,
 		filename: '13_1_1.jpg',
 		id: 61,
 		kind: 'Defense',
@@ -6142,6 +6452,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Fortune',
 		cost: 45,
+		effects: _List_Nil,
 		filename: '14_1_3.jpg',
 		id: 62,
 		kind: 'Defense',
@@ -6154,6 +6465,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Reflex',
 		cost: 45,
+		effects: _List_Nil,
 		filename: '2_1_4.jpg',
 		id: 63,
 		kind: 'Utility',
@@ -6166,6 +6478,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Brawn',
 		cost: 100,
+		effects: _List_Nil,
 		filename: '13_0_2.jpg',
 		id: 64,
 		kind: 'Defense',
@@ -6178,6 +6491,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Discipline',
 		cost: 100,
+		effects: _List_Nil,
 		filename: '8_0_3.jpg',
 		id: 65,
 		kind: 'Defense',
@@ -6190,6 +6504,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Discipline',
 		cost: 45,
+		effects: _List_Nil,
 		filename: '10_0_2.jpg',
 		id: 66,
 		kind: 'Defense',
@@ -6202,6 +6517,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Discipline',
 		cost: 70,
+		effects: _List_Nil,
 		filename: '7_0_2.jpg',
 		id: 67,
 		kind: 'Defense',
@@ -6214,6 +6530,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Brawn',
 		cost: 100,
+		effects: _List_Nil,
 		filename: '14_0_1.jpg',
 		id: 68,
 		kind: 'Offense',
@@ -6226,6 +6543,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Reflex',
 		cost: 100,
+		effects: _List_Nil,
 		filename: '3_1_3.jpg',
 		id: 69,
 		kind: 'Defense',
@@ -6238,6 +6556,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Fortune',
 		cost: 70,
+		effects: _List_Nil,
 		filename: '14_1_4.jpg',
 		id: 70,
 		kind: 'Defense',
@@ -6250,6 +6569,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Brawn',
 		cost: 70,
+		effects: _List_Nil,
 		filename: '11_0_1.jpg',
 		id: 71,
 		kind: 'Defense',
@@ -6262,6 +6582,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Brawn',
 		cost: 70,
+		effects: _List_Nil,
 		filename: '11_1_2.jpg',
 		id: 72,
 		kind: 'Defense',
@@ -6274,6 +6595,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Discipline',
 		cost: 70,
+		effects: _List_Nil,
 		filename: '9_1_2.jpg',
 		id: 73,
 		kind: 'Defense',
@@ -6286,6 +6608,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Brawn',
 		cost: 150,
+		effects: _List_Nil,
 		filename: '13_0_4.jpg',
 		id: 74,
 		kind: 'Offense',
@@ -6298,6 +6621,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Brawn',
 		cost: 45,
+		effects: _List_Nil,
 		filename: '14_0_0.jpg',
 		id: 75,
 		kind: 'Defense',
@@ -6310,6 +6634,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Fortune',
 		cost: 100,
+		effects: _List_Nil,
 		filename: '15_1_0.jpg',
 		id: 76,
 		kind: 'Defense',
@@ -6322,6 +6647,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Brawn',
 		cost: 100,
+		effects: _List_Nil,
 		filename: '13_1_0.jpg',
 		id: 77,
 		kind: 'Defense',
@@ -6334,6 +6660,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Brawn',
 		cost: 100,
+		effects: _List_Nil,
 		filename: '12_1_0.jpg',
 		id: 78,
 		kind: 'Defense',
@@ -6346,6 +6673,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Brawn',
 		cost: 100,
+		effects: _List_Nil,
 		filename: '12_1_1.jpg',
 		id: 79,
 		kind: 'Offense',
@@ -6358,6 +6686,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Brawn',
 		cost: 100,
+		effects: _List_Nil,
 		filename: '12_0_2.jpg',
 		id: 80,
 		kind: 'Offense',
@@ -6370,6 +6699,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Brawn',
 		cost: 100,
+		effects: _List_Nil,
 		filename: '13_0_0.jpg',
 		id: 81,
 		kind: 'Offense',
@@ -6382,6 +6712,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Reflex',
 		cost: 70,
+		effects: _List_Nil,
 		filename: '3_0_0.jpg',
 		id: 82,
 		kind: 'Utility',
@@ -6394,6 +6725,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Reflex',
 		cost: 100,
+		effects: _List_Nil,
 		filename: '4_0_0.jpg',
 		id: 83,
 		kind: 'Defense',
@@ -6406,6 +6738,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Discipline',
 		cost: 75,
+		effects: _List_Nil,
 		filename: '10_1_3.jpg',
 		id: 84,
 		kind: 'Defense',
@@ -6418,6 +6751,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Fortune',
 		cost: 75,
+		effects: _List_Nil,
 		filename: '16_1_0.jpg',
 		id: 85,
 		kind: 'Defense',
@@ -6430,6 +6764,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Discipline',
 		cost: 100,
+		effects: _List_Nil,
 		filename: '9_1_3.jpg',
 		id: 86,
 		kind: 'Defense',
@@ -6442,6 +6777,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Reflex',
 		cost: 150,
+		effects: _List_Nil,
 		filename: '5_0_2.jpg',
 		id: 87,
 		kind: 'Defense',
@@ -6454,6 +6790,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Reflex',
 		cost: 10,
+		effects: _List_Nil,
 		filename: '1_0_0.jpg',
 		id: 88,
 		kind: 'Mobility',
@@ -6466,6 +6803,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Reflex',
 		cost: 30,
+		effects: _List_Nil,
 		filename: '1_1_4.jpg',
 		id: 89,
 		kind: 'Offense',
@@ -6478,6 +6816,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Reflex',
 		cost: 30,
+		effects: _List_Nil,
 		filename: '2_1_0.jpg',
 		id: 90,
 		kind: 'Utility',
@@ -6490,6 +6829,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Reflex',
 		cost: 30,
+		effects: _List_Nil,
 		filename: '3_0_4.jpg',
 		id: 91,
 		kind: 'Mobility',
@@ -6502,6 +6842,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Reflex',
 		cost: 70,
+		effects: _List_Nil,
 		filename: '5_0_0.jpg',
 		id: 92,
 		kind: 'Mobility',
@@ -6514,6 +6855,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Fortune',
 		cost: 150,
+		effects: _List_Nil,
 		filename: '16_0_0.jpg',
 		id: 93,
 		kind: 'Mobility',
@@ -6526,6 +6868,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Reflex',
 		cost: 30,
+		effects: _List_Nil,
 		filename: '5_0_3.jpg',
 		id: 94,
 		kind: 'Utility',
@@ -6538,6 +6881,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Discipline',
 		cost: 30,
+		effects: _List_Nil,
 		filename: '7_1_4.jpg',
 		id: 95,
 		kind: 'Mobility',
@@ -6550,6 +6894,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Reflex',
 		cost: 100,
+		effects: _List_Nil,
 		filename: '5_1_1.jpg',
 		id: 96,
 		kind: 'Utility',
@@ -6562,6 +6907,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Reflex',
 		cost: 30,
+		effects: _List_Nil,
 		filename: '3_0_1.jpg',
 		id: 97,
 		kind: 'Mobility',
@@ -6574,6 +6920,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Reflex',
 		cost: 100,
+		effects: _List_Nil,
 		filename: '4_0_1.jpg',
 		id: 98,
 		kind: 'Mobility',
@@ -6586,6 +6933,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Reflex',
 		cost: 45,
+		effects: _List_Nil,
 		filename: '2_0_0.jpg',
 		id: 99,
 		kind: 'Offense',
@@ -6598,6 +6946,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Reflex',
 		cost: 100,
+		effects: _List_Nil,
 		filename: '3_1_2.jpg',
 		id: 100,
 		kind: 'Mobility',
@@ -6610,6 +6959,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Reflex',
 		cost: 45,
+		effects: _List_Nil,
 		filename: '3_0_2.jpg',
 		id: 101,
 		kind: 'Mobility',
@@ -6622,6 +6972,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Reflex',
 		cost: 70,
+		effects: _List_Nil,
 		filename: '4_1_1.jpg',
 		id: 102,
 		kind: 'Mobility',
@@ -6634,6 +6985,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Reflex',
 		cost: 45,
+		effects: _List_Nil,
 		filename: '2_1_1.jpg',
 		id: 103,
 		kind: 'Utility',
@@ -6646,6 +6998,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Reflex',
 		cost: 45,
+		effects: _List_Nil,
 		filename: '2_0_3.jpg',
 		id: 104,
 		kind: 'Offense',
@@ -6658,6 +7011,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Reflex',
 		cost: 45,
+		effects: _List_Nil,
 		filename: '1_0_1.jpg',
 		id: 105,
 		kind: 'Mobility',
@@ -6670,6 +7024,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Reflex',
 		cost: 100,
+		effects: _List_Nil,
 		filename: '4_0_4.jpg',
 		id: 106,
 		kind: 'Mobility',
@@ -6682,6 +7037,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Reflex',
 		cost: 45,
+		effects: _List_Nil,
 		filename: '1_1_2.jpg',
 		id: 107,
 		kind: 'Offense',
@@ -6694,6 +7050,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Reflex',
 		cost: 100,
+		effects: _List_Nil,
 		filename: '4_1_4.jpg',
 		id: 108,
 		kind: 'Offense',
@@ -6706,6 +7063,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Reflex',
 		cost: 45,
+		effects: _List_Nil,
 		filename: '3_1_0.jpg',
 		id: 109,
 		kind: 'Mobility',
@@ -6718,6 +7076,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Fortune',
 		cost: 100,
+		effects: _List_Nil,
 		filename: '15_0_4.jpg',
 		id: 110,
 		kind: 'Offense',
@@ -6730,6 +7089,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Fortune',
 		cost: 100,
+		effects: _List_Nil,
 		filename: '15_1_2.jpg',
 		id: 111,
 		kind: 'Utility',
@@ -6742,6 +7102,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Reflex',
 		cost: 70,
+		effects: _List_Nil,
 		filename: '2_1_2.jpg',
 		id: 112,
 		kind: 'Utility',
@@ -6754,6 +7115,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Reflex',
 		cost: 100,
+		effects: _List_Nil,
 		filename: '4_1_0.jpg',
 		id: 113,
 		kind: 'Mobility',
@@ -6766,6 +7128,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Fortune',
 		cost: 100,
+		effects: _List_Nil,
 		filename: '15_0_0.jpg',
 		id: 114,
 		kind: 'Utility',
@@ -6778,6 +7141,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Brawn',
 		cost: 70,
+		effects: _List_Nil,
 		filename: '11_0_4.jpg',
 		id: 115,
 		kind: 'Offense',
@@ -6790,6 +7154,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Reflex',
 		cost: 45,
+		effects: _List_Nil,
 		filename: '5_0_4.jpg',
 		id: 116,
 		kind: 'Utility',
@@ -6802,6 +7167,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Reflex',
 		cost: 45,
+		effects: _List_Nil,
 		filename: '5_1_2.jpg',
 		id: 117,
 		kind: 'Mobility',
@@ -6814,6 +7180,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Reflex',
 		cost: 70,
+		effects: _List_Nil,
 		filename: '1_1_3.jpg',
 		id: 118,
 		kind: 'Offense',
@@ -6826,6 +7193,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Reflex',
 		cost: 150,
+		effects: _List_Nil,
 		filename: '4_1_2.jpg',
 		id: 119,
 		kind: 'Offense',
@@ -6838,6 +7206,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Reflex',
 		cost: 70,
+		effects: _List_Nil,
 		filename: '3_1_1.jpg',
 		id: 120,
 		kind: 'Mobility',
@@ -6850,6 +7219,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Reflex',
 		cost: 70,
+		effects: _List_Nil,
 		filename: '3_0_3.jpg',
 		id: 121,
 		kind: 'Mobility',
@@ -6862,6 +7232,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Reflex',
 		cost: 150,
+		effects: _List_Nil,
 		filename: '6_0_0.jpg',
 		id: 122,
 		kind: 'Offense',
@@ -6874,6 +7245,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Reflex',
 		cost: 70,
+		effects: _List_Nil,
 		filename: '1_0_2.jpg',
 		id: 123,
 		kind: 'Mobility',
@@ -6886,6 +7258,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Reflex',
 		cost: 45,
+		effects: _List_Nil,
 		filename: '5_1_3.jpg',
 		id: 124,
 		kind: 'Mobility',
@@ -6898,6 +7271,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Reflex',
 		cost: 100,
+		effects: _List_Nil,
 		filename: '3_1_4.jpg',
 		id: 125,
 		kind: 'Mobility',
@@ -6910,6 +7284,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Reflex',
 		cost: 70,
+		effects: _List_Nil,
 		filename: '5_1_0.jpg',
 		id: 126,
 		kind: 'Utility',
@@ -6922,6 +7297,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Discipline',
 		cost: 70,
+		effects: _List_Nil,
 		filename: '8_0_0.jpg',
 		id: 127,
 		kind: 'Mobility',
@@ -6934,6 +7310,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Reflex',
 		cost: 70,
+		effects: _List_Nil,
 		filename: '2_0_1.jpg',
 		id: 128,
 		kind: 'Offense',
@@ -6946,6 +7323,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Discipline',
 		cost: 100,
+		effects: _List_Nil,
 		filename: '10_1_1.jpg',
 		id: 129,
 		kind: 'Utility',
@@ -6958,6 +7336,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Fortune',
 		cost: 100,
+		effects: _List_Nil,
 		filename: '15_0_3.jpg',
 		id: 130,
 		kind: 'Utility',
@@ -6970,6 +7349,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Reflex',
 		cost: 100,
+		effects: _List_Nil,
 		filename: '4_0_2.jpg',
 		id: 131,
 		kind: 'Mobility',
@@ -6982,6 +7362,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Discipline',
 		cost: 70,
+		effects: _List_Nil,
 		filename: '8_0_1.jpg',
 		id: 132,
 		kind: 'Mobility',
@@ -6994,6 +7375,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Reflex',
 		cost: 100,
+		effects: _List_Nil,
 		filename: '4_0_3.jpg',
 		id: 133,
 		kind: 'Mobility',
@@ -7006,6 +7388,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Reflex',
 		cost: 75,
+		effects: _List_Nil,
 		filename: '6_0_3.jpg',
 		id: 134,
 		kind: 'Mobility',
@@ -7018,6 +7401,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Fortune',
 		cost: 75,
+		effects: _List_Nil,
 		filename: '16_0_4.jpg',
 		id: 135,
 		kind: 'Utility',
@@ -7030,6 +7414,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Discipline',
 		cost: 0,
+		effects: _List_Nil,
 		filename: '7_1_1.jpg',
 		id: 136,
 		kind: 'Defense',
@@ -7042,6 +7427,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Brawn',
 		cost: 0,
+		effects: _List_Nil,
 		filename: '12_1_4.jpg',
 		id: 137,
 		kind: 'Defense',
@@ -7054,6 +7440,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Discipline',
 		cost: 0,
+		effects: _List_Nil,
 		filename: '9_0_0.jpg',
 		id: 138,
 		kind: 'Offense',
@@ -7066,6 +7453,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Fortune',
 		cost: 0,
+		effects: _List_Nil,
 		filename: '16_0_1.jpg',
 		id: 139,
 		kind: 'Utility',
@@ -7078,6 +7466,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Reflex',
 		cost: 0,
+		effects: _List_Nil,
 		filename: '1_0_3.jpg',
 		id: 140,
 		kind: 'Offense',
@@ -7090,6 +7479,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Brawn',
 		cost: 0,
+		effects: _List_Nil,
 		filename: '14_0_3.jpg',
 		id: 141,
 		kind: 'Defense',
@@ -7102,6 +7492,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Fortune',
 		cost: 0,
+		effects: _List_Nil,
 		filename: '15_1_1.jpg',
 		id: 142,
 		kind: 'Defense',
@@ -7114,6 +7505,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Brawn',
 		cost: 5,
+		effects: _List_Nil,
 		filename: '10_1_4.jpg',
 		id: 143,
 		kind: 'Defense',
@@ -7126,6 +7518,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Discipline',
 		cost: 10,
+		effects: _List_Nil,
 		filename: '6_0_4.jpg',
 		id: 144,
 		kind: 'Offense',
@@ -7138,6 +7531,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Brawn',
 		cost: 100,
+		effects: _List_Nil,
 		filename: '13_0_3.jpg',
 		id: 145,
 		kind: 'Offense',
@@ -7150,6 +7544,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Reflex',
 		cost: 0,
+		effects: _List_Nil,
 		filename: '5_0_1.jpg',
 		id: 146,
 		kind: 'Offense',
@@ -7162,6 +7557,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Discipline',
 		cost: 0,
+		effects: _List_Nil,
 		filename: '9_1_4.jpg',
 		id: 147,
 		kind: 'Utility',
@@ -7174,6 +7570,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Brawn',
 		cost: 0,
+		effects: _List_Nil,
 		filename: '12_0_4.jpg',
 		id: 148,
 		kind: 'Offense',
@@ -7186,6 +7583,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Brawn',
 		cost: 0,
+		effects: _List_Nil,
 		filename: '12_0_1.jpg',
 		id: 149,
 		kind: 'Offense',
@@ -7198,6 +7596,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Discipline',
 		cost: 0,
+		effects: _List_Nil,
 		filename: '7_1_3.jpg',
 		id: 150,
 		kind: 'Defense',
@@ -7210,6 +7609,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Fortune',
 		cost: 0,
+		effects: _List_Nil,
 		filename: '15_1_3.jpg',
 		id: 151,
 		kind: 'Utility',
@@ -7222,6 +7622,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Reflex',
 		cost: 0,
+		effects: _List_Nil,
 		filename: '6_0_2.jpg',
 		id: 152,
 		kind: 'Offense',
@@ -7234,6 +7635,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Discipline',
 		cost: 0,
+		effects: _List_Nil,
 		filename: '9_0_1.jpg',
 		id: 153,
 		kind: 'Offense',
@@ -7246,6 +7648,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Fortune',
 		cost: 0,
+		effects: _List_Nil,
 		filename: '16_0_3.jpg',
 		id: 154,
 		kind: 'Offense',
@@ -7258,6 +7661,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Reflex',
 		cost: 0,
+		effects: _List_Nil,
 		filename: '6_0_1.jpg',
 		id: 155,
 		kind: 'Offense',
@@ -7270,6 +7674,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Discipline',
 		cost: 0,
+		effects: _List_Nil,
 		filename: '10_1_2.jpg',
 		id: 156,
 		kind: 'Offense',

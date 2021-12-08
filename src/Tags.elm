@@ -30,7 +30,6 @@ type Stat
     | Accuracy
     | Healing
     | Movement
-    | Sprinting
     | Damage
     | DamageResistance
     | BulletDamage
