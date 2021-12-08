@@ -26,6 +26,10 @@ function initJavascript() {
     leftColumn = document.getElementById('left-column');
     rightColumn = document.getElementById('right-column');
     addToggleInventoryButtonEvent();
+    if(window.innerWidth <= 767) {
+        toggleInventory();
+        toggleInventory();
+    }
 }
 
 function onResize() {

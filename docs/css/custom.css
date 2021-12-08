@@ -50,7 +50,7 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    min-width: 20em;
+    min-width: 18em;
 }
 
 .card-image {
