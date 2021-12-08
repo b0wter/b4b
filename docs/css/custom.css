@@ -50,4 +50,31 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    min-width: 20em;
+}
+
+.card-image {
+
+}
+
+.full-size-card-text {
+
+}
+
+.full-size-card-body {
+    padding-top: 0.5em !important;
+    padding-bottom: 0 !important;
+}
+
+@media only screen and (min-width: 769px) {
+    .full-size-card-text {
+        width: 15em;
+        height: 18em;
+    }
+
+    .card-text-header {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
 }

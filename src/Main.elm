@@ -68,7 +68,7 @@ port receiveCopyResult : (Bool -> msg) -> Sub msg
 
 
 type alias Flags =
-    {}
+    { windowWidth : Int }
 
 
 type CardDisplay
@@ -144,7 +144,7 @@ tryDeckQueryArgument url =
 
 
 init : Flags -> Url -> Key -> ( Model, Cmd Msg )
-init _ url key =
+init flags url key =
     let
         ( navbarState, navbarCmd ) =
             Navbar.initialState NavbarMsg
@@ -173,7 +173,7 @@ init _ url key =
             { url | query = Nothing, fragment = Nothing }
     in
     ( { cardPool = cards
-      , cardDisplay = Image
+      , cardDisplay = if flags.windowWidth < 769 then Text else Image
       , inventoryDisplay = InventoryAsCards
       , selectedCards = selected
       , notSelectedCards = notSelected
@@ -742,7 +742,7 @@ fullCardViewWithImage card =
             Button.secondary
     in
     Grid.col []
-        [ Card.config [ cardBackground , Card.attrs [  Spacing.m2, style "max-width" "2400px" ] ]
+        [ Card.config [ cardBackground , Card.attrs [  Spacing.m2 ] ]
             |> Card.block [ Block.attrs [ class "d-flex justify-content-center" ] ]
                 [ Block.custom
                     (img [ src ("img/english/" ++ card.filename), style "max-width" "200px" ] [])
@@ -763,19 +763,19 @@ fullCardViewWithText card =
         buttonBackground =
             Button.secondary
     in
-    Grid.col []
-        [ Card.config [ cardBackground, Card.attrs [ Spacing.m2, style "width" "15em" ] ]
+    Grid.col [ ]
+        [ Card.config [ cardBackground, Card.attrs [ class "full-size-card-text", Spacing.m2 ] ]
             |> Card.header [ class "text-center" ]
-                [ Html.h6 [ class "card-text-header mb-0"] [ text card.title ]
+                [ Html.h6 [ class "card-text-header mb-0" ] [ text card.title ]
                 ]
-            |> Card.block [ Block.attrs [ style "height" "12em" ] ]
+            |> Card.block [  Block.attrs [ class "full-size-card-body" ] ]
                 [ Block.custom
                     (Html.ul [ Spacing.pl3, Spacing.pr0 ]
                         (card.properties |> List.map (\property -> div [] [ Html.li [] [ Html.small [] [ text property.description ] ] ]))
                     )
                 ]
             |> Card.footer []
-                [ Button.button [ buttonBackground, Button.attrs [ Size.w100, onClick (SelectCard card.id) ] ] [ text "Select" ]
+                [ Button.button [ buttonBackground, Button.small, Button.attrs [ Size.w100, onClick (SelectCard card.id) ] ] [ text "Select" ]
                 ]
             |> Card.view
         ]

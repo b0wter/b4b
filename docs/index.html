@@ -25,7 +25,8 @@
     window.onresize = onResize;
     const node = document.getElementById('elm-node');
     var app = Elm.Main.init({
-      node: node
+      node: node,
+      flags: { windowWidth: window.innerWidth }
     });
     app.ports.copy.subscribe(url => {
       // Usually you'd check for permissions here but Firefox does not currently support that feature.
