@@ -785,16 +785,27 @@ fullCardViewWithText card =
 inventorySummaryView : List Card -> List (Grid.Column Msg)
 inventorySummaryView cards =
     let
-        properties =
-            cards
-            |> List.map (\c -> c.properties |> List.map (\p -> p.description))
+        mergedProperties = 
+            cards 
+            |> List.map (\c -> c.properties) 
             |> List.concat
-        effects =
-            cards
-            |> List.andThen (\c -> c.effects |> List.map effectToString)
+            |> Cards.groupProperties
+        hasPassives = mergedProperties.passives |> (not << List.isEmpty)
+        hasRemaining = mergedProperties.remaining |> (not << List.isEmpty)
+        hasTeam = mergedProperties.team |> (not << List.isEmpty)
+        hasDisables = mergedProperties.disables |> (not << List.isEmpty)
+        orEmptyElement hasElement element = if hasElement then element else div [] []
     in
     [ Grid.col [ Col.xs12 ]
-        [ Html.ul [] (effects |> List.map (\p -> Html.li [] [ text p ])) ]
+        [ Html.h5 [ Spacing.pl2 ] [ text "Passives:"] |> orEmptyElement hasPassives
+        , Html.ul [] (mergedProperties.passives |> List.map (\p -> Html.li [] [ text p ])) |> orEmptyElement hasPassives
+        , Html.h5 [ Spacing.pl2 ] [ text "Other:"] |> orEmptyElement hasRemaining
+        , Html.ul [] (mergedProperties.remaining |> List.map (\p -> Html.li [] [ text p ])) |> orEmptyElement hasRemaining
+        , Html.h5 [ Spacing.pl2 ] [ text "Team Effects:"] |> orEmptyElement hasTeam 
+        , Html.ul [] (mergedProperties.team |> List.map (\p -> Html.li [] [ text p ])) |> orEmptyElement hasTeam
+        , Html.h5 [ Spacing.pl2 ] [ text "Disables:"] |> orEmptyElement hasDisables
+        , Html.ul [] (mergedProperties.disables |> List.map (\p -> Html.li [] [ text p ])) |> orEmptyElement hasDisables
+        ]
     ]
 
 

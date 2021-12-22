@@ -4409,6 +4409,107 @@ var _Bitwise_shiftRightZfBy = F2(function(offset, a)
 {
 	return a >>> offset;
 });
+
+
+// CREATE
+
+var _Regex_never = /.^/;
+
+var _Regex_fromStringWith = F2(function(options, string)
+{
+	var flags = 'g';
+	if (options.multiline) { flags += 'm'; }
+	if (options.caseInsensitive) { flags += 'i'; }
+
+	try
+	{
+		return $elm$core$Maybe$Just(new RegExp(string, flags));
+	}
+	catch(error)
+	{
+		return $elm$core$Maybe$Nothing;
+	}
+});
+
+
+// USE
+
+var _Regex_contains = F2(function(re, string)
+{
+	return string.match(re) !== null;
+});
+
+
+var _Regex_findAtMost = F3(function(n, re, str)
+{
+	var out = [];
+	var number = 0;
+	var string = str;
+	var lastIndex = re.lastIndex;
+	var prevLastIndex = -1;
+	var result;
+	while (number++ < n && (result = re.exec(string)))
+	{
+		if (prevLastIndex == re.lastIndex) break;
+		var i = result.length - 1;
+		var subs = new Array(i);
+		while (i > 0)
+		{
+			var submatch = result[i];
+			subs[--i] = submatch
+				? $elm$core$Maybe$Just(submatch)
+				: $elm$core$Maybe$Nothing;
+		}
+		out.push(A4($elm$regex$Regex$Match, result[0], result.index, number, _List_fromArray(subs)));
+		prevLastIndex = re.lastIndex;
+	}
+	re.lastIndex = lastIndex;
+	return _List_fromArray(out);
+});
+
+
+var _Regex_replaceAtMost = F4(function(n, re, replacer, string)
+{
+	var count = 0;
+	function jsReplacer(match)
+	{
+		if (count++ >= n)
+		{
+			return match;
+		}
+		var i = arguments.length - 3;
+		var submatches = new Array(i);
+		while (i > 0)
+		{
+			var submatch = arguments[i];
+			submatches[--i] = submatch
+				? $elm$core$Maybe$Just(submatch)
+				: $elm$core$Maybe$Nothing;
+		}
+		return replacer(A4($elm$regex$Regex$Match, match, arguments[arguments.length - 2], count, _List_fromArray(submatches)));
+	}
+	return string.replace(re, jsReplacer);
+});
+
+var _Regex_splitAtMost = F3(function(n, re, str)
+{
+	var string = str;
+	var out = [];
+	var start = re.lastIndex;
+	var restoreLastIndex = re.lastIndex;
+	while (n--)
+	{
+		var result = re.exec(string);
+		if (!result) break;
+		out.push(string.slice(start, result.index));
+		start = re.lastIndex;
+	}
+	out.push(string.slice(start));
+	re.lastIndex = restoreLastIndex;
+	return _List_fromArray(out);
+});
+
+var _Regex_infinity = Infinity;
 var $author$project$Main$LinkClicked = function (a) {
 	return {$: 'LinkClicked', a: a};
 };
@@ -5500,7 +5601,6 @@ var $author$project$Tags$Special = function (a) {
 var $author$project$Tags$Stamina = {$: 'Stamina'};
 var $author$project$Tags$StaminaEfficiency = {$: 'StaminaEfficiency'};
 var $author$project$Tags$StaminaRegeneration = {$: 'StaminaRegeneration'};
-var $author$project$Tags$SupportAccessory = {$: 'SupportAccessory'};
 var $author$project$Tags$SwapSpeed = {$: 'SwapSpeed'};
 var $author$project$Tags$TakingFriendlyFire = {$: 'TakingFriendlyFire'};
 var $author$project$Tags$Team = function (a) {
@@ -5751,9 +5851,8 @@ var $author$project$CardData$rawCards = _List_fromArray(
 			[
 				A2(
 				$author$project$Tags$Passive,
-				$author$project$Tags$AmmoCapacity,
-				$author$project$Tags$RelativeMax(75)),
-				$author$project$Tags$Disables($author$project$Tags$SupportAccessory)
+				$author$project$Tags$AccessoryDamage,
+				$author$project$Tags$RelativeMax(25))
 			]),
 		filename: '11_1_3.jpg',
 		id: 11,
@@ -5905,7 +6004,11 @@ var $author$project$CardData$rawCards = _List_fromArray(
 				A2(
 				$author$project$Tags$While,
 				$author$project$Tags$PlayerCrouching,
-				$author$project$Tags$Disables($author$project$Tags$DealingFriendlyFire))
+				$author$project$Tags$Disables($author$project$Tags$DealingFriendlyFire)),
+				A2(
+				$author$project$Tags$Passive,
+				$author$project$Tags$Health,
+				$author$project$Tags$AbsoluteMax(10))
 			]),
 		filename: '9_1_0.jpg',
 		id: 17,
@@ -12760,328 +12863,726 @@ var $author$project$Main$inventoryToggleButton = A2(
 				]))
 		]));
 var $rundis$elm_bootstrap$Bootstrap$Utilities$Border$dark = A2($rundis$elm_bootstrap$Bootstrap$Internal$Role$toClass, 'border', $rundis$elm_bootstrap$Bootstrap$Internal$Role$Dark);
-var $elm$core$List$concatMap = F2(
-	function (f, list) {
-		return $elm$core$List$concat(
-			A2($elm$core$List$map, f, list));
+var $author$project$Cards$Absolute = {$: 'Absolute'};
+var $author$project$Cards$absOrRelToString = function (a) {
+	if (a.$ === 'Absolute') {
+		return 'absolute';
+	} else {
+		return 'relative';
+	}
+};
+var $elm$regex$Regex$Match = F4(
+	function (match, index, number, submatches) {
+		return {index: index, match: match, number: number, submatches: submatches};
 	});
-var $elm_community$list_extra$List$Extra$andThen = $elm$core$List$concatMap;
-var $author$project$Tags$changeToString = function (change) {
-	var formatSignI = function (c) {
-		return (c > 0) ? ('+' + $elm$core$String$fromInt(c)) : $elm$core$String$fromInt(c);
-	};
-	var formatSignF = function (c) {
-		return (c > 0) ? ('+' + $elm$core$String$fromFloat(c)) : $elm$core$String$fromFloat(c);
-	};
-	switch (change.$) {
-		case 'AbsoluteCurrent':
-			var c = change.a;
-			return formatSignI(c);
-		case 'AbsoluteMax':
-			var c = change.a;
-			return formatSignI(c);
-		case 'RelativeMax':
-			var c = change.a;
-			return formatSignF(c) + '%';
-		case 'RelativeCurrent':
-			var c = change.a;
-			return formatSignI(c) + '%';
-		default:
-			return 'DISABLES';
+var $elm$regex$Regex$contains = _Regex_contains;
+var $elm$regex$Regex$find = _Regex_findAtMost(_Regex_infinity);
+var $elm$regex$Regex$fromStringWith = _Regex_fromStringWith;
+var $elm$core$Dict$getMin = function (dict) {
+	getMin:
+	while (true) {
+		if ((dict.$ === 'RBNode_elm_builtin') && (dict.d.$ === 'RBNode_elm_builtin')) {
+			var left = dict.d;
+			var $temp$dict = left;
+			dict = $temp$dict;
+			continue getMin;
+		} else {
+			return dict;
+		}
 	}
 };
-var $author$project$Tags$playerStateToString = function (state) {
-	switch (state.$) {
-		case 'PlayerAimingDownSights':
-			return 'aiming down sights';
-		case 'PlayerCrouching':
-			return 'crouching';
-		case 'PlayerUsingMeleeWeapon':
-			return 'using a melee weapon ';
-		case 'PlayerUsingSniper':
-			return 'using a sniper rifle';
-		case 'PlayerUsingLmg':
-			return 'using a LMG';
-		case 'PlayerUsingRifle':
-			return 'using an assault rifle';
-		case 'PlayerUsingSmg':
-			return 'using an smg';
-		case 'PlayerUsingPistol':
-			return 'using a pistol';
-		case 'PlayerUsingShotgun':
-			return 'using a shotgun';
-		case 'PlayerUsingMedicalAccessory':
-			return 'using a medical accessory';
-		default:
-			return 'while shooting or melee attacking';
-	}
-};
-var $author$project$Tags$statToString = function (stat) {
-	switch (stat.$) {
-		case 'Stamina':
-			return 'stamina';
-		case 'StaminaRegeneration':
-			return 'stamina regeneration';
-		case 'StaminaEfficiency':
-			return 'stamina efficiency';
-		case 'Health':
-			return 'health';
-		case 'Attack':
-			return 'attack';
-		case 'MeleeDamage':
-			return 'melee damage';
-		case 'MeleeStaminaEfficiency':
-			return 'melee stamina efficiency';
-		case 'MeleeAttackSpeed':
-			return 'melee attack speed';
-		case 'WeaponSwapSpeed':
-			return 'weapon swap speed';
-		case 'Accuracy':
-			return 'accuracy';
-		case 'Healing':
-			return 'healing';
-		case 'MoveSpeed':
-			return 'move speed';
-		case 'Damage':
-			return 'damage';
-		case 'MeleeDamageAgainstMutation':
-			return 'melee damage against mutation';
-		case 'DamageResistance':
-			return 'damage resistance';
-		case 'BulletDamage':
-			return 'bullet damage';
-		case 'BulletPenetration':
-			return 'bullet penetration';
-		case 'AmmoCapacity':
-			return 'ammo capacity';
-		case 'AimSpeed':
-			return 'aim speed';
-		case 'AimingDownSightsMoveSpeed':
-			return 'ads move speed';
-		case 'OffensiveAccessoryCount':
-			return 'offensive accessory count';
-		case 'DefensiveAccessoryCount':
-			return 'defensive accessory count';
-		case 'MedicalAccessoryCount':
-			return 'medial accessory count';
-		case 'SupportAccessoryCount':
-			return 'support accessory count';
-		case 'AccessoryDamage':
-			return 'accessory damage';
-		case 'ReloadSpeed':
-			return 'reload speed';
-		case 'SwapSpeed':
-			return 'swap speed';
-		case 'Copper':
-			return 'copper';
-		case 'TemporaryHealth':
-			return 'temporary health';
-		case 'ExplosiveDamage':
-			return 'explosive damage';
-		case 'ExplosiveResistance':
-			return 'explosive resistance';
-		case 'FireDamage':
-			return 'fire damage';
-		case 'Lifes':
-			return 'lifes';
-		case 'WeakspotDamage':
-			return 'weakspot damage';
-		case 'BulletStumble':
-			return 'bullet stumble damage';
-		case 'MeleeStumble':
-			return 'melee stumble damage';
-		case 'EffectiveRange':
-			return 'effective range';
-		case 'TraumaDamage':
-			return 'trauma damage';
-		case 'TraumaResistance':
-			return 'trauma resistance';
-		case 'AmmoRefill':
-			return 'ammo refill';
-		case 'FireResistance':
-			return 'fire resistance';
-		default:
-			return 'acid resistance';
-	}
-};
-var $author$project$Tags$enemyTargetTypeToString = function (enemy) {
-	switch (enemy.$) {
-		case 'AnyEnemy':
-			return 'enemy';
-		case 'Ridden':
-			return 'Ridden';
-		default:
-			return 'Mutation';
-	}
-};
-var $author$project$Tags$friendlyTargetTypeToString = function (friendly) {
-	switch (friendly.$) {
-		case 'Self':
-			return 'you';
-		case 'Teammate':
-			return 'a teammate';
-		default:
-			return 'you or a teammate';
-	}
-};
-var $author$project$Tags$triggerToString = function (trigger) {
-	switch (trigger.$) {
-		case 'Always':
-			return 'always';
-		case 'OnKill':
-			if (trigger.a.$ === 'AnyEnemy') {
-				var _v1 = trigger.a;
-				return 'when you kill an enemy';
+var $elm$core$Dict$moveRedLeft = function (dict) {
+	if (((dict.$ === 'RBNode_elm_builtin') && (dict.d.$ === 'RBNode_elm_builtin')) && (dict.e.$ === 'RBNode_elm_builtin')) {
+		if ((dict.e.d.$ === 'RBNode_elm_builtin') && (dict.e.d.a.$ === 'Red')) {
+			var clr = dict.a;
+			var k = dict.b;
+			var v = dict.c;
+			var _v1 = dict.d;
+			var lClr = _v1.a;
+			var lK = _v1.b;
+			var lV = _v1.c;
+			var lLeft = _v1.d;
+			var lRight = _v1.e;
+			var _v2 = dict.e;
+			var rClr = _v2.a;
+			var rK = _v2.b;
+			var rV = _v2.c;
+			var rLeft = _v2.d;
+			var _v3 = rLeft.a;
+			var rlK = rLeft.b;
+			var rlV = rLeft.c;
+			var rlL = rLeft.d;
+			var rlR = rLeft.e;
+			var rRight = _v2.e;
+			return A5(
+				$elm$core$Dict$RBNode_elm_builtin,
+				$elm$core$Dict$Red,
+				rlK,
+				rlV,
+				A5(
+					$elm$core$Dict$RBNode_elm_builtin,
+					$elm$core$Dict$Black,
+					k,
+					v,
+					A5($elm$core$Dict$RBNode_elm_builtin, $elm$core$Dict$Red, lK, lV, lLeft, lRight),
+					rlL),
+				A5($elm$core$Dict$RBNode_elm_builtin, $elm$core$Dict$Black, rK, rV, rlR, rRight));
+		} else {
+			var clr = dict.a;
+			var k = dict.b;
+			var v = dict.c;
+			var _v4 = dict.d;
+			var lClr = _v4.a;
+			var lK = _v4.b;
+			var lV = _v4.c;
+			var lLeft = _v4.d;
+			var lRight = _v4.e;
+			var _v5 = dict.e;
+			var rClr = _v5.a;
+			var rK = _v5.b;
+			var rV = _v5.c;
+			var rLeft = _v5.d;
+			var rRight = _v5.e;
+			if (clr.$ === 'Black') {
+				return A5(
+					$elm$core$Dict$RBNode_elm_builtin,
+					$elm$core$Dict$Black,
+					k,
+					v,
+					A5($elm$core$Dict$RBNode_elm_builtin, $elm$core$Dict$Red, lK, lV, lLeft, lRight),
+					A5($elm$core$Dict$RBNode_elm_builtin, $elm$core$Dict$Red, rK, rV, rLeft, rRight));
 			} else {
-				var e = trigger.a;
-				return 'you kill a ' + $author$project$Tags$enemyTargetTypeToString(e);
+				return A5(
+					$elm$core$Dict$RBNode_elm_builtin,
+					$elm$core$Dict$Black,
+					k,
+					v,
+					A5($elm$core$Dict$RBNode_elm_builtin, $elm$core$Dict$Red, lK, lV, lLeft, lRight),
+					A5($elm$core$Dict$RBNode_elm_builtin, $elm$core$Dict$Red, rK, rV, rLeft, rRight));
 			}
-		case 'OnIncapacitated':
-			if (trigger.a.$ === 'Self') {
-				var _v2 = trigger.a;
-				return 'you become incapacitated your teammates gain';
-			} else {
-				var o = trigger.a;
-				return $author$project$Tags$friendlyTargetTypeToString(o) + ' becomes incapacitated you and your remaining teammates gain';
-			}
-		case 'OnWeaponChanged':
-			return 'stow/change our weapon';
-		case 'OnLootCopper':
-			return 'loot copper';
-		case 'OnMeleeKill':
-			return 'melee kills';
-		case 'OnTakingPainMeds':
-			return 'Pain meds you apply also grant';
-		case 'OnDealingDamageTo':
-			if (trigger.a.$ === 'AnyEnemy') {
-				var _v3 = trigger.a;
-				return 'dealing damage to an enemy';
-			} else {
-				var enemyTargetType = trigger.a;
-				return 'dealing damage to a ' + $author$project$Tags$enemyTargetTypeToString(enemyTargetType);
-			}
-		case 'OnDealingMeleeDamageTo':
-			if (trigger.a.$ === 'AnyEnemy') {
-				var _v4 = trigger.a;
-				return 'dealing melee damage to an enemy';
-			} else {
-				var enemyTargetType = trigger.a;
-				return 'dealing melee damage to a ' + $author$project$Tags$enemyTargetTypeToString(enemyTargetType);
-			}
-		default:
-			return 'precision kills';
+		}
+	} else {
+		return dict;
 	}
 };
-var $author$project$Tags$effectToString = function (ef) {
-	switch (ef.$) {
-		case 'Passive':
-			var stat = ef.a;
-			var change = ef.b;
-			return $author$project$Tags$changeToString(change) + (' ' + $author$project$Tags$statToString(stat));
-		case 'Once':
-			var stat = ef.a;
-			var change = ef.b;
-			return $author$project$Tags$changeToString(change) + (' ' + $author$project$Tags$statToString(stat));
-		case 'Timed':
-			var duration = ef.a;
-			var effect = ef.b;
-			var d = function () {
-				if (duration.$ === 'Infinite') {
-					return 'for the rest of the round';
+var $elm$core$Dict$moveRedRight = function (dict) {
+	if (((dict.$ === 'RBNode_elm_builtin') && (dict.d.$ === 'RBNode_elm_builtin')) && (dict.e.$ === 'RBNode_elm_builtin')) {
+		if ((dict.d.d.$ === 'RBNode_elm_builtin') && (dict.d.d.a.$ === 'Red')) {
+			var clr = dict.a;
+			var k = dict.b;
+			var v = dict.c;
+			var _v1 = dict.d;
+			var lClr = _v1.a;
+			var lK = _v1.b;
+			var lV = _v1.c;
+			var _v2 = _v1.d;
+			var _v3 = _v2.a;
+			var llK = _v2.b;
+			var llV = _v2.c;
+			var llLeft = _v2.d;
+			var llRight = _v2.e;
+			var lRight = _v1.e;
+			var _v4 = dict.e;
+			var rClr = _v4.a;
+			var rK = _v4.b;
+			var rV = _v4.c;
+			var rLeft = _v4.d;
+			var rRight = _v4.e;
+			return A5(
+				$elm$core$Dict$RBNode_elm_builtin,
+				$elm$core$Dict$Red,
+				lK,
+				lV,
+				A5($elm$core$Dict$RBNode_elm_builtin, $elm$core$Dict$Black, llK, llV, llLeft, llRight),
+				A5(
+					$elm$core$Dict$RBNode_elm_builtin,
+					$elm$core$Dict$Black,
+					k,
+					v,
+					lRight,
+					A5($elm$core$Dict$RBNode_elm_builtin, $elm$core$Dict$Red, rK, rV, rLeft, rRight)));
+		} else {
+			var clr = dict.a;
+			var k = dict.b;
+			var v = dict.c;
+			var _v5 = dict.d;
+			var lClr = _v5.a;
+			var lK = _v5.b;
+			var lV = _v5.c;
+			var lLeft = _v5.d;
+			var lRight = _v5.e;
+			var _v6 = dict.e;
+			var rClr = _v6.a;
+			var rK = _v6.b;
+			var rV = _v6.c;
+			var rLeft = _v6.d;
+			var rRight = _v6.e;
+			if (clr.$ === 'Black') {
+				return A5(
+					$elm$core$Dict$RBNode_elm_builtin,
+					$elm$core$Dict$Black,
+					k,
+					v,
+					A5($elm$core$Dict$RBNode_elm_builtin, $elm$core$Dict$Red, lK, lV, lLeft, lRight),
+					A5($elm$core$Dict$RBNode_elm_builtin, $elm$core$Dict$Red, rK, rV, rLeft, rRight));
+			} else {
+				return A5(
+					$elm$core$Dict$RBNode_elm_builtin,
+					$elm$core$Dict$Black,
+					k,
+					v,
+					A5($elm$core$Dict$RBNode_elm_builtin, $elm$core$Dict$Red, lK, lV, lLeft, lRight),
+					A5($elm$core$Dict$RBNode_elm_builtin, $elm$core$Dict$Red, rK, rV, rLeft, rRight));
+			}
+		}
+	} else {
+		return dict;
+	}
+};
+var $elm$core$Dict$removeHelpPrepEQGT = F7(
+	function (targetKey, dict, color, key, value, left, right) {
+		if ((left.$ === 'RBNode_elm_builtin') && (left.a.$ === 'Red')) {
+			var _v1 = left.a;
+			var lK = left.b;
+			var lV = left.c;
+			var lLeft = left.d;
+			var lRight = left.e;
+			return A5(
+				$elm$core$Dict$RBNode_elm_builtin,
+				color,
+				lK,
+				lV,
+				lLeft,
+				A5($elm$core$Dict$RBNode_elm_builtin, $elm$core$Dict$Red, key, value, lRight, right));
+		} else {
+			_v2$2:
+			while (true) {
+				if ((right.$ === 'RBNode_elm_builtin') && (right.a.$ === 'Black')) {
+					if (right.d.$ === 'RBNode_elm_builtin') {
+						if (right.d.a.$ === 'Black') {
+							var _v3 = right.a;
+							var _v4 = right.d;
+							var _v5 = _v4.a;
+							return $elm$core$Dict$moveRedRight(dict);
+						} else {
+							break _v2$2;
+						}
+					} else {
+						var _v6 = right.a;
+						var _v7 = right.d;
+						return $elm$core$Dict$moveRedRight(dict);
+					}
 				} else {
-					var s = duration.a;
-					return 'for ' + ($elm$core$String$fromInt(s) + ' seconds');
+					break _v2$2;
 				}
-			}();
-			return $author$project$Tags$effectToString(effect) + (' ' + d);
-		case 'Delayed':
-			var duration = ef.a;
-			var effect = ef.b;
-			var d = function () {
-				if (duration.$ === 'Infinite') {
-					return 'at the end of the round';
+			}
+			return dict;
+		}
+	});
+var $elm$core$Dict$removeMin = function (dict) {
+	if ((dict.$ === 'RBNode_elm_builtin') && (dict.d.$ === 'RBNode_elm_builtin')) {
+		var color = dict.a;
+		var key = dict.b;
+		var value = dict.c;
+		var left = dict.d;
+		var lColor = left.a;
+		var lLeft = left.d;
+		var right = dict.e;
+		if (lColor.$ === 'Black') {
+			if ((lLeft.$ === 'RBNode_elm_builtin') && (lLeft.a.$ === 'Red')) {
+				var _v3 = lLeft.a;
+				return A5(
+					$elm$core$Dict$RBNode_elm_builtin,
+					color,
+					key,
+					value,
+					$elm$core$Dict$removeMin(left),
+					right);
+			} else {
+				var _v4 = $elm$core$Dict$moveRedLeft(dict);
+				if (_v4.$ === 'RBNode_elm_builtin') {
+					var nColor = _v4.a;
+					var nKey = _v4.b;
+					var nValue = _v4.c;
+					var nLeft = _v4.d;
+					var nRight = _v4.e;
+					return A5(
+						$elm$core$Dict$balance,
+						nColor,
+						nKey,
+						nValue,
+						$elm$core$Dict$removeMin(nLeft),
+						nRight);
 				} else {
-					var s = duration.a;
-					return 'after ' + ($elm$core$String$fromInt(s) + ' seconds');
+					return $elm$core$Dict$RBEmpty_elm_builtin;
 				}
-			}();
-			return d + (' ' + $author$project$Tags$effectToString(effect));
-		case 'OverTime':
-			var _int = ef.a;
-			var effect = ef.b;
-			return $author$project$Tags$effectToString(effect) + (' over ' + ($elm$core$String$fromInt(_int) + ' seconds'));
-		case 'Triggered':
-			var trigger = ef.a;
-			var effect = ef.b;
-			return 'when ' + ($author$project$Tags$triggerToString(trigger) + (' ' + $author$project$Tags$effectToString(effect)));
-		case 'While':
-			var playerState = ef.a;
-			var effect = ef.b;
-			return 'While ' + ($author$project$Tags$playerStateToString(playerState) + (' gain ' + $author$project$Tags$effectToString(effect)));
-		case 'Twin':
-			var effect1 = ef.a;
-			var effect2 = ef.b;
-			return $author$project$Tags$effectToString(effect1) + (', ' + $author$project$Tags$effectToString(effect2));
-		case 'Special':
-			var string = ef.a;
-			return string;
-		case 'Team':
-			var effect = ef.a;
-			return 'TEAM EFFECT: ' + $author$project$Tags$effectToString(effect);
-		case 'Disables':
-			var stat = ef.a;
-			var s = function () {
-				switch (stat.$) {
-					case 'AimingDownSights':
-						return 'ads';
-					case 'Sprinting':
-						return 'sprinting';
-					case 'SupportAccessory':
-						return 'support accessory';
-					case 'OffensiveAccessory':
-						return 'offensive accessory';
-					case 'DealingFriendlyFire':
-						return 'dealing friendly fire';
-					default:
-						return 'taking friendly fire';
+			}
+		} else {
+			return A5(
+				$elm$core$Dict$RBNode_elm_builtin,
+				color,
+				key,
+				value,
+				$elm$core$Dict$removeMin(left),
+				right);
+		}
+	} else {
+		return $elm$core$Dict$RBEmpty_elm_builtin;
+	}
+};
+var $elm$core$Dict$removeHelp = F2(
+	function (targetKey, dict) {
+		if (dict.$ === 'RBEmpty_elm_builtin') {
+			return $elm$core$Dict$RBEmpty_elm_builtin;
+		} else {
+			var color = dict.a;
+			var key = dict.b;
+			var value = dict.c;
+			var left = dict.d;
+			var right = dict.e;
+			if (_Utils_cmp(targetKey, key) < 0) {
+				if ((left.$ === 'RBNode_elm_builtin') && (left.a.$ === 'Black')) {
+					var _v4 = left.a;
+					var lLeft = left.d;
+					if ((lLeft.$ === 'RBNode_elm_builtin') && (lLeft.a.$ === 'Red')) {
+						var _v6 = lLeft.a;
+						return A5(
+							$elm$core$Dict$RBNode_elm_builtin,
+							color,
+							key,
+							value,
+							A2($elm$core$Dict$removeHelp, targetKey, left),
+							right);
+					} else {
+						var _v7 = $elm$core$Dict$moveRedLeft(dict);
+						if (_v7.$ === 'RBNode_elm_builtin') {
+							var nColor = _v7.a;
+							var nKey = _v7.b;
+							var nValue = _v7.c;
+							var nLeft = _v7.d;
+							var nRight = _v7.e;
+							return A5(
+								$elm$core$Dict$balance,
+								nColor,
+								nKey,
+								nValue,
+								A2($elm$core$Dict$removeHelp, targetKey, nLeft),
+								nRight);
+						} else {
+							return $elm$core$Dict$RBEmpty_elm_builtin;
+						}
+					}
+				} else {
+					return A5(
+						$elm$core$Dict$RBNode_elm_builtin,
+						color,
+						key,
+						value,
+						A2($elm$core$Dict$removeHelp, targetKey, left),
+						right);
 				}
-			}();
-			return 'DISABLES: ' + s;
-		case 'Many':
-			var effects = ef.a;
+			} else {
+				return A2(
+					$elm$core$Dict$removeHelpEQGT,
+					targetKey,
+					A7($elm$core$Dict$removeHelpPrepEQGT, targetKey, dict, color, key, value, left, right));
+			}
+		}
+	});
+var $elm$core$Dict$removeHelpEQGT = F2(
+	function (targetKey, dict) {
+		if (dict.$ === 'RBNode_elm_builtin') {
+			var color = dict.a;
+			var key = dict.b;
+			var value = dict.c;
+			var left = dict.d;
+			var right = dict.e;
+			if (_Utils_eq(targetKey, key)) {
+				var _v1 = $elm$core$Dict$getMin(right);
+				if (_v1.$ === 'RBNode_elm_builtin') {
+					var minKey = _v1.b;
+					var minValue = _v1.c;
+					return A5(
+						$elm$core$Dict$balance,
+						color,
+						minKey,
+						minValue,
+						left,
+						$elm$core$Dict$removeMin(right));
+				} else {
+					return $elm$core$Dict$RBEmpty_elm_builtin;
+				}
+			} else {
+				return A5(
+					$elm$core$Dict$balance,
+					color,
+					key,
+					value,
+					left,
+					A2($elm$core$Dict$removeHelp, targetKey, right));
+			}
+		} else {
+			return $elm$core$Dict$RBEmpty_elm_builtin;
+		}
+	});
+var $elm$core$Dict$remove = F2(
+	function (key, dict) {
+		var _v0 = A2($elm$core$Dict$removeHelp, key, dict);
+		if ((_v0.$ === 'RBNode_elm_builtin') && (_v0.a.$ === 'Red')) {
+			var _v1 = _v0.a;
+			var k = _v0.b;
+			var v = _v0.c;
+			var l = _v0.d;
+			var r = _v0.e;
+			return A5($elm$core$Dict$RBNode_elm_builtin, $elm$core$Dict$Black, k, v, l, r);
+		} else {
+			var x = _v0;
+			return x;
+		}
+	});
+var $author$project$List$Extras$groupBy = F2(
+	function (selector, items) {
+		var run = F2(
+			function (accumulator, remaining) {
+				run:
+				while (true) {
+					if (!remaining.b) {
+						return accumulator;
+					} else {
+						var head = remaining.a;
+						var tail = remaining.b;
+						var mapped = selector(head);
+						var previousValues = A2(
+							$elm$core$Maybe$withDefault,
+							_List_Nil,
+							A2($elm$core$Dict$get, mapped, accumulator));
+						var newValues = A2($elm$core$List$cons, head, previousValues);
+						var updatedDict = A3(
+							$elm$core$Dict$insert,
+							mapped,
+							newValues,
+							A2($elm$core$Dict$remove, mapped, accumulator));
+						var $temp$accumulator = updatedDict,
+							$temp$remaining = tail;
+						accumulator = $temp$accumulator;
+						remaining = $temp$remaining;
+						continue run;
+					}
+				}
+			});
+		return A2(run, $elm$core$Dict$empty, items);
+	});
+var $elm$regex$Regex$never = _Regex_never;
+var $author$project$Cards$Relative = {$: 'Relative'};
+var $author$project$Cards$parseAbsOrRel = function (s) {
+	switch (s) {
+		case '%':
+			return $elm$core$Maybe$Just($author$project$Cards$Relative);
+		case '':
+			return $elm$core$Maybe$Just($author$project$Cards$Absolute);
+		default:
+			return $elm$core$Maybe$Nothing;
+	}
+};
+var $author$project$Cards$Addition = {$: 'Addition'};
+var $author$project$Cards$Subtraction = {$: 'Subtraction'};
+var $author$project$Cards$parseOperation = function (s) {
+	switch (s) {
+		case '+':
+			return $elm$core$Maybe$Just($author$project$Cards$Addition);
+		case '-':
+			return $elm$core$Maybe$Just($author$project$Cards$Subtraction);
+		default:
+			return $elm$core$Maybe$Nothing;
+	}
+};
+var $elm$regex$Regex$fromString = function (string) {
+	return A2(
+		$elm$regex$Regex$fromStringWith,
+		{caseInsensitive: false, multiline: false},
+		string);
+};
+var $elm_community$string_extra$String$Extra$regexFromString = A2(
+	$elm$core$Basics$composeR,
+	$elm$regex$Regex$fromString,
+	$elm$core$Maybe$withDefault($elm$regex$Regex$never));
+var $elm$regex$Regex$replace = _Regex_replaceAtMost(_Regex_infinity);
+var $elm_community$string_extra$String$Extra$changeCase = F2(
+	function (mutator, word) {
+		return A2(
+			$elm$core$Maybe$withDefault,
+			'',
+			A2(
+				$elm$core$Maybe$map,
+				function (_v0) {
+					var head = _v0.a;
+					var tail = _v0.b;
+					return A2(
+						$elm$core$String$cons,
+						mutator(head),
+						tail);
+				},
+				$elm$core$String$uncons(word)));
+	});
+var $elm$core$Char$toUpper = _Char_toUpper;
+var $elm_community$string_extra$String$Extra$toSentenceCase = function (word) {
+	return A2($elm_community$string_extra$String$Extra$changeCase, $elm$core$Char$toUpper, word);
+};
+var $elm_community$string_extra$String$Extra$toTitleCase = function (ws) {
+	var uppercaseMatch = A2(
+		$elm$regex$Regex$replace,
+		$elm_community$string_extra$String$Extra$regexFromString('\\w+'),
+		A2(
+			$elm$core$Basics$composeR,
+			function ($) {
+				return $.match;
+			},
+			$elm_community$string_extra$String$Extra$toSentenceCase));
+	return A3(
+		$elm$regex$Regex$replace,
+		$elm_community$string_extra$String$Extra$regexFromString('^([a-z])|\\s+([a-z])'),
+		A2(
+			$elm$core$Basics$composeR,
+			function ($) {
+				return $.match;
+			},
+			uppercaseMatch),
+		ws);
+};
+var $elm$core$Dict$values = function (dict) {
+	return A3(
+		$elm$core$Dict$foldr,
+		F3(
+			function (key, value, valueList) {
+				return A2($elm$core$List$cons, value, valueList);
+			}),
+		_List_Nil,
+		dict);
+};
+var $author$project$Cards$groupProperties = function (properties) {
+	var teamString = 'TEAM EFFECTS ';
+	var regexResultToMergeElement = function (strings) {
+		_v3$2:
+		while (true) {
+			if ((strings.b && strings.b.b) && strings.b.b.b) {
+				if (!strings.b.b.b.b) {
+					var first = strings.a;
+					var _v4 = strings.b;
+					var second = _v4.a;
+					var _v5 = _v4.b;
+					var third = _v5.a;
+					var _v6 = _Utils_Tuple3(
+						$author$project$Cards$parseOperation(first),
+						$elm$core$String$toInt(second),
+						third);
+					if ((_v6.a.$ === 'Just') && (_v6.b.$ === 'Just')) {
+						var op = _v6.a.a;
+						var value = _v6.b.a;
+						var key = _v6.c;
+						return $elm$core$Maybe$Just(
+							{absOrRel: $author$project$Cards$Absolute, key: key, operation: op, value: value});
+					} else {
+						return $elm$core$Maybe$Nothing;
+					}
+				} else {
+					if (!strings.b.b.b.b.b) {
+						var first = strings.a;
+						var _v7 = strings.b;
+						var second = _v7.a;
+						var _v8 = _v7.b;
+						var third = _v8.a;
+						var _v9 = _v8.b;
+						var fourth = _v9.a;
+						var value = $elm$core$String$toInt(second);
+						var op = $author$project$Cards$parseOperation(first);
+						var absOrRel = $author$project$Cards$parseAbsOrRel(third);
+						var _v10 = _Utils_Tuple3(op, value, absOrRel);
+						if (((_v10.a.$ === 'Just') && (_v10.b.$ === 'Just')) && (_v10.c.$ === 'Just')) {
+							var o = _v10.a.a;
+							var v = _v10.b.a;
+							var a = _v10.c.a;
+							return $elm$core$Maybe$Just(
+								{absOrRel: a, key: fourth, operation: o, value: v});
+						} else {
+							return $elm$core$Maybe$Nothing;
+						}
+					} else {
+						break _v3$2;
+					}
+				}
+			} else {
+				break _v3$2;
+			}
+		}
+		return $elm$core$Maybe$Nothing;
+	};
+	var passiveRegex = A2(
+		$elm$core$Maybe$withDefault,
+		$elm$regex$Regex$never,
+		A2(
+			$elm$regex$Regex$fromStringWith,
+			{caseInsensitive: true, multiline: false},
+			'([+,-])(\\d+)(\\%?)\\s(.+)'));
+	var mergeMergeElements = function (elements) {
+		var merger = function (mergeElements) {
+			var folder = F2(
+				function (next, acc) {
+					var _v2 = next.operation;
+					if (_v2.$ === 'Addition') {
+						return acc + next.value;
+					} else {
+						return acc - next.value;
+					}
+				});
+			var totalValue = A3($elm$core$List$foldl, folder, 0, mergeElements);
+			var first = $elm$core$List$head(mergeElements);
 			return A2(
-				$elm$core$String$join,
-				', ',
-				A2($elm$core$List$map, $author$project$Tags$effectToString, effects));
-		case 'RelativeChance':
-			var _int = ef.a;
-			var effect = ef.b;
-			return 'have a ' + ($elm$core$String$fromInt(_int) + ('% chance to ' + $author$project$Tags$effectToString(effect)));
-		default:
-			var _int = ef.a;
-			var effect = ef.b;
-			return 'within ' + ($elm$core$String$fromInt(_int) + (' meters ' + $author$project$Tags$effectToString(effect)));
-	}
-};
-var $author$project$Main$inventorySummaryView = function (cards) {
-	var properties = $elm$core$List$concat(
+				$elm$core$Maybe$map,
+				function (f) {
+					return _Utils_update(
+						f,
+						{value: totalValue});
+				},
+				first);
+		};
+		var grouped = A2(
+			$author$project$List$Extras$groupBy,
+			function (e) {
+				return _Utils_Tuple2(
+					e.key,
+					$author$project$Cards$absOrRelToString(e.absOrRel));
+			},
+			elements);
+		return A2(
+			$elm$core$List$map,
+			function (element) {
+				var val = (element.value > 0) ? ('+' + $elm$core$String$fromInt(element.value)) : $elm$core$String$fromInt(element.value);
+				return _Utils_ap(
+					val,
+					_Utils_ap(
+						_Utils_eq(element.absOrRel, $author$project$Cards$Absolute) ? ' ' : '% ',
+						$elm_community$string_extra$String$Extra$toTitleCase(element.key)));
+			},
+			A2(
+				$elm$core$List$filter,
+				function (value) {
+					return !(!value.value);
+				},
+				$elm_community$maybe_extra$Maybe$Extra$values(
+					$elm$core$Dict$values(
+						A2(
+							$elm$core$Dict$map,
+							F2(
+								function (_v1, value) {
+									return merger(value);
+								}),
+							grouped)))));
+	};
+	var disableString = 'DISABLES: ';
+	var descriptions = A2(
+		$elm$core$List$map,
+		function (p) {
+			return p.description;
+		},
+		properties);
+	var disables = A2(
+		$elm$core$List$map,
+		function (d) {
+			return A2(
+				$elm$core$String$dropLeft,
+				$elm$core$String$length(disableString),
+				d);
+		},
+		A2(
+			$elm$core$List$filter,
+			function (d) {
+				return A2($elm$core$String$startsWith, disableString, d);
+			},
+			descriptions));
+	var rawPassives = A2(
+		$elm$core$List$map,
+		function (matches) {
+			return $elm$core$List$concat(
+				A2(
+					$elm$core$List$map,
+					function (m) {
+						return $elm_community$maybe_extra$Maybe$Extra$values(m.submatches);
+					},
+					matches));
+		},
 		A2(
 			$elm$core$List$map,
-			function (c) {
-				return A2(
-					$elm$core$List$map,
-					function (p) {
-						return p.description;
-					},
-					c.properties);
-			},
-			cards));
-	var effects = A2(
-		$elm_community$list_extra$List$Extra$andThen,
-		function (c) {
-			return A2($elm$core$List$map, $author$project$Tags$effectToString, c.effects);
+			$elm$regex$Regex$find(passiveRegex),
+			descriptions));
+	var passives = mergeMergeElements(
+		$elm_community$maybe_extra$Maybe$Extra$values(
+			A2($elm$core$List$map, regexResultToMergeElement, rawPassives)));
+	var remaining = A2(
+		$elm$core$List$filter,
+		function (d) {
+			return A3(
+				$elm$core$Basics$composeL,
+				$elm$core$Basics$not,
+				$elm$regex$Regex$contains(passiveRegex),
+				d) && (A3(
+				$elm$core$Basics$composeL,
+				$elm$core$Basics$not,
+				$elm$core$String$startsWith(teamString),
+				d) && A3(
+				$elm$core$Basics$composeL,
+				$elm$core$Basics$not,
+				$elm$core$String$startsWith(disableString),
+				d));
 		},
-		cards);
+		A2(
+			$elm$core$List$filter,
+			A2(
+				$elm$core$Basics$composeL,
+				$elm$core$Basics$not,
+				$elm$regex$Regex$contains(passiveRegex)),
+			descriptions));
+	var teams = A2(
+		$elm$core$List$map,
+		function (d) {
+			return A2(
+				$elm$core$String$dropLeft,
+				$elm$core$String$length(teamString),
+				d);
+		},
+		A2(
+			$elm$core$List$filter,
+			function (d) {
+				return A2($elm$core$String$startsWith, teamString, d);
+			},
+			descriptions));
+	var _v0 = A2($elm$core$Debug$log, 'disables', disables);
+	return {disables: disables, passives: passives, remaining: remaining, team: teams};
+};
+var $elm$core$List$isEmpty = function (xs) {
+	if (!xs.b) {
+		return true;
+	} else {
+		return false;
+	}
+};
+var $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$pl2 = $elm$html$Html$Attributes$class('pl-2');
+var $author$project$Main$inventorySummaryView = function (cards) {
+	var orEmptyElement = F2(
+		function (hasElement, element) {
+			return hasElement ? element : A2($elm$html$Html$div, _List_Nil, _List_Nil);
+		});
+	var mergedProperties = $author$project$Cards$groupProperties(
+		$elm$core$List$concat(
+			A2(
+				$elm$core$List$map,
+				function (c) {
+					return c.properties;
+				},
+				cards)));
+	var hasTeam = A3($elm$core$Basics$composeL, $elm$core$Basics$not, $elm$core$List$isEmpty, mergedProperties.team);
+	var hasRemaining = A3($elm$core$Basics$composeL, $elm$core$Basics$not, $elm$core$List$isEmpty, mergedProperties.remaining);
+	var hasPassives = A3($elm$core$Basics$composeL, $elm$core$Basics$not, $elm$core$List$isEmpty, mergedProperties.passives);
+	var hasDisables = A3($elm$core$Basics$composeL, $elm$core$Basics$not, $elm$core$List$isEmpty, mergedProperties.disables);
 	return _List_fromArray(
 		[
 			A2(
@@ -13091,20 +13592,121 @@ var $author$project$Main$inventorySummaryView = function (cards) {
 			_List_fromArray(
 				[
 					A2(
-					$elm$html$Html$ul,
-					_List_Nil,
+					orEmptyElement,
+					hasPassives,
 					A2(
-						$elm$core$List$map,
-						function (p) {
-							return A2(
-								$elm$html$Html$li,
-								_List_Nil,
-								_List_fromArray(
-									[
-										$elm$html$Html$text(p)
-									]));
-						},
-						effects))
+						$elm$html$Html$h5,
+						_List_fromArray(
+							[$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$pl2]),
+						_List_fromArray(
+							[
+								$elm$html$Html$text('Passives:')
+							]))),
+					A2(
+					orEmptyElement,
+					hasPassives,
+					A2(
+						$elm$html$Html$ul,
+						_List_Nil,
+						A2(
+							$elm$core$List$map,
+							function (p) {
+								return A2(
+									$elm$html$Html$li,
+									_List_Nil,
+									_List_fromArray(
+										[
+											$elm$html$Html$text(p)
+										]));
+							},
+							mergedProperties.passives))),
+					A2(
+					orEmptyElement,
+					hasRemaining,
+					A2(
+						$elm$html$Html$h5,
+						_List_fromArray(
+							[$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$pl2]),
+						_List_fromArray(
+							[
+								$elm$html$Html$text('Other:')
+							]))),
+					A2(
+					orEmptyElement,
+					hasRemaining,
+					A2(
+						$elm$html$Html$ul,
+						_List_Nil,
+						A2(
+							$elm$core$List$map,
+							function (p) {
+								return A2(
+									$elm$html$Html$li,
+									_List_Nil,
+									_List_fromArray(
+										[
+											$elm$html$Html$text(p)
+										]));
+							},
+							mergedProperties.remaining))),
+					A2(
+					orEmptyElement,
+					hasTeam,
+					A2(
+						$elm$html$Html$h5,
+						_List_fromArray(
+							[$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$pl2]),
+						_List_fromArray(
+							[
+								$elm$html$Html$text('Team Effects:')
+							]))),
+					A2(
+					orEmptyElement,
+					hasTeam,
+					A2(
+						$elm$html$Html$ul,
+						_List_Nil,
+						A2(
+							$elm$core$List$map,
+							function (p) {
+								return A2(
+									$elm$html$Html$li,
+									_List_Nil,
+									_List_fromArray(
+										[
+											$elm$html$Html$text(p)
+										]));
+							},
+							mergedProperties.team))),
+					A2(
+					orEmptyElement,
+					hasDisables,
+					A2(
+						$elm$html$Html$h5,
+						_List_fromArray(
+							[$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$pl2]),
+						_List_fromArray(
+							[
+								$elm$html$Html$text('Disables:')
+							]))),
+					A2(
+					orEmptyElement,
+					hasDisables,
+					A2(
+						$elm$html$Html$ul,
+						_List_Nil,
+						A2(
+							$elm$core$List$map,
+							function (p) {
+								return A2(
+									$elm$html$Html$li,
+									_List_Nil,
+									_List_fromArray(
+										[
+											$elm$html$Html$text(p)
+										]));
+							},
+							mergedProperties.disables)))
 				]))
 		]);
 };

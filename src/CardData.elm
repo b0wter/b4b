@@ -229,8 +229,7 @@ rawCards =
             [ "+25% Accessory Damage"
             ]
       , effects =
-            [ Passive AmmoCapacity (RelativeMax 75)
-            , Disables SupportAccessory
+            [ Passive AccessoryDamage (RelativeMax 25)
             ]
       , supplyLine =
             { track = "Alley"
@@ -365,6 +364,7 @@ rawCards =
       , effects =
             [ While PlayerCrouching (Disables TakingFriendlyFire)
             , While PlayerCrouching (Disables DealingFriendlyFire)
+            , Passive Health (AbsoluteMax 10)
             ]
       , supplyLine =
             { track = "Alley"

@@ -1,7 +1,12 @@
 module Cards exposing (..)
 
+import Dict
 import List.Extra as List
+import List.Extras as List
+import Maybe.Extra as Maybe
+import String.Extra as String
 import Tags exposing (..)
+import Regex
 
 
 type alias Property =
@@ -236,3 +241,162 @@ byIds cards ids =
 effectsAsSummary : List Effect -> List String
 effectsAsSummary effects =
     effects |> List.map effectToString
+    
+
+type Operation
+    = Addition
+    | Subtraction
+ 
+type AbsOrRel
+    = Absolute
+    | Relative
+    
+parseAbsOrRel : String -> Maybe AbsOrRel
+parseAbsOrRel s =
+    case s of
+        "%" -> Just Relative
+        ""  -> Just Absolute
+        _   -> Nothing
+
+absOrRelToString : AbsOrRel -> String
+absOrRelToString a =
+    case a of
+        Absolute -> "absolute"
+        Relative -> "relative"
+ 
+type alias MergeElement =
+    { operation: Operation
+    , absOrRel: AbsOrRel
+    , value: Int
+    , key: String
+    }
+ 
+parseOperation : String -> Maybe Operation
+parseOperation s =
+    case s of
+        "+" -> Just Addition
+        "-" -> Just Subtraction
+        _   -> Nothing
+        
+type alias GroupedProperties =
+    { passives: List String
+    , team: List String
+    , disables: List String
+    , remaining: List String
+    }
+        
+groupProperties : List Property -> GroupedProperties
+groupProperties properties =
+    {- The following properties should be grouped:
+        * Team effects
+        * Disables
+        * Passive effects of the same stat (e.g. all health bonuses)
+    -}
+    let
+        descriptions = properties |> List.map (\p -> p.description)
+        
+        disableString = "DISABLES: "
+        disables = 
+            descriptions 
+            |> List.filter (\d -> d |> String.startsWith disableString)
+            |> List.map (\d -> d |> String.dropLeft (disableString |> String.length))
+            
+        _ = Debug.log "disables" disables
+
+        teamString = "TEAM EFFECTS "
+        teams =
+            descriptions
+            |> List.filter (\d -> d |> String.startsWith teamString)
+            |> List.map (\d -> d |> String.dropLeft (teamString |> String.length))
+            
+        regexResultToMergeElement : List String -> Maybe MergeElement
+        regexResultToMergeElement strings =
+            case strings of
+                [ first, second, third] -> 
+                    case (first |> parseOperation, second |> String.toInt, third) of
+                        (Just op, Just value, key) ->
+                            Just { operation = op, absOrRel = Absolute, value = value, key = key }
+                        _ ->
+                            Nothing
+                [ first, second, third, fourth] -> 
+                    let 
+                        op = first |> parseOperation
+                        value = second |> String.toInt
+                        absOrRel = third |> parseAbsOrRel
+                    in
+                    case (op, value, absOrRel) of
+                        (Just o, Just v, Just a) ->
+                            Just { operation = o, absOrRel = a, value = v, key = fourth }
+                        _ ->
+                            Nothing
+                _ -> Nothing
+
+        mergeMergeElements : List MergeElement -> List String
+        mergeMergeElements elements =
+            let
+                grouped = 
+                    elements 
+                    |> List.groupBy (\e -> (e.key, e.absOrRel |> absOrRelToString))
+                    
+                merger : List MergeElement -> Maybe MergeElement
+                merger mergeElements =
+                    let
+                        first = mergeElements |> List.head
+                        
+                        folder next acc = 
+                            case next.operation of
+                                Addition -> acc + next.value
+                                Subtraction -> acc - next.value
+                                           
+                        totalValue = mergeElements |> List.foldl folder 0
+                    in
+                    first 
+                    |> Maybe.map (\f -> { f | value = totalValue })
+            in
+            grouped 
+            |> Dict.map (\_ value -> value |> merger)
+            |> Dict.values
+            |> Maybe.values
+            |> List.filter (\value -> value.value /= 0)
+            |> List.map (\element -> 
+                let 
+                    val = if element.value > 0 then 
+                            "+" ++ (element.value |> String.fromInt) 
+                          else 
+                            element.value |> String.fromInt
+                in
+                val
+                ++ (if element.absOrRel == Absolute then " " else "% ")
+                ++ (element.key |> String.toTitleCase)
+                )
+            
+        passiveRegex = 
+            Regex.fromStringWith { caseInsensitive = True, multiline = False } "([+,-])(\\d+)(\\%?)\\s(.+)"
+            |> Maybe.withDefault Regex.never
+            
+        rawPassives =
+            descriptions
+            |> List.map (Regex.find passiveRegex)
+            |> List.map (\matches -> matches |> List.map (\m -> m.submatches |> Maybe.values) |> List.concat)
+            
+        remaining =
+            descriptions
+            |> List.filter (not << Regex.contains passiveRegex) 
+            |> List.filter (\d -> 
+                (d |> (not << Regex.contains passiveRegex))
+                && (d |> (not << String.startsWith teamString))
+                && (d |> (not << String.startsWith disableString))
+            )
+            
+        passives =
+            rawPassives
+            |> List.map regexResultToMergeElement
+            |> Maybe.values
+            |> mergeMergeElements
+
+    in
+    { passives = passives
+    , team = teams
+    , disables = disables
+    , remaining = remaining
+    }

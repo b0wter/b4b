@@ -1,7 +1,7 @@
 module List.Extras exposing (..)
 
 import List.Extra exposing (..)
-
+import Dict exposing (Dict, empty, get, member)
 
 limit : Int -> List a -> List a
 limit max list =
@@ -90,3 +90,24 @@ splitBy predicate items =
                         run (head :: nonMatches) matches tail
     in
     run [] [] items
+
+groupBy : (a -> comparable) -> List a -> Dict comparable (List a)
+groupBy selector items =
+    let
+        run accumulator remaining =
+            case remaining of
+                [] ->
+                    accumulator
+                head :: tail ->
+                    let 
+                        mapped = head |> selector
+                        previousValues = Dict.get mapped accumulator |> Maybe.withDefault []
+                        newValues = head :: previousValues
+                        updatedDict = 
+                            accumulator
+                            |> Dict.remove mapped
+                            |> Dict.insert mapped newValues
+                    in
+                    run updatedDict tail
+    in
+    run Dict.empty items
