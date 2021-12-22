@@ -180,10 +180,10 @@ parseRawCard raw =
     , totalCost = raw.totalCost
     , filename = raw.filename
     , properties = raw.properties |> List.map (\p -> { description = p })
+    , effects = raw.effects
     , supplyLine = line
     , kind = raw.kind |> parseKind
     , affinity = raw.affinity |> parseAffinity
-    , effects = []
     }
 
 
@@ -194,10 +194,10 @@ type alias Card =
     , totalCost : Int
     , filename : String
     , properties : List Property
+    , effects: List Effect
     , supplyLine : SupplyLine
     , kind : Kind
     , affinity : Affinity
-    , effects : List Effect
     }
 
 
@@ -232,3 +232,7 @@ byIds cards ids =
     in
     cards |> List.filter (\c -> c.id |> isSearchedFor)
 
+
+effectsAsSummary : List Effect -> List String
+effectsAsSummary effects =
+    effects |> List.map effectToString

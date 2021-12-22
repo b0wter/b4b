@@ -5387,7 +5387,7 @@ var $author$project$Cards$parseRawCard = function (raw) {
 	return {
 		affinity: $author$project$Cards$parseAffinity(raw.affinity),
 		cost: raw.cost,
-		effects: _List_Nil,
+		effects: raw.effects,
 		filename: raw.filename,
 		id: raw.id,
 		kind: $author$project$Cards$parseKind(raw.kind),
@@ -5402,64 +5402,126 @@ var $author$project$Cards$parseRawCard = function (raw) {
 		totalCost: raw.totalCost
 	};
 };
+var $author$project$Tags$AbsoluteCurrent = function (a) {
+	return {$: 'AbsoluteCurrent', a: a};
+};
 var $author$project$Tags$AbsoluteMax = function (a) {
 	return {$: 'AbsoluteMax', a: a};
 };
 var $author$project$Tags$AccessoryDamage = {$: 'AccessoryDamage'};
 var $author$project$Tags$Accuracy = {$: 'Accuracy'};
+var $author$project$Tags$AcidResistance = {$: 'AcidResistance'};
 var $author$project$Tags$AimSpeed = {$: 'AimSpeed'};
 var $author$project$Tags$AimingDownSights = {$: 'AimingDownSights'};
+var $author$project$Tags$AimingDownSightsMoveSpeed = {$: 'AimingDownSightsMoveSpeed'};
 var $author$project$Tags$AmmoCapacity = {$: 'AmmoCapacity'};
+var $author$project$Tags$AmmoRefill = {$: 'AmmoRefill'};
+var $author$project$Tags$AnyEnemy = {$: 'AnyEnemy'};
 var $author$project$Tags$BulletDamage = {$: 'BulletDamage'};
 var $author$project$Tags$BulletPenetration = {$: 'BulletPenetration'};
+var $author$project$Tags$BulletStumble = {$: 'BulletStumble'};
+var $author$project$Tags$Copper = {$: 'Copper'};
 var $author$project$Tags$Damage = {$: 'Damage'};
 var $author$project$Tags$DamageResistance = {$: 'DamageResistance'};
 var $author$project$Tags$DealingFriendlyFire = {$: 'DealingFriendlyFire'};
 var $author$project$Tags$Disables = function (a) {
 	return {$: 'Disables', a: a};
 };
+var $author$project$Tags$EffectiveRange = {$: 'EffectiveRange'};
+var $author$project$Tags$ExplosiveDamage = {$: 'ExplosiveDamage'};
+var $author$project$Tags$ExplosiveResistance = {$: 'ExplosiveResistance'};
+var $author$project$Tags$FireResistance = {$: 'FireResistance'};
 var $author$project$Tags$ForSeconds = function (a) {
 	return {$: 'ForSeconds', a: a};
 };
 var $author$project$Tags$Health = {$: 'Health'};
+var $author$project$Tags$InDistance = F2(
+	function (a, b) {
+		return {$: 'InDistance', a: a, b: b};
+	});
+var $author$project$Tags$Lifes = {$: 'Lifes'};
 var $author$project$Tags$Many = function (a) {
 	return {$: 'Many', a: a};
 };
 var $author$project$Tags$MeleeDamage = {$: 'MeleeDamage'};
+var $author$project$Tags$MeleeDamageAgainstMutation = {$: 'MeleeDamageAgainstMutation'};
+var $author$project$Tags$MeleeStumble = {$: 'MeleeStumble'};
+var $author$project$Tags$MoveSpeed = {$: 'MoveSpeed'};
+var $author$project$Tags$Mutation = {$: 'Mutation'};
 var $author$project$Tags$OffensiveAccessoryCount = {$: 'OffensiveAccessoryCount'};
-var $author$project$Tags$OnTeammateOrSelfIncapacitated = {$: 'OnTeammateOrSelfIncapacitated'};
+var $author$project$Tags$OnDealingMeleeDamageTo = function (a) {
+	return {$: 'OnDealingMeleeDamageTo', a: a};
+};
+var $author$project$Tags$OnIncapacitated = function (a) {
+	return {$: 'OnIncapacitated', a: a};
+};
+var $author$project$Tags$OnKill = function (a) {
+	return {$: 'OnKill', a: a};
+};
+var $author$project$Tags$OnLootCopper = {$: 'OnLootCopper'};
+var $author$project$Tags$OnMeleeKill = {$: 'OnMeleeKill'};
+var $author$project$Tags$OnPrecisionKill = {$: 'OnPrecisionKill'};
+var $author$project$Tags$OnTakingPainMeds = {$: 'OnTakingPainMeds'};
+var $author$project$Tags$OnWeaponChanged = {$: 'OnWeaponChanged'};
 var $author$project$Tags$Once = F2(
 	function (a, b) {
 		return {$: 'Once', a: a, b: b};
+	});
+var $author$project$Tags$OverTime = F2(
+	function (a, b) {
+		return {$: 'OverTime', a: a, b: b};
 	});
 var $author$project$Tags$Passive = F2(
 	function (a, b) {
 		return {$: 'Passive', a: a, b: b};
 	});
 var $author$project$Tags$PlayerAimingDownSights = {$: 'PlayerAimingDownSights'};
+var $author$project$Tags$PlayerAttacking = {$: 'PlayerAttacking'};
 var $author$project$Tags$PlayerCrouching = {$: 'PlayerCrouching'};
+var $author$project$Tags$PlayerUsingMedicalAccessory = {$: 'PlayerUsingMedicalAccessory'};
+var $author$project$Tags$PlayerUsingMeleeWeapon = {$: 'PlayerUsingMeleeWeapon'};
+var $author$project$Tags$PlayerUsingPistol = {$: 'PlayerUsingPistol'};
+var $author$project$Tags$PlayerUsingRifle = {$: 'PlayerUsingRifle'};
+var $author$project$Tags$PlayerUsingShotgun = {$: 'PlayerUsingShotgun'};
+var $author$project$Tags$PlayerUsingSniper = {$: 'PlayerUsingSniper'};
+var $author$project$Tags$RelativeChance = F2(
+	function (a, b) {
+		return {$: 'RelativeChance', a: a, b: b};
+	});
 var $author$project$Tags$RelativeMax = function (a) {
 	return {$: 'RelativeMax', a: a};
 };
 var $author$project$Tags$ReloadSpeed = {$: 'ReloadSpeed'};
+var $author$project$Tags$Ridden = {$: 'Ridden'};
+var $author$project$Tags$SelfOrTeammate = {$: 'SelfOrTeammate'};
 var $author$project$Tags$Special = function (a) {
 	return {$: 'Special', a: a};
 };
+var $author$project$Tags$Stamina = {$: 'Stamina'};
 var $author$project$Tags$StaminaEfficiency = {$: 'StaminaEfficiency'};
+var $author$project$Tags$StaminaRegeneration = {$: 'StaminaRegeneration'};
 var $author$project$Tags$SupportAccessory = {$: 'SupportAccessory'};
 var $author$project$Tags$SwapSpeed = {$: 'SwapSpeed'};
 var $author$project$Tags$TakingFriendlyFire = {$: 'TakingFriendlyFire'};
 var $author$project$Tags$Team = function (a) {
 	return {$: 'Team', a: a};
 };
+var $author$project$Tags$TemporaryHealth = {$: 'TemporaryHealth'};
 var $author$project$Tags$Timed = F2(
 	function (a, b) {
 		return {$: 'Timed', a: a, b: b};
 	});
+var $author$project$Tags$TraumaDamage = {$: 'TraumaDamage'};
+var $author$project$Tags$TraumaResistance = {$: 'TraumaResistance'};
 var $author$project$Tags$Triggered = F2(
 	function (a, b) {
 		return {$: 'Triggered', a: a, b: b};
 	});
+var $author$project$Tags$Twin = F2(
+	function (a, b) {
+		return {$: 'Twin', a: a, b: b};
+	});
+var $author$project$Tags$WeakspotDamage = {$: 'WeakspotDamage'};
 var $author$project$Tags$While = F2(
 	function (a, b) {
 		return {$: 'While', a: a, b: b};
@@ -5480,15 +5542,19 @@ var $author$project$CardData$rawCards = _List_fromArray(
 				$author$project$Tags$RelativeMax(5)),
 				A2(
 				$author$project$Tags$Passive,
-				$author$project$Tags$BulletPenetration,
-				$author$project$Tags$RelativeMax(50))
+				$author$project$Tags$BulletStumble,
+				$author$project$Tags$AbsoluteMax(1)),
+				A2(
+				$author$project$Tags$Passive,
+				$author$project$Tags$MeleeStumble,
+				$author$project$Tags$AbsoluteMax(5))
 			]),
 		filename: '7_0_3.jpg',
 		id: 1,
 		kind: 'Offense',
 		name: 'Combat Training',
 		properties: _List_fromArray(
-			['+5% Bullet Damage', '+50% Bullet Penetration']),
+			['+5% Bullet Damage', '+1 Bullet Stumble', '+5 Melee Stumble']),
 		supplyLine: {index: 1, name: 'Paul\'s Alley', tier: 1, track: 'Alley'},
 		totalCost: 0
 	},
@@ -5604,18 +5670,14 @@ var $author$project$CardData$rawCards = _List_fromArray(
 				A2(
 				$author$project$Tags$Passive,
 				$author$project$Tags$BulletPenetration,
-				$author$project$Tags$RelativeMax(100)),
-				A2(
-				$author$project$Tags$Passive,
-				$author$project$Tags$StaminaEfficiency,
-				$author$project$Tags$RelativeMax(-20))
+				$author$project$Tags$RelativeMax(200))
 			]),
 		filename: '7_0_4.jpg',
 		id: 7,
 		kind: 'Offense',
 		name: 'Large Caliber Rounds',
 		properties: _List_fromArray(
-			['+7.5% Bullet Damage', '+100% Bullet Penetration', '-20% Stamina Efficiency']),
+			['+7.5% Bullet Damage', '+200% Bullet Penetration']),
 		supplyLine: {index: 7, name: 'The Stilts', tier: 1, track: 'Alley'},
 		totalCost: 0
 	},
@@ -5668,14 +5730,17 @@ var $author$project$CardData$rawCards = _List_fromArray(
 				$author$project$Tags$Passive,
 				$author$project$Tags$AmmoCapacity,
 				$author$project$Tags$RelativeMax(75)),
-				$author$project$Tags$Disables($author$project$Tags$SupportAccessory)
+				A2(
+				$author$project$Tags$Passive,
+				$author$project$Tags$MoveSpeed,
+				$author$project$Tags$RelativeMax(-5))
 			]),
 		filename: '6_1_1.jpg',
 		id: 10,
 		kind: 'Offense',
 		name: 'Ammo Mule',
 		properties: _List_fromArray(
-			['+75% Ammo Capacity', 'DISABLES: Support Accessories']),
+			['+75% Ammo Capacity', '-5% Move Speed']),
 		supplyLine: {index: 10, name: 'The Stilts', tier: 1, track: 'Alley'},
 		totalCost: 0
 	},
@@ -5750,34 +5815,32 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		cost: 100,
 		effects: _List_fromArray(
 			[
+				$author$project$Tags$Team(
 				A2(
-				$author$project$Tags$Triggered,
-				$author$project$Tags$OnTeammateOrSelfIncapacitated,
-				$author$project$Tags$Many(
-					_List_fromArray(
-						[
-							$author$project$Tags$Team(
-							A2(
+					$author$project$Tags$Triggered,
+					$author$project$Tags$OnIncapacitated($author$project$Tags$SelfOrTeammate),
+					$author$project$Tags$Many(
+						_List_fromArray(
+							[
+								A2(
 								$author$project$Tags$Timed,
 								$author$project$Tags$ForSeconds(10),
 								A2(
 									$author$project$Tags$Once,
 									$author$project$Tags$Damage,
-									$author$project$Tags$RelativeMax(30)))),
-							$author$project$Tags$Team(
-							A2(
+									$author$project$Tags$RelativeMax(30))),
+								A2(
 								$author$project$Tags$Timed,
 								$author$project$Tags$ForSeconds(10),
 								A2(
 									$author$project$Tags$Once,
 									$author$project$Tags$ReloadSpeed,
-									$author$project$Tags$RelativeMax(20)))),
-							$author$project$Tags$Team(
-							A2(
+									$author$project$Tags$RelativeMax(20))),
+								A2(
 								$author$project$Tags$Timed,
 								$author$project$Tags$ForSeconds(10),
-								$author$project$Tags$Special('Unlimited ammo')))
-						])))
+								$author$project$Tags$Special('Unlimited ammo'))
+							]))))
 			]),
 		filename: '8_1_0.jpg',
 		id: 14,
@@ -5796,14 +5859,14 @@ var $author$project$CardData$rawCards = _List_fromArray(
 				A2(
 				$author$project$Tags$While,
 				$author$project$Tags$PlayerAimingDownSights,
-				$author$project$Tags$Special('Each second you Aim Down Sights increases your Damage by 10% (up to 3 stacks).'))
+				$author$project$Tags$Special('Each 0.75 seconds you Aim Down Sights increases your Damage by 10% (up to 3 stacks).'))
 			]),
 		filename: '10_0_3.jpg',
 		id: 15,
 		kind: 'Offense',
 		name: 'Patient Hunter',
 		properties: _List_fromArray(
-			['Each second you Aim Down Sights increases your Damage by 10% (up to 3 stacks).']),
+			['Each 0.75 seconds you Aim Down Sights increase your Damage by 10% (up to 3 stacks).']),
 		supplyLine: {index: 15, name: 'Fort Hope', tier: 1, track: 'Alley'},
 		totalCost: 0
 	},
@@ -5919,7 +5982,24 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Brawn',
 		cost: 45,
-		effects: _List_Nil,
+		effects: _List_fromArray(
+			[
+				A2(
+				$author$project$Tags$Passive,
+				$author$project$Tags$MeleeDamage,
+				$author$project$Tags$RelativeMax(20)),
+				A2(
+				$author$project$Tags$While,
+				$author$project$Tags$PlayerUsingMeleeWeapon,
+				A2(
+					$author$project$Tags$Passive,
+					$author$project$Tags$DamageResistance,
+					$author$project$Tags$RelativeMax(10))),
+				A2(
+				$author$project$Tags$Passive,
+				$author$project$Tags$AmmoCapacity,
+				$author$project$Tags$RelativeMax(-15))
+			]),
 		filename: '11_0_3.jpg',
 		id: 21,
 		kind: 'Offense',
@@ -5932,33 +6012,67 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Discipline',
 		cost: 70,
-		effects: _List_Nil,
+		effects: _List_fromArray(
+			[
+				A2(
+				$author$project$Tags$Passive,
+				$author$project$Tags$BulletDamage,
+				$author$project$Tags$RelativeMax(10)),
+				A2(
+				$author$project$Tags$Passive,
+				$author$project$Tags$EffectiveRange,
+				$author$project$Tags$RelativeMax(150))
+			]),
 		filename: '7_1_0.jpg',
 		id: 22,
 		kind: 'Offense',
 		name: 'Silver Bullets',
 		properties: _List_fromArray(
-			['+10% Bullet Damage', '+150% Bullet Penetration', 'When you kill a Mutation, you lose 5 Copper.']),
+			['+10% Bullet Damage', '+15% Effective Range']),
 		supplyLine: {index: 22, name: 'The Stilts', tier: 2, track: 'Alley'},
 		totalCost: 0
 	},
 		{
 		affinity: 'Reflex',
 		cost: 70,
-		effects: _List_Nil,
+		effects: _List_fromArray(
+			[
+				A2(
+				$author$project$Tags$Passive,
+				$author$project$Tags$AimSpeed,
+				$author$project$Tags$RelativeMax(80)),
+				A2(
+				$author$project$Tags$While,
+				$author$project$Tags$PlayerAimingDownSights,
+				$author$project$Tags$Special('Every 0.75 seconds gives 10% Recoil Control (up to 3 stacks)')),
+				A2(
+				$author$project$Tags$Passive,
+				$author$project$Tags$AimingDownSightsMoveSpeed,
+				$author$project$Tags$RelativeMax(-50))
+			]),
 		filename: '2_0_4.jpg',
 		id: 23,
 		kind: 'Offense',
 		name: 'Steady Aim',
 		properties: _List_fromArray(
-			['+80% Aim Speed', '-50% ADS Move Speed']),
+			['+80% Aim Speed', 'Every 0.75 seconds you Aim Down Sights gives 10% Recoil Control (up to 3 stacks)', '-50% ADS Move Speed']),
 		supplyLine: {index: 23, name: 'The Stilts', tier: 2, track: 'Alley'},
 		totalCost: 0
 	},
 		{
 		affinity: 'Fortune',
 		cost: 100,
-		effects: _List_Nil,
+		effects: _List_fromArray(
+			[
+				A2(
+				$author$project$Tags$Triggered,
+				$author$project$Tags$OnWeaponChanged,
+				$author$project$Tags$Special('Weapon reloads')),
+				A2(
+				$author$project$Tags$Passive,
+				$author$project$Tags$AmmoCapacity,
+				$author$project$Tags$RelativeMax(-15))
+			]),
 		filename: '15_0_2.jpg',
 		id: 24,
 		kind: 'Offense',
@@ -5971,7 +6085,13 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Fortune',
 		cost: 70,
-		effects: _List_Nil,
+		effects: _List_fromArray(
+			[
+				A2(
+				$author$project$Tags$Triggered,
+				$author$project$Tags$OnLootCopper,
+				$author$project$Tags$Special('You gain 3 additional Copper, stacking up to 75 additional Сopper'))
+			]),
 		filename: '15_1_4.jpg',
 		id: 25,
 		kind: 'Utility',
@@ -5984,7 +6104,18 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Fortune',
 		cost: 70,
-		effects: _List_Nil,
+		effects: _List_fromArray(
+			[
+				A2(
+				$author$project$Tags$Passive,
+				$author$project$Tags$Health,
+				$author$project$Tags$RelativeMax(-10)),
+				$author$project$Tags$Team(
+				A2(
+					$author$project$Tags$Passive,
+					$author$project$Tags$OffensiveAccessoryCount,
+					$author$project$Tags$AbsoluteMax(1)))
+			]),
 		filename: '14_1_1.jpg',
 		id: 26,
 		kind: 'Offense',
@@ -5997,7 +6128,11 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Discipline',
 		cost: 70,
-		effects: _List_Nil,
+		effects: _List_fromArray(
+			[
+				$author$project$Tags$Special('You can sense nearby weapons.'),
+				$author$project$Tags$Special('More weapons spawn.')
+			]),
 		filename: '10_0_1.jpg',
 		id: 27,
 		kind: 'Utility',
@@ -6010,7 +6145,16 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Discipline',
 		cost: 100,
-		effects: _List_Nil,
+		effects: _List_fromArray(
+			[
+				A2(
+				$author$project$Tags$Triggered,
+				$author$project$Tags$OnMeleeKill,
+				A2(
+					$author$project$Tags$Once,
+					$author$project$Tags$TemporaryHealth,
+					$author$project$Tags$AbsoluteCurrent(1)))
+			]),
 		filename: '8_1_1.jpg',
 		id: 28,
 		kind: 'Defense',
@@ -6023,7 +6167,14 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Discipline',
 		cost: 70,
-		effects: _List_Nil,
+		effects: _List_fromArray(
+			[
+				A2(
+				$author$project$Tags$Passive,
+				$author$project$Tags$Accuracy,
+				$author$project$Tags$RelativeMax(50)),
+				$author$project$Tags$Disables($author$project$Tags$AimingDownSights)
+			]),
 		filename: '6_1_4.jpg',
 		id: 29,
 		kind: 'Offense',
@@ -6036,7 +6187,19 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Brawn',
 		cost: 70,
-		effects: _List_Nil,
+		effects: _List_fromArray(
+			[
+				A2(
+				$author$project$Tags$Triggered,
+				$author$project$Tags$OnTakingPainMeds,
+				A2(
+					$author$project$Tags$Timed,
+					$author$project$Tags$ForSeconds(60),
+					A2(
+						$author$project$Tags$Passive,
+						$author$project$Tags$Damage,
+						$author$project$Tags$RelativeMax(25))))
+			]),
 		filename: '13_1_4.jpg',
 		id: 30,
 		kind: 'Offense',
@@ -6049,20 +6212,38 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Discipline',
 		cost: 150,
-		effects: _List_Nil,
+		effects: _List_fromArray(
+			[
+				$author$project$Tags$Special('Reloading a gun within 1 seconds of reaching low ammo will increase its magazine size by -30% until the next reload.')
+			]),
 		filename: '10_0_4.jpg',
 		id: 31,
 		kind: 'Offense',
 		name: 'Power reload',
 		properties: _List_fromArray(
-			['Reloading a gun within 0.75 seconds of reaching low ammo will increase its magazine size by -30% until the next reload.']),
+			['Reloading a gun within 1 second of reaching low ammo will increase its magazine size by -30% until the next reload.']),
 		supplyLine: {index: 31, name: 'Paul\'s Alley', tier: 3, track: 'Alley'},
 		totalCost: 0
 	},
 		{
 		affinity: 'Discipline',
 		cost: 100,
-		effects: _List_Nil,
+		effects: _List_fromArray(
+			[
+				A2(
+				$author$project$Tags$While,
+				$author$project$Tags$PlayerCrouching,
+				A2(
+					$author$project$Tags$Twin,
+					A2(
+						$author$project$Tags$Passive,
+						$author$project$Tags$DamageResistance,
+						$author$project$Tags$RelativeMax(10)),
+					A2(
+						$author$project$Tags$Passive,
+						$author$project$Tags$Accuracy,
+						$author$project$Tags$RelativeMax(40))))
+			]),
 		filename: '8_0_4.jpg',
 		id: 32,
 		kind: 'Defense',
@@ -6075,7 +6256,17 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Reflex',
 		cost: 150,
-		effects: _List_Nil,
+		effects: _List_fromArray(
+			[
+				A2(
+				$author$project$Tags$Passive,
+				$author$project$Tags$Damage,
+				$author$project$Tags$RelativeMax(25)),
+				A2(
+				$author$project$Tags$Passive,
+				$author$project$Tags$Health,
+				$author$project$Tags$RelativeMax(-30))
+			]),
 		filename: '4_1_3.jpg',
 		id: 33,
 		kind: 'Offense',
@@ -6088,7 +6279,10 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Discipline',
 		cost: 150,
-		effects: _List_Nil,
+		effects: _List_fromArray(
+			[
+				$author$project$Tags$Special('Mutations you ping are highlighted and your team deals 10% increased damage to highlighted enemies.')
+			]),
 		filename: '10_1_0.jpg',
 		id: 34,
 		kind: 'Utility',
@@ -6101,20 +6295,48 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Fortune',
 		cost: 100,
-		effects: _List_Nil,
+		effects: _List_fromArray(
+			[
+				A2(
+				$author$project$Tags$While,
+				$author$project$Tags$PlayerUsingPistol,
+				A2(
+					$author$project$Tags$RelativeChance,
+					3,
+					$author$project$Tags$Special('spawn ammo')))
+			]),
 		filename: '15_0_1.jpg',
 		id: 35,
 		kind: 'Utility',
 		name: 'Highwayman',
 		properties: _List_fromArray(
-			['Pistol kills have a 2% chance to spawn ammo.']),
+			['Pistol kills have a 3% chance to spawn ammo or a molotov or a molotov.']),
 		supplyLine: {index: 35, name: 'The Stilts', tier: 3, track: 'Alley'},
 		totalCost: 0
 	},
 		{
 		affinity: 'Brawn',
 		cost: 100,
-		effects: _List_Nil,
+		effects: _List_fromArray(
+			[
+				A2(
+				$author$project$Tags$Passive,
+				$author$project$Tags$MeleeDamageAgainstMutation,
+				$author$project$Tags$RelativeMax(20)),
+				A2(
+				$author$project$Tags$Triggered,
+				$author$project$Tags$OnDealingMeleeDamageTo($author$project$Tags$Mutation),
+				A2(
+					$author$project$Tags$Twin,
+					A2(
+						$author$project$Tags$Once,
+						$author$project$Tags$Health,
+						$author$project$Tags$AbsoluteCurrent(1)),
+					A2(
+						$author$project$Tags$Once,
+						$author$project$Tags$Stamina,
+						$author$project$Tags$AbsoluteCurrent(3))))
+			]),
 		filename: '12_0_3.jpg',
 		id: 36,
 		kind: 'Defense',
@@ -6127,7 +6349,17 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Brawn',
 		cost: 100,
-		effects: _List_Nil,
+		effects: _List_fromArray(
+			[
+				A2(
+				$author$project$Tags$Passive,
+				$author$project$Tags$ExplosiveDamage,
+				$author$project$Tags$RelativeMax(100)),
+				A2(
+				$author$project$Tags$Passive,
+				$author$project$Tags$ExplosiveResistance,
+				$author$project$Tags$RelativeMax(35))
+			]),
 		filename: '12_1_2.jpg',
 		id: 37,
 		kind: 'Offense',
@@ -6140,7 +6372,19 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Brawn',
 		cost: 100,
-		effects: _List_Nil,
+		effects: _List_fromArray(
+			[
+				A2(
+				$author$project$Tags$Triggered,
+				$author$project$Tags$OnKill($author$project$Tags$Ridden),
+				A2(
+					$author$project$Tags$InDistance,
+					2,
+					A2(
+						$author$project$Tags$Once,
+						$author$project$Tags$TemporaryHealth,
+						$author$project$Tags$AbsoluteCurrent(2))))
+			]),
 		filename: '13_0_1.jpg',
 		id: 38,
 		kind: 'Defense',
@@ -6153,33 +6397,70 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Discipline',
 		cost: 100,
-		effects: _List_Nil,
+		effects: _List_fromArray(
+			[
+				A2(
+				$author$project$Tags$Passive,
+				$author$project$Tags$Health,
+				$author$project$Tags$RelativeMax(-10)),
+				$author$project$Tags$Team(
+				A2(
+					$author$project$Tags$Passive,
+					$author$project$Tags$Lifes,
+					$author$project$Tags$AbsoluteMax(1)))
+			]),
 		filename: '8_1_4.jpg',
 		id: 39,
 		kind: 'Defense',
 		name: 'Needs of the Many',
 		properties: _List_fromArray(
-			['-20% Health', 'TEAM EFFECTS +1 Team Extra Life']),
+			['-10% Health', 'TEAM EFFECTS +1 Team Extra Life']),
 		supplyLine: {index: 39, name: 'The Stilts', tier: 3, track: 'Alley'},
 		totalCost: 0
 	},
 		{
 		affinity: 'Discipline',
 		cost: 100,
-		effects: _List_Nil,
+		effects: _List_fromArray(
+			[
+				A2(
+				$author$project$Tags$While,
+				$author$project$Tags$PlayerUsingRifle,
+				A2(
+					$author$project$Tags$Passive,
+					$author$project$Tags$Accuracy,
+					$author$project$Tags$RelativeMax(25))),
+				A2(
+				$author$project$Tags$While,
+				$author$project$Tags$PlayerUsingSniper,
+				A2(
+					$author$project$Tags$Passive,
+					$author$project$Tags$Accuracy,
+					$author$project$Tags$RelativeMax(25)))
+			]),
 		filename: '8_1_3.jpg',
 		id: 40,
 		kind: 'Offense',
 		name: 'Trigger Control',
 		properties: _List_fromArray(
-			['+25% Accuracy with Assault Rifles and Sniper Rifles.']),
+			['+25% Accuracy with Assault Rifles', '+25% Accuracy with Sniper Rifles']),
 		supplyLine: {index: 40, name: 'Fort Hope', tier: 3, track: 'Alley'},
 		totalCost: 0
 	},
 		{
 		affinity: 'Brawn',
 		cost: 70,
-		effects: _List_Nil,
+		effects: _List_fromArray(
+			[
+				A2(
+				$author$project$Tags$Passive,
+				$author$project$Tags$AccessoryDamage,
+				$author$project$Tags$RelativeMax(75)),
+				A2(
+				$author$project$Tags$Passive,
+				$author$project$Tags$SwapSpeed,
+				$author$project$Tags$RelativeMax(-25))
+			]),
 		filename: '12_0_0.jpg',
 		id: 41,
 		kind: 'Offense',
@@ -6192,7 +6473,14 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Reflex',
 		cost: 70,
-		effects: _List_Nil,
+		effects: _List_fromArray(
+			[
+				A2(
+				$author$project$Tags$Passive,
+				$author$project$Tags$WeakspotDamage,
+				$author$project$Tags$RelativeMax(30)),
+				$author$project$Tags$Disables($author$project$Tags$AimingDownSights)
+			]),
 		filename: '5_1_4.jpg',
 		id: 42,
 		kind: 'Offense',
@@ -6205,7 +6493,13 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Discipline',
 		cost: 100,
-		effects: _List_Nil,
+		effects: _List_fromArray(
+			[
+				A2(
+				$author$project$Tags$Triggered,
+				$author$project$Tags$OnPrecisionKill,
+				$author$project$Tags$Special('5% Reload Speed for 5 seconds (stacking up to 10 times'))
+			]),
 		filename: '8_1_2.jpg',
 		id: 43,
 		kind: 'Offense',
@@ -6218,7 +6512,19 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Discipline',
 		cost: 100,
-		effects: _List_Nil,
+		effects: _List_fromArray(
+			[
+				A2(
+				$author$project$Tags$While,
+				$author$project$Tags$PlayerAimingDownSights,
+				A2(
+					$author$project$Tags$While,
+					$author$project$Tags$PlayerUsingSniper,
+					A2(
+						$author$project$Tags$Passive,
+						$author$project$Tags$MoveSpeed,
+						$author$project$Tags$RelativeMax(40))))
+			]),
 		filename: '9_0_3.jpg',
 		id: 44,
 		kind: 'Mobility',
@@ -6231,7 +6537,16 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Discipline',
 		cost: 100,
-		effects: _List_Nil,
+		effects: _List_fromArray(
+			[
+				A2(
+				$author$project$Tags$While,
+				$author$project$Tags$PlayerUsingShotgun,
+				A2(
+					$author$project$Tags$Passive,
+					$author$project$Tags$ReloadSpeed,
+					$author$project$Tags$RelativeMax(40)))
+			]),
 		filename: '9_0_2.jpg',
 		id: 45,
 		kind: 'Offense',
@@ -6439,13 +6754,19 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Brawn',
 		cost: 70,
-		effects: _List_Nil,
+		effects: _List_fromArray(
+			[
+				A2(
+				$author$project$Tags$Once,
+				$author$project$Tags$TraumaDamage,
+				$author$project$Tags$AbsoluteCurrent(-15))
+			]),
 		filename: '13_1_1.jpg',
 		id: 61,
 		kind: 'Defense',
 		name: 'Fresh Bandage',
 		properties: _List_fromArray(
-			['Heal 10 Trauma Damage at the start of each level.']),
+			['Heal 15 Trauma Damage at the start of each level.']),
 		supplyLine: {index: 19, name: 'Grant\'s Brew House', tier: 1, track: 'Clinic'},
 		totalCost: 0
 	},
@@ -6465,26 +6786,37 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Reflex',
 		cost: 45,
-		effects: _List_Nil,
+		effects: _List_fromArray(
+			[
+				$author$project$Tags$Special('While reviving teammates, take 3 less damage from all Ridden.'),
+				$author$project$Tags$Special('Heals teammates for an additional 10 Health when you revive them.')
+			]),
 		filename: '2_1_4.jpg',
 		id: 63,
 		kind: 'Utility',
 		name: 'Pep Talk',
 		properties: _List_fromArray(
-			['+150% Revive Speed', '-5% Damage Resistance']),
+			['While reviving teammates, take 3 less damage from all Ridden.', 'Heals teammates for an additional 10 Health when you revive them.']),
 		supplyLine: {index: 21, name: 'The Clinic', tier: 2, track: 'Clinic'},
 		totalCost: 0
 	},
 		{
 		affinity: 'Brawn',
 		cost: 100,
-		effects: _List_Nil,
+		effects: _List_fromArray(
+			[
+				$author$project$Tags$Team(
+				A2(
+					$author$project$Tags$Passive,
+					$author$project$Tags$Health,
+					$author$project$Tags$AbsoluteMax(10)))
+			]),
 		filename: '13_0_2.jpg',
 		id: 64,
 		kind: 'Defense',
 		name: 'Well Fed',
 		properties: _List_fromArray(
-			['-20% Stamina Regen', 'TEAM EFFECTS +10 Team Health']),
+			['TEAM EFFECTS +10 Team Health']),
 		supplyLine: {index: 22, name: 'The Clinic', tier: 2, track: 'Clinic'},
 		totalCost: 0
 	},
@@ -6582,26 +6914,50 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Brawn',
 		cost: 70,
-		effects: _List_Nil,
+		effects: _List_fromArray(
+			[
+				A2(
+				$author$project$Tags$Passive,
+				$author$project$Tags$TraumaResistance,
+				$author$project$Tags$RelativeMax(40)),
+				A2(
+				$author$project$Tags$Passive,
+				$author$project$Tags$FireResistance,
+				$author$project$Tags$RelativeMax(-100)),
+				A2(
+				$author$project$Tags$Passive,
+				$author$project$Tags$AcidResistance,
+				$author$project$Tags$RelativeMax(-100))
+			]),
 		filename: '11_1_2.jpg',
 		id: 72,
 		kind: 'Defense',
 		name: 'Wooden Armor',
 		properties: _List_fromArray(
-			['+40% Trauma Resistance', '-100% Fire Resistance', '-100% Acid Resistance', '-100% Explosion Resistance']),
+			['+40% Trauma Resistance', '-100% Fire Resistance', '-100% Acid Resistance']),
 		supplyLine: {index: 30, name: 'Grant\'s Brew House', tier: 2, track: 'Clinic'},
 		totalCost: 0
 	},
 		{
 		affinity: 'Discipline',
 		cost: 70,
-		effects: _List_Nil,
+		effects: _List_fromArray(
+			[
+				$author$project$Tags$Team(
+				A2(
+					$author$project$Tags$While,
+					$author$project$Tags$PlayerUsingMedicalAccessory,
+					A2(
+						$author$project$Tags$Passive,
+						$author$project$Tags$Health,
+						$author$project$Tags$AbsoluteCurrent(8))))
+			]),
 		filename: '9_1_2.jpg',
 		id: 73,
 		kind: 'Defense',
 		name: 'Group Therapy',
 		properties: _List_fromArray(
-			['When you use a Medical Accessory, all teammates heal for 5 Health.']),
+			['When you use a Medical Accessory, all teammates heal for 8 Health.']),
 		supplyLine: {index: 31, name: 'The Clinic', tier: 3, track: 'Clinic'},
 		totalCost: 0
 	},
@@ -6634,13 +6990,23 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Fortune',
 		cost: 100,
-		effects: _List_Nil,
+		effects: _List_fromArray(
+			[
+				A2(
+				$author$project$Tags$Once,
+				$author$project$Tags$Lifes,
+				$author$project$Tags$AbsoluteCurrent(1)),
+				A2(
+				$author$project$Tags$Passive,
+				$author$project$Tags$TraumaResistance,
+				$author$project$Tags$RelativeMax(15))
+			]),
 		filename: '15_1_0.jpg',
 		id: 76,
 		kind: 'Defense',
 		name: 'Life Insurance',
 		properties: _List_fromArray(
-			['+2 Extra Life', 'Lose 50 Copper at the start of each level.']),
+			['+1 Extra Life', '+15% Reduced Incap Trauma']),
 		supplyLine: {index: 34, name: 'The Clinic', tier: 3, track: 'Clinic'},
 		totalCost: 0
 	},
@@ -6705,7 +7071,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		kind: 'Offense',
 		name: 'Line \'em Up',
 		properties: _List_fromArray(
-			['+100% Bullet Penetration with Assault Rifles.']),
+			['+10% Effective Bullet Range', '+15% Recoil Control', '+25% Bullet Penetration', '+25% Aim Speed']),
 		supplyLine: {index: 39, name: 'Grant\'s Brew House', tier: 3, track: 'Clinic'},
 		totalCost: 0
 	},
@@ -6738,26 +7104,43 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Discipline',
 		cost: 75,
-		effects: _List_Nil,
+		effects: _List_fromArray(
+			[
+				$author$project$Tags$Special('When you use a Medical Accessory, the target gains +10% Maximum Health, Stamina, and Stamina Regen until the end of the level.')
+			]),
 		filename: '10_1_3.jpg',
 		id: 84,
 		kind: 'Defense',
 		name: 'Experienced EMT',
 		properties: _List_fromArray(
-			['When you use a Medical Accessory, the target gains +20% Maximum Health until the end of the level.']),
+			['When you use a Medical Accessory, the target gains +10% Maximum Health, Stamina, and Stamina Regen until the end of the level.']),
 		supplyLine: {index: 42, name: 'The Clinic', tier: 4, track: 'Clinic'},
 		totalCost: 0
 	},
 		{
 		affinity: 'Fortune',
 		cost: 75,
-		effects: _List_Nil,
+		effects: _List_fromArray(
+			[
+				A2(
+				$author$project$Tags$Once,
+				$author$project$Tags$Health,
+				$author$project$Tags$AbsoluteCurrent(15)),
+				A2(
+				$author$project$Tags$Once,
+				$author$project$Tags$TraumaDamage,
+				$author$project$Tags$AbsoluteCurrent(7)),
+				A2(
+				$author$project$Tags$Once,
+				$author$project$Tags$AmmoRefill,
+				$author$project$Tags$RelativeMax(10))
+			]),
 		filename: '16_1_0.jpg',
 		id: 85,
 		kind: 'Defense',
 		name: 'Saferoom Recovery',
 		properties: _List_fromArray(
-			['Your team heals 5 Trauma Damage and refills 10% Ammo at the start of each level.']),
+			['Your team heals 15 Health, 7 Trauma Damage and refills 10% Ammo at the start of each level.']),
 		supplyLine: {index: 43, name: 'The Clinic', tier: 4, track: 'Clinic'},
 		totalCost: 0
 	},
@@ -6848,7 +7231,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		kind: 'Mobility',
 		name: 'Evasive Action',
 		properties: _List_fromArray(
-			['When you take a hit for 10 or more damage, gain 20% Move Speed for 3 seconds.']),
+			['When you take a hit for 10 or more damage, gain 15% Move Speed for 3 seconds.']),
 		supplyLine: {index: 5, name: 'The Crow\'s Nest', tier: 1, track: 'Nest'},
 		totalCost: 0
 	},
@@ -6881,13 +7264,23 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Discipline',
 		cost: 30,
-		effects: _List_Nil,
+		effects: _List_fromArray(
+			[
+				A2(
+				$author$project$Tags$Passive,
+				$author$project$Tags$StaminaRegeneration,
+				$author$project$Tags$RelativeMax(30)),
+				A2(
+				$author$project$Tags$Passive,
+				$author$project$Tags$Health,
+				$author$project$Tags$AbsoluteMax(5))
+			]),
 		filename: '7_1_4.jpg',
 		id: 95,
 		kind: 'Mobility',
 		name: 'Energy Bar',
 		properties: _List_fromArray(
-			['+20% Stamina Regeneration', '+5 Health']),
+			['+30% Stamina Regeneration', '+5 Health']),
 		supplyLine: {index: 8, name: 'Bridge Town', tier: 1, track: 'Nest'},
 		totalCost: 0
 	},
@@ -6965,7 +7358,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		kind: 'Mobility',
 		name: 'Fleet of Foot',
 		properties: _List_fromArray(
-			['+10% Move Speed', '-5% Damage Resistance']),
+			['+8% Move Speed', '-7% Damage Resistance']),
 		supplyLine: {index: 14, name: 'Knuckle House', tier: 1, track: 'Nest'},
 		totalCost: 0
 	},
@@ -6978,7 +7371,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		kind: 'Mobility',
 		name: 'Pep In Your Step',
 		properties: _List_fromArray(
-			['Precision Kills grant you 10% Move Speed for 5 seconds.']),
+			['Precision Kills grant you 8% Move Speed for 5 seconds.']),
 		supplyLine: {index: 15, name: 'Knuckle House', tier: 1, track: 'Nest'},
 		totalCost: 0
 	},
@@ -6998,13 +7391,27 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Reflex',
 		cost: 45,
-		effects: _List_Nil,
+		effects: _List_fromArray(
+			[
+				A2(
+				$author$project$Tags$Passive,
+				$author$project$Tags$AimSpeed,
+				$author$project$Tags$RelativeMax(50)),
+				A2(
+				$author$project$Tags$Passive,
+				$author$project$Tags$DamageResistance,
+				$author$project$Tags$RelativeMax(-5)),
+				A2(
+				$author$project$Tags$While,
+				$author$project$Tags$PlayerAimingDownSights,
+				$author$project$Tags$Special('Every 0.75 seconds gives 5% Weakspot Damage (up to 3 stacks).'))
+			]),
 		filename: '2_0_3.jpg',
 		id: 104,
 		kind: 'Offense',
 		name: 'Tunnel Vision',
 		properties: _List_fromArray(
-			['+50% Aim Speed', '-5% Damage Resistance']),
+			['+50% Aim Speed', '-5% Damage Resistance', 'Every 0.75 seconds you Aim Down Sights gives 5% Weakspot Damage (up to 3 stacks).']),
 		supplyLine: {index: 17, name: 'The Crow\'s Nest', tier: 2, track: 'Nest'},
 		totalCost: 0
 	},
@@ -7017,7 +7424,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		kind: 'Mobility',
 		name: 'Energy Drink',
 		properties: _List_fromArray(
-			['+40% Stamina', '-5% Damage Resistance']),
+			['+15% Stamina', '+25% Weapon Swap Speed', '+15% Move Speed while firing', '+10% Slow Resistance']),
 		supplyLine: {index: 18, name: 'The Crow\'s Nest', tier: 2, track: 'Nest'},
 		totalCost: 0
 	},
@@ -7030,7 +7437,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		kind: 'Mobility',
 		name: 'Marathon Runner',
 		properties: _List_fromArray(
-			['No Movement Penalty for strafe and backpedal.', 'DISABLES: Sprint']),
+			['No Movement Penalty for strafe and backpedal.']),
 		supplyLine: {index: 19, name: 'The Crow\'s Nest', tier: 2, track: 'Nest'},
 		totalCost: 0
 	},
@@ -7069,7 +7476,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		kind: 'Mobility',
 		name: 'Olympic Sprinter',
 		properties: _List_fromArray(
-			['+30% Sprint Efficiency', '-5% Damage Resistance']),
+			['+30% Sprint Efficiency', '-7% Damage Resistance']),
 		supplyLine: {index: 22, name: 'Bridge Town', tier: 2, track: 'Nest'},
 		totalCost: 0
 	},
@@ -7115,7 +7522,14 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Reflex',
 		cost: 100,
-		effects: _List_Nil,
+		effects: _List_fromArray(
+			[
+				$author$project$Tags$Team(
+				A2(
+					$author$project$Tags$Passive,
+					$author$project$Tags$Stamina,
+					$author$project$Tags$RelativeMax(15)))
+			]),
 		filename: '4_1_0.jpg',
 		id: 113,
 		kind: 'Mobility',
@@ -7134,7 +7548,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		kind: 'Utility',
 		name: 'Mugger',
 		properties: _List_fromArray(
-			['Melee kills have a 2% chance to spawn ammo.']),
+			['Melee kills have a 3% chance to spawn ammo or razorwire.']),
 		supplyLine: {index: 27, name: 'Knuckle House', tier: 2, track: 'Nest'},
 		totalCost: 0
 	},
@@ -7173,7 +7587,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		kind: 'Mobility',
 		name: 'Stimulants',
 		properties: _List_fromArray(
-			['Pain Meds you apply also grant +10% Move Speed, + 10% Reload Speed, and + 10% Weapon Swap Speed for 30 seconds.']),
+			['Pain Meds you apply also grant +20% Stamina Regeneration, + 15% Reload Speed, and + 15% Weapon Swap Speed for 30 seconds.']),
 		supplyLine: {index: 30, name: 'The Crow\'s Nest', tier: 3, track: 'Nest'},
 		totalCost: 0
 	},
@@ -7225,7 +7639,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		kind: 'Mobility',
 		name: 'Run Like Hell',
 		properties: _List_fromArray(
-			['+15% Move Speed', 'When you take damage, your Accuracy is reduced by 20% for 3 seconds.']),
+			['+12% Move Speed', 'When you take damage, your Move Speed bonus is lost for 3 seconds.']),
 		supplyLine: {index: 34, name: 'Bridge Town', tier: 3, track: 'Nest'},
 		totalCost: 0
 	},
@@ -7238,7 +7652,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		kind: 'Offense',
 		name: 'Power Swap',
 		properties: _List_fromArray(
-			['Changing weapons within 0.75 seconds of reaching low ammo grants +20% Damage for 5 seconds.']),
+			['Changing weapons within 1 second of reaching low ammo grants +20% Damage for 5 seconds.']),
 		supplyLine: {index: 35, name: 'Bridge Town', tier: 3, track: 'Nest'},
 		totalCost: 0
 	},
@@ -7251,7 +7665,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		kind: 'Mobility',
 		name: 'Rhythmic Breathing',
 		properties: _List_fromArray(
-			['+60% Stamina', '-20% Slow Resistance']),
+			['+40% Stamina']),
 		supplyLine: {index: 36, name: 'Bridge Town', tier: 3, track: 'Nest'},
 		totalCost: 0
 	},
@@ -7303,20 +7717,33 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		kind: 'Mobility',
 		name: 'Cold Brew Coffee',
 		properties: _List_fromArray(
-			['+40% Stamina Regeneration', '-10% Stamina Efficiency']),
+			['+25% Aim Speed', '+25% Weapon Swap Speed', '+25% Use Speed', '+15% Reload Speed']),
 		supplyLine: {index: 40, name: 'Knuckle House', tier: 3, track: 'Nest'},
 		totalCost: 0
 	},
 		{
 		affinity: 'Reflex',
 		cost: 70,
-		effects: _List_Nil,
+		effects: _List_fromArray(
+			[
+				A2(
+				$author$project$Tags$Passive,
+				$author$project$Tags$WeakspotDamage,
+				$author$project$Tags$RelativeMax(50)),
+				A2(
+				$author$project$Tags$While,
+				$author$project$Tags$PlayerAttacking,
+				A2(
+					$author$project$Tags$Passive,
+					$author$project$Tags$MoveSpeed,
+					$author$project$Tags$RelativeMax(-40)))
+			]),
 		filename: '2_0_1.jpg',
 		id: 128,
 		kind: 'Offense',
 		name: 'Hyper-Focused',
 		properties: _List_fromArray(
-			['+50% Weakspot Damage', '-75% ADS Move Speed.']),
+			['+50% Weakspot Damage', '-40% Move Speed while shooting or melee attacking.']),
 		supplyLine: {index: 41, name: 'Knuckle House', tier: 3, track: 'Nest'},
 		totalCost: 0
 	},
@@ -7336,7 +7763,16 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Fortune',
 		cost: 100,
-		effects: _List_Nil,
+		effects: _List_fromArray(
+			[
+				A2(
+				$author$project$Tags$Triggered,
+				$author$project$Tags$OnKill($author$project$Tags$Mutation),
+				A2(
+					$author$project$Tags$Passive,
+					$author$project$Tags$Copper,
+					$author$project$Tags$AbsoluteCurrent(10)))
+			]),
 		filename: '15_0_3.jpg',
 		id: 130,
 		kind: 'Utility',
@@ -7355,7 +7791,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		kind: 'Mobility',
 		name: 'Speed Demon',
 		properties: _List_fromArray(
-			['+6% Move Speed while using an SMG.', '+35% Reload Speed while using an SMG.']),
+			['+4% Move Speed while using an SMG.', '+35% Reload Speed while using an SMG.']),
 		supplyLine: {index: 44, name: 'Crow\'s Nest', tier: 4, track: 'Nest'},
 		totalCost: 0
 	},
@@ -7394,7 +7830,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		kind: 'Mobility',
 		name: 'Mad Dash',
 		properties: _List_fromArray(
-			['+20% Sprint Speed', '-30% Sprint Stamina Efficiency']),
+			['+20% Sprint Speed', '-40% Sprint Stamina Efficiency']),
 		supplyLine: {index: 47, name: 'The Crow\'s Nest', tier: 5, track: 'Nest'},
 		totalCost: 0
 	},
@@ -7544,13 +7980,25 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		{
 		affinity: 'Reflex',
 		cost: 0,
-		effects: _List_Nil,
+		effects: _List_fromArray(
+			[
+				A2(
+				$author$project$Tags$Triggered,
+				$author$project$Tags$OnKill($author$project$Tags$AnyEnemy),
+				A2(
+					$author$project$Tags$OverTime,
+					7,
+					A2(
+						$author$project$Tags$Passive,
+						$author$project$Tags$Stamina,
+						$author$project$Tags$AbsoluteCurrent(7))))
+			]),
 		filename: '5_0_1.jpg',
 		id: 146,
 		kind: 'Offense',
 		name: 'Adrenaline Fueled',
 		properties: _List_fromArray(
-			['+100% Stamina', '-75% Stamina Regeneration', 'When you kill an enemy, gain 10 Stamina instantly and an additional 10 Stamina over 5 seconds.']),
+			['When you kill an enemy, gain 7 Stamina over 7 seconds, stacking up to 5 times.']),
 		supplyLine: {index: -1, name: 'Achievement', tier: 1, track: 'Accomplishment'},
 		totalCost: 0
 	},
@@ -12312,6 +12760,309 @@ var $author$project$Main$inventoryToggleButton = A2(
 				]))
 		]));
 var $rundis$elm_bootstrap$Bootstrap$Utilities$Border$dark = A2($rundis$elm_bootstrap$Bootstrap$Internal$Role$toClass, 'border', $rundis$elm_bootstrap$Bootstrap$Internal$Role$Dark);
+var $elm$core$List$concatMap = F2(
+	function (f, list) {
+		return $elm$core$List$concat(
+			A2($elm$core$List$map, f, list));
+	});
+var $elm_community$list_extra$List$Extra$andThen = $elm$core$List$concatMap;
+var $author$project$Tags$changeToString = function (change) {
+	var formatSignI = function (c) {
+		return (c > 0) ? ('+' + $elm$core$String$fromInt(c)) : $elm$core$String$fromInt(c);
+	};
+	var formatSignF = function (c) {
+		return (c > 0) ? ('+' + $elm$core$String$fromFloat(c)) : $elm$core$String$fromFloat(c);
+	};
+	switch (change.$) {
+		case 'AbsoluteCurrent':
+			var c = change.a;
+			return formatSignI(c);
+		case 'AbsoluteMax':
+			var c = change.a;
+			return formatSignI(c);
+		case 'RelativeMax':
+			var c = change.a;
+			return formatSignF(c) + '%';
+		case 'RelativeCurrent':
+			var c = change.a;
+			return formatSignI(c) + '%';
+		default:
+			return 'DISABLES';
+	}
+};
+var $author$project$Tags$playerStateToString = function (state) {
+	switch (state.$) {
+		case 'PlayerAimingDownSights':
+			return 'aiming down sights';
+		case 'PlayerCrouching':
+			return 'crouching';
+		case 'PlayerUsingMeleeWeapon':
+			return 'using a melee weapon ';
+		case 'PlayerUsingSniper':
+			return 'using a sniper rifle';
+		case 'PlayerUsingLmg':
+			return 'using a LMG';
+		case 'PlayerUsingRifle':
+			return 'using an assault rifle';
+		case 'PlayerUsingSmg':
+			return 'using an smg';
+		case 'PlayerUsingPistol':
+			return 'using a pistol';
+		case 'PlayerUsingShotgun':
+			return 'using a shotgun';
+		case 'PlayerUsingMedicalAccessory':
+			return 'using a medical accessory';
+		default:
+			return 'while shooting or melee attacking';
+	}
+};
+var $author$project$Tags$statToString = function (stat) {
+	switch (stat.$) {
+		case 'Stamina':
+			return 'stamina';
+		case 'StaminaRegeneration':
+			return 'stamina regeneration';
+		case 'StaminaEfficiency':
+			return 'stamina efficiency';
+		case 'Health':
+			return 'health';
+		case 'Attack':
+			return 'attack';
+		case 'MeleeDamage':
+			return 'melee damage';
+		case 'MeleeStaminaEfficiency':
+			return 'melee stamina efficiency';
+		case 'MeleeAttackSpeed':
+			return 'melee attack speed';
+		case 'WeaponSwapSpeed':
+			return 'weapon swap speed';
+		case 'Accuracy':
+			return 'accuracy';
+		case 'Healing':
+			return 'healing';
+		case 'MoveSpeed':
+			return 'move speed';
+		case 'Damage':
+			return 'damage';
+		case 'MeleeDamageAgainstMutation':
+			return 'melee damage against mutation';
+		case 'DamageResistance':
+			return 'damage resistance';
+		case 'BulletDamage':
+			return 'bullet damage';
+		case 'BulletPenetration':
+			return 'bullet penetration';
+		case 'AmmoCapacity':
+			return 'ammo capacity';
+		case 'AimSpeed':
+			return 'aim speed';
+		case 'AimingDownSightsMoveSpeed':
+			return 'ads move speed';
+		case 'OffensiveAccessoryCount':
+			return 'offensive accessory count';
+		case 'DefensiveAccessoryCount':
+			return 'defensive accessory count';
+		case 'MedicalAccessoryCount':
+			return 'medial accessory count';
+		case 'SupportAccessoryCount':
+			return 'support accessory count';
+		case 'AccessoryDamage':
+			return 'accessory damage';
+		case 'ReloadSpeed':
+			return 'reload speed';
+		case 'SwapSpeed':
+			return 'swap speed';
+		case 'Copper':
+			return 'copper';
+		case 'TemporaryHealth':
+			return 'temporary health';
+		case 'ExplosiveDamage':
+			return 'explosive damage';
+		case 'ExplosiveResistance':
+			return 'explosive resistance';
+		case 'FireDamage':
+			return 'fire damage';
+		case 'Lifes':
+			return 'lifes';
+		case 'WeakspotDamage':
+			return 'weakspot damage';
+		case 'BulletStumble':
+			return 'bullet stumble damage';
+		case 'MeleeStumble':
+			return 'melee stumble damage';
+		case 'EffectiveRange':
+			return 'effective range';
+		case 'TraumaDamage':
+			return 'trauma damage';
+		case 'TraumaResistance':
+			return 'trauma resistance';
+		case 'AmmoRefill':
+			return 'ammo refill';
+		case 'FireResistance':
+			return 'fire resistance';
+		default:
+			return 'acid resistance';
+	}
+};
+var $author$project$Tags$enemyTargetTypeToString = function (enemy) {
+	switch (enemy.$) {
+		case 'AnyEnemy':
+			return 'enemy';
+		case 'Ridden':
+			return 'Ridden';
+		default:
+			return 'Mutation';
+	}
+};
+var $author$project$Tags$friendlyTargetTypeToString = function (friendly) {
+	switch (friendly.$) {
+		case 'Self':
+			return 'you';
+		case 'Teammate':
+			return 'a teammate';
+		default:
+			return 'you or a teammate';
+	}
+};
+var $author$project$Tags$triggerToString = function (trigger) {
+	switch (trigger.$) {
+		case 'Always':
+			return 'always';
+		case 'OnKill':
+			if (trigger.a.$ === 'AnyEnemy') {
+				var _v1 = trigger.a;
+				return 'when you kill an enemy';
+			} else {
+				var e = trigger.a;
+				return 'you kill a ' + $author$project$Tags$enemyTargetTypeToString(e);
+			}
+		case 'OnIncapacitated':
+			if (trigger.a.$ === 'Self') {
+				var _v2 = trigger.a;
+				return 'you become incapacitated your teammates gain';
+			} else {
+				var o = trigger.a;
+				return $author$project$Tags$friendlyTargetTypeToString(o) + ' becomes incapacitated you and your remaining teammates gain';
+			}
+		case 'OnWeaponChanged':
+			return 'stow/change our weapon';
+		case 'OnLootCopper':
+			return 'loot copper';
+		case 'OnMeleeKill':
+			return 'melee kills';
+		case 'OnTakingPainMeds':
+			return 'Pain meds you apply also grant';
+		case 'OnDealingDamageTo':
+			if (trigger.a.$ === 'AnyEnemy') {
+				var _v3 = trigger.a;
+				return 'dealing damage to an enemy';
+			} else {
+				var enemyTargetType = trigger.a;
+				return 'dealing damage to a ' + $author$project$Tags$enemyTargetTypeToString(enemyTargetType);
+			}
+		case 'OnDealingMeleeDamageTo':
+			if (trigger.a.$ === 'AnyEnemy') {
+				var _v4 = trigger.a;
+				return 'dealing melee damage to an enemy';
+			} else {
+				var enemyTargetType = trigger.a;
+				return 'dealing melee damage to a ' + $author$project$Tags$enemyTargetTypeToString(enemyTargetType);
+			}
+		default:
+			return 'precision kills';
+	}
+};
+var $author$project$Tags$effectToString = function (ef) {
+	switch (ef.$) {
+		case 'Passive':
+			var stat = ef.a;
+			var change = ef.b;
+			return $author$project$Tags$changeToString(change) + (' ' + $author$project$Tags$statToString(stat));
+		case 'Once':
+			var stat = ef.a;
+			var change = ef.b;
+			return $author$project$Tags$changeToString(change) + (' ' + $author$project$Tags$statToString(stat));
+		case 'Timed':
+			var duration = ef.a;
+			var effect = ef.b;
+			var d = function () {
+				if (duration.$ === 'Infinite') {
+					return 'for the rest of the round';
+				} else {
+					var s = duration.a;
+					return 'for ' + ($elm$core$String$fromInt(s) + ' seconds');
+				}
+			}();
+			return $author$project$Tags$effectToString(effect) + (' ' + d);
+		case 'Delayed':
+			var duration = ef.a;
+			var effect = ef.b;
+			var d = function () {
+				if (duration.$ === 'Infinite') {
+					return 'at the end of the round';
+				} else {
+					var s = duration.a;
+					return 'after ' + ($elm$core$String$fromInt(s) + ' seconds');
+				}
+			}();
+			return d + (' ' + $author$project$Tags$effectToString(effect));
+		case 'OverTime':
+			var _int = ef.a;
+			var effect = ef.b;
+			return $author$project$Tags$effectToString(effect) + (' over ' + ($elm$core$String$fromInt(_int) + ' seconds'));
+		case 'Triggered':
+			var trigger = ef.a;
+			var effect = ef.b;
+			return 'when ' + ($author$project$Tags$triggerToString(trigger) + (' ' + $author$project$Tags$effectToString(effect)));
+		case 'While':
+			var playerState = ef.a;
+			var effect = ef.b;
+			return 'While ' + ($author$project$Tags$playerStateToString(playerState) + (' gain ' + $author$project$Tags$effectToString(effect)));
+		case 'Twin':
+			var effect1 = ef.a;
+			var effect2 = ef.b;
+			return $author$project$Tags$effectToString(effect1) + (', ' + $author$project$Tags$effectToString(effect2));
+		case 'Special':
+			var string = ef.a;
+			return string;
+		case 'Team':
+			var effect = ef.a;
+			return 'TEAM EFFECT: ' + $author$project$Tags$effectToString(effect);
+		case 'Disables':
+			var stat = ef.a;
+			var s = function () {
+				switch (stat.$) {
+					case 'AimingDownSights':
+						return 'ads';
+					case 'Sprinting':
+						return 'sprinting';
+					case 'SupportAccessory':
+						return 'support accessory';
+					case 'OffensiveAccessory':
+						return 'offensive accessory';
+					case 'DealingFriendlyFire':
+						return 'dealing friendly fire';
+					default:
+						return 'taking friendly fire';
+				}
+			}();
+			return 'DISABLES: ' + s;
+		case 'Many':
+			var effects = ef.a;
+			return A2(
+				$elm$core$String$join,
+				', ',
+				A2($elm$core$List$map, $author$project$Tags$effectToString, effects));
+		case 'RelativeChance':
+			var _int = ef.a;
+			var effect = ef.b;
+			return 'have a ' + ($elm$core$String$fromInt(_int) + ('% chance to ' + $author$project$Tags$effectToString(effect)));
+		default:
+			var _int = ef.a;
+			var effect = ef.b;
+			return 'within ' + ($elm$core$String$fromInt(_int) + (' meters ' + $author$project$Tags$effectToString(effect)));
+	}
+};
 var $author$project$Main$inventorySummaryView = function (cards) {
 	var properties = $elm$core$List$concat(
 		A2(
@@ -12325,6 +13076,12 @@ var $author$project$Main$inventorySummaryView = function (cards) {
 					c.properties);
 			},
 			cards));
+	var effects = A2(
+		$elm_community$list_extra$List$Extra$andThen,
+		function (c) {
+			return A2($elm$core$List$map, $author$project$Tags$effectToString, c.effects);
+		},
+		cards);
 	return _List_fromArray(
 		[
 			A2(
@@ -12347,7 +13104,7 @@ var $author$project$Main$inventorySummaryView = function (cards) {
 										$elm$html$Html$text(p)
 									]));
 						},
-						properties))
+						effects))
 				]))
 		]);
 };

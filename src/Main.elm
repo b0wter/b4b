@@ -34,6 +34,7 @@ import Bootstrap.Grid.Row as Row
 import Browser.Navigation as Nav exposing (Key)
 import Maybe.Extra as Maybe
 import QS as QS
+import Tags exposing (effectToString)
 import Task
 import Url exposing (Url)
 import Browser exposing (UrlRequest)
@@ -788,9 +789,12 @@ inventorySummaryView cards =
             cards
             |> List.map (\c -> c.properties |> List.map (\p -> p.description))
             |> List.concat
+        effects =
+            cards
+            |> List.andThen (\c -> c.effects |> List.map effectToString)
     in
     [ Grid.col [ Col.xs12 ]
-        [ Html.ul [] (properties |> List.map (\p -> Html.li [] [ text p ])) ]
+        [ Html.ul [] (effects |> List.map (\p -> Html.li [] [ text p ])) ]
     ]
 
 

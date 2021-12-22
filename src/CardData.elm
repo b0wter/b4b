@@ -13,11 +13,13 @@ rawCards =
       , filename = "7_0_3.jpg"
       , properties =
             [ "+5% Bullet Damage"
-            , "+50% Bullet Penetration"
+            , "+1 Bullet Stumble"
+            , "+5 Melee Stumble"
             ]
       , effects =
             [ Passive BulletDamage (RelativeMax 5)
-            , Passive BulletPenetration (RelativeMax 50)
+            , Passive BulletStumble (AbsoluteMax 1)
+            , Passive MeleeStumble (AbsoluteMax 5)
             ]
       , supplyLine =
             { track = "Alley"
@@ -137,13 +139,11 @@ rawCards =
       , filename = "7_0_4.jpg"
       , properties =
             [ "+7.5% Bullet Damage"
-            , "+100% Bullet Penetration"
-            , "-20% Stamina Efficiency"
+            , "+200% Bullet Penetration"
             ]
       , effects =
             [ Passive BulletDamage (RelativeMax 7.5)
-            , Passive BulletPenetration (RelativeMax 100)
-            , Passive StaminaEfficiency (RelativeMax -20)
+            , Passive BulletPenetration (RelativeMax 200)
             ]
       , supplyLine =
             { track = "Alley"
@@ -205,11 +205,11 @@ rawCards =
       , filename = "6_1_1.jpg"
       , properties =
             [ "+75% Ammo Capacity"
-            , "DISABLES: Support Accessories"
+            , "-5% Move Speed"
             ]
       , effects =
             [ Passive AmmoCapacity (RelativeMax 75)
-            , Disables SupportAccessory
+            , Passive MoveSpeed (RelativeMax -5)
             ]
       , supplyLine =
             { track = "Alley"
@@ -294,13 +294,13 @@ rawCards =
             [ "TEAM EFFECTS When you or a teammate becomes incapacitated, all teammates gain 30% Damage,20% Reload Speed, and Unlimited Ammo for 10 seconds."
             ]
       , effects =
-            [ Triggered
-                OnTeammateOrSelfIncapacitated (
+            [ Team (Triggered
+                (OnIncapacitated SelfOrTeammate) (
                     Many
-                    [ Team (Timed (ForSeconds 10) (Once Damage (RelativeMax 30)))
-                    , Team (Timed (ForSeconds 10) (Once ReloadSpeed (RelativeMax 20)))
-                    , Team (Timed (ForSeconds 10) (Special "Unlimited ammo"))
-                    ])
+                    [ Timed (ForSeconds 10) (Once Damage (RelativeMax 30))
+                    , Timed (ForSeconds 10) (Once ReloadSpeed (RelativeMax 20))
+                    , Timed (ForSeconds 10) (Special "Unlimited ammo")
+                    ]))
             ]
       , supplyLine =
             { track = "Alley"
@@ -317,10 +317,10 @@ rawCards =
       , totalCost = 0
       , filename = "10_0_3.jpg"
       , properties =
-            [ "Each second you Aim Down Sights increases your Damage by 10% (up to 3 stacks)."
+            [ "Each 0.75 seconds you Aim Down Sights increase your Damage by 10% (up to 3 stacks)."
             ]
       , effects =
-            [ While PlayerAimingDownSights (Special "Each second you Aim Down Sights increases your Damage by 10% (up to 3 stacks).")
+            [ While PlayerAimingDownSights (Special "Each 0.75 seconds you Aim Down Sights increases your Damage by 10% (up to 3 stacks).")
             ]
       , supplyLine =
             { track = "Alley"
@@ -452,7 +452,9 @@ rawCards =
             , "-15% Ammo Capacity"
             ]
       , effects =
-            [
+            [ Passive MeleeDamage (RelativeMax 20)
+            , While PlayerUsingMeleeWeapon (Passive DamageResistance (RelativeMax 10))
+            , Passive AmmoCapacity (RelativeMax -15)
             ]
       , supplyLine =
             { track = "Alley"
@@ -470,11 +472,11 @@ rawCards =
       , filename = "7_1_0.jpg"
       , properties =
             [ "+10% Bullet Damage"
-            , "+150% Bullet Penetration"
-            , "When you kill a Mutation, you lose 5 Copper."
+            , "+15% Effective Range"
             ]
       , effects =
-            [
+            [ Passive BulletDamage (RelativeMax 10)
+            , Passive EffectiveRange (RelativeMax 150)
             ]
       , supplyLine =
             { track = "Alley"
@@ -492,10 +494,13 @@ rawCards =
       , filename = "2_0_4.jpg"
       , properties =
             [ "+80% Aim Speed"
+            , "Every 0.75 seconds you Aim Down Sights gives 10% Recoil Control (up to 3 stacks)"
             , "-50% ADS Move Speed"
             ]
       , effects =
-            [
+            [ Passive AimSpeed (RelativeMax 80)
+            , While PlayerAimingDownSights (Special "Every 0.75 seconds gives 10% Recoil Control (up to 3 stacks)")
+            , Passive AimingDownSightsMoveSpeed (RelativeMax -50)
             ]
       , supplyLine =
             { track = "Alley"
@@ -516,7 +521,8 @@ rawCards =
             , "-15% Ammo Capacity"
             ]
       , effects =
-            [
+            [ Triggered OnWeaponChanged (Special "Weapon reloads")
+            , Passive AmmoCapacity (RelativeMax -15)
             ]
       , supplyLine =
             { track = "Alley"
@@ -536,7 +542,7 @@ rawCards =
             [ "Each time your team loots Copper, you gain 3 additional Copper, stacking up to 75 additional Сopper."
             ]
       , effects =
-            [
+            [ Triggered OnLootCopper (Special "You gain 3 additional Copper, stacking up to 75 additional Сopper")
             ]
       , supplyLine =
             { track = "Alley"
@@ -557,7 +563,8 @@ rawCards =
             , "TEAM EFFECTS +1 Team Offensive Inventory"
             ]
       , effects =
-            [
+            [ Passive Health (RelativeMax -10)
+            , Team (Passive OffensiveAccessoryCount (AbsoluteMax 1))
             ]
       , supplyLine =
             { track = "Alley"
@@ -578,7 +585,8 @@ rawCards =
             , "More weapons spawn."
             ]
       , effects =
-            [
+            [ Special "You can sense nearby weapons."
+            , Special "More weapons spawn."
             ]
       , supplyLine =
             { track = "Alley"
@@ -598,7 +606,7 @@ rawCards =
             [ "Melee kills grant 1 Temporary Health to you and nearby teammates."
             ]
       , effects =
-            [
+            [ Triggered OnMeleeKill (Once TemporaryHealth (AbsoluteCurrent 1))
             ]
       , supplyLine =
             { track = "Alley"
@@ -619,7 +627,8 @@ rawCards =
             , "DISABLES: Aim Down Sights"
             ]
       , effects =
-            [
+            [ Passive Accuracy (RelativeMax 50)
+            , Disables AimingDownSights
             ]
       , supplyLine =
             { track = "Alley"
@@ -639,7 +648,7 @@ rawCards =
             [ "Pain Meds you apply also grant +25% Damage for 60 seconds."
             ]
       , effects =
-            [
+            [ Triggered OnTakingPainMeds (Timed (ForSeconds 60) (Passive Damage (RelativeMax 25)))
             ]
       , supplyLine =
             { track = "Alley"
@@ -656,10 +665,10 @@ rawCards =
       , totalCost = 0
       , filename = "10_0_4.jpg"
       , properties =
-            [ "Reloading a gun within 0.75 seconds of reaching low ammo will increase its magazine size by -30% until the next reload."
+            [ "Reloading a gun within 1 second of reaching low ammo will increase its magazine size by -30% until the next reload."
             ]
       , effects =
-            [
+            [ Special "Reloading a gun within 1 seconds of reaching low ammo will increase its magazine size by -30% until the next reload."
             ]
       , supplyLine =
             { track = "Alley"
@@ -679,7 +688,7 @@ rawCards =
             [ "While crouching, gain 10% Damage Resistance and 40% Асcuracy."
             ]
       , effects =
-            [
+            [ While PlayerCrouching (Twin (Passive DamageResistance (RelativeMax 10)) (Passive Accuracy (RelativeMax 40)))
             ]
       , supplyLine =
             { track = "Alley"
@@ -700,7 +709,8 @@ rawCards =
             , "-30% Health"
             ]
       , effects =
-            [
+            [ Passive Damage (RelativeMax 25)
+            , Passive Health (RelativeMax -30)
             ]
       , supplyLine =
             { track = "Alley"
@@ -720,7 +730,7 @@ rawCards =
             [ "Mutations you ping are highlighted and your team deals 10% increased damage to highlighted enemies."
             ]
       , effects =
-            [
+            [ Special "Mutations you ping are highlighted and your team deals 10% increased damage to highlighted enemies."
             ]
       , supplyLine =
             { track = "Alley"
@@ -737,10 +747,10 @@ rawCards =
       , totalCost = 0
       , filename = "15_0_1.jpg"
       , properties =
-            [ "Pistol kills have a 2% chance to spawn ammo."
+            [ "Pistol kills have a 3% chance to spawn ammo or a molotov or a molotov."
             ]
       , effects =
-            [
+            [ While PlayerUsingPistol (RelativeChance 3 (Special "spawn ammo"))
             ]
       , supplyLine =
             { track = "Alley"
@@ -761,7 +771,8 @@ rawCards =
             , "When you deal Melee damage to a Mutation heal 1 Health and recover 3 Stamina."
             ]
       , effects =
-            [
+            [ Passive MeleeDamageAgainstMutation (RelativeMax 20)
+            , Triggered (OnDealingMeleeDamageTo Mutation) (Twin (Once Health (AbsoluteCurrent 1)) (Once Stamina (AbsoluteCurrent 3)))
             ]
       , supplyLine =
             { track = "Alley"
@@ -782,7 +793,8 @@ rawCards =
             , "+35% Explosive Resistance"
             ]
       , effects =
-            [
+            [ Passive ExplosiveDamage (RelativeMax 100)
+            , Passive ExplosiveResistance (RelativeMax 35)
             ]
       , supplyLine =
             { track = "Alley"
@@ -802,7 +814,8 @@ rawCards =
             [ "Gain 2 Temporary Health whenever you kill a Ridden within 2 meters."
             ]
       , effects =
-            [
+            --[ InDistance 2 (Triggered (OnKill Ridden) (Once TemporaryHealth (AbsoluteCurrent 2)))
+            [ Triggered (OnKill Ridden) (InDistance 2 (Once TemporaryHealth (AbsoluteCurrent 2)))
             ]
       , supplyLine =
             { track = "Alley"
@@ -819,11 +832,12 @@ rawCards =
       , totalCost = 0
       , filename = "8_1_4.jpg"
       , properties =
-            [ "-20% Health"
+            [ "-10% Health"
             , "TEAM EFFECTS +1 Team Extra Life"
             ]
       , effects =
-            [
+            [ Passive Health (RelativeMax -10)
+            , Team (Passive Lifes (AbsoluteMax 1))
             ]
       , supplyLine =
             { track = "Alley"
@@ -840,10 +854,12 @@ rawCards =
       , totalCost = 0
       , filename = "8_1_3.jpg"
       , properties =
-            [ "+25% Accuracy with Assault Rifles and Sniper Rifles."
+            [ "+25% Accuracy with Assault Rifles"
+            , "+25% Accuracy with Sniper Rifles"
             ]
       , effects =
-            [
+            [ While PlayerUsingRifle (Passive Accuracy (RelativeMax 25))
+            , While PlayerUsingSniper (Passive Accuracy (RelativeMax 25))
             ]
       , supplyLine =
             { track = "Alley"
@@ -864,7 +880,8 @@ rawCards =
             , "-25% Swap Speed"
             ]
       , effects =
-            [
+            [ Passive AccessoryDamage (RelativeMax 75)
+            , Passive SwapSpeed (RelativeMax -25)
             ]
       , supplyLine =
             { track = "Alley"
@@ -885,7 +902,8 @@ rawCards =
             , "DISABLES: Aim Down Sights"
             ]
       , effects =
-            [
+            [ Passive WeakspotDamage (RelativeMax 30)
+            , Disables AimingDownSights
             ]
       , supplyLine =
             { track = "Alley"
@@ -905,7 +923,7 @@ rawCards =
             [ "Precision Kills grant 5% Reload Speed for 5 seconds (stacking up to 10 times)."
             ]
       , effects =
-            [
+            [ Triggered OnPrecisionKill (Special "5% Reload Speed for 5 seconds (stacking up to 10 times")
             ]
       , supplyLine =
             { track = "Alley"
@@ -925,7 +943,7 @@ rawCards =
             [ "+40% Move Speed while aiming down sights with Sniper Rifles."
             ]
       , effects =
-            [
+            [ While PlayerAimingDownSights (While PlayerUsingSniper (Passive MoveSpeed (RelativeMax 40)))
             ]
       , supplyLine =
             { track = "Alley"
@@ -945,7 +963,7 @@ rawCards =
             [ "+40% Reload Speed with Shotguns."
             ]
       , effects =
-            [
+            [ While PlayerUsingShotgun (Passive ReloadSpeed (RelativeMax 40))
             ]
       , supplyLine =
             { track = "Alley"
@@ -1272,10 +1290,10 @@ rawCards =
       , totalCost = 0
       , filename = "13_1_1.jpg"
       , properties =
-            [ "Heal 10 Trauma Damage at the start of each level."
+            [ "Heal 15 Trauma Damage at the start of each level."
             ]
       , effects =
-            [
+            [ Once TraumaDamage (AbsoluteCurrent -15)
             ]
       , supplyLine =
             { track = "Clinic"
@@ -1313,11 +1331,12 @@ rawCards =
       , totalCost = 0
       , filename = "2_1_4.jpg"
       , properties =
-            [ "+150% Revive Speed"
-            , "-5% Damage Resistance"
+            [ "While reviving teammates, take 3 less damage from all Ridden."
+            , "Heals teammates for an additional 10 Health when you revive them."
             ]
       , effects =
-            [
+            [ Special "While reviving teammates, take 3 less damage from all Ridden."
+            , Special "Heals teammates for an additional 10 Health when you revive them."
             ]
       , supplyLine =
             { track = "Clinic"
@@ -1334,11 +1353,10 @@ rawCards =
       , totalCost = 0
       , filename = "13_0_2.jpg"
       , properties =
-            [ "-20% Stamina Regen"
-            , "TEAM EFFECTS +10 Team Health"
+            [ "TEAM EFFECTS +10 Team Health"
             ]
       , effects =
-            [
+            [ Team (Passive Health (AbsoluteMax 10))
             ]
       , supplyLine =
             { track = "Clinic"
@@ -1503,10 +1521,11 @@ rawCards =
             [ "+40% Trauma Resistance"
             , "-100% Fire Resistance"
             , "-100% Acid Resistance"
-            , "-100% Explosion Resistance"
             ]
       , effects =
-            [
+            [ Passive TraumaResistance (RelativeMax 40)
+            , Passive FireResistance (RelativeMax -100)
+            , Passive AcidResistance (RelativeMax -100)
             ]
       , supplyLine =
             { track = "Clinic"
@@ -1523,10 +1542,10 @@ rawCards =
       , totalCost = 0
       , filename = "9_1_2.jpg"
       , properties =
-            [ "When you use a Medical Accessory, all teammates heal for 5 Health."
+            [ "When you use a Medical Accessory, all teammates heal for 8 Health."
             ]
       , effects =
-            [
+            [ Team (While PlayerUsingMedicalAccessory (Passive Health (AbsoluteCurrent 8)))
             ]
       , supplyLine =
             { track = "Clinic"
@@ -1583,11 +1602,12 @@ rawCards =
       , totalCost = 0
       , filename = "15_1_0.jpg"
       , properties =
-            [ "+2 Extra Life"
-            , "Lose 50 Copper at the start of each level."
+            [ "+1 Extra Life"
+            , "+15% Reduced Incap Trauma"
             ]
       , effects =
-            [
+            [ Once Lifes (AbsoluteCurrent 1)
+            , Passive TraumaResistance (RelativeMax 15)
             ]
       , supplyLine =
             { track = "Clinic"
@@ -1686,7 +1706,10 @@ rawCards =
       , totalCost = 0
       , filename = "13_0_0.jpg"
       , properties =
-            [ "+100% Bullet Penetration with Assault Rifles."
+            [ "+10% Effective Bullet Range"
+            , "+15% Recoil Control"
+            , "+25% Bullet Penetration"
+            , "+25% Aim Speed"
             ]
       , effects =
             [
@@ -1749,10 +1772,10 @@ rawCards =
       , totalCost = 0
       , filename = "10_1_3.jpg"
       , properties =
-            [ "When you use a Medical Accessory, the target gains +20% Maximum Health until the end of the level."
+            [ "When you use a Medical Accessory, the target gains +10% Maximum Health, Stamina, and Stamina Regen until the end of the level."
             ]
       , effects =
-            [
+            [ Special "When you use a Medical Accessory, the target gains +10% Maximum Health, Stamina, and Stamina Regen until the end of the level."
             ]
       , supplyLine =
             { track = "Clinic"
@@ -1769,10 +1792,12 @@ rawCards =
       , totalCost = 0
       , filename = "16_1_0.jpg"
       , properties =
-            [ "Your team heals 5 Trauma Damage and refills 10% Ammo at the start of each level."
+            [ "Your team heals 15 Health, 7 Trauma Damage and refills 10% Ammo at the start of each level."
             ]
       , effects =
-            [
+            [ Once Health (AbsoluteCurrent 15)
+            , Once TraumaDamage (AbsoluteCurrent 7)
+            , Once AmmoRefill (RelativeMax 10)
             ]
       , supplyLine =
             { track = "Clinic"
@@ -1914,7 +1939,7 @@ rawCards =
       , totalCost = 0
       , filename = "5_0_0.jpg"
       , properties =
-            [ "When you take a hit for 10 or more damage, gain 20% Move Speed for 3 seconds."
+            [ "When you take a hit for 10 or more damage, gain 15% Move Speed for 3 seconds."
             ]
       , effects =
             [
@@ -1975,11 +2000,12 @@ rawCards =
       , totalCost = 0
       , filename = "7_1_4.jpg"
       , properties =
-            [ "+20% Stamina Regeneration"
+            [ "+30% Stamina Regeneration"
             , "+5 Health"
             ]
       , effects =
-            [
+            [ Passive StaminaRegeneration (RelativeMax 30)
+            , Passive Health (AbsoluteMax 5)
             ]
       , supplyLine =
             { track = "Nest"
@@ -2100,8 +2126,8 @@ rawCards =
       , totalCost = 0
       , filename = "3_0_2.jpg"
       , properties =
-            [ "+10% Move Speed"
-            , "-5% Damage Resistance"
+            [ "+8% Move Speed"
+            , "-7% Damage Resistance"
             ]
       , effects =
             [
@@ -2121,7 +2147,7 @@ rawCards =
       , totalCost = 0
       , filename = "4_1_1.jpg"
       , properties =
-            [ "Precision Kills grant you 10% Move Speed for 5 seconds."
+            [ "Precision Kills grant you 8% Move Speed for 5 seconds."
             ]
       , effects =
             [
@@ -2164,9 +2190,12 @@ rawCards =
       , properties =
             [ "+50% Aim Speed"
             , "-5% Damage Resistance"
+            , "Every 0.75 seconds you Aim Down Sights gives 5% Weakspot Damage (up to 3 stacks)."
             ]
       , effects =
-            [
+            [ Passive AimSpeed (RelativeMax 50)
+            , Passive DamageResistance (RelativeMax -5)
+            , While PlayerAimingDownSights (Special "Every 0.75 seconds gives 5% Weakspot Damage (up to 3 stacks).")
             ]
       , supplyLine =
             { track = "Nest"
@@ -2183,8 +2212,10 @@ rawCards =
       , totalCost = 0
       , filename = "1_0_1.jpg"
       , properties =
-            [ "+40% Stamina"
-            , "-5% Damage Resistance"
+            [ "+15% Stamina"
+            , "+25% Weapon Swap Speed"
+            , "+15% Move Speed while firing"
+            , "+10% Slow Resistance"
             ]
       , effects =
             [
@@ -2205,7 +2236,6 @@ rawCards =
       , filename = "4_0_4.jpg"
       , properties =
             [ "No Movement Penalty for strafe and backpedal."
-            , "DISABLES: Sprint"
             ]
       , effects =
             [
@@ -2268,7 +2298,7 @@ rawCards =
       , filename = "3_1_0.jpg"
       , properties =
             [ "+30% Sprint Efficiency"
-            , "-5% Damage Resistance"
+            , "-7% Damage Resistance"
             ]
       , effects =
             [
@@ -2354,6 +2384,7 @@ rawCards =
             ]
       , effects =
             [
+                Team (Passive Stamina (RelativeMax 15))
             ]
       , supplyLine =
             { track = "Nest"
@@ -2370,7 +2401,7 @@ rawCards =
       , totalCost = 0
       , filename = "15_0_0.jpg"
       , properties =
-            [ "Melee kills have a 2% chance to spawn ammo."
+            [ "Melee kills have a 3% chance to spawn ammo or razorwire."
             ]
       , effects =
             [
@@ -2433,7 +2464,7 @@ rawCards =
       , totalCost = 0
       , filename = "5_1_2.jpg"
       , properties =
-            [ "Pain Meds you apply also grant +10% Move Speed, + 10% Reload Speed, and + 10% Weapon Swap Speed for 30 seconds."
+            [ "Pain Meds you apply also grant +20% Stamina Regeneration, + 15% Reload Speed, and + 15% Weapon Swap Speed for 30 seconds."
             ]
       , effects =
             [
@@ -2517,8 +2548,8 @@ rawCards =
       , totalCost = 0
       , filename = "3_0_3.jpg"
       , properties =
-            [ "+15% Move Speed"
-            , "When you take damage, your Accuracy is reduced by 20% for 3 seconds."
+            [ "+12% Move Speed"
+            , "When you take damage, your Move Speed bonus is lost for 3 seconds."
             ]
       , effects =
             [
@@ -2538,7 +2569,7 @@ rawCards =
       , totalCost = 0
       , filename = "6_0_0.jpg"
       , properties =
-            [ "Changing weapons within 0.75 seconds of reaching low ammo grants +20% Damage for 5 seconds."
+            [ "Changing weapons within 1 second of reaching low ammo grants +20% Damage for 5 seconds."
             ]
       , effects =
             [
@@ -2558,8 +2589,7 @@ rawCards =
       , totalCost = 0
       , filename = "1_0_2.jpg"
       , properties =
-            [ "+60% Stamina"
-            , "-20% Slow Resistance"
+            [ "+40% Stamina"
             ]
       , effects =
             [
@@ -2640,8 +2670,10 @@ rawCards =
       , totalCost = 0
       , filename = "8_0_0.jpg"
       , properties =
-            [ "+40% Stamina Regeneration"
-            , "-10% Stamina Efficiency"
+            [ "+25% Aim Speed"
+            , "+25% Weapon Swap Speed"
+            , "+25% Use Speed"
+            , "+15% Reload Speed"
             ]
       , effects =
             [
@@ -2662,10 +2694,11 @@ rawCards =
       , filename = "2_0_1.jpg"
       , properties =
             [ "+50% Weakspot Damage"
-            , "-75% ADS Move Speed."
+            , "-40% Move Speed while shooting or melee attacking."
             ]
       , effects =
-            [
+            [ Passive WeakspotDamage (RelativeMax 50)
+            , While PlayerAttacking (Passive MoveSpeed (RelativeMax -40))
             ]
       , supplyLine =
             { track = "Nest"
@@ -2706,7 +2739,7 @@ rawCards =
             [ "When you kill a Mutation, gain 10 Copper (up to 300 per level)."
             ]
       , effects =
-            [
+            [ Triggered (OnKill Mutation) (Passive Copper (AbsoluteCurrent 10))
             ]
       , supplyLine =
             { track = "Nest"
@@ -2723,7 +2756,7 @@ rawCards =
       , totalCost = 0
       , filename = "4_0_2.jpg"
       , properties =
-            [ "+6% Move Speed while using an SMG."
+            [ "+4% Move Speed while using an SMG."
             , "+35% Reload Speed while using an SMG."
             ]
       , effects =
@@ -2787,7 +2820,7 @@ rawCards =
       , filename = "6_0_3.jpg"
       , properties =
             [ "+20% Sprint Speed"
-            , "-30% Sprint Stamina Efficiency"
+            , "-40% Sprint Stamina Efficiency"
             ]
       , effects =
             [
@@ -3030,12 +3063,10 @@ rawCards =
       , totalCost = 0
       , filename = "5_0_1.jpg"
       , properties =
-            [ "+100% Stamina"
-            , "-75% Stamina Regeneration"
-            , "When you kill an enemy, gain 10 Stamina instantly and an additional 10 Stamina over 5 seconds."
+            [ "When you kill an enemy, gain 7 Stamina over 7 seconds, stacking up to 5 times."
             ]
       , effects =
-            [
+            [ Triggered (OnKill AnyEnemy) (OverTime 7 (Passive Stamina (AbsoluteCurrent 7)))
             ]
       , supplyLine =
             { track = "Accomplishment"
