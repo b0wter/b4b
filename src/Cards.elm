@@ -404,8 +404,6 @@ type alias SupplyLineRequirements =
     { nestRequirement : SupplyLineRequirement
     , alleyRequirement : SupplyLineRequirement
     , clinicRequirement : SupplyLineRequirement
-    , stripRequirement : SupplyLineRequirement
-    , starterRequirement : SupplyLineRequirement
     , achievementRequirement : List String
     }
     
@@ -459,9 +457,15 @@ isAccomplishmentLine =
         
 supplyLineCount : (Card -> Bool) -> Int
 supplyLineCount predicate =
-    cards 
-    |> List.filter predicate
-    |> List.length
+    let
+        max = 
+            cards 
+            |> List.filter predicate
+            |> List.maximumBy (\c -> c.supplyLine.index)
+    in
+    max
+    |> Maybe.map (\m -> m.supplyLine.index)
+    |> Maybe.withDefault 0
     
 
 alleySupplyLineCount : Int
@@ -499,8 +503,6 @@ emptySupplyLineRequirements =
     { nestRequirement = { totalElements = nestSupplyLineCount, requiredProgress = 0 }
     , alleyRequirement = { totalElements = alleySupplyLineCount, requiredProgress = 0 }
     , clinicRequirement = { totalElements = clinicSupplyLineCount, requiredProgress = 0 }
-    , stripRequirement = { totalElements = stripSupplyLineCount, requiredProgress = 0 }
-    , starterRequirement = { totalElements = starterSupplyLineCount, requiredProgress = 0 }
     , achievementRequirement = []
     }
 
@@ -521,8 +523,6 @@ supplyLineRequirements selection =
         highestNestIndex = (selection |> highestIndex isNestLine).supplyLine.index
         highestAlleyIndex = (selection |> highestIndex isAlleyLine).supplyLine.index
         highestClinicIndex = (selection |> highestIndex isClinicLine).supplyLine.index
-        highestStripIndex = (selection |> highestIndex isStripLine).supplyLine.index
-        highestStarterIndex = (selection |> highestIndex isStarterLine).supplyLine.index
         requiredAchievements = 
             (selection |> Tuple.first) :: (selection |> Tuple.second)
             |> List.filter isAccomplishmentLine
@@ -535,7 +535,5 @@ supplyLineRequirements selection =
     { nestRequirement = { totalElements = nestSupplyLineCount, requiredProgress = highestNestIndex }
     , alleyRequirement = { totalElements = alleySupplyLineCount, requiredProgress = highestAlleyIndex }
     , clinicRequirement = { totalElements = clinicSupplyLineCount, requiredProgress = highestClinicIndex }
-    , stripRequirement = { totalElements = stripSupplyLineCount, requiredProgress = highestStripIndex }
-    , starterRequirement = { totalElements = starterSupplyLineCount, requiredProgress = highestStarterIndex }
     , achievementRequirement = requiredAchievements
     }

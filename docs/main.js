@@ -12868,6 +12868,9 @@ var $author$project$Main$inventoryToggleButton = A2(
 				]))
 		]));
 var $rundis$elm_bootstrap$Bootstrap$Utilities$Border$dark = A2($rundis$elm_bootstrap$Bootstrap$Internal$Role$toClass, 'border', $rundis$elm_bootstrap$Bootstrap$Internal$Role$Dark);
+var $rundis$elm_bootstrap$Bootstrap$Utilities$Flex$alignItemsCenter = $elm$html$Html$Attributes$class('align-items-center');
+var $rundis$elm_bootstrap$Bootstrap$Utilities$Flex$alignItemsStart = $elm$html$Html$Attributes$class('align-items-start');
+var $rundis$elm_bootstrap$Bootstrap$Utilities$Flex$block = $elm$html$Html$Attributes$class('d-flex');
 var $author$project$Cards$isAlleyLine = function (c) {
 	var _v0 = c.supplyLine.name;
 	if (_v0.$ === 'Alley') {
@@ -12876,9 +12879,51 @@ var $author$project$Cards$isAlleyLine = function (c) {
 		return false;
 	}
 };
+var $elm_community$list_extra$List$Extra$maximumBy = F2(
+	function (f, ls) {
+		var maxBy = F2(
+			function (x, _v1) {
+				var y = _v1.a;
+				var fy = _v1.b;
+				var fx = f(x);
+				return (_Utils_cmp(fx, fy) > 0) ? _Utils_Tuple2(x, fx) : _Utils_Tuple2(y, fy);
+			});
+		if (ls.b) {
+			if (!ls.b.b) {
+				var l_ = ls.a;
+				return $elm$core$Maybe$Just(l_);
+			} else {
+				var l_ = ls.a;
+				var ls_ = ls.b;
+				return $elm$core$Maybe$Just(
+					A3(
+						$elm$core$List$foldl,
+						maxBy,
+						_Utils_Tuple2(
+							l_,
+							f(l_)),
+						ls_).a);
+			}
+		} else {
+			return $elm$core$Maybe$Nothing;
+		}
+	});
 var $author$project$Cards$supplyLineCount = function (predicate) {
-	return $elm$core$List$length(
+	var max = A2(
+		$elm_community$list_extra$List$Extra$maximumBy,
+		function (c) {
+			return c.supplyLine.index;
+		},
 		A2($elm$core$List$filter, predicate, $author$project$Cards$cards));
+	return A2(
+		$elm$core$Maybe$withDefault,
+		0,
+		A2(
+			$elm$core$Maybe$map,
+			function (m) {
+				return m.supplyLine.index;
+			},
+			max));
 };
 var $author$project$Cards$alleySupplyLineCount = $author$project$Cards$supplyLineCount($author$project$Cards$isAlleyLine);
 var $author$project$Cards$isClinicLine = function (c) {
@@ -12899,31 +12944,11 @@ var $author$project$Cards$isNestLine = function (c) {
 	}
 };
 var $author$project$Cards$nestSupplyLineCount = $author$project$Cards$supplyLineCount($author$project$Cards$isNestLine);
-var $author$project$Cards$isStarterLine = function (c) {
-	var _v0 = c.supplyLine.name;
-	if (_v0.$ === 'Starter') {
-		return true;
-	} else {
-		return false;
-	}
-};
-var $author$project$Cards$starterSupplyLineCount = $author$project$Cards$supplyLineCount($author$project$Cards$isStarterLine);
-var $author$project$Cards$isStripLine = function (c) {
-	var _v0 = c.supplyLine.name;
-	if (_v0.$ === 'Strip') {
-		return true;
-	} else {
-		return false;
-	}
-};
-var $author$project$Cards$stripSupplyLineCount = $author$project$Cards$supplyLineCount($author$project$Cards$isStripLine);
 var $author$project$Cards$emptySupplyLineRequirements = {
 	achievementRequirement: _List_Nil,
 	alleyRequirement: {requiredProgress: 0, totalElements: $author$project$Cards$alleySupplyLineCount},
 	clinicRequirement: {requiredProgress: 0, totalElements: $author$project$Cards$clinicSupplyLineCount},
-	nestRequirement: {requiredProgress: 0, totalElements: $author$project$Cards$nestSupplyLineCount},
-	starterRequirement: {requiredProgress: 0, totalElements: $author$project$Cards$starterSupplyLineCount},
-	stripRequirement: {requiredProgress: 0, totalElements: $author$project$Cards$stripSupplyLineCount}
+	nestRequirement: {requiredProgress: 0, totalElements: $author$project$Cards$nestSupplyLineCount}
 };
 var $elm$core$List$isEmpty = function (xs) {
 	if (!xs.b) {
@@ -12931,16 +12956,6 @@ var $elm$core$List$isEmpty = function (xs) {
 	} else {
 		return false;
 	}
-};
-var $rundis$elm_bootstrap$Bootstrap$Progress$Label = function (a) {
-	return {$: 'Label', a: a};
-};
-var $rundis$elm_bootstrap$Bootstrap$Progress$label = function (text) {
-	return $rundis$elm_bootstrap$Bootstrap$Progress$Label(
-		_List_fromArray(
-			[
-				$elm$html$Html$text(text)
-			]));
 };
 var $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$ml2 = $elm$html$Html$Attributes$class('ml-2');
 var $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$ml4 = $elm$html$Html$Attributes$class('ml-4');
@@ -13163,17 +13178,13 @@ var $author$project$Cards$supplyLineRequirements = function (selection) {
 					filtered));
 		});
 	var highestNestIndex = A2(highestIndex, $author$project$Cards$isNestLine, selection).supplyLine.index;
-	var highestStarterIndex = A2(highestIndex, $author$project$Cards$isStarterLine, selection).supplyLine.index;
-	var highestStripIndex = A2(highestIndex, $author$project$Cards$isStripLine, selection).supplyLine.index;
 	var highestClinicIndex = A2(highestIndex, $author$project$Cards$isClinicLine, selection).supplyLine.index;
 	var highestAlleyIndex = A2(highestIndex, $author$project$Cards$isAlleyLine, selection).supplyLine.index;
 	return {
 		achievementRequirement: requiredAchievements,
 		alleyRequirement: {requiredProgress: highestAlleyIndex, totalElements: $author$project$Cards$alleySupplyLineCount},
 		clinicRequirement: {requiredProgress: highestClinicIndex, totalElements: $author$project$Cards$clinicSupplyLineCount},
-		nestRequirement: {requiredProgress: highestNestIndex, totalElements: $author$project$Cards$nestSupplyLineCount},
-		starterRequirement: {requiredProgress: highestStarterIndex, totalElements: $author$project$Cards$starterSupplyLineCount},
-		stripRequirement: {requiredProgress: highestStripIndex, totalElements: $author$project$Cards$stripSupplyLineCount}
+		nestRequirement: {requiredProgress: highestNestIndex, totalElements: $author$project$Cards$nestSupplyLineCount}
 	};
 };
 var $rundis$elm_bootstrap$Bootstrap$Progress$Value = function (a) {
@@ -13208,18 +13219,34 @@ var $author$project$Main$inventoryProgressView = function (cards) {
 			return A2(
 				$elm$html$Html$p,
 				_List_fromArray(
-					[$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$ml4, $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$mr4]),
+					[$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$ml4, $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$mr4, $rundis$elm_bootstrap$Bootstrap$Utilities$Flex$block, $rundis$elm_bootstrap$Bootstrap$Utilities$Flex$alignItemsStart, $rundis$elm_bootstrap$Bootstrap$Utilities$Flex$alignItemsCenter]),
 				_List_fromArray(
 					[
+						A2(
+						$elm$html$Html$small,
+						_List_Nil,
+						_List_fromArray(
+							[
+								A2(
+								$elm$html$Html$div,
+								_List_fromArray(
+									[
+										A2($elm$html$Html$Attributes$style, 'width', '7em')
+									]),
+								_List_fromArray(
+									[
+										$elm$html$Html$text(completeLabel)
+									]))
+							])),
 						$rundis$elm_bootstrap$Bootstrap$Progress$progress(
 						_List_fromArray(
 							[
 								$rundis$elm_bootstrap$Bootstrap$Progress$value(c),
-								$rundis$elm_bootstrap$Bootstrap$Progress$label(completeLabel),
 								$rundis$elm_bootstrap$Bootstrap$Progress$wrapperAttrs(
 								_List_fromArray(
 									[
-										$elm$html$Html$Attributes$class('bg-secondary')
+										$elm$html$Html$Attributes$class('bg-secondary'),
+										A2($elm$html$Html$Attributes$style, 'flex-grow', '1')
 									]))
 							]))
 					]));
@@ -13236,9 +13263,7 @@ var $author$project$Main$inventoryProgressView = function (cards) {
 				])),
 			A2(progressBar, requirements.nestRequirement, 'Nest'),
 			A2(progressBar, requirements.alleyRequirement, 'Alley'),
-			A2(progressBar, requirements.clinicRequirement, 'Clinic'),
-			A2(progressBar, requirements.stripRequirement, 'Strip'),
-			A2(progressBar, requirements.starterRequirement, 'Starter')
+			A2(progressBar, requirements.clinicRequirement, 'Clinic')
 		]);
 	var achievementList = $elm$core$List$isEmpty(requirements.achievementRequirement) ? _List_Nil : _List_fromArray(
 		[
@@ -14124,7 +14149,6 @@ var $author$project$Main$MoveCardDown = function (a) {
 var $author$project$Main$MoveCardUp = function (a) {
 	return {$: 'MoveCardUp', a: a};
 };
-var $rundis$elm_bootstrap$Bootstrap$Utilities$Flex$block = $elm$html$Html$Attributes$class('d-flex');
 var $rundis$elm_bootstrap$Bootstrap$Utilities$Flex$justifyBetween = $elm$html$Html$Attributes$class('justify-content-between');
 var $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$pb1 = $elm$html$Html$Attributes$class('pb-1');
 var $author$project$Main$pointerClass = $elm$html$Html$Attributes$class('pointer');

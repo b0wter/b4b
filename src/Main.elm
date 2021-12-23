@@ -818,8 +818,9 @@ inventoryProgressView cards =
                     ++ (supplyLineRequirement.totalElements |> String.fromInt)
                     ++ ")"
             in
-            Html.p [ Spacing.ml4, Spacing.mr4 ] 
-            [ Progress.progress [ Progress.value c, Progress.label completeLabel, Progress.wrapperAttrs [ class "bg-secondary" ] ]
+            Html.p [ Spacing.ml4, Spacing.mr4, Flex.block, Flex.alignItemsStart, Flex.alignItemsCenter  ] 
+            [ Html.small [] [ div [style "width" "7em" ] [ text completeLabel ] ]
+            , Progress.progress [ Progress.value c, Progress.wrapperAttrs [ class "bg-secondary", style "flex-grow" "1" ] ]
             ]
 
         achievementList =
@@ -835,8 +836,6 @@ inventoryProgressView cards =
             , progressBar requirements.nestRequirement "Nest"
             , progressBar requirements.alleyRequirement "Alley"
             , progressBar requirements.clinicRequirement "Clinic"
-            , progressBar requirements.stripRequirement "Strip"
-            , progressBar requirements.starterRequirement "Starter"
             ]
     in
     Grid.col [ Col.xs12 ]
