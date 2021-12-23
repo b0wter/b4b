@@ -1,5 +1,6 @@
 module Cards exposing (..)
 
+import CardData exposing (RawSupplyLine)
 import Dict
 import List.Extra as List
 import List.Extras as List
@@ -54,7 +55,11 @@ type SupplyTrack
     | Clinic ClinicLines
     | Strip StripLines
     | Starter StarterLines
+    | Accomplishment AchievementLines
     | UnknownTrack String String
+
+type AchievementLines
+    = Achievements
 
 type StarterLines
     = StarterDeck
@@ -85,34 +90,15 @@ type alias CardId =
     Int
 
 
-type alias RawSupplyLine =
-    { track : String
-    , name : String
-    , tier : Int
-    , index : Int
-    }
-
-
-type alias RawCard =
-    { id : Int
-    , name : String
-    , cost : Int
-    , totalCost : Int
-    , filename : String
-    , properties : List String
-    , supplyLine : RawSupplyLine
-    , kind : String
-    , affinity : String
-    , effects : List Effect
-    }
-
-
 type alias SupplyLine =
     { name : SupplyTrack
     , tier : Int
     , index : Int
     }
 
+cards : List Card
+cards =
+    CardData.rawCards |> List.map parseRawCard
 
 parseSupplyTrack: String -> String -> SupplyTrack
 parseSupplyTrack track name =
@@ -159,6 +145,12 @@ parseSupplyTrack track name =
                     Strip TheStrip
                 _ ->
                     UnknownTrack track name
+        "Accomplishment" ->
+            case name of
+                "Achievement" ->
+                    Accomplishment Achievements
+                _ ->
+                    UnknownTrack track name
         _ ->
             UnknownTrack track name
 
@@ -174,7 +166,7 @@ parseSupplyLine raw =
     }
 
 
-parseRawCard: RawCard -> Card
+parseRawCard: CardData.RawCard -> Card
 parseRawCard raw =
     let
         line = parseSupplyLine raw.supplyLine
@@ -231,11 +223,11 @@ containsWords words card =
 silently.
 -}
 byIds : List Card -> List Int -> (List Card)
-byIds cards ids =
+byIds selection ids =
     let
         isSearchedFor i = ids |> List.any (\ii -> ii == i)
     in
-    cards |> List.filter (\c -> c.id |> isSearchedFor)
+    selection |> List.filter (\c -> c.id |> isSearchedFor)
 
 
 effectsAsSummary : List Effect -> List String
@@ -243,6 +235,8 @@ effectsAsSummary effects =
     effects |> List.map effectToString
     
 
+{-| Here is all the code to merge and order cards for the inventory summary
+-}
 type Operation
     = Addition
     | Subtraction
@@ -399,4 +393,134 @@ groupProperties properties =
     , team = teams
     , disables = disables
     , remaining = remaining
+    }
+    
+
+{- Here is all the code required to compute the required supply line progress for the selected cards
+-}
+
+type alias SupplyLineRequirement =
+    { totalElements : Int
+    , requiredProgress : Int
+    }
+    
+type alias SupplyLineRequirements =
+    { nestRequirement : SupplyLineRequirement
+    , alleyRequirement : SupplyLineRequirement
+    , clinicRequirement : SupplyLineRequirement
+    , stripRequirement : SupplyLineRequirement
+    , starterRequirement : SupplyLineRequirement
+    , achievementRequirement : SupplyLineRequirement
+    }
+    
+isNestLine : Card -> Bool
+isNestLine =
+    (\c -> 
+        case c.supplyLine.name of 
+            Nest _ -> True
+            _ -> False
+        )
+    
+isAlleyLine : Card -> Bool
+isAlleyLine =
+    (\c -> 
+        case c.supplyLine.name of 
+            Alley _ -> True
+            _ -> False
+        )
+    
+isClinicLine : Card -> Bool
+isClinicLine =
+    (\c -> 
+        case c.supplyLine.name of 
+            Clinic _ -> True
+            _ -> False
+        )
+    
+isStripLine : Card -> Bool
+isStripLine =
+    (\c -> 
+        case c.supplyLine.name of 
+            Strip _ -> True
+            _ -> False
+        )
+    
+isStarterLine : Card -> Bool
+isStarterLine =
+    (\c -> 
+        case c.supplyLine.name of 
+            Starter _ -> True
+            _ -> False
+        )
+    
+isAccomplishmentLine : Card -> Bool
+isAccomplishmentLine =
+    (\c -> 
+        case c.supplyLine.name of 
+            Accomplishment _ -> True
+            _ -> False
+        )
+        
+supplyLineCount : (Card -> Bool) -> Int
+supplyLineCount predicate =
+    cards 
+    |> List.filter predicate
+    |> List.length
+    
+
+alleySupplyLineCount : Int
+alleySupplyLineCount =
+    supplyLineCount isAlleyLine
+    
+    
+nestSupplyLineCount : Int
+nestSupplyLineCount =
+    supplyLineCount isNestLine
+    
+    
+clinicSupplyLineCount : Int
+clinicSupplyLineCount =
+    supplyLineCount isClinicLine
+    
+    
+stripSupplyLineCount : Int
+stripSupplyLineCount =
+    supplyLineCount isStripLine
+    
+    
+starterSupplyLineCount : Int
+starterSupplyLineCount =
+    supplyLineCount isStarterLine
+    
+    
+accomplishmentSupplyLineCount : Int
+accomplishmentSupplyLineCount =
+    supplyLineCount isAccomplishmentLine
+    
+supplyLineRequirements : (Card, List Card) -> SupplyLineRequirements
+supplyLineRequirements selection =
+    let
+        highestIndex predicate (c, cc) =
+            let
+                filtered = (c :: cc) |> List.filter predicate
+            in
+            filtered 
+            |> List.maximumWith (\a b -> 
+                if a.supplyLine.index > b.supplyLine.index then Basics.GT
+                else if a.supplyLine.index == b.supplyLine.index then Basics.EQ
+                else Basics.LT) 
+            |> Maybe.withDefault c
+        highestNestIndex = (selection |> highestIndex isNestLine).supplyLine.index
+        highestAlleyIndex = (selection |> highestIndex isAlleyLine).supplyLine.index
+        highestClinicIndex = (selection |> highestIndex isClinicLine).supplyLine.index
+        highestStripIndex = (selection |> highestIndex isStripLine).supplyLine.index
+        highestStarterIndex = (selection |> highestIndex isStarterLine).supplyLine.index
+        highestAccomplishmentIndex = (selection |> highestIndex isAccomplishmentLine).supplyLine.index
+    in
+    { nestRequirement = { totalElements = nestSupplyLineCount, requiredProgress = highestNestIndex }
+    , alleyRequirement = { totalElements = alleySupplyLineCount, requiredProgress = highestAlleyIndex }
+    , clinicRequirement = { totalElements = clinicSupplyLineCount, requiredProgress = highestClinicIndex }
+    , stripRequirement = { totalElements = stripSupplyLineCount, requiredProgress = highestStripIndex }
+    , starterRequirement = { totalElements = starterSupplyLineCount, requiredProgress = highestStarterIndex }
+    , achievementRequirement = { totalElements = accomplishmentSupplyLineCount, requiredProgress = highestAccomplishmentIndex }
     }

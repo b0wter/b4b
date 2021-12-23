@@ -1,8 +1,26 @@
 module CardData exposing (..)
 
-import Cards exposing (Card, Kind(..), Property, RawCard)
 import Tags exposing (..)
 
+type alias RawSupplyLine =
+    { track : String
+    , name : String
+    , tier : Int
+    , index : Int
+    }
+
+type alias RawCard =
+    { id : Int
+    , name : String
+    , cost : Int
+    , totalCost : Int
+    , filename : String
+    , properties : List String
+    , supplyLine : RawSupplyLine
+    , kind : String
+    , affinity : String
+    , effects : List Effect
+    }
 
 rawCards : List RawCard
 rawCards =
@@ -3283,8 +3301,3 @@ rawCards =
       , affinity = "Discipline"
       }
     ]
-
-
-cards : List Card
-cards =
-    rawCards |> List.map Cards.parseRawCard

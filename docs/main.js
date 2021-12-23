@@ -5397,6 +5397,10 @@ var $author$project$Cards$parseKind = function (str) {
 			return $author$project$Cards$UnknownKind;
 	}
 };
+var $author$project$Cards$Accomplishment = function (a) {
+	return {$: 'Accomplishment', a: a};
+};
+var $author$project$Cards$Achievements = {$: 'Achievements'};
 var $author$project$Cards$Alley = function (a) {
 	return {$: 'Alley', a: a};
 };
@@ -5472,6 +5476,12 @@ var $author$project$Cards$parseSupplyTrack = F2(
 			case 'Strip':
 				if (name === 'The Strip') {
 					return $author$project$Cards$Strip($author$project$Cards$TheStrip);
+				} else {
+					return A2($author$project$Cards$UnknownTrack, track, name);
+				}
+			case 'Accomplishment':
+				if (name === 'Achievement') {
+					return $author$project$Cards$Accomplishment($author$project$Cards$Achievements);
 				} else {
 					return A2($author$project$Cards$UnknownTrack, track, name);
 				}
@@ -8236,7 +8246,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		totalCost: 0
 	}
 	]);
-var $author$project$CardData$cards = A2($elm$core$List$map, $author$project$Cards$parseRawCard, $author$project$CardData$rawCards);
+var $author$project$Cards$cards = A2($elm$core$List$map, $author$project$Cards$parseRawCard, $author$project$CardData$rawCards);
 var $elm$core$List$filter = F2(
 	function (isGood, list) {
 		return A3(
@@ -8810,7 +8820,7 @@ var $author$project$Main$init = F3(
 						function (cc) {
 							return _Utils_eq(cc.id, c);
 						},
-						$author$project$CardData$cards);
+						$author$project$Cards$cards);
 				},
 				cardIdsFromQuery));
 		var notSelected = A2(
@@ -8821,14 +8831,14 @@ var $author$project$Main$init = F3(
 					$elm$core$Basics$neq(c),
 					selected);
 			},
-			$author$project$CardData$cards);
+			$author$project$Cards$cards);
 		var _v0 = $rundis$elm_bootstrap$Bootstrap$Navbar$initialState($author$project$Main$NavbarMsg);
 		var navbarState = _v0.a;
 		var navbarCmd = _v0.b;
 		return _Utils_Tuple2(
 			{
 				cardDisplay: (flags.windowWidth < 769) ? $author$project$Main$Text : $author$project$Main$Image,
-				cardPool: $author$project$CardData$cards,
+				cardPool: $author$project$Cards$cards,
 				filter: $elm$core$Maybe$Nothing,
 				hostUrl: hostUrl,
 				inventoryDisplay: $author$project$Main$InventoryAsCards,
@@ -9792,7 +9802,7 @@ var $author$project$Main$update = F2(
 			case 'ConfirmResetModal':
 				var updatedModel = _Utils_update(
 					model,
-					{notSelectedCards: $author$project$CardData$cards, selectedCards: _List_Nil, yesNoModalContent: $elm$core$Maybe$Nothing, yesNoModalVisibility: $rundis$elm_bootstrap$Bootstrap$Modal$hidden});
+					{notSelectedCards: $author$project$Cards$cards, selectedCards: _List_Nil, yesNoModalContent: $elm$core$Maybe$Nothing, yesNoModalVisibility: $rundis$elm_bootstrap$Bootstrap$Modal$hidden});
 				var url = $elm$url$Url$toString(
 					$author$project$Main$shareUrl(updatedModel));
 				return _Utils_Tuple2(
@@ -9926,7 +9936,7 @@ var $author$project$Main$update = F2(
 			case 'ResetCards':
 				var updatedModel = _Utils_update(
 					model,
-					{notSelectedCards: $author$project$CardData$cards, selectedCards: _List_Nil});
+					{notSelectedCards: $author$project$Cards$cards, selectedCards: _List_Nil});
 				var url = $elm$url$Url$toString(
 					$author$project$Main$shareUrl(updatedModel));
 				return _Utils_Tuple2(
@@ -13940,14 +13950,14 @@ var $lattyware$elm_fontawesome$FontAwesome$Solid$list = A5(
 	512,
 	_List_fromArray(
 		['M80 368H16a16 16 0 0 0-16 16v64a16 16 0 0 0 16 16h64a16 16 0 0 0 16-16v-64a16 16 0 0 0-16-16zm0-320H16A16 16 0 0 0 0 64v64a16 16 0 0 0 16 16h64a16 16 0 0 0 16-16V64a16 16 0 0 0-16-16zm0 160H16a16 16 0 0 0-16 16v64a16 16 0 0 0 16 16h64a16 16 0 0 0 16-16v-64a16 16 0 0 0-16-16zm416 176H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16zm0-320H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16V80a16 16 0 0 0-16-16zm0 160H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16z']));
-var $lattyware$elm_fontawesome$FontAwesome$Solid$tasks = A5(
+var $lattyware$elm_fontawesome$FontAwesome$Solid$projectDiagram = A5(
 	$lattyware$elm_fontawesome$FontAwesome$Icon$Icon,
 	'fas',
-	'tasks',
-	512,
+	'project-diagram',
+	640,
 	512,
 	_List_fromArray(
-		['M139.61 35.5a12 12 0 0 0-17 0L58.93 98.81l-22.7-22.12a12 12 0 0 0-17 0L3.53 92.41a12 12 0 0 0 0 17l47.59 47.4a12.78 12.78 0 0 0 17.61 0l15.59-15.62L156.52 69a12.09 12.09 0 0 0 .09-17zm0 159.19a12 12 0 0 0-17 0l-63.68 63.72-22.7-22.1a12 12 0 0 0-17 0L3.53 252a12 12 0 0 0 0 17L51 316.5a12.77 12.77 0 0 0 17.6 0l15.7-15.69 72.2-72.22a12 12 0 0 0 .09-16.9zM64 368c-26.49 0-48.59 21.5-48.59 48S37.53 464 64 464a48 48 0 0 0 0-96zm432 16H208a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h288a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16zm0-320H208a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h288a16 16 0 0 0 16-16V80a16 16 0 0 0-16-16zm0 160H208a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h288a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16z']));
+		['M384 320H256c-17.67 0-32 14.33-32 32v128c0 17.67 14.33 32 32 32h128c17.67 0 32-14.33 32-32V352c0-17.67-14.33-32-32-32zM192 32c0-17.67-14.33-32-32-32H32C14.33 0 0 14.33 0 32v128c0 17.67 14.33 32 32 32h95.72l73.16 128.04C211.98 300.98 232.4 288 256 288h.28L192 175.51V128h224V64H192V32zM608 0H480c-17.67 0-32 14.33-32 32v128c0 17.67 14.33 32 32 32h128c17.67 0 32-14.33 32-32V32c0-17.67-14.33-32-32-32z']));
 var $author$project$Main$inventoryStyleToggle = F2(
 	function (inventoryDisplay, extraClasses) {
 		return A2(
@@ -14001,7 +14011,7 @@ var $author$project$Main$inventoryStyleToggle = F2(
 						]),
 					_List_fromArray(
 						[
-							$lattyware$elm_fontawesome$FontAwesome$Icon$viewIcon($lattyware$elm_fontawesome$FontAwesome$Solid$tasks)
+							$lattyware$elm_fontawesome$FontAwesome$Icon$viewIcon($lattyware$elm_fontawesome$FontAwesome$Solid$projectDiagram)
 						]))
 				]));
 	});

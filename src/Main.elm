@@ -17,8 +17,7 @@ import Bootstrap.Utilities.Size as Size
 import Bootstrap.Utilities.Spacing as Spacing
 import Bootstrap.Form.InputGroup as InputGroup
 import Browser
-import Cards exposing (Card, CardId, Kind(..))
-import CardData exposing (cards)
+import Cards exposing (cards, Card, CardId, Kind(..))
 import Dict
 import FontAwesome.Icon
 import FontAwesome.Solid
@@ -34,14 +33,10 @@ import Bootstrap.Grid.Row as Row
 import Browser.Navigation as Nav exposing (Key)
 import Maybe.Extra as Maybe
 import QS as QS
-import Tags exposing (effectToString)
-import Task
 import Url exposing (Url)
 import Browser exposing (UrlRequest)
-import Url.Parser.Query as Query
 import String.Extra as String
 import String.Extras as String
-import Url.Parser exposing (Parser)
 import Platform exposing (Router)
 
 maxDeckSize : Int
@@ -515,7 +510,7 @@ inventoryStyleToggle inventoryDisplay extraClasses =
         , ButtonGroup.radioButton
             (inventoryDisplay == InventoryAsProgressBars)
             [ Button.secondary, Button.onClick <| (ChangeInventoryDisplayType InventoryAsProgressBars) ]
-            [ FontAwesome.Solid.tasks |> FontAwesome.Icon.viewIcon ]
+            [ FontAwesome.Solid.projectDiagram |> FontAwesome.Icon.viewIcon ]
         ]
 
 
