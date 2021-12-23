@@ -55,14 +55,13 @@ type SupplyTrack
     | Clinic ClinicLines
     | Strip StripLines
     | Starter StarterLines
-    | Accomplishment AchievementLines
+    | Accomplishment String
     | UnknownTrack String String
 
-type AchievementLines
-    = Achievements
 
 type StarterLines
     = StarterDeck
+
 
 type NestLines
     = BridgeTown
@@ -146,11 +145,7 @@ parseSupplyTrack track name =
                 _ ->
                     UnknownTrack track name
         "Accomplishment" ->
-            case name of
-                "Achievement" ->
-                    Accomplishment Achievements
-                _ ->
-                    UnknownTrack track name
+            Accomplishment name
         _ ->
             UnknownTrack track name
 
@@ -404,13 +399,14 @@ type alias SupplyLineRequirement =
     , requiredProgress : Int
     }
     
+
 type alias SupplyLineRequirements =
     { nestRequirement : SupplyLineRequirement
     , alleyRequirement : SupplyLineRequirement
     , clinicRequirement : SupplyLineRequirement
     , stripRequirement : SupplyLineRequirement
     , starterRequirement : SupplyLineRequirement
-    , achievementRequirement : SupplyLineRequirement
+    , achievementRequirement : List String
     }
     
 isNestLine : Card -> Bool
@@ -496,7 +492,19 @@ starterSupplyLineCount =
 accomplishmentSupplyLineCount : Int
 accomplishmentSupplyLineCount =
     supplyLineCount isAccomplishmentLine
-    
+
+
+emptySupplyLineRequirements : SupplyLineRequirements
+emptySupplyLineRequirements =
+    { nestRequirement = { totalElements = nestSupplyLineCount, requiredProgress = 0 }
+    , alleyRequirement = { totalElements = alleySupplyLineCount, requiredProgress = 0 }
+    , clinicRequirement = { totalElements = clinicSupplyLineCount, requiredProgress = 0 }
+    , stripRequirement = { totalElements = stripSupplyLineCount, requiredProgress = 0 }
+    , starterRequirement = { totalElements = starterSupplyLineCount, requiredProgress = 0 }
+    , achievementRequirement = []
+    }
+
+
 supplyLineRequirements : (Card, List Card) -> SupplyLineRequirements
 supplyLineRequirements selection =
     let
@@ -515,12 +523,19 @@ supplyLineRequirements selection =
         highestClinicIndex = (selection |> highestIndex isClinicLine).supplyLine.index
         highestStripIndex = (selection |> highestIndex isStripLine).supplyLine.index
         highestStarterIndex = (selection |> highestIndex isStarterLine).supplyLine.index
-        highestAccomplishmentIndex = (selection |> highestIndex isAccomplishmentLine).supplyLine.index
+        requiredAchievements = 
+            (selection |> Tuple.first) :: (selection |> Tuple.second)
+            |> List.filter isAccomplishmentLine
+            |> List.map (\s -> 
+                    case s.supplyLine.name of
+                        Accomplishment x -> x
+                        _ -> "Unknown achievement"
+                )
     in
     { nestRequirement = { totalElements = nestSupplyLineCount, requiredProgress = highestNestIndex }
     , alleyRequirement = { totalElements = alleySupplyLineCount, requiredProgress = highestAlleyIndex }
     , clinicRequirement = { totalElements = clinicSupplyLineCount, requiredProgress = highestClinicIndex }
     , stripRequirement = { totalElements = stripSupplyLineCount, requiredProgress = highestStripIndex }
     , starterRequirement = { totalElements = starterSupplyLineCount, requiredProgress = highestStarterIndex }
-    , achievementRequirement = { totalElements = accomplishmentSupplyLineCount, requiredProgress = highestAccomplishmentIndex }
+    , achievementRequirement = requiredAchievements
     }

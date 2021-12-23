@@ -8,6 +8,7 @@ import Bootstrap.Grid as Grid
 import Bootstrap.Grid.Col as Col
 import Bootstrap.Modal as Modal
 import Bootstrap.Navbar as Navbar
+import Bootstrap.Progress as Progress
 import Bootstrap.Text as Text
 import Bootstrap.Utilities.Border as Border
 import Bootstrap.Utilities.Display as Display
@@ -76,7 +77,6 @@ type CardDisplay
 type InventoryDisplay
     = InventoryAsCards
     | InventoryAsSummary
-    | InventoryAsProgressBars
 
 
 type alias Model =
@@ -507,10 +507,6 @@ inventoryStyleToggle inventoryDisplay extraClasses =
             (inventoryDisplay == InventoryAsSummary)
             [ Button.secondary, Button.onClick <| (ChangeInventoryDisplayType InventoryAsSummary) ]
             [ FontAwesome.Solid.list |> FontAwesome.Icon.viewIcon ]
-        , ButtonGroup.radioButton
-            (inventoryDisplay == InventoryAsProgressBars)
-            [ Button.secondary, Button.onClick <| (ChangeInventoryDisplayType InventoryAsProgressBars) ]
-            [ FontAwesome.Solid.projectDiagram |> FontAwesome.Icon.viewIcon ]
         ]
 
 
@@ -582,11 +578,8 @@ inventoryContentView model =
         InventoryAsCards ->
             (model.selectedCards |> List.indexedMap (\i c -> summaryCardView (Just (i + 1)) c))
         InventoryAsSummary ->
-            inventorySummaryView model.selectedCards
-        _ ->
-            [ Grid.col [Col.xs12] []
-            , Grid.col [Col.xs12] []
-            ]
+            [ inventorySummaryView model.selectedCards, inventoryProgressView model.selectedCards ]
+
 
 cardBackgroundColor : Card -> Card.Option msg
 cardBackgroundColor card =
@@ -777,7 +770,7 @@ fullCardViewWithText card =
         ]
 
 
-inventorySummaryView : List Card -> List (Grid.Column Msg)
+inventorySummaryView : List Card -> (Grid.Column Msg)
 inventorySummaryView cards =
     let
         mergedProperties = 
@@ -791,17 +784,63 @@ inventorySummaryView cards =
         hasDisables = mergedProperties.disables |> (not << List.isEmpty)
         orEmptyElement hasElement element = if hasElement then element else div [] []
     in
-    [ Grid.col [ Col.xs12 ]
-        [ Html.h5 [ Spacing.pl2 ] [ text "Passives:"] |> orEmptyElement hasPassives
-        , Html.ul [] (mergedProperties.passives |> List.map (\p -> Html.li [] [ text p ])) |> orEmptyElement hasPassives
-        , Html.h5 [ Spacing.pl2 ] [ text "Other:"] |> orEmptyElement hasRemaining
-        , Html.ul [] (mergedProperties.remaining |> List.map (\p -> Html.li [] [ text p ])) |> orEmptyElement hasRemaining
-        , Html.h5 [ Spacing.pl2 ] [ text "Team Effects:"] |> orEmptyElement hasTeam 
-        , Html.ul [] (mergedProperties.team |> List.map (\p -> Html.li [] [ text p ])) |> orEmptyElement hasTeam
-        , Html.h5 [ Spacing.pl2 ] [ text "Disables:"] |> orEmptyElement hasDisables
-        , Html.ul [] (mergedProperties.disables |> List.map (\p -> Html.li [] [ text p ])) |> orEmptyElement hasDisables
-        ]
-    ]
+    Grid.col [ Col.xs12 ]
+      [ Html.h5 [ Spacing.pl2 ] [ text "Passives:"] |> orEmptyElement hasPassives
+      , Html.ul [] (mergedProperties.passives |> List.map (\p -> Html.li [] [ text p ])) |> orEmptyElement hasPassives
+      , Html.h5 [ Spacing.pl2 ] [ text "Other:"] |> orEmptyElement hasRemaining
+      , Html.ul [] (mergedProperties.remaining |> List.map (\p -> Html.li [] [ text p ])) |> orEmptyElement hasRemaining
+      , Html.h5 [ Spacing.pl2 ] [ text "Team Effects:"] |> orEmptyElement hasTeam 
+      , Html.ul [] (mergedProperties.team |> List.map (\p -> Html.li [] [ text p ])) |> orEmptyElement hasTeam
+      , Html.h5 [ Spacing.pl2 ] [ text "Disables:"] |> orEmptyElement hasDisables
+      , Html.ul [] (mergedProperties.disables |> List.map (\p -> Html.li [] [ text p ])) |> orEmptyElement hasDisables
+      ]
+    
+    
+inventoryProgressView : List Card -> (Grid.Column Msg)
+inventoryProgressView cards =
+    let
+        requirements = 
+            case cards of
+                head :: tail -> Cards.supplyLineRequirements (head, tail)
+                [] -> Cards.emptySupplyLineRequirements
+
+        progressBar : Cards.SupplyLineRequirement -> String -> Html Msg
+        progressBar supplyLineRequirement label =
+            let 
+                a = supplyLineRequirement.requiredProgress * 100 |> toFloat
+                b = supplyLineRequirement.totalElements |> toFloat
+                c = a / b
+                completeLabel = 
+                    label 
+                    ++ " (" 
+                    ++ (supplyLineRequirement.requiredProgress |> String.fromInt)
+                    ++ "/"
+                    ++ (supplyLineRequirement.totalElements |> String.fromInt)
+                    ++ ")"
+            in
+            Html.p [ Spacing.ml4, Spacing.mr4 ] 
+            [ Progress.progress [ Progress.value c, Progress.label completeLabel, Progress.wrapperAttrs [ class "bg-secondary" ] ]
+            ]
+
+        achievementList =
+            if requirements.achievementRequirement |> List.isEmpty then
+                []
+            else
+                [ Html.h5 [ Spacing.ml2 ] [ text "Required Achievements" ]
+                , Html.ul [] (requirements.achievementRequirement |> List.map (\a -> Html.li [] [ text a ]))
+                ]
+                
+        regularLines = 
+            [ Html.h5 [ Spacing.ml2 ] [ text "Required Supply Lines"]
+            , progressBar requirements.nestRequirement "Nest"
+            , progressBar requirements.alleyRequirement "Alley"
+            , progressBar requirements.clinicRequirement "Clinic"
+            , progressBar requirements.stripRequirement "Strip"
+            , progressBar requirements.starterRequirement "Starter"
+            ]
+    in
+    Grid.col [ Col.xs12 ]
+    [ div [] (List.append regularLines achievementList) ]
 
 
 {-| Creates a simple card view with a summary of all properties.

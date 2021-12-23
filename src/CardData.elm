@@ -3088,7 +3088,7 @@ rawCards =
             ]
       , supplyLine =
             { track = "Accomplishment"
-            , name = "Achievement"
+            , name = "Brought a Knife to a Gunfight"
             , tier = 1
             , index = -1
             }
@@ -3108,7 +3108,7 @@ rawCards =
             ]
       , supplyLine =
             { track = "Accomplishment"
-            , name = "Achievement"
+            , name = "Ammo Scavenger"
             , tier = 1
             , index = -1
             }
@@ -3128,7 +3128,7 @@ rawCards =
             ]
       , supplyLine =
             { track = "Accomplishment"
-            , name = "Achievement"
+            , name = "Berserker"
             , tier = 1
             , index = -1
             }
@@ -3148,7 +3148,7 @@ rawCards =
             ]
       , supplyLine =
             { track = "Accomplishment"
-            , name = "Achievement"
+            , name = "Smorgasbord"
             , tier = 1
             , index = -1
             }
@@ -3169,7 +3169,7 @@ rawCards =
             ]
       , supplyLine =
             { track = "Accomplishment"
-            , name = "Achievement"
+            , name = "Field Surgeon"
             , tier = 1
             , index = -1
             }
@@ -3189,7 +3189,7 @@ rawCards =
             ]
       , supplyLine =
             { track = "Accomplishment"
-            , name = "Achievement"
+            , name = "Jukebox Hero"
             , tier = 1
             , index = -1
             }
@@ -3210,7 +3210,7 @@ rawCards =
             ]
       , supplyLine =
             { track = "Accomplishment"
-            , name = "Achievement"
+            , name = "Mag Carrier"
             , tier = 1
             , index = -1
             }
@@ -3230,7 +3230,7 @@ rawCards =
             ]
       , supplyLine =
             { track = "Accomplishment"
-            , name = "Achievement"
+            , name = "Meatgrinder"
             , tier = 1
             , index = -1
             }
@@ -3251,7 +3251,7 @@ rawCards =
             ]
       , supplyLine =
             { track = "Accomplishment"
-            , name = "Achievement"
+            , name = "Shell Carrier"
             , tier = 1
             , index = -1
             }
@@ -3272,7 +3272,7 @@ rawCards =
             ]
       , supplyLine =
             { track = "Accomplishment"
-            , name = "Achievement"
+            , name = "Stock Pouch"
             , tier = 1
             , index = -1
             }
@@ -3293,7 +3293,7 @@ rawCards =
             ]
       , supplyLine =
             { track = "Accomplishment"
-            , name = "Achievement"
+            , name = "Tactical Vest"
             , tier = 1
             , index = -1
             }

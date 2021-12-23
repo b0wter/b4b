@@ -5400,7 +5400,6 @@ var $author$project$Cards$parseKind = function (str) {
 var $author$project$Cards$Accomplishment = function (a) {
 	return {$: 'Accomplishment', a: a};
 };
-var $author$project$Cards$Achievements = {$: 'Achievements'};
 var $author$project$Cards$Alley = function (a) {
 	return {$: 'Alley', a: a};
 };
@@ -5480,11 +5479,7 @@ var $author$project$Cards$parseSupplyTrack = F2(
 					return A2($author$project$Cards$UnknownTrack, track, name);
 				}
 			case 'Accomplishment':
-				if (name === 'Achievement') {
-					return $author$project$Cards$Accomplishment($author$project$Cards$Achievements);
-				} else {
-					return A2($author$project$Cards$UnknownTrack, track, name);
-				}
+				return $author$project$Cards$Accomplishment(name);
 			default:
 				return A2($author$project$Cards$UnknownTrack, track, name);
 		}
@@ -8112,7 +8107,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		name: 'Adrenaline Fueled',
 		properties: _List_fromArray(
 			['When you kill an enemy, gain 7 Stamina over 7 seconds, stacking up to 5 times.']),
-		supplyLine: {index: -1, name: 'Achievement', tier: 1, track: 'Accomplishment'},
+		supplyLine: {index: -1, name: 'Brought a Knife to a Gunfight', tier: 1, track: 'Accomplishment'},
 		totalCost: 0
 	},
 		{
@@ -8125,7 +8120,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		name: 'Ammo Scavenger',
 		properties: _List_fromArray(
 			['You can sense nearby Ammo. More Ammo spawns.']),
-		supplyLine: {index: -1, name: 'Achievement', tier: 1, track: 'Accomplishment'},
+		supplyLine: {index: -1, name: 'Ammo Scavenger', tier: 1, track: 'Accomplishment'},
 		totalCost: 0
 	},
 		{
@@ -8138,7 +8133,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		name: 'Berserker',
 		properties: _List_fromArray(
 			['Gain 10% Melee Damage,10% Melee Speed, and 5% Move Speed for each Melee kill in the last 4 seconds.']),
-		supplyLine: {index: -1, name: 'Achievement', tier: 1, track: 'Accomplishment'},
+		supplyLine: {index: -1, name: 'Berserker', tier: 1, track: 'Accomplishment'},
 		totalCost: 0
 	},
 		{
@@ -8151,7 +8146,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		name: 'Confident Killer',
 		properties: _List_fromArray(
 			['When you or your team kills a Mutation gain 1% damage (up to -15%) until the end of the level.']),
-		supplyLine: {index: -1, name: 'Achievement', tier: 1, track: 'Accomplishment'},
+		supplyLine: {index: -1, name: 'Smorgasbord', tier: 1, track: 'Accomplishment'},
 		totalCost: 0
 	},
 		{
@@ -8164,7 +8159,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		name: 'Field Surgeon',
 		properties: _List_fromArray(
 			['+60% Healing Efficiency', '-50% Use Speed']),
-		supplyLine: {index: -1, name: 'Achievement', tier: 1, track: 'Accomplishment'},
+		supplyLine: {index: -1, name: 'Field Surgeon', tier: 1, track: 'Accomplishment'},
 		totalCost: 0
 	},
 		{
@@ -8177,7 +8172,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		name: 'Lucky Pennies',
 		properties: _List_fromArray(
 			['Whenever you or your team loots Copper, you have a 35% chance to find 35% additional Copper.']),
-		supplyLine: {index: -1, name: 'Achievement', tier: 1, track: 'Accomplishment'},
+		supplyLine: {index: -1, name: 'Jukebox Hero', tier: 1, track: 'Accomplishment'},
 		totalCost: 0
 	},
 		{
@@ -8190,7 +8185,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		name: 'Mag Carrier',
 		properties: _List_fromArray(
 			['+30% Pistol/SMG Ammo Capacity', '+10% Damage with Pistols and SMGS']),
-		supplyLine: {index: -1, name: 'Achievement', tier: 1, track: 'Accomplishment'},
+		supplyLine: {index: -1, name: 'Mag Carrier', tier: 1, track: 'Accomplishment'},
 		totalCost: 0
 	},
 		{
@@ -8203,7 +8198,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		name: 'Meatgrinder',
 		properties: _List_fromArray(
 			['Gain 30% Move Speed and Accuracy while crouched and using an LMG.']),
-		supplyLine: {index: -1, name: 'Achievement', tier: 1, track: 'Accomplishment'},
+		supplyLine: {index: -1, name: 'Meatgrinder', tier: 1, track: 'Accomplishment'},
 		totalCost: 0
 	},
 		{
@@ -8216,7 +8211,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		name: 'Shell Carrier',
 		properties: _List_fromArray(
 			['+30% Shotgun Ammo Capacity', '+10% Damage with Shotguns']),
-		supplyLine: {index: -1, name: 'Achievement', tier: 1, track: 'Accomplishment'},
+		supplyLine: {index: -1, name: 'Shell Carrier', tier: 1, track: 'Accomplishment'},
 		totalCost: 0
 	},
 		{
@@ -8229,7 +8224,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		name: 'Stock Pouch',
 		properties: _List_fromArray(
 			['+30% Sniper Ammo Capacity', '+10% Damage with Sniper Rifles']),
-		supplyLine: {index: -1, name: 'Achievement', tier: 1, track: 'Accomplishment'},
+		supplyLine: {index: -1, name: 'Stock Pouch', tier: 1, track: 'Accomplishment'},
 		totalCost: 0
 	},
 		{
@@ -8242,7 +8237,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		name: 'Tactical Vest',
 		properties: _List_fromArray(
 			['+30% Rifle Ammo Capacity', '+10% Damage with Assault Rifles and LMGS']),
-		supplyLine: {index: -1, name: 'Achievement', tier: 1, track: 'Accomplishment'},
+		supplyLine: {index: -1, name: 'Tactical Vest', tier: 1, track: 'Accomplishment'},
 		totalCost: 0
 	}
 	]);
@@ -12873,6 +12868,416 @@ var $author$project$Main$inventoryToggleButton = A2(
 				]))
 		]));
 var $rundis$elm_bootstrap$Bootstrap$Utilities$Border$dark = A2($rundis$elm_bootstrap$Bootstrap$Internal$Role$toClass, 'border', $rundis$elm_bootstrap$Bootstrap$Internal$Role$Dark);
+var $author$project$Cards$isAlleyLine = function (c) {
+	var _v0 = c.supplyLine.name;
+	if (_v0.$ === 'Alley') {
+		return true;
+	} else {
+		return false;
+	}
+};
+var $author$project$Cards$supplyLineCount = function (predicate) {
+	return $elm$core$List$length(
+		A2($elm$core$List$filter, predicate, $author$project$Cards$cards));
+};
+var $author$project$Cards$alleySupplyLineCount = $author$project$Cards$supplyLineCount($author$project$Cards$isAlleyLine);
+var $author$project$Cards$isClinicLine = function (c) {
+	var _v0 = c.supplyLine.name;
+	if (_v0.$ === 'Clinic') {
+		return true;
+	} else {
+		return false;
+	}
+};
+var $author$project$Cards$clinicSupplyLineCount = $author$project$Cards$supplyLineCount($author$project$Cards$isClinicLine);
+var $author$project$Cards$isNestLine = function (c) {
+	var _v0 = c.supplyLine.name;
+	if (_v0.$ === 'Nest') {
+		return true;
+	} else {
+		return false;
+	}
+};
+var $author$project$Cards$nestSupplyLineCount = $author$project$Cards$supplyLineCount($author$project$Cards$isNestLine);
+var $author$project$Cards$isStarterLine = function (c) {
+	var _v0 = c.supplyLine.name;
+	if (_v0.$ === 'Starter') {
+		return true;
+	} else {
+		return false;
+	}
+};
+var $author$project$Cards$starterSupplyLineCount = $author$project$Cards$supplyLineCount($author$project$Cards$isStarterLine);
+var $author$project$Cards$isStripLine = function (c) {
+	var _v0 = c.supplyLine.name;
+	if (_v0.$ === 'Strip') {
+		return true;
+	} else {
+		return false;
+	}
+};
+var $author$project$Cards$stripSupplyLineCount = $author$project$Cards$supplyLineCount($author$project$Cards$isStripLine);
+var $author$project$Cards$emptySupplyLineRequirements = {
+	achievementRequirement: _List_Nil,
+	alleyRequirement: {requiredProgress: 0, totalElements: $author$project$Cards$alleySupplyLineCount},
+	clinicRequirement: {requiredProgress: 0, totalElements: $author$project$Cards$clinicSupplyLineCount},
+	nestRequirement: {requiredProgress: 0, totalElements: $author$project$Cards$nestSupplyLineCount},
+	starterRequirement: {requiredProgress: 0, totalElements: $author$project$Cards$starterSupplyLineCount},
+	stripRequirement: {requiredProgress: 0, totalElements: $author$project$Cards$stripSupplyLineCount}
+};
+var $elm$core$List$isEmpty = function (xs) {
+	if (!xs.b) {
+		return true;
+	} else {
+		return false;
+	}
+};
+var $rundis$elm_bootstrap$Bootstrap$Progress$Label = function (a) {
+	return {$: 'Label', a: a};
+};
+var $rundis$elm_bootstrap$Bootstrap$Progress$label = function (text) {
+	return $rundis$elm_bootstrap$Bootstrap$Progress$Label(
+		_List_fromArray(
+			[
+				$elm$html$Html$text(text)
+			]));
+};
+var $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$ml2 = $elm$html$Html$Attributes$class('ml-2');
+var $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$ml4 = $elm$html$Html$Attributes$class('ml-4');
+var $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$mr4 = $elm$html$Html$Attributes$class('mr-4');
+var $elm$html$Html$p = _VirtualDom_node('p');
+var $rundis$elm_bootstrap$Bootstrap$Progress$Options = function (a) {
+	return {$: 'Options', a: a};
+};
+var $rundis$elm_bootstrap$Bootstrap$Progress$applyOption = F2(
+	function (modifier, _v0) {
+		var options = _v0.a;
+		return $rundis$elm_bootstrap$Bootstrap$Progress$Options(
+			function () {
+				switch (modifier.$) {
+					case 'Value':
+						var value_ = modifier.a;
+						return _Utils_update(
+							options,
+							{value: value_});
+					case 'Height':
+						var height_ = modifier.a;
+						return _Utils_update(
+							options,
+							{height: height_});
+					case 'Label':
+						var label_ = modifier.a;
+						return _Utils_update(
+							options,
+							{label: label_});
+					case 'Roled':
+						var role_ = modifier.a;
+						return _Utils_update(
+							options,
+							{role: role_});
+					case 'Striped':
+						var striped_ = modifier.a;
+						return _Utils_update(
+							options,
+							{striped: striped_});
+					case 'Animated':
+						var animated_ = modifier.a;
+						return _Utils_update(
+							options,
+							{animated: animated_});
+					case 'Attrs':
+						var attrs_ = modifier.a;
+						return _Utils_update(
+							options,
+							{attributes: attrs_});
+					default:
+						var attrs_ = modifier.a;
+						return _Utils_update(
+							options,
+							{wrapperAttributes: attrs_});
+				}
+			}());
+	});
+var $rundis$elm_bootstrap$Bootstrap$Progress$defaultOptions = $rundis$elm_bootstrap$Bootstrap$Progress$Options(
+	{animated: false, attributes: _List_Nil, height: $elm$core$Maybe$Nothing, label: _List_Nil, role: $elm$core$Maybe$Nothing, striped: false, value: 0, wrapperAttributes: _List_Nil});
+var $rundis$elm_bootstrap$Bootstrap$Progress$roleClass = function (role) {
+	return $elm$html$Html$Attributes$class(
+		function () {
+			switch (role.$) {
+				case 'Success':
+					return 'bg-success';
+				case 'Info':
+					return 'bg-info';
+				case 'Warning':
+					return 'bg-warning';
+				default:
+					return 'bg-danger';
+			}
+		}());
+};
+var $rundis$elm_bootstrap$Bootstrap$Progress$toAttributes = function (_v0) {
+	var options = _v0.a;
+	return $elm$core$List$concat(
+		_List_fromArray(
+			[
+				_List_fromArray(
+				[
+					A2($elm$html$Html$Attributes$attribute, 'role', 'progressbar'),
+					A2(
+					$elm$html$Html$Attributes$attribute,
+					'aria-value-now',
+					$elm$core$String$fromFloat(options.value)),
+					A2($elm$html$Html$Attributes$attribute, 'aria-valuemin', '0'),
+					A2($elm$html$Html$Attributes$attribute, 'aria-valuemax', '100'),
+					A2(
+					$elm$html$Html$Attributes$style,
+					'width',
+					$elm$core$String$fromFloat(options.value) + '%'),
+					$elm$html$Html$Attributes$classList(
+					_List_fromArray(
+						[
+							_Utils_Tuple2('progress-bar', true),
+							_Utils_Tuple2('progress-bar-striped', options.striped || options.animated),
+							_Utils_Tuple2('progress-bar-animated', options.animated)
+						]))
+				]),
+				function () {
+				var _v1 = options.height;
+				if (_v1.$ === 'Just') {
+					var height_ = _v1.a;
+					return _List_fromArray(
+						[
+							A2(
+							$elm$html$Html$Attributes$style,
+							'height',
+							$elm$core$String$fromInt(height_) + 'px')
+						]);
+				} else {
+					return _List_Nil;
+				}
+			}(),
+				function () {
+				var _v2 = options.role;
+				if (_v2.$ === 'Just') {
+					var role_ = _v2.a;
+					return _List_fromArray(
+						[
+							$rundis$elm_bootstrap$Bootstrap$Progress$roleClass(role_)
+						]);
+				} else {
+					return _List_Nil;
+				}
+			}(),
+				options.attributes
+			]));
+};
+var $rundis$elm_bootstrap$Bootstrap$Progress$renderBar = function (modifiers) {
+	var options = A3($elm$core$List$foldl, $rundis$elm_bootstrap$Bootstrap$Progress$applyOption, $rundis$elm_bootstrap$Bootstrap$Progress$defaultOptions, modifiers);
+	var opts = options.a;
+	return A2(
+		$elm$html$Html$div,
+		$rundis$elm_bootstrap$Bootstrap$Progress$toAttributes(options),
+		opts.label);
+};
+var $rundis$elm_bootstrap$Bootstrap$Progress$progress = function (modifiers) {
+	var _v0 = A3($elm$core$List$foldl, $rundis$elm_bootstrap$Bootstrap$Progress$applyOption, $rundis$elm_bootstrap$Bootstrap$Progress$defaultOptions, modifiers);
+	var options = _v0.a;
+	return A2(
+		$elm$html$Html$div,
+		A2(
+			$elm$core$List$cons,
+			$elm$html$Html$Attributes$class('progress'),
+			options.wrapperAttributes),
+		_List_fromArray(
+			[
+				$rundis$elm_bootstrap$Bootstrap$Progress$renderBar(modifiers)
+			]));
+};
+var $author$project$Cards$isAccomplishmentLine = function (c) {
+	var _v0 = c.supplyLine.name;
+	if (_v0.$ === 'Accomplishment') {
+		return true;
+	} else {
+		return false;
+	}
+};
+var $elm_community$list_extra$List$Extra$foldl1 = F2(
+	function (func, list) {
+		if (!list.b) {
+			return $elm$core$Maybe$Nothing;
+		} else {
+			var x = list.a;
+			var xs = list.b;
+			return $elm$core$Maybe$Just(
+				A3($elm$core$List$foldl, func, x, xs));
+		}
+	});
+var $elm_community$list_extra$List$Extra$maximumWith = F2(
+	function (comparator, list) {
+		return A2(
+			$elm_community$list_extra$List$Extra$foldl1,
+			F2(
+				function (x, y) {
+					var _v0 = A2(comparator, x, y);
+					if (_v0.$ === 'GT') {
+						return x;
+					} else {
+						return y;
+					}
+				}),
+			list);
+	});
+var $author$project$Cards$supplyLineRequirements = function (selection) {
+	var requiredAchievements = A2(
+		$elm$core$List$map,
+		function (s) {
+			var _v1 = s.supplyLine.name;
+			if (_v1.$ === 'Accomplishment') {
+				var x = _v1.a;
+				return x;
+			} else {
+				return 'Unknown achievement';
+			}
+		},
+		A2(
+			$elm$core$List$filter,
+			$author$project$Cards$isAccomplishmentLine,
+			A2($elm$core$List$cons, selection.a, selection.b)));
+	var highestIndex = F2(
+		function (predicate, _v0) {
+			var c = _v0.a;
+			var cc = _v0.b;
+			var filtered = A2(
+				$elm$core$List$filter,
+				predicate,
+				A2($elm$core$List$cons, c, cc));
+			return A2(
+				$elm$core$Maybe$withDefault,
+				c,
+				A2(
+					$elm_community$list_extra$List$Extra$maximumWith,
+					F2(
+						function (a, b) {
+							return (_Utils_cmp(a.supplyLine.index, b.supplyLine.index) > 0) ? $elm$core$Basics$GT : (_Utils_eq(a.supplyLine.index, b.supplyLine.index) ? $elm$core$Basics$EQ : $elm$core$Basics$LT);
+						}),
+					filtered));
+		});
+	var highestNestIndex = A2(highestIndex, $author$project$Cards$isNestLine, selection).supplyLine.index;
+	var highestStarterIndex = A2(highestIndex, $author$project$Cards$isStarterLine, selection).supplyLine.index;
+	var highestStripIndex = A2(highestIndex, $author$project$Cards$isStripLine, selection).supplyLine.index;
+	var highestClinicIndex = A2(highestIndex, $author$project$Cards$isClinicLine, selection).supplyLine.index;
+	var highestAlleyIndex = A2(highestIndex, $author$project$Cards$isAlleyLine, selection).supplyLine.index;
+	return {
+		achievementRequirement: requiredAchievements,
+		alleyRequirement: {requiredProgress: highestAlleyIndex, totalElements: $author$project$Cards$alleySupplyLineCount},
+		clinicRequirement: {requiredProgress: highestClinicIndex, totalElements: $author$project$Cards$clinicSupplyLineCount},
+		nestRequirement: {requiredProgress: highestNestIndex, totalElements: $author$project$Cards$nestSupplyLineCount},
+		starterRequirement: {requiredProgress: highestStarterIndex, totalElements: $author$project$Cards$starterSupplyLineCount},
+		stripRequirement: {requiredProgress: highestStripIndex, totalElements: $author$project$Cards$stripSupplyLineCount}
+	};
+};
+var $rundis$elm_bootstrap$Bootstrap$Progress$Value = function (a) {
+	return {$: 'Value', a: a};
+};
+var $rundis$elm_bootstrap$Bootstrap$Progress$value = function (val) {
+	return $rundis$elm_bootstrap$Bootstrap$Progress$Value(val);
+};
+var $rundis$elm_bootstrap$Bootstrap$Progress$WrapperAttrs = function (a) {
+	return {$: 'WrapperAttrs', a: a};
+};
+var $rundis$elm_bootstrap$Bootstrap$Progress$wrapperAttrs = function (attrs_) {
+	return $rundis$elm_bootstrap$Bootstrap$Progress$WrapperAttrs(attrs_);
+};
+var $author$project$Main$inventoryProgressView = function (cards) {
+	var requirements = function () {
+		if (cards.b) {
+			var head = cards.a;
+			var tail = cards.b;
+			return $author$project$Cards$supplyLineRequirements(
+				_Utils_Tuple2(head, tail));
+		} else {
+			return $author$project$Cards$emptySupplyLineRequirements;
+		}
+	}();
+	var progressBar = F2(
+		function (supplyLineRequirement, label) {
+			var completeLabel = label + (' (' + ($elm$core$String$fromInt(supplyLineRequirement.requiredProgress) + ('/' + ($elm$core$String$fromInt(supplyLineRequirement.totalElements) + ')'))));
+			var b = supplyLineRequirement.totalElements;
+			var a = supplyLineRequirement.requiredProgress * 100;
+			var c = a / b;
+			return A2(
+				$elm$html$Html$p,
+				_List_fromArray(
+					[$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$ml4, $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$mr4]),
+				_List_fromArray(
+					[
+						$rundis$elm_bootstrap$Bootstrap$Progress$progress(
+						_List_fromArray(
+							[
+								$rundis$elm_bootstrap$Bootstrap$Progress$value(c),
+								$rundis$elm_bootstrap$Bootstrap$Progress$label(completeLabel),
+								$rundis$elm_bootstrap$Bootstrap$Progress$wrapperAttrs(
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$class('bg-secondary')
+									]))
+							]))
+					]));
+		});
+	var regularLines = _List_fromArray(
+		[
+			A2(
+			$elm$html$Html$h5,
+			_List_fromArray(
+				[$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$ml2]),
+			_List_fromArray(
+				[
+					$elm$html$Html$text('Required Supply Lines')
+				])),
+			A2(progressBar, requirements.nestRequirement, 'Nest'),
+			A2(progressBar, requirements.alleyRequirement, 'Alley'),
+			A2(progressBar, requirements.clinicRequirement, 'Clinic'),
+			A2(progressBar, requirements.stripRequirement, 'Strip'),
+			A2(progressBar, requirements.starterRequirement, 'Starter')
+		]);
+	var achievementList = $elm$core$List$isEmpty(requirements.achievementRequirement) ? _List_Nil : _List_fromArray(
+		[
+			A2(
+			$elm$html$Html$h5,
+			_List_fromArray(
+				[$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$ml2]),
+			_List_fromArray(
+				[
+					$elm$html$Html$text('Required Achievements')
+				])),
+			A2(
+			$elm$html$Html$ul,
+			_List_Nil,
+			A2(
+				$elm$core$List$map,
+				function (a) {
+					return A2(
+						$elm$html$Html$li,
+						_List_Nil,
+						_List_fromArray(
+							[
+								$elm$html$Html$text(a)
+							]));
+				},
+				requirements.achievementRequirement))
+		]);
+	return A2(
+		$rundis$elm_bootstrap$Bootstrap$Grid$col,
+		_List_fromArray(
+			[$rundis$elm_bootstrap$Bootstrap$Grid$Col$xs12]),
+		_List_fromArray(
+			[
+				A2(
+				$elm$html$Html$div,
+				_List_Nil,
+				A2($elm$core$List$append, regularLines, achievementList))
+			]));
+};
 var $author$project$Cards$Absolute = {$: 'Absolute'};
 var $author$project$Cards$absOrRelToString = function (a) {
 	if (a.$ === 'Absolute') {
@@ -13568,13 +13973,6 @@ var $author$project$Cards$groupProperties = function (properties) {
 	var _v0 = A2($elm$core$Debug$log, 'disables', disables);
 	return {disables: disables, passives: passives, remaining: remaining, team: teams};
 };
-var $elm$core$List$isEmpty = function (xs) {
-	if (!xs.b) {
-		return true;
-	} else {
-		return false;
-	}
-};
 var $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$pl2 = $elm$html$Html$Attributes$class('pl-2');
 var $author$project$Main$inventorySummaryView = function (cards) {
 	var orEmptyElement = F2(
@@ -13593,132 +13991,129 @@ var $author$project$Main$inventorySummaryView = function (cards) {
 	var hasRemaining = A3($elm$core$Basics$composeL, $elm$core$Basics$not, $elm$core$List$isEmpty, mergedProperties.remaining);
 	var hasPassives = A3($elm$core$Basics$composeL, $elm$core$Basics$not, $elm$core$List$isEmpty, mergedProperties.passives);
 	var hasDisables = A3($elm$core$Basics$composeL, $elm$core$Basics$not, $elm$core$List$isEmpty, mergedProperties.disables);
-	return _List_fromArray(
-		[
-			A2(
-			$rundis$elm_bootstrap$Bootstrap$Grid$col,
-			_List_fromArray(
-				[$rundis$elm_bootstrap$Bootstrap$Grid$Col$xs12]),
-			_List_fromArray(
-				[
+	return A2(
+		$rundis$elm_bootstrap$Bootstrap$Grid$col,
+		_List_fromArray(
+			[$rundis$elm_bootstrap$Bootstrap$Grid$Col$xs12]),
+		_List_fromArray(
+			[
+				A2(
+				orEmptyElement,
+				hasPassives,
+				A2(
+					$elm$html$Html$h5,
+					_List_fromArray(
+						[$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$pl2]),
+					_List_fromArray(
+						[
+							$elm$html$Html$text('Passives:')
+						]))),
+				A2(
+				orEmptyElement,
+				hasPassives,
+				A2(
+					$elm$html$Html$ul,
+					_List_Nil,
 					A2(
-					orEmptyElement,
-					hasPassives,
+						$elm$core$List$map,
+						function (p) {
+							return A2(
+								$elm$html$Html$li,
+								_List_Nil,
+								_List_fromArray(
+									[
+										$elm$html$Html$text(p)
+									]));
+						},
+						mergedProperties.passives))),
+				A2(
+				orEmptyElement,
+				hasRemaining,
+				A2(
+					$elm$html$Html$h5,
+					_List_fromArray(
+						[$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$pl2]),
+					_List_fromArray(
+						[
+							$elm$html$Html$text('Other:')
+						]))),
+				A2(
+				orEmptyElement,
+				hasRemaining,
+				A2(
+					$elm$html$Html$ul,
+					_List_Nil,
 					A2(
-						$elm$html$Html$h5,
-						_List_fromArray(
-							[$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$pl2]),
-						_List_fromArray(
-							[
-								$elm$html$Html$text('Passives:')
-							]))),
+						$elm$core$List$map,
+						function (p) {
+							return A2(
+								$elm$html$Html$li,
+								_List_Nil,
+								_List_fromArray(
+									[
+										$elm$html$Html$text(p)
+									]));
+						},
+						mergedProperties.remaining))),
+				A2(
+				orEmptyElement,
+				hasTeam,
+				A2(
+					$elm$html$Html$h5,
+					_List_fromArray(
+						[$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$pl2]),
+					_List_fromArray(
+						[
+							$elm$html$Html$text('Team Effects:')
+						]))),
+				A2(
+				orEmptyElement,
+				hasTeam,
+				A2(
+					$elm$html$Html$ul,
+					_List_Nil,
 					A2(
-					orEmptyElement,
-					hasPassives,
+						$elm$core$List$map,
+						function (p) {
+							return A2(
+								$elm$html$Html$li,
+								_List_Nil,
+								_List_fromArray(
+									[
+										$elm$html$Html$text(p)
+									]));
+						},
+						mergedProperties.team))),
+				A2(
+				orEmptyElement,
+				hasDisables,
+				A2(
+					$elm$html$Html$h5,
+					_List_fromArray(
+						[$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$pl2]),
+					_List_fromArray(
+						[
+							$elm$html$Html$text('Disables:')
+						]))),
+				A2(
+				orEmptyElement,
+				hasDisables,
+				A2(
+					$elm$html$Html$ul,
+					_List_Nil,
 					A2(
-						$elm$html$Html$ul,
-						_List_Nil,
-						A2(
-							$elm$core$List$map,
-							function (p) {
-								return A2(
-									$elm$html$Html$li,
-									_List_Nil,
-									_List_fromArray(
-										[
-											$elm$html$Html$text(p)
-										]));
-							},
-							mergedProperties.passives))),
-					A2(
-					orEmptyElement,
-					hasRemaining,
-					A2(
-						$elm$html$Html$h5,
-						_List_fromArray(
-							[$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$pl2]),
-						_List_fromArray(
-							[
-								$elm$html$Html$text('Other:')
-							]))),
-					A2(
-					orEmptyElement,
-					hasRemaining,
-					A2(
-						$elm$html$Html$ul,
-						_List_Nil,
-						A2(
-							$elm$core$List$map,
-							function (p) {
-								return A2(
-									$elm$html$Html$li,
-									_List_Nil,
-									_List_fromArray(
-										[
-											$elm$html$Html$text(p)
-										]));
-							},
-							mergedProperties.remaining))),
-					A2(
-					orEmptyElement,
-					hasTeam,
-					A2(
-						$elm$html$Html$h5,
-						_List_fromArray(
-							[$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$pl2]),
-						_List_fromArray(
-							[
-								$elm$html$Html$text('Team Effects:')
-							]))),
-					A2(
-					orEmptyElement,
-					hasTeam,
-					A2(
-						$elm$html$Html$ul,
-						_List_Nil,
-						A2(
-							$elm$core$List$map,
-							function (p) {
-								return A2(
-									$elm$html$Html$li,
-									_List_Nil,
-									_List_fromArray(
-										[
-											$elm$html$Html$text(p)
-										]));
-							},
-							mergedProperties.team))),
-					A2(
-					orEmptyElement,
-					hasDisables,
-					A2(
-						$elm$html$Html$h5,
-						_List_fromArray(
-							[$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$pl2]),
-						_List_fromArray(
-							[
-								$elm$html$Html$text('Disables:')
-							]))),
-					A2(
-					orEmptyElement,
-					hasDisables,
-					A2(
-						$elm$html$Html$ul,
-						_List_Nil,
-						A2(
-							$elm$core$List$map,
-							function (p) {
-								return A2(
-									$elm$html$Html$li,
-									_List_Nil,
-									_List_fromArray(
-										[
-											$elm$html$Html$text(p)
-										]));
-							},
-							mergedProperties.disables)))
-				]))
-		]);
+						$elm$core$List$map,
+						function (p) {
+							return A2(
+								$elm$html$Html$li,
+								_List_Nil,
+								_List_fromArray(
+									[
+										$elm$html$Html$text(p)
+									]));
+						},
+						mergedProperties.disables)))
+			]));
 };
 var $author$project$Main$DeselectCard = function (a) {
 	return {$: 'DeselectCard', a: a};
@@ -13734,7 +14129,6 @@ var $rundis$elm_bootstrap$Bootstrap$Utilities$Flex$justifyBetween = $elm$html$Ht
 var $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$pb1 = $elm$html$Html$Attributes$class('pb-1');
 var $author$project$Main$pointerClass = $elm$html$Html$Attributes$class('pointer');
 var $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$pt1 = $elm$html$Html$Attributes$class('pt-1');
-var $elm$html$Html$p = _VirtualDom_node('p');
 var $rundis$elm_bootstrap$Bootstrap$Card$Block$text = F2(
 	function (attributes, children) {
 		return $rundis$elm_bootstrap$Bootstrap$Card$Internal$BlockItem(
@@ -13887,34 +14281,23 @@ var $author$project$Main$summaryCardView = F2(
 	});
 var $author$project$Main$inventoryContentView = function (model) {
 	var _v0 = model.inventoryDisplay;
-	switch (_v0.$) {
-		case 'InventoryAsCards':
-			return A2(
-				$elm$core$List$indexedMap,
-				F2(
-					function (i, c) {
-						return A2(
-							$author$project$Main$summaryCardView,
-							$elm$core$Maybe$Just(i + 1),
-							c);
-					}),
-				model.selectedCards);
-		case 'InventoryAsSummary':
-			return $author$project$Main$inventorySummaryView(model.selectedCards);
-		default:
-			return _List_fromArray(
-				[
-					A2(
-					$rundis$elm_bootstrap$Bootstrap$Grid$col,
-					_List_fromArray(
-						[$rundis$elm_bootstrap$Bootstrap$Grid$Col$xs12]),
-					_List_Nil),
-					A2(
-					$rundis$elm_bootstrap$Bootstrap$Grid$col,
-					_List_fromArray(
-						[$rundis$elm_bootstrap$Bootstrap$Grid$Col$xs12]),
-					_List_Nil)
-				]);
+	if (_v0.$ === 'InventoryAsCards') {
+		return A2(
+			$elm$core$List$indexedMap,
+			F2(
+				function (i, c) {
+					return A2(
+						$author$project$Main$summaryCardView,
+						$elm$core$Maybe$Just(i + 1),
+						c);
+				}),
+			model.selectedCards);
+	} else {
+		return _List_fromArray(
+			[
+				$author$project$Main$inventorySummaryView(model.selectedCards),
+				$author$project$Main$inventoryProgressView(model.selectedCards)
+			]);
 	}
 };
 var $author$project$Main$ConfirmResetModal = {$: 'ConfirmResetModal'};
@@ -13932,7 +14315,6 @@ var $rundis$elm_bootstrap$Bootstrap$Grid$Row$attrs = function (attrs_) {
 var $author$project$Main$ChangeInventoryDisplayType = function (a) {
 	return {$: 'ChangeInventoryDisplayType', a: a};
 };
-var $author$project$Main$InventoryAsProgressBars = {$: 'InventoryAsProgressBars'};
 var $author$project$Main$InventoryAsSummary = {$: 'InventoryAsSummary'};
 var $lattyware$elm_fontawesome$FontAwesome$Solid$layerGroup = A5(
 	$lattyware$elm_fontawesome$FontAwesome$Icon$Icon,
@@ -13950,14 +14332,6 @@ var $lattyware$elm_fontawesome$FontAwesome$Solid$list = A5(
 	512,
 	_List_fromArray(
 		['M80 368H16a16 16 0 0 0-16 16v64a16 16 0 0 0 16 16h64a16 16 0 0 0 16-16v-64a16 16 0 0 0-16-16zm0-320H16A16 16 0 0 0 0 64v64a16 16 0 0 0 16 16h64a16 16 0 0 0 16-16V64a16 16 0 0 0-16-16zm0 160H16a16 16 0 0 0-16 16v64a16 16 0 0 0 16 16h64a16 16 0 0 0 16-16v-64a16 16 0 0 0-16-16zm416 176H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16zm0-320H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16V80a16 16 0 0 0-16-16zm0 160H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16z']));
-var $lattyware$elm_fontawesome$FontAwesome$Solid$projectDiagram = A5(
-	$lattyware$elm_fontawesome$FontAwesome$Icon$Icon,
-	'fas',
-	'project-diagram',
-	640,
-	512,
-	_List_fromArray(
-		['M384 320H256c-17.67 0-32 14.33-32 32v128c0 17.67 14.33 32 32 32h128c17.67 0 32-14.33 32-32V352c0-17.67-14.33-32-32-32zM192 32c0-17.67-14.33-32-32-32H32C14.33 0 0 14.33 0 32v128c0 17.67 14.33 32 32 32h95.72l73.16 128.04C211.98 300.98 232.4 288 256 288h.28L192 175.51V128h224V64H192V32zM608 0H480c-17.67 0-32 14.33-32 32v128c0 17.67 14.33 32 32 32h128c17.67 0 32-14.33 32-32V32c0-17.67-14.33-32-32-32z']));
 var $author$project$Main$inventoryStyleToggle = F2(
 	function (inventoryDisplay, extraClasses) {
 		return A2(
@@ -13999,19 +14373,6 @@ var $author$project$Main$inventoryStyleToggle = F2(
 					_List_fromArray(
 						[
 							$lattyware$elm_fontawesome$FontAwesome$Icon$viewIcon($lattyware$elm_fontawesome$FontAwesome$Solid$list)
-						])),
-					A3(
-					$rundis$elm_bootstrap$Bootstrap$ButtonGroup$radioButton,
-					_Utils_eq(inventoryDisplay, $author$project$Main$InventoryAsProgressBars),
-					_List_fromArray(
-						[
-							$rundis$elm_bootstrap$Bootstrap$Button$secondary,
-							$rundis$elm_bootstrap$Bootstrap$Button$onClick(
-							$author$project$Main$ChangeInventoryDisplayType($author$project$Main$InventoryAsProgressBars))
-						]),
-					_List_fromArray(
-						[
-							$lattyware$elm_fontawesome$FontAwesome$Icon$viewIcon($lattyware$elm_fontawesome$FontAwesome$Solid$projectDiagram)
 						]))
 				]));
 	});
