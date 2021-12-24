@@ -12957,7 +12957,6 @@ var $elm$core$List$isEmpty = function (xs) {
 		return false;
 	}
 };
-var $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$ml2 = $elm$html$Html$Attributes$class('ml-2');
 var $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$ml4 = $elm$html$Html$Attributes$class('ml-4');
 var $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$mr4 = $elm$html$Html$Attributes$class('mr-4');
 var $elm$html$Html$p = _VirtualDom_node('p');
@@ -13210,6 +13209,26 @@ var $author$project$Main$inventoryProgressView = function (cards) {
 			return $author$project$Cards$emptySupplyLineRequirements;
 		}
 	}();
+	var progressCard = F2(
+		function (header, progressBars) {
+			return $rundis$elm_bootstrap$Bootstrap$Card$view(
+				A3(
+					$rundis$elm_bootstrap$Bootstrap$Card$block,
+					_List_Nil,
+					_List_fromArray(
+						[
+							$rundis$elm_bootstrap$Bootstrap$Card$Block$custom(
+							A2($elm$html$Html$div, _List_Nil, progressBars))
+						]),
+					A3(
+						$rundis$elm_bootstrap$Bootstrap$Card$header,
+						_List_Nil,
+						_List_fromArray(
+							[
+								$elm$html$Html$text(header)
+							]),
+						$rundis$elm_bootstrap$Bootstrap$Card$config(_List_Nil))));
+		});
 	var progressBar = F2(
 		function (supplyLineRequirement, label) {
 			var completeLabel = label + (' (' + ($elm$core$String$fromInt(supplyLineRequirement.requiredProgress) + ('/' + ($elm$core$String$fromInt(supplyLineRequirement.totalElements) + ')'))));
@@ -13251,46 +13270,46 @@ var $author$project$Main$inventoryProgressView = function (cards) {
 							]))
 					]));
 		});
-	var regularLines = _List_fromArray(
-		[
-			A2(
-			$elm$html$Html$h5,
-			_List_fromArray(
-				[$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$ml2]),
-			_List_fromArray(
-				[
-					$elm$html$Html$text('Required Supply Lines')
-				])),
-			A2(progressBar, requirements.nestRequirement, 'Nest'),
-			A2(progressBar, requirements.alleyRequirement, 'Alley'),
-			A2(progressBar, requirements.clinicRequirement, 'Clinic')
-		]);
-	var achievementList = $elm$core$List$isEmpty(requirements.achievementRequirement) ? _List_Nil : _List_fromArray(
-		[
-			A2(
-			$elm$html$Html$h5,
-			_List_fromArray(
-				[$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$ml2]),
-			_List_fromArray(
-				[
-					$elm$html$Html$text('Required Achievements')
-				])),
-			A2(
-			$elm$html$Html$ul,
+	var regularLines = A2(
+		progressCard,
+		'Required Supply Lines',
+		_List_fromArray(
+			[
+				A2(progressBar, requirements.nestRequirement, 'Nest'),
+				A2(progressBar, requirements.alleyRequirement, 'Alley'),
+				A2(progressBar, requirements.clinicRequirement, 'Clinic')
+			]));
+	var achievementList = $elm$core$List$isEmpty(requirements.achievementRequirement) ? A2($elm$html$Html$div, _List_Nil, _List_Nil) : $rundis$elm_bootstrap$Bootstrap$Card$view(
+		A3(
+			$rundis$elm_bootstrap$Bootstrap$Card$block,
 			_List_Nil,
-			A2(
-				$elm$core$List$map,
-				function (a) {
-					return A2(
-						$elm$html$Html$li,
+			_List_fromArray(
+				[
+					$rundis$elm_bootstrap$Bootstrap$Card$Block$custom(
+					A2(
+						$elm$html$Html$ul,
 						_List_Nil,
-						_List_fromArray(
-							[
-								$elm$html$Html$text(a)
-							]));
-				},
-				requirements.achievementRequirement))
-		]);
+						A2(
+							$elm$core$List$map,
+							function (a) {
+								return A2(
+									$elm$html$Html$li,
+									_List_Nil,
+									_List_fromArray(
+										[
+											$elm$html$Html$text(a)
+										]));
+							},
+							requirements.achievementRequirement)))
+				]),
+			A3(
+				$rundis$elm_bootstrap$Bootstrap$Card$header,
+				_List_Nil,
+				_List_fromArray(
+					[
+						$elm$html$Html$text('Required Achievements')
+					]),
+				$rundis$elm_bootstrap$Bootstrap$Card$config(_List_Nil))));
 	return A2(
 		$rundis$elm_bootstrap$Bootstrap$Grid$col,
 		_List_fromArray(
@@ -13300,7 +13319,8 @@ var $author$project$Main$inventoryProgressView = function (cards) {
 				A2(
 				$elm$html$Html$div,
 				_List_Nil,
-				A2($elm$core$List$append, regularLines, achievementList))
+				_List_fromArray(
+					[regularLines, achievementList]))
 			]));
 };
 var $author$project$Cards$Absolute = {$: 'Absolute'};
@@ -13998,7 +14018,6 @@ var $author$project$Cards$groupProperties = function (properties) {
 	var _v0 = A2($elm$core$Debug$log, 'disables', disables);
 	return {disables: disables, passives: passives, remaining: remaining, team: teams};
 };
-var $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$pl2 = $elm$html$Html$Attributes$class('pl-2');
 var $author$project$Main$inventorySummaryView = function (cards) {
 	var orEmptyElement = F2(
 		function (hasElement, element) {
@@ -14016,6 +14035,40 @@ var $author$project$Main$inventorySummaryView = function (cards) {
 	var hasRemaining = A3($elm$core$Basics$composeL, $elm$core$Basics$not, $elm$core$List$isEmpty, mergedProperties.remaining);
 	var hasPassives = A3($elm$core$Basics$composeL, $elm$core$Basics$not, $elm$core$List$isEmpty, mergedProperties.passives);
 	var hasDisables = A3($elm$core$Basics$composeL, $elm$core$Basics$not, $elm$core$List$isEmpty, mergedProperties.disables);
+	var cardWithListContentAndHeader = F2(
+		function (header, items) {
+			return $rundis$elm_bootstrap$Bootstrap$Card$view(
+				A3(
+					$rundis$elm_bootstrap$Bootstrap$Card$block,
+					_List_Nil,
+					_List_fromArray(
+						[
+							$rundis$elm_bootstrap$Bootstrap$Card$Block$custom(
+							A2(
+								$elm$html$Html$ul,
+								_List_Nil,
+								A2(
+									$elm$core$List$map,
+									function (i) {
+										return A2(
+											$elm$html$Html$li,
+											_List_Nil,
+											_List_fromArray(
+												[
+													$elm$html$Html$text(i)
+												]));
+									},
+									items)))
+						]),
+					A3(
+						$rundis$elm_bootstrap$Bootstrap$Card$header,
+						_List_Nil,
+						_List_fromArray(
+							[
+								$elm$html$Html$text(header)
+							]),
+						$rundis$elm_bootstrap$Bootstrap$Card$config(_List_Nil))));
+		});
 	return A2(
 		$rundis$elm_bootstrap$Bootstrap$Grid$col,
 		_List_fromArray(
@@ -14025,119 +14078,19 @@ var $author$project$Main$inventorySummaryView = function (cards) {
 				A2(
 				orEmptyElement,
 				hasPassives,
-				A2(
-					$elm$html$Html$h5,
-					_List_fromArray(
-						[$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$pl2]),
-					_List_fromArray(
-						[
-							$elm$html$Html$text('Passives:')
-						]))),
-				A2(
-				orEmptyElement,
-				hasPassives,
-				A2(
-					$elm$html$Html$ul,
-					_List_Nil,
-					A2(
-						$elm$core$List$map,
-						function (p) {
-							return A2(
-								$elm$html$Html$li,
-								_List_Nil,
-								_List_fromArray(
-									[
-										$elm$html$Html$text(p)
-									]));
-						},
-						mergedProperties.passives))),
+				A2(cardWithListContentAndHeader, 'Passive Effects', mergedProperties.passives)),
 				A2(
 				orEmptyElement,
 				hasRemaining,
-				A2(
-					$elm$html$Html$h5,
-					_List_fromArray(
-						[$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$pl2]),
-					_List_fromArray(
-						[
-							$elm$html$Html$text('Other:')
-						]))),
-				A2(
-				orEmptyElement,
-				hasRemaining,
-				A2(
-					$elm$html$Html$ul,
-					_List_Nil,
-					A2(
-						$elm$core$List$map,
-						function (p) {
-							return A2(
-								$elm$html$Html$li,
-								_List_Nil,
-								_List_fromArray(
-									[
-										$elm$html$Html$text(p)
-									]));
-						},
-						mergedProperties.remaining))),
+				A2(cardWithListContentAndHeader, 'Other Effects', mergedProperties.remaining)),
 				A2(
 				orEmptyElement,
 				hasTeam,
-				A2(
-					$elm$html$Html$h5,
-					_List_fromArray(
-						[$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$pl2]),
-					_List_fromArray(
-						[
-							$elm$html$Html$text('Team Effects:')
-						]))),
-				A2(
-				orEmptyElement,
-				hasTeam,
-				A2(
-					$elm$html$Html$ul,
-					_List_Nil,
-					A2(
-						$elm$core$List$map,
-						function (p) {
-							return A2(
-								$elm$html$Html$li,
-								_List_Nil,
-								_List_fromArray(
-									[
-										$elm$html$Html$text(p)
-									]));
-						},
-						mergedProperties.team))),
+				A2(cardWithListContentAndHeader, 'Team Effects', mergedProperties.team)),
 				A2(
 				orEmptyElement,
 				hasDisables,
-				A2(
-					$elm$html$Html$h5,
-					_List_fromArray(
-						[$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$pl2]),
-					_List_fromArray(
-						[
-							$elm$html$Html$text('Disables:')
-						]))),
-				A2(
-				orEmptyElement,
-				hasDisables,
-				A2(
-					$elm$html$Html$ul,
-					_List_Nil,
-					A2(
-						$elm$core$List$map,
-						function (p) {
-							return A2(
-								$elm$html$Html$li,
-								_List_Nil,
-								_List_fromArray(
-									[
-										$elm$html$Html$text(p)
-									]));
-						},
-						mergedProperties.disables)))
+				A2(cardWithListContentAndHeader, 'Disables', mergedProperties.disables))
 			]));
 };
 var $author$project$Main$DeselectCard = function (a) {

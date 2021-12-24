@@ -783,16 +783,20 @@ inventorySummaryView cards =
         hasTeam = mergedProperties.team |> (not << List.isEmpty)
         hasDisables = mergedProperties.disables |> (not << List.isEmpty)
         orEmptyElement hasElement element = if hasElement then element else div [] []
+        cardWithListContentAndHeader : String -> List String -> Html Msg
+        cardWithListContentAndHeader header items =
+            Card.config []
+            |> Card.header [] [ text header ]
+            |> Card.block []
+                [ Block.custom (Html.ul [] (items |> List.map (\i -> Html.li [] [ text i ])))
+                ]
+            |> Card.view
     in
     Grid.col [ Col.xs12 ]
-      [ Html.h5 [ Spacing.pl2 ] [ text "Passives:"] |> orEmptyElement hasPassives
-      , Html.ul [] (mergedProperties.passives |> List.map (\p -> Html.li [] [ text p ])) |> orEmptyElement hasPassives
-      , Html.h5 [ Spacing.pl2 ] [ text "Other:"] |> orEmptyElement hasRemaining
-      , Html.ul [] (mergedProperties.remaining |> List.map (\p -> Html.li [] [ text p ])) |> orEmptyElement hasRemaining
-      , Html.h5 [ Spacing.pl2 ] [ text "Team Effects:"] |> orEmptyElement hasTeam 
-      , Html.ul [] (mergedProperties.team |> List.map (\p -> Html.li [] [ text p ])) |> orEmptyElement hasTeam
-      , Html.h5 [ Spacing.pl2 ] [ text "Disables:"] |> orEmptyElement hasDisables
-      , Html.ul [] (mergedProperties.disables |> List.map (\p -> Html.li [] [ text p ])) |> orEmptyElement hasDisables
+      [ (cardWithListContentAndHeader "Passive Effects" mergedProperties.passives) |> orEmptyElement hasPassives
+      , (cardWithListContentAndHeader "Other Effects" mergedProperties.remaining) |> orEmptyElement hasRemaining
+      , (cardWithListContentAndHeader "Team Effects" mergedProperties.team) |> orEmptyElement hasTeam
+      , (cardWithListContentAndHeader "Disables" mergedProperties.disables) |> orEmptyElement hasDisables
       ]
     
     
@@ -822,24 +826,37 @@ inventoryProgressView cards =
             [ Html.small [] [ div [style "width" "7em" ] [ text completeLabel ] ]
             , Progress.progress [ Progress.value c, Progress.wrapperAttrs [ class "bg-secondary", style "flex-grow" "1" ] ]
             ]
+            
+        progressCard header progressBars =
+            Card.config []
+            |> Card.header [] [ text header ]
+            |> Card.block []
+               [ Block.custom (div [ ] progressBars)
+               ]
+            |> Card.view
+            
 
         achievementList =
             if requirements.achievementRequirement |> List.isEmpty then
-                []
+                div [] []
             else
-                [ Html.h5 [ Spacing.ml2 ] [ text "Required Achievements" ]
-                , Html.ul [] (requirements.achievementRequirement |> List.map (\a -> Html.li [] [ text a ]))
-                ]
+                Card.config []
+                |> Card.header [] [ text "Required Achievements" ]
+                |> Card.block []
+                   [ Block.custom (Html.ul [] (requirements.achievementRequirement |> List.map (\a -> Html.li [] [ text a ])))
+                   ]
+                |> Card.view
                 
+
         regularLines = 
-            [ Html.h5 [ Spacing.ml2 ] [ text "Required Supply Lines"]
-            , progressBar requirements.nestRequirement "Nest"
-            , progressBar requirements.alleyRequirement "Alley"
-            , progressBar requirements.clinicRequirement "Clinic"
-            ]
+            progressCard 
+                "Required Supply Lines"
+                [ progressBar requirements.nestRequirement "Nest"
+                , progressBar requirements.alleyRequirement "Alley"
+                , progressBar requirements.clinicRequirement "Clinic" ]
     in
     Grid.col [ Col.xs12 ]
-    [ div [] (List.append regularLines achievementList) ]
+    [ div [] [regularLines, achievementList] ]
 
 
 {-| Creates a simple card view with a summary of all properties.
