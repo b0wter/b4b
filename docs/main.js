@@ -14354,6 +14354,8 @@ var $author$project$Main$inventoryStyleToggle = F2(
 				]));
 	});
 var $author$project$Main$maxDeckSize = 15;
+var $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$mb0 = $elm$html$Html$Attributes$class('mb-0');
+var $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$ml2 = $elm$html$Html$Attributes$class('ml-2');
 var $lattyware$elm_fontawesome$FontAwesome$Solid$share = A5(
 	$lattyware$elm_fontawesome$FontAwesome$Icon$Icon,
 	'fas',
@@ -14370,6 +14372,13 @@ var $author$project$Main$inventoryHeaderView = F2(
 		var yesNoContent = {header: 'Reset', noMsg: $author$project$Main$RejectResetModal, text: 'Clear the currently selected cards?', yesMsg: $author$project$Main$ConfirmResetModal};
 		var textColor = (_Utils_cmp(numberOfSelectedCards, $author$project$Main$maxDeckSize) < 1) ? $elm$html$Html$Attributes$class('') : $elm$html$Html$Attributes$class('text-warning');
 		var styleSelector = $author$project$Main$inventoryStyleToggle(display);
+		var spacing = function () {
+			if (display.$ === 'InventoryAsCards') {
+				return $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$ml2;
+			} else {
+				return $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$ml4;
+			}
+		}();
 		var selectionCountString = '(' + ($elm$core$String$fromInt(numberOfSelectedCards) + ('/' + ($elm$core$String$fromInt($author$project$Main$maxDeckSize) + ')')));
 		var buttons = A2(
 			$elm$html$Html$div,
@@ -14437,7 +14446,7 @@ var $author$project$Main$inventoryHeaderView = F2(
 							A2(
 							$elm$html$Html$h5,
 							_List_fromArray(
-								[$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$m2, textColor]),
+								[spacing, $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$mb0, textColor]),
 							_List_fromArray(
 								[
 									$elm$html$Html$text(selectionCountString)

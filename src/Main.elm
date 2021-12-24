@@ -564,10 +564,14 @@ inventoryHeaderView numberOfSelectedCards display =
                     , Button.button [ Button.secondary, Button.small, Button.onClick ShowShareModal ] [FontAwesome.Solid.share |> FontAwesome.Icon.viewIcon]
                     , Button.button [ Button.warning, Button.small, Button.onClick (ShowYesNoModal yesNoContent), Button.attrs [ Spacing.ml3 ] ] [FontAwesome.Solid.times |> FontAwesome.Icon.viewIcon]
                     ]
+        spacing =
+            case display of
+                InventoryAsCards -> Spacing.ml2
+                InventoryAsSummary -> Spacing.ml4
     in
     Grid.row [ Row.attrs [ class "pr-1 pt-1 pb-1" ] ]
         [ Grid.col [ Col.xs12, Col.attrs [ class "d-flex justify-content-between align-items-center" ] ]
-            [ Html.h5 [ Spacing.m2, textColor ] [ text (selectionCountString) ]
+            [ Html.h5 [ spacing, Spacing.mb0, textColor ] [ text (selectionCountString) ]
             , div [ Spacing.m2, textColor ] [ buttons ]
         ] ]
 
