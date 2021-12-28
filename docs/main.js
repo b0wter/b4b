@@ -12965,6 +12965,12 @@ var $rundis$elm_bootstrap$Bootstrap$Utilities$Border$dark = A2($rundis$elm_boots
 var $rundis$elm_bootstrap$Bootstrap$Utilities$Flex$alignItemsCenter = $elm$html$Html$Attributes$class('align-items-center');
 var $rundis$elm_bootstrap$Bootstrap$Utilities$Flex$alignItemsStart = $elm$html$Html$Attributes$class('align-items-start');
 var $rundis$elm_bootstrap$Bootstrap$Utilities$Flex$block = $elm$html$Html$Attributes$class('d-flex');
+var $rundis$elm_bootstrap$Bootstrap$Progress$Danger = {$: 'Danger'};
+var $rundis$elm_bootstrap$Bootstrap$Progress$Roled = function (a) {
+	return {$: 'Roled', a: a};
+};
+var $rundis$elm_bootstrap$Bootstrap$Progress$danger = $rundis$elm_bootstrap$Bootstrap$Progress$Roled(
+	$elm$core$Maybe$Just($rundis$elm_bootstrap$Bootstrap$Progress$Danger));
 var $author$project$Cards$isAlleyLine = function (c) {
 	var _v0 = c.supplyLine.name;
 	if (_v0.$ === 'Alley') {
@@ -13045,6 +13051,9 @@ var $author$project$Cards$emptySupplyLineRequirements = {
 	nestRequirement: {requiredProgress: 0, totalElements: $author$project$Cards$nestSupplyLineCount},
 	rovingMerchantsRequirement: _List_Nil
 };
+var $rundis$elm_bootstrap$Bootstrap$Progress$Info = {$: 'Info'};
+var $rundis$elm_bootstrap$Bootstrap$Progress$info = $rundis$elm_bootstrap$Bootstrap$Progress$Roled(
+	$elm$core$Maybe$Just($rundis$elm_bootstrap$Bootstrap$Progress$Info));
 var $elm$core$List$isEmpty = function (xs) {
 	if (!xs.b) {
 		return true;
@@ -13202,6 +13211,9 @@ var $rundis$elm_bootstrap$Bootstrap$Progress$progress = function (modifiers) {
 				$rundis$elm_bootstrap$Bootstrap$Progress$renderBar(modifiers)
 			]));
 };
+var $rundis$elm_bootstrap$Bootstrap$Progress$Success = {$: 'Success'};
+var $rundis$elm_bootstrap$Bootstrap$Progress$success = $rundis$elm_bootstrap$Bootstrap$Progress$Roled(
+	$elm$core$Maybe$Just($rundis$elm_bootstrap$Bootstrap$Progress$Success));
 var $author$project$Cards$isAccomplishmentLine = function (c) {
 	var _v0 = c.supplyLine.name;
 	if (_v0.$ === 'Accomplishment') {
@@ -13457,8 +13469,8 @@ var $author$project$Main$inventoryProgressView = function (cards) {
 										]))
 								])))));
 		});
-	var progressBar = F2(
-		function (supplyLineRequirement, label) {
+	var progressBar = F3(
+		function (supplyLineRequirement, color, label) {
 			var completeLabel = label + (' (' + ($elm$core$String$fromInt(supplyLineRequirement.requiredProgress) + ('/' + ($elm$core$String$fromInt(supplyLineRequirement.totalElements) + ')'))));
 			var b = supplyLineRequirement.totalElements;
 			var a = supplyLineRequirement.requiredProgress * 100;
@@ -13488,6 +13500,7 @@ var $author$project$Main$inventoryProgressView = function (cards) {
 						$rundis$elm_bootstrap$Bootstrap$Progress$progress(
 						_List_fromArray(
 							[
+								color,
 								$rundis$elm_bootstrap$Bootstrap$Progress$value(c),
 								$rundis$elm_bootstrap$Bootstrap$Progress$wrapperAttrs(
 								_List_fromArray(
@@ -13503,9 +13516,9 @@ var $author$project$Main$inventoryProgressView = function (cards) {
 		'Supply Lines',
 		_List_fromArray(
 			[
-				A2(progressBar, requirements.nestRequirement, 'Nest'),
-				A2(progressBar, requirements.alleyRequirement, 'Alley'),
-				A2(progressBar, requirements.clinicRequirement, 'Clinic')
+				A3(progressBar, requirements.nestRequirement, $rundis$elm_bootstrap$Bootstrap$Progress$success, 'Nest'),
+				A3(progressBar, requirements.alleyRequirement, $rundis$elm_bootstrap$Bootstrap$Progress$info, 'Alley'),
+				A3(progressBar, requirements.clinicRequirement, $rundis$elm_bootstrap$Bootstrap$Progress$danger, 'Clinic')
 			]));
 	var achievementList = $elm$core$List$isEmpty(requirements.achievementRequirement) ? A2($elm$html$Html$div, _List_Nil, _List_Nil) : A2(
 		$elm$html$Html$div,

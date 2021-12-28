@@ -809,8 +809,8 @@ inventoryProgressView cards =
                 head :: tail -> Cards.supplyLineRequirements (head, tail)
                 [] -> Cards.emptySupplyLineRequirements
 
-        progressBar : Cards.SupplyLineRequirement -> String -> Html Msg
-        progressBar supplyLineRequirement label =
+        progressBar : Cards.SupplyLineRequirement -> Progress.Option Msg -> String -> Html Msg
+        progressBar supplyLineRequirement color label =
             let 
                 a = supplyLineRequirement.requiredProgress * 100 |> toFloat
                 b = supplyLineRequirement.totalElements |> toFloat
@@ -825,7 +825,7 @@ inventoryProgressView cards =
             in
             Html.p [ Spacing.ml4, Spacing.mr4, Flex.block, Flex.alignItemsStart, Flex.alignItemsCenter  ] 
             [ Html.small [] [ div [style "width" "7em" ] [ text completeLabel ] ]
-            , Progress.progress [ Progress.value c, Progress.wrapperAttrs [ class "bg-secondary", style "flex-grow" "1" ] ]
+            , Progress.progress [ color, Progress.value c, Progress.wrapperAttrs [ class "bg-secondary", style "flex-grow" "1" ] ]
             ]
             
         progressCard header progressBars =
@@ -868,9 +868,9 @@ inventoryProgressView cards =
         regularLines = 
             progressCard 
                 "Supply Lines"
-                [ progressBar requirements.nestRequirement "Nest"
-                , progressBar requirements.alleyRequirement "Alley"
-                , progressBar requirements.clinicRequirement "Clinic" ]
+                [ progressBar requirements.nestRequirement Progress.success "Nest"
+                , progressBar requirements.alleyRequirement Progress.info "Alley"
+                , progressBar requirements.clinicRequirement Progress.danger "Clinic" ]
     in
     Grid.col [ Col.xs12 ]
     [ Card.config []
