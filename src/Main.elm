@@ -69,7 +69,7 @@ type alias Flags =
 
 
 type CardDisplay
-    = TextAndImage
+    = ImageAndDetails
     | Text
     | Image
 
@@ -486,8 +486,8 @@ cardDisplayToggle cardDisplay =
             [ Button.secondary, Button.onClick <| (ChangeCardDisplayType Text) ]
             [ FontAwesome.Solid.alignLeft |> FontAwesome.Icon.viewIcon ]
         , ButtonGroup.radioButton
-            (cardDisplay == TextAndImage)
-            [ Button.secondary, Button.onClick <| (ChangeCardDisplayType TextAndImage) ]
+            (cardDisplay == ImageAndDetails)
+            [ Button.secondary, Button.onClick <| (ChangeCardDisplayType ImageAndDetails) ]
             [ FontAwesome.Solid.idCard |> FontAwesome.Icon.viewIcon ]
         , ButtonGroup.radioButton
             (cardDisplay == Image)
@@ -689,16 +689,16 @@ htmlBackgroundColor card =
 fullCardView :  CardDisplay -> Card ->Grid.Column Msg
 fullCardView cardDisplay card =
     case cardDisplay of
-        TextAndImage ->
-            fullCardViewWithTextAndImage card
+        ImageAndDetails ->
+            fullCardViewWithImageAndDetails card
         Image ->
             fullCardViewWithImage card
         Text ->
             fullCardViewWithText card
 
 
-fullCardViewWithTextAndImage : Card -> Grid.Column Msg
-fullCardViewWithTextAndImage card =
+fullCardViewWithImageAndDetails : Card -> Grid.Column Msg
+fullCardViewWithImageAndDetails card =
     let
         cardBackground =
             card |> cardOutlineColor
@@ -707,9 +707,9 @@ fullCardViewWithTextAndImage card =
             Button.secondary
     in
     Grid.col []
-        [ Card.config [ cardBackground, Card.attrs [ style "width" "16rem", style "height" "605px", Spacing.m2 ] ]
+        [ Card.config [ cardBackground, Card.attrs [ Spacing.m2 ] ]
             |> Card.header [ class "text-center" ]
-                [ img [ src ("img/english/" ++ card.filename), style "max-width" "200px" ] []
+                [ img [ src ("img/english/" ++ card.filename) ] []
                 ]
             |> Card.block []
                 [ Block.titleH5 [] [ text card.title ]

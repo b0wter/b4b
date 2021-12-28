@@ -49,6 +49,7 @@ parseAffinity str =
         "fortune" -> Fortune
         _ -> UnknownAffinity
 
+
 type SupplyTrack
     = Nest NestLines
     | Alley AlleyLines
@@ -56,7 +57,13 @@ type SupplyTrack
     | Strip StripLines
     | Starter StarterLines
     | Accomplishment String
+    | RovingMerchants RovingMerchantsLine
     | UnknownTrack String String
+    
+    
+type RovingMerchantsLine
+    = Liberators
+    | KscConvoy
 
 
 type StarterLines
@@ -146,6 +153,14 @@ parseSupplyTrack track name =
                     UnknownTrack track name
         "Accomplishment" ->
             Accomplishment name
+        "Roving Merchants" ->
+            case name of
+                "Liberators" ->
+                    RovingMerchants Liberators
+                "KSC Convoys" ->
+                    RovingMerchants KscConvoy
+                _ ->
+                    UnknownTrack track name
         _ ->
             UnknownTrack track name
 

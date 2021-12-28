@@ -3300,4 +3300,68 @@ rawCards =
       , kind = "Offense"
       , affinity = "Discipline"
       }
+    , { id = 157
+      , name = "Belt Clip"
+      , cost = 50
+      , totalCost = -1
+      , filename = "16_1_1.jpg"
+      , properties =
+        [ "+1 Quick Slot Inventory"
+        ]
+      , effects =
+        [ Passive SupportAccessoryCount (AbsoluteMax 1)
+        ]
+      , supplyLine = 
+            { track = "Roving Merchants"
+            , name = "Liberators"
+            , tier = 1 
+            , index = 1
+            }
+      , kind = "Utility"
+      , affinity = "Fortune"
+      }
+    , { id = 158
+      , name = "Utility Belt"
+      , cost = 75
+      , totalCost = -1
+      , filename = "16_1_2.jpg"
+      , properties =
+        [ "+2 Quick Slot Inventory"
+        , "-10% Damage Dealt"
+        ]
+      , effects =
+        [ Passive SupportAccessoryCount (AbsoluteMax 1)
+        , Passive Damage (RelativeMax -10)
+        ]
+      , supplyLine = 
+            { track = "Roving Merchants"
+            , name = "Liberators"
+            , tier = 1 
+            , index = 2
+            }
+      , kind = "Utility"
+      , affinity = "Fortune"
+      }
+    , { id = 159
+      , name = "Tool Belts"
+      , cost = 100
+      , totalCost = -1
+      , filename = "16_1_3.jpg"
+      , properties =
+        [ "-10% Health"
+        , "+1 Team Quick Item Inventory"
+        ]
+      , effects =
+        [ Team (Passive QuickAccessoryCount (AbsoluteMax 1))
+        , Passive Health (RelativeMax -10)
+        ]
+      , supplyLine = 
+            { track = "Roving Merchants"
+            , name = "KSC Convoys"
+            , tier = 1 
+            , index = 2
+            }
+      , kind = "Utility"
+      , affinity = "Fortune"
+      }
     ]

@@ -5410,10 +5410,15 @@ var $author$project$Cards$Clinic = function (a) {
 var $author$project$Cards$FortHope = {$: 'FortHope'};
 var $author$project$Cards$GrantsBrewHouse = {$: 'GrantsBrewHouse'};
 var $author$project$Cards$KnuckleHouse = {$: 'KnuckleHouse'};
+var $author$project$Cards$KscConvoy = {$: 'KscConvoy'};
+var $author$project$Cards$Liberators = {$: 'Liberators'};
 var $author$project$Cards$Nest = function (a) {
 	return {$: 'Nest', a: a};
 };
 var $author$project$Cards$PaulsAlley = {$: 'PaulsAlley'};
+var $author$project$Cards$RovingMerchants = function (a) {
+	return {$: 'RovingMerchants', a: a};
+};
 var $author$project$Cards$Starter = function (a) {
 	return {$: 'Starter', a: a};
 };
@@ -5480,6 +5485,15 @@ var $author$project$Cards$parseSupplyTrack = F2(
 				}
 			case 'Accomplishment':
 				return $author$project$Cards$Accomplishment(name);
+			case 'Roving Merchants':
+				switch (name) {
+					case 'Liberators':
+						return $author$project$Cards$RovingMerchants($author$project$Cards$Liberators);
+					case 'KSC Convoys':
+						return $author$project$Cards$RovingMerchants($author$project$Cards$KscConvoy);
+					default:
+						return A2($author$project$Cards$UnknownTrack, track, name);
+				}
 			default:
 				return A2($author$project$Cards$UnknownTrack, track, name);
 		}
@@ -5590,6 +5604,7 @@ var $author$project$Tags$PlayerUsingPistol = {$: 'PlayerUsingPistol'};
 var $author$project$Tags$PlayerUsingRifle = {$: 'PlayerUsingRifle'};
 var $author$project$Tags$PlayerUsingShotgun = {$: 'PlayerUsingShotgun'};
 var $author$project$Tags$PlayerUsingSniper = {$: 'PlayerUsingSniper'};
+var $author$project$Tags$QuickAccessoryCount = {$: 'QuickAccessoryCount'};
 var $author$project$Tags$RelativeChance = F2(
 	function (a, b) {
 		return {$: 'RelativeChance', a: a, b: b};
@@ -5606,6 +5621,7 @@ var $author$project$Tags$Special = function (a) {
 var $author$project$Tags$Stamina = {$: 'Stamina'};
 var $author$project$Tags$StaminaEfficiency = {$: 'StaminaEfficiency'};
 var $author$project$Tags$StaminaRegeneration = {$: 'StaminaRegeneration'};
+var $author$project$Tags$SupportAccessoryCount = {$: 'SupportAccessoryCount'};
 var $author$project$Tags$SwapSpeed = {$: 'SwapSpeed'};
 var $author$project$Tags$TakingFriendlyFire = {$: 'TakingFriendlyFire'};
 var $author$project$Tags$Team = function (a) {
@@ -8239,6 +8255,72 @@ var $author$project$CardData$rawCards = _List_fromArray(
 			['+30% Rifle Ammo Capacity', '+10% Damage with Assault Rifles and LMGS']),
 		supplyLine: {index: -1, name: 'Tactical Vest', tier: 1, track: 'Accomplishment'},
 		totalCost: 0
+	},
+		{
+		affinity: 'Fortune',
+		cost: 50,
+		effects: _List_fromArray(
+			[
+				A2(
+				$author$project$Tags$Passive,
+				$author$project$Tags$SupportAccessoryCount,
+				$author$project$Tags$AbsoluteMax(1))
+			]),
+		filename: '16_1_1.jpg',
+		id: 157,
+		kind: 'Utility',
+		name: 'Belt Clip',
+		properties: _List_fromArray(
+			['+1 Quick Slot Inventory']),
+		supplyLine: {index: 1, name: 'Liberators', tier: 1, track: 'Roving Merchants'},
+		totalCost: -1
+	},
+		{
+		affinity: 'Fortune',
+		cost: 75,
+		effects: _List_fromArray(
+			[
+				A2(
+				$author$project$Tags$Passive,
+				$author$project$Tags$SupportAccessoryCount,
+				$author$project$Tags$AbsoluteMax(1)),
+				A2(
+				$author$project$Tags$Passive,
+				$author$project$Tags$Damage,
+				$author$project$Tags$RelativeMax(-10))
+			]),
+		filename: '16_1_2.jpg',
+		id: 158,
+		kind: 'Utility',
+		name: 'Utility Belt',
+		properties: _List_fromArray(
+			['+2 Quick Slot Inventory', '-10% Damage Dealt']),
+		supplyLine: {index: 2, name: 'Liberators', tier: 1, track: 'Roving Merchants'},
+		totalCost: -1
+	},
+		{
+		affinity: 'Fortune',
+		cost: 100,
+		effects: _List_fromArray(
+			[
+				$author$project$Tags$Team(
+				A2(
+					$author$project$Tags$Passive,
+					$author$project$Tags$QuickAccessoryCount,
+					$author$project$Tags$AbsoluteMax(1))),
+				A2(
+				$author$project$Tags$Passive,
+				$author$project$Tags$Health,
+				$author$project$Tags$RelativeMax(-10))
+			]),
+		filename: '16_1_3.jpg',
+		id: 159,
+		kind: 'Utility',
+		name: 'Tool Belts',
+		properties: _List_fromArray(
+			['-10% Health', '+1 Team Quick Item Inventory']),
+		supplyLine: {index: 2, name: 'KSC Convoys', tier: 1, track: 'Roving Merchants'},
+		totalCost: -1
 	}
 	]);
 var $author$project$Cards$cards = A2($elm$core$List$map, $author$project$Cards$parseRawCard, $author$project$CardData$rawCards);
@@ -9988,7 +10070,7 @@ var $rundis$elm_bootstrap$Bootstrap$Grid$Col$attrs = function (attrs_) {
 var $author$project$Main$ChangeCardDisplayType = function (a) {
 	return {$: 'ChangeCardDisplayType', a: a};
 };
-var $author$project$Main$TextAndImage = {$: 'TextAndImage'};
+var $author$project$Main$ImageAndDetails = {$: 'ImageAndDetails'};
 var $lattyware$elm_fontawesome$FontAwesome$Icon$Icon = F5(
 	function (prefix, name, width, height, paths) {
 		return {height: height, name: name, paths: paths, prefix: prefix, width: width};
@@ -10777,12 +10859,12 @@ var $author$project$Main$cardDisplayToggle = function (cardDisplay) {
 					])),
 				A3(
 				$rundis$elm_bootstrap$Bootstrap$ButtonGroup$radioButton,
-				_Utils_eq(cardDisplay, $author$project$Main$TextAndImage),
+				_Utils_eq(cardDisplay, $author$project$Main$ImageAndDetails),
 				_List_fromArray(
 					[
 						$rundis$elm_bootstrap$Bootstrap$Button$secondary,
 						$rundis$elm_bootstrap$Bootstrap$Button$onClick(
-						$author$project$Main$ChangeCardDisplayType($author$project$Main$TextAndImage))
+						$author$project$Main$ChangeCardDisplayType($author$project$Main$ImageAndDetails))
 					]),
 				_List_fromArray(
 					[
@@ -11731,7 +11813,6 @@ var $author$project$Main$fullCardViewWithImage = function (card) {
 								])))))
 			]));
 };
-var $elm$html$Html$h6 = _VirtualDom_node('h6');
 var $rundis$elm_bootstrap$Bootstrap$Card$Header = function (a) {
 	return {$: 'Header', a: a};
 };
@@ -11757,12 +11838,126 @@ var $rundis$elm_bootstrap$Bootstrap$Card$header = $rundis$elm_bootstrap$Bootstra
 var $elm$html$Html$li = _VirtualDom_node('li');
 var $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$pl3 = $elm$html$Html$Attributes$class('pl-3');
 var $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$pr0 = $elm$html$Html$Attributes$class('pr-0');
+var $elm$html$Html$small = _VirtualDom_node('small');
+var $elm$html$Html$h5 = _VirtualDom_node('h5');
+var $rundis$elm_bootstrap$Bootstrap$Card$Block$title = F3(
+	function (elemFn, attributes, children) {
+		return $rundis$elm_bootstrap$Bootstrap$Card$Internal$BlockItem(
+			A2(
+				elemFn,
+				A2(
+					$elm$core$List$cons,
+					$elm$html$Html$Attributes$class('card-title'),
+					attributes),
+				children));
+	});
+var $rundis$elm_bootstrap$Bootstrap$Card$Block$titleH5 = $rundis$elm_bootstrap$Bootstrap$Card$Block$title($elm$html$Html$h5);
+var $elm$html$Html$ul = _VirtualDom_node('ul');
+var $author$project$Main$fullCardViewWithImageAndDetails = function (card) {
+	var cardBackground = $author$project$Main$cardOutlineColor(card);
+	var buttonBackground = $rundis$elm_bootstrap$Bootstrap$Button$secondary;
+	return A2(
+		$rundis$elm_bootstrap$Bootstrap$Grid$col,
+		_List_Nil,
+		_List_fromArray(
+			[
+				$rundis$elm_bootstrap$Bootstrap$Card$view(
+				A3(
+					$rundis$elm_bootstrap$Bootstrap$Card$footer,
+					_List_Nil,
+					_List_fromArray(
+						[
+							A2(
+							$rundis$elm_bootstrap$Bootstrap$Button$button,
+							_List_fromArray(
+								[
+									buttonBackground,
+									$rundis$elm_bootstrap$Bootstrap$Button$attrs(
+									_List_fromArray(
+										[
+											$rundis$elm_bootstrap$Bootstrap$Utilities$Size$w100,
+											$elm$html$Html$Events$onClick(
+											$author$project$Main$SelectCard(card.id))
+										]))
+								]),
+							_List_fromArray(
+								[
+									$elm$html$Html$text('Select')
+								]))
+						]),
+					A3(
+						$rundis$elm_bootstrap$Bootstrap$Card$block,
+						_List_Nil,
+						_List_fromArray(
+							[
+								A2(
+								$rundis$elm_bootstrap$Bootstrap$Card$Block$titleH5,
+								_List_Nil,
+								_List_fromArray(
+									[
+										$elm$html$Html$text(card.title)
+									])),
+								$rundis$elm_bootstrap$Bootstrap$Card$Block$custom(
+								A2(
+									$elm$html$Html$ul,
+									_List_fromArray(
+										[$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$pl3, $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$pr0]),
+									A2(
+										$elm$core$List$map,
+										function (property) {
+											return A2(
+												$elm$html$Html$div,
+												_List_Nil,
+												_List_fromArray(
+													[
+														A2(
+														$elm$html$Html$li,
+														_List_Nil,
+														_List_fromArray(
+															[
+																A2(
+																$elm$html$Html$small,
+																_List_Nil,
+																_List_fromArray(
+																	[
+																		$elm$html$Html$text(property.description)
+																	]))
+															]))
+													]));
+										},
+										card.properties)))
+							]),
+						A3(
+							$rundis$elm_bootstrap$Bootstrap$Card$header,
+							_List_fromArray(
+								[
+									$elm$html$Html$Attributes$class('text-center')
+								]),
+							_List_fromArray(
+								[
+									A2(
+									$elm$html$Html$img,
+									_List_fromArray(
+										[
+											$elm$html$Html$Attributes$src('img/english/' + card.filename)
+										]),
+									_List_Nil)
+								]),
+							$rundis$elm_bootstrap$Bootstrap$Card$config(
+								_List_fromArray(
+									[
+										cardBackground,
+										$rundis$elm_bootstrap$Bootstrap$Card$attrs(
+										_List_fromArray(
+											[$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$m2]))
+									]))))))
+			]));
+};
+var $elm$html$Html$h6 = _VirtualDom_node('h6');
 var $rundis$elm_bootstrap$Bootstrap$Internal$Button$Size = function (a) {
 	return {$: 'Size', a: a};
 };
 var $rundis$elm_bootstrap$Bootstrap$Button$small = $rundis$elm_bootstrap$Bootstrap$Internal$Button$Size($rundis$elm_bootstrap$Bootstrap$General$Internal$SM);
-var $elm$html$Html$small = _VirtualDom_node('small');
-var $elm$html$Html$ul = _VirtualDom_node('ul');
 var $author$project$Main$fullCardViewWithText = function (card) {
 	var cardBackground = $author$project$Main$cardOutlineColor(card);
 	var buttonBackground = $rundis$elm_bootstrap$Bootstrap$Button$secondary;
@@ -11870,129 +12065,11 @@ var $author$project$Main$fullCardViewWithText = function (card) {
 									]))))))
 			]));
 };
-var $elm$html$Html$h5 = _VirtualDom_node('h5');
-var $rundis$elm_bootstrap$Bootstrap$Card$Block$title = F3(
-	function (elemFn, attributes, children) {
-		return $rundis$elm_bootstrap$Bootstrap$Card$Internal$BlockItem(
-			A2(
-				elemFn,
-				A2(
-					$elm$core$List$cons,
-					$elm$html$Html$Attributes$class('card-title'),
-					attributes),
-				children));
-	});
-var $rundis$elm_bootstrap$Bootstrap$Card$Block$titleH5 = $rundis$elm_bootstrap$Bootstrap$Card$Block$title($elm$html$Html$h5);
-var $author$project$Main$fullCardViewWithTextAndImage = function (card) {
-	var cardBackground = $author$project$Main$cardOutlineColor(card);
-	var buttonBackground = $rundis$elm_bootstrap$Bootstrap$Button$secondary;
-	return A2(
-		$rundis$elm_bootstrap$Bootstrap$Grid$col,
-		_List_Nil,
-		_List_fromArray(
-			[
-				$rundis$elm_bootstrap$Bootstrap$Card$view(
-				A3(
-					$rundis$elm_bootstrap$Bootstrap$Card$footer,
-					_List_Nil,
-					_List_fromArray(
-						[
-							A2(
-							$rundis$elm_bootstrap$Bootstrap$Button$button,
-							_List_fromArray(
-								[
-									buttonBackground,
-									$rundis$elm_bootstrap$Bootstrap$Button$attrs(
-									_List_fromArray(
-										[
-											$rundis$elm_bootstrap$Bootstrap$Utilities$Size$w100,
-											$elm$html$Html$Events$onClick(
-											$author$project$Main$SelectCard(card.id))
-										]))
-								]),
-							_List_fromArray(
-								[
-									$elm$html$Html$text('Select')
-								]))
-						]),
-					A3(
-						$rundis$elm_bootstrap$Bootstrap$Card$block,
-						_List_Nil,
-						_List_fromArray(
-							[
-								A2(
-								$rundis$elm_bootstrap$Bootstrap$Card$Block$titleH5,
-								_List_Nil,
-								_List_fromArray(
-									[
-										$elm$html$Html$text(card.title)
-									])),
-								$rundis$elm_bootstrap$Bootstrap$Card$Block$custom(
-								A2(
-									$elm$html$Html$ul,
-									_List_fromArray(
-										[$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$pl3, $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$pr0]),
-									A2(
-										$elm$core$List$map,
-										function (property) {
-											return A2(
-												$elm$html$Html$div,
-												_List_Nil,
-												_List_fromArray(
-													[
-														A2(
-														$elm$html$Html$li,
-														_List_Nil,
-														_List_fromArray(
-															[
-																A2(
-																$elm$html$Html$small,
-																_List_Nil,
-																_List_fromArray(
-																	[
-																		$elm$html$Html$text(property.description)
-																	]))
-															]))
-													]));
-										},
-										card.properties)))
-							]),
-						A3(
-							$rundis$elm_bootstrap$Bootstrap$Card$header,
-							_List_fromArray(
-								[
-									$elm$html$Html$Attributes$class('text-center')
-								]),
-							_List_fromArray(
-								[
-									A2(
-									$elm$html$Html$img,
-									_List_fromArray(
-										[
-											$elm$html$Html$Attributes$src('img/english/' + card.filename),
-											A2($elm$html$Html$Attributes$style, 'max-width', '200px')
-										]),
-									_List_Nil)
-								]),
-							$rundis$elm_bootstrap$Bootstrap$Card$config(
-								_List_fromArray(
-									[
-										cardBackground,
-										$rundis$elm_bootstrap$Bootstrap$Card$attrs(
-										_List_fromArray(
-											[
-												A2($elm$html$Html$Attributes$style, 'width', '16rem'),
-												A2($elm$html$Html$Attributes$style, 'height', '605px'),
-												$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$m2
-											]))
-									]))))))
-			]));
-};
 var $author$project$Main$fullCardView = F2(
 	function (cardDisplay, card) {
 		switch (cardDisplay.$) {
-			case 'TextAndImage':
-				return $author$project$Main$fullCardViewWithTextAndImage(card);
+			case 'ImageAndDetails':
+				return $author$project$Main$fullCardViewWithImageAndDetails(card);
 			case 'Image':
 				return $author$project$Main$fullCardViewWithImage(card);
 			default:

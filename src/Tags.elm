@@ -59,8 +59,7 @@ type Stat
     | AimSpeed
     | AimingDownSightsMoveSpeed
     | OffensiveAccessoryCount
-    | DefensiveAccessoryCount
-    | MedicalAccessoryCount
+    | QuickAccessoryCount
     | SupportAccessoryCount
     | AccessoryDamage
     | ReloadSpeed
@@ -166,8 +165,7 @@ statToString stat =
     AimSpeed -> "aim speed"
     AimingDownSightsMoveSpeed -> "ads move speed"
     OffensiveAccessoryCount -> "offensive accessory count"
-    DefensiveAccessoryCount -> "defensive accessory count"
-    MedicalAccessoryCount -> "medial accessory count"
+    QuickAccessoryCount -> "quick accessory count"
     SupportAccessoryCount -> "support accessory count"
     AccessoryDamage -> "accessory damage"
     ReloadSpeed -> "reload speed"
