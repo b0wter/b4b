@@ -13273,18 +13273,23 @@ var $author$project$Cards$supplyLineRequirements = function (selection) {
 				A2($elm$core$List$cons, c, cc));
 			return A2(
 				$elm$core$Maybe$withDefault,
-				c,
+				0,
 				A2(
-					$elm_community$list_extra$List$Extra$maximumWith,
-					F2(
-						function (a, b) {
-							return (_Utils_cmp(a.supplyLine.index, b.supplyLine.index) > 0) ? $elm$core$Basics$GT : (_Utils_eq(a.supplyLine.index, b.supplyLine.index) ? $elm$core$Basics$EQ : $elm$core$Basics$LT);
-						}),
-					filtered));
+					$elm$core$Maybe$map,
+					function (card) {
+						return card.supplyLine.index;
+					},
+					A2(
+						$elm_community$list_extra$List$Extra$maximumWith,
+						F2(
+							function (a, b) {
+								return (_Utils_cmp(a.supplyLine.index, b.supplyLine.index) > 0) ? $elm$core$Basics$GT : (_Utils_eq(a.supplyLine.index, b.supplyLine.index) ? $elm$core$Basics$EQ : $elm$core$Basics$LT);
+							}),
+						filtered)));
 		});
-	var highestNestIndex = A2(highestIndex, $author$project$Cards$isNestLine, selection).supplyLine.index;
-	var highestClinicIndex = A2(highestIndex, $author$project$Cards$isClinicLine, selection).supplyLine.index;
-	var highestAlleyIndex = A2(highestIndex, $author$project$Cards$isAlleyLine, selection).supplyLine.index;
+	var highestNestIndex = A2(highestIndex, $author$project$Cards$isNestLine, selection);
+	var highestClinicIndex = A2(highestIndex, $author$project$Cards$isClinicLine, selection);
+	var highestAlleyIndex = A2(highestIndex, $author$project$Cards$isAlleyLine, selection);
 	return {
 		achievementRequirement: requiredAchievements,
 		alleyRequirement: {requiredProgress: highestAlleyIndex, totalElements: $author$project$Cards$alleySupplyLineCount},
@@ -14092,23 +14097,23 @@ var $elm$core$Dict$values = function (dict) {
 var $author$project$Cards$groupProperties = function (properties) {
 	var teamString = 'TEAM EFFECTS ';
 	var regexResultToMergeElement = function (strings) {
-		_v3$2:
+		_v2$2:
 		while (true) {
 			if ((strings.b && strings.b.b) && strings.b.b.b) {
 				if (!strings.b.b.b.b) {
 					var first = strings.a;
-					var _v4 = strings.b;
-					var second = _v4.a;
-					var _v5 = _v4.b;
-					var third = _v5.a;
-					var _v6 = _Utils_Tuple3(
+					var _v3 = strings.b;
+					var second = _v3.a;
+					var _v4 = _v3.b;
+					var third = _v4.a;
+					var _v5 = _Utils_Tuple3(
 						$author$project$Cards$parseOperation(first),
 						$elm$core$String$toFloat(second),
 						third);
-					if ((_v6.a.$ === 'Just') && (_v6.b.$ === 'Just')) {
-						var op = _v6.a.a;
-						var value = _v6.b.a;
-						var key = _v6.c;
+					if ((_v5.a.$ === 'Just') && (_v5.b.$ === 'Just')) {
+						var op = _v5.a.a;
+						var value = _v5.b.a;
+						var key = _v5.c;
 						return $elm$core$Maybe$Just(
 							{absOrRel: $author$project$Cards$Absolute, key: key, operation: op, value: value});
 					} else {
@@ -14117,31 +14122,31 @@ var $author$project$Cards$groupProperties = function (properties) {
 				} else {
 					if (!strings.b.b.b.b.b) {
 						var first = strings.a;
-						var _v7 = strings.b;
-						var second = _v7.a;
+						var _v6 = strings.b;
+						var second = _v6.a;
+						var _v7 = _v6.b;
+						var third = _v7.a;
 						var _v8 = _v7.b;
-						var third = _v8.a;
-						var _v9 = _v8.b;
-						var fourth = _v9.a;
+						var fourth = _v8.a;
 						var value = $elm$core$String$toFloat(second);
 						var op = $author$project$Cards$parseOperation(first);
 						var absOrRel = $author$project$Cards$parseAbsOrRel(third);
-						var _v10 = _Utils_Tuple3(op, value, absOrRel);
-						if (((_v10.a.$ === 'Just') && (_v10.b.$ === 'Just')) && (_v10.c.$ === 'Just')) {
-							var o = _v10.a.a;
-							var v = _v10.b.a;
-							var a = _v10.c.a;
+						var _v9 = _Utils_Tuple3(op, value, absOrRel);
+						if (((_v9.a.$ === 'Just') && (_v9.b.$ === 'Just')) && (_v9.c.$ === 'Just')) {
+							var o = _v9.a.a;
+							var v = _v9.b.a;
+							var a = _v9.c.a;
 							return $elm$core$Maybe$Just(
 								{absOrRel: a, key: fourth, operation: o, value: v});
 						} else {
 							return $elm$core$Maybe$Nothing;
 						}
 					} else {
-						break _v3$2;
+						break _v2$2;
 					}
 				}
 			} else {
-				break _v3$2;
+				break _v2$2;
 			}
 		}
 		return $elm$core$Maybe$Nothing;
@@ -14157,8 +14162,8 @@ var $author$project$Cards$groupProperties = function (properties) {
 		var merger = function (mergeElements) {
 			var folder = F2(
 				function (next, acc) {
-					var _v2 = next.operation;
-					if (_v2.$ === 'Addition') {
+					var _v1 = next.operation;
+					if (_v1.$ === 'Addition') {
 						return acc + next.value;
 					} else {
 						return acc - next.value;
@@ -14203,7 +14208,7 @@ var $author$project$Cards$groupProperties = function (properties) {
 						A2(
 							$elm$core$Dict$map,
 							F2(
-								function (_v1, value) {
+								function (_v0, value) {
 									return merger(value);
 								}),
 							grouped)))));
@@ -14285,7 +14290,6 @@ var $author$project$Cards$groupProperties = function (properties) {
 				return A2($elm$core$String$startsWith, teamString, d);
 			},
 			descriptions));
-	var _v0 = A2($elm$core$Debug$log, 'disables', disables);
 	return {disables: disables, passives: passives, remaining: remaining, team: teams};
 };
 var $author$project$Main$inventorySummaryView = function (cards) {

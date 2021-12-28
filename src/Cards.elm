@@ -305,8 +305,6 @@ groupProperties properties =
             |> List.filter (\d -> d |> String.startsWith disableString)
             |> List.map (\d -> d |> String.dropLeft (disableString |> String.length))
             
-        _ = Debug.log "disables" disables
-
         teamString = "TEAM EFFECTS "
         teams =
             descriptions
@@ -545,10 +543,11 @@ supplyLineRequirements selection =
                 if a.supplyLine.index > b.supplyLine.index then Basics.GT
                 else if a.supplyLine.index == b.supplyLine.index then Basics.EQ
                 else Basics.LT) 
-            |> Maybe.withDefault c
-        highestNestIndex = (selection |> highestIndex isNestLine).supplyLine.index
-        highestAlleyIndex = (selection |> highestIndex isAlleyLine).supplyLine.index
-        highestClinicIndex = (selection |> highestIndex isClinicLine).supplyLine.index
+            |> Maybe.map (\card -> card.supplyLine.index)
+            |> Maybe.withDefault 0
+        highestNestIndex = (selection |> highestIndex isNestLine)
+        highestAlleyIndex = (selection |> highestIndex isAlleyLine)
+        highestClinicIndex = (selection |> highestIndex isClinicLine)
         requiredAchievements = 
             (selection |> Tuple.first) :: (selection |> Tuple.second)
             |> List.filter isAccomplishmentLine
