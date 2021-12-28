@@ -420,6 +420,7 @@ type alias SupplyLineRequirements =
     , alleyRequirement : SupplyLineRequirement
     , clinicRequirement : SupplyLineRequirement
     , achievementRequirement : List String
+    , rovingMerchantsRequirement : List String
     }
     
 isNestLine : Card -> Bool
@@ -467,6 +468,15 @@ isAccomplishmentLine =
     (\c -> 
         case c.supplyLine.name of 
             Accomplishment _ -> True
+            _ -> False
+        )
+        
+        
+isRovingMerchantLine : Card -> Bool
+isRovingMerchantLine =
+    (\c -> 
+        case c.supplyLine.name of 
+            RovingMerchants _ -> True
             _ -> False
         )
         
@@ -519,6 +529,7 @@ emptySupplyLineRequirements =
     , alleyRequirement = { totalElements = alleySupplyLineCount, requiredProgress = 0 }
     , clinicRequirement = { totalElements = clinicSupplyLineCount, requiredProgress = 0 }
     , achievementRequirement = []
+    , rovingMerchantsRequirement = []
     }
 
 
@@ -546,9 +557,19 @@ supplyLineRequirements selection =
                         Accomplishment x -> x
                         _ -> "Unknown achievement"
                 )
+        requiredRovingMerchants =
+            (selection |> Tuple.first) :: (selection |> Tuple.second)
+            |> List.filter isRovingMerchantLine
+            |> List.map (\s -> 
+                    case s.supplyLine.name of
+                        RovingMerchants Liberators -> s.title ++ " (Liberators)"
+                        RovingMerchants KscConvoy -> s.title ++ " (KSC Convoy)"
+                        _ -> "Unknown achievement"
+                )
     in
     { nestRequirement = { totalElements = nestSupplyLineCount, requiredProgress = highestNestIndex }
     , alleyRequirement = { totalElements = alleySupplyLineCount, requiredProgress = highestAlleyIndex }
     , clinicRequirement = { totalElements = clinicSupplyLineCount, requiredProgress = highestClinicIndex }
     , achievementRequirement = requiredAchievements
+    , rovingMerchantsRequirement = requiredRovingMerchants
     }

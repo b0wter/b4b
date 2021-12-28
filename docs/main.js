@@ -13025,7 +13025,8 @@ var $author$project$Cards$emptySupplyLineRequirements = {
 	achievementRequirement: _List_Nil,
 	alleyRequirement: {requiredProgress: 0, totalElements: $author$project$Cards$alleySupplyLineCount},
 	clinicRequirement: {requiredProgress: 0, totalElements: $author$project$Cards$clinicSupplyLineCount},
-	nestRequirement: {requiredProgress: 0, totalElements: $author$project$Cards$nestSupplyLineCount}
+	nestRequirement: {requiredProgress: 0, totalElements: $author$project$Cards$nestSupplyLineCount},
+	rovingMerchantsRequirement: _List_Nil
 };
 var $elm$core$List$isEmpty = function (xs) {
 	if (!xs.b) {
@@ -13192,6 +13193,14 @@ var $author$project$Cards$isAccomplishmentLine = function (c) {
 		return false;
 	}
 };
+var $author$project$Cards$isRovingMerchantLine = function (c) {
+	var _v0 = c.supplyLine.name;
+	if (_v0.$ === 'RovingMerchants') {
+		return true;
+	} else {
+		return false;
+	}
+};
 var $elm_community$list_extra$List$Extra$foldl1 = F2(
 	function (func, list) {
 		if (!list.b) {
@@ -13219,6 +13228,26 @@ var $elm_community$list_extra$List$Extra$maximumWith = F2(
 			list);
 	});
 var $author$project$Cards$supplyLineRequirements = function (selection) {
+	var requiredRovingMerchants = A2(
+		$elm$core$List$map,
+		function (s) {
+			var _v2 = s.supplyLine.name;
+			if (_v2.$ === 'RovingMerchants') {
+				if (_v2.a.$ === 'Liberators') {
+					var _v3 = _v2.a;
+					return s.title + ' (Liberators)';
+				} else {
+					var _v4 = _v2.a;
+					return s.title + ' (KSC Convoy)';
+				}
+			} else {
+				return 'Unknown achievement';
+			}
+		},
+		A2(
+			$elm$core$List$filter,
+			$author$project$Cards$isRovingMerchantLine,
+			A2($elm$core$List$cons, selection.a, selection.b)));
 	var requiredAchievements = A2(
 		$elm$core$List$map,
 		function (s) {
@@ -13260,7 +13289,8 @@ var $author$project$Cards$supplyLineRequirements = function (selection) {
 		achievementRequirement: requiredAchievements,
 		alleyRequirement: {requiredProgress: highestAlleyIndex, totalElements: $author$project$Cards$alleySupplyLineCount},
 		clinicRequirement: {requiredProgress: highestClinicIndex, totalElements: $author$project$Cards$clinicSupplyLineCount},
-		nestRequirement: {requiredProgress: highestNestIndex, totalElements: $author$project$Cards$nestSupplyLineCount}
+		nestRequirement: {requiredProgress: highestNestIndex, totalElements: $author$project$Cards$nestSupplyLineCount},
+		rovingMerchantsRequirement: requiredRovingMerchants
 	};
 };
 var $rundis$elm_bootstrap$Bootstrap$Progress$Value = function (a) {
@@ -13286,25 +13316,124 @@ var $author$project$Main$inventoryProgressView = function (cards) {
 			return $author$project$Cards$emptySupplyLineRequirements;
 		}
 	}();
+	var rovingMerchantsList = $elm$core$List$isEmpty(requirements.rovingMerchantsRequirement) ? A2($elm$html$Html$div, _List_Nil, _List_Nil) : A2(
+		$elm$html$Html$div,
+		_List_fromArray(
+			[
+				$elm$html$Html$Attributes$class('col-xs-12 col-xl-6 pl-0 pl-xl-1 pr-0')
+			]),
+		_List_fromArray(
+			[
+				$rundis$elm_bootstrap$Bootstrap$Card$view(
+				A3(
+					$rundis$elm_bootstrap$Bootstrap$Card$block,
+					_List_fromArray(
+						[
+							$rundis$elm_bootstrap$Bootstrap$Card$Block$attrs(
+							_List_fromArray(
+								[
+									$elm$html$Html$Attributes$class('inventory-summary-sub-card-body')
+								]))
+						]),
+					_List_fromArray(
+						[
+							$rundis$elm_bootstrap$Bootstrap$Card$Block$custom(
+							A2(
+								$elm$html$Html$ul,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$class('inventory-summary-sub-card-list pl-xl-3')
+									]),
+								A2(
+									$elm$core$List$map,
+									function (a) {
+										return A2(
+											$elm$html$Html$li,
+											_List_Nil,
+											_List_fromArray(
+												[
+													$elm$html$Html$text(a)
+												]));
+									},
+									requirements.rovingMerchantsRequirement)))
+						]),
+					A3(
+						$rundis$elm_bootstrap$Bootstrap$Card$header,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('inventory-summary-sub-card-header bg-transparent')
+							]),
+						_List_fromArray(
+							[
+								A2(
+								$elm$html$Html$small,
+								_List_Nil,
+								_List_fromArray(
+									[
+										$elm$html$Html$text('Roving Merchants')
+									]))
+							]),
+						$rundis$elm_bootstrap$Bootstrap$Card$config(
+							_List_fromArray(
+								[
+									$rundis$elm_bootstrap$Bootstrap$Card$attrs(
+									_List_fromArray(
+										[
+											$elm$html$Html$Attributes$class('inventory-summary-sub-card')
+										]))
+								])))))
+			]));
 	var progressCard = F2(
 		function (header, progressBars) {
 			return $rundis$elm_bootstrap$Bootstrap$Card$view(
 				A3(
 					$rundis$elm_bootstrap$Bootstrap$Card$block,
-					_List_Nil,
+					_List_fromArray(
+						[
+							$rundis$elm_bootstrap$Bootstrap$Card$Block$attrs(
+							_List_fromArray(
+								[
+									$elm$html$Html$Attributes$class('inventory-summary-sub-card-body')
+								]))
+						]),
 					_List_fromArray(
 						[
 							$rundis$elm_bootstrap$Bootstrap$Card$Block$custom(
-							A2($elm$html$Html$div, _List_Nil, progressBars))
+							A2(
+								$elm$html$Html$div,
+								_List_fromArray(
+									[
+										A2($elm$html$Html$Attributes$style, 'padding-top', '1rem')
+									]),
+								progressBars))
 						]),
 					A3(
 						$rundis$elm_bootstrap$Bootstrap$Card$header,
-						_List_Nil,
 						_List_fromArray(
 							[
-								$elm$html$Html$text(header)
+								$elm$html$Html$Attributes$class('inventory-summary-sub-card-header bg-transparent')
 							]),
-						$rundis$elm_bootstrap$Bootstrap$Card$config(_List_Nil))));
+						_List_fromArray(
+							[
+								A2(
+								$elm$html$Html$small,
+								_List_Nil,
+								_List_fromArray(
+									[
+										$elm$html$Html$text(header)
+									]))
+							]),
+						$rundis$elm_bootstrap$Bootstrap$Card$config(
+							_List_fromArray(
+								[
+									$rundis$elm_bootstrap$Bootstrap$Card$attrs(
+									_List_fromArray(
+										[
+											$elm$html$Html$Attributes$class('inventory-summary-sub-card col-12'),
+											A2($elm$html$Html$Attributes$style, 'padding-left', '0'),
+											A2($elm$html$Html$Attributes$style, 'padding-right', '0')
+										]))
+								])))));
 		});
 	var progressBar = F2(
 		function (supplyLineRequirement, label) {
@@ -13349,55 +13478,118 @@ var $author$project$Main$inventoryProgressView = function (cards) {
 		});
 	var regularLines = A2(
 		progressCard,
-		'Required Supply Lines',
+		'Supply Lines',
 		_List_fromArray(
 			[
 				A2(progressBar, requirements.nestRequirement, 'Nest'),
 				A2(progressBar, requirements.alleyRequirement, 'Alley'),
 				A2(progressBar, requirements.clinicRequirement, 'Clinic')
 			]));
-	var achievementList = $elm$core$List$isEmpty(requirements.achievementRequirement) ? A2($elm$html$Html$div, _List_Nil, _List_Nil) : $rundis$elm_bootstrap$Bootstrap$Card$view(
-		A3(
-			$rundis$elm_bootstrap$Bootstrap$Card$block,
-			_List_Nil,
-			_List_fromArray(
-				[
-					$rundis$elm_bootstrap$Bootstrap$Card$Block$custom(
-					A2(
-						$elm$html$Html$ul,
-						_List_Nil,
-						A2(
-							$elm$core$List$map,
-							function (a) {
-								return A2(
-									$elm$html$Html$li,
-									_List_Nil,
+	var achievementList = $elm$core$List$isEmpty(requirements.achievementRequirement) ? A2($elm$html$Html$div, _List_Nil, _List_Nil) : A2(
+		$elm$html$Html$div,
+		_List_fromArray(
+			[
+				$elm$html$Html$Attributes$class('col-xs-12 col-xl-6 pl-0 pr-0 pr-xl-1')
+			]),
+		_List_fromArray(
+			[
+				$rundis$elm_bootstrap$Bootstrap$Card$view(
+				A3(
+					$rundis$elm_bootstrap$Bootstrap$Card$block,
+					_List_fromArray(
+						[
+							$rundis$elm_bootstrap$Bootstrap$Card$Block$attrs(
+							_List_fromArray(
+								[
+									$elm$html$Html$Attributes$class('inventory-summary-sub-card-body')
+								]))
+						]),
+					_List_fromArray(
+						[
+							$rundis$elm_bootstrap$Bootstrap$Card$Block$custom(
+							A2(
+								$elm$html$Html$ul,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$class('inventory-summary-sub-card-list pl-xl-3')
+									]),
+								A2(
+									$elm$core$List$map,
+									function (a) {
+										return A2(
+											$elm$html$Html$li,
+											_List_Nil,
+											_List_fromArray(
+												[
+													$elm$html$Html$text(a)
+												]));
+									},
+									requirements.achievementRequirement)))
+						]),
+					A3(
+						$rundis$elm_bootstrap$Bootstrap$Card$header,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('inventory-summary-sub-card-header bg-transparent')
+							]),
+						_List_fromArray(
+							[
+								A2(
+								$elm$html$Html$small,
+								_List_Nil,
+								_List_fromArray(
+									[
+										$elm$html$Html$text('Achievements')
+									]))
+							]),
+						$rundis$elm_bootstrap$Bootstrap$Card$config(
+							_List_fromArray(
+								[
+									$rundis$elm_bootstrap$Bootstrap$Card$attrs(
 									_List_fromArray(
 										[
-											$elm$html$Html$text(a)
-										]));
-							},
-							requirements.achievementRequirement)))
-				]),
-			A3(
-				$rundis$elm_bootstrap$Bootstrap$Card$header,
-				_List_Nil,
-				_List_fromArray(
-					[
-						$elm$html$Html$text('Required Achievements')
-					]),
-				$rundis$elm_bootstrap$Bootstrap$Card$config(_List_Nil))));
+											$elm$html$Html$Attributes$class('inventory-summary-sub-card')
+										]))
+								])))))
+			]));
 	return A2(
 		$rundis$elm_bootstrap$Bootstrap$Grid$col,
 		_List_fromArray(
 			[$rundis$elm_bootstrap$Bootstrap$Grid$Col$xs12]),
 		_List_fromArray(
 			[
-				A2(
-				$elm$html$Html$div,
-				_List_Nil,
-				_List_fromArray(
-					[regularLines, achievementList]))
+				$rundis$elm_bootstrap$Bootstrap$Card$view(
+				A3(
+					$rundis$elm_bootstrap$Bootstrap$Card$block,
+					_List_fromArray(
+						[
+							$rundis$elm_bootstrap$Bootstrap$Card$Block$attrs(
+							_List_fromArray(
+								[
+									$elm$html$Html$Attributes$class('inventory-summary-requirements-card-body')
+								]))
+						]),
+					_List_fromArray(
+						[
+							$rundis$elm_bootstrap$Bootstrap$Card$Block$custom(
+							A2(
+								$elm$html$Html$div,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$class('row'),
+										A2($elm$html$Html$Attributes$style, 'margin', '0')
+									]),
+								_List_fromArray(
+									[regularLines, achievementList, rovingMerchantsList])))
+						]),
+					A3(
+						$rundis$elm_bootstrap$Bootstrap$Card$header,
+						_List_Nil,
+						_List_fromArray(
+							[
+								$elm$html$Html$text('Deck Requirements')
+							]),
+						$rundis$elm_bootstrap$Bootstrap$Card$config(_List_Nil))))
 			]));
 };
 var $author$project$Cards$Absolute = {$: 'Absolute'};

@@ -79,3 +79,32 @@
         min-width: 0;
     }
 }
+
+.inventory-summary-sub-card-header {
+    padding-top: 0.5rem !important;
+    padding-bottom: 0.5rem !important;
+    padding-left: 1.25rem !important;
+}
+.inventory-summary-sub-card {
+    margin-bottom: 0.25rem;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+.inventory-summary-sub-card-body {
+    padding-top: 0.25rem !important;
+    padding-bottom: 0.25rem !important;
+}
+
+.inventory-summary-requirements-card-body {
+    padding: 0.25rem !important;
+}
+
+.inventory-summary-sub-card-list {
+    margin-top: 8px !important;
+    margin-bottom: 8px !important;
+}
+
+.bg-transparent {
+    background: transparent;
+}

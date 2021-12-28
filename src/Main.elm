@@ -832,10 +832,10 @@ inventoryProgressView cards =
             ]
             
         progressCard header progressBars =
-            Card.config []
-            |> Card.header [] [ text header ]
-            |> Card.block []
-               [ Block.custom (div [ ] progressBars)
+            Card.config [ Card.attrs [ class "inventory-summary-sub-card col-12", style "padding-left" "0", style "padding-right" "0" ] ]
+            |> Card.header [ class "inventory-summary-sub-card-header bg-transparent" ] [ Html.small [] [ text header ] ]
+            |> Card.block [ Block.attrs [ class "inventory-summary-sub-card-body" ] ]
+               [ Block.custom (div [ style "padding-top" "1rem" ] progressBars)
                ]
             |> Card.view
             
@@ -844,23 +844,46 @@ inventoryProgressView cards =
             if requirements.achievementRequirement |> List.isEmpty then
                 div [] []
             else
-                Card.config []
-                |> Card.header [] [ text "Required Achievements" ]
-                |> Card.block []
-                   [ Block.custom (Html.ul [] (requirements.achievementRequirement |> List.map (\a -> Html.li [] [ text a ])))
-                   ]
-                |> Card.view
+                div [ class "col-xs-12 col-xl-6 pl-0 pr-0 pr-xl-1"]
+                [ Card.config [ Card.attrs [ class "inventory-summary-sub-card"] ]
+                  |> Card.header [ class "inventory-summary-sub-card-header bg-transparent" ] [ Html.small [] [ text "Achievements" ] ]
+                  |> Card.block [ Block.attrs [ class "inventory-summary-sub-card-body" ] ]
+                     [ Block.custom (Html.ul [ class "inventory-summary-sub-card-list pl-xl-3" ] (requirements.achievementRequirement |> List.map (\a -> Html.li [] [ text a ])))
+                     ]
+                  |> Card.view
+                ]
                 
+                
+        rovingMerchantsList =
+            if requirements.rovingMerchantsRequirement |> List.isEmpty then
+                div [] []
+            else
+                div [ class "col-xs-12 col-xl-6 pl-0 pl-xl-1 pr-0"]
+                [ Card.config [ Card.attrs [ class "inventory-summary-sub-card"] ]
+                  |> Card.header [ class "inventory-summary-sub-card-header bg-transparent" ] [ Html.small [] [ text "Roving Merchants" ] ]
+                  |> Card.block [ Block.attrs [ class "inventory-summary-sub-card-body" ] ]
+                     [ Block.custom (Html.ul [ class "inventory-summary-sub-card-list pl-xl-3" ] (requirements.rovingMerchantsRequirement |> List.map (\a -> Html.li [] [ text a ])))
+                     ]
+                  |> Card.view
+                ]
+
 
         regularLines = 
             progressCard 
-                "Required Supply Lines"
+                "Supply Lines"
                 [ progressBar requirements.nestRequirement "Nest"
                 , progressBar requirements.alleyRequirement "Alley"
                 , progressBar requirements.clinicRequirement "Clinic" ]
     in
     Grid.col [ Col.xs12 ]
-    [ div [] [regularLines, achievementList] ]
+    [ Card.config []
+      |> Card.header [] [ text "Deck Requirements" ]
+      |> Card.block [ Block.attrs [ class "inventory-summary-requirements-card-body" ] ]
+         [ Block.custom (div [ class "row", style "margin" "0" ] [ regularLines, achievementList, rovingMerchantsList ])
+         ]
+      |> Card.view
+    ]
+    --[ div [] [ regularLines, achievementList, rovingMerchantsList ] ]
 
 
 {-| Creates a simple card view with a summary of all properties.
