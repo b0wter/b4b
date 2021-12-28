@@ -14025,6 +14025,7 @@ var $author$project$Cards$parseOperation = function (s) {
 			return $elm$core$Maybe$Nothing;
 	}
 };
+var $elm$core$String$toFloat = _String_toFloat;
 var $elm$regex$Regex$fromString = function (string) {
 	return A2(
 		$elm$regex$Regex$fromStringWith,
@@ -14102,7 +14103,7 @@ var $author$project$Cards$groupProperties = function (properties) {
 					var third = _v5.a;
 					var _v6 = _Utils_Tuple3(
 						$author$project$Cards$parseOperation(first),
-						$elm$core$String$toInt(second),
+						$elm$core$String$toFloat(second),
 						third);
 					if ((_v6.a.$ === 'Just') && (_v6.b.$ === 'Just')) {
 						var op = _v6.a.a;
@@ -14122,7 +14123,7 @@ var $author$project$Cards$groupProperties = function (properties) {
 						var third = _v8.a;
 						var _v9 = _v8.b;
 						var fourth = _v9.a;
-						var value = $elm$core$String$toInt(second);
+						var value = $elm$core$String$toFloat(second);
 						var op = $author$project$Cards$parseOperation(first);
 						var absOrRel = $author$project$Cards$parseAbsOrRel(third);
 						var _v10 = _Utils_Tuple3(op, value, absOrRel);
@@ -14151,7 +14152,7 @@ var $author$project$Cards$groupProperties = function (properties) {
 		A2(
 			$elm$regex$Regex$fromStringWith,
 			{caseInsensitive: true, multiline: false},
-			'([+,-])(\\d+)(\\%?)\\s(.+)'));
+			'([+,-])(\\d+\\.?\\d*)(\\%?)\\s(.+)'));
 	var mergeMergeElements = function (elements) {
 		var merger = function (mergeElements) {
 			var folder = F2(
@@ -14185,7 +14186,7 @@ var $author$project$Cards$groupProperties = function (properties) {
 		return A2(
 			$elm$core$List$map,
 			function (element) {
-				var val = (element.value > 0) ? ('+' + $elm$core$String$fromInt(element.value)) : $elm$core$String$fromInt(element.value);
+				var val = (element.value > 0) ? ('+' + $elm$core$String$fromFloat(element.value)) : $elm$core$String$fromFloat(element.value);
 				return _Utils_ap(
 					val,
 					_Utils_ap(

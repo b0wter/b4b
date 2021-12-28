@@ -271,7 +271,7 @@ absOrRelToString a =
 type alias MergeElement =
     { operation: Operation
     , absOrRel: AbsOrRel
-    , value: Int
+    , value: Float
     , key: String
     }
  
@@ -317,7 +317,7 @@ groupProperties properties =
         regexResultToMergeElement strings =
             case strings of
                 [ first, second, third] -> 
-                    case (first |> parseOperation, second |> String.toInt, third) of
+                    case (first |> parseOperation, second |> String.toFloat, third) of
                         (Just op, Just value, key) ->
                             Just { operation = op, absOrRel = Absolute, value = value, key = key }
                         _ ->
@@ -325,7 +325,7 @@ groupProperties properties =
                 [ first, second, third, fourth] -> 
                     let 
                         op = first |> parseOperation
-                        value = second |> String.toInt
+                        value = second |> String.toFloat
                         absOrRel = third |> parseAbsOrRel
                     in
                     case (op, value, absOrRel) of
@@ -365,9 +365,9 @@ groupProperties properties =
             |> List.map (\element -> 
                 let 
                     val = if element.value > 0 then 
-                            "+" ++ (element.value |> String.fromInt) 
+                            "+" ++ (element.value |> String.fromFloat) 
                           else 
-                            element.value |> String.fromInt
+                            element.value |> String.fromFloat
                 in
                 val
                 ++ (if element.absOrRel == Absolute then " " else "% ")
@@ -375,7 +375,7 @@ groupProperties properties =
                 )
             
         passiveRegex = 
-            Regex.fromStringWith { caseInsensitive = True, multiline = False } "([+,-])(\\d+)(\\%?)\\s(.+)"
+            Regex.fromStringWith { caseInsensitive = True, multiline = False } "([+,-])(\\d+\\.?\\d*)(\\%?)\\s(.+)"
             |> Maybe.withDefault Regex.never
             
         rawPassives =
