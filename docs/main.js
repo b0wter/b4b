@@ -14407,6 +14407,9 @@ var $author$project$Main$MoveCardUp = function (a) {
 	return {$: 'MoveCardUp', a: a};
 };
 var $rundis$elm_bootstrap$Bootstrap$Utilities$Flex$justifyBetween = $elm$html$Html$Attributes$class('justify-content-between');
+var $rundis$elm_bootstrap$Bootstrap$Internal$Role$Secondary = {$: 'Secondary'};
+var $rundis$elm_bootstrap$Bootstrap$Card$outlineSecondary = $rundis$elm_bootstrap$Bootstrap$Card$Internal$Coloring(
+	$rundis$elm_bootstrap$Bootstrap$Card$Internal$Outlined($rundis$elm_bootstrap$Bootstrap$Internal$Role$Secondary));
 var $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$pb1 = $elm$html$Html$Attributes$class('pb-1');
 var $author$project$Main$pointerClass = $elm$html$Html$Attributes$class('pointer');
 var $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$pt1 = $elm$html$Html$Attributes$class('pt-1');
@@ -14433,7 +14436,6 @@ var $author$project$Main$summaryCardView = F2(
 				return '';
 			}
 		}();
-		var background = $author$project$Main$cardOutlineColor(card);
 		return A2(
 			$rundis$elm_bootstrap$Bootstrap$Grid$col,
 			_List_fromArray(
@@ -14553,7 +14555,7 @@ var $author$project$Main$summaryCardView = F2(
 							$rundis$elm_bootstrap$Bootstrap$Card$config(
 								_List_fromArray(
 									[
-										background,
+										$rundis$elm_bootstrap$Bootstrap$Card$outlineSecondary,
 										$rundis$elm_bootstrap$Bootstrap$Card$attrs(
 										_List_fromArray(
 											[$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$m2]))

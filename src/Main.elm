@@ -888,15 +888,13 @@ inventoryProgressView cards =
 summaryCardView : Maybe Int -> Card -> Grid.Column Msg
 summaryCardView optionalIndex card =
     let
-        background =
-            card |> cardOutlineColor
         index =
             case optionalIndex of
                 Just i -> (i |> String.fromInt) ++ ". "
                 Nothing -> ""
     in
     Grid.col [ Col.xs12 ]
-        [ Card.config [ background, Card.attrs [ Spacing.m2 ] ]
+        [ Card.config [ Card.outlineSecondary, Card.attrs [ Spacing.m2 ] ]
             |> Card.block [ Block.attrs [ Spacing.pt1, Spacing.pb1 ] ]
                 [ Block.text [ Flex.block, Flex.justifyBetween ]
                     [ div [] [ text (index ++ card.title) ]
