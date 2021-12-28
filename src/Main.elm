@@ -728,17 +728,17 @@ fullCardViewWithImageAndDetails card =
 fullCardViewWithImage : Card -> Grid.Column Msg
 fullCardViewWithImage card =
     let
-        cardBackground =
-            card |> cardOutlineColor
-
         buttonBackground =
             Button.secondary
     in
     Grid.col []
-        [ Card.config [ cardBackground , Card.attrs [  Spacing.m2 ] ]
-            |> Card.block [ Block.attrs [ class "d-flex justify-content-center" ] ]
+        [ Card.config [ Card.attrs [  Spacing.m2 ] ]
+            |> Card.block [ Block.attrs [ ] ]
                 [ Block.custom
-                    (img [ src ("img/english/" ++ card.filename), style "max-width" "200px" ] [])
+                    ( div [ class "d-flex justify-content-center bg-black" ] 
+                    [ Html.a [ href "#", class "img-shadow"] [ img [ src ("img/english/" ++ card.filename), style "max-width" "200px" ] [] ]
+                    ]
+                    )
                 ]
             |> Card.footer []
                 [ Button.button [ buttonBackground, Button.attrs [ Size.w100, onClick (SelectCard card.id) ] ] [ text "Select" ]
@@ -750,14 +750,11 @@ fullCardViewWithImage card =
 fullCardViewWithText : Card -> Grid.Column Msg
 fullCardViewWithText card =
     let
-        cardBackground =
-            card |> cardOutlineColor
-
         buttonBackground =
             Button.secondary
     in
     Grid.col [ ]
-        [ Card.config [ cardBackground, Card.attrs [ class "full-size-card-text", Spacing.m2 ] ]
+        [ Card.config [ Card.attrs [ class "full-size-card-text", Spacing.m2 ] ]
             |> Card.header [ class "text-center" ]
                 [ Html.h6 [ class "card-text-header mb-0" ] [ text card.title ]
                 ]

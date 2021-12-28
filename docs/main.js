@@ -11332,6 +11332,7 @@ var $author$project$Main$filteredCards = F2(
 var $author$project$Main$SelectCard = function (a) {
 	return {$: 'SelectCard', a: a};
 };
+var $elm$html$Html$a = _VirtualDom_node('a');
 var $rundis$elm_bootstrap$Bootstrap$Card$Internal$Attrs = function (a) {
 	return {$: 'Attrs', a: a};
 };
@@ -11517,42 +11518,6 @@ var $rundis$elm_bootstrap$Bootstrap$Card$block = F3(
 							]))
 				}));
 	});
-var $rundis$elm_bootstrap$Bootstrap$Card$Internal$Coloring = function (a) {
-	return {$: 'Coloring', a: a};
-};
-var $rundis$elm_bootstrap$Bootstrap$Internal$Role$Danger = {$: 'Danger'};
-var $rundis$elm_bootstrap$Bootstrap$Card$Internal$Outlined = function (a) {
-	return {$: 'Outlined', a: a};
-};
-var $rundis$elm_bootstrap$Bootstrap$Card$outlineDanger = $rundis$elm_bootstrap$Bootstrap$Card$Internal$Coloring(
-	$rundis$elm_bootstrap$Bootstrap$Card$Internal$Outlined($rundis$elm_bootstrap$Bootstrap$Internal$Role$Danger));
-var $rundis$elm_bootstrap$Bootstrap$Internal$Role$Dark = {$: 'Dark'};
-var $rundis$elm_bootstrap$Bootstrap$Card$outlineDark = $rundis$elm_bootstrap$Bootstrap$Card$Internal$Coloring(
-	$rundis$elm_bootstrap$Bootstrap$Card$Internal$Outlined($rundis$elm_bootstrap$Bootstrap$Internal$Role$Dark));
-var $rundis$elm_bootstrap$Bootstrap$Internal$Role$Primary = {$: 'Primary'};
-var $rundis$elm_bootstrap$Bootstrap$Card$outlinePrimary = $rundis$elm_bootstrap$Bootstrap$Card$Internal$Coloring(
-	$rundis$elm_bootstrap$Bootstrap$Card$Internal$Outlined($rundis$elm_bootstrap$Bootstrap$Internal$Role$Primary));
-var $rundis$elm_bootstrap$Bootstrap$Internal$Role$Success = {$: 'Success'};
-var $rundis$elm_bootstrap$Bootstrap$Card$outlineSuccess = $rundis$elm_bootstrap$Bootstrap$Card$Internal$Coloring(
-	$rundis$elm_bootstrap$Bootstrap$Card$Internal$Outlined($rundis$elm_bootstrap$Bootstrap$Internal$Role$Success));
-var $rundis$elm_bootstrap$Bootstrap$Internal$Role$Warning = {$: 'Warning'};
-var $rundis$elm_bootstrap$Bootstrap$Card$outlineWarning = $rundis$elm_bootstrap$Bootstrap$Card$Internal$Coloring(
-	$rundis$elm_bootstrap$Bootstrap$Card$Internal$Outlined($rundis$elm_bootstrap$Bootstrap$Internal$Role$Warning));
-var $author$project$Main$cardOutlineColor = function (card) {
-	var _v0 = card.kind;
-	switch (_v0.$) {
-		case 'UnknownKind':
-			return $rundis$elm_bootstrap$Bootstrap$Card$outlineDark;
-		case 'Mobility':
-			return $rundis$elm_bootstrap$Bootstrap$Card$outlinePrimary;
-		case 'Utility':
-			return $rundis$elm_bootstrap$Bootstrap$Card$outlineDanger;
-		case 'Defense':
-			return $rundis$elm_bootstrap$Bootstrap$Card$outlineSuccess;
-		default:
-			return $rundis$elm_bootstrap$Bootstrap$Card$outlineWarning;
-	}
-};
 var $rundis$elm_bootstrap$Bootstrap$Card$config = function (options) {
 	return $rundis$elm_bootstrap$Bootstrap$Card$Config(
 		{blocks: _List_Nil, footer: $elm$core$Maybe$Nothing, header: $elm$core$Maybe$Nothing, imgBottom: $elm$core$Maybe$Nothing, imgTop: $elm$core$Maybe$Nothing, options: options});
@@ -11584,6 +11549,12 @@ var $rundis$elm_bootstrap$Bootstrap$Card$footer = F3(
 								children)))
 				}));
 	});
+var $elm$html$Html$Attributes$href = function (url) {
+	return A2(
+		$elm$html$Html$Attributes$stringProperty,
+		'href',
+		_VirtualDom_noJavaScriptUri(url));
+};
 var $elm$html$Html$img = _VirtualDom_node('img');
 var $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$m2 = $elm$html$Html$Attributes$class('m-2');
 var $elm$html$Html$Attributes$src = function (url) {
@@ -11750,7 +11721,6 @@ var $rundis$elm_bootstrap$Bootstrap$Card$view = function (_v0) {
 };
 var $rundis$elm_bootstrap$Bootstrap$Utilities$Size$w100 = $elm$html$Html$Attributes$class('w-100');
 var $author$project$Main$fullCardViewWithImage = function (card) {
-	var cardBackground = $author$project$Main$cardOutlineColor(card);
 	var buttonBackground = $rundis$elm_bootstrap$Bootstrap$Button$secondary;
 	return A2(
 		$rundis$elm_bootstrap$Bootstrap$Grid$col,
@@ -11785,33 +11755,83 @@ var $author$project$Main$fullCardViewWithImage = function (card) {
 						$rundis$elm_bootstrap$Bootstrap$Card$block,
 						_List_fromArray(
 							[
-								$rundis$elm_bootstrap$Bootstrap$Card$Block$attrs(
-								_List_fromArray(
-									[
-										$elm$html$Html$Attributes$class('d-flex justify-content-center')
-									]))
+								$rundis$elm_bootstrap$Bootstrap$Card$Block$attrs(_List_Nil)
 							]),
 						_List_fromArray(
 							[
 								$rundis$elm_bootstrap$Bootstrap$Card$Block$custom(
 								A2(
-									$elm$html$Html$img,
+									$elm$html$Html$div,
 									_List_fromArray(
 										[
-											$elm$html$Html$Attributes$src('img/english/' + card.filename),
-											A2($elm$html$Html$Attributes$style, 'max-width', '200px')
+											$elm$html$Html$Attributes$class('d-flex justify-content-center bg-black')
 										]),
-									_List_Nil))
+									_List_fromArray(
+										[
+											A2(
+											$elm$html$Html$a,
+											_List_fromArray(
+												[
+													$elm$html$Html$Attributes$href('#'),
+													$elm$html$Html$Attributes$class('img-shadow')
+												]),
+											_List_fromArray(
+												[
+													A2(
+													$elm$html$Html$img,
+													_List_fromArray(
+														[
+															$elm$html$Html$Attributes$src('img/english/' + card.filename),
+															A2($elm$html$Html$Attributes$style, 'max-width', '200px')
+														]),
+													_List_Nil)
+												]))
+										])))
 							]),
 						$rundis$elm_bootstrap$Bootstrap$Card$config(
 							_List_fromArray(
 								[
-									cardBackground,
 									$rundis$elm_bootstrap$Bootstrap$Card$attrs(
 									_List_fromArray(
 										[$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$m2]))
 								])))))
 			]));
+};
+var $rundis$elm_bootstrap$Bootstrap$Card$Internal$Coloring = function (a) {
+	return {$: 'Coloring', a: a};
+};
+var $rundis$elm_bootstrap$Bootstrap$Internal$Role$Danger = {$: 'Danger'};
+var $rundis$elm_bootstrap$Bootstrap$Card$Internal$Outlined = function (a) {
+	return {$: 'Outlined', a: a};
+};
+var $rundis$elm_bootstrap$Bootstrap$Card$outlineDanger = $rundis$elm_bootstrap$Bootstrap$Card$Internal$Coloring(
+	$rundis$elm_bootstrap$Bootstrap$Card$Internal$Outlined($rundis$elm_bootstrap$Bootstrap$Internal$Role$Danger));
+var $rundis$elm_bootstrap$Bootstrap$Internal$Role$Dark = {$: 'Dark'};
+var $rundis$elm_bootstrap$Bootstrap$Card$outlineDark = $rundis$elm_bootstrap$Bootstrap$Card$Internal$Coloring(
+	$rundis$elm_bootstrap$Bootstrap$Card$Internal$Outlined($rundis$elm_bootstrap$Bootstrap$Internal$Role$Dark));
+var $rundis$elm_bootstrap$Bootstrap$Internal$Role$Primary = {$: 'Primary'};
+var $rundis$elm_bootstrap$Bootstrap$Card$outlinePrimary = $rundis$elm_bootstrap$Bootstrap$Card$Internal$Coloring(
+	$rundis$elm_bootstrap$Bootstrap$Card$Internal$Outlined($rundis$elm_bootstrap$Bootstrap$Internal$Role$Primary));
+var $rundis$elm_bootstrap$Bootstrap$Internal$Role$Success = {$: 'Success'};
+var $rundis$elm_bootstrap$Bootstrap$Card$outlineSuccess = $rundis$elm_bootstrap$Bootstrap$Card$Internal$Coloring(
+	$rundis$elm_bootstrap$Bootstrap$Card$Internal$Outlined($rundis$elm_bootstrap$Bootstrap$Internal$Role$Success));
+var $rundis$elm_bootstrap$Bootstrap$Internal$Role$Warning = {$: 'Warning'};
+var $rundis$elm_bootstrap$Bootstrap$Card$outlineWarning = $rundis$elm_bootstrap$Bootstrap$Card$Internal$Coloring(
+	$rundis$elm_bootstrap$Bootstrap$Card$Internal$Outlined($rundis$elm_bootstrap$Bootstrap$Internal$Role$Warning));
+var $author$project$Main$cardOutlineColor = function (card) {
+	var _v0 = card.kind;
+	switch (_v0.$) {
+		case 'UnknownKind':
+			return $rundis$elm_bootstrap$Bootstrap$Card$outlineDark;
+		case 'Mobility':
+			return $rundis$elm_bootstrap$Bootstrap$Card$outlinePrimary;
+		case 'Utility':
+			return $rundis$elm_bootstrap$Bootstrap$Card$outlineDanger;
+		case 'Defense':
+			return $rundis$elm_bootstrap$Bootstrap$Card$outlineSuccess;
+		default:
+			return $rundis$elm_bootstrap$Bootstrap$Card$outlineWarning;
+	}
 };
 var $rundis$elm_bootstrap$Bootstrap$Card$Header = function (a) {
 	return {$: 'Header', a: a};
@@ -11959,7 +11979,6 @@ var $rundis$elm_bootstrap$Bootstrap$Internal$Button$Size = function (a) {
 };
 var $rundis$elm_bootstrap$Bootstrap$Button$small = $rundis$elm_bootstrap$Bootstrap$Internal$Button$Size($rundis$elm_bootstrap$Bootstrap$General$Internal$SM);
 var $author$project$Main$fullCardViewWithText = function (card) {
-	var cardBackground = $author$project$Main$cardOutlineColor(card);
 	var buttonBackground = $rundis$elm_bootstrap$Bootstrap$Button$secondary;
 	return A2(
 		$rundis$elm_bootstrap$Bootstrap$Grid$col,
@@ -12055,7 +12074,6 @@ var $author$project$Main$fullCardViewWithText = function (card) {
 							$rundis$elm_bootstrap$Bootstrap$Card$config(
 								_List_fromArray(
 									[
-										cardBackground,
 										$rundis$elm_bootstrap$Bootstrap$Card$attrs(
 										_List_fromArray(
 											[
@@ -12914,7 +12932,6 @@ var $author$project$Main$cardPoolView = function (model) {
 					A2($author$project$Main$filteredCards, model.filter, model.notSelectedCards)))
 			]));
 };
-var $elm$html$Html$a = _VirtualDom_node('a');
 var $elm$html$Html$h2 = _VirtualDom_node('h2');
 var $lattyware$elm_fontawesome$FontAwesome$Solid$suitcase = A5(
 	$lattyware$elm_fontawesome$FontAwesome$Icon$Icon,

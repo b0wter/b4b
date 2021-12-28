@@ -108,3 +108,27 @@
 .bg-transparent {
     background: transparent;
 }
+
+.bg-black {
+    background: black;
+}
+
+.img-shadow {
+    position: relative;
+    max-width: 100%;
+    float: left;
+}
+
+.img-shadow::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    box-shadow: inset 0 0 20px 8px #000000;
+}
+
+.img-shadow img {
+    float: left;
+} 
