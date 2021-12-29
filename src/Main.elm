@@ -69,8 +69,7 @@ type alias Flags =
 
 
 type CardDisplay
-    = ImageAndDetails
-    | Text
+    = Text
     | Image
 
 
@@ -83,6 +82,7 @@ type alias Model =
     { navbarState : Navbar.State
     , cardDisplay : CardDisplay
     , inventoryDisplay : InventoryDisplay
+    , showCardPoolDetails : Bool
     , shareModalVisibility: Modal.Visibility
     , yesNoModalVisibility: Modal.Visibility
     , yesNoModalContent: Maybe YesNoModalContent
@@ -173,6 +173,7 @@ init flags url key =
       , inventoryDisplay = InventoryAsCards
       , selectedCards = selected
       , notSelectedCards = notSelected
+      , showCardPoolDetails = False
       , filter = Nothing
       , shareModalVisibility = Modal.hidden
       , yesNoModalVisibility = Modal.hidden
@@ -205,6 +206,7 @@ type Msg
     | ShowYesNoModal YesNoModalContent
     | ConfirmResetModal
     | RejectResetModal
+    | ToggleCardDetails
     ---------------------------
     | SelectCard CardId
     | DeselectCard CardId
@@ -276,6 +278,11 @@ update msg model =
 
         RejectResetModal ->
             ( { model | yesNoModalContent = Nothing, yesNoModalVisibility = Modal.hidden }, Cmd.none )
+            
+            
+        ToggleCardDetails ->
+            ( { model | showCardPoolDetails = not model.showCardPoolDetails }, Cmd.none )
+                
 
         CopyShareUrl url ->
             ( model, copy url)
@@ -480,15 +487,11 @@ mainContent model =
 
 cardDisplayToggle : CardDisplay -> Html Msg
 cardDisplayToggle cardDisplay =
-    ButtonGroup.radioButtonGroup [ ButtonGroup.small, ButtonGroup.attrs [ class "d-flex align-items-center", Spacing.ml3 ] ]
+    ButtonGroup.radioButtonGroup [ ButtonGroup.attrs [ class "d-flex align-items-center", Spacing.ml3 ] ]
         [ ButtonGroup.radioButton
             (cardDisplay == Text)
             [ Button.secondary, Button.onClick <| (ChangeCardDisplayType Text) ]
             [ FontAwesome.Solid.alignLeft |> FontAwesome.Icon.viewIcon ]
-        , ButtonGroup.radioButton
-            (cardDisplay == ImageAndDetails)
-            [ Button.secondary, Button.onClick <| (ChangeCardDisplayType ImageAndDetails) ]
-            [ FontAwesome.Solid.idCard |> FontAwesome.Icon.viewIcon ]
         , ButtonGroup.radioButton
             (cardDisplay == Image)
             [ Button.secondary, Button.onClick <| (ChangeCardDisplayType Image) ]
@@ -523,17 +526,24 @@ filterWithClearButton currentFilter =
 
 cardPoolView : Model -> Grid.Column Msg
 cardPoolView model =
+    let
+        showCardDetailsToggle = 
+            ButtonGroup.checkboxButtonGroup [ ButtonGroup.small, ButtonGroup.attrs [ Spacing.ml3, style "min-width" "2em" ] ]
+            [ ButtonGroup.checkboxButton model.showCardPoolDetails [ Button.secondary, Button.small, Button.onClick ToggleCardDetails ] [ FontAwesome.Solid.info |> FontAwesome.Icon.viewIcon ]
+            ]
+    in
     Grid.col [ Col.xs12, Col.md6, Col.lg8, Col.attrs [ id "left-column", class "overflow-scroll content-column" ] ]
         [ Grid.row []
             [ Grid.col [ Col.xs12 ]
                 [ div [ Border.rounded, Spacing.mt2, class "d-flex justify-content-between pr-1 pl-1 pt-1 pb-1 bg-dark shadow "]
                     [ filterWithClearButton (model.filter |> Maybe.withDefault "")
                     , cardDisplayToggle model.cardDisplay
+                    , showCardDetailsToggle
                     ]
                 ]
             ]
         , Grid.row []
-            (model.notSelectedCards |> (filteredCards model.filter) |> List.map (fullCardView model.cardDisplay))
+            (model.notSelectedCards |> (filteredCards model.filter) |> List.map (fullCardView model.showCardPoolDetails model.cardDisplay))
         ]
 
 
@@ -686,50 +696,80 @@ htmlBackgroundColor card =
             Html.Attributes.class "bg-warning"
 
 
-fullCardView :  CardDisplay -> Card ->Grid.Column Msg
-fullCardView cardDisplay card =
+fullCardView :  Bool -> CardDisplay -> Card ->Grid.Column Msg
+fullCardView showCardDetails cardDisplay card =
     case cardDisplay of
-        ImageAndDetails ->
-            fullCardViewWithImageAndDetails card
         Image ->
-            fullCardViewWithImage card
+            fullCardViewWithImage showCardDetails card
         Text ->
-            fullCardViewWithText card
+            fullCardViewWithText showCardDetails card
 
 
-fullCardViewWithImageAndDetails : Card -> Grid.Column Msg
-fullCardViewWithImageAndDetails card =
+fullCardViewDetailsBlock card =
     let
-        cardBackground =
-            card |> cardOutlineColor
-
-        buttonBackground =
-            Button.secondary
+        costText =
+            (card.cost |> String.fromInt) ++ " (Σ " ++ (card.totalCost |> String.fromInt) ++ ")"
+        
+        costDiv =
+            if card |> Cards.isAccomplishmentLine then
+                div [ style "font-size" "2em" ] [ text "🏆" ] --[ FontAwesome.Solid.trophy |> FontAwesome.Icon.viewIcon ] -- Trophy
+            else if card |> Cards.isRovingMerchantLine then
+                div [ style "font-size" "2em" ] [ text "🏬" ] 
+            else if card |> Cards.isStripLine then
+                div [ style "font-size" "2em" ] [ text "🎞" ] 
+            else if card |> Cards.isStarterLine then
+                div [ style "font-size" "2em" ] [ text "🏲" ] 
+            else
+                div [ Flex.block, Flex.col, Flex.alignItemsCenter ]
+                [ div [] [ Html.img [ src "img/cost.png", style "width" "2em", style "height" "2em" ] [] ]
+                , div [] [ text costText ]
+                ]
+                
+        numberOfCards =
+            case card.supplyLine.name of
+                Cards.Nest _ -> Cards.nestSupplyLineCount
+                Cards.Alley _ -> Cards.alleySupplyLineCount
+                Cards.Clinic _ -> Cards.clinicSupplyLineCount
+                _ -> -1
+        
+                
+        nameDiv =
+            div [ Flex.block, Flex.col, Flex.alignItemsCenter ]
+            [ div [] [ Html.b [] [ text (card.supplyLine.name |> Cards.supplyTrackToString)] ]
+            , div []
+              [ ( if (card |> Cards.isAccomplishmentLine) then
+                    div [] []
+                  else if (card |> Cards.isStarterLine) || (card |> Cards.isStripLine) then
+                    div [] [ Html.i [] [ text "always unlocked" ] ]
+                  else if (card |> Cards.isRovingMerchantLine) then
+                    div [] [ Html.i [] [ text "randomly available" ] ]
+                  else
+                    div [] [ text ((card.supplyLine.index |> String.fromInt) ++ " of " ++ (numberOfCards |> String.fromInt) ) ]
+              ) ]
+            ]
+                
     in
-    Grid.col []
-        [ Card.config [ cardBackground, Card.attrs [ Spacing.m2 ] ]
-            |> Card.header [ class "text-center" ]
-                [ img [ src ("img/english/" ++ card.filename) ] []
-                ]
-            |> Card.block []
-                [ Block.titleH5 [] [ text card.title ]
-                , Block.custom
-                    (Html.ul [ Spacing.pl3, Spacing.pr0 ]
-                        (card.properties |> List.map (\property -> div [] [ Html.li [] [ Html.small [] [ text property.description ] ] ]))
-                    )
-                ]
-            |> Card.footer []
-                [ Button.button [ buttonBackground, Button.attrs [ Size.w100, onClick (SelectCard card.id) ] ] [ text "Select" ]
-                ]
-            |> Card.view
+    Block.custom
+      ( div [ Spacing.mt3 ]
+        [ Html.node "hr" [] []
+        , div [ Flex.block, Flex.justifyBetween ]
+          [ nameDiv
+          , costDiv
+          ]
         ]
+      )
 
 
-fullCardViewWithImage : Card -> Grid.Column Msg
-fullCardViewWithImage card =
+fullCardViewWithImage : Bool -> Card -> Grid.Column Msg
+fullCardViewWithImage showDetails card =
     let
         buttonBackground =
             Button.secondary
+        details = 
+            if showDetails then
+                fullCardViewDetailsBlock card
+            else
+                Block.custom (div [] [])
     in
     Grid.col []
         [ Card.config [ Card.attrs [  Spacing.m2 ] ]
@@ -739,6 +779,7 @@ fullCardViewWithImage card =
                     [ Html.a [ href "#", class "img-shadow"] [ img [ src ("img/english/" ++ card.filename), style "max-width" "200px" ] [] ]
                     ]
                     )
+                , details
                 ]
             |> Card.footer []
                 [ Button.button [ buttonBackground, Button.attrs [ Size.w100, onClick (SelectCard card.id) ] ] [ text "Select" ]
@@ -747,11 +788,16 @@ fullCardViewWithImage card =
         ]
 
 
-fullCardViewWithText : Card -> Grid.Column Msg
-fullCardViewWithText card =
+fullCardViewWithText : Bool -> Card -> Grid.Column Msg
+fullCardViewWithText showDetails card =
     let
         buttonBackground =
             Button.secondary
+        details = 
+            if showDetails then
+                fullCardViewDetailsBlock card
+            else
+                Block.custom (div [] [])
     in
     Grid.col [ ]
         [ Card.config [ Card.attrs [ class "full-size-card-text", Spacing.m2 ] ]
@@ -763,6 +809,7 @@ fullCardViewWithText card =
                     (Html.ul [ Spacing.pl3, Spacing.pr0 ]
                         (card.properties |> List.map (\property -> div [] [ Html.li [] [ Html.small [] [ text property.description ] ] ]))
                     )
+                  , details
                 ]
             |> Card.footer []
                 [ Button.button [ buttonBackground, Button.small, Button.attrs [ Size.w100, onClick (SelectCard card.id) ] ] [ text "Select" ]

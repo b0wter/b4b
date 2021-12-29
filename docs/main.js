@@ -5464,6 +5464,8 @@ var $author$project$Cards$parseSupplyTrack = F2(
 				switch (name) {
 					case 'The Crow\'s Nest':
 						return $author$project$Cards$Nest($author$project$Cards$TheCrowsNest);
+					case 'Crow\'s Nest':
+						return $author$project$Cards$Nest($author$project$Cards$TheCrowsNest);
 					case 'Bridge Town':
 						return $author$project$Cards$Nest($author$project$Cards$BridgeTown);
 					case 'Knuckle House':
@@ -8323,7 +8325,17 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		totalCost: -1
 	}
 	]);
-var $author$project$Cards$cards = A2($elm$core$List$map, $author$project$Cards$parseRawCard, $author$project$CardData$rawCards);
+var $elm$core$List$append = F2(
+	function (xs, ys) {
+		if (!ys.b) {
+			return xs;
+		} else {
+			return A3($elm$core$List$foldr, $elm$core$List$cons, ys, xs);
+		}
+	});
+var $elm$core$List$concat = function (lists) {
+	return A3($elm$core$List$foldr, $elm$core$List$append, _List_Nil, lists);
+};
 var $elm$core$List$filter = F2(
 	function (isGood, list) {
 		return A3(
@@ -8335,6 +8347,110 @@ var $elm$core$List$filter = F2(
 			_List_Nil,
 			list);
 	});
+var $elm_community$list_extra$List$Extra$filterNot = F2(
+	function (pred, list) {
+		return A2(
+			$elm$core$List$filter,
+			A2($elm$core$Basics$composeL, $elm$core$Basics$not, pred),
+			list);
+	});
+var $author$project$Cards$isAlleyLine = function (c) {
+	var _v0 = c.supplyLine.name;
+	if (_v0.$ === 'Alley') {
+		return true;
+	} else {
+		return false;
+	}
+};
+var $author$project$Cards$isClinicLine = function (c) {
+	var _v0 = c.supplyLine.name;
+	if (_v0.$ === 'Clinic') {
+		return true;
+	} else {
+		return false;
+	}
+};
+var $author$project$Cards$isNestLine = function (c) {
+	var _v0 = c.supplyLine.name;
+	if (_v0.$ === 'Nest') {
+		return true;
+	} else {
+		return false;
+	}
+};
+var $elm$core$List$sortBy = _List_sortBy;
+var $author$project$Cards$setTotalCardCosts = function (input) {
+	var sortedNest = A2(
+		$elm$core$List$sortBy,
+		function (c) {
+			return c.supplyLine.index;
+		},
+		A2($elm$core$List$filter, $author$project$Cards$isNestLine, input));
+	var sortedClinic = A2(
+		$elm$core$List$sortBy,
+		function (c) {
+			return c.supplyLine.index;
+		},
+		A2($elm$core$List$filter, $author$project$Cards$isClinicLine, input));
+	var sortedAlley = A2(
+		$elm$core$List$sortBy,
+		function (c) {
+			return c.supplyLine.index;
+		},
+		A2($elm$core$List$filter, $author$project$Cards$isAlleyLine, input));
+	var others = A2(
+		$elm$core$List$map,
+		function (c) {
+			return _Utils_update(
+				c,
+				{totalCost: -1});
+		},
+		A2(
+			$elm_community$list_extra$List$Extra$filterNot,
+			$author$project$Cards$isClinicLine,
+			A2(
+				$elm_community$list_extra$List$Extra$filterNot,
+				$author$project$Cards$isNestLine,
+				A2($elm_community$list_extra$List$Extra$filterNot, $author$project$Cards$isAlleyLine, input))));
+	var folder = F2(
+		function (nextCard, _v0) {
+			var updatedCards = _v0.a;
+			var currentPrice = _v0.b;
+			return _Utils_Tuple2(
+				A2(
+					$elm$core$List$cons,
+					_Utils_update(
+						nextCard,
+						{totalCost: currentPrice + nextCard.cost}),
+					updatedCards),
+				currentPrice + nextCard.cost);
+		});
+	var nest = A3(
+		$elm$core$List$foldl,
+		folder,
+		_Utils_Tuple2(_List_Nil, 0),
+		sortedNest).a;
+	var clinic = A3(
+		$elm$core$List$foldl,
+		folder,
+		_Utils_Tuple2(_List_Nil, 0),
+		sortedClinic).a;
+	var alley = A3(
+		$elm$core$List$foldl,
+		folder,
+		_Utils_Tuple2(_List_Nil, 0),
+		sortedAlley).a;
+	return $elm$core$List$concat(
+		_List_fromArray(
+			[nest, alley, clinic, others]));
+};
+var $author$project$Cards$cards = A2(
+	$elm$core$List$sortBy,
+	function (c) {
+		return c.title;
+	},
+	$author$project$Cards$setTotalCardCosts(
+		A2($elm$core$List$map, $author$project$Cards$parseRawCard, $author$project$CardData$rawCards)));
 var $elm_community$list_extra$List$Extra$find = F2(
 	function (predicate, list) {
 		find:
@@ -8499,14 +8615,6 @@ var $elm$core$Dict$get = F2(
 var $sporto$qs$QS$Many = function (a) {
 	return {$: 'Many', a: a};
 };
-var $elm$core$List$append = F2(
-	function (xs, ys) {
-		if (!ys.b) {
-			return xs;
-		} else {
-			return A3($elm$core$List$foldr, $elm$core$List$cons, ys, xs);
-		}
-	});
 var $sporto$qs$QS$get = F2(
 	function (key, query) {
 		return A2($elm$core$Dict$get, key, query);
@@ -8924,6 +9032,7 @@ var $author$project$Main$init = F3(
 				notSelectedCards: notSelected,
 				selectedCards: selected,
 				shareModalVisibility: $rundis$elm_bootstrap$Bootstrap$Modal$hidden,
+				showCardPoolDetails: false,
 				yesNoModalContent: $elm$core$Maybe$Nothing,
 				yesNoModalVisibility: $rundis$elm_bootstrap$Bootstrap$Modal$hidden
 			},
@@ -9593,9 +9702,6 @@ var $author$project$List$Extras$elemIndexBy = F2(
 			});
 		return A2(run, 0, list);
 	});
-var $elm$core$List$concat = function (lists) {
-	return A3($elm$core$List$foldr, $elm$core$List$append, _List_Nil, lists);
-};
 var $elm$core$List$takeReverse = F3(
 	function (n, list, kept) {
 		takeReverse:
@@ -9891,6 +9997,12 @@ var $author$project$Main$update = F2(
 						model,
 						{yesNoModalContent: $elm$core$Maybe$Nothing, yesNoModalVisibility: $rundis$elm_bootstrap$Bootstrap$Modal$hidden}),
 					$elm$core$Platform$Cmd$none);
+			case 'ToggleCardDetails':
+				return _Utils_Tuple2(
+					_Utils_update(
+						model,
+						{showCardPoolDetails: !model.showCardPoolDetails}),
+					$elm$core$Platform$Cmd$none);
 			case 'CopyShareUrl':
 				var url = msg.a;
 				return _Utils_Tuple2(
@@ -10061,6 +10173,13 @@ var $rundis$elm_bootstrap$Bootstrap$Grid$containerFluid = F2(
 				attributes),
 			children);
 	});
+var $author$project$Main$ToggleCardDetails = {$: 'ToggleCardDetails'};
+var $rundis$elm_bootstrap$Bootstrap$ButtonGroup$Attrs = function (a) {
+	return {$: 'Attrs', a: a};
+};
+var $rundis$elm_bootstrap$Bootstrap$ButtonGroup$attrs = function (attrs_) {
+	return $rundis$elm_bootstrap$Bootstrap$ButtonGroup$Attrs(attrs_);
+};
 var $rundis$elm_bootstrap$Bootstrap$Grid$Internal$ColAttrs = function (a) {
 	return {$: 'ColAttrs', a: a};
 };
@@ -10070,7 +10189,6 @@ var $rundis$elm_bootstrap$Bootstrap$Grid$Col$attrs = function (attrs_) {
 var $author$project$Main$ChangeCardDisplayType = function (a) {
 	return {$: 'ChangeCardDisplayType', a: a};
 };
-var $author$project$Main$ImageAndDetails = {$: 'ImageAndDetails'};
 var $lattyware$elm_fontawesome$FontAwesome$Icon$Icon = F5(
 	function (prefix, name, width, height, paths) {
 		return {height: height, name: name, paths: paths, prefix: prefix, width: width};
@@ -10083,20 +10201,6 @@ var $lattyware$elm_fontawesome$FontAwesome$Solid$alignLeft = A5(
 	512,
 	_List_fromArray(
 		['M12.83 352h262.34A12.82 12.82 0 0 0 288 339.17v-38.34A12.82 12.82 0 0 0 275.17 288H12.83A12.82 12.82 0 0 0 0 300.83v38.34A12.82 12.82 0 0 0 12.83 352zm0-256h262.34A12.82 12.82 0 0 0 288 83.17V44.83A12.82 12.82 0 0 0 275.17 32H12.83A12.82 12.82 0 0 0 0 44.83v38.34A12.82 12.82 0 0 0 12.83 96zM432 160H16a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16zm0 256H16a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16z']));
-var $rundis$elm_bootstrap$Bootstrap$ButtonGroup$Attrs = function (a) {
-	return {$: 'Attrs', a: a};
-};
-var $rundis$elm_bootstrap$Bootstrap$ButtonGroup$attrs = function (attrs_) {
-	return $rundis$elm_bootstrap$Bootstrap$ButtonGroup$Attrs(attrs_);
-};
-var $lattyware$elm_fontawesome$FontAwesome$Solid$idCard = A5(
-	$lattyware$elm_fontawesome$FontAwesome$Icon$Icon,
-	'fas',
-	'id-card',
-	576,
-	512,
-	_List_fromArray(
-		['M528 32H48C21.5 32 0 53.5 0 80v16h576V80c0-26.5-21.5-48-48-48zM0 432c0 26.5 21.5 48 48 48h480c26.5 0 48-21.5 48-48V128H0v304zm352-232c0-4.4 3.6-8 8-8h144c4.4 0 8 3.6 8 8v16c0 4.4-3.6 8-8 8H360c-4.4 0-8-3.6-8-8v-16zm0 64c0-4.4 3.6-8 8-8h144c4.4 0 8 3.6 8 8v16c0 4.4-3.6 8-8 8H360c-4.4 0-8-3.6-8-8v-16zm0 64c0-4.4 3.6-8 8-8h144c4.4 0 8 3.6 8 8v16c0 4.4-3.6 8-8 8H360c-4.4 0-8-3.6-8-8v-16zM176 192c35.3 0 64 28.7 64 64s-28.7 64-64 64-64-28.7-64-64 28.7-64 64-64zM67.1 396.2C75.5 370.5 99.6 352 128 352h8.2c12.3 5.1 25.7 8 39.8 8s27.6-2.9 39.8-8h8.2c28.4 0 52.5 18.5 60.9 44.2 3.2 9.9-5.2 19.8-15.6 19.8H82.7c-10.4 0-18.8-10-15.6-19.8z']));
 var $lattyware$elm_fontawesome$FontAwesome$Solid$image = A5(
 	$lattyware$elm_fontawesome$FontAwesome$Icon$Icon,
 	'fas',
@@ -10426,11 +10530,6 @@ var $rundis$elm_bootstrap$Bootstrap$Internal$Button$Roled = function (a) {
 var $rundis$elm_bootstrap$Bootstrap$Internal$Button$Secondary = {$: 'Secondary'};
 var $rundis$elm_bootstrap$Bootstrap$Button$secondary = $rundis$elm_bootstrap$Bootstrap$Internal$Button$Coloring(
 	$rundis$elm_bootstrap$Bootstrap$Internal$Button$Roled($rundis$elm_bootstrap$Bootstrap$Internal$Button$Secondary));
-var $rundis$elm_bootstrap$Bootstrap$General$Internal$SM = {$: 'SM'};
-var $rundis$elm_bootstrap$Bootstrap$ButtonGroup$Size = function (a) {
-	return {$: 'Size', a: a};
-};
-var $rundis$elm_bootstrap$Bootstrap$ButtonGroup$small = $rundis$elm_bootstrap$Bootstrap$ButtonGroup$Size($rundis$elm_bootstrap$Bootstrap$General$Internal$SM);
 var $elm$core$Basics$composeR = F3(
 	function (f, g, x) {
 		return g(
@@ -10834,7 +10933,6 @@ var $author$project$Main$cardDisplayToggle = function (cardDisplay) {
 		$rundis$elm_bootstrap$Bootstrap$ButtonGroup$radioButtonGroup,
 		_List_fromArray(
 			[
-				$rundis$elm_bootstrap$Bootstrap$ButtonGroup$small,
 				$rundis$elm_bootstrap$Bootstrap$ButtonGroup$attrs(
 				_List_fromArray(
 					[
@@ -10859,19 +10957,6 @@ var $author$project$Main$cardDisplayToggle = function (cardDisplay) {
 					])),
 				A3(
 				$rundis$elm_bootstrap$Bootstrap$ButtonGroup$radioButton,
-				_Utils_eq(cardDisplay, $author$project$Main$ImageAndDetails),
-				_List_fromArray(
-					[
-						$rundis$elm_bootstrap$Bootstrap$Button$secondary,
-						$rundis$elm_bootstrap$Bootstrap$Button$onClick(
-						$author$project$Main$ChangeCardDisplayType($author$project$Main$ImageAndDetails))
-					]),
-				_List_fromArray(
-					[
-						$lattyware$elm_fontawesome$FontAwesome$Icon$viewIcon($lattyware$elm_fontawesome$FontAwesome$Solid$idCard)
-					])),
-				A3(
-				$rundis$elm_bootstrap$Bootstrap$ButtonGroup$radioButton,
 				_Utils_eq(cardDisplay, $author$project$Main$Image),
 				_List_fromArray(
 					[
@@ -10885,6 +10970,58 @@ var $author$project$Main$cardDisplayToggle = function (cardDisplay) {
 					]))
 			]));
 };
+var $rundis$elm_bootstrap$Bootstrap$ButtonGroup$CheckboxButtonItem = function (a) {
+	return {$: 'CheckboxButtonItem', a: a};
+};
+var $rundis$elm_bootstrap$Bootstrap$Button$checkboxButton = F3(
+	function (checked, options, children) {
+		return A2(
+			$elm$html$Html$label,
+			A2(
+				$elm$core$List$cons,
+				$elm$html$Html$Attributes$classList(
+					_List_fromArray(
+						[
+							_Utils_Tuple2('active', checked)
+						])),
+				$rundis$elm_bootstrap$Bootstrap$Internal$Button$buttonAttributes(options)),
+			A2(
+				$elm$core$List$cons,
+				A2(
+					$elm$html$Html$input,
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$type_('checkbox'),
+							$elm$html$Html$Attributes$checked(checked),
+							$elm$html$Html$Attributes$autocomplete(false)
+						]),
+					_List_Nil),
+				children));
+	});
+var $rundis$elm_bootstrap$Bootstrap$ButtonGroup$checkboxButton = F3(
+	function (checked, options, children) {
+		return $rundis$elm_bootstrap$Bootstrap$ButtonGroup$CheckboxButtonItem(
+			A3($rundis$elm_bootstrap$Bootstrap$Button$checkboxButton, checked, options, children));
+	});
+var $rundis$elm_bootstrap$Bootstrap$ButtonGroup$checkboxButtonGroupItem = F2(
+	function (options, items) {
+		return $rundis$elm_bootstrap$Bootstrap$ButtonGroup$GroupItem(
+			A2(
+				$elm$html$Html$div,
+				A2($rundis$elm_bootstrap$Bootstrap$ButtonGroup$groupAttributes, true, options),
+				A2(
+					$elm$core$List$map,
+					function (_v0) {
+						var elem = _v0.a;
+						return elem;
+					},
+					items)));
+	});
+var $rundis$elm_bootstrap$Bootstrap$ButtonGroup$checkboxButtonGroup = F2(
+	function (options, items) {
+		return $rundis$elm_bootstrap$Bootstrap$ButtonGroup$renderGroup(
+			A2($rundis$elm_bootstrap$Bootstrap$ButtonGroup$checkboxButtonGroupItem, options, items));
+	});
 var $rundis$elm_bootstrap$Bootstrap$Grid$Column = function (a) {
 	return {$: 'Column', a: a};
 };
@@ -11549,14 +11686,100 @@ var $rundis$elm_bootstrap$Bootstrap$Card$footer = F3(
 								children)))
 				}));
 	});
-var $elm$html$Html$Attributes$href = function (url) {
+var $rundis$elm_bootstrap$Bootstrap$Utilities$Flex$alignItemsCenter = $elm$html$Html$Attributes$class('align-items-center');
+var $elm_community$list_extra$List$Extra$maximumBy = F2(
+	function (f, ls) {
+		var maxBy = F2(
+			function (x, _v1) {
+				var y = _v1.a;
+				var fy = _v1.b;
+				var fx = f(x);
+				return (_Utils_cmp(fx, fy) > 0) ? _Utils_Tuple2(x, fx) : _Utils_Tuple2(y, fy);
+			});
+		if (ls.b) {
+			if (!ls.b.b) {
+				var l_ = ls.a;
+				return $elm$core$Maybe$Just(l_);
+			} else {
+				var l_ = ls.a;
+				var ls_ = ls.b;
+				return $elm$core$Maybe$Just(
+					A3(
+						$elm$core$List$foldl,
+						maxBy,
+						_Utils_Tuple2(
+							l_,
+							f(l_)),
+						ls_).a);
+			}
+		} else {
+			return $elm$core$Maybe$Nothing;
+		}
+	});
+var $author$project$Cards$supplyLineCount = function (predicate) {
+	var max = A2(
+		$elm_community$list_extra$List$Extra$maximumBy,
+		function (c) {
+			return c.supplyLine.index;
+		},
+		A2($elm$core$List$filter, predicate, $author$project$Cards$cards));
 	return A2(
-		$elm$html$Html$Attributes$stringProperty,
-		'href',
-		_VirtualDom_noJavaScriptUri(url));
+		$elm$core$Maybe$withDefault,
+		0,
+		A2(
+			$elm$core$Maybe$map,
+			function (m) {
+				return m.supplyLine.index;
+			},
+			max));
 };
+var $author$project$Cards$alleySupplyLineCount = $author$project$Cards$supplyLineCount($author$project$Cards$isAlleyLine);
+var $elm$html$Html$b = _VirtualDom_node('b');
+var $rundis$elm_bootstrap$Bootstrap$Utilities$Flex$block = $elm$html$Html$Attributes$class('d-flex');
+var $author$project$Cards$clinicSupplyLineCount = $author$project$Cards$supplyLineCount($author$project$Cards$isClinicLine);
+var $rundis$elm_bootstrap$Bootstrap$Utilities$Flex$col = $elm$html$Html$Attributes$class('flex-column');
+var $elm$html$Html$i = _VirtualDom_node('i');
 var $elm$html$Html$img = _VirtualDom_node('img');
-var $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$m2 = $elm$html$Html$Attributes$class('m-2');
+var $author$project$Cards$isAccomplishmentLine = function (c) {
+	var _v0 = c.supplyLine.name;
+	if (_v0.$ === 'Accomplishment') {
+		return true;
+	} else {
+		return false;
+	}
+};
+var $author$project$Cards$isRovingMerchantLine = function (c) {
+	var _v0 = c.supplyLine.name;
+	if (_v0.$ === 'RovingMerchants') {
+		return true;
+	} else {
+		return false;
+	}
+};
+var $author$project$Cards$isStarterLine = function (c) {
+	var _v0 = c.supplyLine.name;
+	if (_v0.$ === 'Starter') {
+		return true;
+	} else {
+		return false;
+	}
+};
+var $author$project$Cards$isStripLine = function (c) {
+	var _v0 = c.supplyLine.name;
+	if (_v0.$ === 'Strip') {
+		return true;
+	} else {
+		return false;
+	}
+};
+var $rundis$elm_bootstrap$Bootstrap$Utilities$Flex$justifyBetween = $elm$html$Html$Attributes$class('justify-content-between');
+var $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$mt3 = $elm$html$Html$Attributes$class('mt-3');
+var $author$project$Cards$nestSupplyLineCount = $author$project$Cards$supplyLineCount($author$project$Cards$isNestLine);
+var $elm$virtual_dom$VirtualDom$node = function (tag) {
+	return _VirtualDom_node(
+		_VirtualDom_noScript(tag));
+};
+var $elm$html$Html$node = $elm$virtual_dom$VirtualDom$node;
 var $elm$html$Html$Attributes$src = function (url) {
 	return A2(
 		$elm$html$Html$Attributes$stringProperty,
@@ -11565,7 +11788,192 @@ var $elm$html$Html$Attributes$src = function (url) {
 };
 var $elm$virtual_dom$VirtualDom$style = _VirtualDom_style;
 var $elm$html$Html$Attributes$style = $elm$virtual_dom$VirtualDom$style;
+var $author$project$Cards$supplyTrackToString = function (track) {
+	switch (track.$) {
+		case 'Nest':
+			return 'Nest';
+		case 'Alley':
+			return 'Alley';
+		case 'Clinic':
+			return 'Clinic';
+		case 'Strip':
+			return 'Strip';
+		case 'Starter':
+			return 'Starter';
+		case 'Accomplishment':
+			var a = track.a;
+			return a;
+		case 'RovingMerchants':
+			return 'Roving Merchants';
+		default:
+			var a = track.a;
+			var b = track.b;
+			return 'Unknown - ' + (a + (' - ' + b));
+	}
+};
 var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
+var $author$project$Main$fullCardViewDetailsBlock = function (card) {
+	var numberOfCards = function () {
+		var _v0 = card.supplyLine.name;
+		switch (_v0.$) {
+			case 'Nest':
+				return $author$project$Cards$nestSupplyLineCount;
+			case 'Alley':
+				return $author$project$Cards$alleySupplyLineCount;
+			case 'Clinic':
+				return $author$project$Cards$clinicSupplyLineCount;
+			default:
+				return -1;
+		}
+	}();
+	var nameDiv = A2(
+		$elm$html$Html$div,
+		_List_fromArray(
+			[$rundis$elm_bootstrap$Bootstrap$Utilities$Flex$block, $rundis$elm_bootstrap$Bootstrap$Utilities$Flex$col, $rundis$elm_bootstrap$Bootstrap$Utilities$Flex$alignItemsCenter]),
+		_List_fromArray(
+			[
+				A2(
+				$elm$html$Html$div,
+				_List_Nil,
+				_List_fromArray(
+					[
+						A2(
+						$elm$html$Html$b,
+						_List_Nil,
+						_List_fromArray(
+							[
+								$elm$html$Html$text(
+								$author$project$Cards$supplyTrackToString(card.supplyLine.name))
+							]))
+					])),
+				A2(
+				$elm$html$Html$div,
+				_List_Nil,
+				_List_fromArray(
+					[
+						$author$project$Cards$isAccomplishmentLine(card) ? A2($elm$html$Html$div, _List_Nil, _List_Nil) : (($author$project$Cards$isStarterLine(card) || $author$project$Cards$isStripLine(card)) ? A2(
+						$elm$html$Html$div,
+						_List_Nil,
+						_List_fromArray(
+							[
+								A2(
+								$elm$html$Html$i,
+								_List_Nil,
+								_List_fromArray(
+									[
+										$elm$html$Html$text('always unlocked')
+									]))
+							])) : ($author$project$Cards$isRovingMerchantLine(card) ? A2(
+						$elm$html$Html$div,
+						_List_Nil,
+						_List_fromArray(
+							[
+								A2(
+								$elm$html$Html$i,
+								_List_Nil,
+								_List_fromArray(
+									[
+										$elm$html$Html$text('randomly available')
+									]))
+							])) : A2(
+						$elm$html$Html$div,
+						_List_Nil,
+						_List_fromArray(
+							[
+								$elm$html$Html$text(
+								$elm$core$String$fromInt(card.supplyLine.index) + (' of ' + $elm$core$String$fromInt(numberOfCards)))
+							]))))
+					]))
+			]));
+	var costText = $elm$core$String$fromInt(card.cost) + (' (Σ ' + ($elm$core$String$fromInt(card.totalCost) + ')'));
+	var costDiv = $author$project$Cards$isAccomplishmentLine(card) ? A2(
+		$elm$html$Html$div,
+		_List_fromArray(
+			[
+				A2($elm$html$Html$Attributes$style, 'font-size', '2em')
+			]),
+		_List_fromArray(
+			[
+				$elm$html$Html$text('🏆')
+			])) : ($author$project$Cards$isRovingMerchantLine(card) ? A2(
+		$elm$html$Html$div,
+		_List_fromArray(
+			[
+				A2($elm$html$Html$Attributes$style, 'font-size', '2em')
+			]),
+		_List_fromArray(
+			[
+				$elm$html$Html$text('🏬')
+			])) : ($author$project$Cards$isStripLine(card) ? A2(
+		$elm$html$Html$div,
+		_List_fromArray(
+			[
+				A2($elm$html$Html$Attributes$style, 'font-size', '2em')
+			]),
+		_List_fromArray(
+			[
+				$elm$html$Html$text('🎞')
+			])) : ($author$project$Cards$isStarterLine(card) ? A2(
+		$elm$html$Html$div,
+		_List_fromArray(
+			[
+				A2($elm$html$Html$Attributes$style, 'font-size', '2em')
+			]),
+		_List_fromArray(
+			[
+				$elm$html$Html$text('🏲')
+			])) : A2(
+		$elm$html$Html$div,
+		_List_fromArray(
+			[$rundis$elm_bootstrap$Bootstrap$Utilities$Flex$block, $rundis$elm_bootstrap$Bootstrap$Utilities$Flex$col, $rundis$elm_bootstrap$Bootstrap$Utilities$Flex$alignItemsCenter]),
+		_List_fromArray(
+			[
+				A2(
+				$elm$html$Html$div,
+				_List_Nil,
+				_List_fromArray(
+					[
+						A2(
+						$elm$html$Html$img,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$src('img/cost.png'),
+								A2($elm$html$Html$Attributes$style, 'width', '2em'),
+								A2($elm$html$Html$Attributes$style, 'height', '2em')
+							]),
+						_List_Nil)
+					])),
+				A2(
+				$elm$html$Html$div,
+				_List_Nil,
+				_List_fromArray(
+					[
+						$elm$html$Html$text(costText)
+					]))
+			])))));
+	return $rundis$elm_bootstrap$Bootstrap$Card$Block$custom(
+		A2(
+			$elm$html$Html$div,
+			_List_fromArray(
+				[$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$mt3]),
+			_List_fromArray(
+				[
+					A3($elm$html$Html$node, 'hr', _List_Nil, _List_Nil),
+					A2(
+					$elm$html$Html$div,
+					_List_fromArray(
+						[$rundis$elm_bootstrap$Bootstrap$Utilities$Flex$block, $rundis$elm_bootstrap$Bootstrap$Utilities$Flex$justifyBetween]),
+					_List_fromArray(
+						[nameDiv, costDiv]))
+				])));
+};
+var $elm$html$Html$Attributes$href = function (url) {
+	return A2(
+		$elm$html$Html$Attributes$stringProperty,
+		'href',
+		_VirtualDom_noJavaScriptUri(url));
+};
+var $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$m2 = $elm$html$Html$Attributes$class('m-2');
 var $rundis$elm_bootstrap$Bootstrap$Card$Internal$applyModifier = F2(
 	function (option, options) {
 		switch (option.$) {
@@ -11720,119 +12128,88 @@ var $rundis$elm_bootstrap$Bootstrap$Card$view = function (_v0) {
 						])))));
 };
 var $rundis$elm_bootstrap$Bootstrap$Utilities$Size$w100 = $elm$html$Html$Attributes$class('w-100');
-var $author$project$Main$fullCardViewWithImage = function (card) {
-	var buttonBackground = $rundis$elm_bootstrap$Bootstrap$Button$secondary;
-	return A2(
-		$rundis$elm_bootstrap$Bootstrap$Grid$col,
-		_List_Nil,
-		_List_fromArray(
-			[
-				$rundis$elm_bootstrap$Bootstrap$Card$view(
-				A3(
-					$rundis$elm_bootstrap$Bootstrap$Card$footer,
-					_List_Nil,
-					_List_fromArray(
-						[
-							A2(
-							$rundis$elm_bootstrap$Bootstrap$Button$button,
+var $author$project$Main$fullCardViewWithImage = F2(
+	function (showDetails, card) {
+		var details = showDetails ? $author$project$Main$fullCardViewDetailsBlock(card) : $rundis$elm_bootstrap$Bootstrap$Card$Block$custom(
+			A2($elm$html$Html$div, _List_Nil, _List_Nil));
+		var buttonBackground = $rundis$elm_bootstrap$Bootstrap$Button$secondary;
+		return A2(
+			$rundis$elm_bootstrap$Bootstrap$Grid$col,
+			_List_Nil,
+			_List_fromArray(
+				[
+					$rundis$elm_bootstrap$Bootstrap$Card$view(
+					A3(
+						$rundis$elm_bootstrap$Bootstrap$Card$footer,
+						_List_Nil,
+						_List_fromArray(
+							[
+								A2(
+								$rundis$elm_bootstrap$Bootstrap$Button$button,
+								_List_fromArray(
+									[
+										buttonBackground,
+										$rundis$elm_bootstrap$Bootstrap$Button$attrs(
+										_List_fromArray(
+											[
+												$rundis$elm_bootstrap$Bootstrap$Utilities$Size$w100,
+												$elm$html$Html$Events$onClick(
+												$author$project$Main$SelectCard(card.id))
+											]))
+									]),
+								_List_fromArray(
+									[
+										$elm$html$Html$text('Select')
+									]))
+							]),
+						A3(
+							$rundis$elm_bootstrap$Bootstrap$Card$block,
 							_List_fromArray(
 								[
-									buttonBackground,
-									$rundis$elm_bootstrap$Bootstrap$Button$attrs(
-									_List_fromArray(
-										[
-											$rundis$elm_bootstrap$Bootstrap$Utilities$Size$w100,
-											$elm$html$Html$Events$onClick(
-											$author$project$Main$SelectCard(card.id))
-										]))
+									$rundis$elm_bootstrap$Bootstrap$Card$Block$attrs(_List_Nil)
 								]),
 							_List_fromArray(
 								[
-									$elm$html$Html$text('Select')
-								]))
-						]),
-					A3(
-						$rundis$elm_bootstrap$Bootstrap$Card$block,
-						_List_fromArray(
-							[
-								$rundis$elm_bootstrap$Bootstrap$Card$Block$attrs(_List_Nil)
-							]),
-						_List_fromArray(
-							[
-								$rundis$elm_bootstrap$Bootstrap$Card$Block$custom(
-								A2(
-									$elm$html$Html$div,
-									_List_fromArray(
-										[
-											$elm$html$Html$Attributes$class('d-flex justify-content-center bg-black')
-										]),
-									_List_fromArray(
-										[
-											A2(
-											$elm$html$Html$a,
-											_List_fromArray(
-												[
-													$elm$html$Html$Attributes$href('#'),
-													$elm$html$Html$Attributes$class('img-shadow')
-												]),
-											_List_fromArray(
-												[
-													A2(
-													$elm$html$Html$img,
-													_List_fromArray(
-														[
-															$elm$html$Html$Attributes$src('img/english/' + card.filename),
-															A2($elm$html$Html$Attributes$style, 'max-width', '200px')
-														]),
-													_List_Nil)
-												]))
-										])))
-							]),
-						$rundis$elm_bootstrap$Bootstrap$Card$config(
-							_List_fromArray(
-								[
-									$rundis$elm_bootstrap$Bootstrap$Card$attrs(
-									_List_fromArray(
-										[$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$m2]))
-								])))))
-			]));
-};
-var $rundis$elm_bootstrap$Bootstrap$Card$Internal$Coloring = function (a) {
-	return {$: 'Coloring', a: a};
-};
-var $rundis$elm_bootstrap$Bootstrap$Internal$Role$Danger = {$: 'Danger'};
-var $rundis$elm_bootstrap$Bootstrap$Card$Internal$Outlined = function (a) {
-	return {$: 'Outlined', a: a};
-};
-var $rundis$elm_bootstrap$Bootstrap$Card$outlineDanger = $rundis$elm_bootstrap$Bootstrap$Card$Internal$Coloring(
-	$rundis$elm_bootstrap$Bootstrap$Card$Internal$Outlined($rundis$elm_bootstrap$Bootstrap$Internal$Role$Danger));
-var $rundis$elm_bootstrap$Bootstrap$Internal$Role$Dark = {$: 'Dark'};
-var $rundis$elm_bootstrap$Bootstrap$Card$outlineDark = $rundis$elm_bootstrap$Bootstrap$Card$Internal$Coloring(
-	$rundis$elm_bootstrap$Bootstrap$Card$Internal$Outlined($rundis$elm_bootstrap$Bootstrap$Internal$Role$Dark));
-var $rundis$elm_bootstrap$Bootstrap$Internal$Role$Primary = {$: 'Primary'};
-var $rundis$elm_bootstrap$Bootstrap$Card$outlinePrimary = $rundis$elm_bootstrap$Bootstrap$Card$Internal$Coloring(
-	$rundis$elm_bootstrap$Bootstrap$Card$Internal$Outlined($rundis$elm_bootstrap$Bootstrap$Internal$Role$Primary));
-var $rundis$elm_bootstrap$Bootstrap$Internal$Role$Success = {$: 'Success'};
-var $rundis$elm_bootstrap$Bootstrap$Card$outlineSuccess = $rundis$elm_bootstrap$Bootstrap$Card$Internal$Coloring(
-	$rundis$elm_bootstrap$Bootstrap$Card$Internal$Outlined($rundis$elm_bootstrap$Bootstrap$Internal$Role$Success));
-var $rundis$elm_bootstrap$Bootstrap$Internal$Role$Warning = {$: 'Warning'};
-var $rundis$elm_bootstrap$Bootstrap$Card$outlineWarning = $rundis$elm_bootstrap$Bootstrap$Card$Internal$Coloring(
-	$rundis$elm_bootstrap$Bootstrap$Card$Internal$Outlined($rundis$elm_bootstrap$Bootstrap$Internal$Role$Warning));
-var $author$project$Main$cardOutlineColor = function (card) {
-	var _v0 = card.kind;
-	switch (_v0.$) {
-		case 'UnknownKind':
-			return $rundis$elm_bootstrap$Bootstrap$Card$outlineDark;
-		case 'Mobility':
-			return $rundis$elm_bootstrap$Bootstrap$Card$outlinePrimary;
-		case 'Utility':
-			return $rundis$elm_bootstrap$Bootstrap$Card$outlineDanger;
-		case 'Defense':
-			return $rundis$elm_bootstrap$Bootstrap$Card$outlineSuccess;
-		default:
-			return $rundis$elm_bootstrap$Bootstrap$Card$outlineWarning;
-	}
-};
+									$rundis$elm_bootstrap$Bootstrap$Card$Block$custom(
+									A2(
+										$elm$html$Html$div,
+										_List_fromArray(
+											[
+												$elm$html$Html$Attributes$class('d-flex justify-content-center bg-black')
+											]),
+										_List_fromArray(
+											[
+												A2(
+												$elm$html$Html$a,
+												_List_fromArray(
+													[
+														$elm$html$Html$Attributes$href('#'),
+														$elm$html$Html$Attributes$class('img-shadow')
+													]),
+												_List_fromArray(
+													[
+														A2(
+														$elm$html$Html$img,
+														_List_fromArray(
+															[
+																$elm$html$Html$Attributes$src('img/english/' + card.filename),
+																A2($elm$html$Html$Attributes$style, 'max-width', '200px')
+															]),
+														_List_Nil)
+													]))
+											]))),
+									details
+								]),
+							$rundis$elm_bootstrap$Bootstrap$Card$config(
+								_List_fromArray(
+									[
+										$rundis$elm_bootstrap$Bootstrap$Card$attrs(
+										_List_fromArray(
+											[$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$m2]))
+									])))))
+				]));
+	});
+var $elm$html$Html$h6 = _VirtualDom_node('h6');
 var $rundis$elm_bootstrap$Bootstrap$Card$Header = function (a) {
 	return {$: 'Header', a: a};
 };
@@ -11858,242 +12235,138 @@ var $rundis$elm_bootstrap$Bootstrap$Card$header = $rundis$elm_bootstrap$Bootstra
 var $elm$html$Html$li = _VirtualDom_node('li');
 var $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$pl3 = $elm$html$Html$Attributes$class('pl-3');
 var $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$pr0 = $elm$html$Html$Attributes$class('pr-0');
-var $elm$html$Html$small = _VirtualDom_node('small');
-var $elm$html$Html$h5 = _VirtualDom_node('h5');
-var $rundis$elm_bootstrap$Bootstrap$Card$Block$title = F3(
-	function (elemFn, attributes, children) {
-		return $rundis$elm_bootstrap$Bootstrap$Card$Internal$BlockItem(
-			A2(
-				elemFn,
-				A2(
-					$elm$core$List$cons,
-					$elm$html$Html$Attributes$class('card-title'),
-					attributes),
-				children));
-	});
-var $rundis$elm_bootstrap$Bootstrap$Card$Block$titleH5 = $rundis$elm_bootstrap$Bootstrap$Card$Block$title($elm$html$Html$h5);
-var $elm$html$Html$ul = _VirtualDom_node('ul');
-var $author$project$Main$fullCardViewWithImageAndDetails = function (card) {
-	var cardBackground = $author$project$Main$cardOutlineColor(card);
-	var buttonBackground = $rundis$elm_bootstrap$Bootstrap$Button$secondary;
-	return A2(
-		$rundis$elm_bootstrap$Bootstrap$Grid$col,
-		_List_Nil,
-		_List_fromArray(
-			[
-				$rundis$elm_bootstrap$Bootstrap$Card$view(
-				A3(
-					$rundis$elm_bootstrap$Bootstrap$Card$footer,
-					_List_Nil,
-					_List_fromArray(
-						[
-							A2(
-							$rundis$elm_bootstrap$Bootstrap$Button$button,
-							_List_fromArray(
-								[
-									buttonBackground,
-									$rundis$elm_bootstrap$Bootstrap$Button$attrs(
-									_List_fromArray(
-										[
-											$rundis$elm_bootstrap$Bootstrap$Utilities$Size$w100,
-											$elm$html$Html$Events$onClick(
-											$author$project$Main$SelectCard(card.id))
-										]))
-								]),
-							_List_fromArray(
-								[
-									$elm$html$Html$text('Select')
-								]))
-						]),
-					A3(
-						$rundis$elm_bootstrap$Bootstrap$Card$block,
-						_List_Nil,
-						_List_fromArray(
-							[
-								A2(
-								$rundis$elm_bootstrap$Bootstrap$Card$Block$titleH5,
-								_List_Nil,
-								_List_fromArray(
-									[
-										$elm$html$Html$text(card.title)
-									])),
-								$rundis$elm_bootstrap$Bootstrap$Card$Block$custom(
-								A2(
-									$elm$html$Html$ul,
-									_List_fromArray(
-										[$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$pl3, $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$pr0]),
-									A2(
-										$elm$core$List$map,
-										function (property) {
-											return A2(
-												$elm$html$Html$div,
-												_List_Nil,
-												_List_fromArray(
-													[
-														A2(
-														$elm$html$Html$li,
-														_List_Nil,
-														_List_fromArray(
-															[
-																A2(
-																$elm$html$Html$small,
-																_List_Nil,
-																_List_fromArray(
-																	[
-																		$elm$html$Html$text(property.description)
-																	]))
-															]))
-													]));
-										},
-										card.properties)))
-							]),
-						A3(
-							$rundis$elm_bootstrap$Bootstrap$Card$header,
-							_List_fromArray(
-								[
-									$elm$html$Html$Attributes$class('text-center')
-								]),
-							_List_fromArray(
-								[
-									A2(
-									$elm$html$Html$img,
-									_List_fromArray(
-										[
-											$elm$html$Html$Attributes$src('img/english/' + card.filename)
-										]),
-									_List_Nil)
-								]),
-							$rundis$elm_bootstrap$Bootstrap$Card$config(
-								_List_fromArray(
-									[
-										cardBackground,
-										$rundis$elm_bootstrap$Bootstrap$Card$attrs(
-										_List_fromArray(
-											[$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$m2]))
-									]))))))
-			]));
-};
-var $elm$html$Html$h6 = _VirtualDom_node('h6');
+var $rundis$elm_bootstrap$Bootstrap$General$Internal$SM = {$: 'SM'};
 var $rundis$elm_bootstrap$Bootstrap$Internal$Button$Size = function (a) {
 	return {$: 'Size', a: a};
 };
 var $rundis$elm_bootstrap$Bootstrap$Button$small = $rundis$elm_bootstrap$Bootstrap$Internal$Button$Size($rundis$elm_bootstrap$Bootstrap$General$Internal$SM);
-var $author$project$Main$fullCardViewWithText = function (card) {
-	var buttonBackground = $rundis$elm_bootstrap$Bootstrap$Button$secondary;
-	return A2(
-		$rundis$elm_bootstrap$Bootstrap$Grid$col,
-		_List_Nil,
-		_List_fromArray(
-			[
-				$rundis$elm_bootstrap$Bootstrap$Card$view(
-				A3(
-					$rundis$elm_bootstrap$Bootstrap$Card$footer,
-					_List_Nil,
-					_List_fromArray(
-						[
-							A2(
-							$rundis$elm_bootstrap$Bootstrap$Button$button,
-							_List_fromArray(
-								[
-									buttonBackground,
-									$rundis$elm_bootstrap$Bootstrap$Button$small,
-									$rundis$elm_bootstrap$Bootstrap$Button$attrs(
-									_List_fromArray(
-										[
-											$rundis$elm_bootstrap$Bootstrap$Utilities$Size$w100,
-											$elm$html$Html$Events$onClick(
-											$author$project$Main$SelectCard(card.id))
-										]))
-								]),
-							_List_fromArray(
-								[
-									$elm$html$Html$text('Select')
-								]))
-						]),
+var $elm$html$Html$small = _VirtualDom_node('small');
+var $elm$html$Html$ul = _VirtualDom_node('ul');
+var $author$project$Main$fullCardViewWithText = F2(
+	function (showDetails, card) {
+		var details = showDetails ? $author$project$Main$fullCardViewDetailsBlock(card) : $rundis$elm_bootstrap$Bootstrap$Card$Block$custom(
+			A2($elm$html$Html$div, _List_Nil, _List_Nil));
+		var buttonBackground = $rundis$elm_bootstrap$Bootstrap$Button$secondary;
+		return A2(
+			$rundis$elm_bootstrap$Bootstrap$Grid$col,
+			_List_Nil,
+			_List_fromArray(
+				[
+					$rundis$elm_bootstrap$Bootstrap$Card$view(
 					A3(
-						$rundis$elm_bootstrap$Bootstrap$Card$block,
+						$rundis$elm_bootstrap$Bootstrap$Card$footer,
+						_List_Nil,
 						_List_fromArray(
 							[
-								$rundis$elm_bootstrap$Bootstrap$Card$Block$attrs(
-								_List_fromArray(
-									[
-										$elm$html$Html$Attributes$class('full-size-card-body')
-									]))
-							]),
-						_List_fromArray(
-							[
-								$rundis$elm_bootstrap$Bootstrap$Card$Block$custom(
 								A2(
-									$elm$html$Html$ul,
-									_List_fromArray(
-										[$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$pl3, $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$pr0]),
-									A2(
-										$elm$core$List$map,
-										function (property) {
-											return A2(
-												$elm$html$Html$div,
-												_List_Nil,
-												_List_fromArray(
-													[
-														A2(
-														$elm$html$Html$li,
-														_List_Nil,
-														_List_fromArray(
-															[
-																A2(
-																$elm$html$Html$small,
-																_List_Nil,
-																_List_fromArray(
-																	[
-																		$elm$html$Html$text(property.description)
-																	]))
-															]))
-													]));
-										},
-										card.properties)))
-							]),
-						A3(
-							$rundis$elm_bootstrap$Bootstrap$Card$header,
-							_List_fromArray(
-								[
-									$elm$html$Html$Attributes$class('text-center')
-								]),
-							_List_fromArray(
-								[
-									A2(
-									$elm$html$Html$h6,
-									_List_fromArray(
-										[
-											$elm$html$Html$Attributes$class('card-text-header mb-0')
-										]),
-									_List_fromArray(
-										[
-											$elm$html$Html$text(card.title)
-										]))
-								]),
-							$rundis$elm_bootstrap$Bootstrap$Card$config(
+								$rundis$elm_bootstrap$Bootstrap$Button$button,
 								_List_fromArray(
 									[
-										$rundis$elm_bootstrap$Bootstrap$Card$attrs(
+										buttonBackground,
+										$rundis$elm_bootstrap$Bootstrap$Button$small,
+										$rundis$elm_bootstrap$Bootstrap$Button$attrs(
 										_List_fromArray(
 											[
-												$elm$html$Html$Attributes$class('full-size-card-text'),
-												$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$m2
+												$rundis$elm_bootstrap$Bootstrap$Utilities$Size$w100,
+												$elm$html$Html$Events$onClick(
+												$author$project$Main$SelectCard(card.id))
 											]))
-									]))))))
-			]));
-};
-var $author$project$Main$fullCardView = F2(
-	function (cardDisplay, card) {
-		switch (cardDisplay.$) {
-			case 'ImageAndDetails':
-				return $author$project$Main$fullCardViewWithImageAndDetails(card);
-			case 'Image':
-				return $author$project$Main$fullCardViewWithImage(card);
-			default:
-				return $author$project$Main$fullCardViewWithText(card);
+									]),
+								_List_fromArray(
+									[
+										$elm$html$Html$text('Select')
+									]))
+							]),
+						A3(
+							$rundis$elm_bootstrap$Bootstrap$Card$block,
+							_List_fromArray(
+								[
+									$rundis$elm_bootstrap$Bootstrap$Card$Block$attrs(
+									_List_fromArray(
+										[
+											$elm$html$Html$Attributes$class('full-size-card-body')
+										]))
+								]),
+							_List_fromArray(
+								[
+									$rundis$elm_bootstrap$Bootstrap$Card$Block$custom(
+									A2(
+										$elm$html$Html$ul,
+										_List_fromArray(
+											[$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$pl3, $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$pr0]),
+										A2(
+											$elm$core$List$map,
+											function (property) {
+												return A2(
+													$elm$html$Html$div,
+													_List_Nil,
+													_List_fromArray(
+														[
+															A2(
+															$elm$html$Html$li,
+															_List_Nil,
+															_List_fromArray(
+																[
+																	A2(
+																	$elm$html$Html$small,
+																	_List_Nil,
+																	_List_fromArray(
+																		[
+																			$elm$html$Html$text(property.description)
+																		]))
+																]))
+														]));
+											},
+											card.properties))),
+									details
+								]),
+							A3(
+								$rundis$elm_bootstrap$Bootstrap$Card$header,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$class('text-center')
+									]),
+								_List_fromArray(
+									[
+										A2(
+										$elm$html$Html$h6,
+										_List_fromArray(
+											[
+												$elm$html$Html$Attributes$class('card-text-header mb-0')
+											]),
+										_List_fromArray(
+											[
+												$elm$html$Html$text(card.title)
+											]))
+									]),
+								$rundis$elm_bootstrap$Bootstrap$Card$config(
+									_List_fromArray(
+										[
+											$rundis$elm_bootstrap$Bootstrap$Card$attrs(
+											_List_fromArray(
+												[
+													$elm$html$Html$Attributes$class('full-size-card-text'),
+													$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$m2
+												]))
+										]))))))
+				]));
+	});
+var $author$project$Main$fullCardView = F3(
+	function (showCardDetails, cardDisplay, card) {
+		if (cardDisplay.$ === 'Image') {
+			return A2($author$project$Main$fullCardViewWithImage, showCardDetails, card);
+		} else {
+			return A2($author$project$Main$fullCardViewWithText, showCardDetails, card);
 		}
 	});
+var $lattyware$elm_fontawesome$FontAwesome$Solid$info = A5(
+	$lattyware$elm_fontawesome$FontAwesome$Icon$Icon,
+	'fas',
+	'info',
+	192,
+	512,
+	_List_fromArray(
+		['M20 424.229h20V279.771H20c-11.046 0-20-8.954-20-20V212c0-11.046 8.954-20 20-20h112c11.046 0 20 8.954 20 20v212.229h20c11.046 0 20 8.954 20 20V492c0 11.046-8.954 20-20 20H20c-11.046 0-20-8.954-20-20v-47.771c0-11.046 8.954-20 20-20zM96 0C56.235 0 24 32.235 24 72s32.235 72 72 72 72-32.235 72-72S135.764 0 96 0z']));
 var $rundis$elm_bootstrap$Bootstrap$Grid$Internal$Col8 = {$: 'Col8'};
 var $rundis$elm_bootstrap$Bootstrap$General$Internal$LG = {$: 'LG'};
 var $rundis$elm_bootstrap$Bootstrap$Grid$Internal$ColWidth = function (a) {
@@ -12877,9 +13150,41 @@ var $rundis$elm_bootstrap$Bootstrap$Grid$row = F2(
 			$rundis$elm_bootstrap$Bootstrap$Grid$Internal$rowAttributes(options),
 			A2($elm$core$List$map, $rundis$elm_bootstrap$Bootstrap$Grid$renderCol, cols));
 	});
+var $rundis$elm_bootstrap$Bootstrap$ButtonGroup$Size = function (a) {
+	return {$: 'Size', a: a};
+};
+var $rundis$elm_bootstrap$Bootstrap$ButtonGroup$small = $rundis$elm_bootstrap$Bootstrap$ButtonGroup$Size($rundis$elm_bootstrap$Bootstrap$General$Internal$SM);
 var $rundis$elm_bootstrap$Bootstrap$Grid$Internal$Col12 = {$: 'Col12'};
 var $rundis$elm_bootstrap$Bootstrap$Grid$Col$xs12 = A2($rundis$elm_bootstrap$Bootstrap$Grid$Internal$width, $rundis$elm_bootstrap$Bootstrap$General$Internal$XS, $rundis$elm_bootstrap$Bootstrap$Grid$Internal$Col12);
 var $author$project$Main$cardPoolView = function (model) {
+	var showCardDetailsToggle = A2(
+		$rundis$elm_bootstrap$Bootstrap$ButtonGroup$checkboxButtonGroup,
+		_List_fromArray(
+			[
+				$rundis$elm_bootstrap$Bootstrap$ButtonGroup$small,
+				$rundis$elm_bootstrap$Bootstrap$ButtonGroup$attrs(
+				_List_fromArray(
+					[
+						$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$ml3,
+						A2($elm$html$Html$Attributes$style, 'min-width', '2em')
+					]))
+			]),
+		_List_fromArray(
+			[
+				A3(
+				$rundis$elm_bootstrap$Bootstrap$ButtonGroup$checkboxButton,
+				model.showCardPoolDetails,
+				_List_fromArray(
+					[
+						$rundis$elm_bootstrap$Bootstrap$Button$secondary,
+						$rundis$elm_bootstrap$Bootstrap$Button$small,
+						$rundis$elm_bootstrap$Bootstrap$Button$onClick($author$project$Main$ToggleCardDetails)
+					]),
+				_List_fromArray(
+					[
+						$lattyware$elm_fontawesome$FontAwesome$Icon$viewIcon($lattyware$elm_fontawesome$FontAwesome$Solid$info)
+					]))
+			]));
 	return A2(
 		$rundis$elm_bootstrap$Bootstrap$Grid$col,
 		_List_fromArray(
@@ -12919,7 +13224,8 @@ var $author$project$Main$cardPoolView = function (model) {
 									[
 										$author$project$Main$filterWithClearButton(
 										A2($elm$core$Maybe$withDefault, '', model.filter)),
-										$author$project$Main$cardDisplayToggle(model.cardDisplay)
+										$author$project$Main$cardDisplayToggle(model.cardDisplay),
+										showCardDetailsToggle
 									]))
 							]))
 					])),
@@ -12928,7 +13234,7 @@ var $author$project$Main$cardPoolView = function (model) {
 				_List_Nil,
 				A2(
 					$elm$core$List$map,
-					$author$project$Main$fullCardView(model.cardDisplay),
+					A2($author$project$Main$fullCardView, model.showCardPoolDetails, model.cardDisplay),
 					A2($author$project$Main$filteredCards, model.filter, model.notSelectedCards)))
 			]));
 };
@@ -12961,89 +13267,15 @@ var $author$project$Main$inventoryToggleButton = A2(
 					$lattyware$elm_fontawesome$FontAwesome$Icon$viewIcon($lattyware$elm_fontawesome$FontAwesome$Solid$suitcase)
 				]))
 		]));
+var $rundis$elm_bootstrap$Bootstrap$Internal$Role$Dark = {$: 'Dark'};
 var $rundis$elm_bootstrap$Bootstrap$Utilities$Border$dark = A2($rundis$elm_bootstrap$Bootstrap$Internal$Role$toClass, 'border', $rundis$elm_bootstrap$Bootstrap$Internal$Role$Dark);
-var $rundis$elm_bootstrap$Bootstrap$Utilities$Flex$alignItemsCenter = $elm$html$Html$Attributes$class('align-items-center');
 var $rundis$elm_bootstrap$Bootstrap$Utilities$Flex$alignItemsStart = $elm$html$Html$Attributes$class('align-items-start');
-var $rundis$elm_bootstrap$Bootstrap$Utilities$Flex$block = $elm$html$Html$Attributes$class('d-flex');
 var $rundis$elm_bootstrap$Bootstrap$Progress$Danger = {$: 'Danger'};
 var $rundis$elm_bootstrap$Bootstrap$Progress$Roled = function (a) {
 	return {$: 'Roled', a: a};
 };
 var $rundis$elm_bootstrap$Bootstrap$Progress$danger = $rundis$elm_bootstrap$Bootstrap$Progress$Roled(
 	$elm$core$Maybe$Just($rundis$elm_bootstrap$Bootstrap$Progress$Danger));
-var $author$project$Cards$isAlleyLine = function (c) {
-	var _v0 = c.supplyLine.name;
-	if (_v0.$ === 'Alley') {
-		return true;
-	} else {
-		return false;
-	}
-};
-var $elm_community$list_extra$List$Extra$maximumBy = F2(
-	function (f, ls) {
-		var maxBy = F2(
-			function (x, _v1) {
-				var y = _v1.a;
-				var fy = _v1.b;
-				var fx = f(x);
-				return (_Utils_cmp(fx, fy) > 0) ? _Utils_Tuple2(x, fx) : _Utils_Tuple2(y, fy);
-			});
-		if (ls.b) {
-			if (!ls.b.b) {
-				var l_ = ls.a;
-				return $elm$core$Maybe$Just(l_);
-			} else {
-				var l_ = ls.a;
-				var ls_ = ls.b;
-				return $elm$core$Maybe$Just(
-					A3(
-						$elm$core$List$foldl,
-						maxBy,
-						_Utils_Tuple2(
-							l_,
-							f(l_)),
-						ls_).a);
-			}
-		} else {
-			return $elm$core$Maybe$Nothing;
-		}
-	});
-var $author$project$Cards$supplyLineCount = function (predicate) {
-	var max = A2(
-		$elm_community$list_extra$List$Extra$maximumBy,
-		function (c) {
-			return c.supplyLine.index;
-		},
-		A2($elm$core$List$filter, predicate, $author$project$Cards$cards));
-	return A2(
-		$elm$core$Maybe$withDefault,
-		0,
-		A2(
-			$elm$core$Maybe$map,
-			function (m) {
-				return m.supplyLine.index;
-			},
-			max));
-};
-var $author$project$Cards$alleySupplyLineCount = $author$project$Cards$supplyLineCount($author$project$Cards$isAlleyLine);
-var $author$project$Cards$isClinicLine = function (c) {
-	var _v0 = c.supplyLine.name;
-	if (_v0.$ === 'Clinic') {
-		return true;
-	} else {
-		return false;
-	}
-};
-var $author$project$Cards$clinicSupplyLineCount = $author$project$Cards$supplyLineCount($author$project$Cards$isClinicLine);
-var $author$project$Cards$isNestLine = function (c) {
-	var _v0 = c.supplyLine.name;
-	if (_v0.$ === 'Nest') {
-		return true;
-	} else {
-		return false;
-	}
-};
-var $author$project$Cards$nestSupplyLineCount = $author$project$Cards$supplyLineCount($author$project$Cards$isNestLine);
 var $author$project$Cards$emptySupplyLineRequirements = {
 	achievementRequirement: _List_Nil,
 	alleyRequirement: {requiredProgress: 0, totalElements: $author$project$Cards$alleySupplyLineCount},
@@ -13214,22 +13446,6 @@ var $rundis$elm_bootstrap$Bootstrap$Progress$progress = function (modifiers) {
 var $rundis$elm_bootstrap$Bootstrap$Progress$Success = {$: 'Success'};
 var $rundis$elm_bootstrap$Bootstrap$Progress$success = $rundis$elm_bootstrap$Bootstrap$Progress$Roled(
 	$elm$core$Maybe$Just($rundis$elm_bootstrap$Bootstrap$Progress$Success));
-var $author$project$Cards$isAccomplishmentLine = function (c) {
-	var _v0 = c.supplyLine.name;
-	if (_v0.$ === 'Accomplishment') {
-		return true;
-	} else {
-		return false;
-	}
-};
-var $author$project$Cards$isRovingMerchantLine = function (c) {
-	var _v0 = c.supplyLine.name;
-	if (_v0.$ === 'RovingMerchants') {
-		return true;
-	} else {
-		return false;
-	}
-};
 var $elm_community$list_extra$List$Extra$foldl1 = F2(
 	function (func, list) {
 		if (!list.b) {
@@ -14406,7 +14622,12 @@ var $author$project$Main$MoveCardDown = function (a) {
 var $author$project$Main$MoveCardUp = function (a) {
 	return {$: 'MoveCardUp', a: a};
 };
-var $rundis$elm_bootstrap$Bootstrap$Utilities$Flex$justifyBetween = $elm$html$Html$Attributes$class('justify-content-between');
+var $rundis$elm_bootstrap$Bootstrap$Card$Internal$Coloring = function (a) {
+	return {$: 'Coloring', a: a};
+};
+var $rundis$elm_bootstrap$Bootstrap$Card$Internal$Outlined = function (a) {
+	return {$: 'Outlined', a: a};
+};
 var $rundis$elm_bootstrap$Bootstrap$Internal$Role$Secondary = {$: 'Secondary'};
 var $rundis$elm_bootstrap$Bootstrap$Card$outlineSecondary = $rundis$elm_bootstrap$Bootstrap$Card$Internal$Coloring(
 	$rundis$elm_bootstrap$Bootstrap$Card$Internal$Outlined($rundis$elm_bootstrap$Bootstrap$Internal$Role$Secondary));
@@ -14595,6 +14816,7 @@ var $rundis$elm_bootstrap$Bootstrap$Grid$Internal$RowAttrs = function (a) {
 var $rundis$elm_bootstrap$Bootstrap$Grid$Row$attrs = function (attrs_) {
 	return $rundis$elm_bootstrap$Bootstrap$Grid$Internal$RowAttrs(attrs_);
 };
+var $elm$html$Html$h5 = _VirtualDom_node('h5');
 var $author$project$Main$ChangeInventoryDisplayType = function (a) {
 	return {$: 'ChangeInventoryDisplayType', a: a};
 };
@@ -14768,6 +14990,7 @@ var $author$project$Main$inventoryHeaderView = F2(
 	});
 var $rundis$elm_bootstrap$Bootstrap$Grid$Internal$Col4 = {$: 'Col4'};
 var $rundis$elm_bootstrap$Bootstrap$Grid$Col$lg4 = A2($rundis$elm_bootstrap$Bootstrap$Grid$Internal$width, $rundis$elm_bootstrap$Bootstrap$General$Internal$LG, $rundis$elm_bootstrap$Bootstrap$Grid$Internal$Col4);
+var $rundis$elm_bootstrap$Bootstrap$Internal$Role$Warning = {$: 'Warning'};
 var $rundis$elm_bootstrap$Bootstrap$Utilities$Border$warning = A2($rundis$elm_bootstrap$Bootstrap$Internal$Role$toClass, 'border', $rundis$elm_bootstrap$Bootstrap$Internal$Role$Warning);
 var $author$project$Main$inventoryView = function (model) {
 	var numberOfSelectedCards = $elm$core$List$length(model.selectedCards);
