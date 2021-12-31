@@ -11686,6 +11686,20 @@ var $rundis$elm_bootstrap$Bootstrap$Card$footer = F3(
 								children)))
 				}));
 	});
+var $author$project$AchievementData$achievements = _List_fromArray(
+	[
+		{card: 'Ammo Scavenger', name: 'Ammo Scavenger', requirement: '500 Total Pistol Kills'},
+		{card: 'Berserker', name: 'Berserker', requirement: '500 Total Melee Kills'},
+		{card: 'Mag Carrier', name: 'Mag Carrier', requirement: '500 Total SMG Kills'},
+		{card: 'Meatgrinder', name: 'Meat Grinder', requirement: '500 Total LMG Kills'},
+		{card: 'Shell Carrier', name: 'Shell Carrier', requirement: '500 Total Shotgun Kills'},
+		{card: 'Stock Pouch', name: 'Stock Pouch', requirement: '500 Total Sniper Kills'},
+		{card: 'Tactical Vest', name: 'Tactical Vest', requirement: '500 Total A-Rifle Kills'},
+		{card: 'Adrenaline Fueled', name: 'Brought a Knife to a Gunfight', requirement: '50 melee kills in single level'},
+		{card: 'Confident Killer', name: 'Smorgasbord', requirement: 'Kill each non-boss Mutation'},
+		{card: 'Lucky Pennies', name: 'Jukebox Hero', requirement: 'Defend Jukebox without it breaking'},
+		{card: 'Field Surgeon', name: 'Field Surgeon', requirement: 'Heal 5,000 Total Health'}
+	]);
 var $rundis$elm_bootstrap$Bootstrap$Utilities$Flex$alignItemsCenter = $elm$html$Html$Attributes$class('align-items-center');
 var $elm_community$list_extra$List$Extra$maximumBy = F2(
 	function (f, ls) {
@@ -11734,7 +11748,6 @@ var $author$project$Cards$supplyLineCount = function (predicate) {
 			max));
 };
 var $author$project$Cards$alleySupplyLineCount = $author$project$Cards$supplyLineCount($author$project$Cards$isAlleyLine);
-var $elm$html$Html$b = _VirtualDom_node('b');
 var $rundis$elm_bootstrap$Bootstrap$Utilities$Flex$block = $elm$html$Html$Attributes$class('d-flex');
 var $author$project$Cards$clinicSupplyLineCount = $author$project$Cards$supplyLineCount($author$project$Cards$isClinicLine);
 var $rundis$elm_bootstrap$Bootstrap$Utilities$Flex$col = $elm$html$Html$Attributes$class('flex-column');
@@ -11773,6 +11786,8 @@ var $author$project$Cards$isStripLine = function (c) {
 	}
 };
 var $rundis$elm_bootstrap$Bootstrap$Utilities$Flex$justifyBetween = $elm$html$Html$Attributes$class('justify-content-between');
+var $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$mb0Sm = $elm$html$Html$Attributes$class('mb-sm-0');
+var $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$mb2 = $elm$html$Html$Attributes$class('mb-2');
 var $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$mt3 = $elm$html$Html$Attributes$class('mt-3');
 var $author$project$Cards$nestSupplyLineCount = $author$project$Cards$supplyLineCount($author$project$Cards$isNestLine);
 var $elm$virtual_dom$VirtualDom$node = function (tag) {
@@ -11813,6 +11828,8 @@ var $author$project$Cards$supplyTrackToString = function (track) {
 };
 var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
 var $author$project$Main$fullCardViewDetailsBlock = function (card) {
+	var totalCostText = 'Σ ' + $elm$core$String$fromInt(card.totalCost);
+	var singleCostText = $elm$core$String$fromInt(card.cost);
 	var numberOfCards = function () {
 		var _v0 = card.supplyLine.name;
 		switch (_v0.$) {
@@ -11826,66 +11843,6 @@ var $author$project$Main$fullCardViewDetailsBlock = function (card) {
 				return -1;
 		}
 	}();
-	var nameDiv = A2(
-		$elm$html$Html$div,
-		_List_fromArray(
-			[$rundis$elm_bootstrap$Bootstrap$Utilities$Flex$block, $rundis$elm_bootstrap$Bootstrap$Utilities$Flex$col, $rundis$elm_bootstrap$Bootstrap$Utilities$Flex$alignItemsCenter]),
-		_List_fromArray(
-			[
-				A2(
-				$elm$html$Html$div,
-				_List_Nil,
-				_List_fromArray(
-					[
-						A2(
-						$elm$html$Html$b,
-						_List_Nil,
-						_List_fromArray(
-							[
-								$elm$html$Html$text(
-								$author$project$Cards$supplyTrackToString(card.supplyLine.name))
-							]))
-					])),
-				A2(
-				$elm$html$Html$div,
-				_List_Nil,
-				_List_fromArray(
-					[
-						$author$project$Cards$isAccomplishmentLine(card) ? A2($elm$html$Html$div, _List_Nil, _List_Nil) : (($author$project$Cards$isStarterLine(card) || $author$project$Cards$isStripLine(card)) ? A2(
-						$elm$html$Html$div,
-						_List_Nil,
-						_List_fromArray(
-							[
-								A2(
-								$elm$html$Html$i,
-								_List_Nil,
-								_List_fromArray(
-									[
-										$elm$html$Html$text('always unlocked')
-									]))
-							])) : ($author$project$Cards$isRovingMerchantLine(card) ? A2(
-						$elm$html$Html$div,
-						_List_Nil,
-						_List_fromArray(
-							[
-								A2(
-								$elm$html$Html$i,
-								_List_Nil,
-								_List_fromArray(
-									[
-										$elm$html$Html$text('randomly available')
-									]))
-							])) : A2(
-						$elm$html$Html$div,
-						_List_Nil,
-						_List_fromArray(
-							[
-								$elm$html$Html$text(
-								$elm$core$String$fromInt(card.supplyLine.index) + (' of ' + $elm$core$String$fromInt(numberOfCards)))
-							]))))
-					]))
-			]));
-	var costText = $elm$core$String$fromInt(card.cost) + (' (Σ ' + ($elm$core$String$fromInt(card.totalCost) + ')'));
 	var costDiv = $author$project$Cards$isAccomplishmentLine(card) ? A2(
 		$elm$html$Html$div,
 		_List_fromArray(
@@ -11925,12 +11882,13 @@ var $author$project$Main$fullCardViewDetailsBlock = function (card) {
 			])) : A2(
 		$elm$html$Html$div,
 		_List_fromArray(
-			[$rundis$elm_bootstrap$Bootstrap$Utilities$Flex$block, $rundis$elm_bootstrap$Bootstrap$Utilities$Flex$col, $rundis$elm_bootstrap$Bootstrap$Utilities$Flex$alignItemsCenter]),
+			[$rundis$elm_bootstrap$Bootstrap$Utilities$Flex$block, $rundis$elm_bootstrap$Bootstrap$Utilities$Flex$col]),
 		_List_fromArray(
 			[
 				A2(
 				$elm$html$Html$div,
-				_List_Nil,
+				_List_fromArray(
+					[$rundis$elm_bootstrap$Bootstrap$Utilities$Flex$block, $rundis$elm_bootstrap$Bootstrap$Utilities$Flex$alignItemsCenter]),
 				_List_fromArray(
 					[
 						A2(
@@ -11938,31 +11896,114 @@ var $author$project$Main$fullCardViewDetailsBlock = function (card) {
 						_List_fromArray(
 							[
 								$elm$html$Html$Attributes$src('img/cost.png'),
-								A2($elm$html$Html$Attributes$style, 'width', '2em'),
-								A2($elm$html$Html$Attributes$style, 'height', '2em')
+								A2($elm$html$Html$Attributes$style, 'width', '1em'),
+								A2($elm$html$Html$Attributes$style, 'height', '1em')
 							]),
-						_List_Nil)
+						_List_Nil),
+						A2(
+						$elm$html$Html$div,
+						_List_Nil,
+						_List_fromArray(
+							[
+								$elm$html$Html$text(singleCostText)
+							]))
 					])),
 				A2(
 				$elm$html$Html$div,
 				_List_Nil,
 				_List_fromArray(
 					[
-						$elm$html$Html$text(costText)
+						$elm$html$Html$text(totalCostText)
 					]))
 			])))));
+	var achievementRequirement = $author$project$Cards$isAccomplishmentLine(card) ? A2(
+		$elm$core$Maybe$withDefault,
+		'',
+		A2(
+			$elm$core$Maybe$map,
+			function (a) {
+				return a.requirement;
+			},
+			A2(
+				$elm_community$list_extra$List$Extra$find,
+				function (a) {
+					return _Utils_eq(a.card, card.title);
+				},
+				$author$project$AchievementData$achievements))) : '';
+	var nameDiv = A2(
+		$elm$html$Html$div,
+		_List_fromArray(
+			[$rundis$elm_bootstrap$Bootstrap$Utilities$Flex$block, $rundis$elm_bootstrap$Bootstrap$Utilities$Flex$col]),
+		_List_fromArray(
+			[
+				A2(
+				$elm$html$Html$div,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('font-weight-semi-bold card-details-achievement-field')
+					]),
+				_List_fromArray(
+					[
+						$elm$html$Html$text(
+						$author$project$Cards$supplyTrackToString(card.supplyLine.name))
+					])),
+				$author$project$Cards$isAccomplishmentLine(card) ? A2(
+				$elm$html$Html$div,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('card-details-achievement-field')
+					]),
+				_List_fromArray(
+					[
+						$elm$html$Html$text(achievementRequirement)
+					])) : (($author$project$Cards$isStarterLine(card) || $author$project$Cards$isStripLine(card)) ? A2(
+				$elm$html$Html$div,
+				_List_Nil,
+				_List_fromArray(
+					[
+						A2(
+						$elm$html$Html$i,
+						_List_Nil,
+						_List_fromArray(
+							[
+								$elm$html$Html$text('always unlocked')
+							]))
+					])) : ($author$project$Cards$isRovingMerchantLine(card) ? A2(
+				$elm$html$Html$div,
+				_List_Nil,
+				_List_fromArray(
+					[
+						A2(
+						$elm$html$Html$i,
+						_List_Nil,
+						_List_fromArray(
+							[
+								$elm$html$Html$text('randomly available')
+							]))
+					])) : A2(
+				$elm$html$Html$div,
+				_List_Nil,
+				_List_fromArray(
+					[
+						$elm$html$Html$text(
+						$elm$core$String$fromInt(card.supplyLine.index) + (' of ' + $elm$core$String$fromInt(numberOfCards)))
+					]))))
+			]));
 	return $rundis$elm_bootstrap$Bootstrap$Card$Block$custom(
 		A2(
 			$elm$html$Html$div,
 			_List_fromArray(
-				[$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$mt3]),
+				[
+					$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$mt3,
+					$elm$html$Html$Attributes$class('card-details-block')
+				]),
 			_List_fromArray(
 				[
 					A3($elm$html$Html$node, 'hr', _List_Nil, _List_Nil),
 					A2(
 					$elm$html$Html$div,
 					_List_fromArray(
-						[$rundis$elm_bootstrap$Bootstrap$Utilities$Flex$block, $rundis$elm_bootstrap$Bootstrap$Utilities$Flex$justifyBetween]),
+						[$rundis$elm_bootstrap$Bootstrap$Utilities$Flex$block, $rundis$elm_bootstrap$Bootstrap$Utilities$Flex$justifyBetween, $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$mb2, $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$mb0Sm]),
 					_List_fromArray(
 						[nameDiv, costDiv]))
 				])));
@@ -12293,7 +12334,11 @@ var $author$project$Main$fullCardViewWithText = F2(
 									A2(
 										$elm$html$Html$ul,
 										_List_fromArray(
-											[$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$pl3, $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$pr0]),
+											[
+												$elm$html$Html$Attributes$class('text-card-list'),
+												$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$pl3,
+												$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$pr0
+											]),
 										A2(
 											$elm$core$List$map,
 											function (property) {

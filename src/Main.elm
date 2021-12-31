@@ -1,5 +1,6 @@
 port module Main exposing (..)
 
+import AchievementData
 import Bootstrap.Button as Button exposing (Option)
 import Bootstrap.ButtonGroup as ButtonGroup
 import Bootstrap.Card as Card
@@ -707,12 +708,15 @@ fullCardView showCardDetails cardDisplay card =
 
 fullCardViewDetailsBlock card =
     let
-        costText =
-            (card.cost |> String.fromInt) ++ " (Σ " ++ (card.totalCost |> String.fromInt) ++ ")"
+        singleCostText =
+            card.cost |> String.fromInt
+            
+        totalCostText =
+            "Σ " ++ (card.totalCost |> String.fromInt) 
         
         costDiv =
             if card |> Cards.isAccomplishmentLine then
-                div [ style "font-size" "2em" ] [ text "🏆" ] --[ FontAwesome.Solid.trophy |> FontAwesome.Icon.viewIcon ] -- Trophy
+                div [ style "font-size" "2em" ] [ text "🏆" ] 
             else if card |> Cards.isRovingMerchantLine then
                 div [ style "font-size" "2em" ] [ text "🏬" ] 
             else if card |> Cards.isStripLine then
@@ -720,10 +724,14 @@ fullCardViewDetailsBlock card =
             else if card |> Cards.isStarterLine then
                 div [ style "font-size" "2em" ] [ text "🏲" ] 
             else
-                div [ Flex.block, Flex.col, Flex.alignItemsCenter ]
-                [ div [] [ Html.img [ src "img/cost.png", style "width" "2em", style "height" "2em" ] [] ]
-                , div [] [ text costText ]
+                div [ Flex.block, Flex.col ]
+                [ div [ Flex.block, Flex.alignItemsCenter ] 
+                  [ Html.img [ src "img/cost.png", style "width" "1em", style "height" "1em" ] [] 
+                  , div [ ] [ text singleCostText ]
+                  ]
+                , div [] [ text totalCostText ]
                 ]
+                
                 
         numberOfCards =
             case card.supplyLine.name of
@@ -732,27 +740,36 @@ fullCardViewDetailsBlock card =
                 Cards.Clinic _ -> Cards.clinicSupplyLineCount
                 _ -> -1
         
+        
+        achievementRequirement =
+            if card |> Cards.isAccomplishmentLine then
+                AchievementData.achievements 
+                |> List.find (\a -> a.card == card.title)
+                |> Maybe.map (\a -> a.requirement)
+                |> Maybe.withDefault ""
+            else
+                ""
                 
+        
         nameDiv =
-            div [ Flex.block, Flex.col, Flex.alignItemsCenter ]
-            [ div [] [ Html.b [] [ text (card.supplyLine.name |> Cards.supplyTrackToString)] ]
-            , div []
-              [ ( if (card |> Cards.isAccomplishmentLine) then
-                    div [] []
+            div [ Flex.block, Flex.col ]
+            [ div [ class "font-weight-semi-bold card-details-achievement-field" ] [ text (card.supplyLine.name |> Cards.supplyTrackToString) ]
+            , ( if (card |> Cards.isAccomplishmentLine) then
+                    div [ class "card-details-achievement-field" ] [ text achievementRequirement ]
                   else if (card |> Cards.isStarterLine) || (card |> Cards.isStripLine) then
                     div [] [ Html.i [] [ text "always unlocked" ] ]
                   else if (card |> Cards.isRovingMerchantLine) then
                     div [] [ Html.i [] [ text "randomly available" ] ]
                   else
                     div [] [ text ((card.supplyLine.index |> String.fromInt) ++ " of " ++ (numberOfCards |> String.fromInt) ) ]
-              ) ]
+              )
             ]
                 
     in
     Block.custom
-      ( div [ Spacing.mt3 ]
+      ( div [ Spacing.mt3, class "card-details-block" ]
         [ Html.node "hr" [] []
-        , div [ Flex.block, Flex.justifyBetween ]
+        , div [ Flex.block, Flex.justifyBetween, Spacing.mb2, Spacing.mb0Sm ]
           [ nameDiv
           , costDiv
           ]
@@ -806,7 +823,7 @@ fullCardViewWithText showDetails card =
                 ]
             |> Card.block [  Block.attrs [ class "full-size-card-body" ] ]
                 [ Block.custom
-                    (Html.ul [ Spacing.pl3, Spacing.pr0 ]
+                    (Html.ul [ class "text-card-list", Spacing.pl3, Spacing.pr0 ]
                         (card.properties |> List.map (\property -> div [] [ Html.li [] [ Html.small [] [ text property.description ] ] ]))
                     )
                   , details

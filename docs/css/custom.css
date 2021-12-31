@@ -53,6 +53,10 @@
     min-width: 18em;
 }
 
+.text-card-list {
+    min-height: 9em;
+}
+
 .card-image {
 
 }
@@ -66,10 +70,13 @@
     padding-bottom: 0 !important;
 }
 
+.card-details-block {
+    height: 4em;
+}
+
 @media only screen and (min-width: 769px) {
     .full-size-card-text {
         width: 15em;
-        height: 18em;
     }
 
     .card-text-header {
@@ -77,6 +84,10 @@
         overflow: hidden;
         text-overflow: ellipsis;
         min-width: 0;
+    }
+
+    .text-card-list {
+
     }
 }
 
@@ -132,3 +143,14 @@
 .img-shadow img {
     float: left;
 } 
+
+.font-weight-semi-bold {
+    font-weight: 600;
+}
+
+.card-details-achievement-field {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 9em;
+}
