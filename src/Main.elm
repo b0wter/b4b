@@ -793,7 +793,7 @@ fullCardViewWithImage showDetails card =
             |> Card.block [ Block.attrs [ ] ]
                 [ Block.custom
                     ( div [ class "d-flex justify-content-center bg-black" ] 
-                    [ Html.a [ href "#", class "img-shadow"] [ img [ src ("img/english/" ++ card.filename), style "max-width" "200px" ] [] ]
+                    [ Html.a [ href "#", class "img-shadow"] [ img [ src ("img/english/" ++ card.filename), style "width" "248px", style "height" "376px" ] [] ]
                     ]
                     )
                 , details

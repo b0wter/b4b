@@ -12234,7 +12234,8 @@ var $author$project$Main$fullCardViewWithImage = F2(
 														_List_fromArray(
 															[
 																$elm$html$Html$Attributes$src('img/english/' + card.filename),
-																A2($elm$html$Html$Attributes$style, 'max-width', '200px')
+																A2($elm$html$Html$Attributes$style, 'width', '248px'),
+																A2($elm$html$Html$Attributes$style, 'height', '376px')
 															]),
 														_List_Nil)
 													]))
