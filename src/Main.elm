@@ -828,7 +828,7 @@ fullCardViewWithText showDetails card =
                     )
                   , details
                 ]
-            |> Card.footer []
+            |> Card.footer [ Spacing.mt2, Spacing.mt0Sm ]
                 [ Button.button [ buttonBackground, Button.small, Button.attrs [ Size.w100, onClick (SelectCard card.id) ] ] [ text "Select" ]
                 ]
             |> Card.view
