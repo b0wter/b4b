@@ -12037,7 +12037,6 @@ var $elm$html$Html$Attributes$href = function (url) {
 		'href',
 		_VirtualDom_noJavaScriptUri(url));
 };
-var $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$m2 = $elm$html$Html$Attributes$class('m-2');
 var $rundis$elm_bootstrap$Bootstrap$Card$Internal$applyModifier = F2(
 	function (option, options) {
 		switch (option.$) {
@@ -12270,7 +12269,7 @@ var $author$project$Main$fullCardViewWithImage = F2(
 									[
 										$rundis$elm_bootstrap$Bootstrap$Card$attrs(
 										_List_fromArray(
-											[$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$m2]))
+											[$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$mt3]))
 									])))))
 				]));
 	});
@@ -12417,7 +12416,7 @@ var $author$project$Main$fullCardViewWithText = F2(
 											_List_fromArray(
 												[
 													$elm$html$Html$Attributes$class('full-size-card-text'),
-													$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$m2
+													$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$mt3
 												]))
 										]))))))
 				]));
@@ -15426,6 +15425,7 @@ var $author$project$Main$MoveCardDown = function (a) {
 var $author$project$Main$MoveCardUp = function (a) {
 	return {$: 'MoveCardUp', a: a};
 };
+var $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$m2 = $elm$html$Html$Attributes$class('m-2');
 var $rundis$elm_bootstrap$Bootstrap$Card$Internal$Coloring = function (a) {
 	return {$: 'Coloring', a: a};
 };

@@ -912,7 +912,7 @@ fullCardViewWithImage showDetails card =
                 Block.custom (div [] [])
     in
     Grid.col []
-        [ Card.config [ Card.attrs [  Spacing.m2 ] ]
+        [ Card.config [ Card.attrs [  Spacing.mt3 ] ]
             |> Card.block [ Block.attrs [ ] ]
                 [ Block.custom
                     ( div [ class "d-flex justify-content-center bg-black" ] 
@@ -940,7 +940,7 @@ fullCardViewWithText showDetails card =
                 Block.custom (div [] [])
     in
     Grid.col [ ]
-        [ Card.config [ Card.attrs [ class "full-size-card-text", Spacing.m2 ] ]
+        [ Card.config [ Card.attrs [ class "full-size-card-text", Spacing.mt3 ] ]
             |> Card.header [ class "text-center" ]
                 [ Html.h6 [ class "card-text-header mb-0" ] [ text card.title ]
                 ]
