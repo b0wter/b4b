@@ -85,7 +85,8 @@
 
 @media only screen and (min-width: 769px) {
     .full-size-card-text {
-        width: 15em;
+        min-width: 15em !important;
+        height: calc(100% - 1em) !important;
     }
 
     .card-text-header {
@@ -96,7 +97,7 @@
     }
 
     .text-card-list {
-        min-height: 9em;
+        min-height: 0em;
     }
 
     .card-details-achievement-field {
