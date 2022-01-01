@@ -16018,7 +16018,7 @@ var $author$project$Main$inventoryView = function (model) {
 				$elm$html$Html$div,
 				_List_fromArray(
 					[
-						$elm$html$Html$Attributes$class('bg-dark m-2 shadow rounded border'),
+						$elm$html$Html$Attributes$class('bg-dark mt-2 mb-2 shadow rounded border'),
 						border
 					]),
 				_List_fromArray(

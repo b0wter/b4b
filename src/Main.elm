@@ -643,7 +643,7 @@ inventoryView model =
         border = if numberOfSelectedCards <= maxDeckSize then Border.dark else Border.warning
     in
     Grid.col [ Col.xs12, Col.md6, Col.lg4, Col.attrs [ id "right-column", class "overflow-scroll content-column" ] ]
-        [ div [ class "bg-dark m-2 shadow rounded border", border]
+        [ div [ class "bg-dark mt-2 mb-2 shadow rounded border", border]
             [ inventoryHeaderView numberOfSelectedCards model.inventoryDisplay
             , Grid.row []
                 (inventoryContentView model)
