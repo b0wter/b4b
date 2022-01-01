@@ -671,6 +671,12 @@ inventoryHeaderView numberOfSelectedCards display =
 inventoryContentView : Model -> List (Grid.Column Msg)
 inventoryContentView model =
     let
+        alertContent =
+            [ text "Click the list icon above to switch to "
+            , Html.a [ class "success-alert-link", href "#", onClick (ChangeInventoryDisplayType InventoryAsSummary) ] [ text "summarized view" ]
+            , text "."
+            ]
+            
         alert children =
             div [ Spacing.ml2, Spacing.mr2, Spacing.mt2 ]
             [ Alert.config
@@ -682,7 +688,7 @@ inventoryContentView model =
     in
     case model.inventoryDisplay of
         InventoryAsCards ->
-            (Grid.col [] [ alert [ text "Click the list icon above to switch to summarized view."] ]) 
+            (Grid.col [] [ alert alertContent ])
             :: (model.selectedCards |> List.indexedMap (\i c -> summaryCardView (Just (i + 1)) c))
         InventoryAsSummary ->
             [ inventorySummaryView model.selectedCards, inventoryProgressView model.selectedCards ]

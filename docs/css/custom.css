@@ -160,6 +160,11 @@
     box-shadow: inset 0 0 20px 8px #000000;
 }
 
+.success-alert-link {
+    text-decoration: underline;
+    color: #155724;
+}
+
 .img-shadow img {
     float: left;
 } 

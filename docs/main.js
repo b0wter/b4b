@@ -14022,6 +14022,10 @@ var $author$project$Main$inventoryToggleButton = A2(
 		]));
 var $rundis$elm_bootstrap$Bootstrap$Internal$Role$Dark = {$: 'Dark'};
 var $rundis$elm_bootstrap$Bootstrap$Utilities$Border$dark = A2($rundis$elm_bootstrap$Bootstrap$Internal$Role$toClass, 'border', $rundis$elm_bootstrap$Bootstrap$Internal$Role$Dark);
+var $author$project$Main$ChangeInventoryDisplayType = function (a) {
+	return {$: 'ChangeInventoryDisplayType', a: a};
+};
+var $author$project$Main$InventoryAsSummary = {$: 'InventoryAsSummary'};
 var $author$project$Main$ToggleSummarizeViewHint = function (a) {
 	return {$: 'ToggleSummarizeViewHint', a: a};
 };
@@ -15703,6 +15707,24 @@ var $rundis$elm_bootstrap$Bootstrap$Alert$view = F2(
 			A3($rundis$elm_bootstrap$Bootstrap$Alert$maybeAddDismissButton, visibility, configRec, configRec.children));
 	});
 var $author$project$Main$inventoryContentView = function (model) {
+	var alertContent = _List_fromArray(
+		[
+			$elm$html$Html$text('Click the list icon above to switch to '),
+			A2(
+			$elm$html$Html$a,
+			_List_fromArray(
+				[
+					$elm$html$Html$Attributes$class('success-alert-link'),
+					$elm$html$Html$Attributes$href('#'),
+					$elm$html$Html$Events$onClick(
+					$author$project$Main$ChangeInventoryDisplayType($author$project$Main$InventoryAsSummary))
+				]),
+			_List_fromArray(
+				[
+					$elm$html$Html$text('summarized view')
+				])),
+			$elm$html$Html$text('.')
+		]);
 	var alert = function (children) {
 		return A2(
 			$elm$html$Html$div,
@@ -15731,11 +15753,7 @@ var $author$project$Main$inventoryContentView = function (model) {
 				_List_Nil,
 				_List_fromArray(
 					[
-						alert(
-						_List_fromArray(
-							[
-								$elm$html$Html$text('Click the list icon above to switch to summarized view.')
-							]))
+						alert(alertContent)
 					])),
 			A2(
 				$elm$core$List$indexedMap,
@@ -15767,10 +15785,6 @@ var $rundis$elm_bootstrap$Bootstrap$Grid$Internal$RowAttrs = function (a) {
 var $rundis$elm_bootstrap$Bootstrap$Grid$Row$attrs = function (attrs_) {
 	return $rundis$elm_bootstrap$Bootstrap$Grid$Internal$RowAttrs(attrs_);
 };
-var $author$project$Main$ChangeInventoryDisplayType = function (a) {
-	return {$: 'ChangeInventoryDisplayType', a: a};
-};
-var $author$project$Main$InventoryAsSummary = {$: 'InventoryAsSummary'};
 var $author$project$Main$inventoryStyleToggle = F2(
 	function (inventoryDisplay, extraClasses) {
 		return A2(
