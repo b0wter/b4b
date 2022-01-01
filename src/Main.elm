@@ -1,6 +1,7 @@
 port module Main exposing (..)
 
 import AchievementData
+import Bootstrap.Alert as Alert
 import Bootstrap.Button as Button exposing (Option)
 import Bootstrap.ButtonGroup as ButtonGroup
 import Bootstrap.Card as Card
@@ -90,6 +91,7 @@ type alias Model =
     , helpModalVisibility : Modal.Visibility
     , hostUrl: Url
     , navKey: Key
+    , summarizeViewHintVisibility: Alert.Visibility
     --------------
     , cardPool : List Card -- All known cards, should never be modified
     , selectedCards : List Card -- All currently selected cards
@@ -177,6 +179,7 @@ init flags url key =
       , notSelectedCards = notSelected
       , showCardPoolDetails = False
       , filter = Nothing
+      , summarizeViewHintVisibility = Alert.shown
       , shareModalVisibility = Modal.hidden
       , yesNoModalVisibility = Modal.hidden
       , helpModalVisibility = Modal.hidden
@@ -211,6 +214,7 @@ type Msg
     | RejectResetModal
     | ToggleCardDetails
     | ToggleHelpModal
+    | ToggleSummarizeViewHint Alert.Visibility
     ---------------------------
     | SelectCard CardId
     | DeselectCard CardId
@@ -279,6 +283,10 @@ update msg model =
                     else Modal.shown
             in
             ( { model | helpModalVisibility = visibility }, Cmd.none )
+            
+            
+        ToggleSummarizeViewHint visibility ->
+            ( { model | summarizeViewHintVisibility = visibility }, Cmd.none )
 
 
         ConfirmResetModal ->
@@ -630,7 +638,6 @@ inventoryView model =
     Grid.col [ Col.xs12, Col.md6, Col.lg4, Col.attrs [ id "right-column", class "overflow-scroll content-column" ] ]
         [ div [ class "bg-dark m-2 shadow rounded border", border]
             [ inventoryHeaderView numberOfSelectedCards model.inventoryDisplay
-            -- TODO: Make the content return List Grid.Row (if that's possible)
             , Grid.row []
                 (inventoryContentView model)
             ]
@@ -663,9 +670,20 @@ inventoryHeaderView numberOfSelectedCards display =
 
 inventoryContentView : Model -> List (Grid.Column Msg)
 inventoryContentView model =
+    let
+        alert children =
+            div [ Spacing.ml2, Spacing.mr2, Spacing.mt2 ]
+            [ Alert.config
+              |> Alert.success
+              |> Alert.dismissableWithAnimation ToggleSummarizeViewHint
+              |> Alert.children children
+              |> Alert.view model.summarizeViewHintVisibility
+            ]
+    in
     case model.inventoryDisplay of
         InventoryAsCards ->
-            (model.selectedCards |> List.indexedMap (\i c -> summaryCardView (Just (i + 1)) c))
+            (Grid.col [] [ alert [ text "Click the list icon above to switch to summarized view."] ]) 
+            :: (model.selectedCards |> List.indexedMap (\i c -> summaryCardView (Just (i + 1)) c))
         InventoryAsSummary ->
             [ inventorySummaryView model.selectedCards, inventoryProgressView model.selectedCards ]
 

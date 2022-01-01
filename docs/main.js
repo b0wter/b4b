@@ -8575,6 +8575,8 @@ var $author$project$Main$parseCardIds = function (query) {
 			$elm$core$String$toInt,
 			A2($author$project$String$Extras$chunks, $author$project$Main$cardIdLength, query)));
 };
+var $rundis$elm_bootstrap$Bootstrap$Alert$Shown = {$: 'Shown'};
+var $rundis$elm_bootstrap$Bootstrap$Alert$shown = $rundis$elm_bootstrap$Bootstrap$Alert$Shown;
 var $sporto$qs$QS$Config = function (a) {
 	return {$: 'Config', a: a};
 };
@@ -9034,6 +9036,7 @@ var $author$project$Main$init = F3(
 				selectedCards: selected,
 				shareModalVisibility: $rundis$elm_bootstrap$Bootstrap$Modal$hidden,
 				showCardPoolDetails: false,
+				summarizeViewHintVisibility: $rundis$elm_bootstrap$Bootstrap$Alert$shown,
 				yesNoModalContent: $elm$core$Maybe$Nothing,
 				yesNoModalVisibility: $rundis$elm_bootstrap$Bootstrap$Modal$hidden
 			},
@@ -9989,6 +9992,13 @@ var $author$project$Main$update = F2(
 					_Utils_update(
 						model,
 						{helpModalVisibility: visibility}),
+					$elm$core$Platform$Cmd$none);
+			case 'ToggleSummarizeViewHint':
+				var visibility = msg.a;
+				return _Utils_Tuple2(
+					_Utils_update(
+						model,
+						{summarizeViewHintVisibility: visibility}),
 					$elm$core$Platform$Cmd$none);
 			case 'ConfirmResetModal':
 				var updatedModel = _Utils_update(
@@ -14012,6 +14022,34 @@ var $author$project$Main$inventoryToggleButton = A2(
 		]));
 var $rundis$elm_bootstrap$Bootstrap$Internal$Role$Dark = {$: 'Dark'};
 var $rundis$elm_bootstrap$Bootstrap$Utilities$Border$dark = A2($rundis$elm_bootstrap$Bootstrap$Internal$Role$toClass, 'border', $rundis$elm_bootstrap$Bootstrap$Internal$Role$Dark);
+var $author$project$Main$ToggleSummarizeViewHint = function (a) {
+	return {$: 'ToggleSummarizeViewHint', a: a};
+};
+var $rundis$elm_bootstrap$Bootstrap$Alert$Config = function (a) {
+	return {$: 'Config', a: a};
+};
+var $rundis$elm_bootstrap$Bootstrap$Alert$children = F2(
+	function (children_, _v0) {
+		var configRec = _v0.a;
+		return $rundis$elm_bootstrap$Bootstrap$Alert$Config(
+			_Utils_update(
+				configRec,
+				{children: children_}));
+	});
+var $rundis$elm_bootstrap$Bootstrap$Internal$Role$Secondary = {$: 'Secondary'};
+var $rundis$elm_bootstrap$Bootstrap$Alert$config = $rundis$elm_bootstrap$Bootstrap$Alert$Config(
+	{attributes: _List_Nil, children: _List_Nil, dismissable: $elm$core$Maybe$Nothing, role: $rundis$elm_bootstrap$Bootstrap$Internal$Role$Secondary, visibility: $rundis$elm_bootstrap$Bootstrap$Alert$Shown, withAnimation: false});
+var $rundis$elm_bootstrap$Bootstrap$Alert$dismissableWithAnimation = F2(
+	function (dismissMsg, _v0) {
+		var configRec = _v0.a;
+		return $rundis$elm_bootstrap$Bootstrap$Alert$Config(
+			_Utils_update(
+				configRec,
+				{
+					dismissable: $elm$core$Maybe$Just(dismissMsg),
+					withAnimation: true
+				}));
+	});
 var $rundis$elm_bootstrap$Bootstrap$Progress$Danger = {$: 'Danger'};
 var $rundis$elm_bootstrap$Bootstrap$Progress$Roled = function (a) {
 	return {$: 'Roled', a: a};
@@ -15355,6 +15393,19 @@ var $author$project$Main$inventorySummaryView = function (cards) {
 				A2(cardWithListContentAndHeader, 'Disables', mergedProperties.disables))
 			]));
 };
+var $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$ml2 = $elm$html$Html$Attributes$class('ml-2');
+var $rundis$elm_bootstrap$Bootstrap$Internal$Role$Success = {$: 'Success'};
+var $rundis$elm_bootstrap$Bootstrap$Alert$role = F2(
+	function (role_, _v0) {
+		var configRec = _v0.a;
+		return $rundis$elm_bootstrap$Bootstrap$Alert$Config(
+			_Utils_update(
+				configRec,
+				{role: role_}));
+	});
+var $rundis$elm_bootstrap$Bootstrap$Alert$success = function (conf) {
+	return A2($rundis$elm_bootstrap$Bootstrap$Alert$role, $rundis$elm_bootstrap$Bootstrap$Internal$Role$Success, conf);
+};
 var $author$project$Main$DeselectCard = function (a) {
 	return {$: 'DeselectCard', a: a};
 };
@@ -15370,7 +15421,6 @@ var $rundis$elm_bootstrap$Bootstrap$Card$Internal$Coloring = function (a) {
 var $rundis$elm_bootstrap$Bootstrap$Card$Internal$Outlined = function (a) {
 	return {$: 'Outlined', a: a};
 };
-var $rundis$elm_bootstrap$Bootstrap$Internal$Role$Secondary = {$: 'Secondary'};
 var $rundis$elm_bootstrap$Bootstrap$Card$outlineSecondary = $rundis$elm_bootstrap$Bootstrap$Card$Internal$Coloring(
 	$rundis$elm_bootstrap$Bootstrap$Card$Internal$Outlined($rundis$elm_bootstrap$Bootstrap$Internal$Role$Secondary));
 var $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$pb1 = $elm$html$Html$Attributes$class('pb-1');
@@ -15525,19 +15575,178 @@ var $author$project$Main$summaryCardView = F2(
 									])))))
 				]));
 	});
+var $rundis$elm_bootstrap$Bootstrap$Alert$Closed = {$: 'Closed'};
+var $rundis$elm_bootstrap$Bootstrap$Alert$StartClose = {$: 'StartClose'};
+var $rundis$elm_bootstrap$Bootstrap$Alert$clickHandler = F2(
+	function (visibility, configRec) {
+		var handleClick = F2(
+			function (viz, toMsg) {
+				return $elm$html$Html$Events$onClick(
+					toMsg(viz));
+			});
+		var _v0 = configRec.dismissable;
+		if (_v0.$ === 'Just') {
+			var dismissMsg = _v0.a;
+			return _List_fromArray(
+				[
+					configRec.withAnimation ? A2(handleClick, $rundis$elm_bootstrap$Bootstrap$Alert$StartClose, dismissMsg) : A2(handleClick, $rundis$elm_bootstrap$Bootstrap$Alert$Closed, dismissMsg)
+				]);
+		} else {
+			return _List_Nil;
+		}
+	});
+var $rundis$elm_bootstrap$Bootstrap$Alert$injectButton = F2(
+	function (btn, children_) {
+		if (children_.b) {
+			var head = children_.a;
+			var tail = children_.b;
+			return A2(
+				$elm$core$List$cons,
+				head,
+				A2($elm$core$List$cons, btn, tail));
+		} else {
+			return _List_fromArray(
+				[btn]);
+		}
+	});
+var $rundis$elm_bootstrap$Bootstrap$Alert$isDismissable = function (configRec) {
+	var _v0 = configRec.dismissable;
+	if (_v0.$ === 'Just') {
+		return true;
+	} else {
+		return false;
+	}
+};
+var $elm$html$Html$span = _VirtualDom_node('span');
+var $rundis$elm_bootstrap$Bootstrap$Alert$maybeAddDismissButton = F3(
+	function (visibilty, configRec, children_) {
+		return $rundis$elm_bootstrap$Bootstrap$Alert$isDismissable(configRec) ? A2(
+			$rundis$elm_bootstrap$Bootstrap$Alert$injectButton,
+			A2(
+				$elm$html$Html$button,
+				_Utils_ap(
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$type_('button'),
+							$elm$html$Html$Attributes$class('close'),
+							A2($elm$html$Html$Attributes$attribute, 'aria-label', 'close')
+						]),
+					A2($rundis$elm_bootstrap$Bootstrap$Alert$clickHandler, visibilty, configRec)),
+				_List_fromArray(
+					[
+						A2(
+						$elm$html$Html$span,
+						_List_fromArray(
+							[
+								A2($elm$html$Html$Attributes$attribute, 'aria-hidden', 'true')
+							]),
+						_List_fromArray(
+							[
+								$elm$html$Html$text('×')
+							]))
+					])),
+			children_) : children_;
+	});
+var $rundis$elm_bootstrap$Bootstrap$Alert$viewAttributes = F2(
+	function (visibility, configRec) {
+		var visibiltyAttributes = _Utils_eq(visibility, $rundis$elm_bootstrap$Bootstrap$Alert$Closed) ? _List_fromArray(
+			[
+				A2($elm$html$Html$Attributes$style, 'display', 'none')
+			]) : _List_Nil;
+		var animationAttributes = function () {
+			if (configRec.withAnimation) {
+				var _v0 = configRec.dismissable;
+				if (_v0.$ === 'Just') {
+					var dismissMsg = _v0.a;
+					return _List_fromArray(
+						[
+							A2(
+							$elm$html$Html$Events$on,
+							'transitionend',
+							$elm$json$Json$Decode$succeed(
+								dismissMsg($rundis$elm_bootstrap$Bootstrap$Alert$Closed)))
+						]);
+				} else {
+					return _List_Nil;
+				}
+			} else {
+				return _List_Nil;
+			}
+		}();
+		var alertAttributes = _List_fromArray(
+			[
+				A2($elm$html$Html$Attributes$attribute, 'role', 'alert'),
+				$elm$html$Html$Attributes$classList(
+				_List_fromArray(
+					[
+						_Utils_Tuple2('alert', true),
+						_Utils_Tuple2(
+						'alert-dismissible',
+						$rundis$elm_bootstrap$Bootstrap$Alert$isDismissable(configRec)),
+						_Utils_Tuple2('fade', configRec.withAnimation),
+						_Utils_Tuple2(
+						'show',
+						_Utils_eq(visibility, $rundis$elm_bootstrap$Bootstrap$Alert$Shown))
+					])),
+				A2($rundis$elm_bootstrap$Bootstrap$Internal$Role$toClass, 'alert', configRec.role)
+			]);
+		return $elm$core$List$concat(
+			_List_fromArray(
+				[configRec.attributes, alertAttributes, visibiltyAttributes, animationAttributes]));
+	});
+var $rundis$elm_bootstrap$Bootstrap$Alert$view = F2(
+	function (visibility, _v0) {
+		var configRec = _v0.a;
+		return A2(
+			$elm$html$Html$div,
+			A2($rundis$elm_bootstrap$Bootstrap$Alert$viewAttributes, visibility, configRec),
+			A3($rundis$elm_bootstrap$Bootstrap$Alert$maybeAddDismissButton, visibility, configRec, configRec.children));
+	});
 var $author$project$Main$inventoryContentView = function (model) {
+	var alert = function (children) {
+		return A2(
+			$elm$html$Html$div,
+			_List_fromArray(
+				[$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$ml2, $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$mr2, $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$mt2]),
+			_List_fromArray(
+				[
+					A2(
+					$rundis$elm_bootstrap$Bootstrap$Alert$view,
+					model.summarizeViewHintVisibility,
+					A2(
+						$rundis$elm_bootstrap$Bootstrap$Alert$children,
+						children,
+						A2(
+							$rundis$elm_bootstrap$Bootstrap$Alert$dismissableWithAnimation,
+							$author$project$Main$ToggleSummarizeViewHint,
+							$rundis$elm_bootstrap$Bootstrap$Alert$success($rundis$elm_bootstrap$Bootstrap$Alert$config))))
+				]));
+	};
 	var _v0 = model.inventoryDisplay;
 	if (_v0.$ === 'InventoryAsCards') {
 		return A2(
-			$elm$core$List$indexedMap,
-			F2(
-				function (i, c) {
-					return A2(
-						$author$project$Main$summaryCardView,
-						$elm$core$Maybe$Just(i + 1),
-						c);
-				}),
-			model.selectedCards);
+			$elm$core$List$cons,
+			A2(
+				$rundis$elm_bootstrap$Bootstrap$Grid$col,
+				_List_Nil,
+				_List_fromArray(
+					[
+						alert(
+						_List_fromArray(
+							[
+								$elm$html$Html$text('Click the list icon above to switch to summarized view.')
+							]))
+					])),
+			A2(
+				$elm$core$List$indexedMap,
+				F2(
+					function (i, c) {
+						return A2(
+							$author$project$Main$summaryCardView,
+							$elm$core$Maybe$Just(i + 1),
+							c);
+					}),
+				model.selectedCards));
 	} else {
 		return _List_fromArray(
 			[
@@ -15608,7 +15817,6 @@ var $author$project$Main$inventoryStyleToggle = F2(
 	});
 var $author$project$Main$maxDeckSize = 15;
 var $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$mb0 = $elm$html$Html$Attributes$class('mb-0');
-var $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$ml2 = $elm$html$Html$Attributes$class('ml-2');
 var $rundis$elm_bootstrap$Bootstrap$Internal$Button$Warning = {$: 'Warning'};
 var $rundis$elm_bootstrap$Bootstrap$Button$warning = $rundis$elm_bootstrap$Bootstrap$Internal$Button$Coloring(
 	$rundis$elm_bootstrap$Bootstrap$Internal$Button$Roled($rundis$elm_bootstrap$Bootstrap$Internal$Button$Warning));
