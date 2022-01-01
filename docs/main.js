@@ -8451,6 +8451,8 @@ var $author$project$Cards$cards = A2(
 	},
 	$author$project$Cards$setTotalCardCosts(
 		A2($elm$core$List$map, $author$project$Cards$parseRawCard, $author$project$CardData$rawCards)));
+var $rundis$elm_bootstrap$Bootstrap$Alert$Closed = {$: 'Closed'};
+var $rundis$elm_bootstrap$Bootstrap$Alert$closed = $rundis$elm_bootstrap$Bootstrap$Alert$Closed;
 var $elm_community$list_extra$List$Extra$find = F2(
 	function (predicate, list) {
 		find:
@@ -9033,6 +9035,7 @@ var $author$project$Main$init = F3(
 				navKey: key,
 				navbarState: navbarState,
 				notSelectedCards: notSelected,
+				returnViewHintVisibility: $rundis$elm_bootstrap$Bootstrap$Alert$closed,
 				selectedCards: selected,
 				shareModalVisibility: $rundis$elm_bootstrap$Bootstrap$Modal$hidden,
 				showCardPoolDetails: false,
@@ -10041,11 +10044,13 @@ var $author$project$Main$update = F2(
 						{cardDisplay: display}),
 					$elm$core$Platform$Cmd$none);
 			case 'ChangeInventoryDisplayType':
-				var display = msg.a;
+				var showReturnHint = msg.a;
+				var display = msg.b;
+				var visibility = showReturnHint ? $rundis$elm_bootstrap$Bootstrap$Alert$shown : $rundis$elm_bootstrap$Bootstrap$Alert$closed;
 				return _Utils_Tuple2(
 					_Utils_update(
 						model,
-						{inventoryDisplay: display}),
+						{inventoryDisplay: display, returnViewHintVisibility: visibility, summarizeViewHintVisibility: $rundis$elm_bootstrap$Bootstrap$Alert$closed}),
 					$elm$core$Platform$Cmd$none);
 			case 'SelectCard':
 				var id = msg.a;
@@ -14022,9 +14027,10 @@ var $author$project$Main$inventoryToggleButton = A2(
 		]));
 var $rundis$elm_bootstrap$Bootstrap$Internal$Role$Dark = {$: 'Dark'};
 var $rundis$elm_bootstrap$Bootstrap$Utilities$Border$dark = A2($rundis$elm_bootstrap$Bootstrap$Internal$Role$toClass, 'border', $rundis$elm_bootstrap$Bootstrap$Internal$Role$Dark);
-var $author$project$Main$ChangeInventoryDisplayType = function (a) {
-	return {$: 'ChangeInventoryDisplayType', a: a};
-};
+var $author$project$Main$ChangeInventoryDisplayType = F2(
+	function (a, b) {
+		return {$: 'ChangeInventoryDisplayType', a: a, b: b};
+	});
 var $author$project$Main$InventoryAsSummary = {$: 'InventoryAsSummary'};
 var $author$project$Main$ToggleSummarizeViewHint = function (a) {
 	return {$: 'ToggleSummarizeViewHint', a: a};
@@ -15579,7 +15585,6 @@ var $author$project$Main$summaryCardView = F2(
 									])))))
 				]));
 	});
-var $rundis$elm_bootstrap$Bootstrap$Alert$Closed = {$: 'Closed'};
 var $rundis$elm_bootstrap$Bootstrap$Alert$StartClose = {$: 'StartClose'};
 var $rundis$elm_bootstrap$Bootstrap$Alert$clickHandler = F2(
 	function (visibility, configRec) {
@@ -15707,7 +15712,7 @@ var $rundis$elm_bootstrap$Bootstrap$Alert$view = F2(
 			A3($rundis$elm_bootstrap$Bootstrap$Alert$maybeAddDismissButton, visibility, configRec, configRec.children));
 	});
 var $author$project$Main$inventoryContentView = function (model) {
-	var alertContent = _List_fromArray(
+	var summaryAlertContent = _List_fromArray(
 		[
 			$elm$html$Html$text('Click the list icon above to switch to '),
 			A2(
@@ -15717,7 +15722,7 @@ var $author$project$Main$inventoryContentView = function (model) {
 					$elm$html$Html$Attributes$class('success-alert-link'),
 					$elm$html$Html$Attributes$href('#'),
 					$elm$html$Html$Events$onClick(
-					$author$project$Main$ChangeInventoryDisplayType($author$project$Main$InventoryAsSummary))
+					A2($author$project$Main$ChangeInventoryDisplayType, true, $author$project$Main$InventoryAsSummary))
 				]),
 			_List_fromArray(
 				[
@@ -15725,25 +15730,44 @@ var $author$project$Main$inventoryContentView = function (model) {
 				])),
 			$elm$html$Html$text('.')
 		]);
-	var alert = function (children) {
-		return A2(
-			$elm$html$Html$div,
-			_List_fromArray(
-				[$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$ml2, $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$mr2, $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$mt2]),
+	var returnAlertContent = _List_fromArray(
+		[
+			$elm$html$Html$text('Return to '),
+			A2(
+			$elm$html$Html$a,
 			_List_fromArray(
 				[
-					A2(
-					$rundis$elm_bootstrap$Bootstrap$Alert$view,
-					model.summarizeViewHintVisibility,
-					A2(
-						$rundis$elm_bootstrap$Bootstrap$Alert$children,
-						children,
+					$elm$html$Html$Attributes$class('success-alert-link'),
+					$elm$html$Html$Attributes$href('#'),
+					$elm$html$Html$Events$onClick(
+					A2($author$project$Main$ChangeInventoryDisplayType, false, $author$project$Main$InventoryAsCards))
+				]),
+			_List_fromArray(
+				[
+					$elm$html$Html$text('previous view')
+				])),
+			$elm$html$Html$text('.')
+		]);
+	var alert = F2(
+		function (visibility, children) {
+			return A2(
+				$elm$html$Html$div,
+				_List_fromArray(
+					[$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$ml2, $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$mr2, $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$mt2]),
+				_List_fromArray(
+					[
 						A2(
-							$rundis$elm_bootstrap$Bootstrap$Alert$dismissableWithAnimation,
-							$author$project$Main$ToggleSummarizeViewHint,
-							$rundis$elm_bootstrap$Bootstrap$Alert$success($rundis$elm_bootstrap$Bootstrap$Alert$config))))
-				]));
-	};
+						$rundis$elm_bootstrap$Bootstrap$Alert$view,
+						visibility,
+						A2(
+							$rundis$elm_bootstrap$Bootstrap$Alert$children,
+							children,
+							A2(
+								$rundis$elm_bootstrap$Bootstrap$Alert$dismissableWithAnimation,
+								$author$project$Main$ToggleSummarizeViewHint,
+								$rundis$elm_bootstrap$Bootstrap$Alert$success($rundis$elm_bootstrap$Bootstrap$Alert$config))))
+					]));
+		});
 	var _v0 = model.inventoryDisplay;
 	if (_v0.$ === 'InventoryAsCards') {
 		return A2(
@@ -15753,7 +15777,7 @@ var $author$project$Main$inventoryContentView = function (model) {
 				_List_Nil,
 				_List_fromArray(
 					[
-						alert(alertContent)
+						A2(alert, model.summarizeViewHintVisibility, summaryAlertContent)
 					])),
 			A2(
 				$elm$core$List$indexedMap,
@@ -15766,11 +15790,20 @@ var $author$project$Main$inventoryContentView = function (model) {
 					}),
 				model.selectedCards));
 	} else {
-		return _List_fromArray(
-			[
-				$author$project$Main$inventorySummaryView(model.selectedCards),
-				$author$project$Main$inventoryProgressView(model.selectedCards)
-			]);
+		return A2(
+			$elm$core$List$cons,
+			A2(
+				$rundis$elm_bootstrap$Bootstrap$Grid$col,
+				_List_Nil,
+				_List_fromArray(
+					[
+						A2(alert, model.returnViewHintVisibility, returnAlertContent)
+					])),
+			_List_fromArray(
+				[
+					$author$project$Main$inventorySummaryView(model.selectedCards),
+					$author$project$Main$inventoryProgressView(model.selectedCards)
+				]));
 	}
 };
 var $author$project$Main$ConfirmResetModal = {$: 'ConfirmResetModal'};
@@ -15808,7 +15841,7 @@ var $author$project$Main$inventoryStyleToggle = F2(
 						[
 							$rundis$elm_bootstrap$Bootstrap$Button$secondary,
 							$rundis$elm_bootstrap$Bootstrap$Button$onClick(
-							$author$project$Main$ChangeInventoryDisplayType($author$project$Main$InventoryAsCards))
+							A2($author$project$Main$ChangeInventoryDisplayType, false, $author$project$Main$InventoryAsCards))
 						]),
 					_List_fromArray(
 						[
@@ -15821,7 +15854,7 @@ var $author$project$Main$inventoryStyleToggle = F2(
 						[
 							$rundis$elm_bootstrap$Bootstrap$Button$secondary,
 							$rundis$elm_bootstrap$Bootstrap$Button$onClick(
-							$author$project$Main$ChangeInventoryDisplayType($author$project$Main$InventoryAsSummary))
+							A2($author$project$Main$ChangeInventoryDisplayType, false, $author$project$Main$InventoryAsSummary))
 						]),
 					_List_fromArray(
 						[

@@ -92,6 +92,7 @@ type alias Model =
     , hostUrl: Url
     , navKey: Key
     , summarizeViewHintVisibility: Alert.Visibility
+    , returnViewHintVisibility: Alert.Visibility
     --------------
     , cardPool : List Card -- All known cards, should never be modified
     , selectedCards : List Card -- All currently selected cards
@@ -180,6 +181,7 @@ init flags url key =
       , showCardPoolDetails = False
       , filter = Nothing
       , summarizeViewHintVisibility = Alert.shown
+      , returnViewHintVisibility = Alert.closed
       , shareModalVisibility = Modal.hidden
       , yesNoModalVisibility = Modal.hidden
       , helpModalVisibility = Modal.hidden
@@ -208,7 +210,7 @@ type Msg
     | CopyShareUrl String
     | CopyShareUrlResult Bool
     | ChangeCardDisplayType CardDisplay
-    | ChangeInventoryDisplayType InventoryDisplay
+    | ChangeInventoryDisplayType Bool InventoryDisplay
     | ShowYesNoModal YesNoModalContent
     | ConfirmResetModal
     | RejectResetModal
@@ -316,8 +318,13 @@ update msg model =
         ChangeCardDisplayType display ->
             ( { model | cardDisplay = display }, Cmd.none )
 
-        ChangeInventoryDisplayType display ->
-            ( { model | inventoryDisplay = display }, Cmd.none )
+        ChangeInventoryDisplayType showReturnHint display ->
+            let
+                visibility = 
+                    if showReturnHint then Alert.shown
+                    else Alert.closed
+            in                       
+            ( { model | inventoryDisplay = display, returnViewHintVisibility = visibility, summarizeViewHintVisibility = Alert.closed }, Cmd.none )
 
         SelectCard id ->
             let
@@ -587,11 +594,11 @@ inventoryStyleToggle inventoryDisplay extraClasses =
     ButtonGroup.radioButtonGroup [ ButtonGroup.small, ButtonGroup.attrs [ class ("d-flex align-items-center " ++ extraClasses), Spacing.ml3 ] ]
         [ ButtonGroup.radioButton
             (inventoryDisplay == InventoryAsCards)
-            [ Button.secondary, Button.onClick <| (ChangeInventoryDisplayType InventoryAsCards) ]
+            [ Button.secondary, Button.onClick <| (ChangeInventoryDisplayType False InventoryAsCards) ]
             [ FontAwesome.Solid.layerGroup |> FontAwesome.Icon.viewIcon ]
         , ButtonGroup.radioButton
             (inventoryDisplay == InventoryAsSummary)
-            [ Button.secondary, Button.onClick <| (ChangeInventoryDisplayType InventoryAsSummary) ]
+            [ Button.secondary, Button.onClick <| (ChangeInventoryDisplayType False InventoryAsSummary) ]
             [ FontAwesome.Solid.list |> FontAwesome.Icon.viewIcon ]
         ]
 
@@ -671,27 +678,34 @@ inventoryHeaderView numberOfSelectedCards display =
 inventoryContentView : Model -> List (Grid.Column Msg)
 inventoryContentView model =
     let
-        alertContent =
+        summaryAlertContent =
             [ text "Click the list icon above to switch to "
-            , Html.a [ class "success-alert-link", href "#", onClick (ChangeInventoryDisplayType InventoryAsSummary) ] [ text "summarized view" ]
+            , Html.a [ class "success-alert-link", href "#", onClick (ChangeInventoryDisplayType True InventoryAsSummary) ] [ text "summarized view" ]
             , text "."
             ]
             
-        alert children =
+        returnAlertContent =
+            [ text "Return to "
+            , Html.a [ class "success-alert-link", href "#", onClick (ChangeInventoryDisplayType False InventoryAsCards) ] [ text "previous view" ]
+            , text "."
+            ]
+            
+        alert visibility children =
             div [ Spacing.ml2, Spacing.mr2, Spacing.mt2 ]
             [ Alert.config
               |> Alert.success
               |> Alert.dismissableWithAnimation ToggleSummarizeViewHint
               |> Alert.children children
-              |> Alert.view model.summarizeViewHintVisibility
+              |> Alert.view visibility
             ]
     in
     case model.inventoryDisplay of
         InventoryAsCards ->
-            (Grid.col [] [ alert alertContent ])
+            (Grid.col [] [ alert model.summarizeViewHintVisibility summaryAlertContent ])
             :: (model.selectedCards |> List.indexedMap (\i c -> summaryCardView (Just (i + 1)) c))
         InventoryAsSummary ->
-            [ inventorySummaryView model.selectedCards, inventoryProgressView model.selectedCards ]
+            (Grid.col [] [ alert model.returnViewHintVisibility returnAlertContent ])
+            :: [ inventorySummaryView model.selectedCards, inventoryProgressView model.selectedCards ]
 
 
 cardBackgroundColor : Card -> Card.Option msg
