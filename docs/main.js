@@ -15404,6 +15404,7 @@ var $author$project$Main$inventorySummaryView = function (cards) {
 };
 var $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$mb3 = $elm$html$Html$Attributes$class('mb-3');
 var $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$ml2 = $elm$html$Html$Attributes$class('ml-2');
+var $rundis$elm_bootstrap$Bootstrap$Utilities$Display$none = $elm$html$Html$Attributes$class('d-none');
 var $rundis$elm_bootstrap$Bootstrap$Internal$Role$Success = {$: 'Success'};
 var $rundis$elm_bootstrap$Bootstrap$Alert$role = F2(
 	function (role_, _v0) {
@@ -15791,46 +15792,48 @@ var $author$project$Main$inventoryContentView = function (model) {
 	};
 	var alert = F2(
 		function (visibility, children) {
-			return A2(
-				$elm$html$Html$div,
+			return _Utils_eq(visibility, $rundis$elm_bootstrap$Bootstrap$Alert$closed) ? A2(
+				$rundis$elm_bootstrap$Bootstrap$Grid$col,
 				_List_fromArray(
-					[$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$ml2, $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$mr2, $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$mt2]),
+					[
+						$rundis$elm_bootstrap$Bootstrap$Grid$Col$attrs(
+						_List_fromArray(
+							[$rundis$elm_bootstrap$Bootstrap$Utilities$Display$none]))
+					]),
+				_List_Nil) : A2(
+				$rundis$elm_bootstrap$Bootstrap$Grid$col,
+				_List_Nil,
 				_List_fromArray(
 					[
 						A2(
-						$rundis$elm_bootstrap$Bootstrap$Alert$view,
-						visibility,
-						A2(
-							$rundis$elm_bootstrap$Bootstrap$Alert$children,
-							children,
-							A2(
-								$rundis$elm_bootstrap$Bootstrap$Alert$dismissableWithAnimation,
-								$author$project$Main$ToggleSummarizeViewHint,
-								$rundis$elm_bootstrap$Bootstrap$Alert$success($rundis$elm_bootstrap$Bootstrap$Alert$config))))
+						$elm$html$Html$div,
+						_List_fromArray(
+							[$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$ml2, $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$mr2, $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$mt2]),
+						_List_fromArray(
+							[
+								A2(
+								$rundis$elm_bootstrap$Bootstrap$Alert$view,
+								visibility,
+								A2(
+									$rundis$elm_bootstrap$Bootstrap$Alert$children,
+									children,
+									A2(
+										$rundis$elm_bootstrap$Bootstrap$Alert$dismissableWithAnimation,
+										$author$project$Main$ToggleSummarizeViewHint,
+										$rundis$elm_bootstrap$Bootstrap$Alert$success($rundis$elm_bootstrap$Bootstrap$Alert$config))))
+							]))
 					]));
 		});
 	var _v0 = model.inventoryDisplay;
 	if (_v0.$ === 'InventoryAsCards') {
 		return A2(
 			$elm$core$List$cons,
-			A2(
-				$rundis$elm_bootstrap$Bootstrap$Grid$col,
-				_List_Nil,
-				_List_fromArray(
-					[
-						A2(alert, model.summarizeViewHintVisibility, summaryAlertContent)
-					])),
+			A2(alert, model.summarizeViewHintVisibility, summaryAlertContent),
 			asCardsView(model.selectedCards));
 	} else {
 		return A2(
 			$elm$core$List$cons,
-			A2(
-				$rundis$elm_bootstrap$Bootstrap$Grid$col,
-				_List_Nil,
-				_List_fromArray(
-					[
-						A2(alert, model.returnViewHintVisibility, returnAlertContent)
-					])),
+			A2(alert, model.returnViewHintVisibility, returnAlertContent),
 			asSummaryView(model.selectedCards));
 	}
 };

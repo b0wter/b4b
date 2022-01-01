@@ -691,13 +691,18 @@ inventoryContentView model =
             ]
             
         alert visibility children =
-            div [ Spacing.ml2, Spacing.mr2, Spacing.mt2 ]
-            [ Alert.config
-              |> Alert.success
-              |> Alert.dismissableWithAnimation ToggleSummarizeViewHint
-              |> Alert.children children
-              |> Alert.view visibility
-            ]
+            if visibility == Alert.closed then
+                Grid.col [ Col.attrs [ Display.none ] ] []
+            else
+                Grid.col []
+                [ div [ Spacing.ml2, Spacing.mr2, Spacing.mt2 ]
+                  [ Alert.config
+                    |> Alert.success
+                    |> Alert.dismissableWithAnimation ToggleSummarizeViewHint
+                    |> Alert.children children
+                    |> Alert.view visibility
+                  ]
+                ]
             
         emptyDeckHint =
             [ Grid.col [ Col.xs12 ] [ div [ Spacing.mb3, class "italic text-center"] [ text "no cards selected" ] ] ]
@@ -712,10 +717,10 @@ inventoryContentView model =
     in
     case model.inventoryDisplay of
         InventoryAsCards ->
-            (Grid.col [] [ alert model.summarizeViewHintVisibility summaryAlertContent ])
+            (alert model.summarizeViewHintVisibility summaryAlertContent)
             :: (model.selectedCards |> asCardsView)
         InventoryAsSummary ->
-            (Grid.col [] [ alert model.returnViewHintVisibility returnAlertContent ])
+            (alert model.returnViewHintVisibility returnAlertContent)
             :: (model.selectedCards |> asSummaryView)
 
 
