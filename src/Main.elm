@@ -87,6 +87,7 @@ type alias Model =
     , shareModalVisibility: Modal.Visibility
     , yesNoModalVisibility: Modal.Visibility
     , yesNoModalContent: Maybe YesNoModalContent
+    , helpModalVisibility : Modal.Visibility
     , hostUrl: Url
     , navKey: Key
     --------------
@@ -178,6 +179,7 @@ init flags url key =
       , filter = Nothing
       , shareModalVisibility = Modal.hidden
       , yesNoModalVisibility = Modal.hidden
+      , helpModalVisibility = Modal.hidden
       , yesNoModalContent = Nothing
       , hostUrl = hostUrl
       , navKey = key
@@ -208,6 +210,7 @@ type Msg
     | ConfirmResetModal
     | RejectResetModal
     | ToggleCardDetails
+    | ToggleHelpModal
     ---------------------------
     | SelectCard CardId
     | DeselectCard CardId
@@ -267,6 +270,15 @@ update msg model =
 
         ShowYesNoModal content ->
             ( { model | yesNoModalContent = Just content, yesNoModalVisibility = Modal.shown }, Cmd.none )
+
+
+        ToggleHelpModal ->
+            let 
+                visibility =
+                    if model.helpModalVisibility == Modal.shown then Modal.hidden
+                    else Modal.shown
+            in
+            ( { model | helpModalVisibility = visibility }, Cmd.none )
 
 
         ConfirmResetModal ->
@@ -404,17 +416,17 @@ view model =
 
 inventoryToggleButton : Html Msg
 inventoryToggleButton =
-    Html.a [ id "inventory-toggle-button", class "action-button-right btn btn-light d-flex d-md-none pointer" ]
+    Html.a [ id "inventory-toggle-button", class "action-button-right action-button-1 btn btn-light d-flex d-md-none pointer" ]
     [
         Html.h2 [ class "m-auto grey no-decoration" ] [ FontAwesome.Solid.suitcase |> FontAwesome.Icon.viewIcon ]
     ]
 
 
-scrollUpActionButton : Html Msg
-scrollUpActionButton =
-    Html.a [ id "inventory-toggle-button", class "action-button-left btn btn-light d-flex d-md-none pointer" ]
+helpActionButton : Html Msg
+helpActionButton =
+    Html.a [ id "help-toggle-button", class "action-button-right action-button-2 btn btn-light d-flex pointer", onClick ToggleHelpModal ]
     [
-        Html.h2 [ class "m-auto grey no-decoration" ] [ FontAwesome.Solid.chevronUp |> FontAwesome.Icon.viewIcon ]
+        Html.h2 [ class "m-auto grey no-decoration" ] [ FontAwesome.Solid.question |> FontAwesome.Icon.viewIcon ]
     ]
 
 
@@ -470,6 +482,66 @@ yesNoModal visibility content =
             [ text "No" ]
         ]
     |> Modal.view visibility
+    
+    
+helpModal : Modal.Visibility -> Html Msg
+helpModal visibility =
+    Modal.config ToggleHelpModal
+    |> Modal.large
+    |> Modal.hideOnBackdropClick True
+    |> Modal.h3 [] [ text "How to use" ]
+    |> Modal.body [ style "overflow" "scroll", style "max-height" "36em" ] 
+       [ Html.h5 [] [ text "Card Pool" ]
+       , div [] [ text "The card pool contains all cards except the ones you have currently selected."]
+       , div [] [ text "You can use the filter to filter for arbitrary words. Only cards whose title or description contain all words (in any order) are displayed." ]
+       , div [] [ text "To share your deck use the share dialog (see below) or copy the current url."]
+       , div [] [ text "Use the x-button to clear the filter."]
+       , div [] [ text "Next to the filter there are three buttons:" ]
+       , div [ Flex.block, Flex.alignItemsCenter ] 
+         [ div [ Spacing.mr2 ] [ FontAwesome.Solid.alignLeft |> FontAwesome.Icon.viewIcon ]
+         , text "Displays cards in the pool as text."
+         ]
+       , div [ Flex.block, Flex.alignItemsCenter ] 
+         [ div [ Spacing.mr2 ] [ FontAwesome.Solid.image |> FontAwesome.Icon.viewIcon ]
+         , text "Displays cards in the pool as images."
+         ]
+       , div [ Flex.block, Flex.alignItemsCenter ] 
+         [ div [ Spacing.mr2 ] [ FontAwesome.Solid.info |> FontAwesome.Icon.viewIcon ]
+         , text "Displays card supply line details."
+         ]
+       , Html.h5 [ Spacing.mt3 ] [ text "Inventory" ]
+       , div [] [ text "The inventory contains all cards you have selected. You may select more than 15 cards." ]
+       , div [] [ text "You can arrange and remove cards by pressing the arrow up/down or x button." ]
+       , div [] [ text "There are two ways to display the inventory:"]
+       , div [ Flex.block, Flex.alignItemsStart, Spacing.mt1 ] 
+         [ div [ Spacing.mr2 ] [ FontAwesome.Solid.layerGroup |> FontAwesome.Icon.viewIcon ]
+         , text "Show each card individually."
+         ]
+       , div [ Flex.block, Flex.alignItemsStart, Spacing.mt1 ] 
+         [ div [ Spacing.mr2 ] [ FontAwesome.Solid.list |> FontAwesome.Icon.viewIcon ]
+         , text "Show a summarized view of the cards. All passive effects (like +X% health) are merged into single entries."
+         , text "E.g. `+15% Health`, `-5% Health` and `+10% Health` only show as a single entry (`+20% Health)."
+         , text "This view also summarizes the required supply line progress as well as required achievements." 
+         ]
+       , div [ Flex.block, Flex.alignItemsStart, Spacing.mt1 ] 
+         [ div [ Spacing.mr2 ] [ FontAwesome.Solid.share |> FontAwesome.Icon.viewIcon ]
+         , text "Opens the share dialog."
+         ]
+       , div [ Flex.block, Flex.alignItemsStart, Spacing.mt1 ] 
+         [ div [ Spacing.mr2 ] [ FontAwesome.Solid.times |> FontAwesome.Icon.viewIcon ]
+         , text "Clears the current inventory."
+         ]
+       ]
+       {-
+       [ Html.h5 [] [ text "Basic Usage"]
+       , div [] [ text "This tool allows you to plan custom card decks for Back 4 Blood. The tool only supports the campaign version of the cards."]
+       , div [] [ text "To add cards to your selection simply click the `Select` button on the card you want."]
+       , div [] [ text "The `inventory` (aka the cards you selected) are either displayed on the right side on the screen or are accessible by using " ]
+       , div [] [ text "round action button (with the suitcase) on the lower right if you're on a mobile device."]
+       , Html.h5 [] [  ]
+       ]
+       -}
+    |> Modal.view visibility
 
 
 mainContent : Model -> List (Html Msg)
@@ -481,8 +553,10 @@ mainContent model =
     in
     [ shareModal model
     , resetModal
+    , helpModal model.helpModalVisibility
     , Grid.row [ ] [ cardPoolView model, inventoryView model ]
     , inventoryToggleButton
+    , helpActionButton
     ]
 
 
@@ -828,7 +902,7 @@ fullCardViewWithText showDetails card =
                     )
                   , details
                 ]
-            |> Card.footer [ Spacing.mt2, Spacing.mt0Sm ]
+            |> Card.footer [ Spacing.mt2 ]
                 [ Button.button [ buttonBackground, Button.small, Button.attrs [ Size.w100, onClick (SelectCard card.id) ] ] [ text "Select" ]
                 ]
             |> Card.view

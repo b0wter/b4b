@@ -25,11 +25,18 @@
 
 .action-button-right {
     position: fixed;
-    bottom: 1em;
     right: 1em;
     width: 4em;
     height: 4em;
     border-radius: 50% !important;
+}
+
+.action-button-1 {
+    bottom: 1em;
+}
+
+.action-button-2 {
+    bottom: 6em;
 }
 
 .action-button-left {
@@ -97,6 +104,10 @@
         overflow: hidden;
         text-overflow: ellipsis;
         width: 9em;
+    }
+
+    .action-button-2 {
+        bottom: 1em;
     }
 }
 
