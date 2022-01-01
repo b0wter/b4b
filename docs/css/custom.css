@@ -172,3 +172,7 @@
 .font-weight-semi-bold {
     font-weight: 600;
 }
+
+.italic {
+    font-style: italic;
+}

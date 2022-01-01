@@ -15403,6 +15403,7 @@ var $author$project$Main$inventorySummaryView = function (cards) {
 				A2(cardWithListContentAndHeader, 'Disables', mergedProperties.disables))
 			]));
 };
+var $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$mb3 = $elm$html$Html$Attributes$class('mb-3');
 var $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$ml2 = $elm$html$Html$Attributes$class('ml-2');
 var $rundis$elm_bootstrap$Bootstrap$Internal$Role$Success = {$: 'Success'};
 var $rundis$elm_bootstrap$Bootstrap$Alert$role = F2(
@@ -15748,6 +15749,46 @@ var $author$project$Main$inventoryContentView = function (model) {
 				])),
 			$elm$html$Html$text('.')
 		]);
+	var emptyDeckHint = _List_fromArray(
+		[
+			A2(
+			$rundis$elm_bootstrap$Bootstrap$Grid$col,
+			_List_fromArray(
+				[$rundis$elm_bootstrap$Bootstrap$Grid$Col$xs12]),
+			_List_fromArray(
+				[
+					A2(
+					$elm$html$Html$div,
+					_List_fromArray(
+						[
+							$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$mb3,
+							$elm$html$Html$Attributes$class('italic text-center')
+						]),
+					_List_fromArray(
+						[
+							$elm$html$Html$text('no cards selected')
+						]))
+				]))
+		]);
+	var asSummaryView = function (cards) {
+		return $elm$core$List$isEmpty(cards) ? emptyDeckHint : _List_fromArray(
+			[
+				$author$project$Main$inventorySummaryView(model.selectedCards),
+				$author$project$Main$inventoryProgressView(model.selectedCards)
+			]);
+	};
+	var asCardsView = function (cards) {
+		return $elm$core$List$isEmpty(cards) ? emptyDeckHint : A2(
+			$elm$core$List$indexedMap,
+			F2(
+				function (i, c) {
+					return A2(
+						$author$project$Main$summaryCardView,
+						$elm$core$Maybe$Just(i + 1),
+						c);
+				}),
+			cards);
+	};
 	var alert = F2(
 		function (visibility, children) {
 			return A2(
@@ -15779,16 +15820,7 @@ var $author$project$Main$inventoryContentView = function (model) {
 					[
 						A2(alert, model.summarizeViewHintVisibility, summaryAlertContent)
 					])),
-			A2(
-				$elm$core$List$indexedMap,
-				F2(
-					function (i, c) {
-						return A2(
-							$author$project$Main$summaryCardView,
-							$elm$core$Maybe$Just(i + 1),
-							c);
-					}),
-				model.selectedCards));
+			asCardsView(model.selectedCards));
 	} else {
 		return A2(
 			$elm$core$List$cons,
@@ -15799,11 +15831,7 @@ var $author$project$Main$inventoryContentView = function (model) {
 					[
 						A2(alert, model.returnViewHintVisibility, returnAlertContent)
 					])),
-			_List_fromArray(
-				[
-					$author$project$Main$inventorySummaryView(model.selectedCards),
-					$author$project$Main$inventoryProgressView(model.selectedCards)
-				]));
+			asSummaryView(model.selectedCards));
 	}
 };
 var $author$project$Main$ConfirmResetModal = {$: 'ConfirmResetModal'};

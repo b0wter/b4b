@@ -698,14 +698,25 @@ inventoryContentView model =
               |> Alert.children children
               |> Alert.view visibility
             ]
+            
+        emptyDeckHint =
+            [ Grid.col [ Col.xs12 ] [ div [ Spacing.mb3, class "italic text-center"] [ text "no cards selected" ] ] ]
+            
+        asCardsView cards =
+            if cards |> List.isEmpty then emptyDeckHint
+            else cards |> List.indexedMap (\i c -> summaryCardView (Just (i + 1)) c)
+            
+        asSummaryView cards =
+            if cards |> List.isEmpty then emptyDeckHint
+            else [ inventorySummaryView model.selectedCards, inventoryProgressView model.selectedCards ]
     in
     case model.inventoryDisplay of
         InventoryAsCards ->
             (Grid.col [] [ alert model.summarizeViewHintVisibility summaryAlertContent ])
-            :: (model.selectedCards |> List.indexedMap (\i c -> summaryCardView (Just (i + 1)) c))
+            :: (model.selectedCards |> asCardsView)
         InventoryAsSummary ->
             (Grid.col [] [ alert model.returnViewHintVisibility returnAlertContent ])
-            :: [ inventorySummaryView model.selectedCards, inventoryProgressView model.selectedCards ]
+            :: (model.selectedCards |> asSummaryView)
 
 
 cardBackgroundColor : Card -> Card.Option msg
