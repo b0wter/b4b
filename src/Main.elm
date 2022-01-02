@@ -168,7 +168,7 @@ init flags url key =
             |> Maybe.values
 
         notSelected =
-            cards |> List.filter (\c -> selected |> List.all  ((/=) c)) --(\s -> s /= c ))
+            cards |> List.filter (\c -> selected |> List.all  ((/=) c)) 
 
         hostUrl =
             { url | query = Nothing, fragment = Nothing }
@@ -446,7 +446,7 @@ inventoryToggleButton numberOfSelectedCards =
     in
     Html.a [ id "inventory-toggle-button", class ("action-button-right action-button-1 btn d-flex d-md-none pointer " ++ background) ]
     [
-        Html.h2 [ class "m-auto grey no-decoration" ] [ content ] --[ FontAwesome.Solid.suitcase |> FontAwesome.Icon.viewIcon ]
+        Html.h2 [ class "m-auto grey no-decoration" ] [ content ] 
     ]
 
 scrollToTopToggleButton : Html Msg
@@ -1070,7 +1070,6 @@ inventoryProgressView cards =
                   |> Card.header [ class "inventory-summary-sub-card-header bg-transparent" ] [ Html.small [] [ text "Achievements" ] ]
                   |> Card.block [ Block.attrs [ class "inventory-summary-sub-card-body" ] ]
                      [ Block.custom (Html.ul [ class "inventory-summary-sub-card-list pl-xl-3" ] (requirements.achievementRequirement |> List.map createLi))
-                     --[ Block.custom (Html.ul [ class "inventory-summary-sub-card-list pl-xl-3" ] (requirements.achievementRequirement |> List.map (\a -> Html.li [] [ text a ])))
                      ]
                   |> Card.view
                 ]
