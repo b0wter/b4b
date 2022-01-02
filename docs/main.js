@@ -13289,6 +13289,21 @@ var $rundis$elm_bootstrap$Bootstrap$Modal$config = function (closeMsg) {
 			withAnimation: $elm$core$Maybe$Nothing
 		});
 };
+var $rundis$elm_bootstrap$Bootstrap$Modal$Footer = function (a) {
+	return {$: 'Footer', a: a};
+};
+var $rundis$elm_bootstrap$Bootstrap$Modal$footer = F3(
+	function (attributes, children, _v0) {
+		var conf = _v0.a;
+		return $rundis$elm_bootstrap$Bootstrap$Modal$Config(
+			_Utils_update(
+				conf,
+				{
+					footer: $elm$core$Maybe$Just(
+						$rundis$elm_bootstrap$Bootstrap$Modal$Footer(
+							{attributes: attributes, children: children}))
+				}));
+	});
 var $elm$html$Html$h3 = _VirtualDom_node('h3');
 var $rundis$elm_bootstrap$Bootstrap$Modal$Header = function (a) {
 	return {$: 'Header', a: a};
@@ -13368,6 +13383,12 @@ var $lattyware$elm_fontawesome$FontAwesome$Solid$list = A5(
 		['M80 368H16a16 16 0 0 0-16 16v64a16 16 0 0 0 16 16h64a16 16 0 0 0 16-16v-64a16 16 0 0 0-16-16zm0-320H16A16 16 0 0 0 0 64v64a16 16 0 0 0 16 16h64a16 16 0 0 0 16-16V64a16 16 0 0 0-16-16zm0 160H16a16 16 0 0 0-16 16v64a16 16 0 0 0 16 16h64a16 16 0 0 0 16-16v-64a16 16 0 0 0-16-16zm416 176H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16zm0-320H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16V80a16 16 0 0 0-16-16zm0 160H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16z']));
 var $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$mr2 = $elm$html$Html$Attributes$class('mr-2');
 var $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$mt1 = $elm$html$Html$Attributes$class('mt-1');
+var $rundis$elm_bootstrap$Bootstrap$Internal$Button$Outlined = function (a) {
+	return {$: 'Outlined', a: a};
+};
+var $rundis$elm_bootstrap$Bootstrap$Internal$Button$Primary = {$: 'Primary'};
+var $rundis$elm_bootstrap$Bootstrap$Button$outlinePrimary = $rundis$elm_bootstrap$Bootstrap$Internal$Button$Coloring(
+	$rundis$elm_bootstrap$Bootstrap$Internal$Button$Outlined($rundis$elm_bootstrap$Bootstrap$Internal$Button$Primary));
 var $lattyware$elm_fontawesome$FontAwesome$Solid$share = A5(
 	$lattyware$elm_fontawesome$FontAwesome$Icon$Icon,
 	'fas',
@@ -13710,212 +13731,262 @@ var $author$project$Main$helpModal = function (visibility) {
 		$rundis$elm_bootstrap$Bootstrap$Modal$view,
 		visibility,
 		A3(
-			$rundis$elm_bootstrap$Bootstrap$Modal$body,
-			_List_fromArray(
-				[
-					A2($elm$html$Html$Attributes$style, 'overflow', 'scroll'),
-					A2($elm$html$Html$Attributes$style, 'max-height', 'calc(70vh)')
-				]),
+			$rundis$elm_bootstrap$Bootstrap$Modal$footer,
+			_List_Nil,
 			_List_fromArray(
 				[
 					A2(
-					$elm$html$Html$h5,
-					_List_Nil,
+					$rundis$elm_bootstrap$Bootstrap$Button$button,
 					_List_fromArray(
 						[
-							$elm$html$Html$text('Card Pool')
-						])),
-					A2(
-					$elm$html$Html$div,
-					_List_Nil,
-					_List_fromArray(
-						[
-							$elm$html$Html$text('The card pool contains all cards except the ones you have currently selected.')
-						])),
-					A2(
-					$elm$html$Html$div,
-					_List_Nil,
-					_List_fromArray(
-						[
-							$elm$html$Html$text('You can use the filter to filter for arbitrary words. Only cards whose title or description contain all words (in any order) are displayed.')
-						])),
-					A2(
-					$elm$html$Html$div,
-					_List_Nil,
-					_List_fromArray(
-						[
-							$elm$html$Html$text('To share your deck use the share dialog (see below) or copy the current url.')
-						])),
-					A2(
-					$elm$html$Html$div,
-					_List_Nil,
-					_List_fromArray(
-						[
-							$elm$html$Html$text('Use the x-button to clear the filter.')
-						])),
-					A2(
-					$elm$html$Html$div,
-					_List_Nil,
-					_List_fromArray(
-						[
-							$elm$html$Html$text('Next to the filter there are three buttons:')
-						])),
-					A2(
-					$elm$html$Html$div,
-					_List_fromArray(
-						[$rundis$elm_bootstrap$Bootstrap$Utilities$Flex$block, $rundis$elm_bootstrap$Bootstrap$Utilities$Flex$alignItemsCenter]),
-					_List_fromArray(
-						[
-							A2(
-							$elm$html$Html$div,
-							_List_fromArray(
-								[$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$mr2]),
+							$rundis$elm_bootstrap$Bootstrap$Button$outlinePrimary,
+							$rundis$elm_bootstrap$Bootstrap$Button$attrs(
 							_List_fromArray(
 								[
-									$lattyware$elm_fontawesome$FontAwesome$Icon$viewIcon($lattyware$elm_fontawesome$FontAwesome$Solid$alignLeft)
-								])),
-							$elm$html$Html$text('Displays cards in the pool as text.')
-						])),
-					A2(
-					$elm$html$Html$div,
-					_List_fromArray(
-						[$rundis$elm_bootstrap$Bootstrap$Utilities$Flex$block, $rundis$elm_bootstrap$Bootstrap$Utilities$Flex$alignItemsCenter]),
+									$elm$html$Html$Events$onClick($author$project$Main$ToggleHelpModal)
+								]))
+						]),
 					_List_fromArray(
 						[
-							A2(
-							$elm$html$Html$div,
-							_List_fromArray(
-								[$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$mr2]),
-							_List_fromArray(
-								[
-									$lattyware$elm_fontawesome$FontAwesome$Icon$viewIcon($lattyware$elm_fontawesome$FontAwesome$Solid$image)
-								])),
-							$elm$html$Html$text('Displays cards in the pool as images.')
-						])),
-					A2(
-					$elm$html$Html$div,
-					_List_fromArray(
-						[$rundis$elm_bootstrap$Bootstrap$Utilities$Flex$block, $rundis$elm_bootstrap$Bootstrap$Utilities$Flex$alignItemsCenter]),
-					_List_fromArray(
-						[
-							A2(
-							$elm$html$Html$div,
-							_List_fromArray(
-								[$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$mr2]),
-							_List_fromArray(
-								[
-									$lattyware$elm_fontawesome$FontAwesome$Icon$viewIcon($lattyware$elm_fontawesome$FontAwesome$Solid$info)
-								])),
-							$elm$html$Html$text('Displays card supply line details.')
-						])),
-					A2(
-					$elm$html$Html$h5,
-					_List_fromArray(
-						[$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$mt3]),
-					_List_fromArray(
-						[
-							$elm$html$Html$text('Inventory')
-						])),
-					A2(
-					$elm$html$Html$div,
-					_List_Nil,
-					_List_fromArray(
-						[
-							$elm$html$Html$text('The inventory contains all cards you have selected. You may select more than 15 cards.')
-						])),
-					A2(
-					$elm$html$Html$div,
-					_List_Nil,
-					_List_fromArray(
-						[
-							$elm$html$Html$text('You can arrange and remove cards by pressing the arrow up/down or x button.')
-						])),
-					A2(
-					$elm$html$Html$div,
-					_List_Nil,
-					_List_fromArray(
-						[
-							$elm$html$Html$text('There are two ways to display the inventory:')
-						])),
-					A2(
-					$elm$html$Html$div,
-					_List_fromArray(
-						[$rundis$elm_bootstrap$Bootstrap$Utilities$Flex$block, $rundis$elm_bootstrap$Bootstrap$Utilities$Flex$alignItemsStart, $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$mt1]),
-					_List_fromArray(
-						[
-							A2(
-							$elm$html$Html$div,
-							_List_fromArray(
-								[$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$mr2]),
-							_List_fromArray(
-								[
-									$lattyware$elm_fontawesome$FontAwesome$Icon$viewIcon($lattyware$elm_fontawesome$FontAwesome$Solid$layerGroup)
-								])),
-							$elm$html$Html$text('Show each card individually.')
-						])),
-					A2(
-					$elm$html$Html$div,
-					_List_fromArray(
-						[$rundis$elm_bootstrap$Bootstrap$Utilities$Flex$block, $rundis$elm_bootstrap$Bootstrap$Utilities$Flex$alignItemsStart, $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$mt1]),
-					_List_fromArray(
-						[
-							A2(
-							$elm$html$Html$div,
-							_List_fromArray(
-								[$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$mr2]),
-							_List_fromArray(
-								[
-									$lattyware$elm_fontawesome$FontAwesome$Icon$viewIcon($lattyware$elm_fontawesome$FontAwesome$Solid$list)
-								])),
-							$elm$html$Html$text('Show a summarized view of the cards. All passive effects (like +X% health) are merged into single entries.'),
-							$elm$html$Html$text('E.g. `+15% Health`, `-5% Health` and `+10% Health` only show as a single entry (`+20% Health).'),
-							$elm$html$Html$text('This view also summarizes the required supply line progress as well as required achievements.')
-						])),
-					A2(
-					$elm$html$Html$div,
-					_List_fromArray(
-						[$rundis$elm_bootstrap$Bootstrap$Utilities$Flex$block, $rundis$elm_bootstrap$Bootstrap$Utilities$Flex$alignItemsStart, $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$mt1]),
-					_List_fromArray(
-						[
-							A2(
-							$elm$html$Html$div,
-							_List_fromArray(
-								[$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$mr2]),
-							_List_fromArray(
-								[
-									$lattyware$elm_fontawesome$FontAwesome$Icon$viewIcon($lattyware$elm_fontawesome$FontAwesome$Solid$share)
-								])),
-							$elm$html$Html$text('Opens the share dialog.')
-						])),
-					A2(
-					$elm$html$Html$div,
-					_List_fromArray(
-						[$rundis$elm_bootstrap$Bootstrap$Utilities$Flex$block, $rundis$elm_bootstrap$Bootstrap$Utilities$Flex$alignItemsStart, $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$mt1]),
-					_List_fromArray(
-						[
-							A2(
-							$elm$html$Html$div,
-							_List_fromArray(
-								[$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$mr2]),
-							_List_fromArray(
-								[
-									$lattyware$elm_fontawesome$FontAwesome$Icon$viewIcon($lattyware$elm_fontawesome$FontAwesome$Solid$times)
-								])),
-							$elm$html$Html$text('Clears the current inventory.')
+							$elm$html$Html$text('Close')
 						]))
 				]),
 			A3(
-				$rundis$elm_bootstrap$Bootstrap$Modal$h3,
-				_List_Nil,
+				$rundis$elm_bootstrap$Bootstrap$Modal$body,
 				_List_fromArray(
 					[
-						$elm$html$Html$text('How to use')
+						A2($elm$html$Html$Attributes$style, 'overflow', 'scroll'),
+						A2($elm$html$Html$Attributes$style, 'max-height', 'calc(70vh)')
 					]),
-				A2(
-					$rundis$elm_bootstrap$Bootstrap$Modal$hideOnBackdropClick,
-					true,
-					$rundis$elm_bootstrap$Bootstrap$Modal$large(
-						$rundis$elm_bootstrap$Bootstrap$Modal$config($author$project$Main$ToggleHelpModal))))));
+				_List_fromArray(
+					[
+						A2(
+						$elm$html$Html$h5,
+						_List_Nil,
+						_List_fromArray(
+							[
+								$elm$html$Html$text('Card Pool')
+							])),
+						A2(
+						$elm$html$Html$div,
+						_List_Nil,
+						_List_fromArray(
+							[
+								$elm$html$Html$text('The card pool contains all cards except the ones you have currently selected.')
+							])),
+						A2(
+						$elm$html$Html$div,
+						_List_Nil,
+						_List_fromArray(
+							[
+								$elm$html$Html$text('You can use the filter to filter for arbitrary words. Only cards whose title or description contain all words (in any order) are displayed.')
+							])),
+						A2(
+						$elm$html$Html$div,
+						_List_Nil,
+						_List_fromArray(
+							[
+								$elm$html$Html$text('To share your deck use the share dialog (see below) or copy the current url.')
+							])),
+						A2(
+						$elm$html$Html$div,
+						_List_Nil,
+						_List_fromArray(
+							[
+								$elm$html$Html$text('Use the x-button to clear the filter.')
+							])),
+						A2(
+						$elm$html$Html$div,
+						_List_Nil,
+						_List_fromArray(
+							[
+								$elm$html$Html$text('Next to the filter there are three buttons:')
+							])),
+						A2(
+						$elm$html$Html$div,
+						_List_fromArray(
+							[$rundis$elm_bootstrap$Bootstrap$Utilities$Flex$block, $rundis$elm_bootstrap$Bootstrap$Utilities$Flex$alignItemsCenter]),
+						_List_fromArray(
+							[
+								A2(
+								$elm$html$Html$div,
+								_List_fromArray(
+									[$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$mr2]),
+								_List_fromArray(
+									[
+										$lattyware$elm_fontawesome$FontAwesome$Icon$viewIcon($lattyware$elm_fontawesome$FontAwesome$Solid$alignLeft)
+									])),
+								$elm$html$Html$text('Displays cards in the pool as text.')
+							])),
+						A2(
+						$elm$html$Html$div,
+						_List_fromArray(
+							[$rundis$elm_bootstrap$Bootstrap$Utilities$Flex$block, $rundis$elm_bootstrap$Bootstrap$Utilities$Flex$alignItemsCenter]),
+						_List_fromArray(
+							[
+								A2(
+								$elm$html$Html$div,
+								_List_fromArray(
+									[$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$mr2]),
+								_List_fromArray(
+									[
+										$lattyware$elm_fontawesome$FontAwesome$Icon$viewIcon($lattyware$elm_fontawesome$FontAwesome$Solid$image)
+									])),
+								$elm$html$Html$text('Displays cards in the pool as images.')
+							])),
+						A2(
+						$elm$html$Html$div,
+						_List_fromArray(
+							[$rundis$elm_bootstrap$Bootstrap$Utilities$Flex$block, $rundis$elm_bootstrap$Bootstrap$Utilities$Flex$alignItemsCenter]),
+						_List_fromArray(
+							[
+								A2(
+								$elm$html$Html$div,
+								_List_fromArray(
+									[$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$mr2]),
+								_List_fromArray(
+									[
+										$lattyware$elm_fontawesome$FontAwesome$Icon$viewIcon($lattyware$elm_fontawesome$FontAwesome$Solid$info)
+									])),
+								$elm$html$Html$text('Displays card supply line details.')
+							])),
+						A2(
+						$elm$html$Html$h5,
+						_List_fromArray(
+							[$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$mt3]),
+						_List_fromArray(
+							[
+								$elm$html$Html$text('Card Details')
+							])),
+						A2(
+						$elm$html$Html$div,
+						_List_Nil,
+						_List_fromArray(
+							[
+								$elm$html$Html$text('The card details show you the name of the supply line in the top left.')
+							])),
+						A2(
+						$elm$html$Html$div,
+						_List_Nil,
+						_List_fromArray(
+							[
+								$elm$html$Html$text('Below that is the index of the card in the supply line. E.g. \"4/45\" means that this is the fourth card in a supply line with a total of 45 cards')
+							])),
+						A2(
+						$elm$html$Html$div,
+						_List_Nil,
+						_List_fromArray(
+							[
+								$elm$html$Html$text('The left hand side shows you the copper cost of the card in the top and the total cost to unlock the card (= buy all previous items in the supply line including cosmetics) in the bottom.')
+							])),
+						A2(
+						$elm$html$Html$h5,
+						_List_fromArray(
+							[$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$mt3]),
+						_List_fromArray(
+							[
+								$elm$html$Html$text('Inventory')
+							])),
+						A2(
+						$elm$html$Html$div,
+						_List_Nil,
+						_List_fromArray(
+							[
+								$elm$html$Html$text('The inventory contains all cards you have selected. You may select more than 15 cards.')
+							])),
+						A2(
+						$elm$html$Html$div,
+						_List_Nil,
+						_List_fromArray(
+							[
+								$elm$html$Html$text('You can arrange and remove cards by pressing the arrow up/down or x button.')
+							])),
+						A2(
+						$elm$html$Html$div,
+						_List_Nil,
+						_List_fromArray(
+							[
+								$elm$html$Html$text('There are two ways to display the inventory:')
+							])),
+						A2(
+						$elm$html$Html$div,
+						_List_fromArray(
+							[$rundis$elm_bootstrap$Bootstrap$Utilities$Flex$block, $rundis$elm_bootstrap$Bootstrap$Utilities$Flex$alignItemsStart, $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$mt1]),
+						_List_fromArray(
+							[
+								A2(
+								$elm$html$Html$div,
+								_List_fromArray(
+									[$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$mr2]),
+								_List_fromArray(
+									[
+										$lattyware$elm_fontawesome$FontAwesome$Icon$viewIcon($lattyware$elm_fontawesome$FontAwesome$Solid$layerGroup)
+									])),
+								$elm$html$Html$text('Show each card individually.')
+							])),
+						A2(
+						$elm$html$Html$div,
+						_List_fromArray(
+							[$rundis$elm_bootstrap$Bootstrap$Utilities$Flex$block, $rundis$elm_bootstrap$Bootstrap$Utilities$Flex$alignItemsStart, $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$mt1]),
+						_List_fromArray(
+							[
+								A2(
+								$elm$html$Html$div,
+								_List_fromArray(
+									[$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$mr2]),
+								_List_fromArray(
+									[
+										$lattyware$elm_fontawesome$FontAwesome$Icon$viewIcon($lattyware$elm_fontawesome$FontAwesome$Solid$list)
+									])),
+								$elm$html$Html$text('Show a summarized view of the cards. All passive effects (like +X% health) are merged into single entries.'),
+								$elm$html$Html$text('E.g. `+15% Health`, `-5% Health` and `+10% Health` only show as a single entry (`+20% Health).'),
+								$elm$html$Html$text('This view also summarizes the required supply line progress as well as required achievements.')
+							])),
+						A2(
+						$elm$html$Html$div,
+						_List_fromArray(
+							[$rundis$elm_bootstrap$Bootstrap$Utilities$Flex$block, $rundis$elm_bootstrap$Bootstrap$Utilities$Flex$alignItemsStart, $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$mt1]),
+						_List_fromArray(
+							[
+								A2(
+								$elm$html$Html$div,
+								_List_fromArray(
+									[$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$mr2]),
+								_List_fromArray(
+									[
+										$lattyware$elm_fontawesome$FontAwesome$Icon$viewIcon($lattyware$elm_fontawesome$FontAwesome$Solid$share)
+									])),
+								$elm$html$Html$text('Opens the share dialog.')
+							])),
+						A2(
+						$elm$html$Html$div,
+						_List_fromArray(
+							[$rundis$elm_bootstrap$Bootstrap$Utilities$Flex$block, $rundis$elm_bootstrap$Bootstrap$Utilities$Flex$alignItemsStart, $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$mt1]),
+						_List_fromArray(
+							[
+								A2(
+								$elm$html$Html$div,
+								_List_fromArray(
+									[$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$mr2]),
+								_List_fromArray(
+									[
+										$lattyware$elm_fontawesome$FontAwesome$Icon$viewIcon($lattyware$elm_fontawesome$FontAwesome$Solid$times)
+									])),
+								$elm$html$Html$text('Clears the current inventory.')
+							]))
+					]),
+				A3(
+					$rundis$elm_bootstrap$Bootstrap$Modal$h3,
+					_List_Nil,
+					_List_fromArray(
+						[
+							$elm$html$Html$text('How to use')
+						]),
+					A2(
+						$rundis$elm_bootstrap$Bootstrap$Modal$hideOnBackdropClick,
+						true,
+						$rundis$elm_bootstrap$Bootstrap$Modal$large(
+							$rundis$elm_bootstrap$Bootstrap$Modal$config($author$project$Main$ToggleHelpModal)))))));
 };
 var $lattyware$elm_fontawesome$FontAwesome$Solid$suitcase = A5(
 	$lattyware$elm_fontawesome$FontAwesome$Icon$Icon,
@@ -15984,27 +16055,6 @@ var $author$project$Main$CopyShareUrl = function (a) {
 	return {$: 'CopyShareUrl', a: a};
 };
 var $author$project$Main$HideShareModal = {$: 'HideShareModal'};
-var $rundis$elm_bootstrap$Bootstrap$Modal$Footer = function (a) {
-	return {$: 'Footer', a: a};
-};
-var $rundis$elm_bootstrap$Bootstrap$Modal$footer = F3(
-	function (attributes, children, _v0) {
-		var conf = _v0.a;
-		return $rundis$elm_bootstrap$Bootstrap$Modal$Config(
-			_Utils_update(
-				conf,
-				{
-					footer: $elm$core$Maybe$Just(
-						$rundis$elm_bootstrap$Bootstrap$Modal$Footer(
-							{attributes: attributes, children: children}))
-				}));
-	});
-var $rundis$elm_bootstrap$Bootstrap$Internal$Button$Outlined = function (a) {
-	return {$: 'Outlined', a: a};
-};
-var $rundis$elm_bootstrap$Bootstrap$Internal$Button$Primary = {$: 'Primary'};
-var $rundis$elm_bootstrap$Bootstrap$Button$outlinePrimary = $rundis$elm_bootstrap$Bootstrap$Internal$Button$Coloring(
-	$rundis$elm_bootstrap$Bootstrap$Internal$Button$Outlined($rundis$elm_bootstrap$Bootstrap$Internal$Button$Primary));
 var $author$project$Main$shareModal = function (model) {
 	var modalShareUrl = $elm$url$Url$toString(
 		$author$project$Main$shareUrl(model));

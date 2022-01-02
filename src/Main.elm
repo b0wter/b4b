@@ -531,6 +531,10 @@ helpModal visibility =
          [ div [ Spacing.mr2 ] [ FontAwesome.Solid.info |> FontAwesome.Icon.viewIcon ]
          , text "Displays card supply line details."
          ]
+       , Html.h5 [ Spacing.mt3 ] [ text "Card Details"]
+       , div [] [ text "The card details show you the name of the supply line in the top left."]
+       , div [] [ text "Below that is the index of the card in the supply line. E.g. \"4/45\" means that this is the fourth card in a supply line with a total of 45 cards" ]
+       , div [] [ text "The left hand side shows you the copper cost of the card in the top and the total cost to unlock the card (= buy all previous items in the supply line including cosmetics) in the bottom." ]
        , Html.h5 [ Spacing.mt3 ] [ text "Inventory" ]
        , div [] [ text "The inventory contains all cards you have selected. You may select more than 15 cards." ]
        , div [] [ text "You can arrange and remove cards by pressing the arrow up/down or x button." ]
@@ -554,6 +558,13 @@ helpModal visibility =
          , text "Clears the current inventory."
          ]
        ]
+    |> Modal.footer []
+        [ Button.button
+            [ Button.outlinePrimary
+            , Button.attrs [ onClick ToggleHelpModal ]
+            ]
+            [ text "Close" ]
+        ]
     |> Modal.view visibility
 
 
