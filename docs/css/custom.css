@@ -36,13 +36,22 @@
 }
 
 .action-button-2 {
-    bottom: 6em;
+    bottom: 6em !important;
 }
 
 .action-button-left {
     position: fixed;
     bottom: 1em;
     left: 1em;
+    width: 4em;
+    height: 4em;
+    border-radius: 50% !important;
+}
+
+.action-button-right {
+    position: fixed;
+    bottom: 1em;
+    right: 1em;
     width: 4em;
     height: 4em;
     border-radius: 50% !important;

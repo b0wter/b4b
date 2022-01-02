@@ -16031,6 +16031,34 @@ var $author$project$Main$inventoryView = function (model) {
 					]))
 			]));
 };
+var $lattyware$elm_fontawesome$FontAwesome$Solid$arrowUp = A5(
+	$lattyware$elm_fontawesome$FontAwesome$Icon$Icon,
+	'fas',
+	'arrow-up',
+	448,
+	512,
+	_List_fromArray(
+		['M34.9 289.5l-22.2-22.2c-9.4-9.4-9.4-24.6 0-33.9L207 39c9.4-9.4 24.6-9.4 33.9 0l194.3 194.3c9.4 9.4 9.4 24.6 0 33.9L413 289.4c-9.5 9.5-25 9.3-34.3-.4L264 168.6V456c0 13.3-10.7 24-24 24h-32c-13.3 0-24-10.7-24-24V168.6L69.2 289.1c-9.3 9.8-24.8 10-34.3.4z']));
+var $author$project$Main$scrollToTopToggleButton = A2(
+	$elm$html$Html$a,
+	_List_fromArray(
+		[
+			$elm$html$Html$Attributes$id('scroll-to-top-toggle-button'),
+			$elm$html$Html$Attributes$class('action-button-left action-button-1 btn btn-light d-none pointer')
+		]),
+	_List_fromArray(
+		[
+			A2(
+			$elm$html$Html$h2,
+			_List_fromArray(
+				[
+					$elm$html$Html$Attributes$class('m-auto grey no-decoration')
+				]),
+			_List_fromArray(
+				[
+					$lattyware$elm_fontawesome$FontAwesome$Icon$viewIcon($lattyware$elm_fontawesome$FontAwesome$Solid$arrowUp)
+				]))
+		]));
 var $author$project$Main$CopyShareUrl = function (a) {
 	return {$: 'CopyShareUrl', a: a};
 };
@@ -16249,6 +16277,7 @@ var $author$project$Main$mainContent = function (model) {
 					$author$project$Main$inventoryView(model)
 				])),
 			$author$project$Main$inventoryToggleButton,
+			$author$project$Main$scrollToTopToggleButton,
 			$author$project$Main$helpActionButton
 		]);
 };

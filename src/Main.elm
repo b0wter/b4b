@@ -436,6 +436,13 @@ inventoryToggleButton =
         Html.h2 [ class "m-auto grey no-decoration" ] [ FontAwesome.Solid.suitcase |> FontAwesome.Icon.viewIcon ]
     ]
 
+scrollToTopToggleButton : Html Msg
+scrollToTopToggleButton =
+    Html.a [ id "scroll-to-top-toggle-button", class "action-button-left action-button-1 btn btn-light d-none pointer" ]
+    [
+        Html.h2 [ class "m-auto grey no-decoration" ] [ FontAwesome.Solid.arrowUp |> FontAwesome.Icon.viewIcon ]
+    ]
+
 
 helpActionButton : Html Msg
 helpActionButton =
@@ -571,6 +578,7 @@ mainContent model =
     , helpModal model.helpModalVisibility
     , Grid.row [ ] [ cardPoolView model, inventoryView model ]
     , inventoryToggleButton
+    , scrollToTopToggleButton
     , helpActionButton
     ]
 

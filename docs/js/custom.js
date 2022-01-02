@@ -12,6 +12,34 @@ function toggleInventory() {
         rightColumn.classList.add("d-none")
     }
     inventoryVisible = !inventoryVisible;
+    
+    checkScrollToTopVisibility();
+}
+
+function checkScrollToTopVisibility(leftColumn)
+{
+    const b = document.getElementById('scroll-to-top-toggle-button');
+    
+    if(inventoryVisible === false) {
+        console.log('hidden bc of inventory');
+        b.classList.add("d-none");
+        b.classList.remove("d-flex");
+    }
+    
+    console.log(leftColumn.scrollHeight);
+    if (leftColumn.scrollTop > 300) {
+        console.log("show")
+        b.classList.add("d-flex");
+        b.classList.remove("d-none");
+    } else {
+        console.log("hide")
+        b.classList.add("d-none");
+        b.classList.remove("d-flex");
+    }
+}
+
+function scrollToTop() {
+    document.getElementById("left-column").scrollTo(0,0);
 }
 
 function addToggleInventoryButtonEvent() {
@@ -21,10 +49,35 @@ function addToggleInventoryButtonEvent() {
     };
 }
 
+function addScrollToTopButtonEvent() {
+    const button = document.getElementById('scroll-to-top-toggle-button');
+    button.classList.add("d-none");
+    button.onclick = () => {
+        scrollToTop();
+    };
+}
+
 function initJavascript() {
     leftColumn = document.getElementById('left-column');
     rightColumn = document.getElementById('right-column');
     addToggleInventoryButtonEvent();
+    addScrollToTopButtonEvent();
+    leftColumn.addEventListener('scroll', function(e) {
+        checkScrollToTopVisibility(leftColumn);
+        /*
+        console.log(leftColumn.scrollHeight);
+        const b = document.getElementById('scroll-to-top-toggle-button');
+        if (leftColumn.scrollTop > 300) {
+            console.log("show")
+            b.classList.add("d-flex");
+            b.classList.remove("d-none");
+        } else {
+            console.log("hide")
+            b.classList.add("d-none");
+            b.classList.remove("d-flex");
+        }
+         */
+    });
     if(window.innerWidth <= 767) {
         toggleInventory();
         toggleInventory();
