@@ -512,7 +512,7 @@ helpModal visibility =
     |> Modal.large
     |> Modal.hideOnBackdropClick True
     |> Modal.h3 [] [ text "How to use" ]
-    |> Modal.body [ style "overflow" "scroll", style "max-height" "36em" ] 
+    |> Modal.body [ style "overflow" "scroll", style "max-height" "calc(70vh)" ] 
        [ Html.h5 [] [ text "Card Pool" ]
        , div [] [ text "The card pool contains all cards except the ones you have currently selected."]
        , div [] [ text "You can use the filter to filter for arbitrary words. Only cards whose title or description contain all words (in any order) are displayed." ]

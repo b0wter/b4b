@@ -1,7 +1,6 @@
 var leftColumn;
 var rightColumn;
-// Contrary to intuition this needs to be true when the app is started.
-var inventoryVisible = true;
+var inventoryVisible = false;
 
 function toggleInventory() {
     if (inventoryVisible) {

@@ -13793,7 +13793,7 @@ var $author$project$Main$helpModal = function (visibility) {
 			_List_fromArray(
 				[
 					A2($elm$html$Html$Attributes$style, 'overflow', 'scroll'),
-					A2($elm$html$Html$Attributes$style, 'max-height', '36em')
+					A2($elm$html$Html$Attributes$style, 'max-height', 'calc(70vh)')
 				]),
 			_List_fromArray(
 				[
