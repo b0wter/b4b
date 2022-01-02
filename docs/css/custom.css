@@ -57,9 +57,20 @@
     border-radius: 50% !important;
 }
 
+/*
 .grey {
     -webkit-filter: grayscale(100%);
     filter: grayscale(100%);
+}
+ */
+
+.small-text {
+    font-size: 0.5em;
+}
+
+.small-icon {
+    height: 0.75em;
+    width: 0.75em;
 }
 
 .card-text-header {

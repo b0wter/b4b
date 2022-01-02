@@ -13988,6 +13988,16 @@ var $author$project$Main$helpModal = function (visibility) {
 						$rundis$elm_bootstrap$Bootstrap$Modal$large(
 							$rundis$elm_bootstrap$Bootstrap$Modal$config($author$project$Main$ToggleHelpModal)))))));
 };
+var $lattyware$elm_fontawesome$FontAwesome$Icon$styled = F2(
+	function (attributes, _v0) {
+		var presentation = _v0.a;
+		return $lattyware$elm_fontawesome$FontAwesome$Icon$Presentation(
+			_Utils_update(
+				presentation,
+				{
+					attributes: _Utils_ap(presentation.attributes, attributes)
+				}));
+	});
 var $lattyware$elm_fontawesome$FontAwesome$Solid$suitcase = A5(
 	$lattyware$elm_fontawesome$FontAwesome$Icon$Icon,
 	'fas',
@@ -13996,26 +14006,50 @@ var $lattyware$elm_fontawesome$FontAwesome$Solid$suitcase = A5(
 	512,
 	_List_fromArray(
 		['M128 480h256V80c0-26.5-21.5-48-48-48H176c-26.5 0-48 21.5-48 48v400zm64-384h128v32H192V96zm320 80v256c0 26.5-21.5 48-48 48h-48V128h48c26.5 0 48 21.5 48 48zM96 480H48c-26.5 0-48-21.5-48-48V176c0-26.5 21.5-48 48-48h48v352z']));
-var $author$project$Main$inventoryToggleButton = A2(
-	$elm$html$Html$a,
-	_List_fromArray(
-		[
-			$elm$html$Html$Attributes$id('inventory-toggle-button'),
-			$elm$html$Html$Attributes$class('action-button-right action-button-1 btn btn-light d-flex d-md-none pointer')
-		]),
-	_List_fromArray(
-		[
-			A2(
-			$elm$html$Html$h2,
-			_List_fromArray(
-				[
-					$elm$html$Html$Attributes$class('m-auto grey no-decoration')
-				]),
-			_List_fromArray(
-				[
-					$lattyware$elm_fontawesome$FontAwesome$Icon$viewIcon($lattyware$elm_fontawesome$FontAwesome$Solid$suitcase)
-				]))
-		]));
+var $author$project$Main$inventoryToggleButton = function (numberOfSelectedCards) {
+	var content = A2(
+		$elm$html$Html$div,
+		_List_fromArray(
+			[$rundis$elm_bootstrap$Bootstrap$Utilities$Flex$block, $rundis$elm_bootstrap$Bootstrap$Utilities$Flex$col]),
+		_List_fromArray(
+			[
+				$lattyware$elm_fontawesome$FontAwesome$Icon$view(
+				A2(
+					$lattyware$elm_fontawesome$FontAwesome$Icon$styled,
+					_List_Nil,
+					$lattyware$elm_fontawesome$FontAwesome$Icon$present($lattyware$elm_fontawesome$FontAwesome$Solid$suitcase))),
+				A2(
+				$elm$html$Html$div,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('small-text')
+					]),
+				_List_fromArray(
+					[
+						$elm$html$Html$text(
+						$elm$core$String$fromInt(numberOfSelectedCards))
+					]))
+			]));
+	var background = (numberOfSelectedCards <= 15) ? 0 : 1;
+	return A2(
+		$elm$html$Html$a,
+		_List_fromArray(
+			[
+				$elm$html$Html$Attributes$id('inventory-toggle-button'),
+				$elm$html$Html$Attributes$class('action-button-right action-button-1 btn btn-light d-flex d-md-none pointer')
+			]),
+		_List_fromArray(
+			[
+				A2(
+				$elm$html$Html$h2,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('m-auto grey no-decoration')
+					]),
+				_List_fromArray(
+					[content]))
+			]));
+};
 var $rundis$elm_bootstrap$Bootstrap$Internal$Role$Dark = {$: 'Dark'};
 var $rundis$elm_bootstrap$Bootstrap$Utilities$Border$dark = A2($rundis$elm_bootstrap$Bootstrap$Internal$Role$toClass, 'border', $rundis$elm_bootstrap$Bootstrap$Internal$Role$Dark);
 var $author$project$Main$ChangeInventoryDisplayType = F2(
@@ -16284,7 +16318,8 @@ var $author$project$Main$mainContent = function (model) {
 					$author$project$Main$cardPoolView(model),
 					$author$project$Main$inventoryView(model)
 				])),
-			$author$project$Main$inventoryToggleButton,
+			$author$project$Main$inventoryToggleButton(
+			$elm$core$List$length(model.selectedCards)),
 			$author$project$Main$scrollToTopToggleButton,
 			$author$project$Main$helpActionButton
 		]);

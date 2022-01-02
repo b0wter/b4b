@@ -429,11 +429,24 @@ view model =
     }
 
 
-inventoryToggleButton : Html Msg
-inventoryToggleButton =
+inventoryToggleButton : Int -> Html Msg
+inventoryToggleButton numberOfSelectedCards =
+    let 
+        background =
+            if numberOfSelectedCards <= 15 then
+                0
+            else
+                1
+                
+        content =
+            div [ Flex.block, Flex.col ]
+            [ FontAwesome.Solid.suitcase |> FontAwesome.Icon.present |> FontAwesome.Icon.styled [] |> FontAwesome.Icon.view
+            , div [ class "small-text" ] [ text (numberOfSelectedCards |> String.fromInt) ]
+            ]
+    in
     Html.a [ id "inventory-toggle-button", class "action-button-right action-button-1 btn btn-light d-flex d-md-none pointer" ]
     [
-        Html.h2 [ class "m-auto grey no-decoration" ] [ FontAwesome.Solid.suitcase |> FontAwesome.Icon.viewIcon ]
+        Html.h2 [ class "m-auto grey no-decoration" ] [ content ] --[ FontAwesome.Solid.suitcase |> FontAwesome.Icon.viewIcon ]
     ]
 
 scrollToTopToggleButton : Html Msg
@@ -579,7 +592,7 @@ mainContent model =
     , resetModal
     , helpModal model.helpModalVisibility
     , Grid.row [ ] [ cardPoolView model, inventoryView model ]
-    , inventoryToggleButton
+    , inventoryToggleButton (model.selectedCards |> List.length)
     , scrollToTopToggleButton
     , helpActionButton
     ]

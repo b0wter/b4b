@@ -1,6 +1,7 @@
 var leftColumn;
 var rightColumn;
-var inventoryVisible = false;
+// Contrary to intuition this needs to be true when the app is started.
+var inventoryVisible = true;
 
 function toggleInventory() {
     if (inventoryVisible) {
@@ -15,23 +16,19 @@ function toggleInventory() {
     checkScrollToTopVisibility();
 }
 
-function checkScrollToTopVisibility(leftColumn)
+function checkScrollToTopVisibility()
 {
     const b = document.getElementById('scroll-to-top-toggle-button');
     
     if(inventoryVisible === false) {
-        console.log('hidden bc of inventory');
         b.classList.add("d-none");
         b.classList.remove("d-flex");
     }
     
-    console.log(leftColumn.scrollHeight);
     if (leftColumn.scrollTop > 300) {
-        console.log("show")
         b.classList.add("d-flex");
         b.classList.remove("d-none");
     } else {
-        console.log("hide")
         b.classList.add("d-none");
         b.classList.remove("d-flex");
     }
@@ -63,19 +60,6 @@ function initJavascript() {
     addScrollToTopButtonEvent();
     leftColumn.addEventListener('scroll', function(e) {
         checkScrollToTopVisibility(leftColumn);
-        /*
-        console.log(leftColumn.scrollHeight);
-        const b = document.getElementById('scroll-to-top-toggle-button');
-        if (leftColumn.scrollTop > 300) {
-            console.log("show")
-            b.classList.add("d-flex");
-            b.classList.remove("d-none");
-        } else {
-            console.log("hide")
-            b.classList.add("d-none");
-            b.classList.remove("d-flex");
-        }
-         */
     });
     if(window.innerWidth <= 767) {
         toggleInventory();
