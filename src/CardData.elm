@@ -30,7 +30,7 @@ rawCards =
     [ { id = 1
       , name = "Combat Training"
       , cost = 30
-      , totalCost = 0
+      , totalCost = 30
       , filename = "7_0_3.jpg"
       , properties =
             [ "+5% Bullet Damage"
@@ -54,7 +54,7 @@ rawCards =
     , { id = 2
       , name = "Ammo Belt"
       , cost = 45
-      , totalCost = 0
+      , totalCost = 75
       , filename = "6_1_0.jpg"
       , properties =
             [ "+50% Ammo Capacity"
@@ -76,7 +76,7 @@ rawCards =
     , { id = 3
       , name = "HI Vis Sights"
       , cost = 30
-      , totalCost = 0
+      , totalCost = 105
       , filename = "2_0_2.jpg"
       , properties =
             [ "+30% Aim Speed"
@@ -96,7 +96,7 @@ rawCards =
     , { id = 4
       , name = "Front Sight Focus"
       , cost = 30
-      , totalCost = 0
+      , totalCost = 140
       , filename = "6_1_2.jpg"
       , properties =
             [ "+20% Accuracy"
@@ -116,7 +116,7 @@ rawCards =
     , { id = 5
       , name = "Grenade Pouch"
       , cost = 30
-      , totalCost = 0
+      , totalCost = 170
       , filename = "14_0_4.jpg"
       , properties =
             [ "+1 Offensive Inventory"
@@ -136,7 +136,7 @@ rawCards =
     , { id = 6
       , name = "Ammo for All"
       , cost = 100
-      , totalCost = 0
+      , totalCost = 270
       , filename = "9_0_4.jpg"
       , properties =
             [ "TEAM EFFECTS +10% Team Ammo Capacity"
@@ -156,7 +156,7 @@ rawCards =
     , { id = 7
       , name = "Large Caliber Rounds"
       , cost = 45
-      , totalCost = 0
+      , totalCost = 320
       , filename = "7_0_4.jpg"
       , properties =
             [ "+7.5% Bullet Damage"
@@ -178,7 +178,7 @@ rawCards =
     , { id = 8
       , name = "Widemouth Magwell"
       , cost = 45
-      , totalCost = 0
+      , totalCost = 370
       , filename = "1_0_4.jpg"
       , properties =
             [ "+30% Reload Speed"
@@ -200,7 +200,7 @@ rawCards =
     , { id = 9
       , name = "Offensive Scavenger"
       , cost = 100
-      , totalCost = 0
+      , totalCost = 475
       , filename = "13_1_3.jpg"
       , properties =
             [ "You can sense nearby Offensive Accessories."
@@ -222,7 +222,7 @@ rawCards =
     , { id = 10
       , name = "Ammo Mule"
       , cost = 70
-      , totalCost = 0
+      , totalCost = 550
       , filename = "6_1_1.jpg"
       , properties =
             [ "+75% Ammo Capacity"
@@ -244,7 +244,7 @@ rawCards =
     , { id = 11
       , name = "Grenade Training"
       , cost = 30
-      , totalCost = 0
+      , totalCost = 585
       , filename = "11_1_3.jpg"
       , properties =
             [ "+25% Accessory Damage"
@@ -264,7 +264,7 @@ rawCards =
     , { id = 12
       , name = "Optics Enthusiast"
       , cost = 45
-      , totalCost = 0
+      , totalCost = 630
       , filename = "6_1_3.jpg"
       , properties =
             [ "+30% Accuracy"
@@ -286,7 +286,7 @@ rawCards =
     , { id = 13
       , name = "Batter Up"
       , cost = 30
-      , totalCost = 0
+      , totalCost = 660
       , filename = "11_0_2.jpg"
       , properties =
             [ "+40% Melee Damage"
@@ -308,7 +308,7 @@ rawCards =
     , { id = 14
       , name = "Avenge The Fallen"
       , cost = 100
-      , totalCost = 0
+      , totalCost = 765
       , filename = "8_1_0.jpg"
       , properties =
             [ "TEAM EFFECTS When you or a teammate becomes incapacitated, all teammates gain 30% Damage,20% Reload Speed, and Unlimited Ammo for 10 seconds."
@@ -337,7 +337,7 @@ rawCards =
     , { id = 15
       , name = "Patient Hunter"
       , cost = 70
-      , totalCost = 0
+      , totalCost = 840
       , filename = "10_0_3.jpg"
       , properties =
             [ "Each 0.75 seconds you Aim Down Sights increase your Damage by 10% (up to 3 stacks)."
@@ -357,7 +357,7 @@ rawCards =
     , { id = 16
       , name = "Double Grenade Pouch"
       , cost = 45
-      , totalCost = 0
+      , totalCost = 890
       , filename = "14_1_0.jpg"
       , properties =
             [ "+2 Offensive Inventory"
@@ -379,7 +379,7 @@ rawCards =
     , { id = 17
       , name = "Down in Front!"
       , cost = 100
-      , totalCost = 0
+      , totalCost = 95
       , filename = "9_1_0.jpg"
       , properties =
             [ "While crouching you neither take nor deal Friendly Fire damage."
@@ -402,7 +402,7 @@ rawCards =
     , { id = 18
       , name = "Demolitions Expert"
       , cost = 45
-      , totalCost = 0
+      , totalCost = 1040
       , filename = "11_1_4.jpg"
       , properties =
             [ "+50% Accessory Damage"
@@ -424,7 +424,7 @@ rawCards =
     , { id = 19
       , name = "Mag Coupler"
       , cost = 70
-      , totalCost = 0
+      , totalCost = 1110
       , filename = "1_1_0.jpg"
       , properties =
             [ "+50% Reload Speed"
@@ -446,7 +446,7 @@ rawCards =
     , { id = 20
       , name = "Two is One and One is None"
       , cost = 100
-      , totalCost = 0
+      , totalCost = 1215
       , filename = "13_1_2.jpg"
       , properties =
             [ "You can equip a Primary weapon in your Secondary slot."
@@ -468,7 +468,7 @@ rawCards =
     , { id = 21
       , name = "Spiky Bits"
       , cost = 45
-      , totalCost = 0
+      , totalCost = 1265
       , filename = "11_0_3.jpg"
       , properties =
             [ "+20% Melee Damage"
@@ -492,7 +492,7 @@ rawCards =
     , { id = 22
       , name = "Silver Bullets"
       , cost = 70
-      , totalCost = 0
+      , totalCost = 1335
       , filename = "7_1_0.jpg"
       , properties =
             [ "+10% Bullet Damage"
@@ -514,7 +514,7 @@ rawCards =
     , { id = 23
       , name = "Steady Aim"
       , cost = 70
-      , totalCost = 0
+      , totalCost = 1410
       , filename = "2_0_4.jpg"
       , properties =
             [ "+80% Aim Speed"
@@ -538,7 +538,7 @@ rawCards =
     , { id = 24
       , name = "Admin Reload"
       , cost = 100
-      , totalCost = 0
+      , totalCost = 1515
       , filename = "15_0_2.jpg"
       , properties =
             [ "When you stow your weapon, it reloads."
@@ -560,7 +560,7 @@ rawCards =
     , { id = 25
       , name = "Money Grubbers"
       , cost = 70
-      , totalCost = 0
+      , totalCost = 1585
       , filename = "15_1_4.jpg"
       , properties =
             [ "Each time your team loots Copper, you gain 3 additional Copper, stacking up to 75 additional Сopper."
@@ -580,7 +580,7 @@ rawCards =
     , { id = 26
       , name = "Surplus Pouches"
       , cost = 70
-      , totalCost = 0
+      , totalCost = 1660
       , filename = "14_1_1.jpg"
       , properties =
             [ "-10% Health"
@@ -602,7 +602,7 @@ rawCards =
     , { id = 27
       , name = "Weapon Scavenger"
       , cost = 70
-      , totalCost = 0
+      , totalCost = 1740
       , filename = "10_0_1.jpg"
       , properties =
             [ "You can sense nearby weapons."
@@ -624,7 +624,7 @@ rawCards =
     , { id = 28
       , name = "Vanguard"
       , cost = 100
-      , totalCost = 0
+      , totalCost = 1840
       , filename = "8_1_1.jpg"
       , properties =
             [ "Melee kills grant 1 Temporary Health to you and nearby teammates."
@@ -644,7 +644,7 @@ rawCards =
     , { id = 29
       , name = "Quick Kill"
       , cost = 70
-      , totalCost = 0
+      , totalCost = 1915
       , filename = "6_1_4.jpg"
       , properties =
             [ "+50% Accuracy"
@@ -666,7 +666,7 @@ rawCards =
     , { id = 30
       , name = "Chemical courage"
       , cost = 70
-      , totalCost = 0
+      , totalCost = 1990
       , filename = "13_1_4.jpg"
       , properties =
             [ "Pain Meds you apply also grant +25% Damage for 60 seconds."
@@ -686,7 +686,7 @@ rawCards =
     , { id = 31
       , name = "Power reload"
       , cost = 150
-      , totalCost = 0
+      , totalCost = 2145
       , filename = "10_0_4.jpg"
       , properties =
             [ "Reloading a gun within 1 second of reaching low ammo will increase its magazine size by -30% until the next reload."
@@ -706,7 +706,7 @@ rawCards =
     , { id = 32
       , name = "Hunker down"
       , cost = 100
-      , totalCost = 0
+      , totalCost = 2250
       , filename = "8_0_4.jpg"
       , properties =
             [ "While crouching, gain 10% Damage Resistance and 40% Асcuracy."
@@ -726,7 +726,7 @@ rawCards =
     , { id = 33
       , name = "Glass Cannon"
       , cost = 150
-      , totalCost = 0
+      , totalCost = 2400
       , filename = "4_1_3.jpg"
       , properties =
             [ "+25% Damage"
@@ -748,7 +748,7 @@ rawCards =
     , { id = 34
       , name = "Marked for Death"
       , cost = 150
-      , totalCost = 0
+      , totalCost = 2550
       , filename = "10_1_0.jpg"
       , properties =
             [ "Mutations you ping are highlighted and your team deals 10% increased damage to highlighted enemies."
@@ -768,7 +768,7 @@ rawCards =
     , { id = 35
       , name = "Highwayman"
       , cost = 100
-      , totalCost = 0
+      , totalCost = 2655
       , filename = "15_0_1.jpg"
       , properties =
             [ "Pistol kills have a 3% chance to spawn ammo or a molotov or a molotov."
@@ -788,7 +788,7 @@ rawCards =
     , { id = 36
       , name = "Ignore the Pain"
       , cost = 100
-      , totalCost = 0
+      , totalCost = 2760
       , filename = "12_0_3.jpg"
       , properties =
             [ "+20% Melee Damage against Mutations"
@@ -810,7 +810,7 @@ rawCards =
     , { id = 37
       , name = "Bomb Squad"
       , cost = 100
-      , totalCost = 0
+      , totalCost = 2865
       , filename = "12_1_2.jpg"
       , properties =
             [ "+100% Explosive Damage"
@@ -832,7 +832,7 @@ rawCards =
     , { id = 38
       , name = "Face your Fears"
       , cost = 100
-      , totalCost = 0
+      , totalCost = 2965
       , filename = "13_0_1.jpg"
       , properties =
             [ "Gain 2 Temporary Health whenever you kill a Ridden within 2 meters."
@@ -853,7 +853,7 @@ rawCards =
     , { id = 39
       , name = "Needs of the Many"
       , cost = 100
-      , totalCost = 0
+      , totalCost = 3065
       , filename = "8_1_4.jpg"
       , properties =
             [ "-10% Health"
@@ -875,7 +875,7 @@ rawCards =
     , { id = 40
       , name = "Trigger Control"
       , cost = 100
-      , totalCost = 0
+      , totalCost = 3170
       , filename = "8_1_3.jpg"
       , properties =
             [ "+25% Accuracy with Assault Rifles"
@@ -897,7 +897,7 @@ rawCards =
     , { id = 41
       , name = "Improvised Explosives"
       , cost = 70
-      , totalCost = 0
+      , totalCost = 3250
       , filename = "12_0_0.jpg"
       , properties =
             [ "+75% Accessory Damage"
@@ -919,7 +919,7 @@ rawCards =
     , { id = 42
       , name = "Killer's Instinct"
       , cost = 70
-      , totalCost = 0
+      , totalCost = 3325
       , filename = "5_1_4.jpg"
       , properties =
             [ "+30% Weakspot Damage"
@@ -941,7 +941,7 @@ rawCards =
     , { id = 43
       , name = "In the Zone"
       , cost = 100
-      , totalCost = 0
+      , totalCost = 3435
       , filename = "8_1_2.jpg"
       , properties =
             [ "Precision Kills grant 5% Reload Speed for 5 seconds (stacking up to 10 times)."
@@ -961,7 +961,7 @@ rawCards =
     , { id = 44
       , name = "Controlled Movement"
       , cost = 100
-      , totalCost = 0
+      , totalCost = 3540
       , filename = "9_0_3.jpg"
       , properties =
             [ "+40% Move Speed while aiming down sights with Sniper Rifles."
@@ -981,7 +981,7 @@ rawCards =
     , { id = 45
       , name = "Scattergun Skills"
       , cost = 100
-      , totalCost = 0
+      , totalCost = 3640
       , filename = "9_0_2.jpg"
       , properties =
             [ "+40% Reload Speed with Shotguns."
@@ -1001,7 +1001,7 @@ rawCards =
     , { id = 46
       , name = "Share the Wealth"
       , cost = 100
-      , totalCost = 0
+      , totalCost = 3785
       , filename = "16_0_2.jpg"
       , properties =
             [ "Each teammate gains 100 bonus Copper at the start of each level."
@@ -1020,7 +1020,7 @@ rawCards =
     , { id = 47
       , name = "Motorcycle Jacket"
       , cost = 30
-      , totalCost = 0
+      , totalCost = 30
       , filename = "7_0_0.jpg"
       , properties =
             [ "+5% Damage Resistance"
@@ -1040,7 +1040,7 @@ rawCards =
     , { id = 48
       , name = "Durable"
       , cost = 30
-      , totalCost = 0
+      , totalCost = 60
       , filename = "11_1_0.jpg"
       , properties =
             [ "+15% Trauma Resistance"
@@ -1060,7 +1060,7 @@ rawCards =
     , { id = 49
       , name = "Poultice"
       , cost = 70
-      , totalCost = 0
+      , totalCost = 130
       , filename = "9_1_1.jpg"
       , properties =
             [ "When you use a Medical Accessory, the target heals for an additional 20 Health over 30 seconds."
@@ -1079,7 +1079,7 @@ rawCards =
     , { id = 50
       , name = "EMT Bag"
       , cost = 45
-      , totalCost = 0
+      , totalCost = 185
       , filename = "7_1_2.jpg"
       , properties =
             [ "+40% Healing Efficiency"
@@ -1099,7 +1099,7 @@ rawCards =
     , { id = 51
       , name = "Inspiring Sacrifice"
       , cost = 100
-      , totalCost = 0
+      , totalCost = 285
       , filename = "8_0_2.jpg"
       , properties =
             [ "TEAM EFFECTS When you or a teammate becomes incapacitated, all teammates heal for 20 health over 15 seconds."
@@ -1118,7 +1118,7 @@ rawCards =
     , { id = 52
       , name = "Padded Suit"
       , cost = 45
-      , totalCost = 0
+      , totalCost = 335
       , filename = "7_0_1.jpg"
       , properties =
             [ "+10% Damage Resistance"
@@ -1139,7 +1139,7 @@ rawCards =
     , { id = 53
       , name = "Hydration Pack"
       , cost = 45
-      , totalCost = 0
+      , totalCost = 385
       , filename = "11_0_0.jpg"
       , properties =
             [ "+25 Health"
@@ -1159,7 +1159,7 @@ rawCards =
     , { id = 54
       , name = "Buckshot Bruiser"
       , cost = 75
-      , totalCost = 0
+      , totalCost = 460
       , filename = "14_0_2.jpg"
       , properties =
             [ "When using Shotguns, gain 0.25 Temporary Health for each pellet that hits."
@@ -1178,7 +1178,7 @@ rawCards =
     , { id = 55
       , name = "Support Scavenger"
       , cost = 100
-      , totalCost = 0
+      , totalCost = 560
       , filename = "10_0_0.jpg"
       , properties =
             [ "You can sense nearby Support Accessories."
@@ -1198,7 +1198,7 @@ rawCards =
     , { id = 56
       , name = "Fanny Pack"
       , cost = 30
-      , totalCost = 0
+      , totalCost = 595
       , filename = "14_1_2.jpg"
       , properties =
             [ "+1 Support Inventory"
@@ -1217,7 +1217,7 @@ rawCards =
     , { id = 57
       , name = "Slugger"
       , cost = 30
-      , totalCost = 0
+      , totalCost = 630
       , filename = "1_1_1.jpg"
       , properties =
             [ "+5 Health"
@@ -1238,7 +1238,7 @@ rawCards =
     , { id = 58
       , name = "Smelling Salts"
       , cost = 30
-      , totalCost = 0
+      , totalCost = 660
       , filename = "2_1_3.jpg"
       , properties =
             [ "+100% Revive Speed"
@@ -1257,7 +1257,7 @@ rawCards =
     , { id = 59
       , name = "Body Armor"
       , cost = 45
-      , totalCost = 0
+      , totalCost = 705
       , filename = "11_1_1.jpg"
       , properties =
             [ "+25% Trauma Resistance"
@@ -1277,7 +1277,7 @@ rawCards =
     , { id = 60
       , name = "Scar Tissue"
       , cost = 100
-      , totalCost = 0
+      , totalCost = 810
       , filename = "12_1_3.jpg"
       , properties =
             [ "Take 1 less damage from all Ridden."
@@ -1296,7 +1296,7 @@ rawCards =
     , { id = 61
       , name = "Fresh Bandage"
       , cost = 70
-      , totalCost = 0
+      , totalCost = 980
       , filename = "13_1_1.jpg"
       , properties =
             [ "Heal 15 Trauma Damage at the start of each level."
@@ -1316,7 +1316,7 @@ rawCards =
     , { id = 62
       , name = "Shoulder Bag"
       , cost = 45
-      , totalCost = 0
+      , totalCost = 1030
       , filename = "14_1_3.jpg"
       , properties =
             [ "+2 Support Inventory"
@@ -1336,7 +1336,7 @@ rawCards =
     , { id = 63
       , name = "Pep Talk"
       , cost = 45
-      , totalCost = 0
+      , totalCost = 1075
       , filename = "2_1_4.jpg"
       , properties =
             [ "While reviving teammates, take 3 less damage from all Ridden."
@@ -1358,7 +1358,7 @@ rawCards =
     , { id = 64
       , name = "Well Fed"
       , cost = 100
-      , totalCost = 0
+      , totalCost = 1185
       , filename = "13_0_2.jpg"
       , properties =
             [ "TEAM EFFECTS +10 Team Health"
@@ -1378,7 +1378,7 @@ rawCards =
     , { id = 65
       , name = "Charitable Soul"
       , cost = 100
-      , totalCost = 0
+      , totalCost = 1290
       , filename = "8_0_3.jpg"
       , properties =
             [ "Healing a teammate also applies 50% of the effect to you."
@@ -1397,7 +1397,7 @@ rawCards =
     , { id = 66
       , name = "Amped Up"
       , cost = 45
-      , totalCost = 0
+      , totalCost = 1345
       , filename = "10_0_2.jpg"
       , properties =
             [ "When you exit a starting saferoom, your team gains 50 Temporary Health."
@@ -1416,7 +1416,7 @@ rawCards =
     , { id = 67
       , name = "Motorcycle Helmet"
       , cost = 70
-      , totalCost = 0
+      , totalCost = 1415
       , filename = "7_0_2.jpg"
       , properties =
             [ "+15% Damage Resistance"
@@ -1437,7 +1437,7 @@ rawCards =
     , { id = 68
       , name = "Broadside"
       , cost = 100
-      , totalCost = 0
+      , totalCost = 1515
       , filename = "14_0_1.jpg"
       , properties =
             [ "Precision Kills have a 20% chance to cause Ridden to explode, dealing 15 damage to other Ridden within 4 meters."
@@ -1456,7 +1456,7 @@ rawCards =
     , { id = 69
       , name = "Combat Medic"
       , cost = 100
-      , totalCost = 0
+      , totalCost = 1620
       , filename = "3_1_3.jpg"
       , properties =
             [ "+50% Use Speed"
@@ -1476,7 +1476,7 @@ rawCards =
     , { id = 70
       , name = "Box O` Bags"
       , cost = 70
-      , totalCost = 0
+      , totalCost = 1700
       , filename = "14_1_4.jpg"
       , properties =
             [ "-10% Health"
@@ -1496,7 +1496,7 @@ rawCards =
     , { id = 71
       , name = "Canned Goods"
       , cost = 70
-      , totalCost = 0
+      , totalCost = 1780
       , filename = "11_0_1.jpg"
       , properties =
             [ "+40 Health"
@@ -1516,7 +1516,7 @@ rawCards =
     , { id = 72
       , name = "Wooden Armor"
       , cost = 70
-      , totalCost = 0
+      , totalCost = 1855
       , filename = "11_1_2.jpg"
       , properties =
             [ "+40% Trauma Resistance"
@@ -1540,7 +1540,7 @@ rawCards =
     , { id = 73
       , name = "Group Therapy"
       , cost = 70
-      , totalCost = 0
+      , totalCost = 1930
       , filename = "9_1_2.jpg"
       , properties =
             [ "When you use a Medical Accessory, all teammates heal for 8 Health."
@@ -1560,7 +1560,7 @@ rawCards =
     , { id = 74
       , name = "Sunder"
       , cost = 150
-      , totalCost = 0
+      , totalCost = 2085
       , filename = "13_0_4.jpg"
       , properties =
             [ "Melee hits cause the target to take 20% increased damage for 5 seconds."
@@ -1579,7 +1579,7 @@ rawCards =
     , { id = 75
       , name = "Numb"
       , cost = 45
-      , totalCost = 0
+      , totalCost = 2140
       , filename = "14_0_0.jpg"
       , properties =
             [ "Gain +15% Damage Resistance while you have Temporary Health."
@@ -1598,7 +1598,7 @@ rawCards =
     , { id = 76
       , name = "Life Insurance"
       , cost = 100
-      , totalCost = 0
+      , totalCost = 2240
       , filename = "15_1_0.jpg"
       , properties =
             [ "+1 Extra Life"
@@ -1620,7 +1620,7 @@ rawCards =
     , { id = 77
       , name = "Overwatch"
       , cost = 100
-      , totalCost = 0
+      , totalCost = 2345
       , filename = "13_1_0.jpg"
       , properties =
             [ "Kills from greater than 15 meters grant 5 Temporary Health to teammates within 10 meters of the target."
@@ -1639,7 +1639,7 @@ rawCards =
     , { id = 78
       , name = "True Grit"
       , cost = 100
-      , totalCost = 0
+      , totalCost = 2450
       , filename = "12_1_0.jpg"
       , properties =
             [ "When you take a single hit for 15 or more damage, heal 10 health over 5 seconds."
@@ -1658,7 +1658,7 @@ rawCards =
     , { id = 79
       , name = "Pyro"
       , cost = 100
-      , totalCost = 0
+      , totalCost = 2555
       , filename = "12_1_1.jpg"
       , properties =
             [ "+100% Fire damage."
@@ -1679,7 +1679,7 @@ rawCards =
     , { id = 80
       , name = "Heavy Hitter"
       , cost = 100
-      , totalCost = 0
+      , totalCost = 2655
       , filename = "12_0_2.jpg"
       , properties =
             [ "Melee hits against Weakspots deal +20 additional Stumble Damage."
@@ -1698,7 +1698,7 @@ rawCards =
     , { id = 81
       , name = "Line 'em Up"
       , cost = 100
-      , totalCost = 0
+      , totalCost = 2765
       , filename = "13_0_0.jpg"
       , properties =
             [ "+10% Effective Bullet Range"
@@ -1720,7 +1720,7 @@ rawCards =
     , { id = 82
       , name = "Rousing Speech"
       , cost = 70
-      , totalCost = 0
+      , totalCost = 2850
       , filename = "3_0_0.jpg"
       , properties =
             [ "+225% Revive Speed"
@@ -1741,7 +1741,7 @@ rawCards =
     , { id = 83
       , name = "Medical Expert"
       , cost = 100
-      , totalCost = 0
+      , totalCost = 2960
       , filename = "4_0_0.jpg"
       , properties =
             [ "+15% Healing Efficiency"
@@ -1761,7 +1761,7 @@ rawCards =
     , { id = 84
       , name = "Experienced EMT"
       , cost = 75
-      , totalCost = 0
+      , totalCost = 3040
       , filename = "10_1_3.jpg"
       , properties =
             [ "When you use a Medical Accessory, the target gains +10% Maximum Health, Stamina, and Stamina Regen until the end of the level."
@@ -1781,7 +1781,7 @@ rawCards =
     , { id = 85
       , name = "Saferoom Recovery"
       , cost = 75
-      , totalCost = 0
+      , totalCost = 3115
       , filename = "16_1_0.jpg"
       , properties =
             [ "Your team heals 15 Health, 7 Trauma Damage and refills 10% Ammo at the start of each level."
@@ -1803,7 +1803,7 @@ rawCards =
     , { id = 86
       , name = "Medical Professional"
       , cost = 100
-      , totalCost = 0
+      , totalCost = 3215
       , filename = "9_1_3.jpg"
       , properties =
             [ "First Aids and Defibrillators also recover 15 Trauma Damage and 1 Extra Life."
@@ -1822,7 +1822,7 @@ rawCards =
     , { id = 87
       , name = "Miraculous Recovery"
       , cost = 150
-      , totalCost = 0
+      , totalCost = 3370
       , filename = "5_0_2.jpg"
       , properties =
             [ "When you use a Medical Accessory, it has a 25% chance to have 100% increased effect."
@@ -1841,7 +1841,7 @@ rawCards =
     , { id = 88
       , name = "Cross Trainers"
       , cost = 10
-      , totalCost = 0
+      , totalCost = 10
       , filename = "1_0_0.jpg"
       , properties =
             [ "+20% Stamina"
@@ -1863,7 +1863,7 @@ rawCards =
     , { id = 89
       , name = "Ridden Slayer"
       , cost = 30
-      , totalCost = 0
+      , totalCost = 40
       , filename = "1_1_4.jpg"
       , properties =
             [ "+20% Weakspot Damage"
@@ -1882,7 +1882,7 @@ rawCards =
     , { id = 90
       , name = "Shooting Gloves"
       , cost = 30
-      , totalCost = 0
+      , totalCost = 75
       , filename = "2_1_0.jpg"
       , properties =
             [ "+25% Weapon Swap Speed"
@@ -1901,7 +1901,7 @@ rawCards =
     , { id = 91
       , name = "Superior Cardio"
       , cost = 30
-      , totalCost = 0
+      , totalCost = 110
       , filename = "3_0_4.jpg"
       , properties =
             [ "+20% Stamina"
@@ -1922,7 +1922,7 @@ rawCards =
     , { id = 92
       , name = "Evasive Action"
       , cost = 70
-      , totalCost = 0
+      , totalCost = 180
       , filename = "5_0_0.jpg"
       , properties =
             [ "When you take a hit for 10 or more damage, gain 15% Move Speed for 3 seconds."
@@ -1941,7 +1941,7 @@ rawCards =
     , { id = 93
       , name = "Run and Gun"
       , cost = 150
-      , totalCost = 0
+      , totalCost = 330
       , filename = "16_0_0.jpg"
       , properties =
             [ "You can shoot while sprinting."
@@ -1960,7 +1960,7 @@ rawCards =
     , { id = 94
       , name = "Screwdriver"
       , cost = 30
-      , totalCost = 0
+      , totalCost = 360
       , filename = "5_0_3.jpg"
       , properties =
             [ "+50% Use Speed"
@@ -1980,7 +1980,7 @@ rawCards =
     , { id = 95
       , name = "Energy Bar"
       , cost = 30
-      , totalCost = 0
+      , totalCost = 395
       , filename = "7_1_4.jpg"
       , properties =
             [ "+30% Stamina Regeneration"
@@ -2002,11 +2002,11 @@ rawCards =
     , { id = 96
       , name = "Utility Scavenger"
       , cost = 100
-      , totalCost = 0
+      , totalCost = 500
       , filename = "5_1_1.jpg"
       , properties =
-            [ "You can sense nearby Quick"
-            , "Accessories. More Quick Accessories spawn."
+            [ "You can sense nearby Quick Accessories."
+            , "More Quick Accessories spawn."
             ]
       , effects =
             []
@@ -2022,7 +2022,7 @@ rawCards =
     , { id = 97
       , name = "Dash"
       , cost = 30
-      , totalCost = 0
+      , totalCost = 535
       , filename = "3_0_1.jpg"
       , properties =
             [ "+5% Move Speed"
@@ -2041,7 +2041,7 @@ rawCards =
     , { id = 98
       , name = "Rolling Thunder"
       , cost = 100
-      , totalCost = 0
+      , totalCost = 640
       , filename = "4_0_1.jpg"
       , properties =
             [ "+35% Move Speed while firing with Shotguns."
@@ -2061,7 +2061,7 @@ rawCards =
     , { id = 99
       , name = "Reckless Strategy"
       , cost = 45
-      , totalCost = 0
+      , totalCost = 685
       , filename = "2_0_0.jpg"
       , properties =
             [ "+30% Weakspot Damage"
@@ -2081,7 +2081,7 @@ rawCards =
     , { id = 100
       , name = "Breakout"
       , cost = 100
-      , totalCost = 0
+      , totalCost = 785
       , filename = "3_1_2.jpg"
       , properties =
             [ "Breakout: Hold E to free yourself from Grabs."
@@ -2101,7 +2101,7 @@ rawCards =
     , { id = 101
       , name = "Fleet of Foot"
       , cost = 45
-      , totalCost = 0
+      , totalCost = 835
       , filename = "3_0_2.jpg"
       , properties =
             [ "+8% Move Speed"
@@ -2121,7 +2121,7 @@ rawCards =
     , { id = 102
       , name = "Pep In Your Step"
       , cost = 70
-      , totalCost = 0
+      , totalCost = 910
       , filename = "4_1_1.jpg"
       , properties =
             [ "Precision Kills grant you 8% Move Speed for 5 seconds."
@@ -2140,7 +2140,7 @@ rawCards =
     , { id = 103
       , name = "Guns Out"
       , cost = 45
-      , totalCost = 0
+      , totalCost = 960
       , filename = "2_1_1.jpg"
       , properties =
             [ "+50% Weapon Swap Speed"
@@ -2160,7 +2160,7 @@ rawCards =
     , { id = 104
       , name = "Tunnel Vision"
       , cost = 45
-      , totalCost = 0
+      , totalCost = 1010
       , filename = "2_0_3.jpg"
       , properties =
             [ "+50% Aim Speed"
@@ -2184,7 +2184,7 @@ rawCards =
     , { id = 105
       , name = "Energy Drink"
       , cost = 45
-      , totalCost = 0
+      , totalCost = 1055
       , filename = "1_0_1.jpg"
       , properties =
             [ "+15% Stamina"
@@ -2206,7 +2206,7 @@ rawCards =
     , { id = 106
       , name = "Marathon Runner"
       , cost = 100
-      , totalCost = 0
+      , totalCost = 1160
       , filename = "4_0_4.jpg"
       , properties =
             [ "No Movement Penalty for strafe and backpedal."
@@ -2225,7 +2225,7 @@ rawCards =
     , { id = 107
       , name = "Brazen"
       , cost = 45
-      , totalCost = 0
+      , totalCost = 1215
       , filename = "1_1_2.jpg"
       , properties =
             [ "+20% Melee Stamina Efficiency"
@@ -2246,7 +2246,7 @@ rawCards =
     , { id = 108
       , name = "Sadistic"
       , cost = 100
-      , totalCost = 0
+      , totalCost = 1315
       , filename = "4_1_4.jpg"
       , properties =
             [ "Gain 5% Weakspot Damage for each Precision Kill in the last 10 seconds."
@@ -2265,7 +2265,7 @@ rawCards =
     , { id = 109
       , name = "Olympic Sprinter"
       , cost = 45
-      , totalCost = 0
+      , totalCost = 1365
       , filename = "3_1_0.jpg"
       , properties =
             [ "+30% Sprint Efficiency"
@@ -2285,7 +2285,7 @@ rawCards =
     , { id = 110
       , name = "Ammo Stash"
       , cost = 100
-      , totalCost = 0
+      , totalCost = 1470
       , filename = "15_0_4.jpg"
       , properties =
             [ "Your secondary weapons have unlimited ammo."
@@ -2305,7 +2305,7 @@ rawCards =
     , { id = 111
       , name = "Compound Interest"
       , cost = 100
-      , totalCost = 0
+      , totalCost = 1570
       , filename = "15_1_2.jpg"
       , properties =
             [ "Gain 10% of your total Copper in each Saferoom."
@@ -2324,7 +2324,7 @@ rawCards =
     , { id = 112
       , name = "Cocky"
       , cost = 70
-      , totalCost = 0
+      , totalCost = 1645
       , filename = "2_1_2.jpg"
       , properties =
             [ "+75% Weapon Swap Speed"
@@ -2344,7 +2344,7 @@ rawCards =
     , { id = 113
       , name = "Mandatory PT"
       , cost = 100
-      , totalCost = 0
+      , totalCost = 1750
       , filename = "4_1_0.jpg"
       , properties =
             [ "TEAM EFFECTS +15% Team Stamina"
@@ -2364,7 +2364,7 @@ rawCards =
     , { id = 114
       , name = "Mugger"
       , cost = 100
-      , totalCost = 0
+      , totalCost = 1855
       , filename = "15_0_0.jpg"
       , properties =
             [ "Melee kills have a 3% chance to spawn ammo or razorwire."
@@ -2383,7 +2383,7 @@ rawCards =
     , { id = 115
       , name = "Mean Drunk"
       , cost = 70
-      , totalCost = 0
+      , totalCost = 1925
       , filename = "11_0_4.jpg"
       , properties =
             [ "+60% Melee Damage"
@@ -2404,7 +2404,7 @@ rawCards =
     , { id = 116
       , name = "Multitool"
       , cost = 45
-      , totalCost = 0
+      , totalCost = 1970
       , filename = "5_0_4.jpg"
       , properties =
             [ "+75% Use Speed"
@@ -2424,7 +2424,7 @@ rawCards =
     , { id = 117
       , name = "Stimulants"
       , cost = 45
-      , totalCost = 0
+      , totalCost = 2025
       , filename = "5_1_2.jpg"
       , properties =
             [ "Pain Meds you apply also grant +20% Stamina Regeneration, + 15% Reload Speed, and + 15% Weapon Swap Speed for 30 seconds."
@@ -2443,7 +2443,7 @@ rawCards =
     , { id = 118
       , name = "Meth Head"
       , cost = 70
-      , totalCost = 0
+      , totalCost = 2095
       , filename = "1_1_3.jpg"
       , properties =
             [ "+40% Melee Attack Speed"
@@ -2465,7 +2465,7 @@ rawCards =
     , { id = 119
       , name = "Shredder"
       , cost = 150
-      , totalCost = 0
+      , totalCost = 2250
       , filename = "4_1_2.jpg"
       , properties =
             [ "Each bullet hit causes the target to take 1% increased damage for 3 seconds (stacks up to 15% )."
@@ -2484,7 +2484,7 @@ rawCards =
     , { id = 120
       , name = "Reckless"
       , cost = 70
-      , totalCost = 0
+      , totalCost = 2335
       , filename = "3_1_1.jpg"
       , properties =
             [ "+40% Sprint Efficiency"
@@ -2504,7 +2504,7 @@ rawCards =
     , { id = 121
       , name = "Run Like Hell"
       , cost = 70
-      , totalCost = 0
+      , totalCost = 2405
       , filename = "3_0_3.jpg"
       , properties =
             [ "+12% Move Speed"
@@ -2524,7 +2524,7 @@ rawCards =
     , { id = 122
       , name = "Power Swap"
       , cost = 150
-      , totalCost = 0
+      , totalCost = 2555
       , filename = "6_0_0.jpg"
       , properties =
             [ "Changing weapons within 1 second of reaching low ammo grants +20% Damage for 5 seconds."
@@ -2543,7 +2543,7 @@ rawCards =
     , { id = 123
       , name = "Rhythmic Breathing"
       , cost = 70
-      , totalCost = 0
+      , totalCost = 2625
       , filename = "1_0_2.jpg"
       , properties =
             [ "+40% Stamina"
@@ -2562,7 +2562,7 @@ rawCards =
     , { id = 124
       , name = "On your Mark..."
       , cost = 45
-      , totalCost = 0
+      , totalCost = 670
       , filename = "5_1_3.jpg"
       , properties =
             [ "When you exit a starting saferoom your team gains +15% Move Speed for 30 seconds."
@@ -2581,7 +2581,7 @@ rawCards =
     , { id = 125
       , name = "Fire in the Hole!"
       , cost = 100
-      , totalCost = 0
+      , totalCost = 770
       , filename = "3_1_4.jpg"
       , properties =
             [ "When you throw an Offensive Accessory, gain 20 Temporary Health and 20% Move Speed for 5 seconds."
@@ -2600,7 +2600,7 @@ rawCards =
     , { id = 126
       , name = "Headband Magnifier"
       , cost = 70
-      , totalCost = 0
+      , totalCost = 2840
       , filename = "5_1_0.jpg"
       , properties =
             [ "+125% Use Speed"
@@ -2620,7 +2620,7 @@ rawCards =
     , { id = 127
       , name = "Cold Brew Coffee"
       , cost = 70
-      , totalCost = 0
+      , totalCost = 2925
       , filename = "8_0_0.jpg"
       , properties =
             [ "+25% Aim Speed"
@@ -2642,7 +2642,7 @@ rawCards =
     , { id = 128
       , name = "Hyper-Focused"
       , cost = 70
-      , totalCost = 0
+      , totalCost = 2995
       , filename = "2_0_1.jpg"
       , properties =
             [ "+50% Weakspot Damage"
@@ -2664,7 +2664,7 @@ rawCards =
     , { id = 129
       , name = "Knowledge is Power"
       , cost = 100
-      , totalCost = 0
+      , totalCost = 3100
       , filename = "10_1_1.jpg"
       , properties =
             [ "+10% Weakspoť Damage"
@@ -2684,7 +2684,7 @@ rawCards =
     , { id = 130
       , name = "Bounty Hunter"
       , cost = 100
-      , totalCost = 0
+      , totalCost = 3205
       , filename = "15_0_3.jpg"
       , properties =
             [ "When you kill a Mutation, gain 10 Copper (up to 300 per level)."
@@ -2704,7 +2704,7 @@ rawCards =
     , { id = 131
       , name = "Speed Demon"
       , cost = 100
-      , totalCost = 0
+      , totalCost = 3310
       , filename = "4_0_2.jpg"
       , properties =
             [ "+4% Move Speed while using an SMG."
@@ -2724,7 +2724,7 @@ rawCards =
     , { id = 132
       , name = "Natural Sprinter"
       , cost = 70
-      , totalCost = 0
+      , totalCost = 3380
       , filename = "8_0_1.jpg"
       , properties =
             [ "+100% Stamina Regeneration"
@@ -2744,7 +2744,7 @@ rawCards =
     , { id = 133
       , name = "Hellfire"
       , cost = 100
-      , totalCost = 0
+      , totalCost = 3550
       , filename = "4_0_3.jpg"
       , properties =
             [ "+45% Move Speed while firing."
@@ -2764,7 +2764,7 @@ rawCards =
     , { id = 134
       , name = "Mad Dash"
       , cost = 75
-      , totalCost = 0
+      , totalCost = 4310
       , filename = "6_0_3.jpg"
       , properties =
             [ "+20% Sprint Speed"
@@ -2784,11 +2784,10 @@ rawCards =
     , { id = 135
       , name = "Hazard Pay"
       , cost = 75
-      , totalCost = 0
+      , totalCost = 4740
       , filename = "16_0_4.jpg"
       , properties =
-            [ "Gain 250 bonus Copper at the"
-            , "start of each level."
+            [ "Gain 250 bonus Copper at the start of each level."
             ]
       , effects =
             []
@@ -3019,7 +3018,8 @@ rawCards =
       , totalCost = 0
       , filename = "9_1_4.jpg"
       , properties =
-            [ "You can sense nearby Ammo. More Ammo spawns."
+            [ "You can sense nearby Ammo."
+            , "More Ammo spawns."
             ]
       , effects =
             []
