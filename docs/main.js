@@ -5679,7 +5679,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['+5% Bullet Damage', '+1 Bullet Stumble', '+5 Melee Stumble']),
 		supplyLine: {index: 1, name: 'Paul\'s Alley', tier: 1, track: 'Alley'},
-		totalCost: 0
+		totalCost: 30
 	},
 		{
 		affinity: 'Discipline',
@@ -5702,7 +5702,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['+50% Ammo Capacity', '-20% Stamina Efficiency']),
 		supplyLine: {index: 2, name: 'Paul\'s Alley', tier: 1, track: 'Alley'},
-		totalCost: 0
+		totalCost: 75
 	},
 		{
 		affinity: 'Reflex',
@@ -5721,7 +5721,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['+30% Aim Speed']),
 		supplyLine: {index: 3, name: 'Paul\'s Alley', tier: 1, track: 'Alley'},
-		totalCost: 0
+		totalCost: 105
 	},
 		{
 		affinity: 'Discipline',
@@ -5740,7 +5740,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['+20% Accuracy']),
 		supplyLine: {index: 4, name: 'Paul\'s Alley', tier: 1, track: 'Alley'},
-		totalCost: 0
+		totalCost: 140
 	},
 		{
 		affinity: 'Fortune',
@@ -5759,7 +5759,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['+1 Offensive Inventory']),
 		supplyLine: {index: 5, name: 'Paul\'s Alley', tier: 1, track: 'Alley'},
-		totalCost: 0
+		totalCost: 170
 	},
 		{
 		affinity: 'Discipline',
@@ -5779,7 +5779,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['TEAM EFFECTS +10% Team Ammo Capacity']),
 		supplyLine: {index: 6, name: 'Paul\'s Alley', tier: 1, track: 'Alley'},
-		totalCost: 0
+		totalCost: 270
 	},
 		{
 		affinity: 'Discipline',
@@ -5802,7 +5802,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['+7.5% Bullet Damage', '+200% Bullet Penetration']),
 		supplyLine: {index: 7, name: 'The Stilts', tier: 1, track: 'Alley'},
-		totalCost: 0
+		totalCost: 320
 	},
 		{
 		affinity: 'Reflex',
@@ -5825,7 +5825,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['+30% Reload Speed', '-5% Damage Resistance']),
 		supplyLine: {index: 8, name: 'The Stilts', tier: 1, track: 'Alley'},
-		totalCost: 0
+		totalCost: 370
 	},
 		{
 		affinity: 'Brawn',
@@ -5842,7 +5842,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['You can sense nearby Offensive Accessories.', 'More Offensive Accessories spawn.']),
 		supplyLine: {index: 9, name: 'The Stilts', tier: 1, track: 'Alley'},
-		totalCost: 0
+		totalCost: 475
 	},
 		{
 		affinity: 'Discipline',
@@ -5865,7 +5865,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['+75% Ammo Capacity', '-5% Move Speed']),
 		supplyLine: {index: 10, name: 'The Stilts', tier: 1, track: 'Alley'},
-		totalCost: 0
+		totalCost: 550
 	},
 		{
 		affinity: 'Brawn',
@@ -5884,7 +5884,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['+25% Accessory Damage']),
 		supplyLine: {index: 11, name: 'Fort Hope', tier: 1, track: 'Alley'},
-		totalCost: 0
+		totalCost: 585
 	},
 		{
 		affinity: 'Discipline',
@@ -5907,7 +5907,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['+30% Accuracy', '-20% Stamina Efficiency']),
 		supplyLine: {index: 12, name: 'Fort Hope', tier: 1, track: 'Alley'},
-		totalCost: 0
+		totalCost: 630
 	},
 		{
 		affinity: 'Brawn',
@@ -5930,7 +5930,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['+40% Melee Damage', '+5 Health']),
 		supplyLine: {index: 13, name: 'Fort Hope', tier: 1, track: 'Alley'},
-		totalCost: 0
+		totalCost: 660
 	},
 		{
 		affinity: 'Discipline',
@@ -5971,7 +5971,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['TEAM EFFECTS When you or a teammate becomes incapacitated, all teammates gain 30% Damage,20% Reload Speed, and Unlimited Ammo for 10 seconds.']),
 		supplyLine: {index: 14, name: 'Fort Hope', tier: 1, track: 'Alley'},
-		totalCost: 0
+		totalCost: 765
 	},
 		{
 		affinity: 'Discipline',
@@ -5990,7 +5990,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['Each 0.75 seconds you Aim Down Sights increase your Damage by 10% (up to 3 stacks).']),
 		supplyLine: {index: 15, name: 'Fort Hope', tier: 1, track: 'Alley'},
-		totalCost: 0
+		totalCost: 840
 	},
 		{
 		affinity: 'Fortune',
@@ -6013,7 +6013,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['+2 Offensive Inventory', '-10% Damage Dealt']),
 		supplyLine: {index: 16, name: 'Paul\'s Alley', tier: 2, track: 'Alley'},
-		totalCost: 0
+		totalCost: 890
 	},
 		{
 		affinity: 'Discipline',
@@ -6040,7 +6040,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['While crouching you neither take nor deal Friendly Fire damage.', '+10 Health']),
 		supplyLine: {index: 17, name: 'Paul\'s Alley', tier: 2, track: 'Alley'},
-		totalCost: 0
+		totalCost: 95
 	},
 		{
 		affinity: 'Brawn',
@@ -6063,7 +6063,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['+50% Accessory Damage', '-15% Ammo Capacity']),
 		supplyLine: {index: 18, name: 'Paul\'s Alley', tier: 2, track: 'Alley'},
-		totalCost: 0
+		totalCost: 1040
 	},
 		{
 		affinity: 'Reflex',
@@ -6083,7 +6083,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['+50% Reload Speed', 'DISABLES: Aim Down Sights']),
 		supplyLine: {index: 19, name: 'Paul\'s Alley', tier: 2, track: 'Alley'},
-		totalCost: 0
+		totalCost: 1110
 	},
 		{
 		affinity: 'Brawn',
@@ -6103,7 +6103,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['You can equip a Primary weapon in your Secondary slot.', '-25% Swap Speed']),
 		supplyLine: {index: 20, name: 'Paul\'s Alley', tier: 2, track: 'Alley'},
-		totalCost: 0
+		totalCost: 1215
 	},
 		{
 		affinity: 'Brawn',
@@ -6133,7 +6133,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['+20% Melee Damage', '+10% Damage Resistance while using a Melee weapon', '-15% Ammo Capacity']),
 		supplyLine: {index: 21, name: 'The Stilts', tier: 2, track: 'Alley'},
-		totalCost: 0
+		totalCost: 1265
 	},
 		{
 		affinity: 'Discipline',
@@ -6156,7 +6156,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['+10% Bullet Damage', '+15% Effective Range']),
 		supplyLine: {index: 22, name: 'The Stilts', tier: 2, track: 'Alley'},
-		totalCost: 0
+		totalCost: 1335
 	},
 		{
 		affinity: 'Reflex',
@@ -6183,7 +6183,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['+80% Aim Speed', 'Every 0.75 seconds you Aim Down Sights gives 10% Recoil Control (up to 3 stacks)', '-50% ADS Move Speed']),
 		supplyLine: {index: 23, name: 'The Stilts', tier: 2, track: 'Alley'},
-		totalCost: 0
+		totalCost: 1410
 	},
 		{
 		affinity: 'Fortune',
@@ -6206,7 +6206,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['When you stow your weapon, it reloads.', '-15% Ammo Capacity']),
 		supplyLine: {index: 24, name: 'The Stilts', tier: 2, track: 'Alley'},
-		totalCost: 0
+		totalCost: 1515
 	},
 		{
 		affinity: 'Fortune',
@@ -6225,7 +6225,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['Each time your team loots Copper, you gain 3 additional Copper, stacking up to 75 additional Сopper.']),
 		supplyLine: {index: 25, name: 'The Stilts', tier: 2, track: 'Alley'},
-		totalCost: 0
+		totalCost: 1585
 	},
 		{
 		affinity: 'Fortune',
@@ -6249,7 +6249,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['-10% Health', 'TEAM EFFECTS +1 Team Offensive Inventory']),
 		supplyLine: {index: 26, name: 'Fort Hope', tier: 2, track: 'Alley'},
-		totalCost: 0
+		totalCost: 1660
 	},
 		{
 		affinity: 'Discipline',
@@ -6266,7 +6266,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['You can sense nearby weapons.', 'More weapons spawn.']),
 		supplyLine: {index: 27, name: 'Fort Hope', tier: 2, track: 'Alley'},
-		totalCost: 0
+		totalCost: 1740
 	},
 		{
 		affinity: 'Discipline',
@@ -6288,7 +6288,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['Melee kills grant 1 Temporary Health to you and nearby teammates.']),
 		supplyLine: {index: 28, name: 'Fort Hope', tier: 2, track: 'Alley'},
-		totalCost: 0
+		totalCost: 1840
 	},
 		{
 		affinity: 'Discipline',
@@ -6308,7 +6308,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['+50% Accuracy', 'DISABLES: Aim Down Sights']),
 		supplyLine: {index: 29, name: 'Fort Hope', tier: 2, track: 'Alley'},
-		totalCost: 0
+		totalCost: 1915
 	},
 		{
 		affinity: 'Brawn',
@@ -6333,7 +6333,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['Pain Meds you apply also grant +25% Damage for 60 seconds.']),
 		supplyLine: {index: 30, name: 'Paul\'s Alley', tier: 3, track: 'Alley'},
-		totalCost: 0
+		totalCost: 1990
 	},
 		{
 		affinity: 'Discipline',
@@ -6349,7 +6349,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['Reloading a gun within 1 second of reaching low ammo will increase its magazine size by -30% until the next reload.']),
 		supplyLine: {index: 31, name: 'Paul\'s Alley', tier: 3, track: 'Alley'},
-		totalCost: 0
+		totalCost: 2145
 	},
 		{
 		affinity: 'Discipline',
@@ -6377,7 +6377,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['While crouching, gain 10% Damage Resistance and 40% Асcuracy.']),
 		supplyLine: {index: 32, name: 'Paul\'s Alley', tier: 3, track: 'Alley'},
-		totalCost: 0
+		totalCost: 2250
 	},
 		{
 		affinity: 'Reflex',
@@ -6400,7 +6400,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['+25% Damage', '-30% Health']),
 		supplyLine: {index: 33, name: 'Paul\'s Alley', tier: 3, track: 'Alley'},
-		totalCost: 0
+		totalCost: 2400
 	},
 		{
 		affinity: 'Discipline',
@@ -6416,7 +6416,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['Mutations you ping are highlighted and your team deals 10% increased damage to highlighted enemies.']),
 		supplyLine: {index: 34, name: 'Paul\'s Alley', tier: 3, track: 'Alley'},
-		totalCost: 0
+		totalCost: 2550
 	},
 		{
 		affinity: 'Fortune',
@@ -6438,7 +6438,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['Pistol kills have a 3% chance to spawn ammo or a molotov or a molotov.']),
 		supplyLine: {index: 35, name: 'The Stilts', tier: 3, track: 'Alley'},
-		totalCost: 0
+		totalCost: 2655
 	},
 		{
 		affinity: 'Brawn',
@@ -6470,7 +6470,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['+20% Melee Damage against Mutations', 'When you deal Melee damage to a Mutation heal 1 Health and recover 3 Stamina.']),
 		supplyLine: {index: 36, name: 'The Stilts', tier: 3, track: 'Alley'},
-		totalCost: 0
+		totalCost: 2760
 	},
 		{
 		affinity: 'Brawn',
@@ -6493,7 +6493,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['+100% Explosive Damage', '+35% Explosive Resistance']),
 		supplyLine: {index: 37, name: 'The Stilts', tier: 3, track: 'Alley'},
-		totalCost: 0
+		totalCost: 2865
 	},
 		{
 		affinity: 'Brawn',
@@ -6518,7 +6518,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['Gain 2 Temporary Health whenever you kill a Ridden within 2 meters.']),
 		supplyLine: {index: 38, name: 'The Stilts', tier: 3, track: 'Alley'},
-		totalCost: 0
+		totalCost: 2965
 	},
 		{
 		affinity: 'Discipline',
@@ -6542,7 +6542,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['-10% Health', 'TEAM EFFECTS +1 Team Extra Life']),
 		supplyLine: {index: 39, name: 'The Stilts', tier: 3, track: 'Alley'},
-		totalCost: 0
+		totalCost: 3065
 	},
 		{
 		affinity: 'Discipline',
@@ -6571,7 +6571,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['+25% Accuracy with Assault Rifles', '+25% Accuracy with Sniper Rifles']),
 		supplyLine: {index: 40, name: 'Fort Hope', tier: 3, track: 'Alley'},
-		totalCost: 0
+		totalCost: 3170
 	},
 		{
 		affinity: 'Brawn',
@@ -6594,7 +6594,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['+75% Accessory Damage', '-25% Swap Speed']),
 		supplyLine: {index: 41, name: 'Fort Hope', tier: 3, track: 'Alley'},
-		totalCost: 0
+		totalCost: 3250
 	},
 		{
 		affinity: 'Reflex',
@@ -6614,7 +6614,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['+30% Weakspot Damage', 'DISABLES: Aim Down Sights']),
 		supplyLine: {index: 42, name: 'Fort Hope', tier: 3, track: 'Alley'},
-		totalCost: 0
+		totalCost: 3325
 	},
 		{
 		affinity: 'Discipline',
@@ -6633,7 +6633,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['Precision Kills grant 5% Reload Speed for 5 seconds (stacking up to 10 times).']),
 		supplyLine: {index: 43, name: 'Paul\'s Alley', tier: 4, track: 'Alley'},
-		totalCost: 0
+		totalCost: 3435
 	},
 		{
 		affinity: 'Discipline',
@@ -6658,7 +6658,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['+40% Move Speed while aiming down sights with Sniper Rifles.']),
 		supplyLine: {index: 44, name: 'Paul\'s Alley', tier: 4, track: 'Alley'},
-		totalCost: 0
+		totalCost: 3540
 	},
 		{
 		affinity: 'Discipline',
@@ -6680,7 +6680,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['+40% Reload Speed with Shotguns.']),
 		supplyLine: {index: 45, name: 'Paul\'s Alley', tier: 4, track: 'Alley'},
-		totalCost: 0
+		totalCost: 3640
 	},
 		{
 		affinity: 'Fortune',
@@ -6693,7 +6693,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['Each teammate gains 100 bonus Copper at the start of each level.']),
 		supplyLine: {index: 46, name: 'The Stilts', tier: 4, track: 'Alley'},
-		totalCost: 0
+		totalCost: 3785
 	},
 		{
 		affinity: 'Discipline',
@@ -6706,7 +6706,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['+5% Damage Resistance', '+5 Health']),
 		supplyLine: {index: 1, name: 'The Clinic', tier: 1, track: 'Clinic'},
-		totalCost: 0
+		totalCost: 30
 	},
 		{
 		affinity: 'Brawn',
@@ -6719,7 +6719,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['+15% Trauma Resistance', '+5 Health']),
 		supplyLine: {index: 2, name: 'The Clinic', tier: 1, track: 'Clinic'},
-		totalCost: 0
+		totalCost: 60
 	},
 		{
 		affinity: 'Discipline',
@@ -6732,7 +6732,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['When you use a Medical Accessory, the target heals for an additional 20 Health over 30 seconds.']),
 		supplyLine: {index: 3, name: 'The Clinic', tier: 1, track: 'Clinic'},
-		totalCost: 0
+		totalCost: 130
 	},
 		{
 		affinity: 'Discipline',
@@ -6745,7 +6745,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['+40% Healing Efficiency', '-20% Stamina Efficiency']),
 		supplyLine: {index: 4, name: 'The Clinic', tier: 1, track: 'Clinic'},
-		totalCost: 0
+		totalCost: 185
 	},
 		{
 		affinity: 'Discipline',
@@ -6758,7 +6758,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['TEAM EFFECTS When you or a teammate becomes incapacitated, all teammates heal for 20 health over 15 seconds.']),
 		supplyLine: {index: 5, name: 'The Clinic', tier: 1, track: 'Clinic'},
-		totalCost: 0
+		totalCost: 285
 	},
 		{
 		affinity: 'Discipline',
@@ -6771,7 +6771,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['+10% Damage Resistance', '+5 Health', '-20% Stamina Efficiency']),
 		supplyLine: {index: 6, name: 'The Furnace', tier: 1, track: 'Clinic'},
-		totalCost: 0
+		totalCost: 335
 	},
 		{
 		affinity: 'Brawn',
@@ -6784,7 +6784,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['+25 Health', '-15% Ammo Capacity']),
 		supplyLine: {index: 7, name: 'The Furnace', tier: 1, track: 'Clinic'},
-		totalCost: 0
+		totalCost: 385
 	},
 		{
 		affinity: 'Brawn',
@@ -6797,7 +6797,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['When using Shotguns, gain 0.25 Temporary Health for each pellet that hits.']),
 		supplyLine: {index: 12, name: 'The Furnace', tier: 1, track: 'Clinic'},
-		totalCost: 0
+		totalCost: 460
 	},
 		{
 		affinity: 'Discipline',
@@ -6810,7 +6810,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['You can sense nearby Support Accessories.', 'More Support Accessories spawn.']),
 		supplyLine: {index: 13, name: 'The Furnace', tier: 1, track: 'Clinic'},
-		totalCost: 0
+		totalCost: 560
 	},
 		{
 		affinity: 'Fortune',
@@ -6823,7 +6823,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['+1 Support Inventory']),
 		supplyLine: {index: 14, name: 'The Furnace', tier: 1, track: 'Clinic'},
-		totalCost: 0
+		totalCost: 595
 	},
 		{
 		affinity: 'Reflex',
@@ -6836,7 +6836,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['+5 Health', '+10% Melee Stamina Efficiency', '+20% Melee Attack Speed']),
 		supplyLine: {index: 15, name: 'Grant\'s Brew House', tier: 1, track: 'Clinic'},
-		totalCost: 0
+		totalCost: 630
 	},
 		{
 		affinity: 'Reflex',
@@ -6849,7 +6849,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['+100% Revive Speed']),
 		supplyLine: {index: 16, name: 'Grant\'s Brew House', tier: 1, track: 'Clinic'},
-		totalCost: 0
+		totalCost: 660
 	},
 		{
 		affinity: 'Brawn',
@@ -6862,7 +6862,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['+25% Trauma Resistance', '-15% Ammo Capacity']),
 		supplyLine: {index: 17, name: 'Grant\'s Brew House', tier: 1, track: 'Clinic'},
-		totalCost: 0
+		totalCost: 705
 	},
 		{
 		affinity: 'Brawn',
@@ -6875,7 +6875,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['Take 1 less damage from all Ridden.']),
 		supplyLine: {index: 18, name: 'Grant\'s Brew House', tier: 1, track: 'Clinic'},
-		totalCost: 0
+		totalCost: 810
 	},
 		{
 		affinity: 'Brawn',
@@ -6894,7 +6894,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['Heal 15 Trauma Damage at the start of each level.']),
 		supplyLine: {index: 19, name: 'Grant\'s Brew House', tier: 1, track: 'Clinic'},
-		totalCost: 0
+		totalCost: 980
 	},
 		{
 		affinity: 'Fortune',
@@ -6907,7 +6907,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['+2 Support Inventory', '-10% Damage Dealt']),
 		supplyLine: {index: 20, name: 'The Clinic', tier: 2, track: 'Clinic'},
-		totalCost: 0
+		totalCost: 1030
 	},
 		{
 		affinity: 'Reflex',
@@ -6924,7 +6924,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['While reviving teammates, take 3 less damage from all Ridden.', 'Heals teammates for an additional 10 Health when you revive them.']),
 		supplyLine: {index: 21, name: 'The Clinic', tier: 2, track: 'Clinic'},
-		totalCost: 0
+		totalCost: 1075
 	},
 		{
 		affinity: 'Brawn',
@@ -6944,7 +6944,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['TEAM EFFECTS +10 Team Health']),
 		supplyLine: {index: 22, name: 'The Clinic', tier: 2, track: 'Clinic'},
-		totalCost: 0
+		totalCost: 1185
 	},
 		{
 		affinity: 'Discipline',
@@ -6957,7 +6957,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['Healing a teammate also applies 50% of the effect to you.']),
 		supplyLine: {index: 23, name: 'The Clinic', tier: 2, track: 'Clinic'},
-		totalCost: 0
+		totalCost: 1290
 	},
 		{
 		affinity: 'Discipline',
@@ -6970,7 +6970,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['When you exit a starting saferoom, your team gains 50 Temporary Health.']),
 		supplyLine: {index: 24, name: 'The Furnace', tier: 2, track: 'Clinic'},
-		totalCost: 0
+		totalCost: 1345
 	},
 		{
 		affinity: 'Discipline',
@@ -6983,7 +6983,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['+15% Damage Resistance', '+10 Health', 'DISABLES: Aim Down Sights']),
 		supplyLine: {index: 25, name: 'The Furnace', tier: 2, track: 'Clinic'},
-		totalCost: 0
+		totalCost: 1415
 	},
 		{
 		affinity: 'Brawn',
@@ -6996,7 +6996,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['Precision Kills have a 20% chance to cause Ridden to explode, dealing 15 damage to other Ridden within 4 meters.']),
 		supplyLine: {index: 26, name: 'The Furnace', tier: 2, track: 'Clinic'},
-		totalCost: 0
+		totalCost: 1515
 	},
 		{
 		affinity: 'Reflex',
@@ -7009,7 +7009,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['+50% Use Speed', 'Heals teammates for an additional 20 Health when you revive them.']),
 		supplyLine: {index: 27, name: 'The Furnace', tier: 2, track: 'Clinic'},
-		totalCost: 0
+		totalCost: 1620
 	},
 		{
 		affinity: 'Fortune',
@@ -7022,7 +7022,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['-10% Health', 'TEAM EFFECTS +1 Team Support Inventory']),
 		supplyLine: {index: 28, name: 'Grant\'s Brew House', tier: 2, track: 'Clinic'},
-		totalCost: 0
+		totalCost: 1700
 	},
 		{
 		affinity: 'Brawn',
@@ -7035,7 +7035,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['+40 Health', '-30% Stamina']),
 		supplyLine: {index: 29, name: 'Grant\'s Brew House', tier: 2, track: 'Clinic'},
-		totalCost: 0
+		totalCost: 1780
 	},
 		{
 		affinity: 'Brawn',
@@ -7062,7 +7062,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['+40% Trauma Resistance', '-100% Fire Resistance', '-100% Acid Resistance']),
 		supplyLine: {index: 30, name: 'Grant\'s Brew House', tier: 2, track: 'Clinic'},
-		totalCost: 0
+		totalCost: 1855
 	},
 		{
 		affinity: 'Discipline',
@@ -7085,7 +7085,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['When you use a Medical Accessory, all teammates heal for 8 Health.']),
 		supplyLine: {index: 31, name: 'The Clinic', tier: 3, track: 'Clinic'},
-		totalCost: 0
+		totalCost: 1930
 	},
 		{
 		affinity: 'Brawn',
@@ -7098,7 +7098,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['Melee hits cause the target to take 20% increased damage for 5 seconds.']),
 		supplyLine: {index: 32, name: 'The Clinic', tier: 3, track: 'Clinic'},
-		totalCost: 0
+		totalCost: 2085
 	},
 		{
 		affinity: 'Brawn',
@@ -7111,7 +7111,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['Gain +15% Damage Resistance while you have Temporary Health.']),
 		supplyLine: {index: 33, name: 'The Clinic', tier: 3, track: 'Clinic'},
-		totalCost: 0
+		totalCost: 2140
 	},
 		{
 		affinity: 'Fortune',
@@ -7134,7 +7134,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['+1 Extra Life', '+15% Reduced Incap Trauma']),
 		supplyLine: {index: 34, name: 'The Clinic', tier: 3, track: 'Clinic'},
-		totalCost: 0
+		totalCost: 2240
 	},
 		{
 		affinity: 'Brawn',
@@ -7147,7 +7147,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['Kills from greater than 15 meters grant 5 Temporary Health to teammates within 10 meters of the target.']),
 		supplyLine: {index: 35, name: 'The Furnace', tier: 3, track: 'Clinic'},
-		totalCost: 0
+		totalCost: 2345
 	},
 		{
 		affinity: 'Brawn',
@@ -7160,7 +7160,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['When you take a single hit for 15 or more damage, heal 10 health over 5 seconds.']),
 		supplyLine: {index: 36, name: 'The Furnace', tier: 3, track: 'Clinic'},
-		totalCost: 0
+		totalCost: 2450
 	},
 		{
 		affinity: 'Brawn',
@@ -7173,7 +7173,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['+100% Fire damage.', 'Kills with fire grant you Temporary Health.', 'You can sense flammable objects nearby.']),
 		supplyLine: {index: 37, name: 'The Furnace', tier: 3, track: 'Clinic'},
-		totalCost: 0
+		totalCost: 2555
 	},
 		{
 		affinity: 'Brawn',
@@ -7186,7 +7186,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['Melee hits against Weakspots deal +20 additional Stumble Damage.']),
 		supplyLine: {index: 38, name: 'The Furnace', tier: 3, track: 'Clinic'},
-		totalCost: 0
+		totalCost: 2655
 	},
 		{
 		affinity: 'Brawn',
@@ -7199,7 +7199,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['+10% Effective Bullet Range', '+15% Recoil Control', '+25% Bullet Penetration', '+25% Aim Speed']),
 		supplyLine: {index: 39, name: 'Grant\'s Brew House', tier: 3, track: 'Clinic'},
-		totalCost: 0
+		totalCost: 2765
 	},
 		{
 		affinity: 'Reflex',
@@ -7212,7 +7212,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['+225% Revive Speed', 'DISABLES: Offensive Accessories', 'TEAM EFFECTS +20% Reduced Incap Trauma']),
 		supplyLine: {index: 40, name: 'Grant\'s Brew House', tier: 3, track: 'Clinic'},
-		totalCost: 0
+		totalCost: 2850
 	},
 		{
 		affinity: 'Reflex',
@@ -7225,7 +7225,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['+15% Healing Efficiency', 'When you use a Medical Accessory, you gain 15% Move Speed for 15 seconds.']),
 		supplyLine: {index: 41, name: 'The Clinic', tier: 4, track: 'Clinic'},
-		totalCost: 0
+		totalCost: 2960
 	},
 		{
 		affinity: 'Discipline',
@@ -7241,7 +7241,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['When you use a Medical Accessory, the target gains +10% Maximum Health, Stamina, and Stamina Regen until the end of the level.']),
 		supplyLine: {index: 42, name: 'The Clinic', tier: 4, track: 'Clinic'},
-		totalCost: 0
+		totalCost: 3040
 	},
 		{
 		affinity: 'Fortune',
@@ -7268,7 +7268,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['Your team heals 15 Health, 7 Trauma Damage and refills 10% Ammo at the start of each level.']),
 		supplyLine: {index: 43, name: 'The Clinic', tier: 4, track: 'Clinic'},
-		totalCost: 0
+		totalCost: 3115
 	},
 		{
 		affinity: 'Discipline',
@@ -7281,7 +7281,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['First Aids and Defibrillators also recover 15 Trauma Damage and 1 Extra Life.']),
 		supplyLine: {index: 44, name: 'The Clinic', tier: 4, track: 'Clinic'},
-		totalCost: 0
+		totalCost: 3215
 	},
 		{
 		affinity: 'Reflex',
@@ -7294,7 +7294,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['When you use a Medical Accessory, it has a 25% chance to have 100% increased effect.']),
 		supplyLine: {index: 45, name: 'The Clinic', tier: 4, track: 'Clinic'},
-		totalCost: 0
+		totalCost: 3370
 	},
 		{
 		affinity: 'Reflex',
@@ -7307,7 +7307,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['+20% Stamina', '+20% Stamina Regen', '+3% Move Speed', '+5 Health']),
 		supplyLine: {index: 1, name: 'The Crow\'s Nest', tier: 1, track: 'Nest'},
-		totalCost: 0
+		totalCost: 10
 	},
 		{
 		affinity: 'Reflex',
@@ -7320,7 +7320,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['+20% Weakspot Damage']),
 		supplyLine: {index: 2, name: 'The Crow\'s Nest', tier: 1, track: 'Nest'},
-		totalCost: 0
+		totalCost: 40
 	},
 		{
 		affinity: 'Reflex',
@@ -7333,7 +7333,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['+25% Weapon Swap Speed']),
 		supplyLine: {index: 3, name: 'The Crow\'s Nest', tier: 1, track: 'Nest'},
-		totalCost: 0
+		totalCost: 75
 	},
 		{
 		affinity: 'Reflex',
@@ -7346,7 +7346,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['+20% Stamina', '+20% Sprint Efficiency', '+5 Health']),
 		supplyLine: {index: 4, name: 'The Crow\'s Nest', tier: 1, track: 'Nest'},
-		totalCost: 0
+		totalCost: 110
 	},
 		{
 		affinity: 'Reflex',
@@ -7359,7 +7359,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['When you take a hit for 10 or more damage, gain 15% Move Speed for 3 seconds.']),
 		supplyLine: {index: 5, name: 'The Crow\'s Nest', tier: 1, track: 'Nest'},
-		totalCost: 0
+		totalCost: 180
 	},
 		{
 		affinity: 'Fortune',
@@ -7372,7 +7372,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['You can shoot while sprinting.']),
 		supplyLine: {index: 6, name: 'The Crow\'s Nest', tier: 1, track: 'Nest'},
-		totalCost: 0
+		totalCost: 330
 	},
 		{
 		affinity: 'Reflex',
@@ -7385,7 +7385,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['+50% Use Speed', '+10% Stamina']),
 		supplyLine: {index: 7, name: 'Bridge Town', tier: 1, track: 'Nest'},
-		totalCost: 0
+		totalCost: 360
 	},
 		{
 		affinity: 'Discipline',
@@ -7408,7 +7408,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['+30% Stamina Regeneration', '+5 Health']),
 		supplyLine: {index: 8, name: 'Bridge Town', tier: 1, track: 'Nest'},
-		totalCost: 0
+		totalCost: 395
 	},
 		{
 		affinity: 'Reflex',
@@ -7419,9 +7419,9 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		kind: 'Utility',
 		name: 'Utility Scavenger',
 		properties: _List_fromArray(
-			['You can sense nearby Quick', 'Accessories. More Quick Accessories spawn.']),
+			['You can sense nearby Quick Accessories.', 'More Quick Accessories spawn.']),
 		supplyLine: {index: 9, name: 'Bridge Town', tier: 1, track: 'Nest'},
-		totalCost: 0
+		totalCost: 500
 	},
 		{
 		affinity: 'Reflex',
@@ -7434,7 +7434,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['+5% Move Speed']),
 		supplyLine: {index: 10, name: 'Bridge Town', tier: 1, track: 'Nest'},
-		totalCost: 0
+		totalCost: 535
 	},
 		{
 		affinity: 'Reflex',
@@ -7447,7 +7447,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['+35% Move Speed while firing with Shotguns.', '+10% Damage with Shotguns.']),
 		supplyLine: {index: 11, name: 'Knuckle House', tier: 1, track: 'Nest'},
-		totalCost: 0
+		totalCost: 640
 	},
 		{
 		affinity: 'Reflex',
@@ -7460,7 +7460,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['+30% Weakspot Damage', '-5% Damage Resistance']),
 		supplyLine: {index: 12, name: 'Knuckle House', tier: 1, track: 'Nest'},
-		totalCost: 0
+		totalCost: 685
 	},
 		{
 		affinity: 'Reflex',
@@ -7473,7 +7473,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['Breakout: Hold E to free yourself from Grabs.', '+50% Breakout Cooldown Reduction. (Base 60 seconds).']),
 		supplyLine: {index: 13, name: 'Knuckle House', tier: 1, track: 'Nest'},
-		totalCost: 0
+		totalCost: 785
 	},
 		{
 		affinity: 'Reflex',
@@ -7486,7 +7486,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['+8% Move Speed', '-7% Damage Resistance']),
 		supplyLine: {index: 14, name: 'Knuckle House', tier: 1, track: 'Nest'},
-		totalCost: 0
+		totalCost: 835
 	},
 		{
 		affinity: 'Reflex',
@@ -7499,7 +7499,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['Precision Kills grant you 8% Move Speed for 5 seconds.']),
 		supplyLine: {index: 15, name: 'Knuckle House', tier: 1, track: 'Nest'},
-		totalCost: 0
+		totalCost: 910
 	},
 		{
 		affinity: 'Reflex',
@@ -7512,7 +7512,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['+50% Weapon Swap Speed', '-5% Damage Resistance']),
 		supplyLine: {index: 16, name: 'The Crow\'s Nest', tier: 2, track: 'Nest'},
-		totalCost: 0
+		totalCost: 960
 	},
 		{
 		affinity: 'Reflex',
@@ -7539,7 +7539,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['+50% Aim Speed', '-5% Damage Resistance', 'Every 0.75 seconds you Aim Down Sights gives 5% Weakspot Damage (up to 3 stacks).']),
 		supplyLine: {index: 17, name: 'The Crow\'s Nest', tier: 2, track: 'Nest'},
-		totalCost: 0
+		totalCost: 1010
 	},
 		{
 		affinity: 'Reflex',
@@ -7552,7 +7552,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['+15% Stamina', '+25% Weapon Swap Speed', '+15% Move Speed while firing', '+10% Slow Resistance']),
 		supplyLine: {index: 18, name: 'The Crow\'s Nest', tier: 2, track: 'Nest'},
-		totalCost: 0
+		totalCost: 1055
 	},
 		{
 		affinity: 'Reflex',
@@ -7565,7 +7565,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['No Movement Penalty for strafe and backpedal.']),
 		supplyLine: {index: 19, name: 'The Crow\'s Nest', tier: 2, track: 'Nest'},
-		totalCost: 0
+		totalCost: 1160
 	},
 		{
 		affinity: 'Reflex',
@@ -7578,7 +7578,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['+20% Melee Stamina Efficiency', '+30% Melee Attack Speed', '-5% Damage Resistance']),
 		supplyLine: {index: 20, name: 'Bridge Town', tier: 2, track: 'Nest'},
-		totalCost: 0
+		totalCost: 1215
 	},
 		{
 		affinity: 'Reflex',
@@ -7591,7 +7591,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['Gain 5% Weakspot Damage for each Precision Kill in the last 10 seconds.']),
 		supplyLine: {index: 21, name: 'Bridge Town', tier: 2, track: 'Nest'},
-		totalCost: 0
+		totalCost: 1315
 	},
 		{
 		affinity: 'Reflex',
@@ -7604,7 +7604,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['+30% Sprint Efficiency', '-7% Damage Resistance']),
 		supplyLine: {index: 22, name: 'Bridge Town', tier: 2, track: 'Nest'},
-		totalCost: 0
+		totalCost: 1365
 	},
 		{
 		affinity: 'Fortune',
@@ -7617,7 +7617,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['Your secondary weapons have unlimited ammo.', 'Your secondary weapons reload -20% slower.']),
 		supplyLine: {index: 23, name: 'Bridge Town', tier: 2, track: 'Nest'},
-		totalCost: 0
+		totalCost: 1470
 	},
 		{
 		affinity: 'Fortune',
@@ -7630,7 +7630,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['Gain 10% of your total Copper in each Saferoom.']),
 		supplyLine: {index: 24, name: 'Bridge Town', tier: 2, track: 'Nest'},
-		totalCost: 0
+		totalCost: 1570
 	},
 		{
 		affinity: 'Reflex',
@@ -7643,7 +7643,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['+75% Weapon Swap Speed', 'When you take damage, your Accuracy is reduced by 20% for 3 seconds.']),
 		supplyLine: {index: 25, name: 'Knuckle House', tier: 2, track: 'Nest'},
-		totalCost: 0
+		totalCost: 1645
 	},
 		{
 		affinity: 'Reflex',
@@ -7663,7 +7663,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['TEAM EFFECTS +15% Team Stamina']),
 		supplyLine: {index: 26, name: 'Knuckle House', tier: 2, track: 'Nest'},
-		totalCost: 0
+		totalCost: 1750
 	},
 		{
 		affinity: 'Fortune',
@@ -7676,7 +7676,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['Melee kills have a 3% chance to spawn ammo or razorwire.']),
 		supplyLine: {index: 27, name: 'Knuckle House', tier: 2, track: 'Nest'},
-		totalCost: 0
+		totalCost: 1855
 	},
 		{
 		affinity: 'Brawn',
@@ -7689,7 +7689,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['+60% Melee Damage', 'Your Melee Attacks cause cleave through enemies dealing damage in a large area.', 'DISABLES: Sprint']),
 		supplyLine: {index: 28, name: 'Knuckle House', tier: 2, track: 'Nest'},
-		totalCost: 0
+		totalCost: 1925
 	},
 		{
 		affinity: 'Reflex',
@@ -7702,7 +7702,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['+75% Use Speed', '-5% Damage Resistance']),
 		supplyLine: {index: 29, name: 'Knuckle House', tier: 2, track: 'Nest'},
-		totalCost: 0
+		totalCost: 1970
 	},
 		{
 		affinity: 'Reflex',
@@ -7715,7 +7715,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['Pain Meds you apply also grant +20% Stamina Regeneration, + 15% Reload Speed, and + 15% Weapon Swap Speed for 30 seconds.']),
 		supplyLine: {index: 30, name: 'The Crow\'s Nest', tier: 3, track: 'Nest'},
-		totalCost: 0
+		totalCost: 2025
 	},
 		{
 		affinity: 'Reflex',
@@ -7728,7 +7728,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['+40% Melee Attack Speed', '+30% Melee Stamina Efficiency', 'Your Melee Attacks no longer stick in tough enemies.', 'DISABLES: Aim Down Sights']),
 		supplyLine: {index: 31, name: 'The Crow\'s Nest', tier: 3, track: 'Nest'},
-		totalCost: 0
+		totalCost: 2095
 	},
 		{
 		affinity: 'Reflex',
@@ -7741,7 +7741,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['Each bullet hit causes the target to take 1% increased damage for 3 seconds (stacks up to 15% ).']),
 		supplyLine: {index: 32, name: 'The Crow\'s Nest', tier: 3, track: 'Nest'},
-		totalCost: 0
+		totalCost: 2250
 	},
 		{
 		affinity: 'Reflex',
@@ -7754,7 +7754,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['+40% Sprint Efficiency', 'When you take damage while Sprinting, you lose all Stamina.']),
 		supplyLine: {index: 33, name: 'Bridge Town', tier: 3, track: 'Nest'},
-		totalCost: 0
+		totalCost: 2335
 	},
 		{
 		affinity: 'Reflex',
@@ -7767,7 +7767,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['+12% Move Speed', 'When you take damage, your Move Speed bonus is lost for 3 seconds.']),
 		supplyLine: {index: 34, name: 'Bridge Town', tier: 3, track: 'Nest'},
-		totalCost: 0
+		totalCost: 2405
 	},
 		{
 		affinity: 'Reflex',
@@ -7780,7 +7780,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['Changing weapons within 1 second of reaching low ammo grants +20% Damage for 5 seconds.']),
 		supplyLine: {index: 35, name: 'Bridge Town', tier: 3, track: 'Nest'},
-		totalCost: 0
+		totalCost: 2555
 	},
 		{
 		affinity: 'Reflex',
@@ -7793,7 +7793,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['+40% Stamina']),
 		supplyLine: {index: 36, name: 'Bridge Town', tier: 3, track: 'Nest'},
-		totalCost: 0
+		totalCost: 2625
 	},
 		{
 		affinity: 'Reflex',
@@ -7806,7 +7806,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['When you exit a starting saferoom your team gains +15% Move Speed for 30 seconds.']),
 		supplyLine: {index: 37, name: 'Bridge Town', tier: 3, track: 'Nest'},
-		totalCost: 0
+		totalCost: 670
 	},
 		{
 		affinity: 'Reflex',
@@ -7819,7 +7819,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['When you throw an Offensive Accessory, gain 20 Temporary Health and 20% Move Speed for 5 seconds.']),
 		supplyLine: {index: 38, name: 'Bridge Town', tier: 3, track: 'Nest'},
-		totalCost: 0
+		totalCost: 770
 	},
 		{
 		affinity: 'Reflex',
@@ -7832,7 +7832,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['+125% Use Speed', 'When you take damage, you have a chance to be blinded for 1 second.']),
 		supplyLine: {index: 39, name: 'Bridge Town', tier: 3, track: 'Nest'},
-		totalCost: 0
+		totalCost: 2840
 	},
 		{
 		affinity: 'Discipline',
@@ -7845,7 +7845,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['+25% Aim Speed', '+25% Weapon Swap Speed', '+25% Use Speed', '+15% Reload Speed']),
 		supplyLine: {index: 40, name: 'Knuckle House', tier: 3, track: 'Nest'},
-		totalCost: 0
+		totalCost: 2925
 	},
 		{
 		affinity: 'Reflex',
@@ -7871,7 +7871,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['+50% Weakspot Damage', '-40% Move Speed while shooting or melee attacking.']),
 		supplyLine: {index: 41, name: 'Knuckle House', tier: 3, track: 'Nest'},
-		totalCost: 0
+		totalCost: 2995
 	},
 		{
 		affinity: 'Discipline',
@@ -7884,7 +7884,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['+10% Weakspoť Damage', 'Allows players to see values for damage they deal and enemy health bars.']),
 		supplyLine: {index: 42, name: 'Knuckle House', tier: 3, track: 'Nest'},
-		totalCost: 0
+		totalCost: 3100
 	},
 		{
 		affinity: 'Fortune',
@@ -7906,7 +7906,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['When you kill a Mutation, gain 10 Copper (up to 300 per level).']),
 		supplyLine: {index: 43, name: 'Crow\'s Nest', tier: 4, track: 'Nest'},
-		totalCost: 0
+		totalCost: 3205
 	},
 		{
 		affinity: 'Reflex',
@@ -7919,7 +7919,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['+4% Move Speed while using an SMG.', '+35% Reload Speed while using an SMG.']),
 		supplyLine: {index: 44, name: 'Crow\'s Nest', tier: 4, track: 'Nest'},
-		totalCost: 0
+		totalCost: 3310
 	},
 		{
 		affinity: 'Discipline',
@@ -7932,7 +7932,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['+100% Stamina Regeneration', '-50% Maximum Stamina']),
 		supplyLine: {index: 45, name: 'Crow\'s Nest', tier: 4, track: 'Nest'},
-		totalCost: 0
+		totalCost: 3380
 	},
 		{
 		affinity: 'Reflex',
@@ -7945,7 +7945,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['+45% Move Speed while firing.', '+5% Move Speed while not firing.']),
 		supplyLine: {index: 46, name: 'Bridge Town', tier: 4, track: 'Nest'},
-		totalCost: 0
+		totalCost: 3550
 	},
 		{
 		affinity: 'Reflex',
@@ -7958,7 +7958,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['+20% Sprint Speed', '-40% Sprint Stamina Efficiency']),
 		supplyLine: {index: 47, name: 'The Crow\'s Nest', tier: 5, track: 'Nest'},
-		totalCost: 0
+		totalCost: 4310
 	},
 		{
 		affinity: 'Fortune',
@@ -7969,9 +7969,9 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		kind: 'Utility',
 		name: 'Hazard Pay',
 		properties: _List_fromArray(
-			['Gain 250 bonus Copper at the', 'start of each level.']),
+			['Gain 250 bonus Copper at the start of each level.']),
 		supplyLine: {index: 48, name: 'Bridge Town', tier: 5, track: 'Nest'},
-		totalCost: 0
+		totalCost: 4740
 	},
 		{
 		affinity: 'Discipline',
@@ -8137,7 +8137,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		kind: 'Utility',
 		name: 'Ammo Scavenger',
 		properties: _List_fromArray(
-			['You can sense nearby Ammo. More Ammo spawns.']),
+			['You can sense nearby Ammo.', 'More Ammo spawns.']),
 		supplyLine: {index: -1, name: 'Ammo Scavenger', tier: 1, track: 'Accomplishment'},
 		totalCost: 0
 	},
@@ -8325,17 +8325,9 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		totalCost: -1
 	}
 	]);
-var $elm$core$List$append = F2(
-	function (xs, ys) {
-		if (!ys.b) {
-			return xs;
-		} else {
-			return A3($elm$core$List$foldr, $elm$core$List$cons, ys, xs);
-		}
-	});
-var $elm$core$List$concat = function (lists) {
-	return A3($elm$core$List$foldr, $elm$core$List$append, _List_Nil, lists);
-};
+var $author$project$Cards$cards = A2($elm$core$List$map, $author$project$Cards$parseRawCard, $author$project$CardData$rawCards);
+var $rundis$elm_bootstrap$Bootstrap$Alert$Closed = {$: 'Closed'};
+var $rundis$elm_bootstrap$Bootstrap$Alert$closed = $rundis$elm_bootstrap$Bootstrap$Alert$Closed;
 var $elm$core$List$filter = F2(
 	function (isGood, list) {
 		return A3(
@@ -8347,112 +8339,6 @@ var $elm$core$List$filter = F2(
 			_List_Nil,
 			list);
 	});
-var $elm_community$list_extra$List$Extra$filterNot = F2(
-	function (pred, list) {
-		return A2(
-			$elm$core$List$filter,
-			A2($elm$core$Basics$composeL, $elm$core$Basics$not, pred),
-			list);
-	});
-var $author$project$Cards$isAlleyLine = function (c) {
-	var _v0 = c.supplyLine.name;
-	if (_v0.$ === 'Alley') {
-		return true;
-	} else {
-		return false;
-	}
-};
-var $author$project$Cards$isClinicLine = function (c) {
-	var _v0 = c.supplyLine.name;
-	if (_v0.$ === 'Clinic') {
-		return true;
-	} else {
-		return false;
-	}
-};
-var $author$project$Cards$isNestLine = function (c) {
-	var _v0 = c.supplyLine.name;
-	if (_v0.$ === 'Nest') {
-		return true;
-	} else {
-		return false;
-	}
-};
-var $elm$core$List$sortBy = _List_sortBy;
-var $author$project$Cards$setTotalCardCosts = function (input) {
-	var sortedNest = A2(
-		$elm$core$List$sortBy,
-		function (c) {
-			return c.supplyLine.index;
-		},
-		A2($elm$core$List$filter, $author$project$Cards$isNestLine, input));
-	var sortedClinic = A2(
-		$elm$core$List$sortBy,
-		function (c) {
-			return c.supplyLine.index;
-		},
-		A2($elm$core$List$filter, $author$project$Cards$isClinicLine, input));
-	var sortedAlley = A2(
-		$elm$core$List$sortBy,
-		function (c) {
-			return c.supplyLine.index;
-		},
-		A2($elm$core$List$filter, $author$project$Cards$isAlleyLine, input));
-	var others = A2(
-		$elm$core$List$map,
-		function (c) {
-			return _Utils_update(
-				c,
-				{totalCost: -1});
-		},
-		A2(
-			$elm_community$list_extra$List$Extra$filterNot,
-			$author$project$Cards$isClinicLine,
-			A2(
-				$elm_community$list_extra$List$Extra$filterNot,
-				$author$project$Cards$isNestLine,
-				A2($elm_community$list_extra$List$Extra$filterNot, $author$project$Cards$isAlleyLine, input))));
-	var folder = F2(
-		function (nextCard, _v0) {
-			var updatedCards = _v0.a;
-			var currentPrice = _v0.b;
-			return _Utils_Tuple2(
-				A2(
-					$elm$core$List$cons,
-					_Utils_update(
-						nextCard,
-						{totalCost: currentPrice + nextCard.cost}),
-					updatedCards),
-				currentPrice + nextCard.cost);
-		});
-	var nest = A3(
-		$elm$core$List$foldl,
-		folder,
-		_Utils_Tuple2(_List_Nil, 0),
-		sortedNest).a;
-	var clinic = A3(
-		$elm$core$List$foldl,
-		folder,
-		_Utils_Tuple2(_List_Nil, 0),
-		sortedClinic).a;
-	var alley = A3(
-		$elm$core$List$foldl,
-		folder,
-		_Utils_Tuple2(_List_Nil, 0),
-		sortedAlley).a;
-	return $elm$core$List$concat(
-		_List_fromArray(
-			[nest, alley, clinic, others]));
-};
-var $author$project$Cards$cards = A2(
-	$elm$core$List$sortBy,
-	function (c) {
-		return c.title;
-	},
-	$author$project$Cards$setTotalCardCosts(
-		A2($elm$core$List$map, $author$project$Cards$parseRawCard, $author$project$CardData$rawCards)));
-var $rundis$elm_bootstrap$Bootstrap$Alert$Closed = {$: 'Closed'};
-var $rundis$elm_bootstrap$Bootstrap$Alert$closed = $rundis$elm_bootstrap$Bootstrap$Alert$Closed;
 var $elm_community$list_extra$List$Extra$find = F2(
 	function (predicate, list) {
 		find:
@@ -8619,6 +8505,14 @@ var $elm$core$Dict$get = F2(
 var $sporto$qs$QS$Many = function (a) {
 	return {$: 'Many', a: a};
 };
+var $elm$core$List$append = F2(
+	function (xs, ys) {
+		if (!ys.b) {
+			return xs;
+		} else {
+			return A3($elm$core$List$foldr, $elm$core$List$cons, ys, xs);
+		}
+	});
 var $sporto$qs$QS$get = F2(
 	function (key, query) {
 		return A2($elm$core$Dict$get, key, query);
@@ -9709,6 +9603,9 @@ var $author$project$List$Extras$elemIndexBy = F2(
 			});
 		return A2(run, 0, list);
 	});
+var $elm$core$List$concat = function (lists) {
+	return A3($elm$core$List$foldr, $elm$core$List$append, _List_Nil, lists);
+};
 var $elm$core$List$takeReverse = F3(
 	function (n, list, kept) {
 		takeReverse:
@@ -11724,6 +11621,14 @@ var $author$project$AchievementData$achievements = _List_fromArray(
 		{card: 'Field Surgeon', name: 'Field Surgeon', requirement: 'Heal 5,000 Total Health'}
 	]);
 var $rundis$elm_bootstrap$Bootstrap$Utilities$Flex$alignItemsCenter = $elm$html$Html$Attributes$class('align-items-center');
+var $author$project$Cards$isAlleyLine = function (c) {
+	var _v0 = c.supplyLine.name;
+	if (_v0.$ === 'Alley') {
+		return true;
+	} else {
+		return false;
+	}
+};
 var $elm_community$list_extra$List$Extra$maximumBy = F2(
 	function (f, ls) {
 		var maxBy = F2(
@@ -11772,6 +11677,14 @@ var $author$project$Cards$supplyLineCount = function (predicate) {
 };
 var $author$project$Cards$alleySupplyLineCount = $author$project$Cards$supplyLineCount($author$project$Cards$isAlleyLine);
 var $rundis$elm_bootstrap$Bootstrap$Utilities$Flex$block = $elm$html$Html$Attributes$class('d-flex');
+var $author$project$Cards$isClinicLine = function (c) {
+	var _v0 = c.supplyLine.name;
+	if (_v0.$ === 'Clinic') {
+		return true;
+	} else {
+		return false;
+	}
+};
 var $author$project$Cards$clinicSupplyLineCount = $author$project$Cards$supplyLineCount($author$project$Cards$isClinicLine);
 var $rundis$elm_bootstrap$Bootstrap$Utilities$Flex$col = $elm$html$Html$Attributes$class('flex-column');
 var $elm$html$Html$i = _VirtualDom_node('i');
@@ -11812,6 +11725,14 @@ var $rundis$elm_bootstrap$Bootstrap$Utilities$Flex$justifyBetween = $elm$html$Ht
 var $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$mb0Sm = $elm$html$Html$Attributes$class('mb-sm-0');
 var $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$mb2 = $elm$html$Html$Attributes$class('mb-2');
 var $rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$mt3 = $elm$html$Html$Attributes$class('mt-3');
+var $author$project$Cards$isNestLine = function (c) {
+	var _v0 = c.supplyLine.name;
+	if (_v0.$ === 'Nest') {
+		return true;
+	} else {
+		return false;
+	}
+};
 var $author$project$Cards$nestSupplyLineCount = $author$project$Cards$supplyLineCount($author$project$Cards$isNestLine);
 var $elm$virtual_dom$VirtualDom$node = function (tag) {
 	return _VirtualDom_node(

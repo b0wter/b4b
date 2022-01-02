@@ -119,53 +119,7 @@ cards : List Card
 cards =
     CardData.rawCards 
     |> List.map parseRawCard
-    |> setTotalCardCosts
-    |> List.sortBy (\c -> c.title)
     
-
-setTotalCardCosts : List Card -> List Card
-setTotalCardCosts input =
-    let
-        sortedNest = 
-            input 
-            |> List.filter isNestLine
-            |> List.sortBy (\c -> c.supplyLine.index)
-        sortedAlley =
-            input
-            |> List.filter isAlleyLine
-            |> List.sortBy (\c -> c.supplyLine.index)
-        sortedClinic =
-            input
-            |> List.filter isClinicLine
-            |> List.sortBy (\c -> c.supplyLine.index)
-            
-        others =
-            input
-            |> List.filterNot isAlleyLine
-            |> List.filterNot isNestLine
-            |> List.filterNot isClinicLine
-            |> List.map (\c -> { c | totalCost = -1 } )
-        
-        folder : (Card -> (List Card, Int) -> (List Card, Int))
-        folder =
-            (\nextCard (updatedCards, currentPrice) -> ({nextCard | totalCost = currentPrice + nextCard.cost} :: updatedCards, currentPrice + nextCard.cost))
-            --(\nextCard acc -> acc + nextCard.cost)
-            
-        nest = 
-            (sortedNest |> List.foldl folder ([], 0))
-            |> Tuple.first
-            
-        alley = 
-            (sortedAlley |> List.foldl folder ([], 0))
-            |> Tuple.first
-            
-        clinic = 
-            (sortedClinic |> List.foldl folder ([], 0))
-            |> Tuple.first
-            
-    in
-    List.concat [nest, alley, clinic, others]
-
 
 parseSupplyTrack: String -> String -> SupplyTrack
 parseSupplyTrack track name =
