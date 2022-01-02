@@ -1,5 +1,6 @@
 module Cards exposing (..)
 
+import AchievementData
 import CardData exposing (RawSupplyLine)
 import Dict
 import List.Extra as List
@@ -429,12 +430,17 @@ type alias SupplyLineRequirement =
     , requiredProgress : Int
     }
     
+    
+type alias AchievementRequirement =
+    { name : String
+    , requirement : String
+    }
 
 type alias SupplyLineRequirements =
     { nestRequirement : SupplyLineRequirement
     , alleyRequirement : SupplyLineRequirement
     , clinicRequirement : SupplyLineRequirement
-    , achievementRequirement : List String
+    , achievementRequirement : List AchievementRequirement
     , rovingMerchantsRequirement : List String
     }
     
@@ -569,9 +575,18 @@ supplyLineRequirements selection =
             (selection |> Tuple.first) :: (selection |> Tuple.second)
             |> List.filter isAccomplishmentLine
             |> List.map (\s -> 
-                    case s.supplyLine.name of
-                        Accomplishment x -> x
-                        _ -> "Unknown achievement"
+                    let 
+                        name =
+                            case s.supplyLine.name of
+                                Accomplishment x -> x
+                                _ -> "Unknown achievement"
+                        req =
+                            AchievementData.achievements 
+                            |> List.find (\a -> a.name == name || a.card == name)
+                            |> Maybe.map (\a -> a.requirement)
+                            |> Maybe.withDefault "unknown requirement"
+                    in
+                    { name = name, requirement = req }
                 )
         requiredRovingMerchants =
             (selection |> Tuple.first) :: (selection |> Tuple.second)

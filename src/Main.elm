@@ -1040,6 +1040,15 @@ inventoryProgressView cards =
             
 
         achievementList =
+            let
+                createLi requirement =
+                    Html.li [ ] 
+                    [ div [ Flex.block, Flex.col ]
+                      [ div [] [ text requirement.name ]
+                      , Html.small [] [ text requirement.requirement ]
+                      ]
+                    ]
+            in
             if requirements.achievementRequirement |> List.isEmpty then
                 div [] []
             else
@@ -1047,7 +1056,8 @@ inventoryProgressView cards =
                 [ Card.config [ Card.attrs [ class "inventory-summary-sub-card"] ]
                   |> Card.header [ class "inventory-summary-sub-card-header bg-transparent" ] [ Html.small [] [ text "Achievements" ] ]
                   |> Card.block [ Block.attrs [ class "inventory-summary-sub-card-body" ] ]
-                     [ Block.custom (Html.ul [ class "inventory-summary-sub-card-list pl-xl-3" ] (requirements.achievementRequirement |> List.map (\a -> Html.li [] [ text a ])))
+                     [ Block.custom (Html.ul [ class "inventory-summary-sub-card-list pl-xl-3" ] (requirements.achievementRequirement |> List.map createLi))
+                     --[ Block.custom (Html.ul [ class "inventory-summary-sub-card-list pl-xl-3" ] (requirements.achievementRequirement |> List.map (\a -> Html.li [] [ text a ])))
                      ]
                   |> Card.view
                 ]

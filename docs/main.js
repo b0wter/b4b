@@ -14277,13 +14277,30 @@ var $author$project$Cards$supplyLineRequirements = function (selection) {
 	var requiredAchievements = A2(
 		$elm$core$List$map,
 		function (s) {
-			var _v1 = s.supplyLine.name;
-			if (_v1.$ === 'Accomplishment') {
-				var x = _v1.a;
-				return x;
-			} else {
-				return 'Unknown achievement';
-			}
+			var name = function () {
+				var _v1 = s.supplyLine.name;
+				if (_v1.$ === 'Accomplishment') {
+					var x = _v1.a;
+					return x;
+				} else {
+					return 'Unknown achievement';
+				}
+			}();
+			var req = A2(
+				$elm$core$Maybe$withDefault,
+				'unknown requirement',
+				A2(
+					$elm$core$Maybe$map,
+					function (a) {
+						return a.requirement;
+					},
+					A2(
+						$elm_community$list_extra$List$Extra$find,
+						function (a) {
+							return _Utils_eq(a.name, name) || _Utils_eq(a.card, name);
+						},
+						$author$project$AchievementData$achievements)));
+			return {name: name, requirement: req};
 		},
 		A2(
 			$elm$core$List$filter,
@@ -14517,73 +14534,93 @@ var $author$project$Main$inventoryProgressView = function (cards) {
 				A3(progressBar, requirements.alleyRequirement, $rundis$elm_bootstrap$Bootstrap$Progress$info, 'Alley'),
 				A3(progressBar, requirements.clinicRequirement, $rundis$elm_bootstrap$Bootstrap$Progress$danger, 'Clinic')
 			]));
-	var achievementList = $elm$core$List$isEmpty(requirements.achievementRequirement) ? A2($elm$html$Html$div, _List_Nil, _List_Nil) : A2(
-		$elm$html$Html$div,
-		_List_fromArray(
-			[
-				$elm$html$Html$Attributes$class('col-xs-12 col-xl-6 pl-0 pr-0 pr-xl-1')
-			]),
-		_List_fromArray(
-			[
-				$rundis$elm_bootstrap$Bootstrap$Card$view(
-				A3(
-					$rundis$elm_bootstrap$Bootstrap$Card$block,
-					_List_fromArray(
-						[
-							$rundis$elm_bootstrap$Bootstrap$Card$Block$attrs(
-							_List_fromArray(
-								[
-									$elm$html$Html$Attributes$class('inventory-summary-sub-card-body')
-								]))
-						]),
-					_List_fromArray(
-						[
-							$rundis$elm_bootstrap$Bootstrap$Card$Block$custom(
-							A2(
-								$elm$html$Html$ul,
+	var achievementList = function () {
+		var createLi = function (requirement) {
+			return A2(
+				$elm$html$Html$li,
+				_List_Nil,
+				_List_fromArray(
+					[
+						A2(
+						$elm$html$Html$div,
+						_List_fromArray(
+							[$rundis$elm_bootstrap$Bootstrap$Utilities$Flex$block, $rundis$elm_bootstrap$Bootstrap$Utilities$Flex$col]),
+						_List_fromArray(
+							[
+								A2(
+								$elm$html$Html$div,
+								_List_Nil,
 								_List_fromArray(
 									[
-										$elm$html$Html$Attributes$class('inventory-summary-sub-card-list pl-xl-3')
-									]),
-								A2(
-									$elm$core$List$map,
-									function (a) {
-										return A2(
-											$elm$html$Html$li,
-											_List_Nil,
-											_List_fromArray(
-												[
-													$elm$html$Html$text(a)
-												]));
-									},
-									requirements.achievementRequirement)))
-						]),
-					A3(
-						$rundis$elm_bootstrap$Bootstrap$Card$header,
-						_List_fromArray(
-							[
-								$elm$html$Html$Attributes$class('inventory-summary-sub-card-header bg-transparent')
-							]),
-						_List_fromArray(
-							[
+										$elm$html$Html$text(requirement.name)
+									])),
 								A2(
 								$elm$html$Html$small,
 								_List_Nil,
 								_List_fromArray(
 									[
-										$elm$html$Html$text('Achievements')
+										$elm$html$Html$text(requirement.requirement)
+									]))
+							]))
+					]));
+		};
+		return $elm$core$List$isEmpty(requirements.achievementRequirement) ? A2($elm$html$Html$div, _List_Nil, _List_Nil) : A2(
+			$elm$html$Html$div,
+			_List_fromArray(
+				[
+					$elm$html$Html$Attributes$class('col-xs-12 col-xl-6 pl-0 pr-0 pr-xl-1')
+				]),
+			_List_fromArray(
+				[
+					$rundis$elm_bootstrap$Bootstrap$Card$view(
+					A3(
+						$rundis$elm_bootstrap$Bootstrap$Card$block,
+						_List_fromArray(
+							[
+								$rundis$elm_bootstrap$Bootstrap$Card$Block$attrs(
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$class('inventory-summary-sub-card-body')
 									]))
 							]),
-						$rundis$elm_bootstrap$Bootstrap$Card$config(
-							_List_fromArray(
-								[
-									$rundis$elm_bootstrap$Bootstrap$Card$attrs(
+						_List_fromArray(
+							[
+								$rundis$elm_bootstrap$Bootstrap$Card$Block$custom(
+								A2(
+									$elm$html$Html$ul,
 									_List_fromArray(
 										[
-											$elm$html$Html$Attributes$class('inventory-summary-sub-card')
+											$elm$html$Html$Attributes$class('inventory-summary-sub-card-list pl-xl-3')
+										]),
+									A2($elm$core$List$map, createLi, requirements.achievementRequirement)))
+							]),
+						A3(
+							$rundis$elm_bootstrap$Bootstrap$Card$header,
+							_List_fromArray(
+								[
+									$elm$html$Html$Attributes$class('inventory-summary-sub-card-header bg-transparent')
+								]),
+							_List_fromArray(
+								[
+									A2(
+									$elm$html$Html$small,
+									_List_Nil,
+									_List_fromArray(
+										[
+											$elm$html$Html$text('Achievements')
 										]))
-								])))))
-			]));
+								]),
+							$rundis$elm_bootstrap$Bootstrap$Card$config(
+								_List_fromArray(
+									[
+										$rundis$elm_bootstrap$Bootstrap$Card$attrs(
+										_List_fromArray(
+											[
+												$elm$html$Html$Attributes$class('inventory-summary-sub-card')
+											]))
+									])))))
+				]));
+	}();
 	return A2(
 		$rundis$elm_bootstrap$Bootstrap$Grid$col,
 		_List_fromArray(
