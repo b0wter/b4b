@@ -554,15 +554,6 @@ helpModal visibility =
          , text "Clears the current inventory."
          ]
        ]
-       {-
-       [ Html.h5 [] [ text "Basic Usage"]
-       , div [] [ text "This tool allows you to plan custom card decks for Back 4 Blood. The tool only supports the campaign version of the cards."]
-       , div [] [ text "To add cards to your selection simply click the `Select` button on the card you want."]
-       , div [] [ text "The `inventory` (aka the cards you selected) are either displayed on the right side on the screen or are accessible by using " ]
-       , div [] [ text "round action button (with the suitcase) on the lower right if you're on a mobile device."]
-       , Html.h5 [] [  ]
-       ]
-       -}
     |> Modal.view visibility
 
 
@@ -1080,7 +1071,6 @@ inventoryProgressView cards =
          ]
       |> Card.view
     ]
-    --[ div [] [ regularLines, achievementList, rovingMerchantsList ] ]
 
 
 {-| Creates a simple card view with a summary of all properties.
