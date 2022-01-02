@@ -434,9 +434,9 @@ inventoryToggleButton numberOfSelectedCards =
     let 
         background =
             if numberOfSelectedCards <= 15 then
-                0
+                "btn-light"
             else
-                1
+                "btn-warning"
                 
         content =
             div [ Flex.block, Flex.col ]
@@ -444,7 +444,7 @@ inventoryToggleButton numberOfSelectedCards =
             , div [ class "small-text" ] [ text (numberOfSelectedCards |> String.fromInt) ]
             ]
     in
-    Html.a [ id "inventory-toggle-button", class "action-button-right action-button-1 btn btn-light d-flex d-md-none pointer" ]
+    Html.a [ id "inventory-toggle-button", class ("action-button-right action-button-1 btn d-flex d-md-none pointer " ++ background) ]
     [
         Html.h2 [ class "m-auto grey no-decoration" ] [ content ] --[ FontAwesome.Solid.suitcase |> FontAwesome.Icon.viewIcon ]
     ]

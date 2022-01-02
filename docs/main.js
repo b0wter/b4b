@@ -14030,13 +14030,13 @@ var $author$project$Main$inventoryToggleButton = function (numberOfSelectedCards
 						$elm$core$String$fromInt(numberOfSelectedCards))
 					]))
 			]));
-	var background = (numberOfSelectedCards <= 15) ? 0 : 1;
+	var background = (numberOfSelectedCards <= 15) ? 'btn-light' : 'btn-warning';
 	return A2(
 		$elm$html$Html$a,
 		_List_fromArray(
 			[
 				$elm$html$Html$Attributes$id('inventory-toggle-button'),
-				$elm$html$Html$Attributes$class('action-button-right action-button-1 btn btn-light d-flex d-md-none pointer')
+				$elm$html$Html$Attributes$class('action-button-right action-button-1 btn d-flex d-md-none pointer ' + background)
 			]),
 		_List_fromArray(
 			[
