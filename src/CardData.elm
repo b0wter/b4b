@@ -2,12 +2,14 @@ module CardData exposing (..)
 
 import Tags exposing (..)
 
+
 type alias RawSupplyLine =
     { track : String
     , name : String
     , tier : Int
     , index : Int
     }
+
 
 type alias RawCard =
     { id : Int
@@ -21,6 +23,7 @@ type alias RawCard =
     , affinity : String
     , effects : List Effect
     }
+
 
 rawCards : List RawCard
 rawCards =
@@ -311,13 +314,16 @@ rawCards =
             [ "TEAM EFFECTS When you or a teammate becomes incapacitated, all teammates gain 30% Damage,20% Reload Speed, and Unlimited Ammo for 10 seconds."
             ]
       , effects =
-            [ Team (Triggered
-                (OnIncapacitated SelfOrTeammate) (
-                    Many
-                    [ Timed (ForSeconds 10) (Once Damage (RelativeMax 30))
-                    , Timed (ForSeconds 10) (Once ReloadSpeed (RelativeMax 20))
-                    , Timed (ForSeconds 10) (Special "Unlimited ammo")
-                    ]))
+            [ Team
+                (Triggered
+                    (OnIncapacitated SelfOrTeammate)
+                    (Many
+                        [ Timed (ForSeconds 10) (Once Damage (RelativeMax 30))
+                        , Timed (ForSeconds 10) (Once ReloadSpeed (RelativeMax 20))
+                        , Timed (ForSeconds 10) (Special "Unlimited ammo")
+                        ]
+                    )
+                )
             ]
       , supplyLine =
             { track = "Alley"
@@ -1001,8 +1007,7 @@ rawCards =
             [ "Each teammate gains 100 bonus Copper at the start of each level."
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Alley"
             , name = "The Stilts"
@@ -1022,8 +1027,7 @@ rawCards =
             , "+5 Health"
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Clinic"
             , name = "The Clinic"
@@ -1043,8 +1047,7 @@ rawCards =
             , "+5 Health"
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Clinic"
             , name = "The Clinic"
@@ -1063,8 +1066,7 @@ rawCards =
             [ "When you use a Medical Accessory, the target heals for an additional 20 Health over 30 seconds."
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Clinic"
             , name = "The Clinic"
@@ -1084,8 +1086,7 @@ rawCards =
             , "-20% Stamina Efficiency"
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Clinic"
             , name = "The Clinic"
@@ -1104,8 +1105,7 @@ rawCards =
             [ "TEAM EFFECTS When you or a teammate becomes incapacitated, all teammates heal for 20 health over 15 seconds."
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Clinic"
             , name = "The Clinic"
@@ -1126,8 +1126,7 @@ rawCards =
             , "-20% Stamina Efficiency"
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Clinic"
             , name = "The Furnace"
@@ -1147,8 +1146,7 @@ rawCards =
             , "-15% Ammo Capacity"
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Clinic"
             , name = "The Furnace"
@@ -1167,8 +1165,7 @@ rawCards =
             [ "When using Shotguns, gain 0.25 Temporary Health for each pellet that hits."
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Clinic"
             , name = "The Furnace"
@@ -1188,8 +1185,7 @@ rawCards =
             , "More Support Accessories spawn."
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Clinic"
             , name = "The Furnace"
@@ -1208,8 +1204,7 @@ rawCards =
             [ "+1 Support Inventory"
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Clinic"
             , name = "The Furnace"
@@ -1230,8 +1225,7 @@ rawCards =
             , "+20% Melee Attack Speed"
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Clinic"
             , name = "Grant's Brew House"
@@ -1250,8 +1244,7 @@ rawCards =
             [ "+100% Revive Speed"
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Clinic"
             , name = "Grant's Brew House"
@@ -1271,8 +1264,7 @@ rawCards =
             , "-15% Ammo Capacity"
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Clinic"
             , name = "Grant's Brew House"
@@ -1291,8 +1283,7 @@ rawCards =
             [ "Take 1 less damage from all Ridden."
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Clinic"
             , name = "Grant's Brew House"
@@ -1332,8 +1323,7 @@ rawCards =
             , "-10% Damage Dealt"
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Clinic"
             , name = "The Clinic"
@@ -1394,8 +1384,7 @@ rawCards =
             [ "Healing a teammate also applies 50% of the effect to you."
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Clinic"
             , name = "The Clinic"
@@ -1414,8 +1403,7 @@ rawCards =
             [ "When you exit a starting saferoom, your team gains 50 Temporary Health."
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Clinic"
             , name = "The Furnace"
@@ -1436,8 +1424,7 @@ rawCards =
             , "DISABLES: Aim Down Sights"
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Clinic"
             , name = "The Furnace"
@@ -1456,8 +1443,7 @@ rawCards =
             [ "Precision Kills have a 20% chance to cause Ridden to explode, dealing 15 damage to other Ridden within 4 meters."
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Clinic"
             , name = "The Furnace"
@@ -1477,8 +1463,7 @@ rawCards =
             , "Heals teammates for an additional 20 Health when you revive them."
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Clinic"
             , name = "The Furnace"
@@ -1498,8 +1483,7 @@ rawCards =
             , "TEAM EFFECTS +1 Team Support Inventory"
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Clinic"
             , name = "Grant's Brew House"
@@ -1519,8 +1503,7 @@ rawCards =
             , "-30% Stamina"
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Clinic"
             , name = "Grant's Brew House"
@@ -1583,8 +1566,7 @@ rawCards =
             [ "Melee hits cause the target to take 20% increased damage for 5 seconds."
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Clinic"
             , name = "The Clinic"
@@ -1603,8 +1585,7 @@ rawCards =
             [ "Gain +15% Damage Resistance while you have Temporary Health."
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Clinic"
             , name = "The Clinic"
@@ -1645,8 +1626,7 @@ rawCards =
             [ "Kills from greater than 15 meters grant 5 Temporary Health to teammates within 10 meters of the target."
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Clinic"
             , name = "The Furnace"
@@ -1665,8 +1645,7 @@ rawCards =
             [ "When you take a single hit for 15 or more damage, heal 10 health over 5 seconds."
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Clinic"
             , name = "The Furnace"
@@ -1687,8 +1666,7 @@ rawCards =
             , "You can sense flammable objects nearby."
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Clinic"
             , name = "The Furnace"
@@ -1707,8 +1685,7 @@ rawCards =
             [ "Melee hits against Weakspots deal +20 additional Stumble Damage."
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Clinic"
             , name = "The Furnace"
@@ -1730,8 +1707,7 @@ rawCards =
             , "+25% Aim Speed"
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Clinic"
             , name = "Grant's Brew House"
@@ -1752,8 +1728,7 @@ rawCards =
             , "TEAM EFFECTS +20% Reduced Incap Trauma"
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Clinic"
             , name = "Grant's Brew House"
@@ -1773,8 +1748,7 @@ rawCards =
             , "When you use a Medical Accessory, you gain 15% Move Speed for 15 seconds."
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Clinic"
             , name = "The Clinic"
@@ -1835,8 +1809,7 @@ rawCards =
             [ "First Aids and Defibrillators also recover 15 Trauma Damage and 1 Extra Life."
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Clinic"
             , name = "The Clinic"
@@ -1855,8 +1828,7 @@ rawCards =
             [ "When you use a Medical Accessory, it has a 25% chance to have 100% increased effect."
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Clinic"
             , name = "The Clinic"
@@ -1878,8 +1850,7 @@ rawCards =
             , "+5 Health"
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Nest"
             , name = "The Crow's Nest"
@@ -1898,8 +1869,7 @@ rawCards =
             [ "+20% Weakspot Damage"
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Nest"
             , name = "The Crow's Nest"
@@ -1918,8 +1888,7 @@ rawCards =
             [ "+25% Weapon Swap Speed"
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Nest"
             , name = "The Crow's Nest"
@@ -1940,8 +1909,7 @@ rawCards =
             , "+5 Health"
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Nest"
             , name = "The Crow's Nest"
@@ -1960,8 +1928,7 @@ rawCards =
             [ "When you take a hit for 10 or more damage, gain 15% Move Speed for 3 seconds."
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Nest"
             , name = "The Crow's Nest"
@@ -1980,8 +1947,7 @@ rawCards =
             [ "You can shoot while sprinting."
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Nest"
             , name = "The Crow's Nest"
@@ -2001,8 +1967,7 @@ rawCards =
             , "+10% Stamina"
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Nest"
             , name = "Bridge Town"
@@ -2044,8 +2009,7 @@ rawCards =
             , "Accessories. More Quick Accessories spawn."
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Nest"
             , name = "Bridge Town"
@@ -2064,8 +2028,7 @@ rawCards =
             [ "+5% Move Speed"
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Nest"
             , name = "Bridge Town"
@@ -2085,8 +2048,7 @@ rawCards =
             , "+10% Damage with Shotguns."
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Nest"
             , name = "Knuckle House"
@@ -2106,8 +2068,7 @@ rawCards =
             , "-5% Damage Resistance"
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Nest"
             , name = "Knuckle House"
@@ -2127,8 +2088,7 @@ rawCards =
             , "+50% Breakout Cooldown Reduction. (Base 60 seconds)."
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Nest"
             , name = "Knuckle House"
@@ -2148,8 +2108,7 @@ rawCards =
             , "-7% Damage Resistance"
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Nest"
             , name = "Knuckle House"
@@ -2168,8 +2127,7 @@ rawCards =
             [ "Precision Kills grant you 8% Move Speed for 5 seconds."
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Nest"
             , name = "Knuckle House"
@@ -2189,8 +2147,7 @@ rawCards =
             , "-5% Damage Resistance"
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Nest"
             , name = "The Crow's Nest"
@@ -2236,8 +2193,7 @@ rawCards =
             , "+10% Slow Resistance"
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Nest"
             , name = "The Crow's Nest"
@@ -2256,8 +2212,7 @@ rawCards =
             [ "No Movement Penalty for strafe and backpedal."
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Nest"
             , name = "The Crow's Nest"
@@ -2278,8 +2233,7 @@ rawCards =
             , "-5% Damage Resistance"
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Nest"
             , name = "Bridge Town"
@@ -2298,8 +2252,7 @@ rawCards =
             [ "Gain 5% Weakspot Damage for each Precision Kill in the last 10 seconds."
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Nest"
             , name = "Bridge Town"
@@ -2319,8 +2272,7 @@ rawCards =
             , "-7% Damage Resistance"
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Nest"
             , name = "Bridge Town"
@@ -2340,8 +2292,7 @@ rawCards =
             , "Your secondary weapons reload -20% slower."
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Nest"
             , name = "Bridge Town"
@@ -2360,8 +2311,7 @@ rawCards =
             [ "Gain 10% of your total Copper in each Saferoom."
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Nest"
             , name = "Bridge Town"
@@ -2381,8 +2331,7 @@ rawCards =
             , "When you take damage, your Accuracy is reduced by 20% for 3 seconds."
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Nest"
             , name = "Knuckle House"
@@ -2401,8 +2350,7 @@ rawCards =
             [ "TEAM EFFECTS +15% Team Stamina"
             ]
       , effects =
-            [
-                Team (Passive Stamina (RelativeMax 15))
+            [ Team (Passive Stamina (RelativeMax 15))
             ]
       , supplyLine =
             { track = "Nest"
@@ -2422,8 +2370,7 @@ rawCards =
             [ "Melee kills have a 3% chance to spawn ammo or razorwire."
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Nest"
             , name = "Knuckle House"
@@ -2444,8 +2391,7 @@ rawCards =
             , "DISABLES: Sprint"
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Nest"
             , name = "Knuckle House"
@@ -2465,8 +2411,7 @@ rawCards =
             , "-5% Damage Resistance"
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Nest"
             , name = "Knuckle House"
@@ -2485,8 +2430,7 @@ rawCards =
             [ "Pain Meds you apply also grant +20% Stamina Regeneration, + 15% Reload Speed, and + 15% Weapon Swap Speed for 30 seconds."
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Nest"
             , name = "The Crow's Nest"
@@ -2508,8 +2452,7 @@ rawCards =
             , "DISABLES: Aim Down Sights"
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Nest"
             , name = "The Crow's Nest"
@@ -2528,8 +2471,7 @@ rawCards =
             [ "Each bullet hit causes the target to take 1% increased damage for 3 seconds (stacks up to 15% )."
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Nest"
             , name = "The Crow's Nest"
@@ -2549,8 +2491,7 @@ rawCards =
             , "When you take damage while Sprinting, you lose all Stamina."
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Nest"
             , name = "Bridge Town"
@@ -2570,8 +2511,7 @@ rawCards =
             , "When you take damage, your Move Speed bonus is lost for 3 seconds."
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Nest"
             , name = "Bridge Town"
@@ -2590,8 +2530,7 @@ rawCards =
             [ "Changing weapons within 1 second of reaching low ammo grants +20% Damage for 5 seconds."
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Nest"
             , name = "Bridge Town"
@@ -2610,8 +2549,7 @@ rawCards =
             [ "+40% Stamina"
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Nest"
             , name = "Bridge Town"
@@ -2630,8 +2568,7 @@ rawCards =
             [ "When you exit a starting saferoom your team gains +15% Move Speed for 30 seconds."
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Nest"
             , name = "Bridge Town"
@@ -2650,8 +2587,7 @@ rawCards =
             [ "When you throw an Offensive Accessory, gain 20 Temporary Health and 20% Move Speed for 5 seconds."
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Nest"
             , name = "Bridge Town"
@@ -2671,8 +2607,7 @@ rawCards =
             , "When you take damage, you have a chance to be blinded for 1 second."
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Nest"
             , name = "Bridge Town"
@@ -2694,8 +2629,7 @@ rawCards =
             , "+15% Reload Speed"
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Nest"
             , name = "Knuckle House"
@@ -2737,8 +2671,7 @@ rawCards =
             , "Allows players to see values for damage they deal and enemy health bars."
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Nest"
             , name = "Knuckle House"
@@ -2778,8 +2711,7 @@ rawCards =
             , "+35% Reload Speed while using an SMG."
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Nest"
             , name = "Crow's Nest"
@@ -2799,8 +2731,7 @@ rawCards =
             , "-50% Maximum Stamina"
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Nest"
             , name = "Crow's Nest"
@@ -2820,8 +2751,7 @@ rawCards =
             , "+5% Move Speed while not firing."
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Nest"
             , name = "Bridge Town"
@@ -2841,8 +2771,7 @@ rawCards =
             , "-40% Sprint Stamina Efficiency"
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Nest"
             , name = "The Crow's Nest"
@@ -2862,8 +2791,7 @@ rawCards =
             , "start of each level."
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Nest"
             , name = "Bridge Town"
@@ -2882,8 +2810,7 @@ rawCards =
             [ "+20% Healing Efficiency"
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Starter"
             , name = "Starter Deck"
@@ -2902,8 +2829,7 @@ rawCards =
             [ "Melee kills heal 2 Health."
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Starter"
             , name = "Starter Deck"
@@ -2922,8 +2848,7 @@ rawCards =
             [ "Turns your Bash into a Knife that counts as a Melee weapon."
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Starter"
             , name = "Starter Deck"
@@ -2943,8 +2868,7 @@ rawCards =
             , "More Copper Piles spawn."
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Starter"
             , name = "Starter Deck"
@@ -2963,8 +2887,7 @@ rawCards =
             [ "+20% Reload Speed"
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Starter"
             , name = "Starter Deck"
@@ -2984,8 +2907,7 @@ rawCards =
             , "+5 Health"
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Starter"
             , name = "Starter Deck"
@@ -3004,8 +2926,7 @@ rawCards =
             [ "Kills while at Critical Health recover 1 Health."
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Starter"
             , name = "Starter Deck"
@@ -3024,8 +2945,7 @@ rawCards =
             [ "+15 Health"
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Strip"
             , name = "The Strip"
@@ -3044,8 +2964,7 @@ rawCards =
             [ "+25% Ammo Сарacity"
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Strip"
             , name = "The Strip"
@@ -3058,14 +2977,13 @@ rawCards =
     , { id = 145
       , name = "Heavy Attack"
       , cost = 100
-      , totalCost = 0
+      , totalCost = 145
       , filename = "13_0_3.jpg"
       , properties =
             [ "Charge: Hold with Melee weapons to burst forward. Charge attacks deal 100% increased damage."
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Strip"
             , name = "The Strip"
@@ -3104,8 +3022,7 @@ rawCards =
             [ "You can sense nearby Ammo. More Ammo spawns."
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Accomplishment"
             , name = "Ammo Scavenger"
@@ -3124,8 +3041,7 @@ rawCards =
             [ "Gain 10% Melee Damage,10% Melee Speed, and 5% Move Speed for each Melee kill in the last 4 seconds."
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Accomplishment"
             , name = "Berserker"
@@ -3144,8 +3060,7 @@ rawCards =
             [ "When you or your team kills a Mutation gain 1% damage (up to -15%) until the end of the level."
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Accomplishment"
             , name = "Smorgasbord"
@@ -3165,8 +3080,7 @@ rawCards =
             , "-50% Use Speed"
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Accomplishment"
             , name = "Field Surgeon"
@@ -3185,8 +3099,7 @@ rawCards =
             [ "Whenever you or your team loots Copper, you have a 35% chance to find 35% additional Copper."
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Accomplishment"
             , name = "Jukebox Hero"
@@ -3206,8 +3119,7 @@ rawCards =
             , "+10% Damage with Pistols and SMGS"
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Accomplishment"
             , name = "Mag Carrier"
@@ -3226,8 +3138,7 @@ rawCards =
             [ "Gain 30% Move Speed and Accuracy while crouched and using an LMG."
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Accomplishment"
             , name = "Meatgrinder"
@@ -3247,8 +3158,7 @@ rawCards =
             , "+10% Damage with Shotguns"
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Accomplishment"
             , name = "Shell Carrier"
@@ -3268,8 +3178,7 @@ rawCards =
             , "+10% Damage with Sniper Rifles"
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Accomplishment"
             , name = "Stock Pouch"
@@ -3289,8 +3198,7 @@ rawCards =
             , "+10% Damage with Assault Rifles and LMGS"
             ]
       , effects =
-            [
-            ]
+            []
       , supplyLine =
             { track = "Accomplishment"
             , name = "Tactical Vest"
@@ -3306,15 +3214,15 @@ rawCards =
       , totalCost = -1
       , filename = "16_1_1.jpg"
       , properties =
-        [ "+1 Quick Slot Inventory"
-        ]
+            [ "+1 Quick Slot Inventory"
+            ]
       , effects =
-        [ Passive SupportAccessoryCount (AbsoluteMax 1)
-        ]
-      , supplyLine = 
+            [ Passive SupportAccessoryCount (AbsoluteMax 1)
+            ]
+      , supplyLine =
             { track = "Roving Merchants"
             , name = "Liberators"
-            , tier = 1 
+            , tier = 1
             , index = 1
             }
       , kind = "Utility"
@@ -3326,17 +3234,17 @@ rawCards =
       , totalCost = -1
       , filename = "16_1_2.jpg"
       , properties =
-        [ "+2 Quick Slot Inventory"
-        , "-10% Damage Dealt"
-        ]
+            [ "+2 Quick Slot Inventory"
+            , "-10% Damage Dealt"
+            ]
       , effects =
-        [ Passive SupportAccessoryCount (AbsoluteMax 1)
-        , Passive Damage (RelativeMax -10)
-        ]
-      , supplyLine = 
+            [ Passive SupportAccessoryCount (AbsoluteMax 1)
+            , Passive Damage (RelativeMax -10)
+            ]
+      , supplyLine =
             { track = "Roving Merchants"
             , name = "Liberators"
-            , tier = 1 
+            , tier = 1
             , index = 2
             }
       , kind = "Utility"
@@ -3348,20 +3256,22 @@ rawCards =
       , totalCost = -1
       , filename = "16_1_3.jpg"
       , properties =
-        [ "-10% Health"
-        , "+1 Team Quick Item Inventory"
-        ]
+            [ "-10% Health"
+            , "+1 Team Quick Item Inventory"
+            ]
       , effects =
-        [ Team (Passive QuickAccessoryCount (AbsoluteMax 1))
-        , Passive Health (RelativeMax -10)
-        ]
-      , supplyLine = 
+            [ Team (Passive QuickAccessoryCount (AbsoluteMax 1))
+            , Passive Health (RelativeMax -10)
+            ]
+      , supplyLine =
             { track = "Roving Merchants"
             , name = "KSC Convoys"
-            , tier = 1 
+            , tier = 1
             , index = 2
             }
       , kind = "Utility"
       , affinity = "Fortune"
       }
     ]
+
+

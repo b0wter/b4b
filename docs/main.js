@@ -8101,7 +8101,7 @@ var $author$project$CardData$rawCards = _List_fromArray(
 		properties: _List_fromArray(
 			['Charge: Hold with Melee weapons to burst forward. Charge attacks deal 100% increased damage.']),
 		supplyLine: {index: 5, name: 'The Strip', tier: 1, track: 'Strip'},
-		totalCost: 0
+		totalCost: 145
 	},
 		{
 		affinity: 'Reflex',
