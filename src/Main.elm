@@ -13,9 +13,7 @@ import Bootstrap.Grid as Grid
 import Bootstrap.Grid.Col as Col
 import Bootstrap.Grid.Row as Row
 import Bootstrap.Modal as Modal
-import Bootstrap.Navbar as Navbar
 import Bootstrap.Progress as Progress
-import Bootstrap.Text as Text exposing (Color)
 import Bootstrap.Utilities.Border as Border
 import Bootstrap.Utilities.Display as Display
 import Bootstrap.Utilities.Flex as Flex
@@ -27,17 +25,14 @@ import Cards exposing (Card, CardId, Kind(..), cards)
 import Dict
 import FontAwesome.Icon
 import FontAwesome.Solid
-import FontAwesome.Transforms
 import Html exposing (Attribute, Html, div, img, text)
 import Html.Attributes exposing (..)
 import Html.Events exposing (onClick, onInput)
 import List.Extra as List
 import List.Extras as List
-import List.FlatMap as List
 import Maybe.Extra as Maybe
 import Platform exposing (Router)
 import QS as QS
-import String.Extra as String
 import String.Extras as String
 import Url exposing (Url)
 
@@ -858,107 +853,6 @@ inventoryContentView model =
         InventoryAsSummary ->
             alert ToggleReturnSummarizeViewHint model.returnViewHintVisibility returnAlertContent
                 :: (model.selectedCards |> asSummaryView)
-
-
-cardBackgroundColor : Card -> Card.Option msg
-cardBackgroundColor card =
-    case card.kind of
-        UnknownKind ->
-            Card.dark
-
-        Mobility ->
-            Card.primary
-
-        Utility ->
-            Card.danger
-
-        Defense ->
-            Card.success
-
-        Offense ->
-            Card.warning
-
-
-buttonBackgroundColor : Card -> Option msg
-buttonBackgroundColor card =
-    case card.kind of
-        UnknownKind ->
-            Button.dark
-
-        Mobility ->
-            Button.primary
-
-        Utility ->
-            Button.danger
-
-        Defense ->
-            Button.success
-
-        Offense ->
-            Button.warning
-
-
-cardOutlineColor : Card -> Card.Option msg
-cardOutlineColor card =
-    case card.kind of
-        UnknownKind ->
-            Card.outlineDark
-
-        Mobility ->
-            Card.outlinePrimary
-
-        Utility ->
-            Card.outlineDanger
-
-        Defense ->
-            Card.outlineSuccess
-
-        Offense ->
-            Card.outlineWarning
-
-
-bgDark : Attribute msg
-bgDark =
-    Html.Attributes.class "bg-dark"
-
-
-bgPrimary : Attribute msg
-bgPrimary =
-    Html.Attributes.class "bg-primary"
-
-
-bgDanger : Attribute msg
-bgDanger =
-    Html.Attributes.class "bg-danger"
-
-
-bgSuccess : Attribute msg
-bgSuccess =
-    Html.Attributes.class "bg-success"
-
-
-bgWarning : Attribute msg
-bgWarning =
-    Html.Attributes.class "bg-warning"
-
-
-htmlBackgroundColor : Card -> Attribute msg
-htmlBackgroundColor card =
-    case card.kind of
-        UnknownKind ->
-            Html.Attributes.class "bg-dark"
-
-        Mobility ->
-            Html.Attributes.class "bg-primary"
-
-        Utility ->
-            Html.Attributes.class "bg-danger"
-
-        Defense ->
-            Html.Attributes.class "bg-success"
-
-        Offense ->
-            Html.Attributes.class "bg-warning"
 
 
 fullCardView : Bool -> CardDisplay -> Card -> Grid.Column Msg
