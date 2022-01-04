@@ -26,8 +26,8 @@
 .action-button-right {
     position: fixed;
     right: 1em;
-    width: 4em;
-    height: 4em;
+    width: 3.5em;
+    height: 3.5em;
     border-radius: 50% !important;
 }
 
@@ -40,29 +40,16 @@
 }
 
 .action-button-left {
+    background-color: rgba(128, 128, 128, 0.25) !important;
+    border: 0 !important;
+    color: white !important;
     position: fixed;
     bottom: 1em;
     left: 1em;
-    width: 4em;
-    height: 4em;
+    width: 3em;
+    height: 3em;
     border-radius: 50% !important;
 }
-
-.action-button-right {
-    position: fixed;
-    bottom: 1em;
-    right: 1em;
-    width: 4em;
-    height: 4em;
-    border-radius: 50% !important;
-}
-
-/*
-.grey {
-    -webkit-filter: grayscale(100%);
-    filter: grayscale(100%);
-}
- */
 
 .small-text {
     font-size: 0.5em;
@@ -71,6 +58,21 @@
 .small-icon {
     height: 0.75em;
     width: 0.75em;
+}
+
+.top-bar {
+    position: sticky;
+    position: -webkit-sticky;
+    z-index: 1;
+    top: 0.5em;
+}
+
+.bottom-bar {
+    position: fixed;
+    position: -webkit-sticky;
+    z-index: 1;
+    bottom: 0;
+    width: calc(100vh);
 }
 
 .card-text-header {

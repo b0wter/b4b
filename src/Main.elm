@@ -451,9 +451,16 @@ inventoryToggleButton numberOfSelectedCards =
 
 scrollToTopToggleButton : Html Msg
 scrollToTopToggleButton =
+    let
+        icon =
+            FontAwesome.Solid.arrowUp 
+            |> FontAwesome.Icon.present 
+            |> FontAwesome.Icon.styled [ style "width" "0.5em", style "height" "0.5em", style "vertical-align" "0.18em" ] 
+            |> FontAwesome.Icon.view
+    in
     Html.a [ id "scroll-to-top-toggle-button", class "action-button-left action-button-1 btn btn-light d-none pointer" ]
     [
-        Html.h2 [ class "m-auto grey no-decoration" ] [ FontAwesome.Solid.arrowUp |> FontAwesome.Icon.viewIcon ]
+        Html.h2 [ class "m-auto grey no-decoration" ] [ icon ]
     ]
 
 

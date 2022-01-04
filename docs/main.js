@@ -10106,6 +10106,12 @@ var $rundis$elm_bootstrap$Bootstrap$Grid$Internal$ColAttrs = function (a) {
 var $rundis$elm_bootstrap$Bootstrap$Grid$Col$attrs = function (attrs_) {
 	return $rundis$elm_bootstrap$Bootstrap$Grid$Internal$ColAttrs(attrs_);
 };
+var $rundis$elm_bootstrap$Bootstrap$Grid$Internal$RowAttrs = function (a) {
+	return {$: 'RowAttrs', a: a};
+};
+var $rundis$elm_bootstrap$Bootstrap$Grid$Row$attrs = function (attrs_) {
+	return $rundis$elm_bootstrap$Bootstrap$Grid$Internal$RowAttrs(attrs_);
+};
 var $author$project$Main$ChangeCardDisplayType = function (a) {
 	return {$: 'ChangeCardDisplayType', a: a};
 };
@@ -13192,36 +13198,38 @@ var $author$project$Main$cardPoolView = function (model) {
 		_List_fromArray(
 			[
 				A2(
-				$rundis$elm_bootstrap$Bootstrap$Grid$row,
-				_List_Nil,
+				$elm$html$Html$div,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('top-bar')
+					]),
 				_List_fromArray(
 					[
 						A2(
-						$rundis$elm_bootstrap$Bootstrap$Grid$col,
-						_List_fromArray(
-							[$rundis$elm_bootstrap$Bootstrap$Grid$Col$xs12]),
+						$elm$html$Html$div,
 						_List_fromArray(
 							[
-								A2(
-								$elm$html$Html$div,
-								_List_fromArray(
-									[
-										$rundis$elm_bootstrap$Bootstrap$Utilities$Border$rounded,
-										$rundis$elm_bootstrap$Bootstrap$Utilities$Spacing$mt2,
-										$elm$html$Html$Attributes$class('d-flex justify-content-between pr-1 pl-1 pt-1 pb-1 bg-dark shadow ')
-									]),
-								_List_fromArray(
-									[
-										$author$project$Main$filterWithClearButton(
-										A2($elm$core$Maybe$withDefault, '', model.filter)),
-										$author$project$Main$cardDisplayToggle(model.cardDisplay),
-										showCardDetailsToggle
-									]))
+								$rundis$elm_bootstrap$Bootstrap$Utilities$Border$rounded,
+								$elm$html$Html$Attributes$class('d-flex justify-content-between pr-1 pl-1 pt-1 pb-1 bg-dark shadow ')
+							]),
+						_List_fromArray(
+							[
+								$author$project$Main$filterWithClearButton(
+								A2($elm$core$Maybe$withDefault, '', model.filter)),
+								$author$project$Main$cardDisplayToggle(model.cardDisplay),
+								showCardDetailsToggle
 							]))
 					])),
 				A2(
 				$rundis$elm_bootstrap$Bootstrap$Grid$row,
-				_List_Nil,
+				_List_fromArray(
+					[
+						$rundis$elm_bootstrap$Bootstrap$Grid$Row$attrs(
+						_List_fromArray(
+							[
+								A2($elm$html$Html$Attributes$style, 'margin-top', '0.5em')
+							]))
+					]),
 				A2(
 					$elm$core$List$map,
 					A2($author$project$Main$fullCardView, model.showCardPoolDetails, model.cardDisplay),
@@ -15906,12 +15914,6 @@ var $author$project$Main$ShowShareModal = {$: 'ShowShareModal'};
 var $author$project$Main$ShowYesNoModal = function (a) {
 	return {$: 'ShowYesNoModal', a: a};
 };
-var $rundis$elm_bootstrap$Bootstrap$Grid$Internal$RowAttrs = function (a) {
-	return {$: 'RowAttrs', a: a};
-};
-var $rundis$elm_bootstrap$Bootstrap$Grid$Row$attrs = function (attrs_) {
-	return $rundis$elm_bootstrap$Bootstrap$Grid$Internal$RowAttrs(attrs_);
-};
 var $author$project$Main$inventoryStyleToggle = F2(
 	function (inventoryDisplay, extraClasses) {
 		return A2(
@@ -16102,26 +16104,36 @@ var $lattyware$elm_fontawesome$FontAwesome$Solid$arrowUp = A5(
 	512,
 	_List_fromArray(
 		['M34.9 289.5l-22.2-22.2c-9.4-9.4-9.4-24.6 0-33.9L207 39c9.4-9.4 24.6-9.4 33.9 0l194.3 194.3c9.4 9.4 9.4 24.6 0 33.9L413 289.4c-9.5 9.5-25 9.3-34.3-.4L264 168.6V456c0 13.3-10.7 24-24 24h-32c-13.3 0-24-10.7-24-24V168.6L69.2 289.1c-9.3 9.8-24.8 10-34.3.4z']));
-var $author$project$Main$scrollToTopToggleButton = A2(
-	$elm$html$Html$a,
-	_List_fromArray(
-		[
-			$elm$html$Html$Attributes$id('scroll-to-top-toggle-button'),
-			$elm$html$Html$Attributes$class('action-button-left action-button-1 btn btn-light d-none pointer')
-		]),
-	_List_fromArray(
-		[
-			A2(
-			$elm$html$Html$h2,
+var $author$project$Main$scrollToTopToggleButton = function () {
+	var icon = $lattyware$elm_fontawesome$FontAwesome$Icon$view(
+		A2(
+			$lattyware$elm_fontawesome$FontAwesome$Icon$styled,
 			_List_fromArray(
 				[
-					$elm$html$Html$Attributes$class('m-auto grey no-decoration')
+					A2($elm$html$Html$Attributes$style, 'width', '0.5em'),
+					A2($elm$html$Html$Attributes$style, 'height', '0.5em'),
+					A2($elm$html$Html$Attributes$style, 'vertical-align', '0.18em')
 				]),
-			_List_fromArray(
-				[
-					$lattyware$elm_fontawesome$FontAwesome$Icon$viewIcon($lattyware$elm_fontawesome$FontAwesome$Solid$arrowUp)
-				]))
-		]));
+			$lattyware$elm_fontawesome$FontAwesome$Icon$present($lattyware$elm_fontawesome$FontAwesome$Solid$arrowUp)));
+	return A2(
+		$elm$html$Html$a,
+		_List_fromArray(
+			[
+				$elm$html$Html$Attributes$id('scroll-to-top-toggle-button'),
+				$elm$html$Html$Attributes$class('action-button-left action-button-1 btn btn-light d-none pointer')
+			]),
+		_List_fromArray(
+			[
+				A2(
+				$elm$html$Html$h2,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('m-auto grey no-decoration')
+					]),
+				_List_fromArray(
+					[icon]))
+			]));
+}();
 var $author$project$Main$CopyShareUrl = function (a) {
 	return {$: 'CopyShareUrl', a: a};
 };
