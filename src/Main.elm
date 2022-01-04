@@ -646,16 +646,14 @@ cardPoolView model =
             ]
     in
     Grid.col [ Col.xs12, Col.md6, Col.lg8, Col.attrs [ id "left-column", class "overflow-scroll content-column" ] ]
-        [ Grid.row []
-            [ Grid.col [ Col.xs12 ]
-                [ div [ Border.rounded, Spacing.mt2, class "d-flex justify-content-between pr-1 pl-1 pt-1 pb-1 bg-dark shadow "]
-                    [ filterWithClearButton (model.filter |> Maybe.withDefault "")
-                    , cardDisplayToggle model.cardDisplay
-                    , showCardDetailsToggle
-                    ]
+        [ div [ class "top-bar" ]
+            [ div [ Border.rounded, class "d-flex justify-content-between pr-1 pl-1 pt-1 pb-1 bg-dark shadow "]
+                [ filterWithClearButton (model.filter |> Maybe.withDefault "")
+                , cardDisplayToggle model.cardDisplay
+                , showCardDetailsToggle
                 ]
             ]
-        , Grid.row []
+        , Grid.row [ Row.attrs [ style "margin-top" "0.5em" ] ]
             (model.notSelectedCards |> (filteredCards model.filter) |> List.map (fullCardView model.showCardPoolDetails model.cardDisplay))
         ]
 
