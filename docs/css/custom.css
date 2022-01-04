@@ -26,8 +26,8 @@
 .action-button-right {
     position: fixed;
     right: 1em;
-    width: 3.5em;
-    height: 3.5em;
+    width: 3em;
+    height: 3em;
     border-radius: 50% !important;
 }
 
