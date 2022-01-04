@@ -13209,6 +13209,13 @@ var $author$project$Main$cardPoolView = function (model) {
 						$elm$html$Html$div,
 						_List_fromArray(
 							[
+								$elm$html$Html$Attributes$class('top-bar-spoiler')
+							]),
+						_List_Nil),
+						A2(
+						$elm$html$Html$div,
+						_List_fromArray(
+							[
 								$rundis$elm_bootstrap$Bootstrap$Utilities$Border$rounded,
 								$elm$html$Html$Attributes$class('d-flex justify-content-between pr-1 pl-1 pt-1 pb-1 bg-dark shadow ')
 							]),

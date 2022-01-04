@@ -654,7 +654,8 @@ cardPoolView model =
     in
     Grid.col [ Col.xs12, Col.md6, Col.lg8, Col.attrs [ id "left-column", class "overflow-scroll content-column" ] ]
         [ div [ class "top-bar" ]
-            [ div [ Border.rounded, class "d-flex justify-content-between pr-1 pl-1 pt-1 pb-1 bg-dark shadow "]
+            [ div [ class "top-bar-spoiler" ] [ ]
+            , div [ Border.rounded, class "d-flex justify-content-between pr-1 pl-1 pt-1 pb-1 bg-dark shadow "]
                 [ filterWithClearButton (model.filter |> Maybe.withDefault "")
                 , cardDisplayToggle model.cardDisplay
                 , showCardDetailsToggle

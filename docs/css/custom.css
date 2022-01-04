@@ -60,11 +60,16 @@
     width: 0.75em;
 }
 
+.top-bar-spoiler {
+    background: #171B1F;
+    height: 0.5em;
+}
+
 .top-bar {
     position: sticky;
     position: -webkit-sticky;
     z-index: 1;
-    top: 0.5em;
+    top: 0;
 }
 
 .bottom-bar {
