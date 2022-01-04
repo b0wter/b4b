@@ -9985,12 +9985,6 @@ var $rundis$elm_bootstrap$Bootstrap$Grid$Internal$ColAttrs = function (a) {
 var $rundis$elm_bootstrap$Bootstrap$Grid$Col$attrs = function (attrs_) {
 	return $rundis$elm_bootstrap$Bootstrap$Grid$Internal$ColAttrs(attrs_);
 };
-var $rundis$elm_bootstrap$Bootstrap$Grid$Internal$RowAttrs = function (a) {
-	return {$: 'RowAttrs', a: a};
-};
-var $rundis$elm_bootstrap$Bootstrap$Grid$Row$attrs = function (attrs_) {
-	return $rundis$elm_bootstrap$Bootstrap$Grid$Internal$RowAttrs(attrs_);
-};
 var $rundis$elm_bootstrap$Bootstrap$Utilities$Flex$blockMd = $elm$html$Html$Attributes$class('d-md-flex');
 var $elm$html$Html$button = _VirtualDom_node('button');
 var $rundis$elm_bootstrap$Bootstrap$Internal$Button$applyModifier = F2(
@@ -13631,14 +13625,7 @@ var $author$project$Main$cardPoolView = function (model) {
 					])),
 				A2(
 				$rundis$elm_bootstrap$Bootstrap$Grid$row,
-				_List_fromArray(
-					[
-						$rundis$elm_bootstrap$Bootstrap$Grid$Row$attrs(
-						_List_fromArray(
-							[
-								A2($elm$html$Html$Attributes$style, 'margin-top', '0.5em')
-							]))
-					]),
+				_List_Nil,
 				A2(
 					$elm$core$List$map,
 					A2($author$project$Main$fullCardView, model.showCardPoolDetails, model.cardDisplay),
@@ -16307,6 +16294,12 @@ var $author$project$Main$RejectResetModal = {$: 'RejectResetModal'};
 var $author$project$Main$ShowShareModal = {$: 'ShowShareModal'};
 var $author$project$Main$ShowYesNoModal = function (a) {
 	return {$: 'ShowYesNoModal', a: a};
+};
+var $rundis$elm_bootstrap$Bootstrap$Grid$Internal$RowAttrs = function (a) {
+	return {$: 'RowAttrs', a: a};
+};
+var $rundis$elm_bootstrap$Bootstrap$Grid$Row$attrs = function (attrs_) {
+	return $rundis$elm_bootstrap$Bootstrap$Grid$Internal$RowAttrs(attrs_);
 };
 var $author$project$Main$inventoryStyleToggle = F2(
 	function (inventoryDisplay, extraClasses) {

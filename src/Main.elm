@@ -697,7 +697,7 @@ cardPoolView model =
                 , helpButton
                 ]
             ]
-        , Grid.row [ Row.attrs [ style "margin-top" "0.5em" ] ]
+        , Grid.row [ ]
             (model.notSelectedCards |> (filteredCards model.filter) |> List.map (fullCardView model.showCardPoolDetails model.cardDisplay))
         ]
 
