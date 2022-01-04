@@ -248,8 +248,7 @@ swapCardsBy predicate stepSize cards =
             cards |> List.swapAt i (i + stepSize)
 
         Nothing ->
-            Debug.log "Tried to swap cards for a card not found in the set."
-                cards
+            cards
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -351,8 +350,7 @@ update msg model =
                     (updatedModel, Nav.pushUrl model.navKey navUrl)
 
                 Nothing ->
-                    Debug.log "A message was sent for a card that could not be found."
-                        ( model, Cmd.none )
+                    ( model, Cmd.none )
 
         DeselectCard id ->
             let
@@ -373,8 +371,7 @@ update msg model =
                     ( updatedModel, Nav.pushUrl model.navKey navUrl)
 
                 Nothing ->
-                    Debug.log "A message was sent for a card that could not be found."
-                        ( model, Cmd.none )
+                    ( model, Cmd.none )
 
         MoveCardDown id ->
             ( { model | selectedCards = model.selectedCards |> swapCardsBy (\c -> c.id == id) 1 }
@@ -401,9 +398,6 @@ update msg model =
 
         ClearFilter ->
             ( { model | filter = Nothing }, Cmd.none )
-
-
-
 
 
 -- View -------------------------------------------------------------------------------------
