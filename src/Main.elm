@@ -553,7 +553,18 @@ helpModal visibility =
         |> Modal.hideOnBackdropClick True
         |> Modal.h3 [] [ text "How to use" ]
         |> Modal.body [ style "overflow" "scroll", style "max-height" "calc(70vh)" ]
-            [ Html.h5 [] [ text "Card Pool" ]
+            [ Html.h5 [] [ text "Disclaimer" ]
+            , div [] [ text "This is an unofficial project and not affiliated with Warner Bros or Turtle Rock Studios."]
+            , Html.h5 [ Spacing.mt3 ] [ text "Contact" ]
+            , div [] 
+              [ text "You can find this project on "
+              , Html.a [ href "https://github.com/b0wter/b4b", class "text-primary", target "_blank" ] [ text "GitHub" ] 
+              , text ". Go there to open issues if you find any bugs or are unsure of how to use this web app."
+              , text "You can also find additional contact information there or contact me via "
+              , Html.a [ href "https://twitter.com/b0wter", class "text-primary", target "_blank" ] [ text "Twitter" ]
+              , text "."
+              ]
+            , Html.h5 [ Spacing.mt3 ] [ text "Card Pool" ]
             , div [] [ text "The card pool contains all cards except the ones you have currently selected." ]
             , div [] [ text "You can use the filter to filter for arbitrary words. Only cards whose title or description contain all words (in any order) are displayed." ]
             , div [] [ text "To share your deck use the share dialog (see below) or copy the current url." ]
