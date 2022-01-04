@@ -3273,5 +3273,3 @@ rawCards =
       , affinity = "Fortune"
       }
     ]
-
-
