@@ -6,6 +6,7 @@ import Bootstrap.Button as Button exposing (Option)
 import Bootstrap.ButtonGroup as ButtonGroup
 import Bootstrap.Card as Card
 import Bootstrap.Card.Block as Block
+import Bootstrap.Dropdown as Dropdown
 import Bootstrap.Grid as Grid
 import Bootstrap.Grid.Col as Col
 import Bootstrap.Modal as Modal
@@ -81,8 +82,8 @@ type InventoryDisplay
 
 
 type alias Model =
-    { navbarState : Navbar.State
-    , cardDisplay : CardDisplay
+    { cardDisplay : CardDisplay
+    , cardDisplayDropdownState : Dropdown.State
     , inventoryDisplay : InventoryDisplay
     , showCardPoolDetails : Bool
     , shareModalVisibility: Modal.Visibility
@@ -147,9 +148,6 @@ tryDeckQueryArgument url =
 init : Flags -> Url -> Key -> ( Model, Cmd Msg )
 init flags url key =
     let
-        ( navbarState, navbarCmd ) =
-            Navbar.initialState NavbarMsg
-
         cardIdsFromQuery =
             url
             |> tryDeckQueryArgument
@@ -175,6 +173,7 @@ init flags url key =
     in
     ( { cardPool = cards
       , cardDisplay = if flags.windowWidth < 769 then Text else Image
+      , cardDisplayDropdownState = Dropdown.initialState
       , inventoryDisplay = InventoryAsCards
       , selectedCards = selected
       , notSelectedCards = notSelected
@@ -188,8 +187,8 @@ init flags url key =
       , yesNoModalContent = Nothing
       , hostUrl = hostUrl
       , navKey = key
-      , navbarState = navbarState }
-    , navbarCmd )
+      }
+    , Cmd.none )
 
 
 type alias YesNoModalContent =
@@ -201,8 +200,7 @@ type alias YesNoModalContent =
 
 
 type Msg
-    = NavbarMsg Navbar.State
-    | UrlChanged Url
+    = UrlChanged Url
     | LinkClicked UrlRequest
     | ShowShareModal
     | HideShareModal
@@ -210,6 +208,7 @@ type Msg
     | CopyShareUrl String
     | CopyShareUrlResult Bool
     | ChangeCardDisplayType CardDisplay
+    | CardDisplayDropdownStateChanged Dropdown.State
     | ChangeInventoryDisplayType Bool InventoryDisplay
     | ShowYesNoModal YesNoModalContent
     | ConfirmResetModal
@@ -232,7 +231,7 @@ type Msg
 subscriptions : Model -> Sub Msg
 subscriptions model =
     Sub.batch
-    [ Navbar.subscriptions model.navbarState NavbarMsg
+    [ Dropdown.subscriptions model.cardDisplayDropdownState CardDisplayDropdownStateChanged
     , receiveCopyResult CopyShareUrlResult
     ]
 
@@ -255,9 +254,6 @@ swapCardsBy predicate stepSize cards =
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
-        NavbarMsg state ->
-            ( { model | navbarState = state }, Cmd.none )
-
         UrlChanged _ ->
             ( model, Cmd.none)
         
@@ -317,6 +313,11 @@ update msg model =
 
         ChangeCardDisplayType display ->
             ( { model | cardDisplay = display }, Cmd.none )
+            
+        
+        CardDisplayDropdownStateChanged state ->
+            ( { model | cardDisplayDropdownState = state }, Cmd.none )
+            
 
         ChangeInventoryDisplayType showReturnHint display ->
             let
@@ -457,14 +458,6 @@ scrollToTopToggleButton =
     ]
 
 
-helpActionButton : Html Msg
-helpActionButton =
-    Html.a [ id "help-toggle-button", class "action-button-right action-button-2 btn btn-light d-flex pointer", onClick ToggleHelpModal ]
-    [
-        Html.h2 [ class "m-auto grey no-decoration fa-lg" ] [ FontAwesome.Solid.question |> FontAwesome.Icon.viewIcon ]
-    ]
-
-
 shareModal : Model -> Html Msg
 shareModal model =
     let
@@ -594,13 +587,12 @@ mainContent model =
     , Grid.row [ ] [ cardPoolView model, inventoryView model ]
     , inventoryToggleButton (model.selectedCards |> List.length)
     , scrollToTopToggleButton
-    , helpActionButton
     ]
 
 
 cardDisplayToggle : CardDisplay -> Html Msg
 cardDisplayToggle cardDisplay =
-    ButtonGroup.radioButtonGroup [ ButtonGroup.attrs [ class "d-flex align-items-center", Spacing.ml3 ] ]
+    ButtonGroup.radioButtonGroup [ ButtonGroup.attrs [ class "d-none align-items-center d-md-flex", Spacing.ml3 ] ]
         [ ButtonGroup.radioButton
             (cardDisplay == Text)
             [ Button.secondary, Button.onClick <| (ChangeCardDisplayType Text) ]
@@ -610,6 +602,39 @@ cardDisplayToggle cardDisplay =
             [ Button.secondary, Button.onClick <| (ChangeCardDisplayType Image) ]
             [ FontAwesome.Solid.image |> FontAwesome.Icon.viewIcon ]
         ]
+        
+
+dropDownCardDisplaySelector : Bool -> Dropdown.State -> CardDisplay -> Html Msg
+dropDownCardDisplaySelector showDetails dropdownState cardDisplay =
+    let
+        icon = 
+            case cardDisplay of
+                Image -> FontAwesome.Solid.image |> FontAwesome.Icon.viewIcon
+                Text  -> FontAwesome.Solid.alignLeft |> FontAwesome.Icon.viewIcon
+
+        detailsButton =
+            if showDetails then
+                Dropdown.buttonItem [ onClick ToggleCardDetails ] [ text "Hide details" ]
+            else
+                Dropdown.buttonItem [ onClick ToggleCardDetails ] [ text "Show details" ]
+    in
+    div [ Spacing.mr3, Display.block, Display.noneMd ]
+    [
+      Dropdown.dropdown
+        dropdownState
+        { options = []
+        , toggleMsg = CardDisplayDropdownStateChanged
+        , toggleButton = 
+              Dropdown.toggle [ Button.secondary ] [ icon ]
+        , items =
+          [ Dropdown.buttonItem [ onClick (ChangeCardDisplayType Image) ] [ text "Image" ]
+          , Dropdown.buttonItem [ onClick (ChangeCardDisplayType Text) ] [ text "Text" ]
+          , Dropdown.customItem (div [ class "dropdown-divider" ] [])
+          , detailsButton
+          ]
+        }
+    ]
+      
 
 
 inventoryStyleToggle : InventoryDisplay -> String -> Html Msg
@@ -640,18 +665,32 @@ filterWithClearButton currentFilter =
 cardPoolView : Model -> Grid.Column Msg
 cardPoolView model =
     let
+        helpButton =
+            Button.button [ Button.secondary, Button.attrs [ onClick ToggleHelpModal, Spacing.ml3 ] ] [ FontAwesome.Solid.question |> FontAwesome.Icon.viewIcon ]
+            
         showCardDetailsToggle = 
-            ButtonGroup.checkboxButtonGroup [ ButtonGroup.small, ButtonGroup.attrs [ Spacing.ml3, style "min-width" "2em" ] ]
+            ButtonGroup.checkboxButtonGroup [ ButtonGroup.small, ButtonGroup.attrs [ Display.none, Flex.blockMd, Spacing.ml3, style "min-width" "2em" ] ]
             [ ButtonGroup.checkboxButton model.showCardPoolDetails [ Button.secondary, Button.small, Button.onClick ToggleCardDetails ] [ FontAwesome.Solid.info |> FontAwesome.Icon.viewIcon ]
             ]
+            
+        -- cardDisplay is used for large screens where every button can be displayed
+        largeCardDisplaySelector =
+            cardDisplayToggle model.cardDisplay
+            
+        -- dropDownDisplay is used for phone screens
+        dropDownDisplaySelector =
+            dropDownCardDisplaySelector model.showCardPoolDetails model.cardDisplayDropdownState model.cardDisplay
+            
     in
     Grid.col [ Col.xs12, Col.md6, Col.lg8, Col.attrs [ id "left-column", class "overflow-scroll content-column" ] ]
         [ div [ class "top-bar" ]
             [ div [ class "top-bar-spoiler" ] [ ]
             , div [ Border.rounded, class "d-flex justify-content-between pr-1 pl-1 pt-1 pb-1 bg-dark shadow "]
-                [ filterWithClearButton (model.filter |> Maybe.withDefault "")
-                , cardDisplayToggle model.cardDisplay
+                [ dropDownDisplaySelector
+                , filterWithClearButton (model.filter |> Maybe.withDefault "")
+                , largeCardDisplaySelector
                 , showCardDetailsToggle
+                , helpButton
                 ]
             ]
         , Grid.row [ Row.attrs [ style "margin-top" "0.5em" ] ]
