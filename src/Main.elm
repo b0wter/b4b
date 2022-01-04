@@ -216,6 +216,7 @@ type Msg
     | ToggleCardDetails
     | ToggleHelpModal
     | ToggleSummarizeViewHint Alert.Visibility
+    | ToggleReturnSummarizeViewHint Alert.Visibility
     ---------------------------
     | SelectCard CardId
     | DeselectCard CardId
@@ -285,6 +286,10 @@ update msg model =
             
         ToggleSummarizeViewHint visibility ->
             ( { model | summarizeViewHintVisibility = visibility }, Cmd.none )
+            
+            
+        ToggleReturnSummarizeViewHint visibility ->
+            ( { model | returnViewHintVisibility = visibility }, Cmd.none )
 
 
         ConfirmResetModal ->
@@ -636,7 +641,6 @@ dropDownCardDisplaySelector showDetails dropdownState cardDisplay =
     ]
       
 
-
 inventoryStyleToggle : InventoryDisplay -> String -> Html Msg
 inventoryStyleToggle inventoryDisplay extraClasses =
     ButtonGroup.radioButtonGroup [ ButtonGroup.small, ButtonGroup.attrs [ class ("d-flex align-items-center " ++ extraClasses), Spacing.ml3 ] ]
@@ -751,7 +755,7 @@ inventoryContentView model =
             , text "."
             ]
             
-        alert visibility children =
+        alert toggle visibility children =
             if visibility == Alert.closed then
                 Grid.col [ Col.attrs [ Display.none ] ] []
             else
@@ -759,7 +763,7 @@ inventoryContentView model =
                 [ div [ Spacing.ml2, Spacing.mr2, Spacing.mt2 ]
                   [ Alert.config
                     |> Alert.success
-                    |> Alert.dismissableWithAnimation ToggleSummarizeViewHint
+                    |> Alert.dismissableWithAnimation toggle
                     |> Alert.children children
                     |> Alert.view visibility
                   ]
@@ -778,10 +782,10 @@ inventoryContentView model =
     in
     case model.inventoryDisplay of
         InventoryAsCards ->
-            (alert model.summarizeViewHintVisibility summaryAlertContent)
+            (alert ToggleSummarizeViewHint model.summarizeViewHintVisibility summaryAlertContent)
             :: (model.selectedCards |> asCardsView)
         InventoryAsSummary ->
-            (alert model.returnViewHintVisibility returnAlertContent)
+            (alert ToggleReturnSummarizeViewHint model.returnViewHintVisibility returnAlertContent)
             :: (model.selectedCards |> asSummaryView)
 
 

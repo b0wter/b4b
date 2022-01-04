@@ -9758,6 +9758,13 @@ var $author$project$Main$update = F2(
 						model,
 						{summarizeViewHintVisibility: visibility}),
 					$elm$core$Platform$Cmd$none);
+			case 'ToggleReturnSummarizeViewHint':
+				var visibility = msg.a;
+				return _Utils_Tuple2(
+					_Utils_update(
+						model,
+						{returnViewHintVisibility: visibility}),
+					$elm$core$Platform$Cmd$none);
 			case 'ConfirmResetModal':
 				var updatedModel = _Utils_update(
 					model,
@@ -14431,6 +14438,9 @@ var $author$project$Main$ChangeInventoryDisplayType = F2(
 		return {$: 'ChangeInventoryDisplayType', a: a, b: b};
 	});
 var $author$project$Main$InventoryAsSummary = {$: 'InventoryAsSummary'};
+var $author$project$Main$ToggleReturnSummarizeViewHint = function (a) {
+	return {$: 'ToggleReturnSummarizeViewHint', a: a};
+};
 var $author$project$Main$ToggleSummarizeViewHint = function (a) {
 	return {$: 'ToggleSummarizeViewHint', a: a};
 };
@@ -16245,8 +16255,8 @@ var $author$project$Main$inventoryContentView = function (model) {
 				}),
 			cards);
 	};
-	var alert = F2(
-		function (visibility, children) {
+	var alert = F3(
+		function (toggle, visibility, children) {
 			return _Utils_eq(visibility, $rundis$elm_bootstrap$Bootstrap$Alert$closed) ? A2(
 				$rundis$elm_bootstrap$Bootstrap$Grid$col,
 				_List_fromArray(
@@ -16274,7 +16284,7 @@ var $author$project$Main$inventoryContentView = function (model) {
 									children,
 									A2(
 										$rundis$elm_bootstrap$Bootstrap$Alert$dismissableWithAnimation,
-										$author$project$Main$ToggleSummarizeViewHint,
+										toggle,
 										$rundis$elm_bootstrap$Bootstrap$Alert$success($rundis$elm_bootstrap$Bootstrap$Alert$config))))
 							]))
 					]));
@@ -16283,12 +16293,12 @@ var $author$project$Main$inventoryContentView = function (model) {
 	if (_v0.$ === 'InventoryAsCards') {
 		return A2(
 			$elm$core$List$cons,
-			A2(alert, model.summarizeViewHintVisibility, summaryAlertContent),
+			A3(alert, $author$project$Main$ToggleSummarizeViewHint, model.summarizeViewHintVisibility, summaryAlertContent),
 			asCardsView(model.selectedCards));
 	} else {
 		return A2(
 			$elm$core$List$cons,
-			A2(alert, model.returnViewHintVisibility, returnAlertContent),
+			A3(alert, $author$project$Main$ToggleReturnSummarizeViewHint, model.returnViewHintVisibility, returnAlertContent),
 			asSummaryView(model.selectedCards));
 	}
 };
